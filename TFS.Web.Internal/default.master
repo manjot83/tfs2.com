@@ -1,0 +1,33 @@
+<%@ Master Language="C#" AutoEventWireup="true" Inherits="_default" Codebehind="default.master.cs" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>TFS Intranet</title>
+    <link rel="stylesheet" type="text/css" href="style/AjaxCSSHelpers.css" />
+    <link rel="stylesheet" type="text/css" href="style/sinorca-tfs2.css" />
+    <link rel="stylesheet" type="text/css" href="style/list-table.css" />
+</head>
+<body>
+    <form id="form1" runat="server">    
+    
+    <!-- ##### Header ##### -->          
+    <tfs:header ID="header_control" runat="server" />
+
+    <!-- ##### Side Bar ##### -->
+    <tfs:siderbar ID="sidebar_control" runat="Server" Visible="true" />
+
+    <!-- ##### Main Copy ##### -->
+    <div id="main-copy">
+        <asp:contentplaceholder id="MainContent" runat="server" Visible="true">
+        </asp:contentplaceholder>
+    </div>
+    
+    
+    <!-- ##### Footer ##### -->
+    <tfs:footer ID="footer_control" runat="server" />
+    
+    </form>
+</body>
+</html>

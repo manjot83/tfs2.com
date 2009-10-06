@@ -1,0 +1,89 @@
+﻿.rollover_1 
+{	
+	display:block;
+	height: 30px;
+	width: 211px;
+	background: url("template/index_r5_c1.gif") 0 0 no-repeat;
+}
+
+.rollover_1:hover 
+{
+	height: 30px;
+	width: 211px;
+	background: url("template/index_r5_c1_f2.gif") 0 0 no-repeat;
+}
+
+.rollover_2 
+{	
+	display:block;
+	height: 30px;
+	width: 211px;
+	background: url("template/index_r6_c1.gif") 0 0 no-repeat;
+}
+
+.rollover_2:hover 
+{
+	height: 30px;
+	width: 211px;
+	background: url("template/index_r6_c1_f2.gif") 0 0 no-repeat;
+}
+
+.rollover_3 
+{	
+	display:block;
+	height: 30px;
+	width: 211px;
+	background: url("template/index_r7_c1.gif") 0 0 no-repeat;
+}
+
+.rollover_3:hover 
+{
+	height: 30px;
+	width: 211px;
+	background: url("template/index_r7_c1_f2.gif") 0 0 no-repeat;
+}
+
+.rollover_4 
+{	
+	display:block;
+	height: 30px;
+	width: 211px;
+	background: url("template/index_r8_c1.gif") 0 0 no-repeat;
+}
+
+.rollover_4:hover 
+{
+	height: 30px;
+	width: 211px;
+	background: url("template/index_r8_c1_f2.gif") 0 0 no-repeat;
+}
+
+.rollover_5 
+{	
+	display:block;
+	height: 30px;
+	width: 211px;
+	background: url("template/index_r9_c1.gif") 0 0 no-repeat;
+}
+
+.rollover_5:hover 
+{
+	height: 30px;
+	width: 211px;
+	background: url("template/index_r9_c1_f2.gif") 0 0 no-repeat;
+}
+
+.rollover_6 
+{	
+	display:block;
+	height: 30px;
+	width: 211px;
+	background: url("template/index_r10_c1.gif") 0 0 no-repeat;
+}
+
+.rollover_6:hover 
+{
+	height: 30px;
+	width: 211px;
+	background: url("template/index_r10_c1_f2.gif") 0 0 no-repeat;
+}

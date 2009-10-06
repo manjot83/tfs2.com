@@ -1,0 +1,33 @@
+SET IDENTITY_INSERT forms ON
+INSERT INTO forms 
+	(id, name, shortname, tfsfnumber, remarks, deleted, createdon)
+	VALUES (103, 'Personnel Files', 'PF', '00-00', 'Web Edition', 0, '8-27-2008')
+SET IDENTITY_INSERT forms OFF
+
+INSERT INTO formfields VALUES (103, 'Last Name', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'First Name', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Middle Initial', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'SSN Last Four', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Address', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Phone', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Alt. Phone', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'E-mail Address', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Date of Birth', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Emergency Contact Name', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Emergency Contact Phone', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Male/Female', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Position', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Branch of Service', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'FAA Certificate', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Type Ratings', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Military FCF Qual', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Date Last BFR or Qual Form 8', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Date Last Military Flight Physical', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Date Last Altitude Chamber', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Date Last Egrees Training LL-03', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Date Last Simulator Refresher', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Date Last CRM', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Date Last Life Support Training', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Date Last Flight', null, 0, null, null, null, null)
+INSERT INTO formfields VALUES (103, 'Program Aircraft Differences Training', null, 0, null, null, null, null)
+

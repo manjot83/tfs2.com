@@ -1,0 +1,64 @@
+#css_frame
+{		
+		width:768px;
+		margin-right:auto;
+		margin-left:auto;
+		margin-top:0px;
+		margin-bottom:0px;
+		padding:0px;
+		text-align:left;
+}
+
+#css_header 
+{
+	margin:0px;
+}
+
+#css_contentframe
+{
+	display:table;
+	margin-top:-5px;
+	padding-top:5px;	
+	padding-bottom:15px;
+	width:768px;
+	background-image: url("template/content_bg.gif");
+	
+}
+
+#css_nav
+{	
+	float:left;
+	width:211px;
+}
+
+#css_content
+{	
+	margin-left:211px;	
+}
+
+#css_text
+{
+	padding-top: 10px;
+	padding-right: 55px;
+	padding-bottom: 10px;
+	
+}
+
+#css_imagestrip
+{
+	float:right;
+	margin-right: 50px;	
+}
+
+#css_imagestrip img
+{
+	display:block;
+	margin-bottom: 10px;
+	margin-left: 5px;
+}
+
+#css_footer
+{
+	clear:both;
+	width:768px;
+}

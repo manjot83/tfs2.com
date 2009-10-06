@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F73F51DA-0FA4-44B2-A47E-9E7ACE07D75E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>db_tfs2_billing</RootNamespace>
+    <AssemblyName>db_tfs2_billing</AssemblyName>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <None Include="Change\OpCenter_2.5.sql" />
+    <None Include="Change\OpCenter_2.4.sql" />
+    <None Include="Change\OpCenter_2.3.sql" />
+    <None Include="Change\OpCenter_2.2.sql" />
+    <None Include="Change\OpCenter_2.1.sql" />
+    <None Include="Release\Billing_2.0.sql" />
+    <None Include="Release\OpCenter_2.0.sql" />
+    <None Include="Release\CMS_2.0.sql" />
+    <None Include="Utility Scripts\AddTestData.sql" />
+    <None Include="Utility Scripts\ClearTables.sql" />
+    <None Include="Utility Scripts\MigrateIntranetData_tempfunction2.sql" />
+    <None Include="Utility Scripts\MigrateIntranetData_tempfunction1.sql" />
+    <None Include="Utility Scripts\Forms\CreateFCIFForm.sql" />
+    <None Include="Utility Scripts\Forms\CreateSRFFile.sql" />
+    <None Include="Utility Scripts\Forms\CreatePersonnelFileForm.sql" />
+    <None Include="Utility Scripts\Forms\DropAllFormData.sql" />
+    <None Include="Utility Scripts\MigrateIntranetData.sql" />
+    <None Include="Utility Scripts\Old Dumps\tfs2_intranet_dump_aug_2008.sql" />
+    <None Include="Utility Scripts\OpCenter_TestData.sql" />
+    <None Include="Utility Scripts\DropAllTablesSPsViews.sql" />
+    <None Include="Utility Scripts\MigrateData.sql" />
+    <None Include="Utility Scripts\Set_UserView.sql" />
+  </ItemGroup>
+</Project>
