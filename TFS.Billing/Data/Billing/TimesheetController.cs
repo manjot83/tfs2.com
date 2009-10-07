@@ -26,9 +26,10 @@ namespace TFS.Intranet.Data.Billing
         public TimesheetCollection FetchORCreateByUsernamePeriodID(String Username, Int32 PeriodAccountID)
         {
             TimesheetCollection col = FetchByUsernamePeriodID(Username, PeriodAccountID);
-            if (col.Count == 0)
-                Insert(Username, PeriodAccountID);
-            return FetchByUsernamePeriodID(Username, PeriodAccountID);                
+            var user = new UserController().ByUsername(Username);
+            if (col.Count == 0 && user != null)
+                Insert(Username, PeriodAccountID, user.Rategroup);
+            return FetchByUsernamePeriodID(Username, PeriodAccountID);
         }
 
         public void UpdatePerDiem(int Id, int Perdiemcount)
@@ -52,9 +53,9 @@ namespace TFS.Intranet.Data.Billing
         }
 
 
-        public void Insert(String Username,Int32 PeriodAccountID)
+        public void Insert(String Username, Int32 PeriodAccountID, int rategroupid)
         {
-            Insert(Username, PeriodAccountID, 0, false, null, null, null, null, 0);            
+            Insert(Username, PeriodAccountID, 0, false, null, null, null, null, 0, rategroupid);
         }
 
 
@@ -81,12 +82,12 @@ namespace TFS.Intranet.Data.Billing
 
 
         public void DeleteTimesheet(int TimesheetID)
-        {           
+        {
             //first delete expense entries
-            ExpenseEntry.Delete(ExpenseEntry.Columns.Timesheetid, TimesheetID, this.UserName);            
+            ExpenseEntry.Delete(ExpenseEntry.Columns.Timesheetid, TimesheetID, this.UserName);
 
             //second delete time entries
-            TimeEntry.Delete(TimeEntry.Columns.Timesheetid, TimesheetID, this.UserName);            
+            TimeEntry.Delete(TimeEntry.Columns.Timesheetid, TimesheetID, this.UserName);
 
             //finally delete the time sheet
             this.Delete(TimesheetID);

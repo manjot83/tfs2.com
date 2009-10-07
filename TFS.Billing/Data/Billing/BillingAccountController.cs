@@ -9,14 +9,8 @@ namespace TFS.Intranet.Data.Billing
 
         public void Update(Int32 id, String name)
         {
-            BillingAccount item = new BillingAccount();
-
-            item.Id = id;
-
+            var item = BillingAccount.FetchByID(id);
             item.Name = name;
-
-            item.Defaultperdiemrate = FetchByID(id)[0].Defaultperdiemrate;
-
             item.MarkOld();
             item.Save(UserName);
         }
@@ -34,15 +28,8 @@ namespace TFS.Intranet.Data.Billing
 
         public void UpdateDefaultPerDiemRate(Int32 id, Double DefaultPerDiemRate)
         {
-            BillingAccount item = new BillingAccount();
-
-            item.Id = id;
-
-            item.Name = FetchByID(id)[0].Name;
-
+            var item = BillingAccount.FetchByID(id); 
             item.Defaultperdiemrate = DefaultPerDiemRate;
-            item.Defaultmileagerate = FetchByID(id)[0].Defaultmileagerate;
-
             item.MarkOld();
             item.Save(UserName);
         }
@@ -51,18 +38,11 @@ namespace TFS.Intranet.Data.Billing
         {
             return FetchByID(id)[0].Defaultmileagerate;
         }
-        
+
         public void UpdateDefaultMileageRate(Int32 id, Double DefaultMileageRate)
         {
-            BillingAccount item = new BillingAccount();
-
-            item.Id = id;
-
-            item.Name = FetchByID(id)[0].Name;
-
+            var item = BillingAccount.FetchByID(id);
             item.Defaultmileagerate = DefaultMileageRate;
-            item.Defaultperdiemrate = FetchByID(id)[0].Defaultperdiemrate;
-
             item.MarkOld();
             item.Save(UserName);
         }

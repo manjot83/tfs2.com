@@ -16,7 +16,7 @@
     <tfs:header ID="header_control" runat="server" />
 
     <!-- ##### Side Bar ##### -->
-    <tfs:siderbar ID="sidebar_control" runat="Server" Visible="true" />
+    <%--<tfs:siderbar ID="sidebar_control" runat="server" />--%>
 
     <!-- ##### Main Copy ##### -->
     <div id="main-copy">

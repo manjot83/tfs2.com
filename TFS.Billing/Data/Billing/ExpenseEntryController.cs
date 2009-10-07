@@ -64,7 +64,7 @@ namespace TFS.Intranet.Data.Billing
 
             if (!timesheetcontroller.TimesheetExists(username, NewBillingPeriodAccountID))
             {
-                timesheetcontroller.Insert(username, NewBillingPeriodAccountID);
+                timesheetcontroller.Insert(username, NewBillingPeriodAccountID, oldtimesheet.Rategroupid);
             }
 
             TimesheetCollection col = new BillingPeriodAccountController().FetchByID(NewBillingPeriodAccountID)[0].Timesheets();

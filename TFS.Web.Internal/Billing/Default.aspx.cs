@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
+using TFS.Intranet.Data.Billing;
 
 public partial class billing_default : System.Web.UI.Page 
 {
@@ -29,7 +30,8 @@ public partial class billing_default : System.Web.UI.Page
     {
         int periodaccountid = Int32.Parse(((LinkButton)sender).CommandArgument);
         String username = getUsername();
-        new TFS.Intranet.Data.Billing.TimesheetController().Insert(username, periodaccountid);
+        var user = new UserController().ByUsername(username);
+        new TFS.Intranet.Data.Billing.TimesheetController().Insert(username, periodaccountid, user.Rategroup);
         OpenTimesheets.DataBind();
         PendingTimesheets.DataBind();
         ReportableTimesheets.DataBind();

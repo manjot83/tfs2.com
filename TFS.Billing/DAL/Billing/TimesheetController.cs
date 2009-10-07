@@ -90,7 +90,7 @@ namespace TFS.Intranet.Data.Billing
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(string Username,int Periodaccountid,int Perdiemcount,bool IsDeleted,DateTime? CreatedOn,string CreatedBy,DateTime? ModifiedOn,string ModifiedBy,double Mileageclaimed)
+	    public void Insert(string Username,int Periodaccountid,int Perdiemcount,bool IsDeleted,DateTime? CreatedOn,string CreatedBy,DateTime? ModifiedOn,string ModifiedBy,double Mileageclaimed,int Rategroupid)
 	    {
 		    Timesheet item = new Timesheet();
 		    
@@ -111,7 +111,8 @@ namespace TFS.Intranet.Data.Billing
             item.ModifiedBy = ModifiedBy;
             
             item.Mileageclaimed = Mileageclaimed;
-            
+
+            item.Rategroupid = Rategroupid;
 	    
 		    item.Save(UserName);
 	    }
@@ -121,7 +122,7 @@ namespace TFS.Intranet.Data.Billing
 	    /// Updates a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-	    public void Update(int Id,string Username,int Periodaccountid,int Perdiemcount,bool IsDeleted,DateTime? CreatedOn,string CreatedBy,DateTime? ModifiedOn,string ModifiedBy,double Mileageclaimed)
+        public void Update(int Id, string Username, int Periodaccountid, int Perdiemcount, bool IsDeleted, DateTime? CreatedOn, string CreatedBy, DateTime? ModifiedOn, string ModifiedBy, double Mileageclaimed, int Rategroupid)
 	    {
 		    Timesheet item = new Timesheet();
 		    
@@ -144,6 +145,8 @@ namespace TFS.Intranet.Data.Billing
 				item.ModifiedBy = ModifiedBy;
 				
 				item.Mileageclaimed = Mileageclaimed;
+
+                item.Rategroupid = Rategroupid;
 				
 		    item.MarkOld();
 		    item.Save(UserName);

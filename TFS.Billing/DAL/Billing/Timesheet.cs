@@ -226,10 +226,22 @@ namespace TFS.Intranet.Data.Billing
 				colvarMileageclaimed.IsPrimaryKey = false;
 				colvarMileageclaimed.IsForeignKey = false;
 				colvarMileageclaimed.IsReadOnly = false;
-				
-						colvarMileageclaimed.DefaultSetting = @"((0))";
+				colvarMileageclaimed.DefaultSetting = @"((0))";
 				colvarMileageclaimed.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarMileageclaimed);
+
+                TableSchema.TableColumn colvarRategroupid = new TableSchema.TableColumn(schema);
+                colvarRategroupid.ColumnName = "rategroupid";
+                colvarRategroupid.DataType = DbType.Int32;
+                colvarRategroupid.MaxLength = 0;
+                colvarRategroupid.AutoIncrement = false;
+                colvarRategroupid.IsNullable = false;
+                colvarRategroupid.IsPrimaryKey = false;
+                colvarRategroupid.IsForeignKey = true;
+                colvarRategroupid.IsReadOnly = false;
+                colvarRategroupid.DefaultSetting = @"";
+                colvarRategroupid.ForeignKeyTableName = "RateGroups";
+                schema.Columns.Add(colvarRategroupid);
 				
 				BaseSchema = schema;
 				//add this schema to the provider
@@ -343,6 +355,15 @@ namespace TFS.Intranet.Data.Billing
 
 		}
 
+        [XmlAttribute("Rategroupid")]
+        public int Rategroupid
+        {
+            get { return GetColumnValue<int>("rategroupid"); }
+
+            set { SetColumnValue("rategroupid", value); }
+
+        }
+
 		
 		#endregion
 		
@@ -377,7 +398,11 @@ namespace TFS.Intranet.Data.Billing
 
 		}
 
-		
+        public RateGroup RateGroup
+        {
+            get { return RateGroup.FetchByID(this.Rategroupid); }
+            set { SetColumnValue("rategroupid", value.Id); }
+        }
 		
 		#endregion
 		
@@ -391,7 +416,7 @@ namespace TFS.Intranet.Data.Billing
 		/// <summary>
 		/// Inserts a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Insert(string varUsername,int varPeriodaccountid,int varPerdiemcount,bool varIsDeleted,DateTime? varCreatedOn,string varCreatedBy,DateTime? varModifiedOn,string varModifiedBy,double varMileageclaimed)
+		public static void Insert(string varUsername,int varPeriodaccountid,int varPerdiemcount,bool varIsDeleted,DateTime? varCreatedOn,string varCreatedBy,DateTime? varModifiedOn,string varModifiedBy,double varMileageclaimed,int varRategroupid)
 		{
 			Timesheet item = new Timesheet();
 			
@@ -412,7 +437,8 @@ namespace TFS.Intranet.Data.Billing
 			item.ModifiedBy = varModifiedBy;
 			
 			item.Mileageclaimed = varMileageclaimed;
-			
+
+            item.Rategroupid = varRategroupid;
 		
 			if (System.Web.HttpContext.Current != null)
 				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
@@ -424,7 +450,7 @@ namespace TFS.Intranet.Data.Billing
 		/// <summary>
 		/// Updates a record, can be used with the Object Data Source
 		/// </summary>
-		public static void Update(int varId,string varUsername,int varPeriodaccountid,int varPerdiemcount,bool varIsDeleted,DateTime? varCreatedOn,string varCreatedBy,DateTime? varModifiedOn,string varModifiedBy,double varMileageclaimed)
+        public static void Update(int varId, string varUsername, int varPeriodaccountid, int varPerdiemcount, bool varIsDeleted, DateTime? varCreatedOn, string varCreatedBy, DateTime? varModifiedOn, string varModifiedBy, double varMileageclaimed, int varRategroupid)
 		{
 			Timesheet item = new Timesheet();
 			
@@ -447,6 +473,8 @@ namespace TFS.Intranet.Data.Billing
 				item.ModifiedBy = varModifiedBy;
 				
 				item.Mileageclaimed = varMileageclaimed;
+
+                item.Rategroupid = varRategroupid;
 				
 			item.IsNew = false;
 			if (System.Web.HttpContext.Current != null)
@@ -469,6 +497,7 @@ namespace TFS.Intranet.Data.Billing
 			 public static string ModifiedOn = @"ModifiedOn";
 			 public static string ModifiedBy = @"ModifiedBy";
 			 public static string Mileageclaimed = @"mileageclaimed";
+             public static string Rategroupid = @"rategroupid";
 						
 		}
 
