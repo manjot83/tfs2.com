@@ -39,3 +39,5 @@ httpd.parse.errors
 # NUnit
 *.VisualState.xml
 TestResult.xml
+
+TFS.Web/App_Data/*.xml
