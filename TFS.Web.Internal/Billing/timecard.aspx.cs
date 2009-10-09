@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
+using TFS.Intranet.Data.Billing;
 
 namespace TFS.Intranet.Web.Billing
 {
@@ -22,7 +23,16 @@ namespace TFS.Intranet.Web.Billing
                 Data.Billing.Timesheet timesheet = new TFS.Intranet.Data.Billing.TimesheetController().FetchByID(id)[0];
                 PerDiemCountDropDown.SelectedValue = timesheet.Perdiemcount.ToString();
                 Mileage_Textbox.Text = timesheet.Mileageclaimed.ToString();
+                RateGroupDropDown.SelectedValue = timesheet.Rategroupid.ToString();
             }
+        }
+
+        protected void Change_RateGroup(object sender, EventArgs e)
+        {
+            int rateGroupId = Int32.Parse(RateGroupDropDown.SelectedValue);
+            int id = Int32.Parse(Request.Params["id"]);
+            new TimesheetController().UpdateRateGroup(id, rateGroupId);
+            RateGroupChangeStatus.Text = "Changed to " + RateGroupDropDown.SelectedItem.Text;
         }
 
         protected void Change_PerDiem(object sender, EventArgs e)

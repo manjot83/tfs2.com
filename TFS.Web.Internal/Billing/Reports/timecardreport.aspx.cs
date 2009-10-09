@@ -27,6 +27,7 @@ namespace TFS.Intranet.Web.Billing.Reports
                 TFS.Intranet.Data.Billing.Timesheet timesheet = new TFS.Intranet.Data.Billing.TimesheetController().FetchByID(id)[0];
                 DaysPerDiem.Text = timesheet.Perdiemcount.ToString();
                 Mileage.Text = timesheet.Mileageclaimed.ToString();
+                PayRateGroup.Text = timesheet.RateGroup.Name;
             }
         }
 

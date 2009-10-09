@@ -32,6 +32,16 @@ namespace TFS.Intranet.Data.Billing
             return FetchByUsernamePeriodID(Username, PeriodAccountID);
         }
 
+        public void UpdateRateGroup(int id, int rateGroupId)
+        {
+            Timesheet item = FetchByID(id)[0];
+
+            item.Rategroupid = rateGroupId;
+
+            item.MarkOld();
+            item.Save(UserName);
+        }
+
         public void UpdatePerDiem(int Id, int Perdiemcount)
         {
             Timesheet item = FetchByID(Id)[0];

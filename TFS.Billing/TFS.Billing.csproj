@@ -7,7 +7,7 @@
     <ProjectGuid>{EEB808F2-BEF9-454D-AA3E-4A31A84DB29E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TFS.Billing</RootNamespace>
+    <RootNamespace>TFS.Intranet</RootNamespace>
     <AssemblyName>TFS.Billing</AssemblyName>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -89,9 +89,11 @@
     <Compile Include="Data\Billing\BillingRatesJoinController.cs" />
     <Compile Include="Data\Billing\DefaultBillingRateController.cs" />
     <Compile Include="Data\Billing\EmployeeSummaryController.cs" />
+    <Compile Include="Data\Billing\EmployeeTimesheetInfo.cs" />
     <Compile Include="Data\Billing\EmployeeTimesheetInfoController.cs" />
     <Compile Include="Data\Billing\ExpenseEntryController.cs" />
     <Compile Include="Data\Billing\RateGroup.cs" />
+    <Compile Include="Data\Billing\RateGroupController.cs" />
     <Compile Include="Data\Billing\TimeEntriesTotalController.cs" />
     <Compile Include="Data\Billing\TimeEntryController.cs" />
     <Compile Include="Data\Billing\TimesheetController.cs" />

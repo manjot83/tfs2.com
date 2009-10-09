@@ -1,17 +1,17 @@
 <%@ Page MasterPageFile="~/default.master" Language="C#" AutoEventWireup="true" CodeBehind="timecard.aspx.cs" Inherits="TFS.Intranet.Web.Billing.timecard" Title="Timecard" %>
 
-
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-
-<asp:ScriptManager ID="ScriptManager1" runat="server" />
-
-<asp:ObjectDataSource ID="UserDataSource" runat="server"
-TypeName="TFS.Intranet.Data.Billing.UserController"
-SelectMethod="SelectUser">
-    <SelectParameters>
-        <asp:QueryStringParameter Name="Username" Type="string" QueryStringField="username" />
-    </SelectParameters>
-</asp:ObjectDataSource>
+    <asp:ScriptManager ID="ScriptManager1" runat="server" />
+    
+    <asp:ObjectDataSource ID="RateGroupDataSource" runat="server" TypeName="TFS.Intranet.Data.Billing.RateGroupController"
+        SelectMethod="FetchAll"></asp:ObjectDataSource>
+        
+    <asp:ObjectDataSource ID="UserDataSource" runat="server" TypeName="TFS.Intranet.Data.Billing.UserController"
+        SelectMethod="SelectUser">
+        <SelectParameters>
+            <asp:QueryStringParameter Name="Username" Type="string" QueryStringField="username" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
 
 <asp:ObjectDataSource ID="TimesheetDataSource" runat="server"
 TypeName="TFS.Intranet.Data.Billing.EmployeeTimesheetInfoController"
@@ -80,8 +80,9 @@ UpdateMethod="Update">
     Editing Payroll for User:
     <asp:Repeater ID="UserDetailsView" runat="Server" DataSourceID="UserDataSource">
         <ItemTemplate><b><asp:Label ID="Lastname" runat="server" Text='<%# Eval("lastname") %>' />,
-            <asp:Label ID="Firstname" runat="server" Text='<%# Eval("firstname") %>' /></b> - 
-            <b><asp:Label ID="title" runat="server" Text='<%# Eval("title") %>'></asp:Label></b>
+            <asp:Label ID="Firstname" runat="server" Text='<%# Eval("firstname") %>' /></b>
+            <%-- - 
+            <b><asp:Label ID="title" runat="server" Text='<%# Eval("title") %>'></asp:Label></b>--%>
         </ItemTemplate>
     </asp:Repeater>
     <br />
@@ -94,10 +95,27 @@ UpdateMethod="Update">
     </asp:Repeater>
 </p>
 
+<h1>Pay Rate Group</h1>
+<p>
+    <b>Instructions</b><br />
+    Use this worksheet to select which pay rate group to use this month for this account.
+</p>
+<asp:UpdatePanel ID="RateGroupUpdatePanel" runat="Server">
+    <ContentTemplate>
+        <p>
+        Change Group
+        <asp:DropDownList ID="RateGroupDropDown" runat="server" DataSourceID="RateGroupDataSource"
+            DataTextField="Name" DataValueField="Id" AppendDataBoundItems="true" Width="200px"
+            OnSelectedIndexChanged="Change_RateGroup" AutoPostBack="true">
+        </asp:DropDownList>
+        <asp:Label ID="RateGroupChangeStatus" runat="server" ForeColor="red"></asp:Label>
+        </p>
+    </ContentTemplate>    
+</asp:UpdatePanel>
+
 
 <a class="topOfPage" href="#top" title="Go to the top of this page">^ TOP</a>
-<h1 id="H1_4">
-    Per Diem Worksheet</h1>
+<h1>Per Diem Worksheet</h1>
 <p>
     <b>Instructions</b><br />
     Use this worksheet to fill out Per Diem Counts for this month for this account.</p>

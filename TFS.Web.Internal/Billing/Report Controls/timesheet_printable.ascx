@@ -57,15 +57,19 @@ SelectMethod="FetchByTimesheetID">
         <td align="right">JOB TITLE:</td>
     </tr>
     <!-- #### Using the repeater to grab user info here ##### -->
+    <tr style="background-color: #CCCCCC;">
    <asp:Repeater ID="UserInfoRepeater" runat="server" DataSourceID="UserDataSource">
-    <ItemTemplate>
-        <tr style="background-color: #CCCCCC;">
-            <td align="left" style="background-color: #FFFFFF; border: solid 1px black;"><b><%# Eval("LastName") %></b></td>
-            <td align="center" colspan="3"><b>HOURS LOG</b></td>
-            <td align="right" style="background-color: #FFFFFF; border: solid 1px black;"><b><%# Eval("Title") %></b></td>
-        </tr>
+    <ItemTemplate>        
+            <td align="left" style="background-color: #FFFFFF; border: solid 1px black;"><b><%# Eval("LastName") %></b></td>            
     </ItemTemplate>
     </asp:Repeater>
+            <td align="center" colspan="3"><b>HOURS LOG</b></td>
+            <asp:Repeater ID="UserInfoRepeater2" runat="server" DataSourceID="TimesheetDataSource">
+    <ItemTemplate>
+            <td align="right" style="background-color: #FFFFFF; border: solid 1px black;"><b><%# Eval("RateGroup.Name") %></b></td>
+            </ItemTemplate>
+    </asp:Repeater>
+        </tr>
     <tr style="background-color: #CCCCCC;">
         <td align="center">DATE</td>
         <td align="center">TIME IN (L)</td>
