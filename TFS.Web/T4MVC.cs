@@ -76,8 +76,8 @@ namespace T4MVC {
     public class T4MVC_DashboardController: TFS.Web.Controllers.DashboardController {
         public T4MVC_DashboardController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult Index() {
-            var callInfo = new T4MVC_ActionResult("Dashboard", Actions.Index);
+        public override System.Web.Mvc.ViewResult Index() {
+            var callInfo = new T4MVC_ViewResult("Dashboard", Actions.Index);
             return callInfo;
         }
 
@@ -175,12 +175,10 @@ public interface IT4MVCActionResult {
 }
 
 [CompilerGenerated]
-public class T4MVC_ActionResult : System.Web.Mvc.ActionResult, IT4MVCActionResult {
-    public T4MVC_ActionResult(string controller, string action): base()  {
+public class T4MVC_ViewResult : System.Web.Mvc.ViewResult, IT4MVCActionResult {
+    public T4MVC_ViewResult(string controller, string action): base()  {
         this.InitMVCT4Result(controller, action);
     }
-     
-    public override void ExecuteResult(System.Web.Mvc.ControllerContext context) { }
     
     public string Controller { get; set; }
     public string Action { get; set; }

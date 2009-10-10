@@ -103,6 +103,7 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\SiteController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -119,8 +120,49 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\public\banners\aircrew_login.gif" />
+    <Content Include="Content\public\banners\contact.gif" />
+    <Content Include="Content\public\banners\experience.gif" />
+    <Content Include="Content\public\banners\programs.gif" />
+    <Content Include="Content\public\banners\services.gif" />
+    <Content Include="Content\public\banners\welcome.gif" />
+    <Content Include="Content\public\login\index_r3_c1.jpg" />
+    <Content Include="Content\public\login\loginlayout_r1_c1.jpg" />
+    <Content Include="Content\public\login\loginlayout_r2_c1.jpg" />
+    <Content Include="Content\public\login\loginlayout_r3_c1.jpg" />
+    <Content Include="Content\public\login\loginlayout_r3_c2.jpg" />
+    <Content Include="Content\public\login\loginlayout_r3_c3.jpg" />
+    <Content Include="Content\public\login\loginlayout_r4_c1.jpg" />
+    <Content Include="Content\public\login\spacer.gif" />
+    <Content Include="Content\public\login\submit.gif" />
+    <Content Include="Content\public\old_imagerollover.css" />
+    <Content Include="Content\public\old_layout.css" />
+    <Content Include="Content\public\old_tfs2.css" />
+    <Content Include="Content\public\template\content_bg.gif" />
+    <Content Include="Content\public\template\footer.gif" />
+    <Content Include="Content\public\template\header01.jpg" />
+    <Content Include="Content\public\template\header02.jpg" />
+    <Content Include="Content\public\template\header03.jpg" />
+    <Content Include="Content\public\template\header04.jpg" />
+    <Content Include="Content\public\template\header05.jpg" />
+    <Content Include="Content\public\template\index_r10_c1.gif" />
+    <Content Include="Content\public\template\index_r10_c1_f2.gif" />
+    <Content Include="Content\public\template\index_r5_c1.gif" />
+    <Content Include="Content\public\template\index_r5_c1_f2.gif" />
+    <Content Include="Content\public\template\index_r6_c1.gif" />
+    <Content Include="Content\public\template\index_r6_c1_f2.gif" />
+    <Content Include="Content\public\template\index_r7_c1.gif" />
+    <Content Include="Content\public\template\index_r7_c1_f2.gif" />
+    <Content Include="Content\public\template\index_r8_c1.gif" />
+    <Content Include="Content\public\template\index_r8_c1_f2.gif" />
+    <Content Include="Content\public\template\index_r9_c1.gif" />
+    <Content Include="Content\public\template\index_r9_c1_f2.gif" />
+    <Content Include="Content\public\template\item.jpg" />
+    <Content Include="Content\public\template\item_hover.jpg" />
+    <Content Include="Content\public\template\spacer.gif" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Views\Site\SitePage.aspx" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-1.3.2.js" />
     <Content Include="Scripts\jquery-1.3.2.min.js" />
@@ -151,7 +193,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

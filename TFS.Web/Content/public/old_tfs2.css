@@ -1,0 +1,60 @@
+body 
+{
+	margin-top: 0px;
+	background-color: #D6D6D6;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+
+P {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	text-align: left;
+}
+
+UL 
+{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	text-align: left;
+}
+
+.bigger
+{
+	font-size: larger;
+}
+
+H3 {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-weight: bold;
+	text-align: left;
+}
+
+a {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-weight: bold;
+	color: #2A5400;
+}
+
+.blacklink a {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-weight: bold;
+	color: #000000;
+	text-decoration: none;
+	
+}
+
+img
+{
+	border-width: 0;
+}
+
+.floatingimage
+{
+	clear:right;
+	float:right;
+	border-width: 0;
+}

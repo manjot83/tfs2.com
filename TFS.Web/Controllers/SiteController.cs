@@ -7,11 +7,12 @@ using System.Web.Mvc.Ajax;
 
 namespace TFS.Web.Controllers
 {
-    public partial class DashboardController : Controller
+    public class SiteController : Controller
     {
-        public virtual ViewResult Index()
+        public ActionResult Index()
         {
-            return View();
+            return View("SitePage");
         }
+
     }
 }
