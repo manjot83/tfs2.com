@@ -56,8 +56,8 @@ SelectMethod="FetchByPeriodID">
     Editing Payroll for User:
     <asp:Repeater ID="UserDetailsView" runat="Server" DataSourceID="UserDataSource">
         <ItemTemplate><b><asp:Label ID="Lastname" runat="server" Text='<%# Eval("lastname") %>' />,
-            <asp:Label ID="Firstname" runat="server" Text='<%# Eval("firstname") %>' /></b> - 
-            <b><asp:Label ID="title" runat="server" Text='<%# Eval("title") %>'></asp:Label></b>
+            <asp:Label ID="Firstname" runat="server" Text='<%# Eval("firstname") %>' /></b><%-- - 
+            <b><asp:Label ID="title" runat="server" Text='<%# Eval("title") %>'></asp:Label></b>--%>
         </ItemTemplate>
     </asp:Repeater>
     <br />
@@ -70,6 +70,11 @@ SelectMethod="FetchByPeriodID">
     </asp:Repeater>
 </p>
 
+
+<h1>Pay Rate Group</h1>
+<p>
+    Rate Group: <b><asp:Label ID="PayRateGroup" runat="Server"></asp:Label></b>
+</p>
 
 <a class="topOfPage" href="#top" title="Go to the top of this page">^ TOP</a>
 <h1 id="H1_4">

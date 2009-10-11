@@ -31,6 +31,15 @@ public partial class _default {
     protected global::User_Controls_Header header_control;
     
     /// <summary>
+    /// sidebar_control control.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated field.
+    /// To modify move field declaration from designer file to code-behind file.
+    /// </remarks>
+    protected global::User_Controls_Sidebar sidebar_control;
+    
+    /// <summary>
     /// MainContent control.
     /// </summary>
     /// <remarks>

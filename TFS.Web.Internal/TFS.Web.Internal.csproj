@@ -38,7 +38,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\Cridion.Web.Controls.dll</HintPath>
     </Reference>
-    <Reference Include="SubSonic, Version=2.0.3.0, Culture=neutral, PublicKeyToken=eadb47849839a332, processorArchitecture=MSIL">
+    <Reference Include="SubSonic, Version=2.1.0.1, Culture=neutral, PublicKeyToken=eadb47849839a332, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Dependencies\SubSonic.dll</HintPath>
     </Reference>

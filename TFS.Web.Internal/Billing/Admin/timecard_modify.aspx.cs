@@ -30,6 +30,7 @@ namespace TFS.Intranet.Web.Billing.Admin
                 TFS.Intranet.Data.Billing.Timesheet timesheet = new TFS.Intranet.Data.Billing.TimesheetController().FetchByID(_timesheetid)[0];
                 DaysPerDiem.Text = timesheet.Perdiemcount.ToString();
                 Mileage.Text = timesheet.Mileageclaimed.ToString();
+                PayRateGroup.Text = timesheet.RateGroup.Name;
             }
         }
 
