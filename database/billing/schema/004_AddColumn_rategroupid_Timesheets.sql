@@ -1,4 +1,5 @@
 BEGIN TRANSACTION
+
 SET QUOTED_IDENTIFIER ON
 SET ARITHABORT ON
 SET NUMERIC_ROUNDABORT OFF
@@ -11,7 +12,14 @@ ALTER TABLE dbo.RateGroups SET (LOCK_ESCALATION = TABLE)
 GO
 
 ALTER TABLE dbo.Timesheets DROP
-    CONSTRAINT FK_Timesheets_BillingPeriodAccounts
+    CONSTRAINT  FK_Timesheets_BillingPeriodAccounts
+GO
+
+ALTER TABLE [dbo].[ExpenseEntries] DROP CONSTRAINT [FK_ExpenseEntries_Timesheets]
+GO
+
+ALTER TABLE dbo.TimeEntries DROP
+     CONSTRAINT FK_TimeEntries_Timesheets
 GO
 
 ALTER TABLE dbo.BillingPeriodAccounts SET (LOCK_ESCALATION = TABLE)
@@ -40,18 +48,13 @@ SET IDENTITY_INSERT dbo.Tmp_Timesheets ON
 GO
 
 IF EXISTS(SELECT * FROM dbo.Timesheets)
-	 EXEC('INSERT INTO dbo.Tmp_Timesheets (id, username, periodaccountid, perdiemcount, IsDeleted, CreatedOn, CreatedBy, ModifiedOn, ModifiedBy, mileageclaimed)
-		SELECT id, username, periodaccountid, perdiemcount, IsDeleted, CreatedOn, CreatedBy, ModifiedOn, ModifiedBy, mileageclaimed FROM dbo.Timesheets WITH (HOLDLOCK TABLOCKX)')
+	 EXEC('INSERT INTO dbo.Tmp_Timesheets (id, username, periodaccountid, perdiemcount, IsDeleted, CreatedOn, CreatedBy, ModifiedOn, ModifiedBy, mileageclaimed,rategroupid)
+		   SELECT Timesheets.id, Timesheets.username, periodaccountid, perdiemcount, IsDeleted, CreatedOn, CreatedBy, ModifiedOn, ModifiedBy, mileageclaimed, vw_Users.rategroup as rategroupid
+		   FROM dbo.Timesheets WITH (HOLDLOCK TABLOCKX)
+		   INNER JOIN vw_Users ON vw_Users.username = Timesheets.username')
 GO
 
 SET IDENTITY_INSERT dbo.Tmp_Timesheets OFF
-GO
-
-ALTER TABLE dbo.ExpenseEntries
-	DROP CONSTRAINT FK_ExpenseEntries_Timesheets
-GO
-ALTER TABLE dbo.TimeEntries
-	DROP CONSTRAINT FK_TimeEntries_Timesheets
 GO
 
 DROP TABLE dbo.Timesheets
@@ -79,5 +82,11 @@ GO
 
 ALTER TABLE dbo.ExpenseEntries SET (LOCK_ESCALATION = TABLE)
 GO
+
+IF @@ERROR <> 0
+ BEGIN
+    ROLLBACK
+    RETURN
+ END
 
 COMMIT
