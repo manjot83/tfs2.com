@@ -7,5 +7,6 @@ namespace TFS.Models
 {
     public class User
     {
+        public virtual Guid Id { get; private set; }
     }
 }
