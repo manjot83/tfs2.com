@@ -4,23 +4,33 @@ using System.Linq;
 using System.Text;
 using TFS.Models.Site;
 using FluentNHibernate.Mapping;
+using TFS.Models.Images;
 
 namespace TFS.Models.Data.Site
 {
-    public class PageMapping : ClassMap<Page>
+    public class PageMap : ClassMap<Page>
     {
-        public PageMapping()
+        public PageMap()
         {
-            Table("pages");
+            Table("Pages");
+
             Id(x => x.Id)
                 .GeneratedBy.Guid()
                 .Not.Nullable();
+
             Map(x => x.URI)
                 .Not.Nullable();
             Map(x => x.Title)
                 .Not.Nullable();            
             Map(x => x.Content)
                 .Not.Nullable();
+
+            HasManyToMany<StaticImage>(x => x.Images)
+                .Table("PageStaticImages")
+                .LazyLoad()
+                .ParentKeyColumn("PageId")
+                .ChildKeyColumn("StaticImageId")
+                .Cascade.SaveUpdate();
         }
     }
 }
