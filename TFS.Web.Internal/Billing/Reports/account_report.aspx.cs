@@ -48,9 +48,8 @@ namespace TFS.Intranet.Web.Billing.Reports
 
             summaryinfo = new TFS.Intranet.Data.Billing.EmployeeTimesheetInfoController().GetAccountSummaryTotals(BillingAccountID, PeriodID);
 
-
-            BillingGroupRepeater.DataSource = summaryinfo;
-            BillingGroupRepeater.DataBind();
+            this.BillingGroupRepeater.DataSource = summaryinfo;
+            this.BillingGroupRepeater.DataBind();
             /*fill in summary*/
 
             //report_TotalExpenses.Text = summaryinfo.Rows[0]["ExpenseTotal"].ToString();

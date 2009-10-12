@@ -30,8 +30,8 @@
             </div>
         </ItemTemplate>
     </asp:Repeater>
-    
-    <table id="Table1" width="100%" style="border: solid 2px black; font-family:Arial;" cellspacing="0">
+   
+    <table id="Table1" width="550px" style="border: solid 2px black; font-family:Arial;" cellspacing="0">
         <tr style="background-color: #CCCCCC;">
             <td align="center" colspan="4">&nbsp;</td>
         </tr>
@@ -47,7 +47,7 @@
                     <td align="center" style="background-color: #CCCCCC;">Total <%# Eval("RateGroupName") %></td>
                     <td align="center"><b><%# Eval("TotalHours") %> Hours</b></td>
                     <td align="center">$<%# Eval("Rate") %>/hr</td>
-                    <td align="center"><b>$(Double.Parse(Eval("TotalHours")) * Double.Parse(Eval("Rate"))</b></td>
+                    <td align="center"><b>$<%# Double.Parse(Eval("TotalHours").ToString()) * Double.Parse(Eval("Rate").ToString()) %></b></td>
                 </tr>
             </ItemTemplate>
         </asp:Repeater>
