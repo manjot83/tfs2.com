@@ -19,11 +19,19 @@ namespace TFS.Models.Data.Site
                 .Not.Nullable();
 
             Map(x => x.URI)
-                .Not.Nullable();
+                .Not.Nullable()
+                .Length(50);
             Map(x => x.Title)
-                .Not.Nullable();            
+                .Not.Nullable()
+                .Length(100);
             Map(x => x.Content)
                 .Not.Nullable();
+            Map(x => x.BannerFileName)
+                .Not.Nullable()
+                .Length(100);
+            Map(x => x.HeaderFileName)
+                .Not.Nullable()
+                .Length(100);
 
             HasManyToMany<StaticImage>(x => x.Images)
                 .Table("PageStaticImages")

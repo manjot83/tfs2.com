@@ -1,0 +1,72 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Centro.Data.DomainModel;
+using Centro.Extensions;
+using NHibernate;
+
+namespace TFS.Models.Data
+{
+    public class UserRepository : RepositoryBase<User>, IUserRepository
+    {
+        public UserRepository(ISession session)
+            : base(session)
+        {
+        }
+
+        public User GetUser(string username)
+        {
+            return Linq().Where(x => x.Username == username).FirstOrDefault();
+        }
+
+        public bool AuthenticateUser(string username, string password)
+        {
+            if (string.IsNullOrEmpty(password))
+                return false;
+            var user = GetUser(username);
+            if (user == null)
+                return false;
+            if (string.IsNullOrEmpty(user.PasswordHash))
+                return false;
+            var suppliedPasswordHash = password.Hash(Crypto.HashAlgorithm.SHA1);
+            return user.PasswordHash.Equals(suppliedPasswordHash);
+        }
+        public bool ResetPasswordAsAdmin(string username, string password)
+        {
+            return ResetPasswordAsAdmin(GetUser(username), password);
+        }
+
+        public bool ResetPasswordAsAdmin(User user, string password)
+        {
+            if (user == null)
+                return false;
+            user.PasswordHash = password.Hash(Crypto.HashAlgorithm.SHA1);
+            Save(user);
+            return true;
+        }
+
+        public bool ChangePassword(string username, string oldPassword, string newPassword)
+        {
+            return ChangePassword(GetUser(username), oldPassword, newPassword);
+        }
+
+        public bool ChangePassword(User user, string oldPassword, string newPassword)
+        {
+            if (user == null)
+                return false;
+            if (!AuthenticateUser(user.Username, oldPassword))
+                return false;
+            if (string.IsNullOrEmpty(newPassword))
+                return false;
+            user.PasswordHash = newPassword.Hash(Crypto.HashAlgorithm.SHA1);
+            Save(user);
+            return true;
+        }
+
+        public int MinRequiredPasswordLength
+        {
+            get { return 8; }
+        }
+    }
+}

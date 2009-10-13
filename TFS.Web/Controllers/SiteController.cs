@@ -4,15 +4,57 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
+using TFS.Models.Site;
 
 namespace TFS.Web.Controllers
 {
-    public class SiteController : Controller
+    public partial class SiteController : Controller
     {
-        public ActionResult Index()
+        private const string URI_HOME = "/home";
+        private const string URI_SERVICES = "/services";
+        private const string URI_PROGRAMS = "/programs";
+        private const string URI_EXPERIENCE = "/experience";
+        private const string URI_CONTACT = "/contact";
+        private readonly ISiteRepository siteRepository;
+
+        public SiteController(ISiteRepository siteRepository)
         {
-            return View("SitePage");
+            this.siteRepository = siteRepository;
         }
 
+        public virtual RedirectToRouteResult Index()
+        {
+            return this.RedirectToAction(MVC.Site.Actions.Home);
+        }
+
+        public virtual ViewResult Home()
+        {
+            var page = siteRepository.GetPage(URI_HOME);
+            return View(MVC.Site.Views.SitePage, page);
+        }
+
+        public virtual ViewResult Services()
+        {
+            var page = siteRepository.GetPage(URI_SERVICES);
+            return View(MVC.Site.Views.SitePage, page);
+        }
+
+        public virtual ViewResult Programs()
+        {
+            var page = siteRepository.GetPage(URI_PROGRAMS);
+            return View(MVC.Site.Views.SitePage, page);
+        }
+
+        public virtual ViewResult Experience()
+        {
+            var page = siteRepository.GetPage(URI_EXPERIENCE);
+            return View(MVC.Site.Views.SitePage, page);
+        }
+
+        public virtual ViewResult Contact()
+        {
+            var page = siteRepository.GetPage(URI_CONTACT);
+            return View(MVC.Site.Views.SitePage, page);
+        }
     }
 }

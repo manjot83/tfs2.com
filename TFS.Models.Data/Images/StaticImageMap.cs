@@ -18,9 +18,11 @@ namespace TFS.Models.Data.Images
                 .GeneratedBy.Guid();
 
             Map(x => x.MimeType)
-                .Not.Nullable();
+                .Not.Nullable()
+                .Length(50);
             Map(x => x.Description)
-                .Not.Nullable();
+                .Not.Nullable()
+                .Length(200);
         }
     }
 }

@@ -39,21 +39,29 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Centro.Core, Version=0.1.3556.40211, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Centro.Core, Version=0.1.3572.33835, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Centro.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Centro.MVC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Centro.Data, Version=0.1.3572.33836, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Centro.MVC.dll</HintPath>
+      <HintPath>..\lib\Centro.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Centro.NHibernateUtils, Version=0.1.3556.40204, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Centro.Web.Mvc, Version=0.1.3572.33835, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Centro.NHibernateUtils.dll</HintPath>
+      <HintPath>..\lib\Centro.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="Elmah, Version=1.1.11517.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Elmah\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate, Version=1.0.0.593, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\fluent-NHibernate\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="HibernatingRhinos.NHibernate.Profiler.Appender, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0774796e73ebf640, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\HibernatingRhinos.NHibernate.Profiler.Appender.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Mvc, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -66,6 +74,10 @@
     <Reference Include="NHibernate.ByteCode.Castle, Version=2.1.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluent-NHibernate\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Validator, Version=1.2.0.2002, Culture=neutral, PublicKeyToken=70154e18752585bd, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\NHibernate.Validator\NHibernate.Validator.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap, Version=2.5.2.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -103,14 +115,18 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\ImagesController.cs" />
+    <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="FormsAuthenticationService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="IAuthenticationService.cs" />
     <Compile Include="MVCConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="T4MVC.cs">
@@ -135,28 +151,28 @@
     <Content Include="Content\public\login\loginlayout_r4_c1.jpg" />
     <Content Include="Content\public\login\spacer.gif" />
     <Content Include="Content\public\login\submit.gif" />
-    <Content Include="Content\public\old_imagerollover.css" />
-    <Content Include="Content\public\old_layout.css" />
-    <Content Include="Content\public\old_tfs2.css" />
+    <Content Include="Content\public\imagerollover.css" />
+    <Content Include="Content\public\layout.css" />
+    <Content Include="Content\public\tfs2.css" />
     <Content Include="Content\public\template\content_bg.gif" />
     <Content Include="Content\public\template\footer.gif" />
-    <Content Include="Content\public\template\header01.jpg" />
-    <Content Include="Content\public\template\header02.jpg" />
-    <Content Include="Content\public\template\header03.jpg" />
-    <Content Include="Content\public\template\header04.jpg" />
-    <Content Include="Content\public\template\header05.jpg" />
-    <Content Include="Content\public\template\index_r10_c1.gif" />
-    <Content Include="Content\public\template\index_r10_c1_f2.gif" />
-    <Content Include="Content\public\template\index_r5_c1.gif" />
-    <Content Include="Content\public\template\index_r5_c1_f2.gif" />
-    <Content Include="Content\public\template\index_r6_c1.gif" />
-    <Content Include="Content\public\template\index_r6_c1_f2.gif" />
-    <Content Include="Content\public\template\index_r7_c1.gif" />
-    <Content Include="Content\public\template\index_r7_c1_f2.gif" />
-    <Content Include="Content\public\template\index_r8_c1.gif" />
-    <Content Include="Content\public\template\index_r8_c1_f2.gif" />
-    <Content Include="Content\public\template\index_r9_c1.gif" />
-    <Content Include="Content\public\template\index_r9_c1_f2.gif" />
+    <Content Include="Content\public\headers\header01.jpg" />
+    <Content Include="Content\public\headers\header02.jpg" />
+    <Content Include="Content\public\headers\header03.jpg" />
+    <Content Include="Content\public\headers\header04.jpg" />
+    <Content Include="Content\public\headers\header05.jpg" />
+    <Content Include="Content\public\rollovers\contact.gif" />
+    <Content Include="Content\public\rollovers\contact_rollover.gif" />
+    <Content Include="Content\public\rollovers\home.gif" />
+    <Content Include="Content\public\rollovers\home_rollover.gif" />
+    <Content Include="Content\public\rollovers\services.gif" />
+    <Content Include="Content\public\rollovers\services_rollover.gif" />
+    <Content Include="Content\public\rollovers\programs.gif" />
+    <Content Include="Content\public\rollovers\programs_rollover.gif" />
+    <Content Include="Content\public\rollovers\experience.gif" />
+    <Content Include="Content\public\rollovers\experience_rollover.gif" />
+    <Content Include="Content\public\rollovers\logon.gif" />
+    <Content Include="Content\public\rollovers\logon_rollover.gif" />
     <Content Include="Content\public\template\item.jpg" />
     <Content Include="Content\public\template\item_hover.jpg" />
     <Content Include="Content\public\template\spacer.gif" />
@@ -172,6 +188,7 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\ConnectionStrings.config" />
     <None Include="T4MVC.settings.t4" />
     <None Include="T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -193,6 +210,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />
@@ -208,7 +226,7 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
+          <AutoAssignPort>False</AutoAssignPort>
           <DevelopmentServerPort>60488</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>

@@ -31,7 +31,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Centro.Core, Version=0.1.3556.40211, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Centro.Core, Version=0.1.3572.33835, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Centro.Core.dll</HintPath>
     </Reference>
@@ -53,11 +53,12 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="Images\ImageFormatExtensions.cs" />
+    <Compile Include="Images\IImageRepository.cs" />
     <Compile Include="Images\StaticImage.cs" />
-    <Compile Include="IRepository.cs" />
+    <Compile Include="IUserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site\Page.cs" />
+    <Compile Include="Site\ISiteRepository.cs" />
     <Compile Include="User.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -20,6 +20,9 @@ using T4MVC;
 [CompilerGenerated]
 public static class MVC {
     public static TFS.Web.Controllers.DashboardController Dashboard = new T4MVC_DashboardController();
+    public static TFS.Web.Controllers.ImagesController Images = new T4MVC_ImagesController();
+    public static TFS.Web.Controllers.SecurityController Security = new T4MVC_SecurityController();
+    public static TFS.Web.Controllers.SiteController Site = new T4MVC_SiteController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 
@@ -58,6 +61,114 @@ namespace TFS.Web.Controllers {
         }
     }
 }
+namespace TFS.Web.Controllers {
+    public partial class ImagesController {
+
+        [CompilerGenerated]
+        protected ImagesController(Dummy d) { }
+
+        protected RedirectToRouteResult RedirectToAction(ActionResult result) {
+            var callInfo = (IT4MVCActionResult)result;
+            return RedirectToRoute(callInfo.RouteValues);
+        }
+
+        [NonAction]
+        public ActionResult StaticImage() {
+            return new T4MVC_ActionResult(Name, Actions.StaticImage);
+        }
+
+
+        [CompilerGenerated]
+        public readonly string Name = "Images";
+
+        static readonly ActionNames s_actions = new ActionNames();
+        [CompilerGenerated]
+        public ActionNames Actions { get { return s_actions; } }
+        [CompilerGenerated]
+        public class ActionNames {
+            public readonly string StaticImage = "StaticImage";
+        }
+
+
+        static readonly ViewNames s_views = new ViewNames();
+        [CompilerGenerated]
+        public ViewNames Views { get { return s_views; } }
+        [CompilerGenerated]
+        public class ViewNames {
+        }
+    }
+}
+namespace TFS.Web.Controllers {
+    public partial class SecurityController {
+
+        [CompilerGenerated]
+        protected SecurityController(Dummy d) { }
+
+        protected RedirectToRouteResult RedirectToAction(ActionResult result) {
+            var callInfo = (IT4MVCActionResult)result;
+            return RedirectToRoute(callInfo.RouteValues);
+        }
+
+
+        [CompilerGenerated]
+        public readonly string Name = "Security";
+
+        static readonly ActionNames s_actions = new ActionNames();
+        [CompilerGenerated]
+        public ActionNames Actions { get { return s_actions; } }
+        [CompilerGenerated]
+        public class ActionNames {
+            public readonly string LogOn = "LogOn";
+            public readonly string LogOff = "LogOff";
+        }
+
+
+        static readonly ViewNames s_views = new ViewNames();
+        [CompilerGenerated]
+        public ViewNames Views { get { return s_views; } }
+        [CompilerGenerated]
+        public class ViewNames {
+        }
+    }
+}
+namespace TFS.Web.Controllers {
+    public partial class SiteController {
+
+        [CompilerGenerated]
+        protected SiteController(Dummy d) { }
+
+        protected RedirectToRouteResult RedirectToAction(ActionResult result) {
+            var callInfo = (IT4MVCActionResult)result;
+            return RedirectToRoute(callInfo.RouteValues);
+        }
+
+
+        [CompilerGenerated]
+        public readonly string Name = "Site";
+
+        static readonly ActionNames s_actions = new ActionNames();
+        [CompilerGenerated]
+        public ActionNames Actions { get { return s_actions; } }
+        [CompilerGenerated]
+        public class ActionNames {
+            public readonly string Index = "Index";
+            public readonly string Home = "Home";
+            public readonly string Services = "Services";
+            public readonly string Programs = "Programs";
+            public readonly string Experience = "Experience";
+            public readonly string Contact = "Contact";
+        }
+
+
+        static readonly ViewNames s_views = new ViewNames();
+        [CompilerGenerated]
+        public ViewNames Views { get { return s_views; } }
+        [CompilerGenerated]
+        public class ViewNames {
+            public readonly string SitePage = "SitePage";
+        }
+    }
+}
 namespace T4MVC {
     public class SharedController {
 
@@ -78,6 +189,76 @@ namespace T4MVC {
 
         public override System.Web.Mvc.ViewResult Index() {
             var callInfo = new T4MVC_ViewResult("Dashboard", Actions.Index);
+            return callInfo;
+        }
+
+    }
+    [CompilerGenerated]
+    public class T4MVC_ImagesController: TFS.Web.Controllers.ImagesController {
+        public T4MVC_ImagesController() : base(Dummy.Instance) { }
+
+        public override System.Web.Mvc.ActionResult StaticImage(System.Guid id) {
+            var callInfo = new T4MVC_ActionResult("Images", Actions.StaticImage);
+            callInfo.RouteValues.Add("id", id);
+            return callInfo;
+        }
+
+    }
+    [CompilerGenerated]
+    public class T4MVC_SecurityController: TFS.Web.Controllers.SecurityController {
+        public T4MVC_SecurityController() : base(Dummy.Instance) { }
+
+        public override System.Web.Mvc.ViewResult LogOn() {
+            var callInfo = new T4MVC_ViewResult("Security", Actions.LogOn);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult LogOn(string userName, string password, bool rememberMe, System.Uri returnUrl) {
+            var callInfo = new T4MVC_ActionResult("Security", Actions.LogOn);
+            callInfo.RouteValues.Add("userName", userName);
+            callInfo.RouteValues.Add("password", password);
+            callInfo.RouteValues.Add("rememberMe", rememberMe);
+            callInfo.RouteValues.Add("returnUrl", returnUrl);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.RedirectToRouteResult LogOff() {
+            var callInfo = new T4MVC_RedirectToRouteResult("Security", Actions.LogOff);
+            return callInfo;
+        }
+
+    }
+    [CompilerGenerated]
+    public class T4MVC_SiteController: TFS.Web.Controllers.SiteController {
+        public T4MVC_SiteController() : base(Dummy.Instance) { }
+
+        public override System.Web.Mvc.RedirectToRouteResult Index() {
+            var callInfo = new T4MVC_RedirectToRouteResult("Site", Actions.Index);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult Home() {
+            var callInfo = new T4MVC_ViewResult("Site", Actions.Home);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult Services() {
+            var callInfo = new T4MVC_ViewResult("Site", Actions.Services);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult Programs() {
+            var callInfo = new T4MVC_ViewResult("Site", Actions.Programs);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult Experience() {
+            var callInfo = new T4MVC_ViewResult("Site", Actions.Experience);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult Contact() {
+            var callInfo = new T4MVC_ViewResult("Site", Actions.Contact);
             return callInfo;
         }
 
@@ -185,6 +366,30 @@ public class T4MVC_ViewResult : System.Web.Mvc.ViewResult, IT4MVCActionResult {
     public RouteValueDictionary RouteValues { get; set; }
 }
 
+[CompilerGenerated]
+public class T4MVC_ActionResult : System.Web.Mvc.ActionResult, IT4MVCActionResult {
+    public T4MVC_ActionResult(string controller, string action): base()  {
+        this.InitMVCT4Result(controller, action);
+    }
+     
+    public override void ExecuteResult(System.Web.Mvc.ControllerContext context) { }
+    
+    public string Controller { get; set; }
+    public string Action { get; set; }
+    public RouteValueDictionary RouteValues { get; set; }
+}
+
+[CompilerGenerated]
+public class T4MVC_RedirectToRouteResult : System.Web.Mvc.RedirectToRouteResult, IT4MVCActionResult {
+    public T4MVC_RedirectToRouteResult(string controller, string action): base(" ", null)  {
+        this.InitMVCT4Result(controller, action);
+    }
+    
+    public string Controller { get; set; }
+    public string Action { get; set; }
+    public RouteValueDictionary RouteValues { get; set; }
+}
+
 
 namespace Links {
     [CompilerGenerated]
@@ -201,6 +406,76 @@ namespace Links {
     public static class @Content {
         public static string Url() { return T4MVCHelpers.ProcessVirtualPath("~/Content"); }
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath("~/Content/" + fileName); }
+        [CompilerGenerated]
+        public static class @public {
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath("~/Content/public"); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath("~/Content/public/" + fileName); }
+            [CompilerGenerated]
+            public static class @banners {
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath("~/Content/public/banners"); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath("~/Content/public/banners/" + fileName); }
+                public static readonly string aircrew_login_gif = Url("aircrew_login.gif");
+                public static readonly string contact_gif = Url("contact.gif");
+                public static readonly string experience_gif = Url("experience.gif");
+                public static readonly string programs_gif = Url("programs.gif");
+                public static readonly string services_gif = Url("services.gif");
+                public static readonly string welcome_gif = Url("welcome.gif");
+            }
+        
+            [CompilerGenerated]
+            public static class @headers {
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath("~/Content/public/headers"); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath("~/Content/public/headers/" + fileName); }
+                public static readonly string header01_jpg = Url("header01.jpg");
+                public static readonly string header02_jpg = Url("header02.jpg");
+                public static readonly string header03_jpg = Url("header03.jpg");
+                public static readonly string header04_jpg = Url("header04.jpg");
+                public static readonly string header05_jpg = Url("header05.jpg");
+            }
+        
+            [CompilerGenerated]
+            public static class @login {
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath("~/Content/public/login"); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath("~/Content/public/login/" + fileName); }
+                public static readonly string index_r3_c1_jpg = Url("index_r3_c1.jpg");
+                public static readonly string loginlayout_r1_c1_jpg = Url("loginlayout_r1_c1.jpg");
+                public static readonly string loginlayout_r2_c1_jpg = Url("loginlayout_r2_c1.jpg");
+                public static readonly string loginlayout_r3_c1_jpg = Url("loginlayout_r3_c1.jpg");
+                public static readonly string loginlayout_r3_c2_jpg = Url("loginlayout_r3_c2.jpg");
+                public static readonly string loginlayout_r3_c3_jpg = Url("loginlayout_r3_c3.jpg");
+                public static readonly string loginlayout_r4_c1_jpg = Url("loginlayout_r4_c1.jpg");
+                public static readonly string spacer_gif = Url("spacer.gif");
+                public static readonly string submit_gif = Url("submit.gif");
+            }
+        
+            public static readonly string old_imagerollover_css = Url("old_imagerollover.css");
+            public static readonly string old_layout_css = Url("old_layout.css");
+            public static readonly string old_tfs2_css = Url("old_tfs2.css");
+            [CompilerGenerated]
+            public static class @template {
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath("~/Content/public/template"); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath("~/Content/public/template/" + fileName); }
+                public static readonly string content_bg_gif = Url("content_bg.gif");
+                public static readonly string footer_gif = Url("footer.gif");
+                public static readonly string index_r10_c1_gif = Url("index_r10_c1.gif");
+                public static readonly string index_r10_c1_f2_gif = Url("index_r10_c1_f2.gif");
+                public static readonly string index_r5_c1_gif = Url("index_r5_c1.gif");
+                public static readonly string index_r5_c1_f2_gif = Url("index_r5_c1_f2.gif");
+                public static readonly string index_r6_c1_gif = Url("index_r6_c1.gif");
+                public static readonly string index_r6_c1_f2_gif = Url("index_r6_c1_f2.gif");
+                public static readonly string index_r7_c1_gif = Url("index_r7_c1.gif");
+                public static readonly string index_r7_c1_f2_gif = Url("index_r7_c1_f2.gif");
+                public static readonly string index_r8_c1_gif = Url("index_r8_c1.gif");
+                public static readonly string index_r8_c1_f2_gif = Url("index_r8_c1_f2.gif");
+                public static readonly string index_r9_c1_gif = Url("index_r9_c1.gif");
+                public static readonly string index_r9_c1_f2_gif = Url("index_r9_c1_f2.gif");
+                public static readonly string item_jpg = Url("item.jpg");
+                public static readonly string item_hover_jpg = Url("item_hover.jpg");
+                public static readonly string spacer_gif = Url("spacer.gif");
+            }
+        
+        }
+    
     }
 
 }

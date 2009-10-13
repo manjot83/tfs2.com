@@ -2,13 +2,15 @@
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Centro.MVC.Controllers;
-using Centro.NHibernateUtils;
+using Centro.Web.Mvc.Controllers;
+using Centro.Data;
 using StructureMap;
 using StructureMap.Attributes;
 using TFS.Web.Controllers;
 using TFS.Models;
 using NHibernate;
+using TFS.Models.Site;
+using TFS.Models.Data.Site;
 
 namespace TFS.Web
 {
@@ -31,7 +33,11 @@ namespace TFS.Web
 
         public static void InitializeIoCAndDataAccess()
         {
-            var mappingAssemblies = new List<Assembly> { typeof(TFS.Models.User).Assembly };
+#if DEBUG
+            HibernatingRhinos.NHibernate.Profiler.Appender.NHibernateProfiler.Initialize();
+#endif
+
+            var mappingAssemblies = new List<Assembly> { typeof(TFS.Models.Data.UserMapping).Assembly };
 #if SQLITE
             var nhibernateRegistry = SQLiteBuilder.CreateRegistry("TFS_Web", mappingAssemblies, InstanceScope.HttpContext);
 #else
@@ -49,10 +55,14 @@ namespace TFS.Web
 
                 i.Scan(x =>
                 {
-                    x.AssemblyContainingType<IRepository>();
-                    x.AssemblyContainingType<RepositoryBase>();
+                    x.AssemblyContainingType<ISiteRepository>();
+                    x.AssemblyContainingType<SiteRepository>();
                     x.With<StructureMap.Graph.DefaultConventionScanner>();
                 });
+
+                i.ForRequestedType<IAuthenticationService>()
+                    .CacheBy(InstanceScope.PerRequest)
+                    .TheDefaultIsConcreteType<FormsAuthenticationService>();
             });
 
 #if DEBUG

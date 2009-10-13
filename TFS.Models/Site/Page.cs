@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TFS.Models.Images;
+using Centro.DomainModel;
 
 namespace TFS.Models.Site
 {
-    public class Page
+    public class Page 
     {
         public Page()
         {

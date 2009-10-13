@@ -5,8 +5,8 @@ using System.Text;
 
 namespace TFS.Models.Images
 {
-    public static class ImageFormatExtensions
+    public interface IImageRepository
     {
-
+        StaticImage GetStaticImage(Guid id);
     }
 }

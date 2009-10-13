@@ -2,11 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Centro.DomainModel;
 
 namespace TFS.Models
 {
-    public class User
+    public class User : BaseEntity
     {
-        public virtual Guid Id { get; private set; }
+        public virtual int Id { get; private set; }
+        public virtual string FirstName { get; set; }
+        public virtual string LastName { get; set; }
+        public virtual string DisplayName { get; set; }
+        public virtual string Email { get; set; }
+        public virtual string Username { get; set; }
+        public virtual bool Disabled { get; set; }
+        public virtual string PasswordHash { get; set; }
     }
 }

@@ -10,10 +10,32 @@ namespace TFS.Models.Data
     {
         public UserMapping()
         {
-            Table("users");
+            Table("Users");
+
             Id(x => x.Id)
-                .GeneratedBy.Guid()
+                .GeneratedBy.Identity()
                 .Not.Nullable();
+
+            Map(x => x.FirstName)
+                .Length(100)
+                .Not.Nullable();
+            Map(x => x.LastName)
+                .Length(100)
+                .Not.Nullable();
+            Map(x => x.DisplayName)
+                .Length(150)
+                .Not.Nullable();
+            Map(x => x.Email)
+                .Length(254)
+                .Not.Nullable();
+            Map(x => x.Username)
+                .Length(100)
+                .Not.Nullable();
+            Map(x => x.Disabled)
+                .Not.Nullable();
+            Map(x => x.PasswordHash)
+                .Length(25)
+                .Nullable();
         }
     }
 }

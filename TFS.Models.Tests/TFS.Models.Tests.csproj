@@ -31,13 +31,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Centro.Core, Version=0.1.3556.40211, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Centro.Core, Version=0.1.3572.33835, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Centro.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Centro.NHibernateUtils, Version=0.1.3556.40204, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Centro.Data, Version=0.1.3572.33836, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Centro.NHibernateUtils.dll</HintPath>
+      <HintPath>..\lib\Centro.Data.dll</HintPath>
     </Reference>
     <Reference Include="FluentNHibernate, Version=1.0.0.593, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

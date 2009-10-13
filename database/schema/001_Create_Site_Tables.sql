@@ -1,23 +1,25 @@
 CREATE TABLE Pages (
-   Id UNIQUEIDENTIFIER not null,
-   URI NVARCHAR(255) not null,
-   Title NVARCHAR(255) not null,
-   Content NVARCHAR(255) not null,
-   PRIMARY KEY (Id)
+   Id UNIQUEIDENTIFIER NOT NULL,
+   URI NVARCHAR(50) NOT NULL,
+   Title NVARCHAR(100) NOT NULL,
+   Content NTEXT NOT NULL,
+   BannerFileName NVARCHAR(100) NOT NULL,
+   HeaderFileName NVARCHAR(100) NOT NULL,
+   CONSTRAINT [PK_Pages] PRIMARY KEY CLUSTERED ([Id])
 )
 GO
 
 CREATE TABLE PageStaticImages (
-   PageId UNIQUEIDENTIFIER not null,
-   StaticImageId UNIQUEIDENTIFIER not null
+   PageId UNIQUEIDENTIFIER NOT NULL,
+   StaticImageId UNIQUEIDENTIFIER NOT NULL
 )
 GO
 
 CREATE TABLE StaticImages (
-   Id UNIQUEIDENTIFIER not null,
-   MimeType NVARCHAR(255) not null,
-   [Description] NVARCHAR(255) not null,
-   PRIMARY KEY (Id)
+   Id UNIQUEIDENTIFIER NOT NULL,
+   MimeType NVARCHAR(50) NOT NULL,
+   [Description] NVARCHAR(200) NOT NULL,
+   CONSTRAINT [PK_StaticImages] PRIMARY KEY CLUSTERED ([Id])
 )
 GO
 
