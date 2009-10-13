@@ -3,14 +3,14 @@
 	display:block;
 	height: 30px;
 	width: 211px;
-	background: url("template/home.gif") 0 0 no-repeat;
+	background: url("rollovers/home.gif") 0 0 no-repeat;
 }
 
 .rollover_home:hover 
 {
 	height: 30px;
 	width: 211px;
-	background: url("template/home_rollover.gif") 0 0 no-repeat;
+	background: url("rollovers/home_rollover.gif") 0 0 no-repeat;
 }
 
 .rollover_services
@@ -18,14 +18,14 @@
 	display:block;
 	height: 30px;
 	width: 211px;
-	background: url("template/services.gif") 0 0 no-repeat;
+	background: url("rollovers/services.gif") 0 0 no-repeat;
 }
 
 .rollover_services:hover 
 {
 	height: 30px;
 	width: 211px;
-	background: url("template/services_rollover.gif") 0 0 no-repeat;
+	background: url("rollovers/services_rollover.gif") 0 0 no-repeat;
 }
 
 .rollover_programs
@@ -33,14 +33,14 @@
 	display:block;
 	height: 30px;
 	width: 211px;
-	background: url("template/programs.gif") 0 0 no-repeat;
+	background: url("rollovers/programs.gif") 0 0 no-repeat;
 }
 
 .rollover_programs:hover 
 {
 	height: 30px;
 	width: 211px;
-	background: url("template/programs_rollover.gif") 0 0 no-repeat;
+	background: url("rollovers/programs_rollover.gif") 0 0 no-repeat;
 }
 
 .rollover_experience 
@@ -48,14 +48,14 @@
 	display:block;
 	height: 30px;
 	width: 211px;
-	background: url("template/experience.gif") 0 0 no-repeat;
+	background: url("rollovers/experience.gif") 0 0 no-repeat;
 }
 
 .rollover_experience:hover 
 {
 	height: 30px;
 	width: 211px;
-	background: url("template/experience_rollover.gif") 0 0 no-repeat;
+	background: url("rollovers/experience_rollover.gif") 0 0 no-repeat;
 }
 
 .rollover_logon 
@@ -63,14 +63,14 @@
 	display:block;
 	height: 30px;
 	width: 211px;
-	background: url("template/logon.gif") 0 0 no-repeat;
+	background: url("rollovers/logon.gif") 0 0 no-repeat;
 }
 
 .rollover_logon:hover
 {
 	height: 30px;
 	width: 211px;
-	background: url("template/logon_rollover.gif") 0 0 no-repeat;
+	background: url("rollovers/logon_rollover.gif") 0 0 no-repeat;
 }
 
 .rollover_contact 
@@ -78,12 +78,12 @@
 	display:block;
 	height: 30px;
 	width: 211px;
-	background: url("template/contact.gif") 0 0 no-repeat;
+	background: url("rollovers/contact.gif") 0 0 no-repeat;
 }
 
 .rollover_contact:hover 
 {
 	height: 30px;
 	width: 211px;
-	background: url("template/contact_rollover.gif") 0 0 no-repeat;
+	background: url("rollovers/contact_rollover.gif") 0 0 no-repeat;
 }

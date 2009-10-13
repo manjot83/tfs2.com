@@ -109,6 +109,11 @@ namespace TFS.Web.Controllers {
             return RedirectToRoute(callInfo.RouteValues);
         }
 
+        [NonAction]
+        public ActionResult LogOn() {
+            return new T4MVC_ActionResult(Name, Actions.LogOn);
+        }
+
 
         [CompilerGenerated]
         public readonly string Name = "Security";
@@ -128,6 +133,7 @@ namespace TFS.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [CompilerGenerated]
         public class ViewNames {
+            public readonly string LogOn = "LogOn";
         }
     }
 }
@@ -208,8 +214,9 @@ namespace T4MVC {
     public class T4MVC_SecurityController: TFS.Web.Controllers.SecurityController {
         public T4MVC_SecurityController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ViewResult LogOn() {
+        public override System.Web.Mvc.ViewResult LogOn(System.Uri returnUrl) {
             var callInfo = new T4MVC_ViewResult("Security", Actions.LogOn);
+            callInfo.RouteValues.Add("returnUrl", returnUrl);
             return callInfo;
         }
 
@@ -433,6 +440,8 @@ namespace Links {
                 public static readonly string header05_jpg = Url("header05.jpg");
             }
         
+            public static readonly string imagerollover_css = Url("imagerollover.css");
+            public static readonly string layout_css = Url("layout.css");
             [CompilerGenerated]
             public static class @login {
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath("~/Content/public/login"); }
@@ -448,32 +457,36 @@ namespace Links {
                 public static readonly string submit_gif = Url("submit.gif");
             }
         
-            public static readonly string old_imagerollover_css = Url("old_imagerollover.css");
-            public static readonly string old_layout_css = Url("old_layout.css");
-            public static readonly string old_tfs2_css = Url("old_tfs2.css");
+            [CompilerGenerated]
+            public static class @rollovers {
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath("~/Content/public/rollovers"); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath("~/Content/public/rollovers/" + fileName); }
+                public static readonly string contact_gif = Url("contact.gif");
+                public static readonly string contact_rollover_gif = Url("contact_rollover.gif");
+                public static readonly string experience_gif = Url("experience.gif");
+                public static readonly string experience_rollover_gif = Url("experience_rollover.gif");
+                public static readonly string home_gif = Url("home.gif");
+                public static readonly string home_rollover_gif = Url("home_rollover.gif");
+                public static readonly string logon_gif = Url("logon.gif");
+                public static readonly string logon_rollover_gif = Url("logon_rollover.gif");
+                public static readonly string programs_gif = Url("programs.gif");
+                public static readonly string programs_rollover_gif = Url("programs_rollover.gif");
+                public static readonly string services_gif = Url("services.gif");
+                public static readonly string services_rollover_gif = Url("services_rollover.gif");
+            }
+        
             [CompilerGenerated]
             public static class @template {
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath("~/Content/public/template"); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath("~/Content/public/template/" + fileName); }
                 public static readonly string content_bg_gif = Url("content_bg.gif");
                 public static readonly string footer_gif = Url("footer.gif");
-                public static readonly string index_r10_c1_gif = Url("index_r10_c1.gif");
-                public static readonly string index_r10_c1_f2_gif = Url("index_r10_c1_f2.gif");
-                public static readonly string index_r5_c1_gif = Url("index_r5_c1.gif");
-                public static readonly string index_r5_c1_f2_gif = Url("index_r5_c1_f2.gif");
-                public static readonly string index_r6_c1_gif = Url("index_r6_c1.gif");
-                public static readonly string index_r6_c1_f2_gif = Url("index_r6_c1_f2.gif");
-                public static readonly string index_r7_c1_gif = Url("index_r7_c1.gif");
-                public static readonly string index_r7_c1_f2_gif = Url("index_r7_c1_f2.gif");
-                public static readonly string index_r8_c1_gif = Url("index_r8_c1.gif");
-                public static readonly string index_r8_c1_f2_gif = Url("index_r8_c1_f2.gif");
-                public static readonly string index_r9_c1_gif = Url("index_r9_c1.gif");
-                public static readonly string index_r9_c1_f2_gif = Url("index_r9_c1_f2.gif");
                 public static readonly string item_jpg = Url("item.jpg");
                 public static readonly string item_hover_jpg = Url("item_hover.jpg");
                 public static readonly string spacer_gif = Url("spacer.gif");
             }
         
+            public static readonly string tfs2_css = Url("tfs2.css");
         }
     
     }

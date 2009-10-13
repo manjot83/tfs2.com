@@ -16,8 +16,9 @@ namespace TFS.Web.Controllers
             this.authenticationService = authenticationService;
         }
 
-        public virtual ViewResult LogOn()
+        public virtual ViewResult LogOn(Uri returnUrl)
         {
+            ViewData["returnUrl"] = returnUrl;
             return View();
         }
 
@@ -26,7 +27,7 @@ namespace TFS.Web.Controllers
         {
             if (!authenticationService.Authenticate(userName, password))
             {
-                this.ModelState.AddModelError("loginForm", "Username or password incorrect.");
+                this.ModelState.AddModelError("Logon Credentials", "Username or password incorrect.");
                 return View();
             }
 
