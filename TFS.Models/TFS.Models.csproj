@@ -36,6 +36,9 @@
       <HintPath>..\lib\Centro.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -53,9 +56,20 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Geography\USAddress.cs" />
     <Compile Include="Images\IImageRepository.cs" />
     <Compile Include="Images\StaticImage.cs" />
     <Compile Include="IUserRepository.cs" />
+    <Compile Include="PersonnelRecords\FCFQualification.cs" />
+    <Compile Include="PersonnelRecords\FlightSuitSize.cs" />
+    <Compile Include="PersonnelRecords\Gender.cs" />
+    <Compile Include="PersonnelRecords\Person.cs" />
+    <Compile Include="PersonnelRecords\Certificate.cs" />
+    <Compile Include="PersonnelRecords\CertificateType.cs" />
+    <Compile Include="PersonnelRecords\Qualifications.cs" />
+    <Compile Include="PersonnelRecords\ServiceBranch.cs" />
+    <Compile Include="PersonnelRecords\ShirtSize.cs" />
+    <Compile Include="Programs\Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site\Page.cs" />
     <Compile Include="Site\ISiteRepository.cs" />

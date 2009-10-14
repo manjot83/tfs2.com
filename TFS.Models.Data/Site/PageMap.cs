@@ -33,7 +33,7 @@ namespace TFS.Models.Data.Site
                 .Not.Nullable()
                 .Length(100);
 
-            HasManyToMany<StaticImage>(x => x.Images)
+            HasManyToMany(x => x.Images)
                 .Table("PageStaticImages")
                 .LazyLoad()
                 .ParentKeyColumn("PageId")
