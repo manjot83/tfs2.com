@@ -2,8 +2,8 @@
 <div class="sidenav">
     <h1>Internal Links</h1>
     <ul>
-        <li><a href="index.html"><img id="ctl00_sidebar_control_Image1" src="../../Content/private/icons/house_go.png" />Home</a></li>
-        <li><a href="index.html"><img id="ctl00_sidebar_control_Image3" src="../../Content/private/icons/email_go.png"  />E-mail</a></li>
+        <li><a href="index.html"><img id="ctl00_sidebar_control_Image1" src="../../Content/internal/icons/house_go.png" />Home</a></li>
+        <li><a href="index.html"><img id="ctl00_sidebar_control_Image3" src="../../Content/internal/icons/email_go.png"  />E-mail</a></li>
         <li><a href="index.html">semper</a></li>
         <li><a href="index.html">convallis</a></li>
     </ul>
