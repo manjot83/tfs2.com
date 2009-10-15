@@ -50,6 +50,7 @@ namespace TFS.Web.Controllers {
         [CompilerGenerated]
         public class ActionNames {
             public readonly string Index = "Index";
+            public readonly string GenerateSideBar = "GenerateSideBar";
         }
 
 
@@ -58,6 +59,7 @@ namespace TFS.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [CompilerGenerated]
         public class ViewNames {
+            public readonly string Index = "Index";
         }
     }
 }
@@ -184,6 +186,7 @@ namespace T4MVC {
         public ViewNames Views { get { return s_views; } }
         [CompilerGenerated]
         public class ViewNames {
+            public readonly string DashboardSideBar = "DashboardSideBar";
         }
     }
 }
@@ -195,6 +198,11 @@ namespace T4MVC {
 
         public override System.Web.Mvc.ViewResult Index() {
             var callInfo = new T4MVC_ViewResult("Dashboard", Actions.Index);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult GenerateSideBar() {
+            var callInfo = new T4MVC_ViewResult("Dashboard", Actions.GenerateSideBar);
             return callInfo;
         }
 
@@ -414,6 +422,15 @@ namespace Links {
         public static string Url() { return T4MVCHelpers.ProcessVirtualPath("~/Content"); }
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath("~/Content/" + fileName); }
         [CompilerGenerated]
+        public static class @private {
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath("~/Content/private"); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath("~/Content/private/" + fileName); }
+            public static readonly string CalendarStyle_css = Url("CalendarStyle.css");
+            public static readonly string list_table_css = Url("list-table.css");
+            public static readonly string sinorca_tfs2_css = Url("sinorca-tfs2.css");
+        }
+    
+        [CompilerGenerated]
         public static class @public {
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath("~/Content/public"); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath("~/Content/public/" + fileName); }
@@ -475,6 +492,7 @@ namespace Links {
                 public static readonly string services_rollover_gif = Url("services_rollover.gif");
             }
         
+            public static readonly string tags_css = Url("tags.css");
             [CompilerGenerated]
             public static class @template {
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath("~/Content/public/template"); }
@@ -486,7 +504,6 @@ namespace Links {
                 public static readonly string spacer_gif = Url("spacer.gif");
             }
         
-            public static readonly string tfs2_css = Url("tfs2.css");
         }
     
     }

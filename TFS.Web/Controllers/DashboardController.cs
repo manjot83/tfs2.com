@@ -13,5 +13,10 @@ namespace TFS.Web.Controllers
         {
             return View();
         }
+
+        public virtual ViewResult GenerateSideBar()
+        {
+            return View(MVC.Shared.Views.DashboardSideBar);
+        }
     }
 }

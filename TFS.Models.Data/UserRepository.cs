@@ -5,10 +5,11 @@ using System.Text;
 using Centro.Data.DomainModel;
 using Centro.Extensions;
 using NHibernate;
+using NHibernate.Linq;
 
 namespace TFS.Models.Data
 {
-    public class UserRepository : RepositoryBase<User>, IUserRepository
+    public class UserRepository : BaseRepository, IUserRepository
     {
         public UserRepository(ISession session)
             : base(session)
@@ -17,7 +18,7 @@ namespace TFS.Models.Data
 
         public User GetUser(string username)
         {
-            return Linq().Where(x => x.Username == username).FirstOrDefault();
+            return Session.Linq<User>().Where(x => x.Username == username).FirstOrDefault();
         }
 
         public bool AuthenticateUser(string username, string password)
@@ -42,7 +43,7 @@ namespace TFS.Models.Data
             if (user == null)
                 return false;
             user.PasswordHash = password.Hash(Crypto.HashAlgorithm.SHA1);
-            Save(user);
+            Session.SaveOrUpdate(user);
             return true;
         }
 
@@ -60,7 +61,7 @@ namespace TFS.Models.Data
             if (string.IsNullOrEmpty(newPassword))
                 return false;
             user.PasswordHash = newPassword.Hash(Crypto.HashAlgorithm.SHA1);
-            Save(user);
+            Session.SaveOrUpdate(user);
             return true;
         }
 

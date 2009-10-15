@@ -6,7 +6,7 @@ using Centro.DomainModel;
 
 namespace TFS.Models
 {
-    public interface IUserRepository : IRepository<User>
+    public interface IUserRepository : IRepository
     {
         User GetUser(string username);
 

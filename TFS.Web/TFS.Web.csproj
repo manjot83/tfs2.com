@@ -126,6 +126,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Html\PartialExtensions.cs" />
     <Compile Include="IAuthenticationService.cs" />
     <Compile Include="MVCConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -153,7 +154,7 @@
     <Content Include="Content\public\login\submit.gif" />
     <Content Include="Content\public\imagerollover.css" />
     <Content Include="Content\public\layout.css" />
-    <Content Include="Content\public\tfs2.css" />
+    <Content Include="Content\public\tags.css" />
     <Content Include="Content\public\template\content_bg.gif" />
     <Content Include="Content\public\template\footer.gif" />
     <Content Include="Content\public\headers\header01.jpg" />
@@ -189,12 +190,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config\ConnectionStrings.config" />
+    <Content Include="Content\private\CalendarStyle.css" />
+    <Content Include="Content\private\list-table.css" />
+    <Content Include="Content\private\sinorca-tfs2.css" />
+    <Content Include="Views\Dashboard\Index.aspx" />
     <Content Include="Views\Security\LogOn.aspx" />
     <None Include="T4MVC.settings.t4" />
     <None Include="T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </None>
+    <Content Include="Views\Shared\Dashboard.Master" />
+    <Content Include="Views\Shared\DashboardSideBar.ascx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />
