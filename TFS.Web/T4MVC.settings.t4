@@ -29,7 +29,7 @@ readonly string[] StaticFilesFolders = new string[] {
 // This way it will be saved and update itself next time the project is built.
 // Basically, it keeps marking itself as unsaved to make the next build work.
 // Note: this is certainly hacky, but is the best I could come up with so far.
-const bool AlwaysKeepTemplateDirty = false;
+bool AlwaysKeepTemplateDirty = false;
 
 void RenderAdditionalCode() {
 #>

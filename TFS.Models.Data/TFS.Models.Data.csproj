@@ -79,6 +79,7 @@
     <Compile Include="Site\SiteRepository.cs" />
     <Compile Include="UserMapping.cs" />
     <Compile Include="UserRepository.cs" />
+    <Compile Include="UserTypes\USStateUserType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TFS.Models\TFS.Models.csproj">

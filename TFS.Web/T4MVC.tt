@@ -1,6 +1,6 @@
 ﻿<#
 /*
-T4MVC Version 2.4.03
+T4MVC Version 2.4.04
 Find latest version on http://aspnet.codeplex.com/Release/ProjectReleases.aspx?ReleaseId=24471&ProjectName=aspnet
 
 Written by David Ebbo, with much feedback from the MVC community (thanks all!)
@@ -20,6 +20,7 @@ readme for all the details!
 <#@ assembly name="Microsoft.VisualStudio.Shell.Interop.8.0" #>
 <#@ assembly name="EnvDTE" #>
 <#@ assembly name="EnvDTE80" #>
+<#@ assembly name="VSLangProj" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="System.IO" #>
 <#@ import namespace="System.Linq" #>
@@ -145,15 +146,15 @@ namespace <#= T4MVCNamespace #> {
 namespace System.Web.Mvc {
     [CompilerGenerated]
     public static class T4Extensions {
-        public static string ActionLink(this HtmlHelper htmlHelper, string linkText, ActionResult result) {
+        public static <#= HtmlStringType #> ActionLink(this HtmlHelper htmlHelper, string linkText, ActionResult result) {
             return htmlHelper.RouteLink(linkText, result.GetRouteValueDictionary());
         }
 
-        public static string ActionLink(this HtmlHelper htmlHelper, string linkText, ActionResult result, object htmlAttributes) {
+        public static <#= HtmlStringType #> ActionLink(this HtmlHelper htmlHelper, string linkText, ActionResult result, object htmlAttributes) {
             return ActionLink(htmlHelper, linkText, result, new RouteValueDictionary(htmlAttributes));
         }
 
-        public static string ActionLink(this HtmlHelper htmlHelper, string linkText, ActionResult result, IDictionary<string, object> htmlAttributes) {
+        public static <#= HtmlStringType #> ActionLink(this HtmlHelper htmlHelper, string linkText, ActionResult result, IDictionary<string, object> htmlAttributes) {
             return htmlHelper.RouteLink(linkText, result.GetRouteValueDictionary(), htmlAttributes);
         }
 
@@ -174,15 +175,15 @@ namespace System.Web.Mvc {
             return urlHelper.RouteUrl(result.GetRouteValueDictionary());
         }
 
-        public static string ActionLink(this AjaxHelper ajaxHelper, string linkText, ActionResult result, AjaxOptions ajaxOptions) {
+        public static <#= HtmlStringType #> ActionLink(this AjaxHelper ajaxHelper, string linkText, ActionResult result, AjaxOptions ajaxOptions) {
             return ajaxHelper.RouteLink(linkText, result.GetRouteValueDictionary(), ajaxOptions);
         }
 
-        public static string ActionLink(this AjaxHelper ajaxHelper, string linkText, ActionResult result, AjaxOptions ajaxOptions, object htmlAttributes) {
+        public static <#= HtmlStringType #> ActionLink(this AjaxHelper ajaxHelper, string linkText, ActionResult result, AjaxOptions ajaxOptions, object htmlAttributes) {
             return ajaxHelper.RouteLink(linkText, result.GetRouteValueDictionary(), ajaxOptions, new RouteValueDictionary(htmlAttributes));
         }
 
-        public static string ActionLink(this AjaxHelper ajaxHelper, string linkText, ActionResult result, AjaxOptions ajaxOptions, IDictionary<string, object> htmlAttributes) {
+        public static <#= HtmlStringType #> ActionLink(this AjaxHelper ajaxHelper, string linkText, ActionResult result, AjaxOptions ajaxOptions, IDictionary<string, object> htmlAttributes) {
             return ajaxHelper.RouteLink(linkText, result.GetRouteValueDictionary(), ajaxOptions, htmlAttributes);
         }
 
@@ -270,6 +271,8 @@ static HashSet<ControllerInfo> Controllers;
 static Dictionary<string, ResultTypeInfo> ResultTypes;
 static TextTransformation TT;
 static string T4FileName;
+static int MvcVersion;
+static string HtmlStringType;
 
 static IEnumerable<ControllerInfo> GetControllers() {
     return Controllers.Where(c => !c.IsAbstract);
@@ -280,7 +283,6 @@ static IEnumerable<ControllerInfo> GetAbstractControllers() {
 }
 
 void PrepareDataToRender(TextTransformation tt) {
-
     TT = tt;
     T4FileName = Path.GetFileName(Host.TemplateFile);
     Controllers = new HashSet<ControllerInfo>();
@@ -290,13 +292,32 @@ void PrepareDataToRender(TextTransformation tt) {
     Dte = (DTE)((IServiceProvider)Host).GetService(typeof(SDTE));
 
     Project = GetProjectContainingT4File(Dte);
+
     if (Project == null) {
         Error("Could not find the VS Project containing the T4 file.");
         return;
     }
 
+    MvcVersion = GetMvcVersion();
+
+    // Use the proper return type of render helpers
+    HtmlStringType = MvcVersion < 2 ? "string" : "MvcHtmlString";
+
     ProcessControllersFolder(Project);
     ProcessAllViews(Project);
+}
+
+int GetMvcVersion() {
+    var vsProject = (VSLangProj.VSProject)Project.Object;
+
+    foreach (VSLangProj.Reference r in vsProject.References) {
+        if (r.Name.Equals("System.Web.Mvc", StringComparison.OrdinalIgnoreCase)) {
+            return r.MajorVersion;
+        }
+    }
+
+    // We should never get here, but default to v1 just in case
+    return 1;
 }
 
 Project GetProjectContainingT4File(DTE dte) {

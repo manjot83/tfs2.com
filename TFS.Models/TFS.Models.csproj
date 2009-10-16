@@ -57,6 +57,7 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="Geography\USAddress.cs" />
+    <Compile Include="Geography\USState.cs" />
     <Compile Include="Images\IImageRepository.cs" />
     <Compile Include="Images\StaticImage.cs" />
     <Compile Include="IUserRepository.cs" />

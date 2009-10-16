@@ -5,6 +5,7 @@ using System.Text;
 using TFS.Models.PersonnelRecords;
 using FluentNHibernate.Mapping;
 using Centro.Data.UserTypes;
+using TFS.Models.Data.UserTypes;
 
 namespace TFS.Models.Data.PersonnelRecords
 {
@@ -70,7 +71,7 @@ namespace TFS.Models.Data.PersonnelRecords
                     .Length(50)
                     .Nullable();
                 m.Map(x => x.State)
-                    .Length(2)
+                    .CustomType<USStateUserType>()
                     .Nullable();
                 m.Map(x => x.ZipCode)
                     .Length(5)
