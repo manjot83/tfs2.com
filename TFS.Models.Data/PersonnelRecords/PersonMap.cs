@@ -24,6 +24,7 @@ namespace TFS.Models.Data.PersonnelRecords
             HasOne(x => x.Qualifications).Constrained().Cascade.SaveUpdate();
 
             References(x => x.HirePosition)
+                .Column("HirePositionId")
                 .Nullable();
 
             Map(x => x.LastName)
