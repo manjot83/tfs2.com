@@ -103,7 +103,7 @@ h1,h2,h3 {
 	line-height: 44px;
 }
 .navigation a:hover {
-	background: #CEBDA1;
+	text-decoration: underline;
 	color: #420;
 }
 
