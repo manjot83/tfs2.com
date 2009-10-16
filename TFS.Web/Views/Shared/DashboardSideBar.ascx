@@ -1,24 +1,18 @@
 <%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl" %>
 <div class="sidenav">
-    <h1>Internal Links</h1>
-    <ul>
-        <li><a href="index.html"><img id="ctl00_sidebar_control_Image1" src="../../Content/internal/icons/house_go.png" />Home</a></li>
-        <li><a href="index.html"><img id="ctl00_sidebar_control_Image3" src="../../Content/internal/icons/email_go.png"  />E-mail</a></li>
-        <li><a href="index.html">semper</a></li>
-        <li><a href="index.html">convallis</a></li>
+    <h1>Operations</h1>
+    <ul>            
+        <li><a href="index.html">BLANK</a></li>
     </ul>
-    <h1>Another thing</h1>
+    <h1>Self Service</h1>
     <ul>
-        <li><a href="index.html">consequat molestie</a></li>
-        <li><a href="index.html">sem justo</a></li>
-        <li><a href="index.html">semper</a></li>
-        <li><a href="index.html">sociis natoque</a></li>
+        <li><%= Html.NavImageLink("My Personnel File", Links.Content.@internal.icons.vcard_png, "#")%></li>
     </ul>
-    <h1>Third and last</h1>
+    <h1>Administration</h1>
     <ul>
-        <li><a href="index.html">sociis natoque</a></li>
-        <li><a href="index.html">magna sed purus</a></li>
-        <li><a href="index.html">tincidunt</a></li>
-        <li><a href="index.html">consequat molestie</a></li>
+        <li><%= Html.NavImageLink("Users", Links.Content.@internal.icons.group_png, "#") %></li>
+        <li><%= Html.NavImageLink("Personnel Files", Links.Content.@internal.icons.vcard_png, "#")%></li>
+        <li><%= Html.NavImageLink("Programs", Links.Content.@internal.icons.book_png, MVC.Programs.Manage())%></li>
+        <li><%= Html.NavImageLink("Website", Links.Content.@internal.icons.world_png, "#")%></li>
     </ul>
 </div>

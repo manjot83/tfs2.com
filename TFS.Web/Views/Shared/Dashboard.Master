@@ -21,11 +21,11 @@
             </div>
         </div>
         <div class="navigation">
-            <a href="#">Home</a>
-            <a href="#">E-mail</a>
+            <%= Html.ActionLink("Home", MVC.Dashboard.Index()) %>
+            <a href="https://apollo.tfs2.com/exchange">E-mail</a>
             <a href="#">Change Password</a>
             <a href="#">Help</a>
-            <a href="#">Log Out</a>
+            <%= Html.ActionLink("Log Out", MVC.Security.LogOff()) %>
             <div class="clearer">
                 <span></span>
             </div>
@@ -42,9 +42,10 @@
         </div>
         <div class="footer">
             <div class="left">                
-                Problems viewing this site? E-mail: <a href="mailto:webmaster@tfs2.com">webmaster@tfs2.com</a>(Build 0000)               
+                Problems viewing this site? E-mail: <a href="mailto:webmaster@tfs2.com">webmaster@tfs2.com</a>
             </div>
             <div class="right">
+                Build <%= Html.Encode(TFS.Web.ApplicationVersion.GetVersion()) %> - 
                 Derived from <a href="http://templates.arcsin.se/">website template</a> by <a href="http://arcsin.se/">Arcsin</a>
             </div>
             <div class="clearer">

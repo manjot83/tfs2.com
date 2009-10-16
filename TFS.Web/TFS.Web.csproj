@@ -116,6 +116,7 @@
     </Compile>
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
+    <Compile Include="Controllers\ProgramsController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
     <Compile Include="Default.aspx.cs">
@@ -126,6 +127,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Html\ImageLinkExtensions.cs" />
     <Compile Include="Html\PartialExtensions.cs" />
     <Compile Include="IAuthenticationService.cs" />
     <Compile Include="MVCConfiguration.cs" />
@@ -135,6 +137,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ApplicationVersion.cs" />
+    <Compile Include="ViewModels\ManageProgramsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\public\banners\aircrew_login.gif" />
@@ -191,88 +195,10 @@
   <ItemGroup>
     <Content Include="Config\ConnectionStrings.config" />
     <Content Include="Content\internal\default.css" />
-    <Content Include="Content\internal\icons\add-user-red.gif" />
-    <Content Include="Content\internal\icons\application_go.png" />
-    <Content Include="Content\internal\icons\arrow_down.png" />
-    <Content Include="Content\internal\icons\arrow_up.png" />
-    <Content Include="Content\internal\icons\award_star_gold_1.png" />
-    <Content Include="Content\internal\icons\award_star_gold_2.png" />
-    <Content Include="Content\internal\icons\award_star_gold_3.png" />
-    <Content Include="Content\internal\icons\basket_go.png" />
-    <Content Include="Content\internal\icons\bell_go.png" />
-    <Content Include="Content\internal\icons\book_go.png" />
-    <Content Include="Content\internal\icons\brick_go.png" />
-    <Content Include="Content\internal\icons\bug_go.png" />
-    <Content Include="Content\internal\icons\building_go.png" />
-    <Content Include="Content\internal\icons\bullet_go.png" />
-    <Content Include="Content\internal\icons\camera_go.png" />
-    <Content Include="Content\internal\icons\cart_go.png" />
-    <Content Include="Content\internal\icons\cd_go.png" />
-    <Content Include="Content\internal\icons\chart_curve_go.png" />
-    <Content Include="Content\internal\icons\check-user-red.gif" />
-    <Content Include="Content\internal\icons\clock_go.png" />
-    <Content Include="Content\internal\icons\cog_go.png" />
-    <Content Include="Content\internal\icons\computer_go.png" />
-    <Content Include="Content\internal\icons\css_go.png" />
-    <Content Include="Content\internal\icons\cup_go.png" />
-    <Content Include="Content\internal\icons\database_go.png" />
-    <Content Include="Content\internal\icons\date_go.png" />
-    <Content Include="Content\internal\icons\drive_go.png" />
-    <Content Include="Content\internal\icons\dvd_go.png" />
-    <Content Include="Content\internal\icons\email-contact-red.gif" />
-    <Content Include="Content\internal\icons\email_go.png" />
-    <Content Include="Content\internal\icons\error_go.png" />
-    <Content Include="Content\internal\icons\feed_go.png" />
-    <Content Include="Content\internal\icons\film_go.png" />
-    <Content Include="Content\internal\icons\folder_go.png" />
-    <Content Include="Content\internal\icons\font_go.png" />
-    <Content Include="Content\internal\icons\group_go.png" />
-    <Content Include="Content\internal\icons\hourglass_go.png" />
-    <Content Include="Content\internal\icons\house_go.png" />
-    <Content Include="Content\internal\icons\html_go.png" />
-    <Content Include="Content\internal\icons\key_go.png" />
-    <Content Include="Content\internal\icons\lightning_go.png" />
-    <Content Include="Content\internal\icons\link_go.png" />
-    <Content Include="Content\internal\icons\lock_go.png" />
-    <Content Include="Content\internal\icons\lorry_go.png" />
-    <Content Include="Content\internal\icons\map_go.png" />
-    <Content Include="Content\internal\icons\medal_gold_1.png" />
-    <Content Include="Content\internal\icons\medal_gold_2.png" />
-    <Content Include="Content\internal\icons\medal_gold_3.png" />
-    <Content Include="Content\internal\icons\medal_gold_add.png" />
-    <Content Include="Content\internal\icons\medal_gold_delete.png" />
-    <Content Include="Content\internal\icons\monitor_go.png" />
-    <Content Include="Content\internal\icons\newspaper_go.png" />
-    <Content Include="Content\internal\icons\note_go.png" />
-    <Content Include="Content\internal\icons\package_go.png" />
-    <Content Include="Content\internal\icons\page_go.png" />
-    <Content Include="Content\internal\icons\page_white_go.png" />
-    <Content Include="Content\internal\icons\pencil_go.png" />
-    <Content Include="Content\internal\icons\picture_go.png" />
-    <Content Include="Content\internal\icons\pill_go.png" />
-    <Content Include="Content\internal\icons\plugin_go.png" />
-    <Content Include="Content\internal\icons\printer-red.gif" />
-    <Content Include="Content\internal\icons\remove-user-red.gif" />
-    <Content Include="Content\internal\icons\report_go.png" />
-    <Content Include="Content\internal\icons\rss_go.png" />
-    <Content Include="Content\internal\icons\ruby_go.png" />
-    <Content Include="Content\internal\icons\script_go.png" />
-    <Content Include="Content\internal\icons\server_go.png" />
-    <Content Include="Content\internal\icons\shape_square_go.png" />
-    <Content Include="Content\internal\icons\shield_go.png" />
-    <Content Include="Content\internal\icons\sport_golf.png" />
-    <Content Include="Content\internal\icons\style_go.png" />
-    <Content Include="Content\internal\icons\table_go.png" />
-    <Content Include="Content\internal\icons\tab_go.png" />
-    <Content Include="Content\internal\icons\telephone_go.png" />
-    <Content Include="Content\internal\icons\time_go.png" />
-    <Content Include="Content\internal\icons\transmit_go.png" />
-    <Content Include="Content\internal\icons\user-arrow-red.gif" />
-    <Content Include="Content\internal\icons\user-comment-red.gif" />
-    <Content Include="Content\internal\icons\user-group2.gif" />
-    <Content Include="Content\internal\icons\user_go.png" />
-    <Content Include="Content\internal\icons\world_go.png" />
-    <Content Include="Content\internal\icons\xhtml_go.png" />
+    <Content Include="Content\internal\icons\book.png" />
+    <Content Include="Content\internal\icons\group.png" />
+    <Content Include="Content\internal\icons\vcard.png" />
+    <Content Include="Content\internal\icons\world.png" />
     <Content Include="Content\internal\images\calendarSelector.png" />
     <Content Include="Content\internal\template\bg.gif" />
     <Content Include="Content\internal\template\bgcontainer.gif" />
@@ -284,6 +210,7 @@
     <Content Include="Content\internal\template\quote.gif" />
     <Content Include="Content\internal\template\sidenavh1.gif" />
     <Content Include="Views\Dashboard\Index.aspx" />
+    <Content Include="Views\Programs\Manage.aspx" />
     <Content Include="Views\Security\LogOn.aspx" />
     <None Include="T4MVC.settings.t4" />
     <None Include="T4MVC.tt">
@@ -308,7 +235,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

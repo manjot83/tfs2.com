@@ -16,6 +16,9 @@
 			
 			<p>Aliquam risus justo, mollis in, laoreet a, consectetuer nec, risus. Nunc blandit sodales lacus. Nam luctus semper mi. In eu diam.</p>
 
+            <h2>Heading Two</h2>
+            <h3>Heading Three</h3>
+
             <p>
             <form action="#">
 <p><label for="name">Name</label> <input type="text" id="name" /></p>

@@ -70,6 +70,7 @@
     <Compile Include="PersonnelRecords\Qualifications.cs" />
     <Compile Include="PersonnelRecords\ServiceBranch.cs" />
     <Compile Include="PersonnelRecords\ShirtSize.cs" />
+    <Compile Include="Programs\IProgramsRepository.cs" />
     <Compile Include="Programs\Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site\Page.cs" />

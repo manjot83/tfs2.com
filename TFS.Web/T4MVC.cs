@@ -21,6 +21,7 @@ using T4MVC;
 public static class MVC {
     public static TFS.Web.Controllers.DashboardController Dashboard = new T4MVC_DashboardController();
     public static TFS.Web.Controllers.ImagesController Images = new T4MVC_ImagesController();
+    public static TFS.Web.Controllers.ProgramsController Programs = new T4MVC_ProgramsController();
     public static TFS.Web.Controllers.SecurityController Security = new T4MVC_SecurityController();
     public static TFS.Web.Controllers.SiteController Site = new T4MVC_SiteController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
@@ -97,6 +98,45 @@ namespace TFS.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [CompilerGenerated]
         public class ViewNames {
+        }
+    }
+}
+namespace TFS.Web.Controllers {
+    public partial class ProgramsController {
+
+        [CompilerGenerated]
+        protected ProgramsController(Dummy d) { }
+
+        protected RedirectToRouteResult RedirectToAction(ActionResult result) {
+            var callInfo = (IT4MVCActionResult)result;
+            return RedirectToRoute(callInfo.RouteValues);
+        }
+
+        [NonAction]
+        public ActionResult AddNewPosition() {
+            return new T4MVC_ActionResult(Name, Actions.AddNewPosition);
+        }
+
+
+        [CompilerGenerated]
+        public readonly string Name = "Programs";
+
+        static readonly ActionNames s_actions = new ActionNames();
+        [CompilerGenerated]
+        public ActionNames Actions { get { return s_actions; } }
+        [CompilerGenerated]
+        public class ActionNames {
+            public readonly string Manage = "Manage";
+            public readonly string AddNewPosition = "AddNewPosition";
+        }
+
+
+        static readonly ViewNames s_views = new ViewNames();
+        [CompilerGenerated]
+        public ViewNames Views { get { return s_views; } }
+        [CompilerGenerated]
+        public class ViewNames {
+            public readonly string Manage = "Manage";
         }
     }
 }
@@ -214,6 +254,22 @@ namespace T4MVC {
         public override System.Web.Mvc.ActionResult StaticImage(System.Guid id) {
             var callInfo = new T4MVC_ActionResult("Images", Actions.StaticImage);
             callInfo.RouteValues.Add("id", id);
+            return callInfo;
+        }
+
+    }
+    [CompilerGenerated]
+    public class T4MVC_ProgramsController: TFS.Web.Controllers.ProgramsController {
+        public T4MVC_ProgramsController() : base(Dummy.Instance) { }
+
+        public override System.Web.Mvc.ViewResult Manage() {
+            var callInfo = new T4MVC_ViewResult("Programs", Actions.Manage);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.RedirectToRouteResult AddNewPosition(string title) {
+            var callInfo = new T4MVC_RedirectToRouteResult("Programs", Actions.AddNewPosition);
+            callInfo.RouteValues.Add("title", title);
             return callInfo;
         }
 
@@ -430,88 +486,10 @@ namespace Links {
             public static class @icons {
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath("~/Content/internal/icons"); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath("~/Content/internal/icons/" + fileName); }
-                public static readonly string add_user_red_gif = Url("add-user-red.gif");
-                public static readonly string application_go_png = Url("application_go.png");
-                public static readonly string arrow_down_png = Url("arrow_down.png");
-                public static readonly string arrow_up_png = Url("arrow_up.png");
-                public static readonly string award_star_gold_1_png = Url("award_star_gold_1.png");
-                public static readonly string award_star_gold_2_png = Url("award_star_gold_2.png");
-                public static readonly string award_star_gold_3_png = Url("award_star_gold_3.png");
-                public static readonly string basket_go_png = Url("basket_go.png");
-                public static readonly string bell_go_png = Url("bell_go.png");
-                public static readonly string book_go_png = Url("book_go.png");
-                public static readonly string brick_go_png = Url("brick_go.png");
-                public static readonly string bug_go_png = Url("bug_go.png");
-                public static readonly string building_go_png = Url("building_go.png");
-                public static readonly string bullet_go_png = Url("bullet_go.png");
-                public static readonly string camera_go_png = Url("camera_go.png");
-                public static readonly string cart_go_png = Url("cart_go.png");
-                public static readonly string cd_go_png = Url("cd_go.png");
-                public static readonly string chart_curve_go_png = Url("chart_curve_go.png");
-                public static readonly string check_user_red_gif = Url("check-user-red.gif");
-                public static readonly string clock_go_png = Url("clock_go.png");
-                public static readonly string cog_go_png = Url("cog_go.png");
-                public static readonly string computer_go_png = Url("computer_go.png");
-                public static readonly string css_go_png = Url("css_go.png");
-                public static readonly string cup_go_png = Url("cup_go.png");
-                public static readonly string database_go_png = Url("database_go.png");
-                public static readonly string date_go_png = Url("date_go.png");
-                public static readonly string drive_go_png = Url("drive_go.png");
-                public static readonly string dvd_go_png = Url("dvd_go.png");
-                public static readonly string email_contact_red_gif = Url("email-contact-red.gif");
-                public static readonly string email_go_png = Url("email_go.png");
-                public static readonly string error_go_png = Url("error_go.png");
-                public static readonly string feed_go_png = Url("feed_go.png");
-                public static readonly string film_go_png = Url("film_go.png");
-                public static readonly string folder_go_png = Url("folder_go.png");
-                public static readonly string font_go_png = Url("font_go.png");
-                public static readonly string group_go_png = Url("group_go.png");
-                public static readonly string hourglass_go_png = Url("hourglass_go.png");
-                public static readonly string house_go_png = Url("house_go.png");
-                public static readonly string html_go_png = Url("html_go.png");
-                public static readonly string key_go_png = Url("key_go.png");
-                public static readonly string lightning_go_png = Url("lightning_go.png");
-                public static readonly string link_go_png = Url("link_go.png");
-                public static readonly string lock_go_png = Url("lock_go.png");
-                public static readonly string lorry_go_png = Url("lorry_go.png");
-                public static readonly string map_go_png = Url("map_go.png");
-                public static readonly string medal_gold_1_png = Url("medal_gold_1.png");
-                public static readonly string medal_gold_2_png = Url("medal_gold_2.png");
-                public static readonly string medal_gold_3_png = Url("medal_gold_3.png");
-                public static readonly string medal_gold_add_png = Url("medal_gold_add.png");
-                public static readonly string medal_gold_delete_png = Url("medal_gold_delete.png");
-                public static readonly string monitor_go_png = Url("monitor_go.png");
-                public static readonly string newspaper_go_png = Url("newspaper_go.png");
-                public static readonly string note_go_png = Url("note_go.png");
-                public static readonly string package_go_png = Url("package_go.png");
-                public static readonly string page_go_png = Url("page_go.png");
-                public static readonly string page_white_go_png = Url("page_white_go.png");
-                public static readonly string pencil_go_png = Url("pencil_go.png");
-                public static readonly string picture_go_png = Url("picture_go.png");
-                public static readonly string pill_go_png = Url("pill_go.png");
-                public static readonly string plugin_go_png = Url("plugin_go.png");
-                public static readonly string printer_red_gif = Url("printer-red.gif");
-                public static readonly string remove_user_red_gif = Url("remove-user-red.gif");
-                public static readonly string report_go_png = Url("report_go.png");
-                public static readonly string rss_go_png = Url("rss_go.png");
-                public static readonly string ruby_go_png = Url("ruby_go.png");
-                public static readonly string script_go_png = Url("script_go.png");
-                public static readonly string server_go_png = Url("server_go.png");
-                public static readonly string shape_square_go_png = Url("shape_square_go.png");
-                public static readonly string shield_go_png = Url("shield_go.png");
-                public static readonly string sport_golf_png = Url("sport_golf.png");
-                public static readonly string style_go_png = Url("style_go.png");
-                public static readonly string tab_go_png = Url("tab_go.png");
-                public static readonly string table_go_png = Url("table_go.png");
-                public static readonly string telephone_go_png = Url("telephone_go.png");
-                public static readonly string time_go_png = Url("time_go.png");
-                public static readonly string transmit_go_png = Url("transmit_go.png");
-                public static readonly string user_arrow_red_gif = Url("user-arrow-red.gif");
-                public static readonly string user_comment_red_gif = Url("user-comment-red.gif");
-                public static readonly string user_group2_gif = Url("user-group2.gif");
-                public static readonly string user_go_png = Url("user_go.png");
-                public static readonly string world_go_png = Url("world_go.png");
-                public static readonly string xhtml_go_png = Url("xhtml_go.png");
+                public static readonly string book_png = Url("book.png");
+                public static readonly string group_png = Url("group.png");
+                public static readonly string vcard_png = Url("vcard.png");
+                public static readonly string world_png = Url("world.png");
             }
         
             [CompilerGenerated]

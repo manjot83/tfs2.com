@@ -74,6 +74,7 @@
     <Compile Include="PersonnelRecords\PersonMap.cs" />
     <Compile Include="PersonnelRecords\QualificationsMap.cs" />
     <Compile Include="Programs\PositionMap.cs" />
+    <Compile Include="Programs\ProgramsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site\PageMap.cs" />
     <Compile Include="Site\SiteRepository.cs" />
