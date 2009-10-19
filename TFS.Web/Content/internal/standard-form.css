@@ -1,0 +1,60 @@
+﻿.standard-form
+{	
+	font-weight: bold;
+	margin-top: 1.1em;
+	font-size: 1.2em;	
+	display: inline-block;
+}
+ 
+.standard-form label
+{
+	display: block;
+	font-weight: bold;	
+}
+
+.standard-form input
+{	
+	display: block;	
+}
+ 
+.standard-form input[type="checkbox"]
+{
+	display: inline;
+}
+ 
+.standard-form img
+{
+	vertical-align:bottom;
+}
+
+.standard-form div
+{
+	display: block;
+	padding: 5px 0px 5px 0px;
+}
+
+.standard-form .field-group
+{
+	vertical-align: top;
+	display:block;
+}
+
+.standard-form .field
+{
+	display: inline-block;
+}
+
+.standard-form .button-group
+{	
+	margin-top: 10px;
+}
+
+.standard-form .button-group input
+{	
+	display: inline;
+}
+
+.standard-form .field-validation-error
+{
+	color: Red;
+}

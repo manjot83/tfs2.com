@@ -210,6 +210,7 @@
     <Content Include="Content\internal\icons\world.png" />
     <Content Include="Content\internal\images\calendarSelector.png" />
     <Content Include="Content\internal\list-table.css" />
+    <Content Include="Content\internal\standard-form.css" />
     <Content Include="Content\internal\template\bg.gif" />
     <Content Include="Content\internal\template\bgcontainer.gif" />
     <Content Include="Content\internal\template\bgfooter.gif" />

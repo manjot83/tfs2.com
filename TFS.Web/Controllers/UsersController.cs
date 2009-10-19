@@ -72,7 +72,7 @@ namespace TFS.Web.Controllers
         [RequireTransaction]
         public virtual ActionResult Create(UserViewModel user)
         {
-            user.Validate(ModelState, "user");
+            user.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
                 return View(user);
             throw new NotImplementedException();

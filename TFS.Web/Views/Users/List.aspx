@@ -1,8 +1,5 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.SortedListViewModel<TFS.Models.User>>" %>
 
-<asp:Content ContentPlaceHolderID="AdditionalStyleSheets" runat="server">
-    <link type="text/css" rel="stylesheet" href="<%= Url.Content("~/Content/internal/list-table.css") %>" />
-</asp:Content>
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <h1>Users</h1>
     <p>

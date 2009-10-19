@@ -57,8 +57,5 @@ color: #555;</code>
 			<p>Eget feugiat est leo tempor quam. Ut quis neque convallis magna consequat molestie.</p>
 </asp:Content>
 
-<asp:Content ContentPlaceHolderID="AdditionalStyleSheets" runat="server">
-</asp:Content>
-
 <asp:Content ContentPlaceHolderID="AdditionalJavascript" runat="server">
 </asp:Content>
