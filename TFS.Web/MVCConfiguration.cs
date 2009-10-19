@@ -11,6 +11,7 @@ using TFS.Models;
 using NHibernate;
 using TFS.Models.Site;
 using TFS.Models.Data.Site;
+using Centro.Validation;
 
 namespace TFS.Web
 {
@@ -39,9 +40,9 @@ namespace TFS.Web
 
             var mappingAssemblies = new List<Assembly> { typeof(TFS.Models.Data.UserMapping).Assembly };
 #if SQLITE
-            var nhibernateRegistry = SQLiteBuilder.CreateRegistry("TFS_Web", mappingAssemblies, InstanceScope.HttpContext);
+            var nhibernateRegistry = SQLiteBuilder.CreateRegistry("TFS_Web", mappingAssemblies, InstanceScope.HttpContext, false);
 #else
-            var nhibernateRegistry = MSSqlBuilder.CreateRegistry("TFS_Web", mappingAssemblies, InstanceScope.HttpContext);
+            var nhibernateRegistry = MSSqlBuilder.CreateRegistry("TFS_Web", mappingAssemblies, InstanceScope.HttpContext, false);
 #endif
             ObjectFactory.Initialize(i =>
             {
@@ -63,6 +64,10 @@ namespace TFS.Web
                 i.ForRequestedType<IAuthenticationService>()
                     .CacheBy(InstanceScope.PerRequest)
                     .TheDefaultIsConcreteType<FormsAuthenticationService>();
+
+                i.ForRequestedType<IValidator>()
+                    .CacheBy(InstanceScope.Singleton)
+                    .TheDefaultIsConcreteType<DataAnnotationsValidator>();
             });
 
 #if DEBUG
@@ -73,16 +78,9 @@ namespace TFS.Web
 
 #if SQLITE
             SQLiteUtil.GenerateSchema(nhibernateRegistry.Configuration, ObjectFactory.GetInstance<ISession>());
-            SQLiteUtil.InitializeData(SQLiteTestData, ObjectFactory.GetInstance<ISession>());
+            SQLiteUtil.InitializeData(SQLiteTestData.Execute, ObjectFactory.GetInstance<ISession>());
             ObjectFactory.GetInstance<ISession>().Clear();
 #endif
         }
-
-#if SQLITE
-        private static void SQLiteTestData()
-        {
-            var session = ObjectFactory.GetInstance<ISession>();
-        }
-#endif
     }
 }

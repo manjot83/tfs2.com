@@ -251,6 +251,7 @@ namespace TFS.Web.Controllers {
             public readonly string Index = "Index";
             public readonly string List = "List";
             public readonly string Edit = "Edit";
+            public readonly string Create = "Create";
         }
 
 
@@ -259,6 +260,7 @@ namespace TFS.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [CompilerGenerated]
         public class ViewNames {
+            public readonly string Create = "Create";
             public readonly string List = "List";
         }
     }
@@ -389,7 +391,7 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult List(TFS.Web.ViewModels.UserSortType? sortType, System.Web.UI.WebControls.SortDirection? sortDirection) {
+        public override System.Web.Mvc.ViewResult List(string sortType, System.Web.UI.WebControls.SortDirection? sortDirection) {
             var callInfo = new T4MVC_ViewResult("Users", Actions.List);
             callInfo.RouteValues.Add("sortType", sortType);
             callInfo.RouteValues.Add("sortDirection", sortDirection);
@@ -399,6 +401,17 @@ namespace T4MVC {
         public override System.Web.Mvc.ViewResult Edit(string username) {
             var callInfo = new T4MVC_ViewResult("Users", Actions.Edit);
             callInfo.RouteValues.Add("username", username);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult Create() {
+            var callInfo = new T4MVC_ViewResult("Users", Actions.Create);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Create(TFS.Web.ViewModels.UserViewModel user) {
+            var callInfo = new T4MVC_ActionResult("Users", Actions.Create);
+            callInfo.RouteValues.Add("user", user);
             return callInfo;
         }
 

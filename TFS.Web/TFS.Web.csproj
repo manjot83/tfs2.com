@@ -84,6 +84,9 @@
       <HintPath>..\lib\StructureMap.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -133,6 +136,7 @@
     <Compile Include="IAuthenticationService.cs" />
     <Compile Include="MVCConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLiteTestData.cs" />
     <Compile Include="T4MVC.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -140,7 +144,8 @@
     </Compile>
     <Compile Include="ApplicationVersion.cs" />
     <Compile Include="ViewModels\ManageProgramsViewModel.cs" />
-    <Compile Include="ViewModels\UserSortType.cs" />
+    <Compile Include="ViewModels\SortedListViewModel.cs" />
+    <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\public\banners\aircrew_login.gif" />
@@ -225,6 +230,7 @@
     </None>
     <Content Include="Views\Shared\Dashboard.Master" />
     <Content Include="Views\Shared\DashboardSideBar.ascx" />
+    <Content Include="Views\Users\Create.aspx" />
     <Content Include="Views\Users\List.aspx" />
   </ItemGroup>
   <ItemGroup>
