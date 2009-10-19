@@ -24,6 +24,7 @@ public static class MVC {
     public static TFS.Web.Controllers.ProgramsController Programs = new T4MVC_ProgramsController();
     public static TFS.Web.Controllers.SecurityController Security = new T4MVC_SecurityController();
     public static TFS.Web.Controllers.SiteController Site = new T4MVC_SiteController();
+    public static TFS.Web.Controllers.UsersController Users = new T4MVC_UsersController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 
@@ -217,6 +218,51 @@ namespace TFS.Web.Controllers {
         }
     }
 }
+namespace TFS.Web.Controllers {
+    public partial class UsersController {
+
+        [CompilerGenerated]
+        protected UsersController(Dummy d) { }
+
+        protected RedirectToRouteResult RedirectToAction(ActionResult result) {
+            var callInfo = (IT4MVCActionResult)result;
+            return RedirectToRoute(callInfo.RouteValues);
+        }
+
+        [NonAction]
+        public ActionResult List() {
+            return new T4MVC_ActionResult(Name, Actions.List);
+        }
+
+        [NonAction]
+        public ActionResult Edit() {
+            return new T4MVC_ActionResult(Name, Actions.Edit);
+        }
+
+
+        [CompilerGenerated]
+        public readonly string Name = "Users";
+
+        static readonly ActionNames s_actions = new ActionNames();
+        [CompilerGenerated]
+        public ActionNames Actions { get { return s_actions; } }
+        [CompilerGenerated]
+        public class ActionNames {
+            public readonly string Index = "Index";
+            public readonly string List = "List";
+            public readonly string Edit = "Edit";
+        }
+
+
+        static readonly ViewNames s_views = new ViewNames();
+        [CompilerGenerated]
+        public ViewNames Views { get { return s_views; } }
+        [CompilerGenerated]
+        public class ViewNames {
+            public readonly string List = "List";
+        }
+    }
+}
 namespace T4MVC {
     public class SharedController {
 
@@ -330,6 +376,29 @@ namespace T4MVC {
 
         public override System.Web.Mvc.ViewResult Contact() {
             var callInfo = new T4MVC_ViewResult("Site", Actions.Contact);
+            return callInfo;
+        }
+
+    }
+    [CompilerGenerated]
+    public class T4MVC_UsersController: TFS.Web.Controllers.UsersController {
+        public T4MVC_UsersController() : base(Dummy.Instance) { }
+
+        public override System.Web.Mvc.ActionResult Index() {
+            var callInfo = new T4MVC_ActionResult("Users", Actions.Index);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult List(TFS.Web.ViewModels.UserSortType? sortType, System.Web.UI.WebControls.SortDirection? sortDirection) {
+            var callInfo = new T4MVC_ViewResult("Users", Actions.List);
+            callInfo.RouteValues.Add("sortType", sortType);
+            callInfo.RouteValues.Add("sortDirection", sortDirection);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult Edit(string username) {
+            var callInfo = new T4MVC_ViewResult("Users", Actions.Edit);
+            callInfo.RouteValues.Add("username", username);
             return callInfo;
         }
 
@@ -488,6 +557,8 @@ namespace Links {
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath("~/Content/internal/icons/" + fileName); }
                 public static readonly string book_png = Url("book.png");
                 public static readonly string group_png = Url("group.png");
+                public static readonly string sort_down_gif = Url("sort_down.gif");
+                public static readonly string sort_up_gif = Url("sort_up.gif");
                 public static readonly string vcard_png = Url("vcard.png");
                 public static readonly string world_png = Url("world.png");
             }
@@ -499,6 +570,7 @@ namespace Links {
                 public static readonly string calendarSelector_png = Url("calendarSelector.png");
             }
         
+            public static readonly string list_table_css = Url("list-table.css");
             [CompilerGenerated]
             public static class @template {
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath("~/Content/internal/template"); }

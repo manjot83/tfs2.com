@@ -21,6 +21,11 @@ namespace TFS.Models.Data
             return Session.Linq<User>().Where(x => x.Username == username).FirstOrDefault();
         }
 
+        public IEnumerable<User> GetUsers()
+        {
+            return Session.Linq<User>();
+        }
+
         public bool AuthenticateUser(string username, string password)
         {
             if (string.IsNullOrEmpty(password))

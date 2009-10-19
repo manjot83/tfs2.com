@@ -119,6 +119,7 @@
     <Compile Include="Controllers\ProgramsController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -139,6 +140,7 @@
     </Compile>
     <Compile Include="ApplicationVersion.cs" />
     <Compile Include="ViewModels\ManageProgramsViewModel.cs" />
+    <Compile Include="ViewModels\UserSortType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\public\banners\aircrew_login.gif" />
@@ -197,9 +199,12 @@
     <Content Include="Content\internal\default.css" />
     <Content Include="Content\internal\icons\book.png" />
     <Content Include="Content\internal\icons\group.png" />
+    <Content Include="Content\internal\icons\sort_down.gif" />
+    <Content Include="Content\internal\icons\sort_up.gif" />
     <Content Include="Content\internal\icons\vcard.png" />
     <Content Include="Content\internal\icons\world.png" />
     <Content Include="Content\internal\images\calendarSelector.png" />
+    <Content Include="Content\internal\list-table.css" />
     <Content Include="Content\internal\template\bg.gif" />
     <Content Include="Content\internal\template\bgcontainer.gif" />
     <Content Include="Content\internal\template\bgfooter.gif" />
@@ -209,6 +214,7 @@
     <Content Include="Content\internal\template\li.gif" />
     <Content Include="Content\internal\template\quote.gif" />
     <Content Include="Content\internal\template\sidenavh1.gif" />
+    <Content Include="favicon.ico" />
     <Content Include="Views\Dashboard\Index.aspx" />
     <Content Include="Views\Programs\Manage.aspx" />
     <Content Include="Views\Security\LogOn.aspx" />
@@ -219,6 +225,7 @@
     </None>
     <Content Include="Views\Shared\Dashboard.Master" />
     <Content Include="Views\Shared\DashboardSideBar.ascx" />
+    <Content Include="Views\Users\List.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />

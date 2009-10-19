@@ -8,6 +8,8 @@ namespace TFS.Models
 {
     public interface IUserRepository : IRepository
     {
+        IEnumerable<User> GetUsers();
+
         User GetUser(string username);
 
         bool AuthenticateUser(string username, string password);
