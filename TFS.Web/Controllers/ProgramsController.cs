@@ -9,6 +9,7 @@ using TFS.Web.ViewModels;
 
 namespace TFS.Web.Controllers
 {
+    [Authorize]
     public partial class ProgramsController : Controller
     {
         private readonly IProgramsRepository programsRepository;

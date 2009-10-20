@@ -6,7 +6,7 @@
     </ul>
     <h1>Self Service</h1>
     <ul>
-        <li><%= Html.NavImageLink("My Personnel File", Links.Content.@internal.icons.vcard_png, "#")%></li>
+        <li><%= Html.NavImageLink("My Personnel File", Links.Content.@internal.icons.vcard_png, MVC.PersonnelRecords.Mine())%></li>
     </ul>
     <h1>Administration</h1>
     <ul>

@@ -8,7 +8,7 @@ using Centro.DomainModel;
 namespace TFS.Web.ViewModels
 {
     public class UserViewModel : BaseEntity
-    {        
+    {
         [Required]
         [StringLength(50)]
         public string FirstName { get; set; }
@@ -25,7 +25,17 @@ namespace TFS.Web.ViewModels
         [StringLength(50)]
         public string Username { get; set; }
 
+        [Required]
         [StringLength(50)]
-        public string Password { get; set; }        
+        public string Password { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string ConfirmPassword { get; set; }
+
+        public bool PasswordConfirmed()
+        {
+            return Password.Equals(ConfirmPassword);
+        }
     }
 }

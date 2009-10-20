@@ -11,7 +11,7 @@ namespace TFS.Models.Data.UserTypes
     {
         object IUserType.NullSafeGet(IDataReader rs, string[] names, object owner)
         {
-            var val = NHibernateUtil.Byte.NullSafeGet(rs, names);
+            var val = NHibernateUtil.String.NullSafeGet(rs, names);
             if (val == null)
                 return null;
             var state = USState.FromAbbreviation(val.ToString());
@@ -25,7 +25,7 @@ namespace TFS.Models.Data.UserTypes
             if (value != null && value is USState)
             {
                 var val = ((USState)value).Abbreviation;
-                NHibernateUtil.Int32.NullSafeSet(cmd, val, index);
+                NHibernateUtil.String.NullSafeSet(cmd, val, index);
             }
             else
                 NHibernateUtil.String.NullSafeSet(cmd, null, index);

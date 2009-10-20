@@ -23,5 +23,7 @@ namespace TFS.Models
         bool ChangePassword(User user, string oldPassword, string newPassword);
 
         int MinRequiredPasswordLength { get; }
+
+        User CreateUser(string username, string firstname, string lastname, string displayname);
     }
 }

@@ -21,6 +21,7 @@ using T4MVC;
 public static class MVC {
     public static TFS.Web.Controllers.DashboardController Dashboard = new T4MVC_DashboardController();
     public static TFS.Web.Controllers.ImagesController Images = new T4MVC_ImagesController();
+    public static TFS.Web.Controllers.PersonnelRecordsController PersonnelRecords = new T4MVC_PersonnelRecordsController();
     public static TFS.Web.Controllers.ProgramsController Programs = new T4MVC_ProgramsController();
     public static TFS.Web.Controllers.SecurityController Security = new T4MVC_SecurityController();
     public static TFS.Web.Controllers.SiteController Site = new T4MVC_SiteController();
@@ -99,6 +100,51 @@ namespace TFS.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [CompilerGenerated]
         public class ViewNames {
+        }
+    }
+}
+namespace TFS.Web.Controllers {
+    public partial class PersonnelRecordsController {
+
+        [CompilerGenerated]
+        protected PersonnelRecordsController(Dummy d) { }
+
+        protected RedirectToRouteResult RedirectToAction(ActionResult result) {
+            var callInfo = (IT4MVCActionResult)result;
+            return RedirectToRoute(callInfo.RouteValues);
+        }
+
+        [NonAction]
+        public ActionResult EditPersonalInfo() {
+            return new T4MVC_ActionResult(Name, Actions.EditPersonalInfo);
+        }
+
+        [NonAction]
+        public ActionResult EditContactInfo() {
+            return new T4MVC_ActionResult(Name, Actions.EditContactInfo);
+        }
+
+
+        [CompilerGenerated]
+        public readonly string Name = "PersonnelRecords";
+
+        static readonly ActionNames s_actions = new ActionNames();
+        [CompilerGenerated]
+        public ActionNames Actions { get { return s_actions; } }
+        [CompilerGenerated]
+        public class ActionNames {
+            public readonly string Mine = "Mine";
+            public readonly string EditPersonalInfo = "EditPersonalInfo";
+            public readonly string EditContactInfo = "EditContactInfo";
+        }
+
+
+        static readonly ViewNames s_views = new ViewNames();
+        [CompilerGenerated]
+        public ViewNames Views { get { return s_views; } }
+        [CompilerGenerated]
+        public class ViewNames {
+            public readonly string Edit = "Edit";
         }
     }
 }
@@ -302,6 +348,32 @@ namespace T4MVC {
         public override System.Web.Mvc.ActionResult StaticImage(System.Guid id) {
             var callInfo = new T4MVC_ActionResult("Images", Actions.StaticImage);
             callInfo.RouteValues.Add("id", id);
+            return callInfo;
+        }
+
+    }
+    [CompilerGenerated]
+    public class T4MVC_PersonnelRecordsController: TFS.Web.Controllers.PersonnelRecordsController {
+        public T4MVC_PersonnelRecordsController() : base(Dummy.Instance) { }
+
+        public override System.Web.Mvc.ViewResult Mine() {
+            var callInfo = new T4MVC_ViewResult("PersonnelRecords", Actions.Mine);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult EditPersonalInfo(string username, bool editingMine, TFS.Web.ViewModels.PersonnelRecordPersonalInfo personalInfo) {
+            var callInfo = new T4MVC_ActionResult("PersonnelRecords", Actions.EditPersonalInfo);
+            callInfo.RouteValues.Add("username", username);
+            callInfo.RouteValues.Add("editingMine", editingMine);
+            callInfo.RouteValues.Add("personalInfo", personalInfo);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult EditContactInfo(string username, bool editingMine, TFS.Web.ViewModels.PersonnelRecordContactInfo contactInfo) {
+            var callInfo = new T4MVC_ActionResult("PersonnelRecords", Actions.EditContactInfo);
+            callInfo.RouteValues.Add("username", username);
+            callInfo.RouteValues.Add("editingMine", editingMine);
+            callInfo.RouteValues.Add("contactInfo", contactInfo);
             return callInfo;
         }
 
@@ -584,6 +656,7 @@ namespace Links {
             }
         
             public static readonly string list_table_css = Url("list-table.css");
+            public static readonly string standard_form_css = Url("standard-form.css");
             [CompilerGenerated]
             public static class @template {
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath("~/Content/internal/template"); }

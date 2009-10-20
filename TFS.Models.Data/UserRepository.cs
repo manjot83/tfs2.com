@@ -74,5 +74,19 @@ namespace TFS.Models.Data
         {
             get { return 8; }
         }
+
+        public User CreateUser(string username, string firstname, string lastname, string displayname)
+        {
+            var user = new User
+            {
+                Username = username,
+                FirstName = firstname,
+                LastName = lastname,
+                DisplayName = displayname,
+                Disabled = false,
+            };
+            user.SetDefaultEmailAddress(username);
+            return (User)Session.SaveOrUpdateCopy(user);
+        }
     }
 }

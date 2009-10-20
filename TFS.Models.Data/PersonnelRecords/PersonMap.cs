@@ -41,7 +41,7 @@ namespace TFS.Models.Data.PersonnelRecords
             Map(x => x.Gender)
                 .CustomType<EnumerationUserType<Gender>>()
                 .Nullable();
-            Map(x => x.SocialSecurityNumberEnding)
+            Map(x => x.SocialSecurityLastFour)
                 .Length(4)
                 .Nullable();
             Map(x => x.PrimaryPhoneNumber)

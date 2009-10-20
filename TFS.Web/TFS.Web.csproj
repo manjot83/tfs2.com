@@ -117,8 +117,10 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Controllers\ControllerExtensions.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
+    <Compile Include="Controllers\PersonnelRecordsController.cs" />
     <Compile Include="Controllers\ProgramsController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
@@ -131,8 +133,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Html\DateTimeExtensions.cs" />
     <Compile Include="Html\ImageLinkExtensions.cs" />
     <Compile Include="Html\PartialExtensions.cs" />
+    <Compile Include="Html\SelectListItemExtensions.cs" />
     <Compile Include="IAuthenticationService.cs" />
     <Compile Include="MVCConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -144,6 +148,9 @@
     </Compile>
     <Compile Include="ApplicationVersion.cs" />
     <Compile Include="ViewModels\ManageProgramsViewModel.cs" />
+    <Compile Include="ViewModels\PersonnelRecordContactInfo.cs" />
+    <Compile Include="ViewModels\PersonnelRecordPersonalInfo.cs" />
+    <Compile Include="ViewModels\PersonnelRecordViewModel.cs" />
     <Compile Include="ViewModels\SortedListViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
@@ -222,6 +229,7 @@
     <Content Include="Content\internal\template\sidenavh1.gif" />
     <Content Include="favicon.ico" />
     <Content Include="Views\Dashboard\Index.aspx" />
+    <Content Include="Views\PersonnelRecords\Edit.aspx" />
     <Content Include="Views\Programs\Manage.aspx" />
     <Content Include="Views\Security\LogOn.aspx" />
     <None Include="T4MVC.settings.t4" />

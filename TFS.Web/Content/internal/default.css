@@ -24,11 +24,11 @@ a:hover {
 body {
 	background: #fcf9e7;
 	color: #543;
-	font: normal 62.5% "Lucida Sans Unicode",sans-serif;
+	font: normal 62.5% "Verdana",sans-serif;
 }
 input {
 	color: #555;
-	font: normal 1.2em "Lucida Sans Unicode",sans-serif;
+	font: normal 1.2em "Verdana",sans-serif;
 }
 p,cite,code,ul,table {
 	font-size: 1.2em;
@@ -44,7 +44,7 @@ code {
 	border-left: 6px solid #938262;
 	color: #554;
 	display: block;
-	font: normal 1.1em "Lucida Sans Unicode",serif;
+	font: normal 1.1em "Verdana",serif;
 	margin-bottom: 12px;
 	padding: 8px 10px;
 	white-space: pre;
@@ -53,7 +53,7 @@ blockquote {
 	background: url(template/quote.gif) no-repeat;
 	color: #666;
 	display: block;
-	font: normal 1.3em "Lucida Sans Unicode",serif;
+	font: normal 1.3em "Verdana",serif;
 	padding-left: 28px;
 }
 h1,h2,h3 {
@@ -84,7 +84,7 @@ h1,h2,h3 {
 }
 .title h1 {
 	color: #E4DBCF;
-	font: normal 3.4em "Lucida Sans Unicode","Trebuchet MS",sans-serif;
+	font: normal 3.4em "Verdana","Trebuchet MS",sans-serif;
 }
 
 /* navigation */

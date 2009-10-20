@@ -17,5 +17,13 @@ namespace TFS.Models
         public virtual string Username { get; set; }
         public virtual bool Disabled { get; set; }
         public virtual string PasswordHash { get; set; }
+
+        public virtual void SetDefaultEmailAddress(string username)
+        {
+            if (username.ToUpper().EndsWith("@TFS2.COM"))
+                Email = username;
+            else
+                Email = username + "@tfs2.com";
+        }
     }
 }

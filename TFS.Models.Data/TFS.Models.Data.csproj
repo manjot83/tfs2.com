@@ -72,6 +72,7 @@
     <Compile Include="Images\StaticImageMap.cs" />
     <Compile Include="PersonnelRecords\CertificateMap.cs" />
     <Compile Include="PersonnelRecords\PersonMap.cs" />
+    <Compile Include="PersonnelRecords\PersonnelRecordsRepository.cs" />
     <Compile Include="PersonnelRecords\QualificationsMap.cs" />
     <Compile Include="Programs\PositionMap.cs" />
     <Compile Include="Programs\ProgramsRepository.cs" />

@@ -7,6 +7,7 @@ using StructureMap;
 using NHibernate;
 using TFS.Models;
 using Centro.Extensions;
+using TFS.Models.Programs;
 
 namespace TFS.Web
 {
@@ -25,7 +26,7 @@ namespace TFS.Web
                 Username = "j.daigle",
                 Email = "j.daigle@tfs2.com",
                 Disabled = false,
-                PasswordHash = "password",
+                PasswordHash = "j.daigle".Hash(Crypto.HashAlgorithm.SHA1),
             });
             session.Save(new User
             {
@@ -35,7 +36,7 @@ namespace TFS.Web
                 Username = "w.petit",
                 Email = "w.petit@tfs2.com",
                 Disabled = false,
-                PasswordHash = "password",
+                PasswordHash = "w.petit".Hash(Crypto.HashAlgorithm.SHA1),
             });
             session.Save(new User
             {
@@ -46,6 +47,20 @@ namespace TFS.Web
                 Email = "m.ott@tfs2.com",
                 Disabled = true,
                 PasswordHash = null,
+            });
+
+            // Program Data
+            session.Save(new Position()
+            {
+                Title = "Pilot",
+            });
+            session.Save(new Position()
+            {
+                Title = "Flight Engineer",
+            });
+            session.Save(new Position()
+            {
+                Title = "Loadmaster",
             });
         }
     }
