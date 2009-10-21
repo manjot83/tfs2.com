@@ -28,7 +28,7 @@ namespace TFS.Models.Data.FlightLogs
                 .Not.Nullable();
             Map(x => x.AdditionalInfo)
                 .Length(100)
-                .Not.Nullable();
+                .Nullable();
             Map(x => x.FromICAO)
                 .Length(4)
                 .Not.Nullable();
