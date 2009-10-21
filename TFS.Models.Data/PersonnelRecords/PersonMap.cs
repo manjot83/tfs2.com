@@ -20,10 +20,16 @@ namespace TFS.Models.Data.PersonnelRecords
                 .GeneratedBy.Foreign("User")
                 .Not.Nullable();
 
-            HasOne(x => x.User).Constrained().Cascade.SaveUpdate();
-            HasOne(x => x.Qualifications).Constrained().Cascade.SaveUpdate();
+            HasOne(x => x.User)
+                .ForeignKey("FK_Persons_Users")
+                .Constrained()
+                .Cascade.SaveUpdate();
+            HasOne(x => x.Qualifications)
+                .Constrained()
+                .Cascade.SaveUpdate();
 
             References(x => x.HirePosition)
+                .ForeignKey("FK_Persons_Positions")
                 .Column("HirePositionId")
                 .Nullable();
 

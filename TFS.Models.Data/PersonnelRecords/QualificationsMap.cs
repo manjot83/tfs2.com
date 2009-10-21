@@ -19,9 +19,13 @@ namespace TFS.Models.Data.PersonnelRecords
                 .GeneratedBy.Foreign("Person")
                 .Not.Nullable();
 
-            HasOne(x => x.Person).Constrained().Cascade.SaveUpdate();
+            HasOne(x => x.Person)
+                .ForeignKey("FK_Qualifications_Person")
+                .Constrained()
+                .Cascade.SaveUpdate();
             HasManyToMany(x => x.Certificates)
                 .Table("QualificationsCertificates")
+                .ForeignKeyConstraintNames("FK_QualificationsCertificates_Qualifications", "FK_QualificationsCertificates_Certificates")
                 .ParentKeyColumn("PersonId")
                 .ChildKeyColumn("CertificateId")
                 .Cascade.SaveUpdate();

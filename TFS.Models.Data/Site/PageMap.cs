@@ -35,6 +35,7 @@ namespace TFS.Models.Data.Site
 
             HasManyToMany(x => x.Images)
                 .Table("PageStaticImages")
+                .ForeignKeyConstraintNames("FK_PageStaticImages_Pages","FK_PageStaticImages_StaticImages")
                 .LazyLoad()
                 .ParentKeyColumn("PageId")
                 .ChildKeyColumn("StaticImageId")
