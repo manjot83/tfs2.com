@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Centro.DomainModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace TFS.Models.FlightLogs
 {
-    public class MissionSummary : BaseEntity
+    public class MissionLog : BaseEntity
     {
-        public MissionSummary()
+        public MissionLog()
         {
             this.Missions = new List<Mission>();
             this.SquadronLogs = new List<SquadronLog>();
@@ -16,12 +17,17 @@ namespace TFS.Models.FlightLogs
 
         public virtual int? Id { get; set; }
 
+        [DomainSignature, Required]
         public virtual DateTime CreatedDate { get; set; }
+        [DomainSignature, Required]
         public virtual DateTime LastModifiedDate { get; set; }
 
+        [DomainSignature, Required]
         public virtual string AircraftModel { get; set; } // "MDS"
+        [DomainSignature, Required]
         public virtual string AircraftSerialNumber { get; set; } // "Serial No." or Tail Number
 
+        [DomainSignature, Required]
         public virtual string Location { get; set; } // Todo Change to "Program Location"
 
         public virtual IList<Mission> Missions { get; set; }

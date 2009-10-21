@@ -69,6 +69,9 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="FlightLogs\MissionMap.cs" />
+    <Compile Include="FlightLogs\MissionLogMap.cs" />
+    <Compile Include="FlightLogs\SquadronLogMap.cs" />
     <Compile Include="Images\StaticImageMap.cs" />
     <Compile Include="PersonnelRecords\CertificateMap.cs" />
     <Compile Include="PersonnelRecords\PersonMap.cs" />

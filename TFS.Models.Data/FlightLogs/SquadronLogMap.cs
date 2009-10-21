@@ -1,0 +1,52 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using TFS.Models.FlightLogs;
+using FluentNHibernate.Mapping;
+using Centro.Data.UserTypes;
+
+namespace TFS.Models.Data.FlightLogs
+{
+    public class SquadronLogMap : ClassMap<SquadronLog>
+    {
+        public SquadronLogMap()
+        {
+            Table("SquadronLogs");
+
+            Id(x => x.Id)
+                .GeneratedBy.Identity()
+                .Not.Nullable();
+
+            References(x => x.MissionLog)
+                .Column("MissionLogId")
+                .Cascade.SaveUpdate()
+                .Not.Nullable();
+            References(x => x.Person)
+                .Column("PersonId")
+                .Not.Nullable();
+
+            Map(x => x.DutyCode)
+                .CustomType<EnumerationUserType<DutyCode>>()
+                .Not.Nullable();
+            Map(x => x.PrimaryHours)
+                .Not.Nullable();
+            Map(x => x.SecondaryHours)
+                .Not.Nullable();
+            Map(x => x.InstructorHours)
+                .Not.Nullable();
+            Map(x => x.EvaluatorHours)
+                .Not.Nullable();
+            Map(x => x.OtherHours)
+                .Not.Nullable();
+            Map(x => x.Sorties)
+                .Not.Nullable();
+            Map(x => x.PrimaryNightHours)
+                .Not.Nullable();
+            Map(x => x.PrimaryInstrumentHours)
+                 .Not.Nullable();
+            Map(x => x.SimulatedInstrumentHours)
+                 .Not.Nullable();
+        }
+    }
+}

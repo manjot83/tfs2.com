@@ -58,7 +58,7 @@
     </Compile>
     <Compile Include="FlightLogs\DutyCode.cs" />
     <Compile Include="FlightLogs\Mission.cs" />
-    <Compile Include="FlightLogs\MissionSummary.cs" />
+    <Compile Include="FlightLogs\MissionLog.cs" />
     <Compile Include="FlightLogs\SquadronLog.cs" />
     <Compile Include="Geography\USAddress.cs" />
     <Compile Include="Geography\USState.cs" />
