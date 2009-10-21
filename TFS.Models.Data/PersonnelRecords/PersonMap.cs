@@ -50,6 +50,9 @@ namespace TFS.Models.Data.PersonnelRecords
             Map(x => x.AlternatePhoneNumber)
                 .Length(10)
                 .Nullable();
+            Map(x => x.AlternateEmail)
+                .Length(254)
+                .Nullable();
             Map(x => x.EmergencyContactName)
                 .Length(50)
                 .Nullable();

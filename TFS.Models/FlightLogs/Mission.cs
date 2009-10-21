@@ -28,6 +28,11 @@ namespace TFS.Models.FlightLogs
         [DomainSignature, Required]
         public virtual DateTime LandTime { get; set; }
 
+        public virtual TimeSpan ComputeFlightTime()
+        {
+            return LandTime.Subtract(TakeOffTime);
+        }
+
         [DomainSignature, Required]
         public virtual int TouchAndGos { get; set;}
         [DomainSignature, Required]
