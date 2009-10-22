@@ -30,5 +30,10 @@ namespace TFS.Web.ViewModels
         {
             return SortDirection == SortDirection.Ascending;
         }
+
+        public string SortDirectionClass(string ascendingClass, string descendingClass)
+        {
+            return IsSortedAscending() ? ascendingClass : descendingClass;
+        }
     }
 }

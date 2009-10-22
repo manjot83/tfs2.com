@@ -44,7 +44,7 @@
                 <%= Html.TextBox("SocialSecurityLastFour", Model.Record.SocialSecurityLastFour, new { size = "10", maxlength = "4" })%>
                 <%= Html.ValidationMessage("SocialSecurityLastFour")%>
             </div>
-        </div
+        </div>
         <div class="button-group">
             <input type="submit" value="Save changes" />
             <input type="reset" value="Reset" />

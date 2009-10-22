@@ -70,8 +70,6 @@ namespace TFS.Web.Controllers {
 namespace TFS.Web.Controllers {
     public partial class FlightLogsController {
 
-        public FlightLogsController() { }
-
         [CompilerGenerated]
         protected FlightLogsController(Dummy d) { }
 
@@ -85,6 +83,11 @@ namespace TFS.Web.Controllers {
             return new T4MVC_ActionResult(Name, Actions.List);
         }
 
+        [NonAction]
+        public ActionResult EditMissionLog() {
+            return new T4MVC_ActionResult(Name, Actions.EditMissionLog);
+        }
+
 
         [CompilerGenerated]
         public readonly string Name = "FlightLogs";
@@ -96,6 +99,8 @@ namespace TFS.Web.Controllers {
         public class ActionNames {
             public readonly string Index = "Index";
             public readonly string List = "List";
+            public readonly string EditMissionLog = "EditMissionLog";
+            public readonly string CreateMissionLog = "CreateMissionLog";
         }
 
 
@@ -396,6 +401,17 @@ namespace T4MVC {
             var callInfo = new T4MVC_ViewResult("FlightLogs", Actions.List);
             callInfo.RouteValues.Add("sortType", sortType);
             callInfo.RouteValues.Add("sortDirection", sortDirection);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult EditMissionLog(int id) {
+            var callInfo = new T4MVC_ViewResult("FlightLogs", Actions.EditMissionLog);
+            callInfo.RouteValues.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult CreateMissionLog() {
+            var callInfo = new T4MVC_ViewResult("FlightLogs", Actions.CreateMissionLog);
             return callInfo;
         }
 
