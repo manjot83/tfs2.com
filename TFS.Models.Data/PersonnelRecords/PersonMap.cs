@@ -43,6 +43,7 @@ namespace TFS.Models.Data.PersonnelRecords
                 .Length(50)
                 .Nullable();
             Map(x => x.DateOfBirth)
+                .CustomType<UtcDateTimeUserType>()
                 .Nullable();
             Map(x => x.Gender)
                 .CustomType<EnumerationUserType<Gender>>()

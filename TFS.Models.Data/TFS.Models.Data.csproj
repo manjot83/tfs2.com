@@ -30,6 +30,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Sqlite|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SQLITE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Centro.Core, Version=0.1.3572.33835, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -69,6 +77,7 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="FlightLogs\FlightLogRepository.cs" />
     <Compile Include="FlightLogs\MissionMap.cs" />
     <Compile Include="FlightLogs\MissionLogMap.cs" />
     <Compile Include="FlightLogs\SquadronLogMap.cs" />
@@ -85,6 +94,7 @@
     <Compile Include="UserMapping.cs" />
     <Compile Include="UserRepository.cs" />
     <Compile Include="UserTypes\USStateUserType.cs" />
+    <Compile Include="UserTypes\UtcDateTimeUserType.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TFS.Models\TFS.Models.csproj">

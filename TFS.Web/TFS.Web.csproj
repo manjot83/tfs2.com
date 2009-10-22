@@ -119,6 +119,7 @@
     </Compile>
     <Compile Include="Controllers\ControllerExtensions.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\FlightLogsController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\PersonnelRecordsController.cs" />
     <Compile Include="Controllers\ProgramsController.cs" />
@@ -213,6 +214,7 @@
     <Content Include="Content\internal\icons\group.png" />
     <Content Include="Content\internal\icons\sort_down.gif" />
     <Content Include="Content\internal\icons\sort_up.gif" />
+    <Content Include="Content\internal\icons\flightlog.png" />
     <Content Include="Content\internal\icons\vcard.png" />
     <Content Include="Content\internal\icons\world.png" />
     <Content Include="Content\internal\images\calendarSelector.png" />
@@ -229,6 +231,7 @@
     <Content Include="Content\internal\template\sidenavh1.gif" />
     <Content Include="favicon.ico" />
     <Content Include="Views\Dashboard\Index.aspx" />
+    <Content Include="Views\FlightLogs\List.aspx" />
     <Content Include="Views\PersonnelRecords\Edit.aspx" />
     <Content Include="Views\Programs\Manage.aspx" />
     <Content Include="Views\Security\LogOn.aspx" />

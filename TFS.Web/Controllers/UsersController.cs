@@ -23,9 +23,9 @@ namespace TFS.Web.Controllers
             this.userRepository = userRepository;
         }
 
-        public virtual ActionResult Index()
+        public virtual ViewResult Index()
         {
-            return RedirectToAction(MVC.Users.List());
+            return List(null, null);
         }
 
         public virtual ViewResult List(string sortType, SortDirection? sortDirection)
@@ -55,7 +55,7 @@ namespace TFS.Web.Controllers
             else if (viewModel.IsCurrentSortType("status"))
                 users = users.OrderByDescending(x => x.Disabled);
             viewModel.Items = users;
-            return View(viewModel);
+            return View(Views.List, viewModel);
         }
 
         public virtual ViewResult Edit(string username)

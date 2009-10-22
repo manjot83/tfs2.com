@@ -2,7 +2,7 @@
 <div class="sidenav">
     <h1>Operations</h1>
     <ul>            
-        <li><a href="index.html">BLANK</a></li>
+        <li><%= Html.NavImageLink("Flight Logs", Links.Content.@internal.icons.flightlog_png, MVC.FlightLogs.Index()) %></li>
     </ul>
     <h1>Self Service</h1>
     <ul>

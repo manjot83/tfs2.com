@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using FluentNHibernate.Mapping;
+using TFS.Models.Data.UserTypes;
 using TFS.Models.FlightLogs;
-using FluentNHibernate.Mapping;
 
 namespace TFS.Models.Data.FlightLogs
 {
@@ -20,7 +17,7 @@ namespace TFS.Models.Data.FlightLogs
             References(x => x.MissionLog)
                 .ForeignKey("FK_Missions_MissionLogs")
                 .Column("MissionLogId")
-                .Cascade.SaveUpdate()                
+                .Cascade.SaveUpdate()
                 .Not.Nullable();
 
             Map(x => x.Name)
@@ -36,8 +33,10 @@ namespace TFS.Models.Data.FlightLogs
                 .Length(4)
                 .Not.Nullable();
             Map(x => x.TakeOffTime)
+                .CustomType<UtcDateTimeUserType>()
                 .Not.Nullable();
             Map(x => x.LandTime)
+                .CustomType<UtcDateTimeUserType>()
                 .Not.Nullable();
             Map(x => x.TouchAndGos)
                 .Not.Nullable();

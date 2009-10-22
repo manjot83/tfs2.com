@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 using Centro.DomainModel;
 using TFS.Models.PersonnelRecords;
-using System.ComponentModel.DataAnnotations;
 
 namespace TFS.Models.FlightLogs
 {
@@ -36,6 +32,6 @@ namespace TFS.Models.FlightLogs
         [DomainSignature, Required]
         public virtual double PrimaryInstrumentHours { get; set; }
         [DomainSignature, Required]
-        public virtual double SimulatedInstrumentHours { get; set; }        
+        public virtual double SimulatedInstrumentHours { get; set; }
     }
 }

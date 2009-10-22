@@ -72,7 +72,7 @@ namespace TFS.Web
                 HirePosition = session.Get<Position>(position_pilot),
                 FirstName = "Joe",
                 LastName = "Daigle",
-                DateOfBirth = new DateTime(1985, 5, 2),
+                DateOfBirth = new DateTime(1985, 5, 2).ToUniversalTime(),
             };
             person_joseph_entity.Qualifications = new Qualifications()
             {
@@ -83,8 +83,8 @@ namespace TFS.Web
             // Example Flight Log Data
             var missionlog_example1 = session.Save(new MissionLog()
             {
-                CreatedDate = DateTime.Now,
-                LastModifiedDate = DateTime.Now,
+                CreatedDate = DateTime.Now.ToUniversalTime(),
+                LastModifiedDate = DateTime.Now.ToUniversalTime(),
                 Location = "Wako TX",
                 AircraftModel = "C-130J",
                 AircraftSerialNumber = "THX 1138",
@@ -95,8 +95,8 @@ namespace TFS.Web
                 Name = "Test Flight 1",
                 FromICAO = "KATL",
                 ToICAO = "KATL",
-                TakeOffTime = DateTime.Now.Subtract(new TimeSpan(5, 0, 0)),
-                LandTime = DateTime.Now.Subtract(new TimeSpan(4, 0, 0)),
+                TakeOffTime = DateTime.Now.Subtract(new TimeSpan(5, 0, 0)).ToUniversalTime(),
+                LandTime = DateTime.Now.Subtract(new TimeSpan(4, 0, 0)).ToUniversalTime(),
                 TouchAndGos = 2,
                 FullStops = 1,
                 Sorties = 1,
@@ -108,8 +108,8 @@ namespace TFS.Web
                 Name = "Test Flight 2",
                 FromICAO = "KATL",
                 ToICAO = "KATL",
-                TakeOffTime = DateTime.Now.Subtract(new TimeSpan(3, 0, 0)),
-                LandTime = DateTime.Now.Subtract(new TimeSpan(2, 0, 0)),
+                TakeOffTime = DateTime.Now.Subtract(new TimeSpan(3, 0, 0)).ToUniversalTime(),
+                LandTime = DateTime.Now.Subtract(new TimeSpan(2, 0, 0)).ToUniversalTime(),
                 TouchAndGos = 4,
                 FullStops = 2,
                 Sorties = 2,

@@ -5,6 +5,7 @@ using System.Text;
 using TFS.Models.PersonnelRecords;
 using FluentNHibernate.Mapping;
 using Centro.Data.UserTypes;
+using TFS.Models.Data.UserTypes;
 
 namespace TFS.Models.Data.PersonnelRecords
 {
@@ -37,20 +38,28 @@ namespace TFS.Models.Data.PersonnelRecords
                 .CustomType<EnumerationUserType<FCFQualification>>()
                 .Nullable();
             Map(x => x.LastAltitudeChamber)
+                .CustomType<UtcDateTimeUserType>()
                 .Nullable();
             Map(x => x.LastBFR)
+                .CustomType<UtcDateTimeUserType>()
                 .Nullable();
             Map(x => x.LastCRM)
+                .CustomType<UtcDateTimeUserType>()
                 .Nullable();
             Map(x => x.LastEgreesTraining)
+                .CustomType<UtcDateTimeUserType>()
                 .Nullable();
             Map(x => x.LastFlight)
+                .CustomType<UtcDateTimeUserType>()
                 .Nullable();
             Map(x => x.LastLifeSupportTraining)
+                .CustomType<UtcDateTimeUserType>()
                 .Nullable();
             Map(x => x.LastMilitaryFlightPhysical)
+                .CustomType<UtcDateTimeUserType>()
                 .Nullable();
             Map(x => x.LastSimulatorRefresher)
+                .CustomType<UtcDateTimeUserType>()
                 .Nullable();
         }
     }

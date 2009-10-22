@@ -20,6 +20,7 @@ using T4MVC;
 [CompilerGenerated]
 public static class MVC {
     public static TFS.Web.Controllers.DashboardController Dashboard = new T4MVC_DashboardController();
+    public static TFS.Web.Controllers.FlightLogsController FlightLogs = new T4MVC_FlightLogsController();
     public static TFS.Web.Controllers.ImagesController Images = new T4MVC_ImagesController();
     public static TFS.Web.Controllers.PersonnelRecordsController PersonnelRecords = new T4MVC_PersonnelRecordsController();
     public static TFS.Web.Controllers.ProgramsController Programs = new T4MVC_ProgramsController();
@@ -63,6 +64,47 @@ namespace TFS.Web.Controllers {
         [CompilerGenerated]
         public class ViewNames {
             public readonly string Index = "Index";
+        }
+    }
+}
+namespace TFS.Web.Controllers {
+    public partial class FlightLogsController {
+
+        public FlightLogsController() { }
+
+        [CompilerGenerated]
+        protected FlightLogsController(Dummy d) { }
+
+        protected RedirectToRouteResult RedirectToAction(ActionResult result) {
+            var callInfo = (IT4MVCActionResult)result;
+            return RedirectToRoute(callInfo.RouteValues);
+        }
+
+        [NonAction]
+        public ActionResult List() {
+            return new T4MVC_ActionResult(Name, Actions.List);
+        }
+
+
+        [CompilerGenerated]
+        public readonly string Name = "FlightLogs";
+
+        static readonly ActionNames s_actions = new ActionNames();
+        [CompilerGenerated]
+        public ActionNames Actions { get { return s_actions; } }
+        [CompilerGenerated]
+        public class ActionNames {
+            public readonly string Index = "Index";
+            public readonly string List = "List";
+        }
+
+
+        static readonly ViewNames s_views = new ViewNames();
+        [CompilerGenerated]
+        public ViewNames Views { get { return s_views; } }
+        [CompilerGenerated]
+        public class ViewNames {
+            public readonly string List = "List";
         }
     }
 }
@@ -342,6 +384,23 @@ namespace T4MVC {
 
     }
     [CompilerGenerated]
+    public class T4MVC_FlightLogsController: TFS.Web.Controllers.FlightLogsController {
+        public T4MVC_FlightLogsController() : base(Dummy.Instance) { }
+
+        public override System.Web.Mvc.ViewResult Index() {
+            var callInfo = new T4MVC_ViewResult("FlightLogs", Actions.Index);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult List(string sortType, System.Web.UI.WebControls.SortDirection? sortDirection) {
+            var callInfo = new T4MVC_ViewResult("FlightLogs", Actions.List);
+            callInfo.RouteValues.Add("sortType", sortType);
+            callInfo.RouteValues.Add("sortDirection", sortDirection);
+            return callInfo;
+        }
+
+    }
+    [CompilerGenerated]
     public class T4MVC_ImagesController: TFS.Web.Controllers.ImagesController {
         public T4MVC_ImagesController() : base(Dummy.Instance) { }
 
@@ -458,8 +517,8 @@ namespace T4MVC {
     public class T4MVC_UsersController: TFS.Web.Controllers.UsersController {
         public T4MVC_UsersController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ActionResult Index() {
-            var callInfo = new T4MVC_ActionResult("Users", Actions.Index);
+        public override System.Web.Mvc.ViewResult Index() {
+            var callInfo = new T4MVC_ViewResult("Users", Actions.Index);
             return callInfo;
         }
 
@@ -641,6 +700,7 @@ namespace Links {
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath("~/Content/internal/icons"); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath("~/Content/internal/icons/" + fileName); }
                 public static readonly string book_png = Url("book.png");
+                public static readonly string flightlog_png = Url("flightlog.png");
                 public static readonly string group_png = Url("group.png");
                 public static readonly string sort_down_gif = Url("sort_down.gif");
                 public static readonly string sort_up_gif = Url("sort_up.gif");

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using TFS.Models.FlightLogs;
+﻿using Centro.Data.UserTypes;
 using FluentNHibernate.Mapping;
-using Centro.Data.UserTypes;
+using TFS.Models.FlightLogs;
 
 namespace TFS.Models.Data.FlightLogs
 {

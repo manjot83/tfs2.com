@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Centro.DomainModel;
 using System.ComponentModel.DataAnnotations;
+using Centro.DomainModel;
 
 namespace TFS.Models.FlightLogs
 {

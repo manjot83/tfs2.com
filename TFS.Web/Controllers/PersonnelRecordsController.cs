@@ -45,7 +45,7 @@ namespace TFS.Web.Controllers
             person.FirstName = personalInfo.FirstName;
             person.LastName = personalInfo.LastName;
             person.MiddleInitial = personalInfo.MiddleInitial;
-            person.DateOfBirth = personalInfo.DateOfBirth;
+            person.DateOfBirth = personalInfo.DateOfBirth.ToUniversalTime();
             person.Gender = personalInfo.Gender;
             person.SocialSecurityLastFour = personalInfo.SocialSecurityLastFour;
             personnelRecordsRepository.SaveOrUpdate(person);

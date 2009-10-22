@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using FluentNHibernate.Mapping;
+using TFS.Models.Data.UserTypes;
 using TFS.Models.FlightLogs;
-using FluentNHibernate.Mapping;
 
 namespace TFS.Models.Data.FlightLogs
 {
@@ -25,8 +22,10 @@ namespace TFS.Models.Data.FlightLogs
                 .Inverse();
 
             Map(x => x.CreatedDate)
+                .CustomType<UtcDateTimeUserType>()
                 .Not.Nullable();
             Map(x => x.LastModifiedDate)
+                .CustomType<UtcDateTimeUserType>()
                 .Not.Nullable();
             Map(x => x.Location)
                 .Length(100)

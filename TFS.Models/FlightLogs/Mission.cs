@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Centro.DomainModel;
 using System.ComponentModel.DataAnnotations;
+using Centro.DomainModel;
 
 namespace TFS.Models.FlightLogs
 {
@@ -34,7 +31,7 @@ namespace TFS.Models.FlightLogs
         }
 
         [DomainSignature, Required]
-        public virtual int TouchAndGos { get; set;}
+        public virtual int TouchAndGos { get; set; }
         [DomainSignature, Required]
         public virtual int FullStops { get; set; }
         [DomainSignature, Required]
