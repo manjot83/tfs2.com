@@ -148,6 +148,7 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationVersion.cs" />
+    <Compile Include="ViewModels\FlightLogViewModel.cs" />
     <Compile Include="ViewModels\ManageProgramsViewModel.cs" />
     <Compile Include="ViewModels\PersonnelRecordContactInfo.cs" />
     <Compile Include="ViewModels\PersonnelRecordPersonalInfo.cs" />
@@ -231,7 +232,9 @@
     <Content Include="Content\internal\template\sidenavh1.gif" />
     <Content Include="favicon.ico" />
     <Content Include="Views\Dashboard\Index.aspx" />
+    <Content Include="Views\FlightLogs\EditMissionLog.aspx" />
     <Content Include="Views\FlightLogs\List.aspx" />
+    <Content Include="Views\FlightLogs\CreateMissionLog.aspx" />
     <Content Include="Views\PersonnelRecords\Edit.aspx" />
     <Content Include="Views\Programs\Manage.aspx" />
     <Content Include="Views\Security\LogOn.aspx" />

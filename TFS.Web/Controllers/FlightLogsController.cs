@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Mvc.Ajax;
 using System.Web.UI.WebControls;
+using Centro.Web.Mvc;
+using Centro.Web.Mvc.ActionFilters;
 using TFS.Models.FlightLogs;
 using TFS.Web.ViewModels;
 
@@ -29,7 +27,7 @@ namespace TFS.Web.Controllers
             if (string.IsNullOrEmpty(sortType))
                 sortType = "date";
             if (sortDirection == null)
-                sortDirection = SortDirection.Ascending;
+                sortDirection = SortDirection.Descending;
             var viewModel = new SortedListViewModel<MissionLog>();
             viewModel.SortDirection = sortDirection ?? SortDirection.Ascending;
             viewModel.SortType = sortType;
@@ -50,14 +48,29 @@ namespace TFS.Web.Controllers
             return View(Views.List, viewModel);
         }
 
+        [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult EditMissionLog(int id)
         {
-            throw new NotImplementedException();
+            var missionLog = flightLogRepository.GetMissionLog(id);
+            var viewModel = FlightLogViewModel.CreateFromMissionLog(missionLog);
+            return View(viewModel);
         }
 
+        [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult CreateMissionLog()
         {
-            throw new NotImplementedException();
+            return View(new FlightLogViewModel());
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [RequireTransaction]
+        public virtual ActionResult CreateMissionLog(FlightLogViewModel flightLog)
+        {
+            flightLog.Validate(ModelState, string.Empty);
+            if (!ModelState.IsValid)
+                return View(flightLog);
+            var missiongLog = flightLogRepository.CreateNewMissionLog(flightLog.AircraftModel, flightLog.AircraftSerialNumber, flightLog.Location);
+            return RedirectToAction(MVC.FlightLogs.EditMissionLog(missiongLog.Id.Value));
         }
     }
 }

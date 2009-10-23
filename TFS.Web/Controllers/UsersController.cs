@@ -31,7 +31,7 @@ namespace TFS.Web.Controllers
         public virtual ViewResult List(string sortType, SortDirection? sortDirection)
         {
             if (string.IsNullOrEmpty(sortType))
-                sortType = "username";
+                sortType = "name";
             if (sortDirection == null)
                 sortDirection = SortDirection.Ascending;
             var viewModel = new SortedListViewModel<User>();

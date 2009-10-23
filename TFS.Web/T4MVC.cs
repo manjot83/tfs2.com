@@ -109,6 +109,8 @@ namespace TFS.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [CompilerGenerated]
         public class ViewNames {
+            public readonly string CreateMissionLog = "CreateMissionLog";
+            public readonly string EditMissionLog = "EditMissionLog";
             public readonly string List = "List";
         }
     }
@@ -412,6 +414,12 @@ namespace T4MVC {
 
         public override System.Web.Mvc.ViewResult CreateMissionLog() {
             var callInfo = new T4MVC_ViewResult("FlightLogs", Actions.CreateMissionLog);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult CreateMissionLog(TFS.Web.ViewModels.FlightLogViewModel flightLog) {
+            var callInfo = new T4MVC_ActionResult("FlightLogs", Actions.CreateMissionLog);
+            callInfo.RouteValues.Add("flightLog", flightLog);
             return callInfo;
         }
 

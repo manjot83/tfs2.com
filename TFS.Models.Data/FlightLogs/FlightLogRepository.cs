@@ -15,6 +15,11 @@ namespace TFS.Models.Data.FlightLogs
         {
         }
 
+        public MissionLog GetMissionLog(int id)
+        {
+            return QueryMissionLogs().Where(x => x.Id == id).FirstOrDefault();
+        }
+
         public IEnumerable<MissionLog> GetAllMissionLogs()
         {
             return QueryMissionLogs().ToList();
