@@ -3,9 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
-<head runat="server">
+<head>
     <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
-    <link type="text/css" rel="stylesheet" href="~/Content/internal/default.css" />
+    <link type="text/css" rel="stylesheet" href="<%= Url.Content("~/Content/internal/default.css") %>" />
     <link type="text/css" rel="stylesheet" href="<%= Url.Content("~/Content/internal/list-table.css") %>" />
     <link type="text/css" rel="stylesheet" href="<%= Url.Content("~/Content/internal/standard-form.css") %>" />
 </head>
@@ -13,19 +13,17 @@
     <div class="container">
         <div class="header">
             <div class="title">
-            <div class="right">
+                <div class="right">
                     <h1>Operations Center</h1>
                 </div>
                 <h1>Tactical Flight Services</h1>
-                
-                <%--<h1>Tactical Flight Services - Operations Center</h1>--%>
             </div>
         </div>
         <div class="navigation">
             <%= Html.ActionLink("Home", MVC.Dashboard.Index()) %>
             <a href="https://apollo.tfs2.com/exchange">E-mail</a>
-            <a href="#">Change Password</a>
-            <a href="#">Help</a>
+            <%= Html.ActionLink("Change Password", MVC.Security.ChangePassword()) %>
+            <a href="#" >Help</a>
             <%= Html.ActionLink("Log Out", MVC.Security.LogOff()) %>
             <div class="clearer">
                 <span></span>

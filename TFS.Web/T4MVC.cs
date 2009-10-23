@@ -263,6 +263,7 @@ namespace TFS.Web.Controllers {
         public class ActionNames {
             public readonly string LogOn = "LogOn";
             public readonly string LogOff = "LogOff";
+            public readonly string ChangePassword = "ChangePassword";
         }
 
 
@@ -271,6 +272,7 @@ namespace TFS.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [CompilerGenerated]
         public class ViewNames {
+            public readonly string ChangePassword = "ChangePassword";
             public readonly string LogOn = "LogOn";
         }
     }
@@ -498,6 +500,19 @@ namespace T4MVC {
 
         public override System.Web.Mvc.RedirectToRouteResult LogOff() {
             var callInfo = new T4MVC_RedirectToRouteResult("Security", Actions.LogOff);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult ChangePassword() {
+            var callInfo = new T4MVC_ViewResult("Security", Actions.ChangePassword);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ChangePassword(string originalPassword, string newPassword, string confirmNewPassword) {
+            var callInfo = new T4MVC_ActionResult("Security", Actions.ChangePassword);
+            callInfo.RouteValues.Add("originalPassword", originalPassword);
+            callInfo.RouteValues.Add("newPassword", newPassword);
+            callInfo.RouteValues.Add("confirmNewPassword", confirmNewPassword);
             return callInfo;
         }
 

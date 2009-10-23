@@ -65,6 +65,8 @@ namespace TFS.Models.Data
                 return false;
             if (string.IsNullOrEmpty(newPassword))
                 return false;
+            if (newPassword.Length < MinRequiredPasswordLength)
+                return false;
             user.PasswordHash = newPassword.Hash(Crypto.HashAlgorithm.SHA1);
             Session.SaveOrUpdate(user);
             return true;

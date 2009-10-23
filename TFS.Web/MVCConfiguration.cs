@@ -40,7 +40,7 @@ namespace TFS.Web
 
             var mappingAssemblies = new List<Assembly> { typeof(TFS.Models.Data.UserMapping).Assembly };
 #if SQLITE
-            var nhibernateRegistry = SQLiteBuilder.CreateRegistry("TFS_Web", mappingAssemblies, InstanceScope.HttpContext, false);
+            var nhibernateRegistry = SQLiteBuilder.CreateRegistry("TFS_Web", mappingAssemblies, InstanceScope.Hybrid, false);
 #else
             var nhibernateRegistry = MSSqlBuilder.CreateRegistry("TFS_Web", mappingAssemblies, InstanceScope.HttpContext, false);
 #endif

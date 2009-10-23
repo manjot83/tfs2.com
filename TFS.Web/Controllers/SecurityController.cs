@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
+using Centro.Web.Mvc.ActionFilters;
 
 namespace TFS.Web.Controllers
 {
@@ -46,6 +47,40 @@ namespace TFS.Web.Controllers
         {
             authenticationService.LogOff();
             return RedirectToAction(MVC.Site.Index());
+        }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        [Authorize]
+        public virtual ViewResult ChangePassword()
+        {
+            var user = this.GetCurrentUser();
+            return View(user);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [Authorize]
+        [RequireTransaction]
+        public virtual ActionResult ChangePassword(string originalPassword, string newPassword, string confirmNewPassword)
+        {
+            if (string.IsNullOrEmpty(originalPassword))
+                ModelState.AddModelError("originalPassword", "Password cannot be blank.");
+            if (string.IsNullOrEmpty(newPassword))
+                ModelState.AddModelError("newPassword", "Password cannot be blank.");
+            if (string.IsNullOrEmpty(confirmNewPassword))
+                ModelState.AddModelError("confirmNewPassword", "Password cannot be blank.");
+            if (newPassword.Length < authenticationService.UserRepository.MinRequiredPasswordLength)
+                ModelState.AddModelError("newPassword", string.Format("Password must be at least {0} characters long.", authenticationService.UserRepository.MinRequiredPasswordLength));
+            if (newPassword != confirmNewPassword)
+                ModelState.AddModelError("confirmNewPassword", "New password's must match.");
+            var user = this.GetCurrentUser();
+            if (!ModelState.IsValid)
+                return View(user);
+            if (!authenticationService.UserRepository.ChangePassword(user, originalPassword, newPassword))
+            {
+                ModelState.AddModelError("originalPassword", "Incorrect password.");
+                return View(user);
+            }
+            return RedirectToAction(MVC.Dashboard.Index());
         }
     }
 }
