@@ -77,9 +77,10 @@ namespace TFS.Web
             ControllerBuilder.Current.SetControllerFactory(new StructureMapControllerFactory());
 
 #if SQLITE
-            SQLiteUtil.GenerateSchema(nhibernateRegistry.Configuration, ObjectFactory.GetInstance<ISession>());
-            SQLiteUtil.InitializeData(SQLiteTestData.Execute, ObjectFactory.GetInstance<ISession>());
-            ObjectFactory.GetInstance<ISession>().Clear();
+            var session = ObjectFactory.GetInstance<ISession>();
+            SQLiteUtil.GenerateSchema(nhibernateRegistry.Configuration, session);
+            SQLiteUtil.InitializeData(SQLiteTestData.Execute, session);
+            session.Clear();
 #endif
         }
     }
