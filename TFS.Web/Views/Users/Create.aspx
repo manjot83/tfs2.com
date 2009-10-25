@@ -32,18 +32,6 @@
                 <%= Html.ValidationMessage("username")%>
             </div>
         </div>
-        <div class="field-group">
-            <div class="field">
-                <label for="password">Password</label>
-                <%= Html.Password("password", Model.Password, new { size = "20", maxlength = "50" })%>
-                <%= Html.ValidationMessage("password") %>
-            </div>
-            <div class="field">
-                <label for="confirmpassword">Re-enter Password</label>
-                <%= Html.Password("confirmpassword", Model.Password, new { size = "20", maxlength = "50" })%>
-                <%= Html.ValidationMessage("confirmpassword")%>
-            </div>
-        </div>
         <div class="button-group">
             <input type="submit" value="Create new user" />
             <input type="reset" value="Reset" />

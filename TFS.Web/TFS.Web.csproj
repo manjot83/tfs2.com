@@ -117,6 +117,7 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="ConfigurationHelper.cs" />
     <Compile Include="Controllers\ControllerExtensions.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\FlightLogsController.cs" />
@@ -239,6 +240,7 @@
     <Content Include="Views\Programs\Manage.aspx" />
     <Content Include="Views\Security\ChangePassword.aspx" />
     <Content Include="Views\Security\LogOn.aspx" />
+    <Content Include="Config\AppSettings.config" />
     <None Include="T4MVC.settings.t4" />
     <None Include="T4MVC.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

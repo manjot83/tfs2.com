@@ -68,14 +68,14 @@ namespace TFS.Web.Controllers
                 ModelState.AddModelError("newPassword", "Password cannot be blank.");
             if (string.IsNullOrEmpty(confirmNewPassword))
                 ModelState.AddModelError("confirmNewPassword", "Password cannot be blank.");
-            if (newPassword.Length < authenticationService.UserRepository.MinRequiredPasswordLength)
-                ModelState.AddModelError("newPassword", string.Format("Password must be at least {0} characters long.", authenticationService.UserRepository.MinRequiredPasswordLength));
+            if (newPassword.Length < authenticationService.MinRequiredPasswordLength)
+                ModelState.AddModelError("newPassword", string.Format("Password must be at least {0} characters long.", authenticationService.MinRequiredPasswordLength));
             if (newPassword != confirmNewPassword)
                 ModelState.AddModelError("confirmNewPassword", "New password's must match.");
             var user = this.GetCurrentUser();
             if (!ModelState.IsValid)
                 return View(user);
-            if (!authenticationService.UserRepository.ChangePassword(user, originalPassword, newPassword))
+            if (!authenticationService.ChangePassword(user, originalPassword, newPassword))
             {
                 ModelState.AddModelError("originalPassword", "Incorrect password.");
                 return View(user);

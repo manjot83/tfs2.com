@@ -33,9 +33,6 @@ namespace TFS.Models.Data
                 .Not.Nullable();
             Map(x => x.Disabled)
                 .Not.Nullable();
-            Map(x => x.PasswordHash)
-                .Length(25)
-                .Nullable();
         }
     }
 }

@@ -26,56 +26,51 @@ namespace TFS.Models.Data
             return Session.Linq<User>();
         }
 
-        public bool AuthenticateUser(string username, string password)
-        {
-            if (string.IsNullOrEmpty(password))
-                return false;
-            var user = GetUser(username);
-            if (user == null)
-                return false;
-            if (string.IsNullOrEmpty(user.PasswordHash))
-                return false;
-            var suppliedPasswordHash = password.Hash(Crypto.HashAlgorithm.SHA1);
-            return user.PasswordHash.Equals(suppliedPasswordHash);
-        }
-        public bool ResetPasswordAsAdmin(string username, string password)
-        {
-            return ResetPasswordAsAdmin(GetUser(username), password);
-        }
+        //public bool AuthenticateUser(string username, string password)
+        //{
+        //    if (string.IsNullOrEmpty(password))
+        //        return false;
+        //    var user = GetUser(username);
+        //    if (user == null)
+        //        return false;
+        //    if (string.IsNullOrEmpty(user.PasswordHash))
+        //        return false;
+        //    var suppliedPasswordHash = password.Hash(Crypto.HashAlgorithm.SHA1);
+        //    return user.PasswordHash.Equals(suppliedPasswordHash);
+        //}
+        //public bool ResetPasswordAsAdmin(string username, string password)
+        //{
+        //    return ResetPasswordAsAdmin(GetUser(username), password);
+        //}
 
-        public bool ResetPasswordAsAdmin(User user, string password)
-        {
-            if (user == null)
-                return false;
-            user.PasswordHash = password.Hash(Crypto.HashAlgorithm.SHA1);
-            Session.SaveOrUpdate(user);
-            return true;
-        }
+        //public bool ResetPasswordAsAdmin(User user, string password)
+        //{
+        //    if (user == null)
+        //        return false;
+        //    user.PasswordHash = password.Hash(Crypto.HashAlgorithm.SHA1);
+        //    Session.SaveOrUpdate(user);
+        //    return true;
+        //}
 
-        public bool ChangePassword(string username, string oldPassword, string newPassword)
-        {
-            return ChangePassword(GetUser(username), oldPassword, newPassword);
-        }
+        //public bool ChangePassword(string username, string oldPassword, string newPassword)
+        //{
+        //    return ChangePassword(GetUser(username), oldPassword, newPassword);
+        //}
 
-        public bool ChangePassword(User user, string oldPassword, string newPassword)
-        {
-            if (user == null)
-                return false;
-            if (!AuthenticateUser(user.Username, oldPassword))
-                return false;
-            if (string.IsNullOrEmpty(newPassword))
-                return false;
-            if (newPassword.Length < MinRequiredPasswordLength)
-                return false;
-            user.PasswordHash = newPassword.Hash(Crypto.HashAlgorithm.SHA1);
-            Session.SaveOrUpdate(user);
-            return true;
-        }
-
-        public int MinRequiredPasswordLength
-        {
-            get { return 8; }
-        }
+        //public bool ChangePassword(User user, string oldPassword, string newPassword)
+        //{
+        //    if (user == null)
+        //        return false;
+        //    if (!AuthenticateUser(user.Username, oldPassword))
+        //        return false;
+        //    if (string.IsNullOrEmpty(newPassword))
+        //        return false;
+        //    if (newPassword.Length < MinRequiredPasswordLength)
+        //        return false;
+        //    user.PasswordHash = newPassword.Hash(Crypto.HashAlgorithm.SHA1);
+        //    Session.SaveOrUpdate(user);
+        //    return true;
+        //}
 
         public User CreateUser(string username, string firstname, string lastname, string displayname)
         {

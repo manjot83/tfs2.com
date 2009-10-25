@@ -9,20 +9,7 @@ namespace TFS.Models
     public interface IUserRepository : IRepository
     {
         IEnumerable<User> GetUsers();
-
-        User GetUser(string username);
-
-        bool AuthenticateUser(string username, string password);
-
-        bool ResetPasswordAsAdmin(string username, string password);
-
-        bool ResetPasswordAsAdmin(User user, string password);
-
-        bool ChangePassword(string username, string oldPassword, string newPassword);
-
-        bool ChangePassword(User user, string oldPassword, string newPassword);
-
-        int MinRequiredPasswordLength { get; }
+        User GetUser(string username);        
 
         User CreateUser(string username, string firstname, string lastname, string displayname);
     }

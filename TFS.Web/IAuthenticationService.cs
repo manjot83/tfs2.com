@@ -7,5 +7,8 @@ namespace TFS.Web
         void LogOn(string username, bool persistent);
         void LogOff();
         IUserRepository UserRepository { get; }
+
+        bool ChangePassword(User user, string originalPassword, string newPassword);
+        int MinRequiredPasswordLength { get; }
     }
 }

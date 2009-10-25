@@ -74,14 +74,11 @@ namespace TFS.Web.Controllers
         public virtual ActionResult Create(UserViewModel user)
         {
             user.Validate(ModelState, string.Empty);
-            if (!user.PasswordConfirmed())
-                ModelState.AddModelError("password", "Passwords must match.");
             if (ModelState.IsValid && userRepository.GetUser(user.Username) != null)
                 ModelState.AddModelError("username", "Username must be unique.");
             if (!ModelState.IsValid)
                 return View(user);
             var newUser = userRepository.CreateUser(user.Username, user.FirstName, user.LastName, user.DisplayName);
-            userRepository.ResetPasswordAsAdmin(newUser, user.Password);
             return RedirectToAction(MVC.Users.List());
         }
     }

@@ -1,5 +1,8 @@
 ﻿using System.Web.Security;
 using TFS.Models;
+using System.Net;
+using System;
+using System.IO;
 
 namespace TFS.Web
 {
@@ -21,7 +24,31 @@ namespace TFS.Web
         public bool Authenticate(string username, string password)
         {
             var cleanedUsername = CleanUpUsername(username);
-            return UserRepository.AuthenticateUser(cleanedUsername, password);
+            if (UserRepository.GetUser(cleanedUsername) == null)
+                return false;
+            var queryString = string.Format("?username={0}&password={1}", cleanedUsername, password);
+            var request = WebRequest.Create(ConfigurationHelper.AuthenticationService + queryString);
+            using (var response = request.GetResponse())
+            {
+                var responseText = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                return responseText == "1";
+            }
+        }
+
+        public bool ChangePassword(User user, string originalPassword, string newPassword)
+        {
+            var queryString = string.Format("?username={0}&originalPassword={1}&newPassword={2}", user.Username, originalPassword, newPassword);
+            var request = WebRequest.Create(ConfigurationHelper.ChangePasswordService + queryString);
+            using (var response = request.GetResponse())
+            {
+                var responseText = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                return responseText == "1";
+            }            
+        }
+
+        public int MinRequiredPasswordLength
+        {
+            get { return 8; }
         }
 
         public void LogOn(string username, bool persistent)

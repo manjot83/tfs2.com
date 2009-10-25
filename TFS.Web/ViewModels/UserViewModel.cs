@@ -24,18 +24,5 @@ namespace TFS.Web.ViewModels
         [Required]
         [StringLength(50)]
         public string Username { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string Password { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string ConfirmPassword { get; set; }
-
-        public bool PasswordConfirmed()
-        {
-            return Password.Equals(ConfirmPassword);
-        }
     }
 }

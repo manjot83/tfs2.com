@@ -28,7 +28,6 @@ namespace TFS.Web
                 Username = "j.daigle",
                 Email = "j.daigle@tfs2.com",
                 Disabled = false,
-                PasswordHash = "j.daigle".Hash(Crypto.HashAlgorithm.SHA1),
             });
             var user__bill = session.Save(new User
             {
@@ -38,7 +37,6 @@ namespace TFS.Web
                 Username = "w.petit",
                 Email = "w.petit@tfs2.com",
                 Disabled = false,
-                PasswordHash = "w.petit".Hash(Crypto.HashAlgorithm.SHA1),
             });
             session.Save(new User
             {
@@ -48,7 +46,6 @@ namespace TFS.Web
                 Username = "m.ott",
                 Email = "m.ott@tfs2.com",
                 Disabled = true,
-                PasswordHash = null,
             });
 
             // Program Data
