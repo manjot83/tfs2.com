@@ -23,11 +23,25 @@ namespace TFS.Models.FlightLogs
         [DomainSignature, Required]
         public virtual DateTime TakeOffTime { get; set; }
         [DomainSignature, Required]
-        public virtual DateTime LandTime { get; set; }
+        public virtual DateTime LandingTime { get; set; }
+
+        public virtual void SetTakeOffTime(int hours, int minutes)
+        {
+            var logDate = MissionLog.LogDate;
+            TakeOffTime = new DateTime(logDate.Year, logDate.Month, logDate.Day, hours, minutes, 0).ToUniversalTime();
+        }
+
+        public virtual void SetLandingTime(int hours, int minutes)
+        {
+            var logDate = MissionLog.LogDate;
+            LandingTime = new DateTime(logDate.Year, logDate.Month, logDate.Day, hours, minutes, 0).ToUniversalTime();
+            if (LandingTime < TakeOffTime)
+                LandingTime = LandingTime.AddDays(1);
+        }
 
         public virtual TimeSpan ComputeFlightTime()
         {
-            return LandTime.Subtract(TakeOffTime);
+            return LandingTime.Subtract(TakeOffTime);
         }
 
         [DomainSignature, Required]
@@ -38,5 +52,10 @@ namespace TFS.Models.FlightLogs
         public virtual int Sorties { get; set; }
         [DomainSignature, Required]
         public virtual int Totals { get; set; }
+
+        public virtual void MarkedUpdated()
+        {
+            MissionLog.MarkedUpdated();
+        }
     }
 }

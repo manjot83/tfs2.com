@@ -21,7 +21,7 @@ namespace TFS.Models.Data.FlightLogs
                 .KeyColumn("MissionLogId")
                 .Inverse();
 
-            Map(x => x.CreatedDate)
+            Map(x => x.LogDate)
                 .CustomType<UtcDateTimeUserType>()
                 .Not.Nullable();
             Map(x => x.LastModifiedDate)

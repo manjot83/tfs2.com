@@ -37,7 +37,7 @@ namespace TFS.Models.Data.PersonnelRecords
                 Person = person,
             };
             Session.Save(person);
-            return SaveOrUpdate(person);
+            return (Person)Session.SaveOrUpdateCopy(person);
         }
 
         public Person CreatePersonnelRecordFor(string username)
@@ -55,11 +55,6 @@ namespace TFS.Models.Data.PersonnelRecords
                 Person = person,
             };
             Session.Save(person);
-            return SaveOrUpdate(person);
-        }
-
-        public Person SaveOrUpdate(Person person)
-        {
             return (Person)Session.SaveOrUpdateCopy(person);
         }
     }

@@ -12,7 +12,5 @@ namespace TFS.Models.PersonnelRecords
 
         Person CreatePersonnelRecordFor(User user);
         Person CreatePersonnelRecordFor(string username);
-
-        Person SaveOrUpdate(Person person);
     }
 }

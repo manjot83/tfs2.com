@@ -16,7 +16,7 @@ namespace TFS.Models.FlightLogs
         public virtual int? Id { get; set; }
 
         [DomainSignature, Required]
-        public virtual DateTime CreatedDate { get; set; }
+        public virtual DateTime LogDate { get; set; }
         [DomainSignature, Required]
         public virtual DateTime LastModifiedDate { get; set; }
 
@@ -30,5 +30,10 @@ namespace TFS.Models.FlightLogs
 
         public virtual IList<Mission> Missions { get; set; }
         public virtual IList<SquadronLog> SquadronLogs { get; set; }
+
+        public virtual void MarkedUpdated()
+        {
+            LastModifiedDate = DateTime.Now.ToUniversalTime();
+        }
     }
 }

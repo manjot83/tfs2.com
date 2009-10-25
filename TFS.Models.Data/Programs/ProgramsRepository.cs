@@ -21,11 +21,6 @@ namespace TFS.Models.Data.Programs
             return Session.Linq<Position>().ToList();
         }
 
-        public Position SaveOrUpdate(Position position)
-        {
-            return (Position)Session.SaveOrUpdateCopy(position);
-        }
-
         public Position CreateNewPosition(string title)
         {
             if (GetAllPositions().Any(x => x.Title.Matches(title)))
@@ -34,7 +29,7 @@ namespace TFS.Models.Data.Programs
             {
                 Title = title,
             };
-            return SaveOrUpdate(newPosition);
+            return (Position)Session.SaveOrUpdateCopy(newPosition);
         }
     }
 }

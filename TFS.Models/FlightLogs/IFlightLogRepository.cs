@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Centro.DomainModel;
+using System;
 
 namespace TFS.Models.FlightLogs
 {
@@ -13,13 +14,6 @@ namespace TFS.Models.FlightLogs
         IQueryable<Mission> QueryMissions();
         IQueryable<SquadronLog> QuerySquadronLogs();
 
-        MissionLog SaveOrUpdate(MissionLog missionLog);
-        SquadronLog SaveOrUpdate(SquadronLog squadronLog);
-        Mission SaveOrUpdate(Mission mission);
-
-        MissionLog CreateNewMissionLog(string aircraftModel, string aircraftSerialNumber, string location);
-
-
-        
+        MissionLog CreateNewMissionLog(DateTime logDate, string aircraftModel, string aircraftSerialNumber, string location);
     }
 }

@@ -40,35 +40,17 @@ namespace TFS.Models.Data.FlightLogs
             return Session.Linq<SquadronLog>();
         }
 
-        public MissionLog SaveOrUpdate(MissionLog missionLog)
-        {
-            missionLog.LastModifiedDate = DateTime.Now.ToUniversalTime();
-            return (MissionLog)Session.SaveOrUpdateCopy(missionLog);
-        }
-
-        public SquadronLog SaveOrUpdate(SquadronLog squadronLog)
-        {
-            squadronLog.MissionLog.LastModifiedDate = DateTime.Now.ToUniversalTime();
-            return (SquadronLog)Session.SaveOrUpdateCopy(squadronLog);
-        }
-
-        public Mission SaveOrUpdate(Mission mission)
-        {
-            mission.MissionLog.LastModifiedDate = DateTime.Now.ToUniversalTime();
-            return (Mission)Session.SaveOrUpdateCopy(mission);
-        }
-
-        public MissionLog CreateNewMissionLog(string aircraftModel, string aircraftSerialNumber, string location)
+        public MissionLog CreateNewMissionLog(DateTime logDate, string aircraftModel, string aircraftSerialNumber, string location)
         {
             var newMissionLog = new MissionLog
             {
                 AircraftModel = aircraftModel,
                 AircraftSerialNumber = aircraftSerialNumber,
                 Location = location,
-                CreatedDate = DateTime.Now.ToUniversalTime(),
+                LogDate = DateTime.Now.ToUniversalTime(),
                 LastModifiedDate = DateTime.Now.ToUniversalTime(),
             };
-            return SaveOrUpdate(newMissionLog);
+            return (MissionLog)Session.SaveOrUpdateCopy(newMissionLog);
         }
     }
 }

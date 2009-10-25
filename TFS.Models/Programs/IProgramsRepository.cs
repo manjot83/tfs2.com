@@ -7,8 +7,6 @@ namespace TFS.Models.Programs
     {
         IList<Position> GetAllPositions();
 
-        Position SaveOrUpdate(Position position);
-
         Position CreateNewPosition(string title);
     }
 }
