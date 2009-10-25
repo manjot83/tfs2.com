@@ -11,7 +11,8 @@ namespace TFS.Web.ViewModels
     public class FlightLogViewModel : BaseEntity
     {
         public int FlightLogId { get; set; }
-        public DateTime LastModifiedDate { get; set; }
+        [Required]
+        public DateTime FlightLogDate { get; set; }
         [Required]
         public string AircraftModel { get; set; } // "MDS"
         [Required]
@@ -19,15 +20,20 @@ namespace TFS.Web.ViewModels
         [Required]
         public string Location { get; set; } // Todo Change to "Program Location"
 
+        public bool SavedMissionLog { get; set; }
+
+        public IList<Mission> Missions { get; set; }
+
         public static FlightLogViewModel CreateFromMissionLog(MissionLog missionLog)
         {
             return new FlightLogViewModel
             {
                 FlightLogId = missionLog.Id.Value,
-                LastModifiedDate = missionLog.LastModifiedDate,
+                FlightLogDate = missionLog.LogDate,
                 AircraftModel = missionLog.AircraftModel,
                 AircraftSerialNumber = missionLog.AircraftSerialNumber,
                 Location = missionLog.Location,
+                Missions = missionLog.Missions,
             };
         }
     }

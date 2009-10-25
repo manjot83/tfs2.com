@@ -8,6 +8,13 @@
     <% using (Html.BeginForm(MVC.FlightLogs.CreateMissionLog(), FormMethod.Post, new { @class = "standard-form" })) { %>
         <div class="field-group">
             <div class="field">
+                <label for="flightlogdate">Date (mm/dd/yyyy)</label>
+                <%= Html.TextBox("flightlogdate", Model.FlightLogDate.ToShortDateOrEmptyString(), new { size = "15", maxlength = "10" })%>
+                <%= Html.ValidationMessage("flightlogdate")%>
+            </div>
+        </div>
+        <div class="field-group">
+            <div class="field">
                 <label for="aircraftmodel">Aircraft Model</label>
                 <%= Html.TextBox("aircraftmodel", Model.AircraftModel, new { size = "20", maxlength = "50" })%>
                 <%= Html.ValidationMessage("aircraftmodel")%>

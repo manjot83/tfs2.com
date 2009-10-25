@@ -31,7 +31,7 @@ namespace TFS.Models.FlightLogs
             var takeOffTime = new DateTime(logDate.Year, logDate.Month, logDate.Day, int.Parse(TakeOffTime.Substring(0, 2)), int.Parse(TakeOffTime.Substring(2, 2)), 0);
             var landingTime = new DateTime(logDate.Year, logDate.Month, logDate.Day, int.Parse(LandingTime.Substring(0, 2)), int.Parse(LandingTime.Substring(2, 2)), 0);
             if (landingTime <= takeOffTime)
-                landingTime.AddDays(1);
+                landingTime = landingTime.AddDays(1);
             return landingTime.Subtract(takeOffTime);
         }
 

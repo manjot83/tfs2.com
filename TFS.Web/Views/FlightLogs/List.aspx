@@ -34,7 +34,7 @@
         <% foreach (var log in Model.Items) { %>
         <tr>
             <td>
-                <%= Html.ActionLink(log.LastModifiedDate.ToShortDateString(), MVC.FlightLogs.EditMissionLog(log.Id.Value)) %>
+                <%= Html.ActionLink(log.LogDate.ToShortDateString(), MVC.FlightLogs.EditMissionLog(log.Id.Value)) %>
             </td>
             <td>
                 <%= Html.Encode(log.AircraftModel + " : " + log.AircraftSerialNumber) %>

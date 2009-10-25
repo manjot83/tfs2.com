@@ -48,7 +48,6 @@ namespace TFS.Web.Controllers
             person.DateOfBirth = personalInfo.DateOfBirth.ToUniversalTime();
             person.Gender = personalInfo.Gender;
             person.SocialSecurityLastFour = personalInfo.SocialSecurityLastFour;
-            personnelRecordsRepository.SaveOrUpdate(person);
             if (editingMine)
                 return RedirectToAction(MVC.PersonnelRecords.Mine());
             else

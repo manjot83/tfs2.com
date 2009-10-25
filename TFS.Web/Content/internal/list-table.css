@@ -21,6 +21,11 @@
 	text-align: left;
 }
 
+.list-table thead tr:hover
+{
+	background: #FFFDE5;
+}
+
 .list-table tr
 {
 }

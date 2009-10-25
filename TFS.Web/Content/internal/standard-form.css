@@ -1,7 +1,6 @@
 ﻿.standard-form
 {
 	font-weight: bold;
-	margin-top: 1.1em;
 	font-size: 1.2em;
 	display: inline-block;
 }
@@ -68,5 +67,6 @@
 .form-section-header
 {
 	margin-top: 20px;
+	padding-bottom: 5px;
 	text-decoration: underline;
 }

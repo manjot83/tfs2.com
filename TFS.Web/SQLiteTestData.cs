@@ -80,7 +80,7 @@ namespace TFS.Web
             // Example Flight Log Data
             var missionlog_example1 = session.Save(new MissionLog()
             {
-                CreatedDate = DateTime.Now.ToUniversalTime(),
+                LogDate = DateTime.Now.ToUniversalTime(),
                 LastModifiedDate = DateTime.Now.ToUniversalTime(),
                 Location = "Wako TX",
                 AircraftModel = "C-130J",
@@ -92,8 +92,8 @@ namespace TFS.Web
                 Name = "Test Flight 1",
                 FromICAO = "KATL",
                 ToICAO = "KATL",
-                TakeOffTime = DateTime.Now.Subtract(new TimeSpan(5, 0, 0)).ToUniversalTime(),
-                LandTime = DateTime.Now.Subtract(new TimeSpan(4, 0, 0)).ToUniversalTime(),
+                TakeOffTime = "0930",
+                LandingTime = "1645",
                 TouchAndGos = 2,
                 FullStops = 1,
                 Sorties = 1,
@@ -105,8 +105,8 @@ namespace TFS.Web
                 Name = "Test Flight 2",
                 FromICAO = "KATL",
                 ToICAO = "KATL",
-                TakeOffTime = DateTime.Now.Subtract(new TimeSpan(3, 0, 0)).ToUniversalTime(),
-                LandTime = DateTime.Now.Subtract(new TimeSpan(2, 0, 0)).ToUniversalTime(),
+                TakeOffTime = "2200",
+                LandingTime = "0100",
                 TouchAndGos = 4,
                 FullStops = 2,
                 Sorties = 2,
