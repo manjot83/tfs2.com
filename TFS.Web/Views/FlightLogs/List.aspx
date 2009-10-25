@@ -37,7 +37,7 @@
                 <%= Html.ActionLink(log.LogDate.ToShortDateString(), MVC.FlightLogs.EditMissionLog(log.Id.Value)) %>
             </td>
             <td>
-                <%= Html.Encode(log.AircraftModel + " : " + log.AircraftSerialNumber) %>
+                <%= Html.Encode(log.AircraftMDS + " : " + log.AircraftSerialNumber)%>
             </td>
             <td>
                 <%= Html.Encode(log.Location) %>

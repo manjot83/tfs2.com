@@ -83,7 +83,7 @@ namespace TFS.Web
                 LogDate = DateTime.Now.ToUniversalTime(),
                 LastModifiedDate = DateTime.Now.ToUniversalTime(),
                 Location = "Wako TX",
-                AircraftModel = "C-130J",
+                AircraftMDS = "C-130J",
                 AircraftSerialNumber = "THX 1138",
             });
             session.Save(new Mission()

@@ -19,12 +19,12 @@
         </div>
         <div class="field-group">
             <div class="field">
-                <label for="aircraftmodel">Aircraft Model</label>
-                <%= Html.TextBox("aircraftmodel", Model.AircraftModel, new { size = "20", maxlength = "50" })%>
+                <label for="aircraftmodel">Aircraft <acronym title="Mission-Design Series">MDS</acronym></label>
+                <%= Html.TextBox("aircraftmodel", Model.AircraftMDS, new { size = "20", maxlength = "50" })%>
                 <%= Html.ValidationMessage("aircraftmodel")%>
             </div>
             <div class="field">
-                <label for="aircraftserialnumber">Aircraft Serial Number</label>
+                <label for="aircraftserialnumber">Aircraft Serial/Tail Number</label>
                 <%= Html.TextBox("aircraftserialnumber", Model.AircraftSerialNumber, new { size = "20", maxlength = "50" })%>
                 <%= Html.ValidationMessage("aircraftserialnumber")%>
             </div>
@@ -49,6 +49,7 @@
     <p>
         Click below to see more details and edit a mission, or <%= Html.ActionLink("add", MVC.FlightLogs.CreateMission()) %> a mission.
     </p>
+    <% if (Model.Missions.Any()) { %>
     <table class="list-table">
         <thead>
             <tr>
@@ -71,11 +72,15 @@
         </tr>
         <% } %>
     </table>
+    <% } else { %>
+    <p><b>No missions entered.</b></p>
+    <% } %>
     
     <h3 class="form-section-header">Squadron log</h3>
     <p>
         Click below to see more details and edit a squadron member log, or <%= Html.ActionLink("add", MVC.FlightLogs.CreateSquadronLog()) %> a squadron member log.
     </p>
+    <% if (Model.SquadronLogs.Any()) { %>
     <table class="list-table">
         <thead>
             <tr>
@@ -92,5 +97,8 @@
         </tr>
         <% } %>
     </table>
+    <% } else { %>
+    <p><b>No squadron members entered.</b></p>
+    <% } %>
 
 </asp:Content>

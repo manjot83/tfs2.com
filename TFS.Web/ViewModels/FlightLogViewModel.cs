@@ -14,7 +14,7 @@ namespace TFS.Web.ViewModels
         [Required]
         public DateTime FlightLogDate { get; set; }
         [Required]
-        public string AircraftModel { get; set; } // "MDS"
+        public string AircraftMDS { get; set; } // "Mission-Design Series"
         [Required]
         public string AircraftSerialNumber { get; set; } // "Serial No." or Tail Number
         [Required]
@@ -31,7 +31,7 @@ namespace TFS.Web.ViewModels
             {
                 FlightLogId = missionLog.Id.Value,
                 FlightLogDate = missionLog.LogDate,
-                AircraftModel = missionLog.AircraftModel,
+                AircraftMDS = missionLog.AircraftMDS,
                 AircraftSerialNumber = missionLog.AircraftSerialNumber,
                 Location = missionLog.Location,
                 Missions = missionLog.Missions,

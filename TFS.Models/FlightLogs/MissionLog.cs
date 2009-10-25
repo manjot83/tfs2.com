@@ -21,7 +21,7 @@ namespace TFS.Models.FlightLogs
         public virtual DateTime LastModifiedDate { get; set; }
 
         [DomainSignature, Required]
-        public virtual string AircraftModel { get; set; } // "MDS"
+        public virtual string AircraftMDS { get; set; } // "Mission Design Series"
         [DomainSignature, Required]
         public virtual string AircraftSerialNumber { get; set; } // "Serial No." or Tail Number
 

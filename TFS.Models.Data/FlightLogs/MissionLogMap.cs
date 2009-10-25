@@ -30,7 +30,7 @@ namespace TFS.Models.Data.FlightLogs
             Map(x => x.Location)
                 .Length(100)
                 .Not.Nullable();
-            Map(x => x.AircraftModel)
+            Map(x => x.AircraftMDS)
                 .Length(50)
                 .Not.Nullable();
             Map(x => x.AircraftSerialNumber)

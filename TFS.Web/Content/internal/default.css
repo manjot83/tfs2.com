@@ -21,6 +21,10 @@ a {
 a:hover {
 	color: #C60;
 }
+acronym 
+{
+	text-decoration: underline;
+}
 body {
 	background: #fcf9e7;
 	color: #543;

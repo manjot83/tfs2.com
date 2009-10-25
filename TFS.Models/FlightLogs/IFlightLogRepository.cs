@@ -14,6 +14,6 @@ namespace TFS.Models.FlightLogs
         IQueryable<Mission> QueryMissions();
         IQueryable<SquadronLog> QuerySquadronLogs();
 
-        MissionLog CreateNewMissionLog(DateTime logDate, string aircraftModel, string aircraftSerialNumber, string location);
+        MissionLog CreateNewMissionLog(DateTime logDate, string aircraftMDS, string aircraftSerialNumber, string location);
     }
 }

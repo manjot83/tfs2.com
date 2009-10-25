@@ -38,9 +38,9 @@ namespace TFS.Web.Controllers
             else if (viewModel.IsCurrentSortType("date"))
                 missionLogs = missionLogs.OrderByDescending(x => x.LogDate);
             if (viewModel.IsCurrentSortType("aircraft") && viewModel.SortDirection == SortDirection.Ascending)
-                missionLogs = missionLogs.OrderBy(x => x.AircraftModel);
+                missionLogs = missionLogs.OrderBy(x => x.AircraftMDS);
             else if (viewModel.IsCurrentSortType("aircraft"))
-                missionLogs = missionLogs.OrderByDescending(x => x.AircraftModel);
+                missionLogs = missionLogs.OrderByDescending(x => x.AircraftMDS);
             if (viewModel.IsCurrentSortType("location") && viewModel.SortDirection == SortDirection.Ascending)
                 missionLogs = missionLogs.OrderBy(x => x.Location);
             else if (viewModel.IsCurrentSortType("location"))
@@ -68,7 +68,7 @@ namespace TFS.Web.Controllers
             if (!ModelState.IsValid)
                 return View(viewModel);            
             missionLog.LogDate = flightLog.FlightLogDate.ToUniversalTime();
-            missionLog.AircraftModel = flightLog.AircraftModel;
+            missionLog.AircraftMDS = flightLog.AircraftMDS;
             missionLog.AircraftSerialNumber = flightLog.AircraftSerialNumber;
             missionLog.Location = flightLog.Location;
             TempData["SavedMissionLog"] = true;
@@ -88,7 +88,7 @@ namespace TFS.Web.Controllers
             flightLog.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
                 return View(flightLog);
-            var missiongLog = flightLogRepository.CreateNewMissionLog(flightLog.FlightLogDate.ToUniversalTime(), flightLog.AircraftModel, flightLog.AircraftSerialNumber, flightLog.Location);
+            var missiongLog = flightLogRepository.CreateNewMissionLog(flightLog.FlightLogDate.ToUniversalTime(), flightLog.AircraftMDS, flightLog.AircraftSerialNumber, flightLog.Location);
             return RedirectToAction(MVC.FlightLogs.EditMissionLog(missiongLog.Id.Value));
         }
 

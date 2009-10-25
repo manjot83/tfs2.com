@@ -40,11 +40,11 @@ namespace TFS.Models.Data.FlightLogs
             return Session.Linq<SquadronLog>();
         }
 
-        public MissionLog CreateNewMissionLog(DateTime logDate, string aircraftModel, string aircraftSerialNumber, string location)
+        public MissionLog CreateNewMissionLog(DateTime logDate, string aircraftMDS, string aircraftSerialNumber, string location)
         {
             var newMissionLog = new MissionLog
             {
-                AircraftModel = aircraftModel,
+                AircraftMDS = aircraftMDS,
                 AircraftSerialNumber = aircraftSerialNumber,
                 Location = location,
                 LogDate = logDate,
