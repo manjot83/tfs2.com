@@ -47,7 +47,7 @@ namespace TFS.Models.Data.FlightLogs
                 AircraftModel = aircraftModel,
                 AircraftSerialNumber = aircraftSerialNumber,
                 Location = location,
-                LogDate = DateTime.Now.ToUniversalTime(),
+                LogDate = logDate,
                 LastModifiedDate = DateTime.Now.ToUniversalTime(),
             };
             return (MissionLog)Session.SaveOrUpdateCopy(newMissionLog);

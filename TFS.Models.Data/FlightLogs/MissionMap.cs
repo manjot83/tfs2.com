@@ -33,10 +33,10 @@ namespace TFS.Models.Data.FlightLogs
                 .Length(4)
                 .Not.Nullable();
             Map(x => x.TakeOffTime)
-                .CustomType<UtcDateTimeUserType>()
+                .Length(4)
                 .Not.Nullable();
             Map(x => x.LandingTime)
-                .CustomType<UtcDateTimeUserType>()
+                .Length(4)
                 .Not.Nullable();
             Map(x => x.TouchAndGos)
                 .Not.Nullable();

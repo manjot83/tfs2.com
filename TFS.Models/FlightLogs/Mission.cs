@@ -20,28 +20,19 @@ namespace TFS.Models.FlightLogs
         [DomainSignature, Required, StringLength(4)]
         public virtual string ToICAO { get; set; }
 
-        [DomainSignature, Required]
-        public virtual DateTime TakeOffTime { get; set; }
-        [DomainSignature, Required]
-        public virtual DateTime LandingTime { get; set; }
-
-        public virtual void SetTakeOffTime(int hours, int minutes)
-        {
-            var logDate = MissionLog.LogDate;
-            TakeOffTime = new DateTime(logDate.Year, logDate.Month, logDate.Day, hours, minutes, 0).ToUniversalTime();
-        }
-
-        public virtual void SetLandingTime(int hours, int minutes)
-        {
-            var logDate = MissionLog.LogDate;
-            LandingTime = new DateTime(logDate.Year, logDate.Month, logDate.Day, hours, minutes, 0).ToUniversalTime();
-            if (LandingTime < TakeOffTime)
-                LandingTime = LandingTime.AddDays(1);
-        }
+        [DomainSignature, Required, StringLength(4), RegularExpression(@"\d\d\d\d", ErrorMessage = "Must contain 4 numbers.")]
+        public virtual string TakeOffTime { get; set; }
+        [DomainSignature, Required, StringLength(4), RegularExpression(@"\d\d\d\d", ErrorMessage = "Must contain 4 numbers.")]
+        public virtual string LandingTime { get; set; }
 
         public virtual TimeSpan ComputeFlightTime()
         {
-            return LandingTime.Subtract(TakeOffTime);
+            var logDate = MissionLog.LogDate;
+            var takeOffTime = new DateTime(logDate.Year, logDate.Month, logDate.Day, int.Parse(TakeOffTime.Substring(0, 2)), int.Parse(TakeOffTime.Substring(2, 2)), 0);
+            var landingTime = new DateTime(logDate.Year, logDate.Month, logDate.Day, int.Parse(LandingTime.Substring(0, 2)), int.Parse(LandingTime.Substring(2, 2)), 0);
+            if (landingTime <= takeOffTime)
+                landingTime.AddDays(1);
+            return landingTime.Subtract(takeOffTime);
         }
 
         [DomainSignature, Required]
