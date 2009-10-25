@@ -11,7 +11,7 @@ namespace TFS.Web.Html
         {
             if (dateTime == DateTime.MinValue)
                 return string.Empty;
-            return dateTime.ToShortDateString();
+            return dateTime.ToString("MM/dd/yyyy");
         }
 
         public static string ToShortMilitaryTime(this DateTime dateTime)
@@ -19,11 +19,6 @@ namespace TFS.Web.Html
             if (dateTime == DateTime.MinValue)
                 return string.Empty;
             return dateTime.ToString("HHMM");
-        }
-
-        public static string ToShortMilitaryTime(this TimeSpan timeSpan)
-        {
-            return timeSpan.TotalHours.ToString();
         }
     }
 }

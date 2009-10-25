@@ -62,10 +62,11 @@ namespace TFS.Web.Controllers
         [RequireTransaction]
         public virtual ActionResult EditMissionLog(int id, FlightLogViewModel flightLog)
         {
+            var missionLog = flightLogRepository.GetMissionLog(id);
+            var viewModel = FlightLogViewModel.CreateFromMissionLog(missionLog);
             flightLog.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
-                return View(flightLog);
-            var missionLog = flightLogRepository.GetMissionLog(id);
+                return View(viewModel);            
             missionLog.LogDate = flightLog.FlightLogDate.ToUniversalTime();
             missionLog.AircraftModel = flightLog.AircraftModel;
             missionLog.AircraftSerialNumber = flightLog.AircraftSerialNumber;

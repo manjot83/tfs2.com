@@ -34,6 +34,15 @@ namespace TFS.Models.FlightLogs
         [DomainSignature, Required]
         public virtual double SimulatedInstrumentHours { get; set; }
 
+        public virtual double CalculateTotalHours()
+        {
+            return PrimaryHours +
+                   SecondaryHours +
+                   InstructorHours +
+                   EvaluatorHours +
+                   OtherHours;
+        }
+
         public virtual void MarkedUpdated()
         {
             MissionLog.MarkedUpdated();

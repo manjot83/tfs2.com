@@ -36,5 +36,10 @@ namespace TFS.Models.PersonnelRecords
         public virtual Position HirePosition { get; set; }
 
         public virtual Qualifications Qualifications { get; set; }
+
+        public virtual string FileByName()
+        {
+            return LastName + ", " + FirstName;
+        }
     }
 }

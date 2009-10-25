@@ -23,6 +23,7 @@ namespace TFS.Web.ViewModels
         public bool SavedMissionLog { get; set; }
 
         public IList<Mission> Missions { get; set; }
+        public IList<SquadronLog> SquadronLogs { get; set; }
 
         public static FlightLogViewModel CreateFromMissionLog(MissionLog missionLog)
         {
@@ -34,6 +35,7 @@ namespace TFS.Web.ViewModels
                 AircraftSerialNumber = missionLog.AircraftSerialNumber,
                 Location = missionLog.Location,
                 Missions = missionLog.Missions,
+                SquadronLogs = missionLog.SquadronLogs,
             };
         }
     }

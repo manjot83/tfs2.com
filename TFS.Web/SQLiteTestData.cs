@@ -112,6 +112,32 @@ namespace TFS.Web
                 Sorties = 2,
                 Totals = 1,
             });
+            session.Save(new Mission()
+            {
+                MissionLog = session.Get<MissionLog>(missionlog_example1),
+                Name = "Test Flight 2",
+                FromICAO = "KATL",
+                ToICAO = "KATL",
+                TakeOffTime = "2359",
+                LandingTime = "0100",
+                TouchAndGos = 4,
+                FullStops = 2,
+                Sorties = 2,
+                Totals = 1,
+            });
+            session.Save(new Mission()
+            {
+                MissionLog = session.Get<MissionLog>(missionlog_example1),
+                Name = "Test Flight 2",
+                FromICAO = "KATL",
+                ToICAO = "KATL",
+                TakeOffTime = "1200",
+                LandingTime = "0000",
+                TouchAndGos = 4,
+                FullStops = 2,
+                Sorties = 2,
+                Totals = 1,
+            });
             session.Save(new SquadronLog()
             {
                 MissionLog = session.Get<MissionLog>(missionlog_example1),

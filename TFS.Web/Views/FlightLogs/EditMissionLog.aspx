@@ -52,24 +52,12 @@
     <table class="list-table">
         <thead>
             <tr>
-                <th>
-                    Mission
-                </th>
-                <th>
-                    From
-                </th>
-                <th>
-                    To
-                </th>
-                <th>
-                    T/O Time
-                </th>
-                <th>
-                    Land Time
-                </th>
-                <th>
-                    Flight Time
-                </th>
+                <th>Mission</th>
+                <th>From</th>
+                <th>To</th>
+                <th>T/O Time</th>
+                <th>Land Time</th>
+                <th>Flight Time</th>
             </tr>
         </thead>
         <% foreach(var mission in Model.Missions) { %>
@@ -79,7 +67,28 @@
             <td><%= Html.Encode(mission.ToICAO) %></td>
             <td><%= Html.Encode(mission.TakeOffTime) %></td>
             <td><%= Html.Encode(mission.LandingTime) %></td>
-            <td><%= Html.Encode(mission.ComputeFlightTime().ToShortMilitaryTime()) %> hrs</td>
+            <td><%= Html.Encode(mission.ComputeFlightTime().TotalHours.ToString("F2")) %> hrs</td>
+        </tr>
+        <% } %>
+    </table>
+    
+    <h3 class="form-section-header">Squadron log</h3>
+    <p>
+        Click below to see more details and edit a squadron member log, or <%= Html.ActionLink("add", MVC.FlightLogs.CreateSquadronLog()) %> a squadron member log.
+    </p>
+    <table class="list-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Duty Code</th>
+                <th>Total Hours</th>
+            </tr>
+        </thead>
+        <% foreach(var squadronLog in Model.SquadronLogs) { %>
+        <tr>
+            <td><%= Html.ActionLink(squadronLog.Person.FileByName(), MVC.FlightLogs.EditSquadronLog(squadronLog.Id.Value))%></td>
+            <td><%= Html.Encode(squadronLog.DutyCode) %></td>
+            <td><%= Html.Encode(squadronLog.CalculateTotalHours().ToString("F2")) %> hrs</td>
         </tr>
         <% } %>
     </table>
