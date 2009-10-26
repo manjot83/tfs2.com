@@ -4,11 +4,11 @@
     <p>
         <%= Html.ActionLink("Back to flight log summary ...", MVC.FlightLogs.EditMissionLog(Model.MissionLogId)) %>
     </p>
-    <h1>Create a flight log mission</h1>
+    <h1>Add a flight log mission</h1>
     <% using (Html.BeginForm(MVC.FlightLogs.CreateMission(Model.MissionLogId), FormMethod.Post, new { @class = "standard-form" })) { %>
         <% Html.RenderPartial("MissionForm"); %>
         <div class="button-group">
-            <input type="submit" value="Create new flight log mission" />
+            <input type="submit" value="Add new flight log mission" />
             <input type="reset" value="Reset" />
         </div>
     <% } %>

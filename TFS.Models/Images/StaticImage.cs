@@ -9,7 +9,7 @@ namespace TFS.Models.Images
 {
     public class StaticImage : BaseEntity
     {
-        public virtual Guid Id { get; private set; }
+        public virtual Guid? Id { get; private set; }
         public virtual string MimeType { get; set; }
         public virtual string Description { get; set; }
     }

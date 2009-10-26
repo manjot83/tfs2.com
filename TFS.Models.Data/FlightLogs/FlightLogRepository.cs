@@ -5,6 +5,8 @@ using Centro.Data.DomainModel;
 using NHibernate;
 using NHibernate.Linq;
 using TFS.Models.FlightLogs;
+using TFS.Models.PersonnelRecords;
+using Centro.Extensions;
 
 namespace TFS.Models.Data.FlightLogs
 {
@@ -28,6 +30,16 @@ namespace TFS.Models.Data.FlightLogs
         public SquadronLog GetSquadronLog(int id)
         {
             return QuerySquadronLogs().Where(x => x.Id == id).FirstOrDefault();
+        }
+
+        public IList<Person> GetAvailableSquadronPersons()
+        {
+            return Session.Linq<Person>().Where(x => !x.User.Disabled).ToList();
+        }
+
+        public Person GetSquadronPersonForUsername(string username)
+        {
+            return Session.Linq<Person>().Where(x => x.User.Username.Matches(username)).FirstOrDefault();
         }
 
         public IEnumerable<MissionLog> GetAllMissionLogs()
@@ -68,6 +80,13 @@ namespace TFS.Models.Data.FlightLogs
             mission.MissionLog = missionLog;            
             mission.MarkedUpdated();
             return (Mission)Session.SaveOrUpdateCopy(mission);
+        }
+
+        public SquadronLog AddSquadronLog(MissionLog missionLog, SquadronLog squadronLog)
+        {
+            squadronLog.MissionLog = missionLog;
+            squadronLog.MarkedUpdated();
+            return (SquadronLog)Session.SaveOrUpdateCopy(squadronLog);
         }
     }
 }

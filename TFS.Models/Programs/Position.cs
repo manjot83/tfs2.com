@@ -8,7 +8,7 @@ namespace TFS.Models.Programs
 {
     public class Position : BaseEntity
     {
-        public virtual int Id { get; private set; }
+        public virtual int? Id { get; private set; }
 
         public virtual string Title { get; set; }
     }

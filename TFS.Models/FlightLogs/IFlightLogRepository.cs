@@ -2,6 +2,7 @@
 using System.Linq;
 using Centro.DomainModel;
 using System;
+using TFS.Models.PersonnelRecords;
 
 namespace TFS.Models.FlightLogs
 {
@@ -11,6 +12,8 @@ namespace TFS.Models.FlightLogs
         Mission GetMission(int id);
         SquadronLog GetSquadronLog(int id);
         IEnumerable<MissionLog> GetAllMissionLogs();
+        IList<Person> GetAvailableSquadronPersons();
+        Person GetSquadronPersonForUsername(string username);
 
         IQueryable<MissionLog> QueryMissionLogs();
         IQueryable<Mission> QueryMissions();
@@ -18,5 +21,6 @@ namespace TFS.Models.FlightLogs
 
         MissionLog CreateNewMissionLog(DateTime logDate, string aircraftMDS, string aircraftSerialNumber, string location);
         Mission AddMission(MissionLog missionLog, Mission mission);
+        SquadronLog AddSquadronLog(MissionLog missionLog, SquadronLog squadronLog);        
     }
 }

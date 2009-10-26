@@ -103,6 +103,11 @@ namespace TFS.Web.Controllers {
             return new T4MVC_ActionResult(Name, Actions.EditSquadronLog);
         }
 
+        [NonAction]
+        public ActionResult CreateSquadronLog() {
+            return new T4MVC_ActionResult(Name, Actions.CreateSquadronLog);
+        }
+
 
         [CompilerGenerated]
         public readonly string Name = "FlightLogs";
@@ -130,10 +135,13 @@ namespace TFS.Web.Controllers {
         public class ViewNames {
             public readonly string CreateMission = "CreateMission";
             public readonly string CreateMissionLog = "CreateMissionLog";
+            public readonly string CreateSquadronLog = "CreateSquadronLog";
             public readonly string EditMission = "EditMission";
             public readonly string EditMissionLog = "EditMissionLog";
+            public readonly string EditSquadronLog = "EditSquadronLog";
             public readonly string List = "List";
             public readonly string MissionForm = "MissionForm";
+            public readonly string SquadronLogForm = "SquadronLogForm";
         }
     }
 }
@@ -485,8 +493,22 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult CreateSquadronLog() {
+        public override System.Web.Mvc.ActionResult EditSquadronLog(int id, TFS.Web.ViewModels.SquadronLogViewModel squadronLogViewModel) {
+            var callInfo = new T4MVC_ActionResult("FlightLogs", Actions.EditSquadronLog);
+            callInfo.RouteValues.Add("id", id);
+            callInfo.RouteValues.Add("squadronLogViewModel", squadronLogViewModel);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult CreateSquadronLog(int missionLogId) {
             var callInfo = new T4MVC_ViewResult("FlightLogs", Actions.CreateSquadronLog);
+            callInfo.RouteValues.Add("missionLogId", missionLogId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult CreateSquadronLog(TFS.Web.ViewModels.SquadronLogViewModel squadronLogViewModel) {
+            var callInfo = new T4MVC_ActionResult("FlightLogs", Actions.CreateSquadronLog);
+            callInfo.RouteValues.Add("squadronLogViewModel", squadronLogViewModel);
             return callInfo;
         }
 

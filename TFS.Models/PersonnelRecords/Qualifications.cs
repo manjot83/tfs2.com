@@ -14,7 +14,7 @@ namespace TFS.Models.PersonnelRecords
             Certificates = new List<Certificate>();
         }
 
-        public virtual int Id { get; private set; }
+        public virtual int? Id { get; private set; }
 
         [Required]
         public virtual Person Person { get; set; }

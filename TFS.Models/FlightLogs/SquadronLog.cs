@@ -9,8 +9,7 @@ namespace TFS.Models.FlightLogs
         public virtual int? Id { get; set; }
 
         public virtual MissionLog MissionLog { get; set; }
-
-        [DomainSignature, Required]
+        
         public virtual Person Person { get; set; }
         [DomainSignature, Required]
         public virtual DutyCode DutyCode { get; set; }

@@ -9,9 +9,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TFS.Models.PersonnelRecords
 {
-    public class Person : BaseEntity
+    public class Person : BaseEntity, IKeyedModel
     {
-        public virtual int Id { get; private set; }
+        public virtual int? Id { get; private set; }
 
         [Required]
         public virtual User User { get; set; }
@@ -40,6 +40,16 @@ namespace TFS.Models.PersonnelRecords
         public virtual string FileByName()
         {
             return LastName + ", " + FirstName;
+        }
+
+        string IKeyedModel.Id
+        {
+            get { return User.Username; }
+        }
+
+        string IKeyedModel.DisplayText
+        {
+            get { return FileByName(); }
         }
     }
 }

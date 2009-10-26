@@ -5,7 +5,7 @@ namespace TFS.Models.PersonnelRecords
 {
     public class Certificate : BaseEntity
     {
-        public virtual int Id { get; private set; }
+        public virtual int? Id { get; private set; }
         [Required]
         public virtual CertificateType Type { get; set; }
         [Required]

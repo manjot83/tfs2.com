@@ -78,7 +78,7 @@
     
     <h3 class="form-section-header">Squadron log</h3>
     <p>
-        Click below to see more details and edit a squadron member log, or <b></a><%= Html.ActionLink("Add", MVC.FlightLogs.CreateSquadronLog()) %></b> a squadron member log.
+        Click below to see more details and edit a squadron member log, or <b></a><%= Html.ActionLink("Add", MVC.FlightLogs.CreateSquadronLog(Model.MissionLogId)) %></b> a squadron member log.
     </p>
     <% if (Model.SquadronLogs.Any()) { %>
     <table class="list-table">

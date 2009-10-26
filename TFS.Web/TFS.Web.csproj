@@ -29,6 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <MvcBuildViews>true</MvcBuildViews>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Sqlite|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -156,6 +157,7 @@
     <Compile Include="ViewModels\PersonnelRecordPersonalInfo.cs" />
     <Compile Include="ViewModels\PersonnelRecordViewModel.cs" />
     <Compile Include="ViewModels\SortedListViewModel.cs" />
+    <Compile Include="ViewModels\SquadronLogViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -234,12 +236,15 @@
     <Content Include="Content\internal\template\sidenavh1.gif" />
     <Content Include="favicon.ico" />
     <Content Include="Views\Dashboard\Index.aspx" />
+    <Content Include="Views\FlightLogs\EditSquadronLog.aspx" />
     <Content Include="Views\FlightLogs\CreateMission.aspx" />
+    <Content Include="Views\FlightLogs\CreateSquadronLog.aspx" />
     <Content Include="Views\FlightLogs\EditMission.aspx" />
     <Content Include="Views\FlightLogs\EditMissionLog.aspx" />
     <Content Include="Views\FlightLogs\List.aspx" />
     <Content Include="Views\FlightLogs\CreateMissionLog.aspx" />
     <Content Include="Views\FlightLogs\MissionForm.ascx" />
+    <Content Include="Views\FlightLogs\SquadronLogForm.ascx" />
     <Content Include="Views\PersonnelRecords\Edit.aspx" />
     <Content Include="Views\Programs\Manage.aspx" />
     <Content Include="Views\Security\ChangePassword.aspx" />

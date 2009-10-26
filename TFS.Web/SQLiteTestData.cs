@@ -77,6 +77,20 @@ namespace TFS.Web
             };
             var person_joseph = session.Save(person_joseph_entity);
 
+            var person_bill_entity = new Person()
+            {
+                User = session.Get<User>(user__bill),
+                HirePosition = session.Get<Position>(position_pilot),
+                FirstName = "Bill",
+                LastName = "Petit",
+                DateOfBirth = new DateTime(1985, 5, 2).ToUniversalTime(),
+            };
+            person_bill_entity.Qualifications = new Qualifications()
+            {
+                Person = person_bill_entity,
+            };
+            var person_bill = session.Save(person_bill_entity);
+
             // Example Flight Log Data
             var missionlog_example1 = session.Save(new MissionLog()
             {

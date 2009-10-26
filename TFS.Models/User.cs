@@ -6,9 +6,9 @@ using Centro.DomainModel;
 
 namespace TFS.Models
 {
-    public class User : BaseEntity
+    public class User : BaseEntity, IKeyedModel
     {
-        public virtual int Id { get; private set; }
+        public virtual int? Id { get; private set; }
         
         public virtual string FirstName { get; set; }
         public virtual string LastName { get; set; }
@@ -23,6 +23,16 @@ namespace TFS.Models
                 Email = username;
             else
                 Email = username + "@tfs2.com";
+        }
+
+        string IKeyedModel.Id
+        {
+            get { return Username; }
+        }
+
+        string IKeyedModel.DisplayText
+        {
+            get { return DisplayName; }
         }
     }
 }
