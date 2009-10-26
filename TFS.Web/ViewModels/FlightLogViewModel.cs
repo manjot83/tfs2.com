@@ -5,6 +5,7 @@ using System.Web;
 using Centro.DomainModel;
 using System.ComponentModel.DataAnnotations;
 using TFS.Models.FlightLogs;
+using Centro.Validation;
 
 namespace TFS.Web.ViewModels
 {
@@ -24,6 +25,14 @@ namespace TFS.Web.ViewModels
 
         public IList<Mission> Missions { get; set; }
         public IList<SquadronLog> SquadronLogs { get; set; }
+
+        public override IEnumerable<ValidationError> GetCustomValidationErrors()
+        {
+            var errors = new List<ValidationError>();
+            if (MissionLogDate == DateTime.MinValue)
+                errors.Add(new ValidationError("MissionLogDate", "Must supply a date", MissionLogDate));
+            return errors;
+        }
 
         public static FlightLogViewModel CreateFromMissionLog(MissionLog missionLog)
         {

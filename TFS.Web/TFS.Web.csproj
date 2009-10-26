@@ -235,6 +235,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Views\Dashboard\Index.aspx" />
     <Content Include="Views\FlightLogs\CreateMission.aspx" />
+    <Content Include="Views\FlightLogs\EditMission.aspx" />
     <Content Include="Views\FlightLogs\EditMissionLog.aspx" />
     <Content Include="Views\FlightLogs\List.aspx" />
     <Content Include="Views\FlightLogs\CreateMissionLog.aspx" />

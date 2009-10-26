@@ -130,8 +130,10 @@ namespace TFS.Web.Controllers {
         public class ViewNames {
             public readonly string CreateMission = "CreateMission";
             public readonly string CreateMissionLog = "CreateMissionLog";
+            public readonly string EditMission = "EditMission";
             public readonly string EditMissionLog = "EditMissionLog";
             public readonly string List = "List";
+            public readonly string MissionForm = "MissionForm";
         }
     }
 }

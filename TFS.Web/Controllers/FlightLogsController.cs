@@ -71,6 +71,7 @@ namespace TFS.Web.Controllers
             missionLog.AircraftMDS = flightLog.AircraftMDS;
             missionLog.AircraftSerialNumber = flightLog.AircraftSerialNumber;
             missionLog.Location = flightLog.Location;
+            missionLog.MarkedUpdated();
             TempData["SavedMissionLog"] = true;
             return RedirectToAction(MVC.FlightLogs.EditMissionLog(id));
         }
@@ -96,7 +97,8 @@ namespace TFS.Web.Controllers
         public virtual ViewResult EditMission(int id)
         {
             var viewModel = new MissionViewModel();
-            viewModel.Mission = flightLogRepository.GetMission(id);            
+            viewModel.Mission = flightLogRepository.GetMission(id);
+            viewModel.MissionLogId = viewModel.Mission.MissionLog.Id.Value;
             return View(viewModel);
         }
 
@@ -105,13 +107,24 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditMission(int id, MissionViewModel missionViewModel)
         {
             var mission = flightLogRepository.GetMission(id);
-            var viewModel = new MissionViewModel();
+            var viewModel = new MissionViewModel { MissionLogId = mission.MissionLog.Id.Value };
             viewModel.Mission = mission;
             missionViewModel.Validate(ModelState, string.Empty);
             missionViewModel.Mission.Validate(ModelState, "mission");
             if (!ModelState.IsValid)
                 return View(viewModel);
-            throw new NotImplementedException();
+            mission.Name = missionViewModel.Mission.Name;
+            mission.AdditionalInfo = missionViewModel.Mission.AdditionalInfo;
+            mission.FromICAO = missionViewModel.Mission.FromICAO;
+            mission.ToICAO = missionViewModel.Mission.ToICAO;
+            mission.TakeOffTime = missionViewModel.Mission.TakeOffTime;
+            mission.LandingTime = missionViewModel.Mission.LandingTime;
+            mission.TouchAndGos = missionViewModel.Mission.TouchAndGos;
+            mission.FullStops = missionViewModel.Mission.FullStops;
+            mission.Sorties = missionViewModel.Mission.Sorties;
+            mission.Totals = missionViewModel.Mission.Totals;
+            mission.MarkedUpdated();
+            return RedirectToAction(MVC.FlightLogs.EditMissionLog(missionViewModel.MissionLogId));
         }
 
         [AcceptVerbs(HttpVerbs.Get)]

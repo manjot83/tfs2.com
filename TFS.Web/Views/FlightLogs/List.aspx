@@ -3,7 +3,7 @@
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <h1>Flight Time Summaries</h1>
     <p>
-        Click the date to edit, or <%= Html.ActionLink("Create", MVC.FlightLogs.CreateMissionLog())%> a new one.
+        Click the date to edit, or <b><%= Html.ActionLink("Create", MVC.FlightLogs.CreateMissionLog())%></b> a new one.
     </p>
     <table class="list-table">
         <thead>

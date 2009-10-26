@@ -12,16 +12,16 @@
         <%= Html.Hidden("id", Model.MissionLogId)%>
         <div class="field-group">
             <div class="field">
-                <label for="flightlogdate">Date (mm/dd/yyyy)</label>
-                <%= Html.TextBox("flightlogdate", Model.MissionLogDate.ToShortDateOrEmptyString(), new { size = "15", maxlength = "10" })%>
-                <%= Html.ValidationMessage("flightlogdate")%>
+                <label for="MissionLogDate">Date (mm/dd/yyyy)</label>
+                <%= Html.TextBox("MissionLogDate", Model.MissionLogDate.ToShortDateOrEmptyString(), new { size = "15", maxlength = "10" })%>
+                <%= Html.ValidationMessage("MissionLogDate")%>
             </div>
         </div>
         <div class="field-group">
             <div class="field">
-                <label for="aircraftmodel">Aircraft <acronym title="Mission-Design Series">MDS</acronym></label>
-                <%= Html.TextBox("aircraftmodel", Model.AircraftMDS, new { size = "20", maxlength = "50" })%>
-                <%= Html.ValidationMessage("aircraftmodel")%>
+                <label for="AircraftMDS">Aircraft <acronym title="Mission-Design Series">MDS</acronym></label>
+                <%= Html.TextBox("AircraftMDS", Model.AircraftMDS, new { size = "20", maxlength = "50" })%>
+                <%= Html.ValidationMessage("AircraftMDS")%>
             </div>
             <div class="field">
                 <label for="aircraftserialnumber">Aircraft Serial/Tail Number</label>
@@ -47,7 +47,7 @@
     
     <h3 class="form-section-header">Missions</h3>
     <p>
-        Click below to see more details and edit a mission, or <%= Html.ActionLink("add", MVC.FlightLogs.CreateMission(Model.MissionLogId))%> a mission.
+        Click below to see more details and edit a mission, or <b><%= Html.ActionLink("Add", MVC.FlightLogs.CreateMission(Model.MissionLogId))%></b> a mission.
     </p>
     <% if (Model.Missions.Any()) { %>
     <table class="list-table">
@@ -78,7 +78,7 @@
     
     <h3 class="form-section-header">Squadron log</h3>
     <p>
-        Click below to see more details and edit a squadron member log, or <%= Html.ActionLink("add", MVC.FlightLogs.CreateSquadronLog()) %> a squadron member log.
+        Click below to see more details and edit a squadron member log, or <b></a><%= Html.ActionLink("Add", MVC.FlightLogs.CreateSquadronLog()) %></b> a squadron member log.
     </p>
     <% if (Model.SquadronLogs.Any()) { %>
     <table class="list-table">
