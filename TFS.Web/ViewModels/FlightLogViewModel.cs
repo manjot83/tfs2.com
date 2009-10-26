@@ -10,9 +10,9 @@ namespace TFS.Web.ViewModels
 {
     public class FlightLogViewModel : BaseEntity
     {
-        public int FlightLogId { get; set; }
+        public int MissionLogId { get; set; }
         [Required]
-        public DateTime FlightLogDate { get; set; }
+        public DateTime MissionLogDate { get; set; }
         [Required]
         public string AircraftMDS { get; set; } // "Mission-Design Series"
         [Required]
@@ -29,8 +29,8 @@ namespace TFS.Web.ViewModels
         {
             return new FlightLogViewModel
             {
-                FlightLogId = missionLog.Id.Value,
-                FlightLogDate = missionLog.LogDate,
+                MissionLogId = missionLog.Id.Value,
+                MissionLogDate = missionLog.LogDate,
                 AircraftMDS = missionLog.AircraftMDS,
                 AircraftSerialNumber = missionLog.AircraftSerialNumber,
                 Location = missionLog.Location,

@@ -31,7 +31,7 @@
                 <%= Html.TextBox("location", Model.Location, new { size = "40", maxlength = "100" })%>
                 <%= Html.ValidationMessage("location")%>
             </div>
-        </div>        
+        </div>
         <div class="button-group">
             <input type="submit" value="Create new flight log summary" />
             <input type="reset" value="Reset" />

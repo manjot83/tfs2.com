@@ -8,6 +8,8 @@ namespace TFS.Models.FlightLogs
     public interface IFlightLogRepository : IRepository
     {
         MissionLog GetMissionLog(int id);
+        Mission GetMission(int id);
+        SquadronLog GetSquadronLog(int id);
         IEnumerable<MissionLog> GetAllMissionLogs();
 
         IQueryable<MissionLog> QueryMissionLogs();
@@ -15,5 +17,6 @@ namespace TFS.Models.FlightLogs
         IQueryable<SquadronLog> QuerySquadronLogs();
 
         MissionLog CreateNewMissionLog(DateTime logDate, string aircraftMDS, string aircraftSerialNumber, string location);
+        Mission AddMission(MissionLog missionLog, Mission mission);
     }
 }

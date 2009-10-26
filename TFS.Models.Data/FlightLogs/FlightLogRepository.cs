@@ -20,6 +20,16 @@ namespace TFS.Models.Data.FlightLogs
             return QueryMissionLogs().Where(x => x.Id == id).FirstOrDefault();
         }
 
+        public Mission GetMission(int id)
+        {
+            return QueryMissions().Where(x => x.Id == id).FirstOrDefault();
+        }
+
+        public SquadronLog GetSquadronLog(int id)
+        {
+            return QuerySquadronLogs().Where(x => x.Id == id).FirstOrDefault();
+        }
+
         public IEnumerable<MissionLog> GetAllMissionLogs()
         {
             return QueryMissionLogs().ToList();
@@ -51,6 +61,13 @@ namespace TFS.Models.Data.FlightLogs
                 LastModifiedDate = DateTime.Now.ToUniversalTime(),
             };
             return (MissionLog)Session.SaveOrUpdateCopy(newMissionLog);
+        }
+
+        public Mission AddMission(MissionLog missionLog, Mission mission)
+        {
+            mission.MissionLog = missionLog;            
+            mission.MarkedUpdated();
+            return (Mission)Session.SaveOrUpdateCopy(mission);
         }
     }
 }

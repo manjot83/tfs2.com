@@ -151,6 +151,7 @@
     <Compile Include="ApplicationVersion.cs" />
     <Compile Include="ViewModels\FlightLogViewModel.cs" />
     <Compile Include="ViewModels\ManageProgramsViewModel.cs" />
+    <Compile Include="ViewModels\MissionViewModel.cs" />
     <Compile Include="ViewModels\PersonnelRecordContactInfo.cs" />
     <Compile Include="ViewModels\PersonnelRecordPersonalInfo.cs" />
     <Compile Include="ViewModels\PersonnelRecordViewModel.cs" />
@@ -233,9 +234,11 @@
     <Content Include="Content\internal\template\sidenavh1.gif" />
     <Content Include="favicon.ico" />
     <Content Include="Views\Dashboard\Index.aspx" />
+    <Content Include="Views\FlightLogs\CreateMission.aspx" />
     <Content Include="Views\FlightLogs\EditMissionLog.aspx" />
     <Content Include="Views\FlightLogs\List.aspx" />
     <Content Include="Views\FlightLogs\CreateMissionLog.aspx" />
+    <Content Include="Views\FlightLogs\MissionForm.ascx" />
     <Content Include="Views\PersonnelRecords\Edit.aspx" />
     <Content Include="Views\Programs\Manage.aspx" />
     <Content Include="Views\Security\ChangePassword.aspx" />

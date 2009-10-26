@@ -67,7 +67,7 @@ namespace TFS.Web.Controllers
             flightLog.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
                 return View(viewModel);            
-            missionLog.LogDate = flightLog.FlightLogDate.ToUniversalTime();
+            missionLog.LogDate = flightLog.MissionLogDate.ToUniversalTime();
             missionLog.AircraftMDS = flightLog.AircraftMDS;
             missionLog.AircraftSerialNumber = flightLog.AircraftSerialNumber;
             missionLog.Location = flightLog.Location;
@@ -88,20 +88,49 @@ namespace TFS.Web.Controllers
             flightLog.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
                 return View(flightLog);
-            var missiongLog = flightLogRepository.CreateNewMissionLog(flightLog.FlightLogDate.ToUniversalTime(), flightLog.AircraftMDS, flightLog.AircraftSerialNumber, flightLog.Location);
+            var missiongLog = flightLogRepository.CreateNewMissionLog(flightLog.MissionLogDate.ToUniversalTime(), flightLog.AircraftMDS, flightLog.AircraftSerialNumber, flightLog.Location);
             return RedirectToAction(MVC.FlightLogs.EditMissionLog(missiongLog.Id.Value));
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult EditMission(int id)
         {
+            var viewModel = new MissionViewModel();
+            viewModel.Mission = flightLogRepository.GetMission(id);            
+            return View(viewModel);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [RequireTransaction]
+        public virtual ActionResult EditMission(int id, MissionViewModel missionViewModel)
+        {
+            var mission = flightLogRepository.GetMission(id);
+            var viewModel = new MissionViewModel();
+            viewModel.Mission = mission;
+            missionViewModel.Validate(ModelState, string.Empty);
+            missionViewModel.Mission.Validate(ModelState, "mission");
+            if (!ModelState.IsValid)
+                return View(viewModel);
             throw new NotImplementedException();
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
-        public virtual ViewResult CreateMission()
+        public virtual ViewResult CreateMission(int missionLogId)
         {
-            throw new NotImplementedException();
+            return View(new MissionViewModel { MissionLogId = missionLogId });
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [RequireTransaction]
+        public virtual ActionResult CreateMission(MissionViewModel missionViewModel)
+        {
+            missionViewModel.Validate(ModelState, string.Empty);
+            missionViewModel.Mission.Validate(ModelState, "mission");
+            if (!ModelState.IsValid)
+                return View(missionViewModel);
+            var missionLog = flightLogRepository.GetMissionLog(missionViewModel.MissionLogId);
+            flightLogRepository.AddMission(missionLog, missionViewModel.Mission);
+            return RedirectToAction(MVC.FlightLogs.EditMissionLog(missionViewModel.MissionLogId));
         }
 
         [AcceptVerbs(HttpVerbs.Get)]

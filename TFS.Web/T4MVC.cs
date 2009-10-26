@@ -94,6 +94,11 @@ namespace TFS.Web.Controllers {
         }
 
         [NonAction]
+        public ActionResult CreateMission() {
+            return new T4MVC_ActionResult(Name, Actions.CreateMission);
+        }
+
+        [NonAction]
         public ActionResult EditSquadronLog() {
             return new T4MVC_ActionResult(Name, Actions.EditSquadronLog);
         }
@@ -123,6 +128,7 @@ namespace TFS.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [CompilerGenerated]
         public class ViewNames {
+            public readonly string CreateMission = "CreateMission";
             public readonly string CreateMissionLog = "CreateMissionLog";
             public readonly string EditMissionLog = "EditMissionLog";
             public readonly string List = "List";
@@ -452,8 +458,22 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult CreateMission() {
+        public override System.Web.Mvc.ActionResult EditMission(int id, TFS.Web.ViewModels.MissionViewModel missionViewModel) {
+            var callInfo = new T4MVC_ActionResult("FlightLogs", Actions.EditMission);
+            callInfo.RouteValues.Add("id", id);
+            callInfo.RouteValues.Add("missionViewModel", missionViewModel);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult CreateMission(int missionLogId) {
             var callInfo = new T4MVC_ViewResult("FlightLogs", Actions.CreateMission);
+            callInfo.RouteValues.Add("missionLogId", missionLogId);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult CreateMission(TFS.Web.ViewModels.MissionViewModel missionViewModel) {
+            var callInfo = new T4MVC_ActionResult("FlightLogs", Actions.CreateMission);
+            callInfo.RouteValues.Add("missionViewModel", missionViewModel);
             return callInfo;
         }
 

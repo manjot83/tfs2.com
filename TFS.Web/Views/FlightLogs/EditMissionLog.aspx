@@ -9,11 +9,11 @@
     
     <h3 class="form-section-header">Header</h3>
     <% using (Html.BeginForm(MVC.FlightLogs.EditMissionLog(), FormMethod.Post, new { @class = "standard-form" })) { %>
-        <%= Html.Hidden("id", Model.FlightLogId) %>
+        <%= Html.Hidden("id", Model.MissionLogId)%>
         <div class="field-group">
             <div class="field">
                 <label for="flightlogdate">Date (mm/dd/yyyy)</label>
-                <%= Html.TextBox("flightlogdate", Model.FlightLogDate.ToShortDateOrEmptyString(), new { size = "15", maxlength = "10" })%>
+                <%= Html.TextBox("flightlogdate", Model.MissionLogDate.ToShortDateOrEmptyString(), new { size = "15", maxlength = "10" })%>
                 <%= Html.ValidationMessage("flightlogdate")%>
             </div>
         </div>
@@ -47,7 +47,7 @@
     
     <h3 class="form-section-header">Missions</h3>
     <p>
-        Click below to see more details and edit a mission, or <%= Html.ActionLink("add", MVC.FlightLogs.CreateMission()) %> a mission.
+        Click below to see more details and edit a mission, or <%= Html.ActionLink("add", MVC.FlightLogs.CreateMission(Model.MissionLogId))%> a mission.
     </p>
     <% if (Model.Missions.Any()) { %>
     <table class="list-table">
@@ -56,7 +56,7 @@
                 <th>Mission</th>
                 <th>From</th>
                 <th>To</th>
-                <th>T/O Time</th>
+                <th>Take Off Time</th>
                 <th>Land Time</th>
                 <th>Flight Time</th>
             </tr>
