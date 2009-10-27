@@ -7,6 +7,7 @@ using TFS.Models.Geography;
 
 namespace TFS.Models.Data.UserTypes
 {
+    [Serializable]
     public class USStateUserType : IUserType
     {
         object IUserType.NullSafeGet(IDataReader rs, string[] names, object owner)

@@ -15,7 +15,7 @@ namespace TFS.Models.Data.PersonnelRecords
 
         public Person GetPerson(User user)
         {
-            return Session.Linq<Person>().Where(x => x.User.Equals(user)).FirstOrDefault();
+            return Session.Linq<Person>().Where(x => x.User.Id == user.Id).FirstOrDefault();
         }
 
         public Person GetPerson(string username)
