@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Centro.DomainModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace TFS.Models
 {
     public class User : BaseEntity, IKeyedModel
     {
         public virtual int? Id { get; private set; }
-        
+
+        [Required, StringLength(50)]
         public virtual string FirstName { get; set; }
+        [Required, StringLength(50)]
         public virtual string LastName { get; set; }
+        [Required, StringLength(100)]
         public virtual string DisplayName { get; set; }
+        [Required, StringLength(50)]
         public virtual string Email { get; set; }
+        [Required, StringLength(50)]
         public virtual string Username { get; set; }
         public virtual bool Disabled { get; set; }
 

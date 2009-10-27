@@ -57,17 +57,17 @@
         <div class="field-group">
             <div class="field">
                 <label for="PrimaryPhoneNumber">Phone Number</label>
-                <%= Html.TextBox("PrimaryPhoneNumber", Model.Record.PrimaryPhoneNumber, new { size = "20", maxlength = "50" })%>
+                <%= Html.TextBox("PrimaryPhoneNumber", Model.Record.PrimaryPhoneNumber, new { size = "20", maxlength = "15" })%>
                 <%= Html.ValidationMessage("PrimaryPhoneNumber")%>
             </div>
             <div class="field">
                 <label for="AlternatePhoneNumber">Alt. Phone Number</label>
-                <%= Html.TextBox("AlternatePhoneNumber", Model.Record.AlternatePhoneNumber, new { size = "20", maxlength = "50" })%>
+                <%= Html.TextBox("AlternatePhoneNumber", Model.Record.AlternatePhoneNumber, new { size = "20", maxlength = "15" })%>
                 <%= Html.ValidationMessage("AlternatePhoneNumber")%>
             </div>
             <div class="field">
                 <label for="AlternateEmail">Alt. E-mail</label>
-                <%= Html.TextBox("AlternateEmail", Model.Record.AlternateEmail, new { size = "20", maxlength = "50" })%>
+                <%= Html.TextBox("AlternateEmail", Model.Record.AlternateEmail, new { size = "20", maxlength = "255" })%>
                 <%= Html.ValidationMessage("AlternateEmail")%>
             </div>
         </div>
@@ -79,7 +79,7 @@
             </div>
             <div class="field">
                 <label for="EmergencyContactPhoneNumber">Emergency Contact Phone</label>
-                <%= Html.TextBox("EmergencyContactPhoneNumber", Model.Record.EmergencyContactPhoneNumber, new { size = "20", maxlength = "50" })%>
+                <%= Html.TextBox("EmergencyContactPhoneNumber", Model.Record.EmergencyContactPhoneNumber, new { size = "20", maxlength = "15" })%>
                 <%= Html.ValidationMessage("EmergencyContactPhoneNumber")%>
             </div>
         </div>

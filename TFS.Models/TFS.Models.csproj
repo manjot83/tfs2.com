@@ -80,6 +80,7 @@
     <Compile Include="Programs\IProgramsRepository.cs" />
     <Compile Include="Programs\Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegExLib.cs" />
     <Compile Include="Site\Page.cs" />
     <Compile Include="Site\ISiteRepository.cs" />
     <Compile Include="User.cs" />

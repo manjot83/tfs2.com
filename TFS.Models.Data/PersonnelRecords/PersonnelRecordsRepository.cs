@@ -15,7 +15,7 @@ namespace TFS.Models.Data.PersonnelRecords
 
         public Person GetPerson(User user)
         {
-            return Session.Linq<Person>().Where(x => x.User.Id == user.Id).FirstOrDefault();
+            return GetPerson(user.Username);
         }
 
         public Person GetPerson(string username)
@@ -25,37 +25,25 @@ namespace TFS.Models.Data.PersonnelRecords
 
         public Person CreatePersonnelRecordFor(User user)
         {
-            var person = GetPerson(user);
-            if (person != null)
-                return person;
-            person = new Person
+            var person = new Person
             {
                 User = user,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
             };
             person.Qualifications = new Qualifications
             {
                 Person = person,
             };
             Session.Save(person);
+            Session.Save(person.Qualifications);
             return (Person)Session.SaveOrUpdateCopy(person);
         }
 
         public Person CreatePersonnelRecordFor(string username)
         {
-            var person = GetPerson(username);
-            if (person != null)
-                return person;
             var user = Session.Linq<User>().Where(x => x.Username == username).FirstOrDefault();
-            person = new Person
-            {
-                User = user,
-            };
-            person.Qualifications = new Qualifications
-            {
-                Person = person,
-            };
-            Session.Save(person);
-            return (Person)Session.SaveOrUpdateCopy(person);
+            return CreatePersonnelRecordFor(user);
         }
     }
 }

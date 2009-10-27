@@ -5,10 +5,10 @@ using Centro.Web.Mvc;
 using Centro.Web.Mvc.ActionFilters;
 using TFS.Models.FlightLogs;
 using TFS.Web.ViewModels;
-using System;
 
 namespace TFS.Web.Controllers
 {
+    [Authorize]
     public partial class FlightLogsController : Controller
     {
         private readonly IFlightLogRepository flightLogRepository;
@@ -62,7 +62,7 @@ namespace TFS.Web.Controllers
         [RequireTransaction]
         public virtual ActionResult EditMissionLog(int id, FlightLogViewModel flightLog)
         {
-            var missionLog = flightLogRepository.GetMissionLog(id);            
+            var missionLog = flightLogRepository.GetMissionLog(id);
             flightLog.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
             {
@@ -108,7 +108,7 @@ namespace TFS.Web.Controllers
         [RequireTransaction]
         public virtual ActionResult EditMission(int id, MissionViewModel missionViewModel)
         {
-            var mission = flightLogRepository.GetMission(id);            
+            var mission = flightLogRepository.GetMission(id);
             missionViewModel.Validate(ModelState, string.Empty);
             missionViewModel.Mission.Validate(ModelState, "Mission");
             if (!ModelState.IsValid)
@@ -168,7 +168,7 @@ namespace TFS.Web.Controllers
         [RequireTransaction]
         public virtual ActionResult EditSquadronLog(int id, SquadronLogViewModel squadronLogViewModel)
         {
-            var squadronLog = flightLogRepository.GetSquadronLog(id);            
+            var squadronLog = flightLogRepository.GetSquadronLog(id);
             squadronLogViewModel.Validate(ModelState, string.Empty);
             squadronLogViewModel.SquadronLog.Validate(ModelState, "SquadronLog");
             if (!ModelState.IsValid)

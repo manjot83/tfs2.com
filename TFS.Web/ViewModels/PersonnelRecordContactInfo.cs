@@ -5,6 +5,7 @@ using System.Web;
 using Centro.DomainModel;
 using TFS.Models.Geography;
 using System.ComponentModel.DataAnnotations;
+using TFS.Models;
 
 namespace TFS.Web.ViewModels
 {
@@ -20,15 +21,15 @@ namespace TFS.Web.ViewModels
         [Required]
         [RegularExpression(@"\d{5}", ErrorMessage = "Must contain 5 numbers.")]
         public virtual string ZipCode { get; set; }
-        //[Required]
+        [RegularExpression(RegExLib.USPhoneNumber, ErrorMessage = "Must contain a phone number")]
         public virtual string PrimaryPhoneNumber { get; set; }
-        //[Required]
+        [RegularExpression(RegExLib.USPhoneNumber, ErrorMessage = "Must contain a phone number")]
         public virtual string AlternatePhoneNumber { get; set; }
         //[Required]        
         public virtual string AlternateEmail { get; set; }
         //[Required]
         public virtual string EmergencyContactName { get; set; }
-        //[Required]
+        [RegularExpression(RegExLib.USPhoneNumber, ErrorMessage = "Must contain a phone number")]
         public virtual string EmergencyContactPhoneNumber { get; set; }
     }
 }

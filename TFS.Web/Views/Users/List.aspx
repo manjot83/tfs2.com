@@ -41,7 +41,8 @@
         <% foreach (var user in Model.Items) { %>
         <tr>
             <td>
-                <%= Html.ActionLink(user.LastName + ", " +user.FirstName, MVC.Users.Edit(user.Username)) %>
+                <%--<%= Html.ActionLink(user.LastName + ", " +user.FirstName, MVC.Users.Edit(user.Username)) %>--%>
+                <%= Html.Encode(user.LastName + ", " +user.FirstName) %>
             </td>
             <td>
                 <%= Html.Encode(user.Username) %>

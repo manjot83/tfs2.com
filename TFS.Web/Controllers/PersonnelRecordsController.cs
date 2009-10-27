@@ -10,9 +10,13 @@ using Centro.Web.Mvc;
 using TFS.Models.Programs;
 using Centro.Web.Mvc.ActionFilters;
 using TFS.Models.Geography;
+using System.Text.RegularExpressions;
+using TFS.Models;
+using Centro.Extensions;
 
 namespace TFS.Web.Controllers
 {
+    [Authorize]
     public partial class PersonnelRecordsController : Controller
     {
         private readonly IPersonnelRecordsRepository personnelRecordsRepository;
@@ -64,11 +68,11 @@ namespace TFS.Web.Controllers
                 ModelState.AddModelError("State", "Must be a valid US state abbreviation.");
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.Edit, GeneratePersonnelRecordViewModel(person, editingMine));
-            person.PrimaryPhoneNumber = contactInfo.PrimaryPhoneNumber;
-            person.AlternatePhoneNumber = contactInfo.AlternatePhoneNumber;
+            person.PrimaryPhoneNumber = RegExLib.ParseRegEx(contactInfo.PrimaryPhoneNumber, RegExLib.USPhoneNumber);
+            person.AlternatePhoneNumber = RegExLib.ParseRegEx(contactInfo.AlternatePhoneNumber, RegExLib.USPhoneNumber);
             person.AlternateEmail = contactInfo.AlternateEmail;
             person.EmergencyContactName = contactInfo.EmergencyContactName;
-            person.EmergencyContactPhoneNumber = contactInfo.EmergencyContactPhoneNumber;
+            person.EmergencyContactPhoneNumber = RegExLib.ParseRegEx(contactInfo.EmergencyContactPhoneNumber, RegExLib.USPhoneNumber);
             if (person.Address == null)
                 person.Address = new TFS.Models.Geography.USAddress();
             person.Address.StreetAddress = contactInfo.StreetAddress;
