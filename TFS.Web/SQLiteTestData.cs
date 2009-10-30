@@ -138,6 +138,7 @@ namespace TFS.Web
                 FullStops = 2,
                 Sorties = 2,
                 Totals = 1,
+                AdditionalInfo = "Some Additional Info",
             });
             session.Save(new Mission()
             {

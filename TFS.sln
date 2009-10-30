@@ -19,10 +19,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFS.Authentication", "TFS.A
 EndProject
 Project("{2CFEAB61-6A3B-4EB8-B523-560B4BEEF521}") = "TFS.Web.Deploy", "TFS.Web.Deploy\TFS.Web.Deploy.wdproj", "{88F9D772-E990-47BC-A1D2-C166D6D7A676}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFS.Reports", "TFS.Reports\TFS.Reports.csproj", "{4E4A9D9D-8139-4F97-A154-C35E391A907C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFS.Reports.Tests", "TFS.Reports.Tests\TFS.Reports.Tests.csproj", "{03B2FCE7-E972-4A2D-A333-67647A2BC26E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,7 +47,6 @@ Global
 		{FF527CDF-9E37-436C-A657-B9C3034C964D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FF527CDF-9E37-436C-A657-B9C3034C964D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF527CDF-9E37-436C-A657-B9C3034C964D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FF527CDF-9E37-436C-A657-B9C3034C964D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FF527CDF-9E37-436C-A657-B9C3034C964D}.Sqlite|Any CPU.ActiveCfg = Debug|Any CPU
 		{FF527CDF-9E37-436C-A657-B9C3034C964D}.Sqlite|Any CPU.Build.0 = Debug|Any CPU
 		{0E1CDC53-E67D-4313-816B-8A58CCC79483}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -61,23 +56,9 @@ Global
 		{0E1CDC53-E67D-4313-816B-8A58CCC79483}.Sqlite|Any CPU.ActiveCfg = Debug|Any CPU
 		{0E1CDC53-E67D-4313-816B-8A58CCC79483}.Sqlite|Any CPU.Build.0 = Debug|Any CPU
 		{88F9D772-E990-47BC-A1D2-C166D6D7A676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{88F9D772-E990-47BC-A1D2-C166D6D7A676}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88F9D772-E990-47BC-A1D2-C166D6D7A676}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88F9D772-E990-47BC-A1D2-C166D6D7A676}.Release|Any CPU.Build.0 = Release|Any CPU
-		{88F9D772-E990-47BC-A1D2-C166D6D7A676}.Sqlite|Any CPU.ActiveCfg = Release|Any CPU
-		{88F9D772-E990-47BC-A1D2-C166D6D7A676}.Sqlite|Any CPU.Build.0 = Release|Any CPU
-		{4E4A9D9D-8139-4F97-A154-C35E391A907C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4E4A9D9D-8139-4F97-A154-C35E391A907C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4E4A9D9D-8139-4F97-A154-C35E391A907C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4E4A9D9D-8139-4F97-A154-C35E391A907C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4E4A9D9D-8139-4F97-A154-C35E391A907C}.Sqlite|Any CPU.ActiveCfg = Release|Any CPU
-		{4E4A9D9D-8139-4F97-A154-C35E391A907C}.Sqlite|Any CPU.Build.0 = Release|Any CPU
-		{03B2FCE7-E972-4A2D-A333-67647A2BC26E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{03B2FCE7-E972-4A2D-A333-67647A2BC26E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{03B2FCE7-E972-4A2D-A333-67647A2BC26E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{03B2FCE7-E972-4A2D-A333-67647A2BC26E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{03B2FCE7-E972-4A2D-A333-67647A2BC26E}.Sqlite|Any CPU.ActiveCfg = Release|Any CPU
-		{03B2FCE7-E972-4A2D-A333-67647A2BC26E}.Sqlite|Any CPU.Build.0 = Release|Any CPU
+		{88F9D772-E990-47BC-A1D2-C166D6D7A676}.Sqlite|Any CPU.ActiveCfg = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

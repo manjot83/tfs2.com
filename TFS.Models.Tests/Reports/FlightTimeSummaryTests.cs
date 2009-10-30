@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using TFS.Models.FlightLogs;
-using TFS.Models.PersonnelRecords;
+using TFS.Models.Reports;
 using System.IO;
 using System.Diagnostics;
+using TFS.Models.PersonnelRecords;
 
-namespace TFS.Reports.Tests
+namespace TFS.Models.Tests.Reports
 {
     [TestFixture]
-    public class ReportGeneratorTests
+    public class FlightTimeSummaryTests
     {
         private MissionLog GenerateMissionLog()
         {
@@ -36,6 +37,7 @@ namespace TFS.Reports.Tests
                     FullStops = 1,
                     Sorties = 1,
                     Totals = 1,
+                    AdditionalInfo = "not empty",
                 },
                 new Mission
                 {
@@ -49,6 +51,7 @@ namespace TFS.Reports.Tests
                     FullStops = 2,
                     Sorties = 2,
                     Totals = 1,
+                    AdditionalInfo = "not empty",
                 }
             };
             missionLog.SquadronLogs = new List<SquadronLog>
@@ -88,27 +91,27 @@ namespace TFS.Reports.Tests
         [Test]
         public void Should_Compile_XSLT()
         {
-            new FlightTimeSummaryReportGenerator();
+            new ReportGenerator(GenerateMissionLog());
         }
 
         [Test]
         public void Should_Generate_XML()
         {
-            var xml = new FlightTimeSummaryReportGenerator().GenerateXmlFor(GenerateMissionLog());
+            var xml = new ReportGenerator(GenerateMissionLog()).GenerateXml();
             Console.Out.WriteLine(xml.ToString());
         }
 
         [Test]
         public void Should_Generate_XSLFO()
         {
-            var xslfo = new FlightTimeSummaryReportGenerator().GenerateXslFoFor(GenerateMissionLog());
+            var xslfo = new ReportGenerator(GenerateMissionLog()).GenerateXslFo();
             Console.Out.WriteLine(xslfo.ToString());
         }
 
         [Test]
         public void Should_Generate_PDF()
         {
-            var bytes = new FlightTimeSummaryReportGenerator().GenerateReportFor(GenerateMissionLog());
+            var bytes = new ReportGenerator(GenerateMissionLog()).GenerateReport();
             var fileName = Path.GetTempFileName() + ".pdf";
             File.WriteAllBytes(fileName, bytes);
             Process.Start(fileName);

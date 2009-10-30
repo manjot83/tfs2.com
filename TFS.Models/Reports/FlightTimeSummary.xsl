@@ -69,21 +69,21 @@
                                  padding=".05in">
                     <fo:block font-weight="bold">Date</fo:block>
                     <fo:block space-before=".05in">
-                      <xsl:value-of select="FlightTimeSummary/@Date"/>
+                      <xsl:value-of select="FlightTimeSummary/Date"/>
                     </fo:block>
                   </fo:table-cell>
                   <fo:table-cell border-right=".01in solid black"
                                  padding=".05in">
                     <fo:block font-weight="bold">MDS</fo:block>
                     <fo:block space-before=".05in">
-                      <xsl:value-of select="FlightTimeSummary/@MDS"/>
+                      <xsl:value-of select="FlightTimeSummary/MDS"/>
                     </fo:block>
                   </fo:table-cell>
                   <fo:table-cell border-right=".01in solid black"
                                  padding=".05in">
                     <fo:block font-weight="bold">Serial No.</fo:block>
                     <fo:block space-before=".05in">
-                      <xsl:value-of select="FlightTimeSummary/@Serial"/>
+                      <xsl:value-of select="FlightTimeSummary/SerialNumber"/>
                     </fo:block>
                   </fo:table-cell>
                   <fo:table-cell number-columns-spanned="3"
@@ -91,7 +91,7 @@
                                  padding=".05in">
                     <fo:block font-weight="bold">Unit Charged For Flying Hours</fo:block>
                     <fo:block space-before=".05in">
-                      <xsl:value-of select="FlightTimeSummary/@UnitCharged"/>
+                      <xsl:value-of select="FlightTimeSummary/OperatingUnit"/>
                     </fo:block>
                   </fo:table-cell>
                   <fo:table-cell number-columns-spanned="3"
@@ -99,7 +99,7 @@
                                  padding=".05in">
                     <fo:block font-weight="bold">Location</fo:block>
                     <fo:block space-before=".05in">
-                      <xsl:value-of select="FlightTimeSummary/@Location"/>
+                      <xsl:value-of select="FlightTimeSummary/Location"/>
                     </fo:block>
                   </fo:table-cell>
                   <fo:table-cell number-columns-spanned="4">
@@ -281,28 +281,28 @@
                                    border-right=".01in solid black"
                                    padding=".05in">
                       <fo:block>
-                        <xsl:value-of select=".//Flight" />
+                        <xsl:value-of select=".//FlightTime" />
                       </fo:block>
                     </fo:table-cell>
                     <fo:table-cell border-bottom=".01in solid black"
                                    border-right=".01in solid black"
                                    padding=".05in">
                       <fo:block>
-                        <xsl:value-of select=".//TouchGo" />
+                        <xsl:value-of select=".//TouchAndGos" />
                       </fo:block>
                     </fo:table-cell>
                     <fo:table-cell border-bottom=".01in solid black"
                                    border-right=".01in solid black"
                                    padding=".05in">
                       <fo:block>
-                        <xsl:value-of select=".//FullStop" />
+                        <xsl:value-of select=".//FullStops" />
                       </fo:block>
                     </fo:table-cell>
                     <fo:table-cell border-bottom=".01in solid black"
                                    border-right=".01in solid black"
                                    padding=".05in">
                       <fo:block>
-                        <xsl:value-of select=".//Total" />
+                        <xsl:value-of select=".//Totals" />
                       </fo:block>
                     </fo:table-cell>
                     <fo:table-cell border-bottom=".01in solid black"
@@ -349,28 +349,28 @@
                                  border-bottom=".01in solid black"
                                  padding=".05in">
                     <fo:block>
-                      <xsl:value-of select="FlightTimeSummary/TotalFlightTime" />
+                      <xsl:value-of select="FlightTimeSummary/TotalCalculatedFlightTime" />
                     </fo:block>
                   </fo:table-cell>
                   <fo:table-cell border-right=".01in solid black"
                                  border-bottom=".01in solid black"
                                  padding=".05in">
                     <fo:block>
-                      <xsl:value-of select="FlightTimeSummary/TotalTouchGo" />
+                      <xsl:value-of select="FlightTimeSummary/TotalTouchAndGos" />
                     </fo:block>
                   </fo:table-cell>
                   <fo:table-cell border-right=".01in solid black"
                                  border-bottom=".01in solid black"
                                  padding=".05in">
                     <fo:block>
-                      <xsl:value-of select="FlightTimeSummary/TotalFullStop" />
+                      <xsl:value-of select="FlightTimeSummary/TotalFullStops" />
                     </fo:block>
                   </fo:table-cell>
                   <fo:table-cell border-right=".01in solid black"
                                  border-bottom=".01in solid black"
                                  padding=".05in">
                     <fo:block>
-                      <xsl:value-of select="FlightTimeSummary/TotalTotal" />
+                      <xsl:value-of select="FlightTimeSummary/TotalTotals" />
                     </fo:block>
                   </fo:table-cell>
                   <fo:table-cell border-right=".01in solid black"
@@ -552,13 +552,13 @@
                                    border-right=".01in solid black"
                                    padding=".05in">
                       <fo:block>
-                        <xsl:value-of select=".//PrimaryInstructor" />
+                        <xsl:value-of select=".//PrimaryInstrument" />
                       </fo:block>
                     </fo:table-cell>
                     <fo:table-cell border-bottom=".01in solid black"
                                    padding=".05in">
                       <fo:block>
-                        <xsl:value-of select=".//SimulatedInstructor" />
+                        <xsl:value-of select=".//SimulatedInstrument" />
                       </fo:block>
                     </fo:table-cell>
                   </fo:table-row>

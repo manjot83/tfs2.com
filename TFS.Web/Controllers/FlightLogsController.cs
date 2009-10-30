@@ -5,7 +5,7 @@ using Centro.Web.Mvc;
 using Centro.Web.Mvc.ActionFilters;
 using TFS.Models.FlightLogs;
 using TFS.Web.ViewModels;
-using TFS.Reports;
+using TFS.Models.Reports;
 
 namespace TFS.Web.Controllers
 {
@@ -225,8 +225,8 @@ namespace TFS.Web.Controllers
         public virtual FileContentResult DownloadPDF(int id)
         {
             var missionLog = flightLogRepository.GetMissionLog(id);
-            var reportGenerator = new FlightTimeSummaryReportGenerator();
-            var bytes = reportGenerator.GenerateReportFor(missionLog);
+            var reportGenerator = new ReportGenerator(missionLog);
+            var bytes = reportGenerator.GenerateReport();
             return File(bytes, "application/pdf", "FlightTimeSummary(" + missionLog.LogDate.ToString("MM-dd-yy") + ").pdf");
         }
     }
