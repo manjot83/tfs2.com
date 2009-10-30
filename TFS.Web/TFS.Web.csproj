@@ -272,6 +272,10 @@
       <Project>{67E5844A-31A4-49F7-ABCE-2D70559D4EB7}</Project>
       <Name>TFS.Models</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TFS.Reports\TFS.Reports.csproj">
+      <Project>{4E4A9D9D-8139-4F97-A154-C35E391A907C}</Project>
+      <Name>TFS.Reports</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

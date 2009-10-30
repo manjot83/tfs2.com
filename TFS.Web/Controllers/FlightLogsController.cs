@@ -5,6 +5,7 @@ using Centro.Web.Mvc;
 using Centro.Web.Mvc.ActionFilters;
 using TFS.Models.FlightLogs;
 using TFS.Web.ViewModels;
+using TFS.Reports;
 
 namespace TFS.Web.Controllers
 {
@@ -219,6 +220,14 @@ namespace TFS.Web.Controllers
             squadronLogViewModel.SquadronLog.Person = flightLogRepository.GetSquadronPersonForUsername(squadronLogViewModel.PersonUsername);
             flightLogRepository.AddSquadronLog(missionLog, squadronLogViewModel.SquadronLog);
             return RedirectToAction(MVC.FlightLogs.EditMissionLog(squadronLogViewModel.MissionLogId));
+        }
+
+        public virtual FileContentResult DownloadPDF(int id)
+        {
+            var missionLog = flightLogRepository.GetMissionLog(id);
+            var reportGenerator = new FlightTimeSummaryReportGenerator();
+            var bytes = reportGenerator.GenerateReportFor(missionLog);
+            return File(bytes, "application/pdf", "FlightTimeSummary(" + missionLog.LogDate.ToString("MM-dd-yy") + ").pdf");
         }
     }
 }

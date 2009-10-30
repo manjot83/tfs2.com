@@ -101,4 +101,7 @@
     <p><b>No squadron members entered.</b></p>
     <% } %>
 
+    <p>
+        Click to download as a <%= Html.ActionLink("PDF", MVC.FlightLogs.DownloadPDF(Model.MissionLogId)) %>
+    </p>
 </asp:Content>

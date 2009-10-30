@@ -108,6 +108,11 @@ namespace TFS.Web.Controllers {
             return new T4MVC_ActionResult(Name, Actions.CreateSquadronLog);
         }
 
+        [NonAction]
+        public ActionResult DownloadPDF() {
+            return new T4MVC_ActionResult(Name, Actions.DownloadPDF);
+        }
+
 
         [CompilerGenerated]
         public readonly string Name = "FlightLogs";
@@ -125,6 +130,7 @@ namespace TFS.Web.Controllers {
             public readonly string CreateMission = "CreateMission";
             public readonly string EditSquadronLog = "EditSquadronLog";
             public readonly string CreateSquadronLog = "CreateSquadronLog";
+            public readonly string DownloadPDF = "DownloadPDF";
         }
 
 
@@ -512,6 +518,12 @@ namespace T4MVC {
             return callInfo;
         }
 
+        public override System.Web.Mvc.FileContentResult DownloadPDF(int id) {
+            var callInfo = new T4MVC_FileContentResult("FlightLogs", Actions.DownloadPDF);
+            callInfo.RouteValues.Add("id", id);
+            return callInfo;
+        }
+
     }
     [CompilerGenerated]
     public class T4MVC_ImagesController: TFS.Web.Controllers.ImagesController {
@@ -783,6 +795,17 @@ public class T4MVC_ActionResult : System.Web.Mvc.ActionResult, IT4MVCActionResul
     }
      
     public override void ExecuteResult(System.Web.Mvc.ControllerContext context) { }
+    
+    public string Controller { get; set; }
+    public string Action { get; set; }
+    public RouteValueDictionary RouteValues { get; set; }
+}
+
+[CompilerGenerated]
+public class T4MVC_FileContentResult : System.Web.Mvc.FileContentResult, IT4MVCActionResult {
+    public T4MVC_FileContentResult(string controller, string action): base(new byte[0], " ")  {
+        this.InitMVCT4Result(controller, action);
+    }
     
     public string Controller { get; set; }
     public string Action { get; set; }
