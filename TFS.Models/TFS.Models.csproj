@@ -73,7 +73,8 @@
     <Compile Include="IKeyedModel.cs" />
     <Compile Include="Images\IImageRepository.cs" />
     <Compile Include="Images\StaticImage.cs" />
-    <Compile Include="Reports\IReportSerializable.cs" />
+    <Compile Include="Reports\FlightTimeSummaryReport.cs" />
+    <Compile Include="Reports\IReport.cs" />
     <Compile Include="IUserRepository.cs" />
     <Compile Include="PersonnelRecords\FCFQualification.cs" />
     <Compile Include="PersonnelRecords\FlightSuitSize.cs" />

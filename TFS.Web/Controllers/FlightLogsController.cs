@@ -225,7 +225,7 @@ namespace TFS.Web.Controllers
         public virtual FileContentResult DownloadPDF(int id)
         {
             var missionLog = flightLogRepository.GetMissionLog(id);
-            var reportGenerator = new ReportGenerator(missionLog);
+            var reportGenerator = new ReportGenerator(new FlightTimeSummaryReport(missionLog));
             var bytes = reportGenerator.GenerateReport();
             return File(bytes, "application/pdf", "FlightTimeSummary(" + missionLog.LogDate.ToString("MM-dd-yy") + ").pdf");
         }

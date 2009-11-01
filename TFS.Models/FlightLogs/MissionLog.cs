@@ -1,17 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Centro.DomainModel;
-using System.Xml.Serialization;
 using System.Linq;
-using TFS.Models.Reports;
-using System.Runtime.Serialization;
+using Centro.DomainModel;
 
 namespace TFS.Models.FlightLogs
 {
-    [Serializable]
-    [DataContract(Name = "FlightTimeSummary", Namespace="")]
-    public class MissionLog : BaseEntity, IReportSerializable
+    public class MissionLog : BaseEntity
     {
         public MissionLog()
         {
@@ -22,86 +17,49 @@ namespace TFS.Models.FlightLogs
             OperatingUnit = "Tactical Flight Services";
         }
 
-        string IReportSerializable.StylesheetResourceName
-        {
-            get { return "TFS.Models.Reports.FlightTimeSummary.xsl"; }
-        }
-
-        [IgnoreDataMember]
         public virtual int? Id { get; set; }
 
         [DomainSignature, Required]
-        [DataMember(Name = "Date")]
         public virtual DateTime LogDate { get; set; }
         [DomainSignature, Required]
-        [IgnoreDataMember]
         public virtual DateTime LastModifiedDate { get; set; }
 
         [DomainSignature, Required]
-        [DataMember(Name = "MDS")]
         public virtual string AircraftMDS { get; set; } // "Mission Design Series"
         [DomainSignature, Required]
-        [DataMember(Name = "SerialNumber")]
         public virtual string AircraftSerialNumber { get; set; } // "Serial No." or Tail Number
 
         [DomainSignature, Required]
-        [DataMember(Name = "Location")]
         public virtual string Location { get; set; } // Todo Change to "Program Location"
 
-        [DataMember(Name = "Missions")]
         public virtual IList<Mission> Missions { get; set; }
-        [DataMember(Name = "Squadron")]
         public virtual IList<SquadronLog> SquadronLogs { get; set; }
 
-        [DataMember(Name = "OperatingUnit")]
         public virtual string OperatingUnit { get; set; }
 
-        [DataMember(Name = "PilotReview")]
-        public virtual string PilotReview { get; set; }
-
-        [DataMember(Name = "OpsReview")]
-        public virtual string OpsReview { get; set; }
-
-        [DataMember(Name = "GeneratedDate")]
-        private DateTime GeneratedDate
+        public double CalculateTotalFlightTime()
         {
-            get { return DateTime.UtcNow; }
-            set { /* noop required for serialization */ }
+            return Missions.Sum(x => x.ComputeFlightTime().TotalHours);
         }
 
-        [DataMember(Name = "TotalCalculatedFlightTime")]
-        private double TotalCalculatedFlightTime
+        public double CalculateTotalTouchAndGos()
         {
-            get { return Missions.Sum(x => x.ComputeFlightTime().Hours); }
-            set { /* noop required for serialization */ }
+            return Missions.Sum(x => x.TouchAndGos);
         }
 
-        [DataMember(Name = "TotalTouchAndGos")]
-        private double TotalTouchAndGos
+        public double CalculateTotalFullStops()
         {
-            get { return Missions.Sum(x => x.TouchAndGos); }
-            set { /* noop required for serialization */ }
+            return Missions.Sum(x => x.FullStops);
         }
 
-        [DataMember(Name = "TotalFullStops")]
-        private double TotalFullStops
+        public double CalculateTotals()
         {
-            get { return Missions.Sum(x => x.FullStops); }
-            set { /* noop required for serialization */ }
+            return Missions.Sum(x => x.Totals);
         }
 
-        [DataMember(Name = "TotalTotals")]
-        private double TotalTotals
+        public double CalculateTotalSorties()
         {
-            get { return Missions.Sum(x => x.Totals); }
-            set { /* noop required for serialization */ }
-        }
-
-        [DataMember(Name = "TotalSorties")]
-        private double TotalSorties
-        {
-            get { return Missions.Sum(x => x.Sorties); }
-            set { /* noop required for serialization */ }
+            return Missions.Sum(x => x.Sorties);
         }
 
         public virtual void MarkedUpdated()

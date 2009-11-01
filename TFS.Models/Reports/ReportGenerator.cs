@@ -1,26 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.IO;
 using System.Text;
-using System.Xml.Xsl;
 using System.Xml;
-using System.IO;
+using System.Xml.Serialization;
 using System.Xml.XPath;
+using System.Xml.Xsl;
 using Fop.Net;
-using System.Runtime.Serialization;
 
 namespace TFS.Models.Reports
 {
     public class ReportGenerator
     {
-        private IReportSerializable domainObject;
+        private IReport report;
         private XslCompiledTransform xslt;
 
-        public ReportGenerator(IReportSerializable domainObject)
+        public ReportGenerator(IReport report)
         {
-            this.domainObject = domainObject;
+            this.report = report;
             xslt = new XslCompiledTransform();
-            using (var stream = typeof(ReportGenerator).Assembly.GetManifestResourceStream(this.domainObject.StylesheetResourceName))
+            using (var stream = typeof(ReportGenerator).Assembly.GetManifestResourceStream(this.report.StylesheetResourceName))
             {
                 xslt.Load(new XmlTextReader(stream));
             }
@@ -28,11 +25,11 @@ namespace TFS.Models.Reports
 
         public string GenerateXml()
         {
-            var serializer = new DataContractSerializer(domainObject.GetType());
+            var serializer = new XmlSerializer(report.GetType());
             var resultString = new StringBuilder();
             using (var writer = XmlWriter.Create(resultString))
             {
-                serializer.WriteObject(writer, domainObject);
+                serializer.Serialize(writer, report);
                 writer.Flush();
                 return resultString.ToString();
             }

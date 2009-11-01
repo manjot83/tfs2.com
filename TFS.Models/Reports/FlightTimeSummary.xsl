@@ -69,21 +69,21 @@
                                  padding=".05in">
                     <fo:block font-weight="bold">Date</fo:block>
                     <fo:block space-before=".05in">
-                      <xsl:value-of select="FlightTimeSummary/Date"/>
+                      <xsl:value-of select="FlightTimeSummary/@Date"/>
                     </fo:block>
                   </fo:table-cell>
                   <fo:table-cell border-right=".01in solid black"
                                  padding=".05in">
                     <fo:block font-weight="bold">MDS</fo:block>
                     <fo:block space-before=".05in">
-                      <xsl:value-of select="FlightTimeSummary/MDS"/>
+                      <xsl:value-of select="FlightTimeSummary/@MDS"/>
                     </fo:block>
                   </fo:table-cell>
                   <fo:table-cell border-right=".01in solid black"
                                  padding=".05in">
                     <fo:block font-weight="bold">Serial No.</fo:block>
                     <fo:block space-before=".05in">
-                      <xsl:value-of select="FlightTimeSummary/SerialNumber"/>
+                      <xsl:value-of select="FlightTimeSummary/@SerialNumber"/>
                     </fo:block>
                   </fo:table-cell>
                   <fo:table-cell number-columns-spanned="3"
@@ -91,7 +91,7 @@
                                  padding=".05in">
                     <fo:block font-weight="bold">Unit Charged For Flying Hours</fo:block>
                     <fo:block space-before=".05in">
-                      <xsl:value-of select="FlightTimeSummary/OperatingUnit"/>
+                      <xsl:value-of select="FlightTimeSummary/@OperatingUnit"/>
                     </fo:block>
                   </fo:table-cell>
                   <fo:table-cell number-columns-spanned="3"
@@ -99,7 +99,7 @@
                                  padding=".05in">
                     <fo:block font-weight="bold">Location</fo:block>
                     <fo:block space-before=".05in">
-                      <xsl:value-of select="FlightTimeSummary/Location"/>
+                      <xsl:value-of select="FlightTimeSummary/@Location"/>
                     </fo:block>
                   </fo:table-cell>
                   <fo:table-cell number-columns-spanned="4">
@@ -118,7 +118,7 @@
               TFS FORM 781 - Flight Time Summary - Previous Edition Obsolete
             </fo:block>
             <fo:block>
-              Generated: <xsl:value-of select="FlightTimeSummary/GeneratedDate"/>
+              Generated: <xsl:value-of select="FlightTimeSummary/@GeneratedDate"/>
             </fo:block>
           </fo:block>
         </fo:static-content>

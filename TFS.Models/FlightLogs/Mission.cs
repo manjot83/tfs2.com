@@ -1,43 +1,30 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Centro.DomainModel;
 using Centro.Validation;
-using System.Collections.Generic;
-using System.Linq;
-using System.Xml.Serialization;
-using System.Runtime.Serialization;
 
 namespace TFS.Models.FlightLogs
 {
-    [Serializable]
-    [DataContract(Name = "Mission", Namespace="")]
     public class Mission : BaseEntity
     {
-        [IgnoreDataMember]
         public virtual int? Id { get; set; }
 
-        [IgnoreDataMember]
         public virtual MissionLog MissionLog { get; set; }
 
         [DomainSignature, Required, StringLength(50)]
-        [DataMember(Name="Name")]
         public virtual string Name { get; set; }
         [DomainSignature, StringLength(100)]
-        [DataMember(Name = "SpecialUse")]
         public virtual string AdditionalInfo { get; set; }
 
         [DomainSignature, Required, StringLength(4)]
-        [DataMember(Name = "From")]
         public virtual string FromICAO { get; set; }
         [DomainSignature, Required, StringLength(4)]
-        [DataMember(Name = "To")]
         public virtual string ToICAO { get; set; }
 
         [DomainSignature, Required, StringLength(4), RegularExpression(@"[0-2][0-9][0-5][0-9]", ErrorMessage = "Must be in the format HHMM")]
-        [DataMember(Name = "TakeOff")]
         public virtual string TakeOffTime { get; set; }
         [DomainSignature, Required, StringLength(4), RegularExpression(@"[0-2][0-9][0-5][0-9]", ErrorMessage = "Must be in the format HHMM")]
-        [DataMember(Name = "Landing")]
         public virtual string LandingTime { get; set; }
 
         public static TimeSpan ComputeFlightTime(DateTime logDate, string takeOffTime, string landingTime)
@@ -54,24 +41,13 @@ namespace TFS.Models.FlightLogs
             return ComputeFlightTime(MissionLog.LogDate, TakeOffTime, LandingTime);
         }
 
-        [DataMember(Name = "FlightTime")]
-        private double FlightTime
-        {
-            get { return ComputeFlightTime().Hours; }
-            set { /* noop required for serialization */ }
-        }
-
         [DomainSignature, Required]
-        [DataMember(Name = "TouchAndGos")]
         public virtual int TouchAndGos { get; set; }
         [DomainSignature, Required]
-        [DataMember(Name = "FullStops")]
         public virtual int FullStops { get; set; }
         [DomainSignature, Required]
-        [DataMember(Name = "Sorties")]
         public virtual int Sorties { get; set; }
         [DomainSignature, Required]
-        [DataMember(Name = "Totals")]
         public virtual int Totals { get; set; }
 
         public virtual void MarkedUpdated()
