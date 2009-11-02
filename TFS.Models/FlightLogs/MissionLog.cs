@@ -37,27 +37,27 @@ namespace TFS.Models.FlightLogs
 
         public virtual string OperatingUnit { get; set; }
 
-        public double CalculateTotalFlightTime()
+        public virtual double CalculateTotalFlightTime()
         {
             return Missions.Sum(x => x.ComputeFlightTime().TotalHours);
         }
 
-        public double CalculateTotalTouchAndGos()
+        public virtual double CalculateTotalTouchAndGos()
         {
             return Missions.Sum(x => x.TouchAndGos);
         }
 
-        public double CalculateTotalFullStops()
+        public virtual double CalculateTotalFullStops()
         {
             return Missions.Sum(x => x.FullStops);
         }
 
-        public double CalculateTotals()
+        public virtual double CalculateTotals()
         {
             return Missions.Sum(x => x.Totals);
         }
 
-        public double CalculateTotalSorties()
+        public virtual double CalculateTotalSorties()
         {
             return Missions.Sum(x => x.Sorties);
         }
