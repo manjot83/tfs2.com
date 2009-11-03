@@ -31,7 +31,7 @@
     <WarningLevel>4</WarningLevel>
     <MvcBuildViews>true</MvcBuildViews>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Sqlite|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug - SQLite|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\</OutputPath>
     <DefineConstants>TRACE;DEBUG;SQLITE</DefineConstants>
@@ -143,7 +143,7 @@
     <Compile Include="IAuthenticationService.cs" />
     <Compile Include="MVCConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SQLiteTestData.cs" />
+    <Compile Include="TestData.cs" />
     <Compile Include="T4MVC.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

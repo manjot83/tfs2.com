@@ -78,8 +78,8 @@ namespace TFS.Web
 
 #if SQLITE
             var session = ObjectFactory.GetInstance<ISession>();
-            SQLiteUtil.GenerateSchema(nhibernateRegistry.Configuration, session);
-            SQLiteUtil.InitializeData(SQLiteTestData.Execute, session);
+            SqlSchemaUtil.GenerateSchema(nhibernateRegistry.Configuration, session);
+            TestData.Execute();
             session.Clear();
 #endif
         }

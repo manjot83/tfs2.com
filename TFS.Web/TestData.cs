@@ -13,11 +13,12 @@ using TFS.Models.FlightLogs;
 
 namespace TFS.Web
 {
-    public static class SQLiteTestData
+    public static class TestData
     {
         public static void Execute()
         {
             var session = ObjectFactory.GetInstance<ISession>();
+            session.BeginTransaction();
 
             // Users
             var user_joseph = session.Save(new User
@@ -171,6 +172,8 @@ namespace TFS.Web
                 Sorties = 3,
                 PrimaryInstrumentHours = 3,
             });
+
+            session.Transaction.Commit();
         }
     }
 }
