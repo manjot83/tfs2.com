@@ -42,22 +42,22 @@ namespace TFS.Models.FlightLogs
             return Missions.Sum(x => x.ComputeFlightTime().TotalHours);
         }
 
-        public virtual double CalculateTotalTouchAndGos()
+        public virtual int CalculateTotalTouchAndGos()
         {
             return Missions.Sum(x => x.TouchAndGos);
         }
 
-        public virtual double CalculateTotalFullStops()
+        public virtual int CalculateTotalFullStops()
         {
             return Missions.Sum(x => x.FullStops);
         }
 
-        public virtual double CalculateTotals()
+        public virtual int CalculateTotals()
         {
             return Missions.Sum(x => x.Totals);
         }
 
-        public virtual double CalculateTotalSorties()
+        public virtual int CalculateTotalSorties()
         {
             return Missions.Sum(x => x.Sorties);
         }

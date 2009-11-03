@@ -330,7 +330,7 @@
                     <fo:block text-align="left">
                       <fo:inline font-weight="bold">Operating Unit: </fo:inline>
                       <fo:inline>
-                        <xsl:value-of select="FlightTimeSummary/OperatingUnit" />
+                        <xsl:value-of select="FlightTimeSummary/@OperatingUnit" />
                       </fo:inline>
                     </fo:block>
                   </fo:table-cell>

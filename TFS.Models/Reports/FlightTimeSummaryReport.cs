@@ -61,16 +61,16 @@ namespace TFS.Models.Reports
             writer.WriteElementString("Name", member.Person.FileByName());
             writer.WriteElementString("SSN", member.Person.SocialSecurityLastFour);
             writer.WriteElementString("DutyCode", member.DutyCode.ToString());
-            writer.WriteElementString("Primary", member.PrimaryHours.ToString());
-            writer.WriteElementString("Secondary", member.SecondaryHours.ToString());
-            writer.WriteElementString("Instructor", member.InstructorHours.ToString());
-            writer.WriteElementString("Evaluator", member.EvaluatorHours.ToString());
-            writer.WriteElementString("Other", member.OtherHours.ToString());
-            writer.WriteElementString("Sorties", member.Sorties.ToString());
-            writer.WriteElementString("PrimaryNight", member.PrimaryNightHours.ToString());
-            writer.WriteElementString("PrimaryInstrument", member.PrimaryInstrumentHours.ToString());
-            writer.WriteElementString("SimulatedInstrument", member.SimulatedInstrumentHours.ToString());
-            writer.WriteElementString("Total", member.CalculateTotalHours().ToString());
+            writer.WriteElementString("Primary", member.PrimaryHours.ToString("N"));
+            writer.WriteElementString("Secondary", member.SecondaryHours.ToString("N"));
+            writer.WriteElementString("Instructor", member.InstructorHours.ToString("N"));
+            writer.WriteElementString("Evaluator", member.EvaluatorHours.ToString("N"));
+            writer.WriteElementString("Other", member.OtherHours.ToString("N"));
+            writer.WriteElementString("Sorties", member.Sorties.ToString("N"));
+            writer.WriteElementString("PrimaryNight", member.PrimaryNightHours.ToString("N"));
+            writer.WriteElementString("PrimaryInstrument", member.PrimaryInstrumentHours.ToString("N"));
+            writer.WriteElementString("SimulatedInstrument", member.SimulatedInstrumentHours.ToString("N"));
+            writer.WriteElementString("Total", member.CalculateTotalHours().ToString("N"));
             writer.WriteEndElement();
         }
 
@@ -83,7 +83,7 @@ namespace TFS.Models.Reports
             writer.WriteElementString("To", mission.ToICAO);
             writer.WriteElementString("TakeOff", mission.TakeOffTime);
             writer.WriteElementString("Landing", mission.LandingTime);
-            writer.WriteElementString("FlightTime", mission.ComputeFlightTime().TotalHours.ToString());
+            writer.WriteElementString("FlightTime", mission.ComputeFlightTime().TotalHours.ToString("N"));
             writer.WriteElementString("TouchAndGos", mission.TouchAndGos.ToString());
             writer.WriteElementString("FullStops", mission.FullStops.ToString());
             writer.WriteElementString("Sorties", mission.Sorties.ToString());
@@ -94,7 +94,7 @@ namespace TFS.Models.Reports
 
         private void WriteMissionLogElements(XmlWriter writer)
         {
-            writer.WriteElementString("TotalCalculatedFlightTime", missionLog.CalculateTotalFlightTime().ToString());
+            writer.WriteElementString("TotalCalculatedFlightTime", missionLog.CalculateTotalFlightTime().ToString("N"));
             writer.WriteElementString("TotalTouchAndGos", missionLog.CalculateTotalTouchAndGos().ToString());
             writer.WriteElementString("TotalFullStops", missionLog.CalculateTotalFullStops().ToString());
             writer.WriteElementString("TotalTotals", missionLog.CalculateTotals().ToString());

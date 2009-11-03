@@ -214,8 +214,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config\ConnectionStrings.config" />
-    <Content Include="Content\internal\base-tags.css" />
-    <Content Include="Content\internal\default.css" />
+    <Content Include="Content\internal\tags.css" />
+    <Content Include="Content\internal\base.css" />
     <Content Include="Content\internal\icons\book.png" />
     <Content Include="Content\internal\icons\group.png" />
     <Content Include="Content\internal\icons\sort_down.gif" />
