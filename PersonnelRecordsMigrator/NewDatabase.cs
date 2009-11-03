@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PersonnelRecordsMigrator
+namespace PersonnelRecordsMigrator.New
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
