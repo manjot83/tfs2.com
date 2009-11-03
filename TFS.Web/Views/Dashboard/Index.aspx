@@ -16,9 +16,19 @@
 			
 			<p>Aliquam risus justo, mollis in, laoreet a, consectetuer nec, risus. Nunc blandit sodales lacus. Nam luctus semper mi. In eu diam.</p>
 
+            <h1>Heading One</h1>
+            <p>Paragraph</p>
             <h2>Heading Two</h2>
+            <p>Paragraph</p>
             <h3>Heading Three</h3>
-
+            <p>Paragraph</p>
+            <h4>Heading Four</h4>
+            <p>Paragraph</p>
+            <h5>Heading Five</h5>
+            <p>Paragraph</p>
+            <h6>Heading Six</h6>
+            <p>Paragraph</p>
+            
             <p>
             <form action="#">
 <p><label for="name">Name</label> <input type="text" id="name" /></p>

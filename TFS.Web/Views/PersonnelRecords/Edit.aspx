@@ -5,7 +5,7 @@
     <p>
         Use this form to edit personnel information, emergency contact information, and flight qualifications.
     </p>
-    <h3 class="form-section-header">Personal Information</h3>
+    <h3 class="section-header underlined">Personal Information</h3>
     <% using (Html.BeginForm(MVC.PersonnelRecords.EditPersonalInfo(), FormMethod.Post, new { @class = "standard-form" })) { %>
         <%= Html.Hidden("username", Model.Record.User.Username) %>
         <%= Html.Hidden("editingmine", Model.EditingMine) %>
@@ -50,7 +50,7 @@
             <input type="reset" value="Reset" />
         </div>
     <% } %>
-    <h3 class="form-section-header">Contact Information</h3>
+    <h3 class="section-header underlined">Contact Information</h3>
     <% using (Html.BeginForm(MVC.PersonnelRecords.EditContactInfo(), FormMethod.Post, new { @class = "standard-form" })) { %>
         <%= Html.Hidden("username", Model.Record.User.Username) %>
         <%= Html.Hidden("editingmine", Model.EditingMine) %>

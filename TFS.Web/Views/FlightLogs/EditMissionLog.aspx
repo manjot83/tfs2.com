@@ -7,7 +7,7 @@
     
     <h1>Edit flight time summary</h1>
     
-    <h3 class="form-section-header">Header</h3>
+    <h3 class="section-header underlined">Header</h3>
     <% using (Html.BeginForm(MVC.FlightLogs.EditMissionLog(), FormMethod.Post, new { @class = "standard-form" })) { %>
         <%= Html.Hidden("id", Model.MissionLogId)%>
         <div class="field-group">
@@ -45,7 +45,7 @@
         </div>
     <% } %>
     
-    <h3 class="form-section-header">Missions</h3>
+    <h3 class="section-header underlined">Missions</h3>
     <p>
         Click below to see more details and edit a mission, or <b><%= Html.ActionLink("Add", MVC.FlightLogs.CreateMission(Model.MissionLogId))%></b> a mission.
     </p>
@@ -76,7 +76,7 @@
     <p><b>No missions entered.</b></p>
     <% } %>
     
-    <h3 class="form-section-header">Squadron log</h3>
+    <h3 class="section-header underlined">Squadron log</h3>
     <p>
         Click below to see more details and edit a squadron member log, or <b></a><%= Html.ActionLink("Add", MVC.FlightLogs.CreateSquadronLog(Model.MissionLogId)) %></b> a squadron member log.
     </p>
@@ -100,7 +100,7 @@
     <% } else { %>
     <p><b>No squadron members entered.</b></p>
     <% } %>
-
+    <h3 class="section-header underlined">Reports</h3>
     <p>
         Click to download as a <%= Html.ActionLink("PDF", MVC.FlightLogs.DownloadPDF(Model.MissionLogId)) %>
     </p>

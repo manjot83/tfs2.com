@@ -5,7 +5,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
     <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
-    <link type="text/css" rel="stylesheet" href="<%= Url.Content("~/Content/internal/default.css") %>" />
+    <link type="text/css" rel="stylesheet" href="<%= Url.Content("~/Content/internal/reset.css") %>" />
+    <link type="text/css" rel="stylesheet" href="<%= Url.Content("~/Content/internal/base.css") %>" />
+    <link type="text/css" rel="stylesheet" href="<%= Url.Content("~/Content/internal/tags.css") %>" />
     <link type="text/css" rel="stylesheet" href="<%= Url.Content("~/Content/internal/list-table.css") %>" />
     <link type="text/css" rel="stylesheet" href="<%= Url.Content("~/Content/internal/standard-form.css") %>" />
 </head>

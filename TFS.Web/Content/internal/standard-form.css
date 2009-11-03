@@ -9,6 +9,7 @@
 {
 	display: block;
 	font-weight: bold;
+	padding-bottom: .2em;
 }
 
 .standard-form input
@@ -62,11 +63,4 @@
 .standard-form .inline
 {
 	display:inherit;
-}
-
-.form-section-header
-{
-	margin-top: 20px;
-	padding-bottom: 5px;
-	text-decoration: underline;
 }
