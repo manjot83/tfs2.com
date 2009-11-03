@@ -1,0 +1,2 @@
+﻿/server:.\sqlexpress /database:dev_tfs2.com /code:NewDatabase.cs /namespace:PersonnelRecordsMigrator /context:NewDatabase /pluralize /views /functions /sprocs
+/server:.\sqlexpress /database:old_tfs2.com_opcenter /code:OldDatabase.cs /namespace:PersonnelRecordsMigrator /context:OldDatabase /pluralize /views /functions /sprocs
