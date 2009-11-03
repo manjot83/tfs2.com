@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Centro.Data.DomainModel;
+using Centro.Extensions;
 using NHibernate;
 using NHibernate.Linq;
 using TFS.Models.Programs;
-using Centro.Extensions;
-using System;
 
 namespace TFS.Models.Data.Programs
 {
@@ -19,6 +19,11 @@ namespace TFS.Models.Data.Programs
         public IList<Position> GetAllPositions()
         {
             return Session.Linq<Position>().ToList();
+        }
+
+        public Position GetPositionById(int id)
+        {
+            return Session.Get<Position>(id);
         }
 
         public Position CreateNewPosition(string title)

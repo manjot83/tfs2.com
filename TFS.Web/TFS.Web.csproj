@@ -153,6 +153,7 @@
     <Compile Include="ViewModels\FlightLogViewModel.cs" />
     <Compile Include="ViewModels\ManageProgramsViewModel.cs" />
     <Compile Include="ViewModels\MissionViewModel.cs" />
+    <Compile Include="ViewModels\PersonnelRecordCompanyInfo.cs" />
     <Compile Include="ViewModels\PersonnelRecordContactInfo.cs" />
     <Compile Include="ViewModels\PersonnelRecordPersonalInfo.cs" />
     <Compile Include="ViewModels\PersonnelRecordViewModel.cs" />
@@ -247,7 +248,7 @@
     <Content Include="Views\FlightLogs\CreateMissionLog.aspx" />
     <Content Include="Views\FlightLogs\MissionForm.ascx" />
     <Content Include="Views\FlightLogs\SquadronLogForm.ascx" />
-    <Content Include="Views\PersonnelRecords\Edit.aspx" />
+    <Content Include="Views\PersonnelRecords\EditRecord.aspx" />
     <Content Include="Views\Programs\Manage.aspx" />
     <Content Include="Views\Security\ChangePassword.aspx" />
     <Content Include="Views\Security\LogOn.aspx" />

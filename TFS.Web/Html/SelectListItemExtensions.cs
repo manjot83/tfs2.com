@@ -24,7 +24,7 @@ namespace TFS.Web.Html
         {
             var selectedValue = enumeration.ToString();
             var values = Enum.GetNames(enumeration.GetType());
-            return values.Select(x => new SelectListItem { Text = x, Value = x, Selected = x == selectedValue });
+            return values.Select(x => new SelectListItem { Text = x.Replace("_", " ").Trim(), Value = x, Selected = x == selectedValue });
         }
     }
 }

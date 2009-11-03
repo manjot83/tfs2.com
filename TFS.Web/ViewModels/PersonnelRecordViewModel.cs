@@ -4,13 +4,24 @@ using System.Linq;
 using System.Web;
 using TFS.Models.PersonnelRecords;
 using TFS.Models.Programs;
+using System.Web.Mvc;
 
 namespace TFS.Web.ViewModels
 {
     public class PersonnelRecordViewModel
     {
-        public IEnumerable<Position> HirePositions { get; set; }
         public Person Record { get; set; }
-        public bool EditingMine { get; set; }
+        public bool EditingMyRecord { get; set; }
+        public IEnumerable<SelectListItem> HirePositions { get; set; }
+
+        public void SetHirePositions(IEnumerable<Position> hirePositions, Position currentPosition)
+        {
+            HirePositions = hirePositions.Select(x => new SelectListItem
+            {
+                Text = x.Title,
+                Value = x.Id.Value.ToString(),
+                Selected = x == currentPosition
+            }).OrderBy(x => x.Text);
+        }
     }
 }

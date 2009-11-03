@@ -1,18 +1,12 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Mvc.Ajax;
-using TFS.Models.PersonnelRecords;
-using TFS.Web.ViewModels;
 using Centro.Web.Mvc;
-using TFS.Models.Programs;
 using Centro.Web.Mvc.ActionFilters;
-using TFS.Models.Geography;
-using System.Text.RegularExpressions;
 using TFS.Models;
-using Centro.Extensions;
+using TFS.Models.Geography;
+using TFS.Models.PersonnelRecords;
+using TFS.Models.Programs;
+using TFS.Web.ViewModels;
 
 namespace TFS.Web.Controllers
 {
@@ -29,45 +23,45 @@ namespace TFS.Web.Controllers
         }
 
         [RequireTransaction]
-        public virtual ViewResult Mine()
+        public virtual ViewResult EditMyRecord()
         {
             var person = personnelRecordsRepository.GetPerson(this.GetCurrentUser());
             if (person == null)
                 person = personnelRecordsRepository.CreatePersonnelRecordFor(this.GetCurrentUser());
-            var viewModel = GeneratePersonnelRecordViewModel(person, true);            
-            return View(MVC.PersonnelRecords.Views.Edit, viewModel);
+            var viewModel = GeneratePersonnelRecordViewModel(person, true);
+            return View(MVC.PersonnelRecords.Views.EditRecord, viewModel);
         }
 
         [RequireTransaction]
         [AcceptVerbs(HttpVerbs.Post)]
-        public virtual ActionResult EditPersonalInfo(string username, bool editingMine, PersonnelRecordPersonalInfo personalInfo)
+        public virtual ActionResult EditPersonalInfo(string username, bool editingMyRecord, PersonnelRecordPersonalInfo personalInfo)
         {
             personalInfo.Validate(ModelState, string.Empty);
             var person = personnelRecordsRepository.GetPerson(username);
             if (!ModelState.IsValid)
-                return View(MVC.PersonnelRecords.Views.Edit, GeneratePersonnelRecordViewModel(person, editingMine));
+                return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
             person.FirstName = personalInfo.FirstName;
             person.LastName = personalInfo.LastName;
             person.MiddleInitial = personalInfo.MiddleInitial;
             person.DateOfBirth = personalInfo.DateOfBirth.ToUniversalTime();
             person.Gender = personalInfo.Gender;
             person.SocialSecurityLastFour = personalInfo.SocialSecurityLastFour;
-            if (editingMine)
-                return RedirectToAction(MVC.PersonnelRecords.Mine());
+            if (editingMyRecord)
+                return RedirectToAction(MVC.PersonnelRecords.EditMyRecord());
             else
                 throw new NotImplementedException();
         }
 
         [RequireTransaction]
         [AcceptVerbs(HttpVerbs.Post)]
-        public virtual ActionResult EditContactInfo(string username, bool editingMine, PersonnelRecordContactInfo contactInfo)
+        public virtual ActionResult EditContactInfo(string username, bool editingMyRecord, PersonnelRecordContactInfo contactInfo)
         {
             contactInfo.Validate(ModelState, string.Empty);
             var person = personnelRecordsRepository.GetPerson(username);
             if (USState.FromAbbreviation(contactInfo.State.ToUpper()) == null)
                 ModelState.AddModelError("State", "Must be a valid US state abbreviation.");
             if (!ModelState.IsValid)
-                return View(MVC.PersonnelRecords.Views.Edit, GeneratePersonnelRecordViewModel(person, editingMine));
+                return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
             person.PrimaryPhoneNumber = RegExLib.ParseRegEx(contactInfo.PrimaryPhoneNumber, RegExLib.USPhoneNumber);
             person.AlternatePhoneNumber = RegExLib.ParseRegEx(contactInfo.AlternatePhoneNumber, RegExLib.USPhoneNumber);
             person.AlternateEmail = contactInfo.AlternateEmail;
@@ -79,20 +73,38 @@ namespace TFS.Web.Controllers
             person.Address.City = contactInfo.City;
             person.Address.State = USState.FromAbbreviation(contactInfo.State.ToUpper());
             person.Address.ZipCode = contactInfo.ZipCode;
-            if (editingMine)
-                return RedirectToAction(MVC.PersonnelRecords.Mine());
+            if (editingMyRecord)
+                return RedirectToAction(MVC.PersonnelRecords.EditMyRecord());
             else
                 throw new NotImplementedException();
         }
 
-        private PersonnelRecordViewModel GeneratePersonnelRecordViewModel(Person person, bool editingMine)
+        [RequireTransaction]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual ActionResult EditCompanyInfo(string username, bool editingMyRecord, PersonnelRecordCompanyInfo companyInfo)
         {
-            return new PersonnelRecordViewModel
+            companyInfo.Validate(ModelState, string.Empty);
+            var person = personnelRecordsRepository.GetPerson(username);
+            if (!ModelState.IsValid)
+                return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
+            person.FlightSuitSize = companyInfo.FlightSuitSize;
+            person.ShirtSize = companyInfo.ShirtSize;
+            person.HirePosition = programsRepository.GetPositionById(companyInfo.HirePositionId);
+            if (editingMyRecord)
+                return RedirectToAction(MVC.PersonnelRecords.EditMyRecord());
+            else
+                throw new NotImplementedException();
+        }
+
+        private PersonnelRecordViewModel GeneratePersonnelRecordViewModel(Person person, bool editingMyRecord)
+        {
+            var viewModel = new PersonnelRecordViewModel
             {
-                EditingMine = editingMine,
+                EditingMyRecord = editingMyRecord,
                 Record = person,
-                HirePositions = programsRepository.GetAllPositions(),
             };
+            viewModel.SetHirePositions(programsRepository.GetAllPositions(), person.HirePosition);
+            return viewModel;
         }
 
     }

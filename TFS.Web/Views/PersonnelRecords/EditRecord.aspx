@@ -8,7 +8,7 @@
     <h3 class="section-header underlined">Personal Information</h3>
     <% using (Html.BeginForm(MVC.PersonnelRecords.EditPersonalInfo(), FormMethod.Post, new { @class = "standard-form" })) { %>
         <%= Html.Hidden("username", Model.Record.User.Username) %>
-        <%= Html.Hidden("editingmine", Model.EditingMine) %>
+        <%= Html.Hidden("editingmyrecord", Model.EditingMyRecord)%>
         <div class="field-group">
             <div class="field">
                 <label for="firstname">First name</label>
@@ -53,7 +53,7 @@
     <h3 class="section-header underlined">Contact Information</h3>
     <% using (Html.BeginForm(MVC.PersonnelRecords.EditContactInfo(), FormMethod.Post, new { @class = "standard-form" })) { %>
         <%= Html.Hidden("username", Model.Record.User.Username) %>
-        <%= Html.Hidden("editingmine", Model.EditingMine) %>
+        <%= Html.Hidden("editingmyrecord", Model.EditingMyRecord)%>
         <div class="field-group">
             <div class="field">
                 <label for="PrimaryPhoneNumber">Phone Number</label>
@@ -106,6 +106,34 @@
                 <label for="ZipCode">Zip</label>
                 <%= Html.TextBox("ZipCode", Model.Record.Address != null ? Model.Record.Address.ZipCode : string.Empty, new { size = "10", maxlength = "5" })%>
                 <%= Html.ValidationMessage("ZipCode")%>
+            </div>
+        </div>
+        <div class="button-group">
+            <input type="submit" value="Save changes" />
+            <input type="reset" value="Reset" />
+        </div>
+    <% } %>
+    <h3 class="section-header underlined">TFS Company Information</h3>
+    <% using (Html.BeginForm(MVC.PersonnelRecords.EditCompanyInfo(), FormMethod.Post, new { @class = "standard-form" })) { %>
+        <%= Html.Hidden("username", Model.Record.User.Username) %>
+        <%= Html.Hidden("editingmyrecord", Model.EditingMyRecord)%>
+        <div class="field-group">
+            <div class="field">
+                <label for="HirePositionId">Hired On Position</label>
+                <%= Html.DropDownList("HirePositionId", Model.HirePositions)%>
+                <%= Html.ValidationMessage("HirePositionId")%>
+            </div>
+        </div
+        <div class="field-group">
+            <div class="field">
+                <label for="ShirtSize">Shirt Size</label>
+                <%= Html.DropDownList("ShirtSize", Model.Record.ShirtSize.GenerateSelectListItems())%>
+                <%= Html.ValidationMessage("ShirtSize")%>
+            </div>
+            <div class="field">
+                <label for="FlightSuitSize">Flight Suit Size</label>
+                <%= Html.DropDownList("FlightSuitSize", Model.Record.FlightSuitSize.GenerateSelectListItems())%>
+                <%= Html.ValidationMessage("FlightSuitSize")%>
             </div>
         </div>
         <div class="button-group">
