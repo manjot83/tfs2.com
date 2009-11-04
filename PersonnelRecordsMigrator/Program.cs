@@ -15,6 +15,30 @@ namespace PersonnelRecordsMigrator
 
         static void Main(string[] args)
         {
+            new Program().Run();
+        }
+
+        public Program()
+        {
+            oldDatabase = new OldDatabase(@"Server=apollo.tfs2.com;Database=tfs_opcenter;user id=sa;password=willypete;");
+            newDatabase = new NewDatabase(@"Server=.\SQLEXPRESS;Database=dev_tfs2.com;Trusted_Connection=yes;");
+        }
+
+        public void Run()
+        {
+            var usernames = GetAllNewUsernames();
+            foreach (var username in usernames)
+            {
+                var person = GetOrCreatePersonForUsername(username);
+                var qualification = GetOrCreateQualification(person);
+                var records = GetOldFormRecordsForUsername(username);
+                foreach (var record in records)
+                {
+                    UpdatePerson(person, record);
+                    UpdateQual(qualification, record);
+                    newDatabase.SubmitChanges();
+                }
+            }
         }
 
         IList<string> GetAllNewUsernames()
@@ -99,9 +123,11 @@ namespace PersonnelRecordsMigrator
             };
         }
 
-        string StripExtraPhoneCharacters(string number)
+        string StripExtraPhoneCharacters(string input)
         {
-            return number.Replace(")", "")
+            if (input == null)
+                return null;
+            var number = input.Replace(")", "")
                 .Replace("(", "")
                 .Replace(".", "")
                 .Replace("-", "")
@@ -109,18 +135,29 @@ namespace PersonnelRecordsMigrator
                 .Replace("]", "")
                 .Replace(",", "")
                 .Replace(" ", "");
+            number = number.Replace("Cell:", "");
+            number = number.Replace("HOME#OR", "");
+            if (number.Length > 10)
+            {
+                number = number.Substring(0, 10);
+            }
+            return number;
         }
 
-        DateTime? TryParseDate(string date)
+        DateTime? TryParseDate(string input)
         {
-            DateTime parsed = DateTime.Now;
-            if (!DateTime.TryParse(date, out parsed))
+            if (input == null)
                 return null;
-            return parsed;
+            DateTime date = DateTime.Now;
+            if (!DateTime.TryParse(input, out date))
+                return null;
+            return date;
         }
 
         int? MaleOrFemale(string input)
         {
+            if (input == null)
+                return null;
             if (input.ToUpperInvariant() == "MALE")
                 return 1;
             if (input.ToUpperInvariant() == "FEMALE")
@@ -130,14 +167,18 @@ namespace PersonnelRecordsMigrator
 
         Position TryGetPosition(string input)
         {
+            if (input == null)
+                return null;
             return newDatabase.Positions.FirstOrDefault(x => x.Title.Contains(input));
         }
 
         int? PraseFCFQual(string input)
         {
+            if (input == null)
+                return null;
             if (input.ToUpperInvariant() == "NO")
                 return 0;
-            if (cinput.ToUpperInvariant() == "YES")
+            if (input.ToUpperInvariant() == "YES")
                 return 1;
             if (input.StartsWith("TFS"))
                 return 2;
