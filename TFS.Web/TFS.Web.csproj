@@ -249,6 +249,7 @@
     <Content Include="Views\FlightLogs\MissionForm.ascx" />
     <Content Include="Views\FlightLogs\SquadronLogForm.ascx" />
     <Content Include="Views\PersonnelRecords\EditRecord.aspx" />
+    <Content Include="Views\PersonnelRecords\List.aspx" />
     <Content Include="Views\Programs\Manage.aspx" />
     <Content Include="Views\Security\ChangePassword.aspx" />
     <Content Include="Views\Security\LogOn.aspx" />

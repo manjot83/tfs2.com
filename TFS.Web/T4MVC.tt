@@ -26,7 +26,7 @@ readme for all the details!
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text.RegularExpressions" #>
 <#@ import namespace="Microsoft.VisualStudio.Shell.Interop" #>
-<#@ import namespace="EnvDTE" #>
+<#@ import namespace="EnvDTE" #>    
 <#@ import namespace="EnvDTE80" #>
 <#@ import namespace="Microsoft.VisualStudio.TextTemplating" #>
 <# PrepareDataToRender(this); #>
@@ -42,7 +42,7 @@ readme for all the details!
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Web;
+using System.Web;   
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Mvc.Html;

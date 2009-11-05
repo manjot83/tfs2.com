@@ -87,3 +87,20 @@ a.sorted-down
 	font-weight: normal;
 	font-style: italic;
 }
+
+.list-table-pager
+{
+	font-size:1em;
+	text-align:right;
+}
+
+.list-table-pager span
+{
+	display:inline-block;
+}
+
+.list-table-pager select
+{
+	margin-top: 1em;
+	font-size:1em;
+}

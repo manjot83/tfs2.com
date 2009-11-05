@@ -6,6 +6,8 @@ namespace TFS.Web.ViewModels
 {
     public class SortedListViewModel<TItemType>
     {
+        public const int DefaultItemsPerPage = 20;
+
         public IEnumerable<TItemType> Items { get; set; }
 
         public string SortType { get; set; }
@@ -13,8 +15,16 @@ namespace TFS.Web.ViewModels
 
         public bool PagingEnabled { get; set; }
         public int CurrentPage { get; set; }
-        public int TotalPages { get; set; }
-        public int ViewableItems { get; set; }
+        public int TotalPages
+        {
+            get
+            {
+                if (TotalItems <= 0 || ItemsPerPage <= 0)
+                    return 1;
+                return (TotalItems / ItemsPerPage) + 1;
+            }
+        }
+        public int ItemsPerPage { get; set; }
         public int TotalItems { get; set; }
 
         public SortDirection GetReverseSortDirection()
@@ -41,6 +51,26 @@ namespace TFS.Web.ViewModels
         public string SortDirectionClass(string ascendingClass, string descendingClass)
         {
             return IsSortedAscending() ? ascendingClass : descendingClass;
+        }
+
+        public bool HasPreviousPage()
+        {
+            return PagingEnabled && CurrentPage > 1;
+        }
+
+        public bool HasNextPage()
+        {
+            return PagingEnabled && CurrentPage < TotalPages;
+        }
+
+        public int PreviousPage()
+        {
+            return CurrentPage - 1;
+        }
+
+        public int NextPage()
+        {
+            return CurrentPage + 1;
         }
     }
 }
