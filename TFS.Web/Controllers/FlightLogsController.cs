@@ -19,11 +19,13 @@ namespace TFS.Web.Controllers
             this.flightLogRepository = flightLogRepository;
         }
 
+        [RequireTransaction]
         public virtual ViewResult Index()
         {
             return List(null, null);
         }
 
+        [RequireTransaction]
         public virtual ViewResult List(string sortType, SortDirection? sortDirection)
         {
             if (string.IsNullOrEmpty(sortType))
@@ -51,6 +53,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
+        [RequireTransaction]
         public virtual ViewResult EditMissionLog(int id)
         {
             var missionLog = flightLogRepository.GetMissionLog(id);
@@ -97,6 +100,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
+        [RequireTransaction]
         public virtual ViewResult EditMission(int id)
         {
             var viewModel = new MissionViewModel();
@@ -150,11 +154,12 @@ namespace TFS.Web.Controllers
                 return View(missionViewModel);
             }
             var missionLog = flightLogRepository.GetMissionLog(missionViewModel.MissionLogId);
-            flightLogRepository.AddMission(missionLog, missionViewModel.Mission);
+            missionLog.AddMission(missionViewModel.Mission);
             return RedirectToAction(MVC.FlightLogs.EditMissionLog(missionViewModel.MissionLogId));
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
+        [RequireTransaction]
         public virtual ViewResult EditSquadronLog(int id)
         {
             var viewModel = new SquadronLogViewModel();
@@ -197,6 +202,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
+        [RequireTransaction]
         public virtual ViewResult CreateSquadronLog(int missionLogId)
         {
             var viewModel = new SquadronLogViewModel();
@@ -218,10 +224,11 @@ namespace TFS.Web.Controllers
             }
             var missionLog = flightLogRepository.GetMissionLog(squadronLogViewModel.MissionLogId);
             squadronLogViewModel.SquadronLog.Person = flightLogRepository.GetSquadronPersonForUsername(squadronLogViewModel.PersonUsername);
-            flightLogRepository.AddSquadronLog(missionLog, squadronLogViewModel.SquadronLog);
+            missionLog.AddSquadronLog(squadronLogViewModel.SquadronLog);
             return RedirectToAction(MVC.FlightLogs.EditMissionLog(squadronLogViewModel.MissionLogId));
         }
 
+        [RequireTransaction]
         public virtual FileContentResult DownloadPDF(int id)
         {
             var missionLog = flightLogRepository.GetMissionLog(id);

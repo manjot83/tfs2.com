@@ -23,11 +23,13 @@ namespace TFS.Web.Controllers
             this.userRepository = userRepository;
         }
 
+        [RequireTransaction]
         public virtual ViewResult Index()
         {
             return List(null, null);
         }
 
+        [RequireTransaction]
         public virtual ViewResult List(string sortType, SortDirection? sortDirection)
         {
             if (string.IsNullOrEmpty(sortType))

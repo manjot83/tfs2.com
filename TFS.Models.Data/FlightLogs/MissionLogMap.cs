@@ -16,10 +16,12 @@ namespace TFS.Models.Data.FlightLogs
 
             HasMany(x => x.Missions)
                 .KeyColumn("MissionLogId")
-                .Inverse();
+                .Inverse()
+                .Cascade.SaveUpdate();
             HasMany(x => x.SquadronLogs)
                 .KeyColumn("MissionLogId")
-                .Inverse();
+                .Inverse()
+                .Cascade.SaveUpdate();
 
             Map(x => x.LogDate)
                 .CustomType<UtcDateTimeUserType>()

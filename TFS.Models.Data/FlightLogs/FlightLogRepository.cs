@@ -39,7 +39,7 @@ namespace TFS.Models.Data.FlightLogs
 
         public Person GetSquadronPersonForUsername(string username)
         {
-            return Session.Linq<Person>().Where(x => x.User.Username.Matches(username)).FirstOrDefault();
+            return Session.Linq<Person>().Where(x => x.User.Username == username).FirstOrDefault();
         }
 
         public IEnumerable<MissionLog> GetAllMissionLogs()
@@ -73,20 +73,6 @@ namespace TFS.Models.Data.FlightLogs
                 LastModifiedDate = DateTime.Now.ToUniversalTime(),
             };
             return (MissionLog)Session.SaveOrUpdateCopy(newMissionLog);
-        }
-
-        public Mission AddMission(MissionLog missionLog, Mission mission)
-        {
-            mission.MissionLog = missionLog;            
-            mission.MarkedUpdated();
-            return (Mission)Session.SaveOrUpdateCopy(mission);
-        }
-
-        public SquadronLog AddSquadronLog(MissionLog missionLog, SquadronLog squadronLog)
-        {
-            squadronLog.MissionLog = missionLog;
-            squadronLog.MarkedUpdated();
-            return (SquadronLog)Session.SaveOrUpdateCopy(squadronLog);
         }
     }
 }

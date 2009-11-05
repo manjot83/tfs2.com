@@ -16,7 +16,5 @@ namespace TFS.Models.FlightLogs
         Person GetSquadronPersonForUsername(string username);
 
         MissionLog CreateNewMissionLog(DateTime logDate, string aircraftMDS, string aircraftSerialNumber, string location);
-        Mission AddMission(MissionLog missionLog, Mission mission);
-        SquadronLog AddSquadronLog(MissionLog missionLog, SquadronLog squadronLog);        
     }
 }

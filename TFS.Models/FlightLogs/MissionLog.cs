@@ -66,5 +66,20 @@ namespace TFS.Models.FlightLogs
         {
             LastModifiedDate = DateTime.Now.ToUniversalTime();
         }
+
+        public virtual Mission AddMission(Mission mission)
+        {
+            mission.MissionLog = this;
+            mission.MarkedUpdated();
+            Missions.Add(mission);
+            return mission;
+        }
+        public virtual SquadronLog AddSquadronLog(SquadronLog squadronLog)
+        {
+            squadronLog.MissionLog = this;
+            squadronLog.MarkedUpdated();
+            SquadronLogs.Add(squadronLog);
+            return squadronLog;
+        }
     }
 }
