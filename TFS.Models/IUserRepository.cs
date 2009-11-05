@@ -6,9 +6,9 @@ using Centro.DomainModel;
 
 namespace TFS.Models
 {
-    public interface IUserRepository : IRepository
+    public interface IUserRepository
     {
-        IEnumerable<User> GetUsers();
+        IEnumerable<User> GetAllUsers();
         User GetUser(string username);        
 
         User CreateUser(string username, string firstname, string lastname, string displayname);

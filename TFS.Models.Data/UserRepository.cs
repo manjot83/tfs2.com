@@ -21,7 +21,7 @@ namespace TFS.Models.Data
             return Session.Linq<User>().Where(x => x.Username == username).FirstOrDefault();
         }
 
-        public IEnumerable<User> GetUsers()
+        public IEnumerable<User> GetAllUsers()
         {
             return Session.Linq<User>();
         }
