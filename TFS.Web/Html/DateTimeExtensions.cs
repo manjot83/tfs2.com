@@ -7,18 +7,18 @@ namespace TFS.Web.Html
 {
     public static class DateTimeExtensions
     {
-        public static string ToShortDateOrEmptyString(this DateTime dateTime)
+        public static string ToShortDateOrEmptyString(this DateTime? dateTime)
         {
-            if (dateTime == DateTime.MinValue)
+            if (!dateTime.HasValue || dateTime == DateTime.MinValue)
                 return string.Empty;
-            return dateTime.ToString("MM/dd/yyyy");
+            return dateTime.Value.ToString("MM/dd/yyyy");
         }
 
-        public static string ToShortMilitaryTime(this DateTime dateTime)
+        public static string ToShortMilitaryTime(this DateTime? dateTime)
         {
-            if (dateTime == DateTime.MinValue)
+            if (!dateTime.HasValue || dateTime == DateTime.MinValue)
                 return string.Empty;
-            return dateTime.ToString("HHMM");
+            return dateTime.Value.ToString("HHMM");
         }
     }
 }

@@ -23,9 +23,8 @@ namespace TFS.Models.Data.PersonnelRecords
             HasOne(x => x.User)
                 .ForeignKey("FK_Persons_Users")
                 .Constrained()
-                .Cascade.SaveUpdate();
+                .Cascade.All();
             HasOne(x => x.Qualifications)
-                .Constrained()
                 .Cascade.All();
 
             References(x => x.HirePosition)

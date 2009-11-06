@@ -79,7 +79,6 @@
     <Compile Include="PersonnelRecords\FCFQualification.cs" />
     <Compile Include="PersonnelRecords\FlightSuitSize.cs" />
     <Compile Include="PersonnelRecords\Gender.cs" />
-    <Compile Include="PersonnelRecords\IPersonnelRecordsRepository.cs" />
     <Compile Include="PersonnelRecords\Person.cs" />
     <Compile Include="PersonnelRecords\Certificate.cs" />
     <Compile Include="PersonnelRecords\CertificateType.cs" />

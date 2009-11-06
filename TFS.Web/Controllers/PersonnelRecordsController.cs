@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using Centro.Web.Mvc;
 using Centro.Web.Mvc.ActionFilters;
 using TFS.Models;
@@ -8,19 +10,18 @@ using TFS.Models.Geography;
 using TFS.Models.PersonnelRecords;
 using TFS.Models.Programs;
 using TFS.Web.ViewModels;
-using System.Web.UI.WebControls;
 
 namespace TFS.Web.Controllers
 {
     [Authorize]
     public partial class PersonnelRecordsController : Controller
     {
-        private readonly IPersonnelRecordsRepository personnelRecordsRepository;
+        private readonly IUserRepository userRepository;
         private readonly IProgramsRepository programsRepository;
 
-        public PersonnelRecordsController(IPersonnelRecordsRepository personnelRecordsRepository, IProgramsRepository programsRepository)
+        public PersonnelRecordsController(IUserRepository userRepository, IProgramsRepository programsRepository)
         {
-            this.personnelRecordsRepository = personnelRecordsRepository;
+            this.userRepository = userRepository;
             this.programsRepository = programsRepository;
         }
 
@@ -38,7 +39,12 @@ namespace TFS.Web.Controllers
                 ItemsPerPage = itemsPerPage.HasValue ? itemsPerPage.Value : SortedListViewModel<Person>.DefaultItemsPerPage,
             };
 
-            var items = personnelRecordsRepository.GetAllRecords();
+            IEnumerable<Person> items = userRepository.GetAllUsers().Select(x => x.Person);
+            if (viewModel.IsCurrentSortType("name") && viewModel.SortDirection == SortDirection.Ascending)
+                items = items.OrderBy(x => x.FileByName());
+            else if (viewModel.IsCurrentSortType("name"))
+                items = items.OrderByDescending(x => x.FileByName());
+            items = items.ToList();
             viewModel.TotalItems = items.Count();
             viewModel.Items = items.Skip(viewModel.ItemsPerPage * (viewModel.CurrentPage - 1)).Take(viewModel.ItemsPerPage).ToList();
 
@@ -46,11 +52,23 @@ namespace TFS.Web.Controllers
         }
 
         [RequireTransaction]
+        public virtual ViewResult EditRecord(string username)
+        {
+            var user = userRepository.GetUser(username);
+            var person = user.Person;
+            if (person == null)
+                person = userRepository.CreatePersonFor(user);
+            var viewModel = GeneratePersonnelRecordViewModel(person, false);
+            return View(MVC.PersonnelRecords.Views.EditRecord, viewModel);
+        }
+
+        [RequireTransaction]
         public virtual ViewResult EditMyRecord()
         {
-            var person = personnelRecordsRepository.GetPerson(this.GetCurrentUser());
+            var user = this.GetCurrentUser();
+            var person = user.Person;
             if (person == null)
-                person = personnelRecordsRepository.CreatePersonnelRecordFor(this.GetCurrentUser());
+                person = userRepository.CreatePersonFor(user);
             var viewModel = GeneratePersonnelRecordViewModel(person, true);
             return View(MVC.PersonnelRecords.Views.EditRecord, viewModel);
         }
@@ -60,7 +78,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditPersonalInfo(string username, bool editingMyRecord, PersonnelRecordPersonalInfo personalInfo)
         {
             personalInfo.Validate(ModelState, string.Empty);
-            var person = personnelRecordsRepository.GetPerson(username);
+            var person = userRepository.GetUser(username).Person;
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
             person.FirstName = personalInfo.FirstName;
@@ -72,7 +90,7 @@ namespace TFS.Web.Controllers
             if (editingMyRecord)
                 return RedirectToAction(MVC.PersonnelRecords.EditMyRecord());
             else
-                throw new NotImplementedException();
+                return RedirectToAction(MVC.PersonnelRecords.EditRecord(username));
         }
 
         [RequireTransaction]
@@ -80,7 +98,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditContactInfo(string username, bool editingMyRecord, PersonnelRecordContactInfo contactInfo)
         {
             contactInfo.Validate(ModelState, string.Empty);
-            var person = personnelRecordsRepository.GetPerson(username);
+            var person = userRepository.GetUser(username).Person;
             if (USState.FromAbbreviation(contactInfo.State.ToUpper()) == null)
                 ModelState.AddModelError("State", "Must be a valid US state abbreviation.");
             if (!ModelState.IsValid)
@@ -99,7 +117,7 @@ namespace TFS.Web.Controllers
             if (editingMyRecord)
                 return RedirectToAction(MVC.PersonnelRecords.EditMyRecord());
             else
-                throw new NotImplementedException();
+                return RedirectToAction(MVC.PersonnelRecords.EditRecord(username));
         }
 
         [RequireTransaction]
@@ -107,7 +125,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditCompanyInfo(string username, bool editingMyRecord, PersonnelRecordCompanyInfo companyInfo)
         {
             companyInfo.Validate(ModelState, string.Empty);
-            var person = personnelRecordsRepository.GetPerson(username);
+            var person = userRepository.GetUser(username).Person;
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
             person.FlightSuitSize = companyInfo.FlightSuitSize;
@@ -116,7 +134,7 @@ namespace TFS.Web.Controllers
             if (editingMyRecord)
                 return RedirectToAction(MVC.PersonnelRecords.EditMyRecord());
             else
-                throw new NotImplementedException();
+                return RedirectToAction(MVC.PersonnelRecords.EditRecord(username));
         }
 
         private PersonnelRecordViewModel GeneratePersonnelRecordViewModel(Person person, bool editingMyRecord)

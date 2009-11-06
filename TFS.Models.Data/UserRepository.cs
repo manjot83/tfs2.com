@@ -6,6 +6,7 @@ using Centro.Data.DomainModel;
 using Centro.Extensions;
 using NHibernate;
 using NHibernate.Linq;
+using TFS.Models.PersonnelRecords;
 
 namespace TFS.Models.Data
 {
@@ -84,6 +85,19 @@ namespace TFS.Models.Data
             };
             user.SetDefaultEmailAddress(username);
             return (User)Session.SaveOrUpdateCopy(user);
+        }
+
+        public Person CreatePersonFor(User user)
+        {
+            var person = new Person
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                User = user,
+            };
+            person = (Person)Session.SaveOrUpdateCopy(person);
+            user.Person = person;
+            return person;
         }
     }
 }

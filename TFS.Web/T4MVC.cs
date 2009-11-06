@@ -206,6 +206,11 @@ namespace TFS.Web.Controllers {
         }
 
         [NonAction]
+        public ActionResult EditRecord() {
+            return new T4MVC_ActionResult(Name, Actions.EditRecord);
+        }
+
+        [NonAction]
         public ActionResult EditPersonalInfo() {
             return new T4MVC_ActionResult(Name, Actions.EditPersonalInfo);
         }
@@ -230,6 +235,7 @@ namespace TFS.Web.Controllers {
         [CompilerGenerated]
         public class ActionNames {
             public readonly string List = "List";
+            public readonly string EditRecord = "EditRecord";
             public readonly string EditMyRecord = "EditMyRecord";
             public readonly string EditPersonalInfo = "EditPersonalInfo";
             public readonly string EditContactInfo = "EditContactInfo";
@@ -560,6 +566,12 @@ namespace T4MVC {
             callInfo.RouteValues.Add("sortDirection", sortDirection);
             callInfo.RouteValues.Add("page", page);
             callInfo.RouteValues.Add("itemsPerPage", itemsPerPage);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult EditRecord(string username) {
+            var callInfo = new T4MVC_ViewResult("PersonnelRecords", Actions.EditRecord);
+            callInfo.RouteValues.Add("username", username);
             return callInfo;
         }
 

@@ -18,7 +18,7 @@ namespace TFS.Models.PersonnelRecords
         public virtual string LastName { get; set; }
         public virtual string FirstName { get; set; }
         public virtual string MiddleInitial { get; set; }
-        public virtual DateTime DateOfBirth { get; set; }
+        public virtual DateTime? DateOfBirth { get; set; }
         public virtual Gender Gender { get; set; }
         public virtual string SocialSecurityLastFour { get; set; }
 

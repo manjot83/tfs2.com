@@ -23,7 +23,7 @@ namespace TFS.Models.Data.PersonnelRecords
             HasOne(x => x.Person)
                 .ForeignKey("FK_Qualifications_Person")
                 .Constrained()
-                .Cascade.SaveUpdate();
+                .Cascade.All();
             HasManyToMany(x => x.Certificates)
                 .Table("QualificationsCertificates")
                 .ForeignKeyConstraintNames("FK_QualificationsCertificates_Qualifications", "FK_QualificationsCertificates_Certificates")

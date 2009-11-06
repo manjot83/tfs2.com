@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Centro.DomainModel;
 using System.ComponentModel.DataAnnotations;
+using TFS.Models.PersonnelRecords;
 
 namespace TFS.Models
 {
@@ -22,6 +23,8 @@ namespace TFS.Models
         [Required, StringLength(50)]
         public virtual string Username { get; set; }
         public virtual bool Disabled { get; set; }
+
+        public virtual Person Person { get; set; }
 
         public virtual void SetDefaultEmailAddress(string username)
         {

@@ -17,6 +17,7 @@
         <tr>
             <td>
                 <%--<%= Html.ActionLink(user.LastName + ", " +user.FirstName, MVC.Users.Edit(user.Username)) %>--%>
+                <%= Html.ActionLink(person.FileByName(), MVC.PersonnelRecords.EditRecord(person.User.Username)) %>
                 <%= Html.Encode(person.FileByName()) %>
             </td>
         </tr>

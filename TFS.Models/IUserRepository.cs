@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Centro.DomainModel;
+using TFS.Models.PersonnelRecords;
 
 namespace TFS.Models
 {
@@ -12,5 +13,7 @@ namespace TFS.Models
         User GetUser(string username);        
 
         User CreateUser(string username, string firstname, string lastname, string displayname);
+
+        Person CreatePersonFor(User user);
     }
 }

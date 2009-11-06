@@ -18,11 +18,6 @@ namespace TFS.Models.Data.UserTypes
         void IUserType.NullSafeSet(IDbCommand cmd, object value, int index)
         {
             var dateValue = (DateTime?)value;
-
-            //We seem to get a DateTime.MinValue in stead of a null, turn that value into a null
-            if (dateValue.HasValue)
-                dateValue = dateValue.Value == DateTime.MinValue ? null : dateValue;
-
             if (dateValue.HasValue)
             {
                 if (dateValue.Value.Kind != DateTimeKind.Utc)
@@ -77,6 +72,8 @@ namespace TFS.Models.Data.UserTypes
 
         bool IUserType.Equals(object x, object y)
         {
+            if (object.ReferenceEquals(x, y))
+                return true;
             if ((x != null) && (y != null))
                 return x.Equals(y);
             return false;

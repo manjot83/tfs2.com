@@ -16,6 +16,9 @@ namespace TFS.Models.Data
                 .GeneratedBy.Identity()
                 .Not.Nullable();
 
+            HasOne(x => x.Person)
+                .Cascade.All();
+
             Map(x => x.FirstName)
                 .Length(100)
                 .Not.Nullable();
