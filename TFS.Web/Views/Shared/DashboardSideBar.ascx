@@ -11,7 +11,7 @@
     <h1>Administration</h1>
     <ul>
         <li><%= Html.NavImageLink("Users", Links.Content.@internal.icons.group_png, MVC.Users.Index()) %></li>
-        <%--<li><%= Html.NavImageLink("Personnel Files", Links.Content.@internal.icons.vcard_png, "#")%></li>--%>
+        <li><%= Html.NavImageLink("Personnel Files", Links.Content.@internal.icons.vcard_png, MVC.PersonnelRecords.List())%></li>
         <%--<li><%= Html.NavImageLink("Programs", Links.Content.@internal.icons.book_png, MVC.Programs.Manage())%></li>
         <li><%= Html.NavImageLink("Website", Links.Content.@internal.icons.world_png, "#")%></li>--%>
     </ul>

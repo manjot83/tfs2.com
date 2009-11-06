@@ -92,6 +92,31 @@ namespace TFS.Web
             };
             var person_bill = session.Save(person_bill_entity);
 
+            for (int i = 0; i < 50; i++)
+            {
+                var user = session.Save(new User
+                {
+                    FirstName = "Fake",
+                    LastName = "User" + i,
+                    DisplayName = "Fake User" + i,
+                    Username = "f.user" + i,
+                    Email = "f.user" + i + "@tfs2.com",
+                    Disabled = false,
+                });
+                var person = new Person()
+                {
+                    User = session.Get<User>(user),
+                    HirePosition = session.Get<Position>(position_pilot),
+                    FirstName = "Fake",
+                    LastName = "User" + i,
+                };
+                person.Qualifications = new Qualifications()
+                {
+                    Person = person,
+                };
+                session.Save(person);
+            }
+
             // Example Flight Log Data
             var missionlog_example1 = session.Save(new MissionLog()
             {

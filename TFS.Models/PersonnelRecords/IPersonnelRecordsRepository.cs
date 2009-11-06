@@ -7,6 +7,7 @@ namespace TFS.Models.PersonnelRecords
 {
     public interface IPersonnelRecordsRepository
     {
+        IList<Person> GetAllRecords();
         Person GetPerson(User user);
         Person GetPerson(string username);
 

@@ -3,6 +3,8 @@ using Centro.Data.DomainModel;
 using NHibernate;
 using NHibernate.Linq;
 using TFS.Models.PersonnelRecords;
+using System.Collections.Generic;
+using NHibernate.Criterion;
 
 namespace TFS.Models.Data.PersonnelRecords
 {
@@ -11,6 +13,11 @@ namespace TFS.Models.Data.PersonnelRecords
         public PersonnelRecordsRepository(ISession session)
             : base(session)
         {
+        }
+
+        public IList<Person> GetAllRecords()
+        {
+            return Session.Linq<Person>().Where(x => !x.User.Disabled).ToList();
         }
 
         public Person GetPerson(User user)
@@ -45,5 +52,7 @@ namespace TFS.Models.Data.PersonnelRecords
             var user = Session.Linq<User>().Where(x => x.Username == username).FirstOrDefault();
             return CreatePersonnelRecordFor(user);
         }
+
+
     }
 }

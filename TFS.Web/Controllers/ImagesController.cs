@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using TFS.Models.Images;
+using Centro.Web.Mvc.ActionFilters;
 
 namespace TFS.Web.Controllers
 {
@@ -17,6 +18,7 @@ namespace TFS.Web.Controllers
             this.imageRepository = imageRepository;
         }
 
+        [RequireTransaction]
         public virtual ActionResult StaticImage(Guid id)
         {
             var imageInfo = imageRepository.GetStaticImage(id);

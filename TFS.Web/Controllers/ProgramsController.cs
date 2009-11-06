@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using TFS.Models.Programs;
 using TFS.Web.ViewModels;
+using Centro.Web.Mvc.ActionFilters;
 
 namespace TFS.Web.Controllers
 {
@@ -19,6 +20,7 @@ namespace TFS.Web.Controllers
             this.programsRepository = programsRepository;
         }
 
+        [RequireTransaction]
         public virtual ViewResult Manage()
         {
             var viewModel = new ManageProgramsViewModel();
@@ -26,6 +28,7 @@ namespace TFS.Web.Controllers
             return View(viewModel);
         }
 
+        [RequireTransaction]
         public virtual RedirectToRouteResult AddNewPosition(string title)
         {
             programsRepository.CreateNewPosition(title);

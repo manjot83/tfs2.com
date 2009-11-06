@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Web.Mvc;
 using Centro.Web.Mvc;
 using Centro.Web.Mvc.ActionFilters;
@@ -7,6 +8,7 @@ using TFS.Models.Geography;
 using TFS.Models.PersonnelRecords;
 using TFS.Models.Programs;
 using TFS.Web.ViewModels;
+using System.Web.UI.WebControls;
 
 namespace TFS.Web.Controllers
 {
@@ -20,6 +22,27 @@ namespace TFS.Web.Controllers
         {
             this.personnelRecordsRepository = personnelRecordsRepository;
             this.programsRepository = programsRepository;
+        }
+
+        [RequireTransaction]
+        public virtual ViewResult List(string sortType, SortDirection? sortDirection, int? page, int? itemsPerPage)
+        {
+            if (string.IsNullOrEmpty(sortType))
+                sortType = "name";
+            var viewModel = new SortedListViewModel<Person>()
+            {
+                SortDirection = sortDirection ?? SortDirection.Ascending,
+                SortType = sortType,
+                PagingEnabled = true,
+                CurrentPage = page.HasValue ? page.Value : 1,
+                ItemsPerPage = itemsPerPage.HasValue ? itemsPerPage.Value : SortedListViewModel<Person>.DefaultItemsPerPage,
+            };
+
+            var items = personnelRecordsRepository.GetAllRecords();
+            viewModel.TotalItems = items.Count();
+            viewModel.Items = items.Skip(viewModel.ItemsPerPage * (viewModel.CurrentPage - 1)).Take(viewModel.ItemsPerPage).ToList();
+
+            return View(Views.List, viewModel);
         }
 
         [RequireTransaction]

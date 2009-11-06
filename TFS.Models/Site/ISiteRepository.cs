@@ -6,7 +6,7 @@ using Centro.DomainModel;
 
 namespace TFS.Models.Site
 {
-    public interface ISiteRepository : IRepository
+    public interface ISiteRepository
     {
         Page GetPage(string uri);
     }

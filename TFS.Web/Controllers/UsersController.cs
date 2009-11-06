@@ -23,11 +23,13 @@ namespace TFS.Web.Controllers
             this.userRepository = userRepository;
         }
 
+        [RequireTransaction]
         public virtual ViewResult Index()
         {
             return List(null, null);
         }
 
+        [RequireTransaction]
         public virtual ViewResult List(string sortType, SortDirection? sortDirection)
         {
             if (string.IsNullOrEmpty(sortType))
@@ -37,7 +39,7 @@ namespace TFS.Web.Controllers
             var viewModel = new SortedListViewModel<User>();
             viewModel.SortDirection = sortDirection ?? SortDirection.Ascending;
             viewModel.SortType = sortType;
-            var users = userRepository.GetUsers();
+            var users = userRepository.GetAllUsers();
             if (viewModel.IsCurrentSortType("name") && viewModel.SortDirection == SortDirection.Ascending)
                 users = users.OrderBy(x => x.LastName);
             else if (viewModel.IsCurrentSortType("name"))

@@ -6,7 +6,7 @@ using TFS.Models.PersonnelRecords;
 
 namespace TFS.Models.FlightLogs
 {
-    public interface IFlightLogRepository : IRepository
+    public interface IFlightLogRepository
     {
         MissionLog GetMissionLog(int id);
         Mission GetMission(int id);
@@ -15,12 +15,6 @@ namespace TFS.Models.FlightLogs
         IList<Person> GetAvailableSquadronPersons();
         Person GetSquadronPersonForUsername(string username);
 
-        IQueryable<MissionLog> QueryMissionLogs();
-        IQueryable<Mission> QueryMissions();
-        IQueryable<SquadronLog> QuerySquadronLogs();
-
         MissionLog CreateNewMissionLog(DateTime logDate, string aircraftMDS, string aircraftSerialNumber, string location);
-        Mission AddMission(MissionLog missionLog, Mission mission);
-        SquadronLog AddSquadronLog(MissionLog missionLog, SquadronLog squadronLog);        
     }
 }
