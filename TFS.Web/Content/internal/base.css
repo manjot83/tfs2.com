@@ -30,7 +30,7 @@ acronym
 }
 body
 {
-	background: #fcf9e7;
+	background: #e4dac4;
 	color: #543;
 	font: normal 62.5% "Verdana" ,sans-serif;
 }
@@ -105,7 +105,7 @@ h1, h2, h3
 /* header */
 .header
 {
-	background: url(template/bgheader.gif) repeat-x;
+	background: url(template/bgheader.png) repeat-x;
 	margin: 0 auto;
 }
 
@@ -218,7 +218,7 @@ h1, h2, h3
 /* footer */
 .footer
 {
-	background: #958463 url(template/bgfooter.gif) repeat-x;
+	background: #958463 url(template/bgfooter.png) repeat-x;
 	color: #FED;
 	font-size: 1.1em;
 	line-height: 40px;

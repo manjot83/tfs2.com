@@ -11,11 +11,6 @@
 	text-align :center;
 }
 
-.list-table a:hover
-{
-	color: #2A5400;
-}
-
 .list-table thead
 {
 	text-align: left;

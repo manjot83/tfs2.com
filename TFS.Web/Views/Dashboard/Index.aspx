@@ -8,7 +8,7 @@
 
     <h1>Select options from the left.</h1>    
 
-    <%--<h1>Porttitor posuere</h1>
+    <h1>Porttitor posuere</h1>
 			<div class="descr">Jun 13, 2006 by Vulputate</div>
 
 			<p>In hac habitasse platea dictumst. Duis porttitor. Sed vulputate elementum nisl. Vivamus et mi at arcu mattis iaculis. Nullam posuere tristique tortor. In bibendum. Aenean ornare, <a href="index.html">nunc eget pretium</a> porttitor, sem est pretium leo, non euismod nulla dui non diam. Pellentesque dictum faucibus leo. Vestibulum ac ante. Sed in est.</p>
@@ -65,7 +65,7 @@ background: url(img/quote.gif) no-repeat;
 padding-left: 28px;
 color: #555;</code>
 
-			<p>Eget feugiat est leo tempor quam. Ut quis neque convallis magna consequat molestie.</p>--%>
+			<p>Eget feugiat est leo tempor quam. Ut quis neque convallis magna consequat molestie.</p>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="AdditionalJavascript" runat="server">
