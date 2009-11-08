@@ -21,7 +21,10 @@ namespace TFS.Web.ViewModels
             {
                 if (TotalItems <= 0 || ItemsPerPage <= 0)
                     return 1;
-                return (TotalItems / ItemsPerPage) + 1;
+                if (TotalItems % ItemsPerPage == 0)
+                    return TotalItems / ItemsPerPage;
+                else
+                    return (TotalItems / ItemsPerPage) + 1;
             }
         }
         public int ItemsPerPage { get; set; }

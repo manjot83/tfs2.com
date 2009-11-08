@@ -415,6 +415,7 @@ namespace TFS.Web.Controllers {
         public class ViewNames {
             public readonly string Create = "Create";
             public readonly string List = "List";
+            public readonly string UserInformation = "UserInformation";
         }
     }
 }
@@ -703,16 +704,24 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult List(string sortType, System.Web.UI.WebControls.SortDirection? sortDirection) {
+        public override System.Web.Mvc.ViewResult List(string sortType, System.Web.UI.WebControls.SortDirection? sortDirection, int? page, int? itemsPerPage) {
             var callInfo = new T4MVC_ViewResult("Users", Actions.List);
             callInfo.RouteValues.Add("sortType", sortType);
             callInfo.RouteValues.Add("sortDirection", sortDirection);
+            callInfo.RouteValues.Add("page", page);
+            callInfo.RouteValues.Add("itemsPerPage", itemsPerPage);
             return callInfo;
         }
 
         public override System.Web.Mvc.ViewResult Edit(string username) {
             var callInfo = new T4MVC_ViewResult("Users", Actions.Edit);
             callInfo.RouteValues.Add("username", username);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Edit(TFS.Web.ViewModels.UserViewModel user) {
+            var callInfo = new T4MVC_ActionResult("Users", Actions.Edit);
+            callInfo.RouteValues.Add("user", user);
             return callInfo;
         }
 
@@ -915,9 +924,10 @@ namespace Links {
             public static class @template {
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath("~/Content/internal/template"); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath("~/Content/internal/template/" + fileName); }
-                public static readonly string bg_gif = Url("bg.gif");
                 public static readonly string bgcontainer_gif = Url("bgcontainer.gif");
                 public static readonly string bgfooter_gif = Url("bgfooter.gif");
+                public static readonly string bgfooter_pdn = Url("bgfooter.pdn");
+                public static readonly string bgfooter_png = Url("bgfooter.png");
                 public static readonly string bgheader_gif = Url("bgheader.gif");
                 public static readonly string bgnavigation_gif = Url("bgnavigation.gif");
                 public static readonly string bgul_gif = Url("bgul.gif");

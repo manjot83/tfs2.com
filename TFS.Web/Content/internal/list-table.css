@@ -87,6 +87,7 @@ a.sorted-down
 {
 	font-size:1em;
 	text-align:right;
+	padding-bottom: 5px;
 }
 
 .list-table-pager span

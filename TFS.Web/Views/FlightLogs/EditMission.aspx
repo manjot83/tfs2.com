@@ -6,7 +6,7 @@
     </p>
     <h1>Edit flight log mission</h1>
     <% using (Html.BeginForm(MVC.FlightLogs.EditMission(Model.Mission.Id.Value), FormMethod.Post, new { @class = "standard-form" })) { %>
-        <% Html.RenderPartial("MissionForm"); %>
+        <% Html.RenderPartial(MVC.FlightLogs.Views.MissionForm); %>
         <div class="button-group">
             <input type="submit" value="Save changes" />
             <input type="reset" value="Reset" />

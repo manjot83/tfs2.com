@@ -1,6 +1,15 @@
 <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.SortedListViewModel<TFS.Models.PersonnelRecords.Person>>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
+    <div class="list-table-pager">
+        <% if (Model.HasPreviousPage()) { %>
+            <span><%= Html.ActionLink("« prev", MVC.PersonnelRecords.List(Model.SortType, Model.SortDirection, Model.PreviousPage(), Model.ItemsPerPage))%></span>
+        <% } %>
+        <span>Page <%= Html.Encode(Model.CurrentPage) %> of <%= Html.Encode(Model.TotalPages) %></span>
+        <% if (Model.HasNextPage()) { %>
+            <span><%= Html.ActionLink("next »", MVC.PersonnelRecords.List(Model.SortType, Model.SortDirection, Model.NextPage(), Model.ItemsPerPage))%></span>
+        <% } %>
+    </div>
     <table class="list-table">
         <thead>
             <tr>
@@ -23,7 +32,6 @@
         </tr>
         <% } %>
     </table>
-    <% if (Model.PagingEnabled) { %>
     <div class="list-table-pager">
         <% if (Model.HasPreviousPage()) { %>
             <span><%= Html.ActionLink("« prev", MVC.PersonnelRecords.List(Model.SortType, Model.SortDirection, Model.PreviousPage(), Model.ItemsPerPage))%></span>
@@ -44,5 +52,4 @@
             <% } %>
         </div>
     </div>
-    <% } %>
 </asp:Content>

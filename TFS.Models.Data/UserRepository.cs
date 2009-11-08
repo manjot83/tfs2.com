@@ -27,6 +27,11 @@ namespace TFS.Models.Data
             return Session.Linq<User>();
         }
 
+        public IEnumerable<User> GetAllActiveUsers()
+        {
+            return Session.Linq<User>().Where(x => !x.Disabled);
+        }
+
         //public bool AuthenticateUser(string username, string password)
         //{
         //    if (string.IsNullOrEmpty(password))

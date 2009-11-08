@@ -6,7 +6,7 @@
     </p>
     <h1>Edit flight log squadron member</h1>
     <% using (Html.BeginForm(MVC.FlightLogs.EditSquadronLog(Model.SquadronLog.Id.Value), FormMethod.Post, new { @class = "standard-form" })) { %>
-        <% Html.RenderPartial("SquadronLogForm"); %>
+        <% Html.RenderPartial(MVC.FlightLogs.Views.SquadronLogForm); %>
         <div class="button-group">
             <input type="submit" value="Save changes" />
             <input type="reset" value="Reset" />

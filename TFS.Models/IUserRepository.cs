@@ -9,6 +9,7 @@ namespace TFS.Models
 {
     public interface IUserRepository
     {
+        IEnumerable<User> GetAllActiveUsers();
         IEnumerable<User> GetAllUsers();
         User GetUser(string username);        
 

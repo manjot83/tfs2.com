@@ -26,19 +26,22 @@ namespace TFS.Web.Controllers
         [RequireTransaction]
         public virtual ViewResult Index()
         {
-            return List(null, null);
+            return List(null, null, null, null);
         }
 
         [RequireTransaction]
-        public virtual ViewResult List(string sortType, SortDirection? sortDirection)
+        public virtual ViewResult List(string sortType, SortDirection? sortDirection, int? page, int? itemsPerPage)
         {
             if (string.IsNullOrEmpty(sortType))
                 sortType = "name";
-            if (sortDirection == null)
-                sortDirection = SortDirection.Ascending;
-            var viewModel = new SortedListViewModel<User>();
-            viewModel.SortDirection = sortDirection ?? SortDirection.Ascending;
-            viewModel.SortType = sortType;
+            var viewModel = new SortedListViewModel<User>()
+            {
+                SortDirection = sortDirection ?? SortDirection.Ascending,
+                SortType = sortType,
+                PagingEnabled = true,
+                CurrentPage = page.HasValue ? page.Value : 1,
+                ItemsPerPage = itemsPerPage.HasValue ? itemsPerPage.Value : SortedListViewModel<User>.DefaultItemsPerPage,
+            };
             var users = userRepository.GetAllUsers();
             if (viewModel.IsCurrentSortType("name") && viewModel.SortDirection == SortDirection.Ascending)
                 users = users.OrderBy(x => x.LastName);
@@ -56,13 +59,40 @@ namespace TFS.Web.Controllers
                 users = users.OrderBy(x => x.Disabled);
             else if (viewModel.IsCurrentSortType("status"))
                 users = users.OrderByDescending(x => x.Disabled);
-            viewModel.Items = users;
+            viewModel.TotalItems = users.Count();
+            viewModel.Items = users.Skip(viewModel.ItemsPerPage * (viewModel.CurrentPage - 1)).Take(viewModel.ItemsPerPage).ToList();
             return View(Views.List, viewModel);
         }
 
+        [AcceptVerbs(HttpVerbs.Get)]
+        [RequireTransaction]
         public virtual ViewResult Edit(string username)
         {
-            throw new NotImplementedException();
+            var user = userRepository.GetUser(username);
+            var viewModel = new UserViewModel
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                DisplayName = user.DisplayName,
+                Username = user.Username,
+                Disabled = user.Disabled,
+            };
+            return View(viewModel);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [RequireTransaction]
+        public virtual ActionResult Edit(UserViewModel user)
+        {
+            user.Validate(ModelState, string.Empty);
+            if (!ModelState.IsValid)
+                return View(user);
+            var userEntity = userRepository.GetUser(user.Username);
+            userEntity.FirstName = user.FirstName;
+            userEntity.LastName = user.LastName;
+            userEntity.DisplayName = user.DisplayName;
+            userEntity.Disabled = user.Disabled;
+            return RedirectToAction(MVC.Users.List());
         }
 
         [AcceptVerbs(HttpVerbs.Get)]

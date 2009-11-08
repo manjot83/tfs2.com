@@ -263,7 +263,9 @@
     <Content Include="Views\Shared\Dashboard.Master" />
     <Content Include="Views\Shared\DashboardSideBar.ascx" />
     <Content Include="Views\Users\Create.aspx" />
+    <Content Include="Views\Users\Edit.aspx" />
     <Content Include="Views\Users\List.aspx" />
+    <Content Include="Views\Users\UserInformation.ascx" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{B4F97281-0DBD-4835-9ED8-7DFB966E87FF}" />

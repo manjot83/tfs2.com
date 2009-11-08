@@ -39,7 +39,7 @@ namespace TFS.Web.Controllers
                 ItemsPerPage = itemsPerPage.HasValue ? itemsPerPage.Value : SortedListViewModel<Person>.DefaultItemsPerPage,
             };
 
-            IEnumerable<Person> items = userRepository.GetAllUsers().Select(x => x.Person);
+            IEnumerable<Person> items = userRepository.GetAllActiveUsers().Select(x => x.Person);
             if (viewModel.IsCurrentSortType("name") && viewModel.SortDirection == SortDirection.Ascending)
                 items = items.OrderBy(x => x.FileByName());
             else if (viewModel.IsCurrentSortType("name"))

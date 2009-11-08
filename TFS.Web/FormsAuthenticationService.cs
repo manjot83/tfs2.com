@@ -24,7 +24,8 @@ namespace TFS.Web
         public bool Authenticate(string username, string password)
         {
             var cleanedUsername = CleanUpUsername(username);
-            if (UserRepository.GetUser(cleanedUsername) == null)
+            var user = UserRepository.GetUser(cleanedUsername);
+            if (user == null || user.Disabled)
                 return false;
             var queryString = string.Format("?username={0}&password={1}", cleanedUsername, password);
             var request = WebRequest.Create(ConfigurationHelper.AuthenticationService + queryString);

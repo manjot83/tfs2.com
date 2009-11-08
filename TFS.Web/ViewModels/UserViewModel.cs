@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using Centro.DomainModel;
 
 namespace TFS.Web.ViewModels
@@ -24,5 +20,7 @@ namespace TFS.Web.ViewModels
         [Required]
         [StringLength(50)]
         public string Username { get; set; }
+
+        public bool Disabled { get; set; }
     }
 }
