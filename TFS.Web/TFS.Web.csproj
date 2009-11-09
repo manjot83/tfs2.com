@@ -238,6 +238,7 @@
     <Content Include="Content\internal\template\quote.gif" />
     <Content Include="Content\internal\template\sidenavh1.gif" />
     <Content Include="favicon.ico" />
+    <Content Include="StyleTest.html" />
     <Content Include="Views\Dashboard\Index.aspx" />
     <Content Include="Views\FlightLogs\EditSquadronLog.aspx" />
     <Content Include="Views\FlightLogs\CreateMission.aspx" />
