@@ -47,7 +47,7 @@
     
     <h3 class="section-header underlined">Missions</h3>
     <p>
-        Click below to see more details and edit a mission, or <b><%= Html.ActionLink("Add", MVC.FlightLogs.CreateMission(Model.MissionLogId))%></b> a mission.
+        Click on any mission to edit or see more details.
     </p>
     <% if (Model.Missions.Any()) { %>
     <table class="list-table">
@@ -75,10 +75,16 @@
     <% } else { %>
     <p><b>No missions entered.</b></p>
     <% } %>
-    
+    <% using(Html.BeginForm(MVC.FlightLogs.CreateMission(), FormMethod.Get)) { %>
+        <%= Html.Hidden("MissionLogId", Model.MissionLogId) %>
+        <p class="list-table-footer">
+            <input type="submit" value="Add a mission" />
+        </p>
+    <% } %>
+        
     <h3 class="section-header underlined">Squadron log</h3>
     <p>
-        Click below to see more details and edit a squadron member log, or <b></a><%= Html.ActionLink("Add", MVC.FlightLogs.CreateSquadronLog(Model.MissionLogId)) %></b> a squadron member log.
+        Click on any squadron member to edit or see more details.
     </p>
     <% if (Model.SquadronLogs.Any()) { %>
     <table class="list-table">
@@ -100,6 +106,13 @@
     <% } else { %>
     <p><b>No squadron members entered.</b></p>
     <% } %>
+    <% using(Html.BeginForm(MVC.FlightLogs.CreateSquadronLog(), FormMethod.Get)) { %>
+        <%= Html.Hidden("MissionLogId", Model.MissionLogId) %>
+        <p class="list-table-footer">
+            <input type="submit" value="Add a squadron member" />
+        </p>
+    <% } %>
+        
     <h3 class="section-header underlined">Reports</h3>
     <p>
         Click to download as a <%= Html.ActionLink("PDF", MVC.FlightLogs.DownloadPDF(Model.MissionLogId)) %>

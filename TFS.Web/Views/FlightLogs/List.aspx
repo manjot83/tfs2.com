@@ -45,4 +45,9 @@
         </tr>
         <% } %>
     </table>
+    <% using(Html.BeginForm(MVC.FlightLogs.CreateMissionLog(), FormMethod.Get)) { %>
+        <p class="list-table-footer">
+            <input type="submit" value="Create a mission log" />
+        </p>
+    <% } %>
 </asp:Content>
