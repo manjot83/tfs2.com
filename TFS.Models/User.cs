@@ -34,6 +34,11 @@ namespace TFS.Models
                 Email = username + "@tfs2.com";
         }
 
+        public virtual string FileByName()
+        {
+            return LastName + ", " + FirstName;
+        }
+
         string IKeyedModel.Id
         {
             get { return Username; }

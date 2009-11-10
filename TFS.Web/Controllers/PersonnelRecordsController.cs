@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
@@ -10,6 +9,8 @@ using TFS.Models.Geography;
 using TFS.Models.PersonnelRecords;
 using TFS.Models.Programs;
 using TFS.Web.ViewModels;
+using TFS.Models.Reports;
+using System;
 
 namespace TFS.Web.Controllers
 {
@@ -30,7 +31,7 @@ namespace TFS.Web.Controllers
         {
             if (string.IsNullOrEmpty(sortType))
                 sortType = "name";
-            var viewModel = new SortedListViewModel<Person>()
+            var viewModel = new PersonnelRecordListViewModel
             {
                 SortDirection = sortDirection ?? SortDirection.Ascending,
                 SortType = sortType,
@@ -39,14 +40,16 @@ namespace TFS.Web.Controllers
                 ItemsPerPage = itemsPerPage.HasValue ? itemsPerPage.Value : SortedListViewModel<Person>.DefaultItemsPerPage,
             };
 
-            IEnumerable<Person> items = userRepository.GetAllActiveUsers().Where(x => x.Person != null).Select(x => x.Person);
+            IEnumerable<User> items = userRepository.GetAllActiveUsers();
             if (viewModel.IsCurrentSortType("name") && viewModel.SortDirection == SortDirection.Ascending)
                 items = items.OrderBy(x => x.FileByName());
             else if (viewModel.IsCurrentSortType("name"))
                 items = items.OrderByDescending(x => x.FileByName());
-            items = items.ToList();
-            viewModel.TotalItems = items.Count();
-            viewModel.Items = items.Skip(viewModel.ItemsPerPage * (viewModel.CurrentPage - 1)).Take(viewModel.ItemsPerPage).ToList();
+            if (viewModel.IsCurrentSortType("status") && viewModel.SortDirection == SortDirection.Ascending)
+                items = items.OrderBy(x => viewModel.GetMissionInformation(x));
+            else if (viewModel.IsCurrentSortType("status"))
+                items = items.OrderByDescending(x => viewModel.GetMissionInformation(x));
+            viewModel.SetItems(items.ToList());
 
             return View(Views.List, viewModel);
         }
@@ -148,5 +151,13 @@ namespace TFS.Web.Controllers
             return viewModel;
         }
 
+        [RequireTransaction]
+        public virtual FileContentResult DownloadAllAsCsv()
+        {
+            var users = userRepository.GetAllActiveUsers().OrderBy(x => x.FileByName());
+            var reportGenerator = new CsvReportGenerator(new PersonnelFileData(users));
+            var bytes = reportGenerator.GenerateReport();
+            return File(bytes, "text/csv", "PersonnelRecords(" + DateTime.Now.ToString("MM-dd-yy") + ").csv");
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.UI.WebControls;
 using Centro.Extensions;
+using System.Linq;
 
 namespace TFS.Web.ViewModels
 {
@@ -29,6 +30,12 @@ namespace TFS.Web.ViewModels
         }
         public int ItemsPerPage { get; set; }
         public int TotalItems { get; set; }
+
+        public void SetItems(IEnumerable<TItemType> items)
+        {
+            TotalItems = items.Count();
+            Items = items.Skip(ItemsPerPage * (CurrentPage - 1)).Take(ItemsPerPage).ToList();            
+        }
 
         public SortDirection GetReverseSortDirection()
         {

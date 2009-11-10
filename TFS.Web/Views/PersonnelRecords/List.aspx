@@ -1,6 +1,13 @@
-<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.SortedListViewModel<TFS.Models.PersonnelRecords.Person>>" %>
+<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.PersonnelRecordListViewModel>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
+    <h1>Personnel Records</h1>
+    <p class="instructions">Below is a list of all active users.</p>
+    <ul class="instructions">
+        <li>Click on the person's name to see and edit their personnel record.</li>
+        <li>Sort by status to find people with missing key information (key information includes SSN, date of birth, and contact information).</li>
+        <li>Click to download as a <%= Html.ActionLink("CSV", MVC.PersonnelRecords.DownloadAllAsCsv()) %> for Excel.</li>
+    </ul>
     <div class="list-table-pager">
         <% if (Model.HasPreviousPage()) { %>
             <span><%= Html.ActionLink("« prev", MVC.PersonnelRecords.List(Model.SortType, Model.SortDirection, Model.PreviousPage(), Model.ItemsPerPage))%></span>
@@ -20,14 +27,22 @@
                     <%= Html.ActionLink("Name", MVC.PersonnelRecords.List("name", SortDirection.Ascending, Model.CurrentPage, Model.ItemsPerPage)) %>
                 <% } %>
                 </th>
+                <th>
+                <% if (Model.IsCurrentSortType("status")) { %>
+                    <%= Html.ActionLink("Status", MVC.PersonnelRecords.List("status", Model.GetReverseSortDirection(), Model.CurrentPage, Model.ItemsPerPage), new { @class = Model.IsSortedAscending() ? "sorted-down" : "sorted-up" })%>
+                <% } else { %>
+                    <%= Html.ActionLink("Status", MVC.PersonnelRecords.List("status", SortDirection.Ascending, Model.CurrentPage, Model.ItemsPerPage))%>
+                <% } %>
+                </th>
             </tr>
         </thead>
-        <% foreach (var person in Model.Items) { %>
+        <% foreach (var user in Model.Items) { %>
         <tr>
             <td>
-                <%--<%= Html.ActionLink(user.LastName + ", " +user.FirstName, MVC.Users.Edit(user.Username)) %>--%>
-                <%= Html.ActionLink(person.FileByName(), MVC.PersonnelRecords.EditRecord(person.User.Username)) %>
-                <%= Html.Encode(person.FileByName()) %>
+                <%= Html.ActionLink(user.FileByName(), MVC.PersonnelRecords.EditRecord(user.Username))%>
+            </td>
+            <td>
+                <%= Html.Encode(Model.GetMissionInformation(user)) %>
             </td>
         </tr>
         <% } %>

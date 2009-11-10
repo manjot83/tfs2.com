@@ -7,9 +7,9 @@ using TFS.Models.FlightLogs;
 namespace TFS.Models.Reports
 {
     [XmlRoot(ElementName = "FlightTimeSummary")]
-    public class FlightTimeSummaryReport : IReport
+    public class FlightTimeSummaryReport : IXmlReport
     {
-        string IReport.StylesheetResourceName
+        string IXmlReport.XmlStylesheetResourceName
         {
             get { return "TFS.Models.Reports.FlightTimeSummary.xsl"; }
         }

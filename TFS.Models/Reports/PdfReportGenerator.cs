@@ -8,16 +8,16 @@ using Fop.Net;
 
 namespace TFS.Models.Reports
 {
-    public class ReportGenerator
+    public class PdfReportGenerator
     {
-        private IReport report;
+        private IXmlReport report;
         private XslCompiledTransform xslt;
 
-        public ReportGenerator(IReport report)
+        public PdfReportGenerator(IXmlReport report)
         {
             this.report = report;
             xslt = new XslCompiledTransform();
-            using (var stream = typeof(ReportGenerator).Assembly.GetManifestResourceStream(this.report.StylesheetResourceName))
+            using (var stream = typeof(PdfReportGenerator).Assembly.GetManifestResourceStream(this.report.XmlStylesheetResourceName))
             {
                 xslt.Load(new XmlTextReader(stream));
             }

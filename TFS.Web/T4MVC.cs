@@ -240,6 +240,7 @@ namespace TFS.Web.Controllers {
             public readonly string EditPersonalInfo = "EditPersonalInfo";
             public readonly string EditContactInfo = "EditContactInfo";
             public readonly string EditCompanyInfo = "EditCompanyInfo";
+            public readonly string DownloadAllAsCsv = "DownloadAllAsCsv";
         }
 
 
@@ -414,6 +415,7 @@ namespace TFS.Web.Controllers {
         [CompilerGenerated]
         public class ViewNames {
             public readonly string Create = "Create";
+            public readonly string Edit = "Edit";
             public readonly string List = "List";
             public readonly string UserInformation = "UserInformation";
         }
@@ -602,6 +604,11 @@ namespace T4MVC {
             callInfo.RouteValues.Add("username", username);
             callInfo.RouteValues.Add("editingMyRecord", editingMyRecord);
             callInfo.RouteValues.Add("companyInfo", companyInfo);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.FileContentResult DownloadAllAsCsv() {
+            var callInfo = new T4MVC_FileContentResult("PersonnelRecords", Actions.DownloadAllAsCsv);
             return callInfo;
         }
 

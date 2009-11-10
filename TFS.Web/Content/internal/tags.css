@@ -8,3 +8,9 @@
 	margin-top: 20px;
 	padding-bottom: 5px;	
 }
+
+.instructions
+{
+	padding-bottom: .75em;
+	max-width: 600px;
+}

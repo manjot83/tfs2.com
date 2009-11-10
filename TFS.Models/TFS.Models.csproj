@@ -73,8 +73,10 @@
     <Compile Include="IKeyedModel.cs" />
     <Compile Include="Images\IImageRepository.cs" />
     <Compile Include="Images\StaticImage.cs" />
+    <Compile Include="Reports\CsvReportGenerator.cs" />
     <Compile Include="Reports\FlightTimeSummaryReport.cs" />
-    <Compile Include="Reports\IReport.cs" />
+    <Compile Include="Reports\ICsvReport.cs" />
+    <Compile Include="Reports\IXmlReport.cs" />
     <Compile Include="IUserRepository.cs" />
     <Compile Include="PersonnelRecords\FCFQualification.cs" />
     <Compile Include="PersonnelRecords\FlightSuitSize.cs" />
@@ -89,7 +91,8 @@
     <Compile Include="Programs\Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegExLib.cs" />
-    <Compile Include="Reports\ReportGenerator.cs" />
+    <Compile Include="Reports\PdfReportGenerator.cs" />
+    <Compile Include="Reports\PersonnelFileData.cs" />
     <Compile Include="Site\Page.cs" />
     <Compile Include="Site\ISiteRepository.cs" />
     <Compile Include="User.cs" />

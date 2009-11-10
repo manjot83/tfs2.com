@@ -98,27 +98,27 @@ namespace TFS.Models.Tests.Reports
         [Test]
         public void Should_Compile_XSLT()
         {
-            new ReportGenerator(new FlightTimeSummaryReport(CreateMissionLog()));
+            new PdfReportGenerator(new FlightTimeSummaryReport(CreateMissionLog()));
         }
 
         [Test]
         public void Should_Generate_XML()
         {
-            var xml = new ReportGenerator(new FlightTimeSummaryReport(CreateMissionLog())).GenerateXml();
+            var xml = new PdfReportGenerator(new FlightTimeSummaryReport(CreateMissionLog())).GenerateXml();
             Console.Out.WriteLine(xml.ToString());
         }
 
         [Test]
         public void Should_Generate_XSLFO()
         {
-            var xslfo = new ReportGenerator(new FlightTimeSummaryReport(CreateMissionLog())).GenerateXslFo();
+            var xslfo = new PdfReportGenerator(new FlightTimeSummaryReport(CreateMissionLog())).GenerateXslFo();
             Console.Out.WriteLine(xslfo.ToString());
         }
 
         [Test]
         public void Should_Generate_PDF()
         {
-            var bytes = new ReportGenerator(new FlightTimeSummaryReport(CreateMissionLog())).GenerateReport();
+            var bytes = new PdfReportGenerator(new FlightTimeSummaryReport(CreateMissionLog())).GenerateReport();
             var fileName = Path.GetTempFileName() + ".pdf";
             File.WriteAllBytes(fileName, bytes);
             Process.Start(fileName);

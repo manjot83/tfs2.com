@@ -153,6 +153,7 @@
     <Compile Include="ViewModels\FlightLogViewModel.cs" />
     <Compile Include="ViewModels\ManageProgramsViewModel.cs" />
     <Compile Include="ViewModels\MissionViewModel.cs" />
+    <Compile Include="ViewModels\PersonnelRecordListViewModel.cs" />
     <Compile Include="ViewModels\PersonnelRecordCompanyInfo.cs" />
     <Compile Include="ViewModels\PersonnelRecordContactInfo.cs" />
     <Compile Include="ViewModels\PersonnelRecordPersonalInfo.cs" />
