@@ -6,4 +6,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("Tactical Flight Services")]
 [assembly: AssemblyCopyright("Copyright © Cridion, LLC")]
 
-[assembly: AssemblyVersion("3.0.1.*")]
+[assembly: AssemblyVersion("3.0.2.*")]

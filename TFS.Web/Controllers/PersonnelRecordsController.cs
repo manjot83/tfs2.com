@@ -155,7 +155,7 @@ namespace TFS.Web.Controllers
         public virtual FileContentResult DownloadAllAsCsv()
         {
             var users = userRepository.GetAllActiveUsers().OrderBy(x => x.FileByName());
-            var reportGenerator = new CsvReportGenerator(new PersonnelFileData(users));
+            var reportGenerator = new CsvReportGenerator(new PersonnelFileReport(users));
             var bytes = reportGenerator.GenerateReport();
             return File(bytes, "text/csv", "PersonnelRecords(" + DateTime.Now.ToString("MM-dd-yy") + ").csv");
         }
