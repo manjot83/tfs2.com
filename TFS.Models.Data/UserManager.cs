@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Centro.Data.DomainModel;
 using Centro.Extensions;
 using NHibernate;
 using NHibernate.Linq;
@@ -10,9 +9,9 @@ using TFS.Models.PersonnelRecords;
 
 namespace TFS.Models.Data
 {
-    public class UserRepository : BaseRepository, IUserRepository
+    public class UserManager : BaseService, IUserManager
     {
-        public UserRepository(ISession session)
+        public UserManager(ISession session)
             : base(session)
         {
         }

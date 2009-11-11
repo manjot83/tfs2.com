@@ -1,26 +1,21 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Mvc.Ajax;
+using System.Web.UI.WebControls;
+using Centro.Web.Mvc;
+using Centro.Web.Mvc.ActionFilters;
 using TFS.Models;
 using TFS.Web.ViewModels;
-using System.Web.UI.WebControls;
-using Centro.Extensions;
-using Centro.Web.Mvc.ActionFilters;
-using Centro.Web.Mvc;
 
 namespace TFS.Web.Controllers
 {
     [Authorize]
     public partial class UsersController : Controller
     {
-        private readonly IUserRepository userRepository;
+        private readonly IUserManager userManager;
 
-        public UsersController(IUserRepository userRepository)
+        public UsersController(IUserManager userManager)
         {
-            this.userRepository = userRepository;
+            this.userManager = userManager;
         }
 
         [RequireTransaction]
@@ -42,7 +37,7 @@ namespace TFS.Web.Controllers
                 CurrentPage = page.HasValue ? page.Value : 1,
                 ItemsPerPage = itemsPerPage.HasValue ? itemsPerPage.Value : SortedListViewModel<User>.DefaultItemsPerPage,
             };
-            var users = userRepository.GetAllUsers();
+            var users = userManager.GetAllUsers();
             if (viewModel.IsCurrentSortType("name") && viewModel.SortDirection == SortDirection.Ascending)
                 users = users.OrderBy(x => x.LastName);
             else if (viewModel.IsCurrentSortType("name"))
@@ -68,7 +63,7 @@ namespace TFS.Web.Controllers
         [RequireTransaction]
         public virtual ViewResult Edit(string username)
         {
-            var user = userRepository.GetUser(username);
+            var user = userManager.GetUser(username);
             var viewModel = new UserViewModel
             {
                 FirstName = user.FirstName,
@@ -87,7 +82,7 @@ namespace TFS.Web.Controllers
             user.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
                 return View(user);
-            var userEntity = userRepository.GetUser(user.Username);
+            var userEntity = userManager.GetUser(user.Username);
             userEntity.FirstName = user.FirstName;
             userEntity.LastName = user.LastName;
             userEntity.DisplayName = user.DisplayName;
@@ -106,11 +101,11 @@ namespace TFS.Web.Controllers
         public virtual ActionResult Create(UserViewModel user)
         {
             user.Validate(ModelState, string.Empty);
-            if (ModelState.IsValid && userRepository.GetUser(user.Username) != null)
+            if (ModelState.IsValid && userManager.GetUser(user.Username) != null)
                 ModelState.AddModelError("username", "Username must be unique.");
             if (!ModelState.IsValid)
                 return View(user);
-            var newUser = userRepository.CreateUser(user.Username, user.FirstName, user.LastName, user.DisplayName);
+            var newUser = userManager.CreateUser(user.Username, user.FirstName, user.LastName, user.DisplayName);
             return RedirectToAction(MVC.Users.List());
         }
     }

@@ -6,7 +6,7 @@ using TFS.Models.PersonnelRecords;
 
 namespace TFS.Models.FlightLogs
 {
-    public interface IFlightLogRepository
+    public interface IFlightLogManager
     {
         MissionLog GetMissionLog(int id);
         Mission GetMission(int id);

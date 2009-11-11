@@ -2,16 +2,15 @@
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Centro.Web.Mvc.Controllers;
 using Centro.Data;
+using Centro.Validation;
+using Centro.Web.Mvc.Controllers;
+using NHibernate;
 using StructureMap;
 using StructureMap.Attributes;
-using TFS.Web.Controllers;
 using TFS.Models;
-using NHibernate;
-using TFS.Models.Site;
-using TFS.Models.Data.Site;
-using Centro.Validation;
+using TFS.Models.Data;
+using TFS.Web.Controllers;
 
 namespace TFS.Web
 {
@@ -40,13 +39,19 @@ namespace TFS.Web
 
             var mappingAssemblies = new List<Assembly> { typeof(TFS.Models.Data.UserMapping).Assembly };
 #if SQLITE
-            var nhibernateRegistry = SQLiteBuilder.CreateRegistry("TFS_Web", mappingAssemblies, InstanceScope.Hybrid, false);
+            var fluentConfiguration = SQLiteBuilder.CreateConfiguration("TFS_Web", mappingAssemblies, false);
 #else
-            var nhibernateRegistry = MSSqlBuilder.CreateRegistry("TFS_Web", mappingAssemblies, InstanceScope.HttpContext, false);
+            var fluentConfiguration = MSSqlBuilder.CreateConfiguration("TFS_Web", mappingAssemblies, false);
 #endif
             ObjectFactory.Initialize(i =>
             {
-                i.AddRegistry(nhibernateRegistry);
+                i.ForRequestedType<ISessionFactory>()
+                    .CacheBy(InstanceScope.Singleton)
+                    .TheDefault.Is.IsThis(fluentConfiguration.BuildSessionFactory());
+
+                i.ForRequestedType<ISession>()
+                    .CacheBy(InstanceScope.Hybrid)
+                    .TheDefault.Is.ConstructedBy(x => x.GetInstance<ISessionFactory>().OpenSession());
 
                 i.Scan(s =>
                 {
@@ -56,18 +61,14 @@ namespace TFS.Web
 
                 i.Scan(x =>
                 {
-                    x.AssemblyContainingType<ISiteRepository>();
-                    x.AssemblyContainingType<SiteRepository>();
+                    x.AssemblyContainingType<IUserManager>();
+                    x.AssemblyContainingType<UserManager>();
                     x.With<StructureMap.Graph.DefaultConventionScanner>();
                 });
 
                 i.ForRequestedType<IAuthenticationService>()
-                    .CacheBy(InstanceScope.PerRequest)
+                    .CacheBy(InstanceScope.Hybrid)
                     .TheDefaultIsConcreteType<FormsAuthenticationService>();
-
-                i.ForRequestedType<IValidator>()
-                    .CacheBy(InstanceScope.Singleton)
-                    .TheDefaultIsConcreteType<DataAnnotationsValidator>();
             });
 
 #if DEBUG
@@ -75,11 +76,12 @@ namespace TFS.Web
 #endif
 
             ControllerBuilder.Current.SetControllerFactory(new StructureMapControllerFactory());
+            SharedValidator.Default.Validator = new DataAnnotationsValidator();
 
 #if SQLITE
             var session = ObjectFactory.GetInstance<ISession>();
-            SqlSchemaUtil.GenerateSchema(nhibernateRegistry.Configuration, session);
-            TestData.Execute();
+            SqlSchemaUtil.GenerateSchema(fluentConfiguration.BuildConfiguration(), session);
+            TestData.Execute(session);
             session.Clear();
 #endif
         }

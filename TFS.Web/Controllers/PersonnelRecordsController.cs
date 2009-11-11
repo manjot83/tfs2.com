@@ -17,13 +17,13 @@ namespace TFS.Web.Controllers
     [Authorize]
     public partial class PersonnelRecordsController : Controller
     {
-        private readonly IUserRepository userRepository;
-        private readonly IProgramsRepository programsRepository;
+        private readonly IUserManager userManager;
+        private readonly IProgramsManager programsManager;
 
-        public PersonnelRecordsController(IUserRepository userRepository, IProgramsRepository programsRepository)
+        public PersonnelRecordsController(IUserManager userManager, IProgramsManager programsManager)
         {
-            this.userRepository = userRepository;
-            this.programsRepository = programsRepository;
+            this.userManager = userManager;
+            this.programsManager = programsManager;
         }
 
         [RequireTransaction]
@@ -40,7 +40,7 @@ namespace TFS.Web.Controllers
                 ItemsPerPage = itemsPerPage.HasValue ? itemsPerPage.Value : SortedListViewModel<Person>.DefaultItemsPerPage,
             };
 
-            IEnumerable<User> items = userRepository.GetAllActiveUsers();
+            IEnumerable<User> items = userManager.GetAllActiveUsers();
             if (viewModel.IsCurrentSortType("name") && viewModel.SortDirection == SortDirection.Ascending)
                 items = items.OrderBy(x => x.FileByName());
             else if (viewModel.IsCurrentSortType("name"))
@@ -57,10 +57,10 @@ namespace TFS.Web.Controllers
         [RequireTransaction]
         public virtual ViewResult EditRecord(string username)
         {
-            var user = userRepository.GetUser(username);
+            var user = userManager.GetUser(username);
             var person = user.Person;
             if (person == null)
-                person = userRepository.CreatePersonFor(user);
+                person = userManager.CreatePersonFor(user);
             var viewModel = GeneratePersonnelRecordViewModel(person, false);
             return View(MVC.PersonnelRecords.Views.EditRecord, viewModel);
         }
@@ -71,7 +71,7 @@ namespace TFS.Web.Controllers
             var user = this.GetCurrentUser();
             var person = user.Person;
             if (person == null)
-                person = userRepository.CreatePersonFor(user);
+                person = userManager.CreatePersonFor(user);
             var viewModel = GeneratePersonnelRecordViewModel(person, true);
             return View(MVC.PersonnelRecords.Views.EditRecord, viewModel);
         }
@@ -81,7 +81,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditPersonalInfo(string username, bool editingMyRecord, PersonnelRecordPersonalInfo personalInfo)
         {
             personalInfo.Validate(ModelState, string.Empty);
-            var person = userRepository.GetUser(username).Person;
+            var person = userManager.GetUser(username).Person;
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
             person.FirstName = personalInfo.FirstName;
@@ -101,7 +101,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditContactInfo(string username, bool editingMyRecord, PersonnelRecordContactInfo contactInfo)
         {
             contactInfo.Validate(ModelState, string.Empty);
-            var person = userRepository.GetUser(username).Person;
+            var person = userManager.GetUser(username).Person;
             if (USState.FromAbbreviation(contactInfo.State.ToUpper()) == null)
                 ModelState.AddModelError("State", "Must be a valid US state abbreviation.");
             if (!ModelState.IsValid)
@@ -128,12 +128,12 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditCompanyInfo(string username, bool editingMyRecord, PersonnelRecordCompanyInfo companyInfo)
         {
             companyInfo.Validate(ModelState, string.Empty);
-            var person = userRepository.GetUser(username).Person;
+            var person = userManager.GetUser(username).Person;
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
             person.FlightSuitSize = companyInfo.FlightSuitSize;
             person.ShirtSize = companyInfo.ShirtSize;
-            person.HirePosition = programsRepository.GetPositionById(companyInfo.HirePositionId);
+            person.HirePosition = programsManager.GetPositionById(companyInfo.HirePositionId);
             if (editingMyRecord)
                 return RedirectToAction(MVC.PersonnelRecords.EditMyRecord());
             else
@@ -147,14 +147,14 @@ namespace TFS.Web.Controllers
                 EditingMyRecord = editingMyRecord,
                 Record = person,
             };
-            viewModel.SetHirePositions(programsRepository.GetAllPositions(), person.HirePosition);
+            viewModel.SetHirePositions(programsManager.GetAllPositions(), person.HirePosition);
             return viewModel;
         }
 
         [RequireTransaction]
         public virtual FileContentResult DownloadAllAsCsv()
         {
-            var users = userRepository.GetAllActiveUsers().OrderBy(x => x.FileByName());
+            var users = userManager.GetAllActiveUsers().OrderBy(x => x.FileByName());
             var reportGenerator = new CsvReportGenerator(new PersonnelFileReport(users));
             var bytes = reportGenerator.GenerateReport();
             return File(bytes, "text/csv", "PersonnelRecords(" + DateTime.Now.ToString("MM-dd-yy") + ").csv");

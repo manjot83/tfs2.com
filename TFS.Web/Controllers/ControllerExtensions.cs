@@ -10,7 +10,7 @@ namespace TFS.Web.Controllers
         {
             if (controller.User != null &&
                 controller.User.Identity != null)
-                return ObjectFactory.GetInstance<IUserRepository>().GetUser(controller.User.Identity.Name);
+                return ObjectFactory.GetInstance<IUserManager>().GetUser(controller.User.Identity.Name);
             return null;
         }
     }

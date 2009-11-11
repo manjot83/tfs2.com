@@ -13,25 +13,25 @@ namespace TFS.Web.Controllers
     [Authorize]
     public partial class ProgramsController : Controller
     {
-        private readonly IProgramsRepository programsRepository;
+        private readonly IProgramsManager programsManager;
 
-        public ProgramsController(IProgramsRepository programsRepository)
+        public ProgramsController(IProgramsManager programsManager)
         {
-            this.programsRepository = programsRepository;
+            this.programsManager = programsManager;
         }
 
         [RequireTransaction]
         public virtual ViewResult Manage()
         {
             var viewModel = new ManageProgramsViewModel();
-            viewModel.ActivePositions = programsRepository.GetAllPositions();
+            viewModel.ActivePositions = programsManager.GetAllPositions();
             return View(viewModel);
         }
 
         [RequireTransaction]
         public virtual RedirectToRouteResult AddNewPosition(string title)
         {
-            programsRepository.CreateNewPosition(title);
+            programsManager.CreateNewPosition(title);
             return RedirectToRoute(MVC.Programs.Manage());
         }
 

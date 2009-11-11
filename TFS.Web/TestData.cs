@@ -15,9 +15,8 @@ namespace TFS.Web
 {
     public static class TestData
     {
-        public static void Execute()
+        public static void Execute(ISession session)
         {
-            var session = ObjectFactory.GetInstance<ISession>();
             session.BeginTransaction();
 
             // Users

@@ -7,7 +7,7 @@ using TFS.Models.PersonnelRecords;
 
 namespace TFS.Models
 {
-    public interface IUserRepository
+    public interface IUserManager
     {
         IEnumerable<User> GetAllActiveUsers();
         IEnumerable<User> GetAllUsers();

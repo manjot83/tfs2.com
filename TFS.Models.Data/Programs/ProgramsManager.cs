@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Centro.Data.DomainModel;
 using Centro.Extensions;
 using NHibernate;
 using NHibernate.Linq;
@@ -9,9 +8,9 @@ using TFS.Models.Programs;
 
 namespace TFS.Models.Data.Programs
 {
-    public class ProgramsRepository : BaseRepository, IProgramsRepository
+    public class ProgramsManager : BaseService, IProgramsManager
     {
-        public ProgramsRepository(ISession session)
+        public ProgramsManager(ISession session)
             : base(session)
         {
         }

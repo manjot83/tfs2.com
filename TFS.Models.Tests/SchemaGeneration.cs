@@ -17,8 +17,7 @@ namespace TFS.Models.Tests
         public virtual void SetUp()
         {
             var mappingAssemblies = new List<Assembly> { typeof(UserMapping).Assembly };
-            var fluentConfiguration = new FluentConfigurationBuilder(MsSqlConfiguration.MsSql2008.ConnectionString(@"Server=.\SQLEXPRESS;Database=dev_tfs2.com;Trusted_Connection=yes;"), mappingAssemblies);
-            cfg = fluentConfiguration.Configuration;
+            cfg = FluentConfigurationBuilder.CreateFluentConfiguration(MsSqlConfiguration.MsSql2008.ConnectionString(@"Server=.\SQLEXPRESS;Database=dev_tfs2.com;Trusted_Connection=yes;"), mappingAssemblies).BuildConfiguration();
         }
 
         [Test, Explicit("Generates Schema Creation Scripts")]

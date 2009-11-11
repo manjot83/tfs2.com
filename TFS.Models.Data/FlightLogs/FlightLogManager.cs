@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Centro.Data.DomainModel;
 using NHibernate;
 using NHibernate.Linq;
 using TFS.Models.FlightLogs;
@@ -10,9 +9,9 @@ using Centro.Extensions;
 
 namespace TFS.Models.Data.FlightLogs
 {
-    public class FlightLogRepository : BaseRepository, IFlightLogRepository
+    public class FlightLogManager : BaseService, IFlightLogManager
     {
-        public FlightLogRepository(ISession session)
+        public FlightLogManager(ISession session)
             : base(session)
         {
         }

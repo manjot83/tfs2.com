@@ -11,17 +11,17 @@ namespace TFS.Web.Controllers
 {
     public partial class ImagesController : Controller
     {
-        private IImageRepository imageRepository;
+        private IImageFinder imageFinder;
 
-        public ImagesController(IImageRepository imageRepository)
+        public ImagesController(IImageFinder imageFinder)
         {
-            this.imageRepository = imageRepository;
+            this.imageFinder = imageFinder;
         }
 
         [RequireTransaction]
         public virtual ActionResult StaticImage(Guid id)
         {
-            var imageInfo = imageRepository.GetStaticImage(id);
+            var imageInfo = imageFinder.GetStaticImage(id);
             if (imageInfo == null)
                 return new EmptyResult();
             //return File(string.Empty, imageInfo.MimeType);

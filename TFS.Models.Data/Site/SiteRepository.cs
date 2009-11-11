@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TFS.Models.Site;
-using Centro.Data.DomainModel;
 using NHibernate;
 using NHibernate.Linq;
 
 namespace TFS.Models.Data.Site
 {
-    public class SiteRepository : BaseRepository, ISiteRepository
+    public class SiteRepository : BaseService, ISiteRepository
     {
         public SiteRepository(ISession session)
             : base(session)

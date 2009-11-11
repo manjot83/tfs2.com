@@ -64,20 +64,20 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="FlightLogs\DutyCode.cs" />
-    <Compile Include="FlightLogs\IFlightLogRepository.cs" />
+    <Compile Include="FlightLogs\IFlightLogManager.cs" />
     <Compile Include="FlightLogs\Mission.cs" />
     <Compile Include="FlightLogs\MissionLog.cs" />
     <Compile Include="FlightLogs\SquadronLog.cs" />
     <Compile Include="Geography\USAddress.cs" />
     <Compile Include="Geography\USState.cs" />
     <Compile Include="IKeyedModel.cs" />
-    <Compile Include="Images\IImageRepository.cs" />
+    <Compile Include="Images\IImageFinder.cs" />
     <Compile Include="Images\StaticImage.cs" />
     <Compile Include="Reports\CsvReportGenerator.cs" />
     <Compile Include="Reports\FlightTimeSummaryReport.cs" />
     <Compile Include="Reports\ICsvReport.cs" />
     <Compile Include="Reports\IXmlReport.cs" />
-    <Compile Include="IUserRepository.cs" />
+    <Compile Include="IUserManager.cs" />
     <Compile Include="PersonnelRecords\FCFQualification.cs" />
     <Compile Include="PersonnelRecords\FlightSuitSize.cs" />
     <Compile Include="PersonnelRecords\Gender.cs" />
@@ -87,7 +87,7 @@
     <Compile Include="PersonnelRecords\Qualifications.cs" />
     <Compile Include="PersonnelRecords\ServiceBranch.cs" />
     <Compile Include="PersonnelRecords\ShirtSize.cs" />
-    <Compile Include="Programs\IProgramsRepository.cs" />
+    <Compile Include="Programs\IProgramsManager.cs" />
     <Compile Include="Programs\Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegExLib.cs" />

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TFS.Models.Images
 {
-    public interface IImageRepository
+    public interface IImageFinder
     {
         StaticImage GetStaticImage(Guid id);
     }
