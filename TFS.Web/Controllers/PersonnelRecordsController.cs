@@ -68,7 +68,7 @@ namespace TFS.Web.Controllers
         [RequireTransaction]
         public virtual ViewResult EditMyRecord()
         {
-            var user = this.GetCurrentUser();
+            var user = userManager.GetUser(User.Identity.Name);
             var person = user.Person;
             if (person == null)
                 person = userManager.CreatePersonFor(user);

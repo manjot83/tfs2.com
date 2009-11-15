@@ -55,7 +55,7 @@ namespace TFS.Web.Controllers
         [RequireTransaction]
         public virtual ViewResult ChangePassword()
         {
-            var user = this.GetCurrentUser();
+            var user = authenticationService.UserManager.GetUser(User.Identity.Name);
             return View(user);
         }
 
@@ -74,7 +74,7 @@ namespace TFS.Web.Controllers
                 ModelState.AddModelError("newPassword", string.Format("Password must be at least {0} characters long.", authenticationService.MinRequiredPasswordLength));
             if (newPassword != confirmNewPassword)
                 ModelState.AddModelError("confirmNewPassword", "New password's must match.");
-            var user = this.GetCurrentUser();
+            var user = authenticationService.UserManager.GetUser(User.Identity.Name);
             if (!ModelState.IsValid)
                 return View(user);
             if (!authenticationService.ChangePassword(user, originalPassword, newPassword))

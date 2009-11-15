@@ -34,7 +34,7 @@ namespace TFS.Web
         public static void InitializeIoCAndDataAccess()
         {
 #if DEBUG
-            HibernatingRhinos.NHibernate.Profiler.Appender.NHibernateProfiler.Initialize();
+            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
 #endif
 
             var mappingAssemblies = new List<Assembly> { typeof(TFS.Models.Data.UserMapping).Assembly };
