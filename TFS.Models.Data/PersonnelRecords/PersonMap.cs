@@ -45,7 +45,7 @@ namespace TFS.Models.Data.PersonnelRecords
                 .CustomType<UtcDateTimeUserType>()
                 .Nullable();
             Map(x => x.Gender)
-                .CustomType<EnumerationUserType<Gender>>()
+                .CustomType<Gender>()
                 .Nullable();
             Map(x => x.SocialSecurityLastFour)
                 .Length(4)
@@ -66,10 +66,10 @@ namespace TFS.Models.Data.PersonnelRecords
                 .Length(50)
                 .Nullable();
             Map(x => x.ShirtSize)
-                .CustomType<EnumerationUserType<ShirtSize>>()
+                .CustomType<ShirtSize>()
                 .Nullable();
             Map(x => x.FlightSuitSize)
-                .CustomType<EnumerationUserType<FlightSuitSize>>()
+                .CustomType<FlightSuitSize>()
                 .Nullable();
 
             Component(x => x.Address, m =>

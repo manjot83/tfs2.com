@@ -19,7 +19,7 @@ namespace TFS.Models.Data.PersonnelRecords
 
             Map(x => x.Type)
                 .Not.Nullable()
-                .CustomType<Centro.Data.UserTypes.EnumerationUserType<CertificateType>>();
+                .CustomType<CertificateType>();
             Map(x => x.Name)
                 .Length(50)
                 .Not.Nullable();
