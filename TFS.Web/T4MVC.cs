@@ -225,6 +225,11 @@ namespace TFS.Web.Controllers {
             return new T4MVC_ActionResult(Name, Actions.EditCompanyInfo);
         }
 
+        [NonAction]
+        public ActionResult EditQualifications() {
+            return new T4MVC_ActionResult(Name, Actions.EditQualifications);
+        }
+
 
         [CompilerGenerated]
         public readonly string Name = "PersonnelRecords";
@@ -240,6 +245,7 @@ namespace TFS.Web.Controllers {
             public readonly string EditPersonalInfo = "EditPersonalInfo";
             public readonly string EditContactInfo = "EditContactInfo";
             public readonly string EditCompanyInfo = "EditCompanyInfo";
+            public readonly string EditQualifications = "EditQualifications";
             public readonly string DownloadAllAsCsv = "DownloadAllAsCsv";
         }
 
@@ -604,6 +610,14 @@ namespace T4MVC {
             callInfo.RouteValues.Add("username", username);
             callInfo.RouteValues.Add("editingMyRecord", editingMyRecord);
             callInfo.RouteValues.Add("companyInfo", companyInfo);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult EditQualifications(string username, bool editingMyRecord, TFS.Web.ViewModels.PersonnelRecordQualificationViewModel qualifications) {
+            var callInfo = new T4MVC_ActionResult("PersonnelRecords", Actions.EditQualifications);
+            callInfo.RouteValues.Add("username", username);
+            callInfo.RouteValues.Add("editingMyRecord", editingMyRecord);
+            callInfo.RouteValues.Add("qualifications", qualifications);
             return callInfo;
         }
 

@@ -265,3 +265,27 @@ h1, h2, h3
 {
 	clear: both;
 }
+/* Form element color scheme */
+input
+{	
+	border: solid 2px #C9C9C9;
+	padding: 1px;
+}
+input:focus
+{
+	border: solid 2px #C29100;
+}
+input[type="submit"], input[type="button"], input[type="reset"]
+{
+	background-color: #F2F2F2;
+	padding: 2px;
+}
+select
+{
+	border: solid 2px #C9C9C9;
+	padding: 1px;
+}
+select:focus
+{
+	border: solid 2px #C29100;
+}

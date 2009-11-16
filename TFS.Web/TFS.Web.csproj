@@ -156,6 +156,7 @@
     <Compile Include="ViewModels\PersonnelRecordCompanyInfo.cs" />
     <Compile Include="ViewModels\PersonnelRecordContactInfo.cs" />
     <Compile Include="ViewModels\PersonnelRecordPersonalInfo.cs" />
+    <Compile Include="ViewModels\PersonnelRecordQualificationViewModel.cs" />
     <Compile Include="ViewModels\PersonnelRecordViewModel.cs" />
     <Compile Include="ViewModels\SortedListViewModel.cs" />
     <Compile Include="ViewModels\SquadronLogViewModel.cs" />

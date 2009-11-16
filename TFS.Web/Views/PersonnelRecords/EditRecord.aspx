@@ -123,7 +123,7 @@
                 <%= Html.DropDownList("HirePositionId", Model.HirePositions)%>
                 <%= Html.ValidationMessage("HirePositionId")%>
             </div>
-        </div
+        </div>
         <div class="field-group">
             <div class="field">
                 <label for="ShirtSize">Shirt Size</label>
@@ -134,6 +134,27 @@
                 <label for="FlightSuitSize">Flight Suit Size</label>
                 <%= Html.DropDownList("FlightSuitSize", Model.Record.FlightSuitSize.GenerateSelectListItems())%>
                 <%= Html.ValidationMessage("FlightSuitSize")%>
+            </div>
+        </div>
+        <div class="button-group">
+            <input type="submit" value="Save changes" />
+            <input type="reset" value="Reset" />
+        </div>
+    <% } %>
+    <h3 class="section-header underlined">Military Background and Qualifications</h3>
+    <% using (Html.BeginForm(MVC.PersonnelRecords.EditQualifications(), FormMethod.Post, new { @class = "standard-form" })) { %>
+        <%= Html.Hidden("username", Model.Record.User.Username) %>
+        <%= Html.Hidden("editingmyrecord", Model.EditingMyRecord)%>
+        <div class="field-group">
+            <div class="field">
+                <label for="BranchOfService">Branch of Service</label>
+                <%= Html.DropDownList("BranchOfService", Model.Record.Qualifications.BranchOfService.GenerateSelectListItems())%>
+                <%= Html.ValidationMessage("BranchOfService")%>
+            </div>
+            <div class="field">
+                <label for="MilitaryFCFQualification">FCF Qualification</label>
+                <%= Html.DropDownList("MilitaryFCFQualification", Model.Record.Qualifications.MilitaryFCFQualification.GenerateSelectListItems())%>
+                <%= Html.ValidationMessage("MilitaryFCFQualification")%>
             </div>
         </div>
         <div class="button-group">

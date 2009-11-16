@@ -103,5 +103,14 @@ namespace TFS.Models.Data
             user.Person = person;
             return person;
         }
+
+        public Qualifications CreateQualificationsFor(Person person)
+        {
+            var qual = new Qualifications
+            {
+                Person = person,
+            };
+            return (Qualifications)Session.SaveOrUpdateCopy(qual);
+        }
     }
 }

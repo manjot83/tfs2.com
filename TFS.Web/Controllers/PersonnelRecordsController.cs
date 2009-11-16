@@ -61,6 +61,8 @@ namespace TFS.Web.Controllers
             var person = user.Person;
             if (person == null)
                 person = userManager.CreatePersonFor(user);
+            if (person.Qualifications == null)
+                userManager.CreateQualificationsFor(person);
             var viewModel = GeneratePersonnelRecordViewModel(person, false);
             return View(MVC.PersonnelRecords.Views.EditRecord, viewModel);
         }
@@ -72,6 +74,8 @@ namespace TFS.Web.Controllers
             var person = user.Person;
             if (person == null)
                 person = userManager.CreatePersonFor(user);
+            if (person.Qualifications == null)
+                userManager.CreateQualificationsFor(person);
             var viewModel = GeneratePersonnelRecordViewModel(person, true);
             return View(MVC.PersonnelRecords.Views.EditRecord, viewModel);
         }
@@ -134,6 +138,21 @@ namespace TFS.Web.Controllers
             person.FlightSuitSize = companyInfo.FlightSuitSize;
             person.ShirtSize = companyInfo.ShirtSize;
             person.HirePosition = programsManager.GetPositionById(companyInfo.HirePositionId);
+            if (editingMyRecord)
+                return RedirectToAction(MVC.PersonnelRecords.EditMyRecord());
+            else
+                return RedirectToAction(MVC.PersonnelRecords.EditRecord(username));
+        }
+
+        [RequireTransaction]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual ActionResult EditQualifications(string username, bool editingMyRecord, PersonnelRecordQualificationViewModel qualifications)
+        {
+            qualifications.Validate(ModelState, string.Empty);
+            var person = userManager.GetUser(username).Person;
+            if (!ModelState.IsValid)
+                return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
+
             if (editingMyRecord)
                 return RedirectToAction(MVC.PersonnelRecords.EditMyRecord());
             else

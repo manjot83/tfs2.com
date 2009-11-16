@@ -16,5 +16,6 @@ namespace TFS.Models
         User CreateUser(string username, string firstname, string lastname, string displayname);
 
         Person CreatePersonFor(User user);
+        Qualifications CreateQualificationsFor(Person person);
     }
 }
