@@ -25,7 +25,7 @@ namespace TFS.Models.Data.FlightLogs
                 .Not.Nullable();
 
             Map(x => x.DutyCode)
-                .CustomType<EnumerationUserType<DutyCode>>()
+                .CustomType<DutyCode>()
                 .Not.Nullable();
             Map(x => x.PrimaryHours)
                 .Not.Nullable();

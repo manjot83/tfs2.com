@@ -32,10 +32,10 @@ namespace TFS.Models.Data.PersonnelRecords
                 .Cascade.SaveUpdate();
 
             Map(x => x.BranchOfService)
-                .CustomType<EnumerationUserType<ServiceBranch>>()
+                .CustomType<ServiceBranch>()
                 .Nullable();
             Map(x => x.MilitaryFCFQualification)
-                .CustomType<EnumerationUserType<FCFQualification>>()
+                .CustomType<FCFQualification>()
                 .Nullable();
             Map(x => x.LastAltitudeChamber)
                 .CustomType<UtcDateTimeUserType>()
