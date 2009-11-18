@@ -59,7 +59,7 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="BaseEntity.cs" />
+    <Compile Include="BaseDomainEntity.cs" />
     <Compile Include="BaseValidatableEntity.cs" />
     <Compile Include="DomainModelException.cs" />
     <Compile Include="DomainEqualityAttribute.cs" />

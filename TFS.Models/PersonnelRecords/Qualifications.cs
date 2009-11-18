@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TFS.Models.PersonnelRecords
 {
-    public class Qualifications : BaseEntity
+    public class Qualifications : BaseDomainEntity
     {
         public Qualifications()
         {

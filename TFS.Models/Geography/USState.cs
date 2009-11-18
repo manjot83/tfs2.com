@@ -5,7 +5,7 @@ using System;
 namespace TFS.Models.Geography
 {
     [Serializable]
-    public sealed class USState : BaseEntity
+    public sealed class USState : BaseDomainEntity
     {
         private static Dictionary<string, USState> states = new Dictionary<string, USState>();
 

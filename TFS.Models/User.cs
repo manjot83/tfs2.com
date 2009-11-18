@@ -8,7 +8,7 @@ using TFS.Models.PersonnelRecords;
 
 namespace TFS.Models
 {
-    public class User : BaseEntity, IKeyedModel
+    public class User : BaseDomainEntity, IKeyedModel
     {
         public virtual int? Id { get; private set; }
 

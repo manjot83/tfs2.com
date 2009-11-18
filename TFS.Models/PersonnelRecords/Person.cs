@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TFS.Models.PersonnelRecords
 {
-    public class Person : BaseEntity, IKeyedModel
+    public class Person : BaseDomainEntity, IKeyedModel
     {
         public virtual int? Id { get; private set; }
 

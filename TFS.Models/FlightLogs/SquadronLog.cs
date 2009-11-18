@@ -4,7 +4,7 @@ using TFS.Models.PersonnelRecords;
 
 namespace TFS.Models.FlightLogs
 {
-    public class SquadronLog : BaseEntity
+    public class SquadronLog : BaseDomainEntity
     {
         public SquadronLog()
         {

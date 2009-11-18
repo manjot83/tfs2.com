@@ -3,7 +3,7 @@ using TFS.Models;
 
 namespace TFS.Models.PersonnelRecords
 {
-    public class Certificate : BaseEntity
+    public class Certificate : BaseDomainEntity
     {
         public virtual int? Id { get; private set; }
         [Required]

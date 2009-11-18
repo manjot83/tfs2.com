@@ -6,7 +6,7 @@ using TFS.Models;
 
 namespace TFS.Models.FlightLogs
 {
-    public class MissionLog : BaseEntity
+    public class MissionLog : BaseDomainEntity
     {
         public MissionLog()
         {

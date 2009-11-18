@@ -6,7 +6,7 @@ using TFS.Models.Validation;
 
 namespace TFS.Models.FlightLogs
 {
-    public class Mission : BaseEntity
+    public class Mission : BaseDomainEntity
     {
         public virtual int? Id { get; set; }
 

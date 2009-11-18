@@ -6,7 +6,7 @@ using TFS.Models;
 
 namespace TFS.Models.Programs
 {
-    public class Position : BaseEntity
+    public class Position : BaseDomainEntity
     {
         public virtual int? Id { get; private set; }
 
