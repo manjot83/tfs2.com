@@ -31,6 +31,9 @@ readonly string[] StaticFilesFolders = new string[] {
 // Note: this is certainly hacky, but is the best I could come up with so far.
 bool AlwaysKeepTemplateDirty = false;
 
+// If true,the template output will be split into multiple files.
+bool SplitIntoMultipleFiles = false;
+
 void RenderAdditionalCode() {
 #>
 static class T4MVCHelpers {
@@ -43,6 +46,11 @@ static class T4MVCHelpers {
         
         // Add your own modifications here before returning the path
         return path;
+    }
+    
+    // Logic to determine if the app is running in production or dev environment
+    public static bool IsProduction() { 
+        return (HttpContext.Current != null && !HttpContext.Current.IsDebuggingEnabled); 
     }
 }
 

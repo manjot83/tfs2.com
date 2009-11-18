@@ -151,6 +151,7 @@
     <Compile Include="ViewModels\PersonnelRecordQualificationViewModel.cs" />
     <Compile Include="ViewModels\PersonnelRecordViewModel.cs" />
     <Compile Include="ViewModels\SortedListViewModel.cs" />
+    <Compile Include="ViewModels\SquadronLogListViewModel.cs" />
     <Compile Include="ViewModels\SquadronLogViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelExtensions.cs" />
@@ -234,6 +235,7 @@
     <Content Include="favicon.ico" />
     <Content Include="StyleTest.html" />
     <Content Include="Views\Dashboard\Index.aspx" />
+    <Content Include="Views\FlightLogs\BulkCreateSquadronLog.aspx" />
     <Content Include="Views\FlightLogs\EditSquadronLog.aspx" />
     <Content Include="Views\FlightLogs\CreateMission.aspx" />
     <Content Include="Views\FlightLogs\CreateSquadronLog.aspx" />

@@ -4,7 +4,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>    
+    <link rel="icon" type="image/vnd.microsoft.icon" href="<%= Url.Content("~/favicon.ico") %>" /> 
     <link type="text/css" rel="stylesheet" href="<%= Url.Content("~/Content/internal/reset.css") %>" />
     <link type="text/css" rel="stylesheet" href="<%= Url.Content("~/Content/internal/base.css") %>" />
     <link type="text/css" rel="stylesheet" href="<%= Url.Content("~/Content/internal/tags.css") %>" />

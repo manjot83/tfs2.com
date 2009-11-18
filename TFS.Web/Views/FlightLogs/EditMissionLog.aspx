@@ -77,7 +77,7 @@
     <% } %>
     <% using(Html.BeginForm(MVC.FlightLogs.CreateMission(), FormMethod.Get)) { %>
         <%= Html.Hidden("MissionLogId", Model.MissionLogId) %>
-        <p class="list-table-footer">
+        <p>
             <input type="submit" value="Add a mission" />
         </p>
     <% } %>
@@ -105,11 +105,17 @@
     </table>
     <% } else { %>
     <p><b>No squadron members entered.</b></p>
-    <% } %>
+    <% } %>    
     <% using(Html.BeginForm(MVC.FlightLogs.CreateSquadronLog(), FormMethod.Get)) { %>
         <%= Html.Hidden("MissionLogId", Model.MissionLogId) %>
-        <p class="list-table-footer">
+        <p>
             <input type="submit" value="Add a squadron member" />
+        </p>
+    <% } %>
+    <% using(Html.BeginForm(MVC.FlightLogs.BulkCreateSquadronLog(), FormMethod.Get)) { %>
+        <%= Html.Hidden("MissionLogId", Model.MissionLogId) %>
+        <p>
+            <input type="submit" value="Add several squadron members" />
         </p>
     <% } %>
         

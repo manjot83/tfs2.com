@@ -21,7 +21,12 @@
     <div class="field">
         <label for="SquadronLog_SecondaryHours">Secondary</label>
         <%= Html.TextBox("SquadronLog.SecondaryHours", Model.SquadronLog.SecondaryHours, new { size = "10", maxlength = "5" })%>
-        <%= Html.ValidationMessage("SquadronLog.SecondaryHours")%>
+        <%= Html.ValidationMessage("SquadronLog.SecondaryHours")%>        
+    </div>
+    <div class="field">
+        <label for="SquadronLog_OtherHours">Other</label>
+        <%= Html.TextBox("SquadronLog.OtherHours", Model.SquadronLog.OtherHours, new { size = "10", maxlength = "5" })%>
+        <%= Html.ValidationMessage("SquadronLog.OtherHours")%>
     </div>
 </div>
 <div class="field-group">
@@ -35,15 +40,6 @@
         <%= Html.TextBox("SquadronLog.EvaluatorHours", Model.SquadronLog.EvaluatorHours, new { size = "10", maxlength = "5" })%>
         <%= Html.ValidationMessage("SquadronLog.EvaluatorHours")%>
     </div>
-</div>
-<div class="field-group">
-    <div class="field">
-        <label for="SquadronLog_OtherHours">Other</label>
-        <%= Html.TextBox("SquadronLog.OtherHours", Model.SquadronLog.OtherHours, new { size = "10", maxlength = "5" })%>
-        <%= Html.ValidationMessage("SquadronLog.OtherHours")%>
-    </div>
-</div>
-<div class="field-group">
     <div class="field">
         <label for="SquadronLog_Sorties">Sorties</label>
         <%= Html.TextBox("SquadronLog.Sorties", Model.SquadronLog.Sorties, new { size = "10", maxlength = "2" })%>

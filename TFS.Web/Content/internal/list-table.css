@@ -4,6 +4,7 @@
 	background: #FFFDE5;
 	border-collapse: collapse;
 	border: 2px solid #d3d9ce;
+	margin-bottom: 1em;
 }
 
 .centered-table
@@ -12,6 +13,11 @@
 }
 
 .list-table thead
+{
+	text-align: left;
+}
+
+.list-table th
 {
 	text-align: left;
 }
@@ -99,9 +105,4 @@ a.sorted-down
 {
 	margin-top: 1em;
 	font-size:1em;
-}
-
-.list-table-footer
-{
-	margin-top: 1em;
 }

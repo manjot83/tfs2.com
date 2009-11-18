@@ -5,6 +5,7 @@ using TFS.Models.FlightLogs;
 using TFS.Web.ViewModels;
 using TFS.Models.Reports;
 using TFS.Web.ActionFilters;
+using System;
 
 namespace TFS.Web.Controllers
 {
@@ -206,7 +207,7 @@ namespace TFS.Web.Controllers
         {
             var viewModel = new SquadronLogViewModel();
             viewModel.MissionLogId = missionLogId;
-            viewModel.AvailablePersons = flightLogManager.GetAvailableSquadronPersons();
+            viewModel.SetAvailablePersons(flightLogManager.GetAvailableSquadronPersons());
             return View(viewModel);
         }
 
@@ -218,13 +219,37 @@ namespace TFS.Web.Controllers
             squadronLogViewModel.SquadronLog.Validate(ModelState, "SquadronLog");
             if (!ModelState.IsValid)
             {
-                squadronLogViewModel.AvailablePersons = flightLogManager.GetAvailableSquadronPersons();
+                squadronLogViewModel.SetAvailablePersons(flightLogManager.GetAvailableSquadronPersons());
                 return View(squadronLogViewModel);
             }
-            var missionLog = flightLogManager.GetMissionLog(squadronLogViewModel.MissionLogId);
-            squadronLogViewModel.SquadronLog.Person = flightLogManager.GetSquadronPersonForUsername(squadronLogViewModel.PersonUsername);
-            missionLog.AddSquadronLog(squadronLogViewModel.SquadronLog);
+            CreateNewSquadronLog(squadronLogViewModel);
             return RedirectToAction(MVC.FlightLogs.EditMissionLog(squadronLogViewModel.MissionLogId));
+        }
+
+        
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        [RequireTransaction]
+        public virtual ViewResult BulkCreateSquadronLog(int missionLogId)
+        {
+            var viewModel = CreateSquadronLogListViewModel(missionLogId);
+            return View(Views.BulkCreateSquadronLog, viewModel);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [RequireTransaction]
+        public virtual ActionResult BulkCreateSquadronLog(SquadronLogViewModel squadronLogViewModel)
+        {
+            squadronLogViewModel.Validate(ModelState, string.Empty);
+            squadronLogViewModel.SquadronLog.Validate(ModelState, "SquadronLog");
+            if (!ModelState.IsValid)
+            {
+                var viewModel = CreateSquadronLogListViewModel(squadronLogViewModel.MissionLogId);
+                viewModel.CurrentSquadronLog = squadronLogViewModel;
+                return View(Views.BulkCreateSquadronLog, viewModel);
+            }
+            CreateNewSquadronLog(squadronLogViewModel);
+            return RedirectToAction(MVC.FlightLogs.BulkCreateSquadronLog(squadronLogViewModel.MissionLogId));
         }
 
         [RequireTransaction]
@@ -234,6 +259,26 @@ namespace TFS.Web.Controllers
             var reportGenerator = new PdfReportGenerator(new FlightTimeSummaryReport(missionLog));
             var bytes = reportGenerator.GenerateReport();
             return File(bytes, "application/pdf", "FlightTimeSummary(" + missionLog.LogDate.ToString("MM-dd-yy") + ").pdf");
+        }
+
+        private SquadronLogListViewModel CreateSquadronLogListViewModel(int missionLogId)
+        {
+            var viewModel = new SquadronLogListViewModel();
+            viewModel.MissionLog = flightLogManager.GetMissionLog(missionLogId);
+            viewModel.Items = viewModel.MissionLog.SquadronLogs;
+            viewModel.CurrentSquadronLog = new SquadronLogViewModel
+            {
+                MissionLogId = viewModel.MissionLog.Id.Value,
+            };
+            viewModel.CurrentSquadronLog.SetAvailablePersons(flightLogManager.GetAvailableSquadronPersons());
+            return viewModel;
+        }
+
+        private void CreateNewSquadronLog(SquadronLogViewModel squadronLogViewModel)
+        {
+            var missionLog = flightLogManager.GetMissionLog(squadronLogViewModel.MissionLogId);
+            squadronLogViewModel.SquadronLog.Person = flightLogManager.GetSquadronPersonForUsername(squadronLogViewModel.PersonUsername);
+            missionLog.AddSquadronLog(squadronLogViewModel.SquadronLog);
         }
     }
 }

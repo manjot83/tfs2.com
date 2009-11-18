@@ -37,16 +37,16 @@
                 <%= Html.ActionLink(log.LogDate.ToShortDateString(), MVC.FlightLogs.EditMissionLog(log.Id.Value)) %>
             </td>
             <td>
-                <%= Html.Encode(log.AircraftMDS + " : " + log.AircraftSerialNumber)%>
+                <%= Html.Encode(log.AircraftMDS + " : " + log.AircraftSerialNumber) %>
             </td>
             <td>
-                <%= Html.Encode(log.Location) %>
+                    
             </td>
         </tr>
         <% } %>
     </table>
     <% using(Html.BeginForm(MVC.FlightLogs.CreateMissionLog(), FormMethod.Get)) { %>
-        <p class="list-table-footer">
+        <p>
             <input type="submit" value="Create a mission log" />
         </p>
     <% } %>
