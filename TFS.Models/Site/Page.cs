@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TFS.Models.Images;
-using Centro.DomainModel;
+using TFS.Models;
 
 namespace TFS.Models.Site
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using Centro.DomainModel;
+using TFS.Models;
 using TFS.Models.PersonnelRecords;
 
 namespace TFS.Web.ViewModels

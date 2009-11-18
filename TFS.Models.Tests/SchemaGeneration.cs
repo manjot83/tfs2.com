@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
-using Centro.Data;
 using FluentNHibernate.Cfg.Db;
 using NHibernate.Tool.hbm2ddl;
 using NUnit.Framework;
 using TFS.Models.Data;
+using TFS.Models.Data.Configuration;
 
 namespace TFS.Models.Tests
 {

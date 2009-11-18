@@ -31,14 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Centro.Core, Version=0.1.3572.33835, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Centro.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Centro.Data, Version=0.1.3572.33836, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Centro.Data.dll</HintPath>
-    </Reference>
     <Reference Include="FluentNHibernate, Version=1.0.0.593, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluent-NHibernate\FluentNHibernate.dll</HintPath>
@@ -85,6 +77,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TFS.Common\TFS.Common.csproj">
+      <Project>{88F0DC86-E359-4746-98B8-F320EA7C2D49}</Project>
+      <Name>TFS.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TFS.Models.Data\TFS.Models.Data.csproj">
       <Project>{A4BDC461-2A4C-4AC7-BB5D-18D3A4CF5DAC}</Project>
       <Name>TFS.Models.Data</Name>

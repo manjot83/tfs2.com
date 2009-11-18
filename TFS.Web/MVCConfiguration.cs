@@ -2,15 +2,13 @@
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
-using Centro.Data;
-using Centro.Validation;
-using Centro.Web.Mvc.Controllers;
 using NHibernate;
 using StructureMap;
 using StructureMap.Attributes;
 using TFS.Models;
 using TFS.Models.Data;
 using TFS.Web.Controllers;
+using TFS.Models.Data.Configuration;
 
 namespace TFS.Web
 {
@@ -39,9 +37,9 @@ namespace TFS.Web
 
             var mappingAssemblies = new List<Assembly> { typeof(TFS.Models.Data.UserMapping).Assembly };
 #if SQLITE
-            var fluentConfiguration = SQLiteBuilder.CreateConfiguration("TFS_Web", mappingAssemblies, false);
+            var fluentConfiguration = SQLiteBuilder.CreateConfiguration("TFS_Web", mappingAssemblies);
 #else
-            var fluentConfiguration = MSSqlBuilder.CreateConfiguration("TFS_Web", mappingAssemblies, false);
+            var fluentConfiguration = MSSqlBuilder.CreateConfiguration("TFS_Web", mappingAssemblies);
 #endif
             ObjectFactory.Initialize(i =>
             {
@@ -76,7 +74,6 @@ namespace TFS.Web
 #endif
 
             ControllerBuilder.Current.SetControllerFactory(new StructureMapControllerFactory());
-            SharedValidator.Default.Validator = new DataAnnotationsValidator();
 
 #if SQLITE
             var session = ObjectFactory.GetInstance<ISession>();

@@ -5,7 +5,7 @@ using NHibernate;
 using NHibernate.Linq;
 using TFS.Models.FlightLogs;
 using TFS.Models.PersonnelRecords;
-using Centro.Extensions;
+using TFS.Extensions;
 
 namespace TFS.Models.Data.FlightLogs
 {

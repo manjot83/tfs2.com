@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Centro.DomainModel;
 using System.ComponentModel.DataAnnotations;
 using TFS.Models.FlightLogs;
-using Centro.Validation;
+using TFS.Models.Validation;
+using TFS.Models;
 
 namespace TFS.Web.ViewModels
 {
-    public class FlightLogViewModel : BaseEntity
+    public class FlightLogViewModel : BaseValidatableEntity
     {
         public int MissionLogId { get; set; }
         [Required]

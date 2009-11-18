@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing.Imaging;
-using Centro.DomainModel;
+using TFS.Models;
 
 namespace TFS.Models.Images
 {

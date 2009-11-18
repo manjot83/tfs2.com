@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Centro.DomainModel;
+using TFS.Models;
 using TFS.Models.PersonnelRecords;
 
 namespace TFS.Models

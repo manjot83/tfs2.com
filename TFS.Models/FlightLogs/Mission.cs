@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Centro.DomainModel;
-using Centro.Validation;
+using TFS.Models;
+using TFS.Models.Validation;
 
 namespace TFS.Models.FlightLogs
 {
@@ -12,19 +12,19 @@ namespace TFS.Models.FlightLogs
 
         public virtual MissionLog MissionLog { get; set; }
 
-        [DomainSignature, Required, StringLength(50)]
+        [DomainEquality, Required, StringLength(50)]
         public virtual string Name { get; set; }
-        [DomainSignature, StringLength(100)]
+        [DomainEquality, StringLength(100)]
         public virtual string AdditionalInfo { get; set; }
 
-        [DomainSignature, Required, StringLength(4)]
+        [DomainEquality, Required, StringLength(4)]
         public virtual string FromICAO { get; set; }
-        [DomainSignature, Required, StringLength(4)]
+        [DomainEquality, Required, StringLength(4)]
         public virtual string ToICAO { get; set; }
 
-        [DomainSignature, Required, StringLength(4), RegularExpression(@"[0-2][0-9][0-5][0-9]", ErrorMessage = "Must be in the format HHMM")]
+        [DomainEquality, Required, StringLength(4), RegularExpression(@"[0-2][0-9][0-5][0-9]", ErrorMessage = "Must be in the format HHMM")]
         public virtual string TakeOffTime { get; set; }
-        [DomainSignature, Required, StringLength(4), RegularExpression(@"[0-2][0-9][0-5][0-9]", ErrorMessage = "Must be in the format HHMM")]
+        [DomainEquality, Required, StringLength(4), RegularExpression(@"[0-2][0-9][0-5][0-9]", ErrorMessage = "Must be in the format HHMM")]
         public virtual string LandingTime { get; set; }
 
         public static TimeSpan ComputeFlightTime(DateTime logDate, string takeOffTime, string landingTime)
@@ -41,13 +41,13 @@ namespace TFS.Models.FlightLogs
             return ComputeFlightTime(MissionLog.LogDate, TakeOffTime, LandingTime);
         }
 
-        [DomainSignature, Required]
+        [DomainEquality, Required]
         public virtual int TouchAndGos { get; set; }
-        [DomainSignature, Required]
+        [DomainEquality, Required]
         public virtual int FullStops { get; set; }
-        [DomainSignature, Required]
+        [DomainEquality, Required]
         public virtual int Sorties { get; set; }
-        [DomainSignature, Required]
+        [DomainEquality, Required]
         public virtual int Totals { get; set; }
 
         public virtual void MarkedUpdated()

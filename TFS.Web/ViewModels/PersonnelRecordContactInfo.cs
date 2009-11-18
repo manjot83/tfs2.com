@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Centro.DomainModel;
+using TFS.Models;
 using TFS.Models.Geography;
 using System.ComponentModel.DataAnnotations;
 using TFS.Models;
 
 namespace TFS.Web.ViewModels
 {
-    public class PersonnelRecordContactInfo : BaseEntity
+    public class PersonnelRecordContactInfo : BaseValidatableEntity
     {
         [Required]
         public virtual string StreetAddress { get; set; }

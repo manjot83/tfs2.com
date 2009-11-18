@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Text;
-using Centro.Inflector;
+using TFS.Inflector;
 
 namespace TFS.Models.Reports
 {

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using TFS.Models.PersonnelRecords;
 using FluentNHibernate.Mapping;
-using Centro.Data.UserTypes;
 using TFS.Models.Data.UserTypes;
 
 namespace TFS.Models.Data.PersonnelRecords

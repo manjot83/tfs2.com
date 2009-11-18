@@ -1,5 +1,4 @@
-﻿using Centro.Data.UserTypes;
-using FluentNHibernate.Mapping;
+﻿using FluentNHibernate.Mapping;
 using TFS.Models.FlightLogs;
 
 namespace TFS.Models.Data.FlightLogs

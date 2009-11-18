@@ -30,7 +30,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug - SQLite|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug with SQLite|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG;SQLITE</DefineConstants>
@@ -39,14 +39,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Centro.Core, Version=0.1.3572.33835, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Centro.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Centro.Data, Version=0.1.3572.33836, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Centro.Data.dll</HintPath>
-    </Reference>
     <Reference Include="FluentNHibernate, Version=1.0.0.593, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\fluent-NHibernate\FluentNHibernate.dll</HintPath>
@@ -78,6 +70,10 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="BaseService.cs" />
+    <Compile Include="Configuration\FluentConfigurationBuilder.cs" />
+    <Compile Include="Configuration\MSSqlBuilder.cs" />
+    <Compile Include="Configuration\SQLiteBuilder.cs" />
+    <Compile Include="Configuration\SqlSchemaUtil.cs" />
     <Compile Include="FlightLogs\FlightLogManager.cs" />
     <Compile Include="FlightLogs\MissionMap.cs" />
     <Compile Include="FlightLogs\MissionLogMap.cs" />
@@ -97,6 +93,10 @@
     <Compile Include="UserTypes\UtcDateTimeUserType.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TFS.Common\TFS.Common.csproj">
+      <Project>{88F0DC86-E359-4746-98B8-F320EA7C2D49}</Project>
+      <Name>TFS.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TFS.Models\TFS.Models.csproj">
       <Project>{67E5844A-31A4-49F7-ABCE-2D70559D4EB7}</Project>
       <Name>TFS.Models</Name>

@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Centro.DomainModel;
+using TFS.Models;
 
 namespace TFS.Web.ViewModels
 {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Centro.DomainModel;
+using TFS.Models;
 
 namespace TFS.Models.FlightLogs
 {
@@ -19,17 +19,17 @@ namespace TFS.Models.FlightLogs
 
         public virtual int? Id { get; set; }
 
-        [DomainSignature, Required]
+        [DomainEquality, Required]
         public virtual DateTime LogDate { get; set; }
-        [DomainSignature, Required]
+        [DomainEquality, Required]
         public virtual DateTime LastModifiedDate { get; set; }
 
-        [DomainSignature, Required]
+        [DomainEquality, Required]
         public virtual string AircraftMDS { get; set; } // "Mission Design Series"
-        [DomainSignature, Required]
+        [DomainEquality, Required]
         public virtual string AircraftSerialNumber { get; set; } // "Serial No." or Tail Number
 
-        [DomainSignature, Required]
+        [DomainEquality, Required]
         public virtual string Location { get; set; } // Todo Change to "Program Location"
 
         public virtual IList<Mission> Missions { get; set; }
