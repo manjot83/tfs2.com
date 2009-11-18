@@ -6,6 +6,7 @@ using TFS.Models.Validation;
 
 namespace TFS.Models
 {
+    [Serializable]
     public abstract class BaseValidatableEntity : IValidatable
     {
         private readonly static DataAnnotationsValidator Validator;

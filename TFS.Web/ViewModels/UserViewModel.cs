@@ -3,7 +3,7 @@ using TFS.Models;
 
 namespace TFS.Web.ViewModels
 {
-    public class UserViewModel : BaseEntity
+    public class UserViewModel : BaseValidatableEntity
     {
         [Required]
         [StringLength(50)]

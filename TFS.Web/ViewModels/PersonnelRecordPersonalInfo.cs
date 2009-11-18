@@ -5,7 +5,7 @@ using TFS.Models.PersonnelRecords;
 
 namespace TFS.Web.ViewModels
 {
-    public class PersonnelRecordPersonalInfo : BaseEntity
+    public class PersonnelRecordPersonalInfo : BaseValidatableEntity
     {
         [Required, StringLength(50)]
         public virtual string LastName { get; set; }

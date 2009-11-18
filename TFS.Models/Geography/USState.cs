@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using TFS.Models;
+using System;
 
 namespace TFS.Models.Geography
 {
+    [Serializable]
     public sealed class USState : BaseEntity
     {
         private static Dictionary<string, USState> states = new Dictionary<string, USState>();

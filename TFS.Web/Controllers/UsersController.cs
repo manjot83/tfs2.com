@@ -53,6 +53,7 @@ namespace TFS.Web.Controllers
                 users = users.OrderBy(x => x.Disabled);
             else if (viewModel.IsCurrentSortType("status"))
                 users = users.OrderByDescending(x => x.Disabled);
+            users = users.ToList();
             viewModel.TotalItems = users.Count();
             viewModel.Items = users.Skip(viewModel.ItemsPerPage * (viewModel.CurrentPage - 1)).Take(viewModel.ItemsPerPage).ToList();
             return View(Views.List, viewModel);

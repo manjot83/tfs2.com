@@ -6,7 +6,7 @@ using TFS.Models;
 
 namespace TFS.Web.ViewModels
 {
-    public class PersonnelRecordQualificationViewModel : BaseEntity
+    public class PersonnelRecordQualificationViewModel : BaseValidatableEntity
     {
     }
 }

@@ -8,7 +8,7 @@ using TFS.Models.PersonnelRecords;
 
 namespace TFS.Web.ViewModels
 {
-    public class SquadronLogViewModel: BaseEntity
+    public class SquadronLogViewModel : BaseValidatableEntity
     {
         public SquadronLogViewModel()
         {

@@ -6,6 +6,7 @@ using NHibernate.UserTypes;
 
 namespace TFS.Models.Data.UserTypes
 {
+    [Serializable]
     public class UtcDateTimeUserType : IUserType
     {
         object IUserType.NullSafeGet(IDataReader rs, string[] names, object owner)
