@@ -13,6 +13,7 @@ namespace TFS.Models.PersonnelRecords
     {
         public virtual int? Id { get; private set; }
 
+        [DomainEquality]
         public virtual User User { get; set; }
 
         public virtual string LastName { get; set; }

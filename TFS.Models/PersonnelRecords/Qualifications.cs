@@ -16,6 +16,7 @@ namespace TFS.Models.PersonnelRecords
 
         public virtual int? Id { get; private set; }
 
+        [DomainEquality]
         [Required]
         public virtual Person Person { get; set; }
 

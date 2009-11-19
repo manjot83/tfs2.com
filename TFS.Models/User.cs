@@ -20,7 +20,8 @@ namespace TFS.Models
         public virtual string DisplayName { get; set; }
         [Required, StringLength(50)]
         public virtual string Email { get; set; }
-        [Required, StringLength(50)]
+        [DomainEquality]
+        [Required, StringLength(50)]        
         public virtual string Username { get; set; }
         public virtual bool Disabled { get; set; }
 

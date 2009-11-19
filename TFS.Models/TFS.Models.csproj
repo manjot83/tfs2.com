@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\fluent-NHibernate\Iesi.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="nfop, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\nfop.dll</HintPath>
@@ -74,6 +78,9 @@
     <Compile Include="Images\IImageFinder.cs" />
     <Compile Include="Images\StaticImage.cs" />
     <Compile Include="InvalidModelException.cs" />
+    <Compile Include="Programs\AircraftMDS.cs" />
+    <Compile Include="Programs\FlightProgram.cs" />
+    <Compile Include="Programs\ProgramLocation.cs" />
     <Compile Include="Reports\CsvReportGenerator.cs" />
     <Compile Include="Reports\FlightTimeSummaryReport.cs" />
     <Compile Include="Reports\ICsvReport.cs" />
