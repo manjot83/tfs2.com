@@ -45,25 +45,12 @@ namespace TFS.Web
 #endif
             ObjectFactory.Initialize(i =>
             {
-                i.ForRequestedType<ISessionFactory>()
-                    .CacheBy(InstanceScope.Singleton)
-                    .TheDefault.Is.IsThis(fluentConfiguration.BuildSessionFactory());
-
-                i.ForRequestedType<ISession>()
-                    .CacheBy(InstanceScope.Hybrid)
-                    .TheDefault.Is.ConstructedBy(x => x.GetInstance<ISessionFactory>().OpenSession());
+                i.AddRegistry(new DomainModelRegistry(fluentConfiguration));
 
                 i.Scan(s =>
                 {
                     s.IncludeNamespaceContainingType<DashboardController>();
                     s.AddAllTypesOf<IController>();
-                });
-
-                i.Scan(x =>
-                {
-                    x.AssemblyContainingType<IUserManager>();
-                    x.AssemblyContainingType<UserManager>();
-                    x.With<StructureMap.Graph.DefaultConventionScanner>();
                 });
 
                 i.ForRequestedType<IAuthenticationService>()

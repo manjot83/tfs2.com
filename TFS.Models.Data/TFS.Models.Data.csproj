@@ -78,7 +78,7 @@
     <Compile Include="Configuration\MSSqlBuilder.cs" />
     <Compile Include="Configuration\SQLiteBuilder.cs" />
     <Compile Include="Configuration\SqlSchemaUtil.cs" />
-    <Compile Include="FlightLogs\FlightLogManager.cs" />
+    <Compile Include="FlightLogs\FlightLogRepository.cs" />
     <Compile Include="Mappings\FlightLogs\MissionMap.cs" />
     <Compile Include="Mappings\FlightLogs\FlightLogMap.cs" />
     <Compile Include="Mappings\FlightLogs\SquadronLogMap.cs" />
@@ -93,6 +93,7 @@
     <Compile Include="Programs\ProgramsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Mappings\Site\PageMap.cs" />
+    <Compile Include="SessionExtensions.cs" />
     <Compile Include="Site\SiteRepository.cs" />
     <Compile Include="Mappings\Users\UserMapping.cs" />
     <Compile Include="Users\UserManager.cs" />

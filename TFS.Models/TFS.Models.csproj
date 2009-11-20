@@ -68,7 +68,8 @@
     <Compile Include="DomainModelException.cs" />
     <Compile Include="DomainEqualityAttribute.cs" />
     <Compile Include="FlightLogs\DutyCode.cs" />
-    <Compile Include="FlightLogs\IFlightLogManager.cs" />
+    <Compile Include="FlightLogs\FlightLogManager.cs" />
+    <Compile Include="FlightLogs\IFlightLogRepository.cs" />
     <Compile Include="FlightLogs\Mission.cs" />
     <Compile Include="FlightLogs\FlightLog.cs" />
     <Compile Include="FlightLogs\SquadronLog.cs" />

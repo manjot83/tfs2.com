@@ -6,44 +6,52 @@ using NHibernate.Linq;
 using TFS.Models.FlightLogs;
 using TFS.Models.PersonnelRecords;
 using TFS.Extensions;
+using TFS.Models.Users;
 
 namespace TFS.Models.Data.FlightLogs
 {
-    public class FlightLogManager : BaseDataAccessObject, IFlightLogManager
+    public class FlightLogRepository : BaseDataAccessObject, IFlightLogRepository
     {
-        public FlightLogManager(ISession session)
+        private readonly IUserManager userManager;
+
+        public FlightLogRepository(ISession session, IUserManager userManager)
             : base(session)
         {
+            this.userManager = userManager;
         }
 
-        public FlightLog GetFlgithLog(int id)
+        public IEnumerable<FlightLog> GetAllFlightLogs()
+        {
+            return QueryFlightLogs().ToList();
+        }
+
+        public FlightLog GetFlightLogById(int id)
         {
             return QueryFlightLogs().Where(x => x.Id == id).FirstOrDefault();
         }
 
-        public Mission GetMission(int id)
+        public Mission GetMissionById(int id)
         {
             return QueryMissions().Where(x => x.Id == id).FirstOrDefault();
         }
 
-        public SquadronLog GetSquadronLog(int id)
+        public SquadronLog GetSquadronLogById(int id)
         {
             return QuerySquadronLogs().Where(x => x.Id == id).FirstOrDefault();
         }
 
         public IList<Person> GetAvailableSquadronPersons()
         {
-            return Session.Linq<Person>().Where(x => !x.User.Disabled).ToList();
+            return userManager.GetAllActiveUsers()
+                .ToList()
+                .Where(x => x.Person != null)
+                .Select(x => x.Person).ToList();
         }
 
         public Person GetSquadronPersonForUsername(string username)
         {
-            return Session.Linq<Person>().Where(x => x.User.Username == username).FirstOrDefault();
-        }
-
-        public IEnumerable<FlightLog> GetAllFlightLogs()
-        {
-            return QueryFlightLogs().ToList();
+            var user = userManager.GetUser(username);
+            return user != null ? user.Person : null;
         }
 
         public IQueryable<FlightLog> QueryFlightLogs()
@@ -61,17 +69,9 @@ namespace TFS.Models.Data.FlightLogs
             return Session.Linq<SquadronLog>();
         }
 
-        public FlightLog CreateNewFlightLog(DateTime logDate, string aircraftMDS, string aircraftSerialNumber, string location)
+        public FlightLog AddFlightLog(FlightLog flightLog)
         {
-            var newFlightLog = new FlightLog
-            {
-                AircraftMDS = aircraftMDS,
-                AircraftSerialNumber = aircraftSerialNumber,
-                Location = location,
-                LogDate = logDate,
-                LastModifiedDate = DateTime.Now.ToUniversalTime(),
-            };
-            return (FlightLog)Session.SaveOrUpdateCopy(newFlightLog);
+            return Session.SaveOrUpdateCopy<FlightLog>(flightLog);
         }
     }
 }
