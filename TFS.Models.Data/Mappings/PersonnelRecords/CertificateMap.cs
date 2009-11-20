@@ -5,7 +5,7 @@ using System.Text;
 using TFS.Models.PersonnelRecords;
 using FluentNHibernate.Mapping;
 
-namespace TFS.Models.Data.PersonnelRecords
+namespace TFS.Models.Data.Mappings.PersonnelRecords
 {
     public class CertificateMap : ClassMap<Certificate>
     {

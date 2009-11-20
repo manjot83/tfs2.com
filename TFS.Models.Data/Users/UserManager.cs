@@ -6,8 +6,9 @@ using TFS.Extensions;
 using NHibernate;
 using NHibernate.Linq;
 using TFS.Models.PersonnelRecords;
+using TFS.Models.Users;
 
-namespace TFS.Models.Data
+namespace TFS.Models.Data.Users
 {
     public class UserManager : BaseDataAccessObject, IUserManager
     {

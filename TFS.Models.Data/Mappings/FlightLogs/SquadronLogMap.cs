@@ -1,7 +1,7 @@
 ﻿using FluentNHibernate.Mapping;
 using TFS.Models.FlightLogs;
 
-namespace TFS.Models.Data.FlightLogs
+namespace TFS.Models.Data.Mappings.FlightLogs
 {
     public class SquadronLogMap : ClassMap<SquadronLog>
     {

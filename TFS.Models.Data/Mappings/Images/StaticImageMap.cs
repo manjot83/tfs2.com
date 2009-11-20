@@ -5,7 +5,7 @@ using System.Text;
 using TFS.Models.Images;
 using FluentNHibernate.Mapping;
 
-namespace TFS.Models.Data.Images
+namespace TFS.Models.Data.Mappings.Images
 {
     public class StaticImageMap : ClassMap<StaticImage>
     {

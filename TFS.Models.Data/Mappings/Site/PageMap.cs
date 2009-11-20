@@ -6,7 +6,7 @@ using TFS.Models.Site;
 using FluentNHibernate.Mapping;
 using TFS.Models.Images;
 
-namespace TFS.Models.Data.Site
+namespace TFS.Models.Data.Mappings.Site
 {
     public class PageMap : ClassMap<Page>
     {

@@ -5,7 +5,7 @@ using System.Text;
 using TFS.Models.Programs;
 using FluentNHibernate.Mapping;
 
-namespace TFS.Models.Data.Programs
+namespace TFS.Models.Data.Mappings.Programs
 {
     public class PositionMap : ClassMap<Position>
     {

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FluentNHibernate.Mapping;
+using TFS.Models.Users;
 
-namespace TFS.Models.Data
+namespace TFS.Models.Mappings.Data
 {
     public class UserMapping : ClassMap<User>
     {

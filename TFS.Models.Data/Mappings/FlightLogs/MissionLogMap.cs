@@ -2,7 +2,7 @@
 using TFS.Models.Data.UserTypes;
 using TFS.Models.FlightLogs;
 
-namespace TFS.Models.Data.FlightLogs
+namespace TFS.Models.Data.Mappings.FlightLogs
 {
     public class MissionLogMap : ClassMap<MissionLog>
     {

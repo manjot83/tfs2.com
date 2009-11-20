@@ -6,7 +6,7 @@ using TFS.Models.PersonnelRecords;
 using FluentNHibernate.Mapping;
 using TFS.Models.Data.UserTypes;
 
-namespace TFS.Models.Data.PersonnelRecords
+namespace TFS.Models.Data.Mappings.PersonnelRecords
 {
     public class QualificationsMap : ClassMap<Qualifications>
     {
