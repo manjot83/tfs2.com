@@ -80,6 +80,7 @@ namespace TFS.Models.Data.Users
 
         public User AddUser(User user)
         {
+            user.Validate();
             return Session.SaveOrUpdateCopy<User>(user);
         }
     }

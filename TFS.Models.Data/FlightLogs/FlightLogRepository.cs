@@ -71,6 +71,7 @@ namespace TFS.Models.Data.FlightLogs
 
         public FlightLog AddFlightLog(FlightLog flightLog)
         {
+            flightLog.Validate();
             return Session.SaveOrUpdateCopy<FlightLog>(flightLog);
         }
     }

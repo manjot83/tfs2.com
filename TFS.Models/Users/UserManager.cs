@@ -32,6 +32,8 @@ namespace TFS.Models.Users
 
         public Person CreatePersonFor(User user)
         {
+            if (user.Person != null)
+                throw new InvalidOperationException("User already has a Person object attached");
             var person = new Person
             {
                 FirstName = user.FirstName,
@@ -44,6 +46,8 @@ namespace TFS.Models.Users
 
         public Qualifications CreateQualificationsFor(Person person)
         {
+            if (person.Qualifications != null)
+                throw new InvalidOperationException("Person already has a Qualifications object attached");
             var qual = new Qualifications
             {
                 Person = person,
