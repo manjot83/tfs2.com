@@ -2,7 +2,7 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <p>
-        <%= Html.ActionLink("Back to flight log summary ...", MVC.FlightLogs.EditMissionLog(Model.MissionLogId)) %>
+        <%= Html.ActionLink("Back to flight log summary ...", MVC.FlightLogs.EditFlightLog(Model.FlightLogId))%>
     </p>
     <h1>Edit flight log squadron member</h1>
     <% using (Html.BeginForm(MVC.FlightLogs.EditSquadronLog(Model.SquadronLog.Id.Value), FormMethod.Post, new { @class = "standard-form" })) { %>

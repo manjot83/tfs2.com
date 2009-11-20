@@ -13,9 +13,9 @@ namespace TFS.Models.Data.Mappings.FlightLogs
                 .GeneratedBy.Identity()
                 .Not.Nullable();
 
-            References(x => x.MissionLog)
-                .ForeignKey("FK_SquadronLogs_MissionLogs")
-                .Column("MissionLogId")
+            References(x => x.FlightLog)
+                .ForeignKey("FK_SquadronLogs_FlightLogs")
+                .Column("FlightLogId")
                 .Cascade.SaveUpdate()
                 .Not.Nullable();
             References(x => x.Person)

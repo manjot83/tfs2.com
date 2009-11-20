@@ -7,9 +7,9 @@ using Iesi.Collections.Generic;
 
 namespace TFS.Models.FlightLogs
 {
-    public class MissionLog : BaseDomainEntity
+    public class FlightLog : BaseDomainEntity
     {
-        public MissionLog()
+        public FlightLog()
         {
             this.Missions = new HashedSet<Mission>();
             this.SquadronLogs = new HashedSet<SquadronLog>();
@@ -70,14 +70,14 @@ namespace TFS.Models.FlightLogs
 
         public virtual Mission AddMission(Mission mission)
         {
-            mission.MissionLog = this;
+            mission.FlightLog = this;
             mission.MarkedUpdated();
             Missions.Add(mission);
             return mission;
         }
         public virtual SquadronLog AddSquadronLog(SquadronLog squadronLog)
         {
-            squadronLog.MissionLog = this;
+            squadronLog.FlightLog = this;
             squadronLog.MarkedUpdated();
             SquadronLogs.Add(squadronLog);
             return squadronLog;

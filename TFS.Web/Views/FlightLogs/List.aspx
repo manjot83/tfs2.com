@@ -1,9 +1,9 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.SortedListViewModel<TFS.Models.FlightLogs.MissionLog>>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.SortedListViewModel<TFS.Models.FlightLogs.FlightLog>>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <h1>Flight Time Summaries</h1>
     <p>
-        Click the date to edit, or <b><%= Html.ActionLink("Create", MVC.FlightLogs.CreateMissionLog())%></b> a new one.
+        Click the date to edit, or <b><%= Html.ActionLink("Create", MVC.FlightLogs.CreateFlightLog())%></b> a new one.
     </p>
     <table class="list-table">
         <thead>
@@ -34,7 +34,7 @@
         <% foreach (var log in Model.Items) { %>
         <tr>
             <td>
-                <%= Html.ActionLink(log.LogDate.ToShortDateString(), MVC.FlightLogs.EditMissionLog(log.Id.Value)) %>
+                <%= Html.ActionLink(log.LogDate.ToShortDateString(), MVC.FlightLogs.EditFlightLog(log.Id.Value)) %>
             </td>
             <td>
                 <%= Html.Encode(log.AircraftMDS + " : " + log.AircraftSerialNumber) %>
@@ -45,7 +45,7 @@
         </tr>
         <% } %>
     </table>
-    <% using(Html.BeginForm(MVC.FlightLogs.CreateMissionLog(), FormMethod.Get)) { %>
+    <% using(Html.BeginForm(MVC.FlightLogs.CreateFlightLog(), FormMethod.Get)) { %>
         <p>
             <input type="submit" value="Create a mission log" />
         </p>

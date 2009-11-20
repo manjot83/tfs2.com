@@ -14,7 +14,7 @@ namespace TFS.Models.FlightLogs
 
         public virtual int? Id { get; set; }
 
-        public virtual MissionLog MissionLog { get; set; }
+        public virtual FlightLog FlightLog { get; set; }
 
         public virtual string FlyingUnit { get; set; }
 
@@ -52,7 +52,7 @@ namespace TFS.Models.FlightLogs
 
         public virtual void MarkedUpdated()
         {
-            MissionLog.MarkedUpdated();
+            FlightLog.MarkedUpdated();
         }
     }
 }

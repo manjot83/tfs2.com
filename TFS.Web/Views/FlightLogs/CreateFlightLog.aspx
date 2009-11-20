@@ -5,12 +5,12 @@
         <%= Html.ActionLink("Back to flight log summary list...", MVC.FlightLogs.List()) %>
     </p>
     <h1>Create a flight log summary</h1>
-    <% using (Html.BeginForm(MVC.FlightLogs.CreateMissionLog(), FormMethod.Post, new { @class = "standard-form" })) { %>
+    <% using (Html.BeginForm(MVC.FlightLogs.CreateFlightLog(), FormMethod.Post, new { @class = "standard-form" })) { %>
         <div class="field-group">
             <div class="field">
-                <label for="MissionLogDate">Date (mm/dd/yyyy)</label>
-                <%= Html.TextBox("MissionLogDate", Model.MissionLogDate.ToShortDateOrEmptyString(), new { size = "15", maxlength = "10" })%>
-                <%= Html.ValidationMessage("MissionLogDate")%>
+                <label for="FlightLogDate">Date (mm/dd/yyyy)</label>
+                <%= Html.TextBox("FlightLogDate", Model.FlightLogDate.ToShortDateOrEmptyString(), new { size = "15", maxlength = "10" })%>
+                <%= Html.ValidationMessage("FlightLogDate")%>
             </div>
         </div>
         <div class="field-group">

@@ -15,16 +15,16 @@ namespace TFS.Models.Reports
             get { return "TFS.Models.Reports.FlightTimeSummary.xsl"; }
         }
 
-        private MissionLog missionLog;
+        private FlightLog flightLog;
 
         public FlightTimeSummaryReport()
         {
             // Required for serialization
         }
 
-        public FlightTimeSummaryReport(MissionLog missionLog)
+        public FlightTimeSummaryReport(FlightLog flightLog)
         {
-            this.missionLog = missionLog;
+            this.flightLog = flightLog;
         }
 
         public XmlSchema GetSchema()
@@ -39,16 +39,16 @@ namespace TFS.Models.Reports
 
         public void WriteXml(XmlWriter writer)
         {
-            WriteMissionLogAttributes(writer);
-            WriteMissionLogElements(writer);
+            WriteFlightLogAttributes(writer);
+            WriteFlightLogElements(writer);
             writer.WriteStartElement("Missions");
-            for (int i = 0; i < missionLog.Missions.Count; i++)
+            for (int i = 0; i < flightLog.Missions.Count; i++)
             {
-                WriteMissionElement(writer, missionLog.Missions.ToArray()[i], i + 1);
+                WriteMissionElement(writer, flightLog.Missions.ToArray()[i], i + 1);
             }
             writer.WriteEndElement();
             writer.WriteStartElement("Squadron");
-            foreach (var member in missionLog.SquadronLogs)
+            foreach (var member in flightLog.SquadronLogs)
             {
                 WriteSquadronMember(writer, member);
             }
@@ -93,22 +93,22 @@ namespace TFS.Models.Reports
             writer.WriteEndElement();
         }
 
-        private void WriteMissionLogElements(XmlWriter writer)
+        private void WriteFlightLogElements(XmlWriter writer)
         {
-            writer.WriteElementString("TotalCalculatedFlightTime", missionLog.CalculateTotalFlightTime().ToString("N1"));
-            writer.WriteElementString("TotalTouchAndGos", missionLog.CalculateTotalTouchAndGos().ToString());
-            writer.WriteElementString("TotalFullStops", missionLog.CalculateTotalFullStops().ToString());
-            writer.WriteElementString("TotalTotals", missionLog.CalculateTotals().ToString());
-            writer.WriteElementString("TotalSorties", missionLog.CalculateTotalSorties().ToString());
+            writer.WriteElementString("TotalCalculatedFlightTime", flightLog.CalculateTotalFlightTime().ToString("N1"));
+            writer.WriteElementString("TotalTouchAndGos", flightLog.CalculateTotalTouchAndGos().ToString());
+            writer.WriteElementString("TotalFullStops", flightLog.CalculateTotalFullStops().ToString());
+            writer.WriteElementString("TotalTotals", flightLog.CalculateTotals().ToString());
+            writer.WriteElementString("TotalSorties", flightLog.CalculateTotalSorties().ToString());
         }
 
-        private void WriteMissionLogAttributes(XmlWriter writer)
+        private void WriteFlightLogAttributes(XmlWriter writer)
         {
-            writer.WriteAttributeString("Date", missionLog.LogDate.ToString("MM/dd/yy"));
-            writer.WriteAttributeString("MDS", missionLog.AircraftMDS);
-            writer.WriteAttributeString("SerialNumber", missionLog.AircraftSerialNumber);
-            writer.WriteAttributeString("Location", missionLog.Location);
-            writer.WriteAttributeString("OperatingUnit", missionLog.OperatingUnit);
+            writer.WriteAttributeString("Date", flightLog.LogDate.ToString("MM/dd/yy"));
+            writer.WriteAttributeString("MDS", flightLog.AircraftMDS);
+            writer.WriteAttributeString("SerialNumber", flightLog.AircraftSerialNumber);
+            writer.WriteAttributeString("Location", flightLog.Location);
+            writer.WriteAttributeString("OperatingUnit", flightLog.OperatingUnit);
             writer.WriteAttributeString("GeneratedDate", DateTime.UtcNow.ToString("MM/dd/yy"));
         }
     }

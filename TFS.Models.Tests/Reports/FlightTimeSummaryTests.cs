@@ -14,20 +14,20 @@ namespace TFS.Models.Tests.Reports
     [TestFixture]
     public class FlightTimeSummaryTests
     {
-        private MissionLog CreateMissionLog()
+        private FlightLog CreateFlightLog()
         {
-            var missionLog = new MissionLog
+            var flightLog = new FlightLog
             {
                 LogDate = DateTime.UtcNow,
                 AircraftMDS = "C130J",
                 AircraftSerialNumber = "THX1138",
                 Location = "Marietta, GA",
             };
-            missionLog.Missions = new HashedSet<Mission>
+            flightLog.Missions = new HashedSet<Mission>
             {
                 new Mission
                 {
-                    MissionLog = missionLog,
+                    FlightLog = flightLog,
                     Name = "Test Flight 1",
                     FromICAO = "KATL",
                     ToICAO = "KATL",
@@ -41,7 +41,7 @@ namespace TFS.Models.Tests.Reports
                 },
                 new Mission
                 {
-                    MissionLog = missionLog,
+                    FlightLog = flightLog,
                     Name = "Test Flight 2",
                     FromICAO = "KATL",
                     ToICAO = "KATL",
@@ -54,11 +54,11 @@ namespace TFS.Models.Tests.Reports
                     AdditionalInfo = "not empty",
                 }
             };
-            missionLog.SquadronLogs = new HashedSet<SquadronLog>
+            flightLog.SquadronLogs = new HashedSet<SquadronLog>
             {
                 new SquadronLog
                 {
-                    MissionLog = missionLog,
+                    FlightLog = flightLog,
                     Person = new Person
                     {
                         FirstName = "Joseph",
@@ -72,7 +72,7 @@ namespace TFS.Models.Tests.Reports
                 },
                 new SquadronLog
                 {
-                    MissionLog = missionLog,
+                    FlightLog = flightLog,
                     Person = new Person
                     {
                         FirstName = "Joseph",
@@ -85,13 +85,13 @@ namespace TFS.Models.Tests.Reports
                     PrimaryInstrumentHours = 3,
                 },
             };
-            return missionLog;
+            return flightLog;
         }
 
         [Test]
         public void Should_Serialize_To_Xml()
         {
-            var report = new FlightTimeSummaryReport(CreateMissionLog());
+            var report = new FlightTimeSummaryReport(CreateFlightLog());
             var xml = report.ConvertToXml<FlightTimeSummaryReport>();
             Console.Out.WriteLine(xml);
         }
@@ -99,27 +99,27 @@ namespace TFS.Models.Tests.Reports
         [Test]
         public void Should_Compile_XSLT()
         {
-            new PdfReportGenerator(new FlightTimeSummaryReport(CreateMissionLog()));
+            new PdfReportGenerator(new FlightTimeSummaryReport(CreateFlightLog()));
         }
 
         [Test]
         public void Should_Generate_XML()
         {
-            var xml = new PdfReportGenerator(new FlightTimeSummaryReport(CreateMissionLog())).GenerateXml();
+            var xml = new PdfReportGenerator(new FlightTimeSummaryReport(CreateFlightLog())).GenerateXml();
             Console.Out.WriteLine(xml.ToString());
         }
 
         [Test]
         public void Should_Generate_XSLFO()
         {
-            var xslfo = new PdfReportGenerator(new FlightTimeSummaryReport(CreateMissionLog())).GenerateXslFo();
+            var xslfo = new PdfReportGenerator(new FlightTimeSummaryReport(CreateFlightLog())).GenerateXslFo();
             Console.Out.WriteLine(xslfo.ToString());
         }
 
         [Test]
         public void Should_Generate_PDF()
         {
-            var bytes = new PdfReportGenerator(new FlightTimeSummaryReport(CreateMissionLog())).GenerateReport();
+            var bytes = new PdfReportGenerator(new FlightTimeSummaryReport(CreateFlightLog())).GenerateReport();
             var fileName = Path.GetTempFileName() + ".pdf";
             File.WriteAllBytes(fileName, bytes);
             Process.Start(fileName);

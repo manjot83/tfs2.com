@@ -10,7 +10,7 @@ namespace TFS.Models.FlightLogs
     {
         public virtual int? Id { get; set; }
 
-        public virtual MissionLog MissionLog { get; set; }
+        public virtual FlightLog FlightLog { get; set; }
 
         [DomainEquality, Required, StringLength(50)]
         public virtual string Name { get; set; }
@@ -38,7 +38,7 @@ namespace TFS.Models.FlightLogs
 
         public virtual TimeSpan ComputeFlightTime()
         {
-            return ComputeFlightTime(MissionLog.LogDate, TakeOffTime, LandingTime);
+            return ComputeFlightTime(FlightLog.LogDate, TakeOffTime, LandingTime);
         }
 
         [DomainEquality, Required]
@@ -52,7 +52,7 @@ namespace TFS.Models.FlightLogs
 
         public virtual void MarkedUpdated()
         {
-            MissionLog.MarkedUpdated();
+            FlightLog.MarkedUpdated();
         }
 
         public override IEnumerable<ValidationError> GetCustomValidationErrors()

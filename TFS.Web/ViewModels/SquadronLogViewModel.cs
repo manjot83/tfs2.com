@@ -13,7 +13,7 @@ namespace TFS.Web.ViewModels
             SquadronLog = new SquadronLog();
         }
 
-        public int MissionLogId { get; set; }
+        public int FlightLogId { get; set; }
         public IList<Person> AvailablePersons { get; set; }
         public string PersonUsername { get; set; }
 

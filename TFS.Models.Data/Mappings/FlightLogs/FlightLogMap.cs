@@ -4,22 +4,22 @@ using TFS.Models.FlightLogs;
 
 namespace TFS.Models.Data.Mappings.FlightLogs
 {
-    public class MissionLogMap : ClassMap<MissionLog>
+    public class FlightLogMap : ClassMap<FlightLog>
     {
-        public MissionLogMap()
+        public FlightLogMap()
         {
-            Table("MissionLogs");
+            Table("FlightLogs");
 
             Id(x => x.Id)
                 .GeneratedBy.Identity()
                 .Not.Nullable();
 
             HasMany(x => x.Missions)
-                .KeyColumn("MissionLogId")
+                .KeyColumn("FlightLogId")
                 .Inverse()
                 .Cascade.SaveUpdate();
             HasMany(x => x.SquadronLogs)
-                .KeyColumn("MissionLogId")
+                .KeyColumn("FlightLogId")
                 .Inverse()
                 .Cascade.SaveUpdate();
 

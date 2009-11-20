@@ -10,6 +10,7 @@ using TFS.Extensions;
 using TFS.Models.Programs;
 using TFS.Models.PersonnelRecords;
 using TFS.Models.FlightLogs;
+using TFS.Models.Users;
 
 namespace TFS.Web
 {
@@ -117,7 +118,7 @@ namespace TFS.Web
             }
 
             // Example Flight Log Data
-            var missionlog_example1 = session.Save(new MissionLog()
+            var flightlog_example1 = session.Save(new FlightLog()
             {
                 LogDate = DateTime.Now.ToUniversalTime(),
                 LastModifiedDate = DateTime.Now.ToUniversalTime(),
@@ -127,7 +128,7 @@ namespace TFS.Web
             });
             session.Save(new Mission()
             {
-                MissionLog = session.Get<MissionLog>(missionlog_example1),
+                FlightLog = session.Get<FlightLog>(flightlog_example1),
                 Name = "Test Flight 1",
                 FromICAO = "KATL",
                 ToICAO = "KATL",
@@ -140,7 +141,7 @@ namespace TFS.Web
             });
             session.Save(new Mission()
             {
-                MissionLog = session.Get<MissionLog>(missionlog_example1),
+                FlightLog = session.Get<FlightLog>(flightlog_example1),
                 Name = "Test Flight 2",
                 FromICAO = "KATL",
                 ToICAO = "KATL",
@@ -153,7 +154,7 @@ namespace TFS.Web
             });
             session.Save(new Mission()
             {
-                MissionLog = session.Get<MissionLog>(missionlog_example1),
+                FlightLog = session.Get<FlightLog>(flightlog_example1),
                 Name = "Test Flight 2",
                 FromICAO = "KATL",
                 ToICAO = "KATL",
@@ -167,7 +168,7 @@ namespace TFS.Web
             });
             session.Save(new Mission()
             {
-                MissionLog = session.Get<MissionLog>(missionlog_example1),
+                FlightLog = session.Get<FlightLog>(flightlog_example1),
                 Name = "Test Flight 2",
                 FromICAO = "KATL",
                 ToICAO = "KATL",
@@ -180,7 +181,7 @@ namespace TFS.Web
             });
             session.Save(new SquadronLog()
             {
-                MissionLog = session.Get<MissionLog>(missionlog_example1),
+                FlightLog = session.Get<FlightLog>(flightlog_example1),
                 Person = session.Get<Person>(person_joseph),
                 DutyCode = DutyCode.PIC,
                 PrimaryHours = 2,
@@ -189,7 +190,7 @@ namespace TFS.Web
             });
             session.Save(new SquadronLog()
             {
-                MissionLog = session.Get<MissionLog>(missionlog_example1),
+                FlightLog = session.Get<FlightLog>(flightlog_example1),
                 Person = session.Get<Person>(person_joseph),
                 DutyCode = DutyCode.PIC,
                 PrimaryHours = 2,

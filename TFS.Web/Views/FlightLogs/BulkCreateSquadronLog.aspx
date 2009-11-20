@@ -2,13 +2,13 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <p>
-        <%= Html.ActionLink("Back to flight log summary ...", MVC.FlightLogs.EditMissionLog(Model.MissionLog.Id.Value)) %>
+        <%= Html.ActionLink("Back to flight log summary ...", MVC.FlightLogs.EditFlightLog(Model.FlightLog.Id.Value)) %>
     </p>
     <h2>Current flight log info:</h2>
     <p>
-        Date: <b><%= Html.Encode(Model.MissionLog.LogDate.ToShortDateOrEmptyString()) %></b><br />
-        Aircraft: <b><%= Html.Encode(Model.MissionLog.AircraftMDS + " : " + Model.MissionLog.AircraftSerialNumber)%></b><br />
-        Location: <b><%= Html.Encode(Model.MissionLog.Location)%></b>
+        Date: <b><%= Html.Encode(Model.FlightLog.LogDate.ToShortDateOrEmptyString())%></b><br />
+        Aircraft: <b><%= Html.Encode(Model.FlightLog.AircraftMDS + " : " + Model.FlightLog.AircraftSerialNumber)%></b><br />
+        Location: <b><%= Html.Encode(Model.FlightLog.Location)%></b>
     </p>
     <h1>Add many flight log squadron members</h1>
     <p>
@@ -34,7 +34,7 @@
     <% } else { %>
     <p><b>No squadron members entered.</b></p>
     <% } %>
-    <% using (Html.BeginForm(MVC.FlightLogs.BulkCreateSquadronLog(Model.MissionLog.Id.Value), FormMethod.Post, new { @class = "standard-form" })) { %>
+    <% using (Html.BeginForm(MVC.FlightLogs.BulkCreateSquadronLog(Model.FlightLog.Id.Value), FormMethod.Post, new { @class = "standard-form" })) { %>
         <% Html.RenderPartial(MVC.FlightLogs.Views.SquadronLogForm, Model.CurrentSquadronLog); %>
         <div class="button-group">
             <input type="submit" value="Add new flight log squadron member" />

@@ -411,8 +411,8 @@ namespace TFS.Web.Controllers {
         }
 
         [NonAction]
-        public System.Web.Mvc.ViewResult EditMissionLog() {
-            return new T4MVC_ViewResult(Name, Actions.EditMissionLog);
+        public System.Web.Mvc.ViewResult EditFlightLog() {
+            return new T4MVC_ViewResult(Name, Actions.EditFlightLog);
         }
 
         [NonAction]
@@ -456,8 +456,8 @@ namespace TFS.Web.Controllers {
         public class ActionNames {
             public readonly string Index = "Index";
             public readonly string List = "List";
-            public readonly string EditMissionLog = "EditMissionLog";
-            public readonly string CreateMissionLog = "CreateMissionLog";
+            public readonly string EditFlightLog = "EditFlightLog";
+            public readonly string CreateFlightLog = "CreateFlightLog";
             public readonly string EditMission = "EditMission";
             public readonly string CreateMission = "CreateMission";
             public readonly string EditSquadronLog = "EditSquadronLog";
@@ -473,11 +473,11 @@ namespace TFS.Web.Controllers {
         [CompilerGenerated]
         public class ViewNames {
             public readonly string BulkCreateSquadronLog = "BulkCreateSquadronLog";
+            public readonly string CreateFlightLog = "CreateFlightLog";
             public readonly string CreateMission = "CreateMission";
-            public readonly string CreateMissionLog = "CreateMissionLog";
             public readonly string CreateSquadronLog = "CreateSquadronLog";
+            public readonly string EditFlightLog = "EditFlightLog";
             public readonly string EditMission = "EditMission";
-            public readonly string EditMissionLog = "EditMissionLog";
             public readonly string EditSquadronLog = "EditSquadronLog";
             public readonly string List = "List";
             public readonly string MissionForm = "MissionForm";
@@ -503,26 +503,26 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult EditMissionLog(int id) {
-            var callInfo = new T4MVC_ViewResult("FlightLogs", Actions.EditMissionLog);
+        public override System.Web.Mvc.ViewResult EditFlightLog(int id) {
+            var callInfo = new T4MVC_ViewResult("FlightLogs", Actions.EditFlightLog);
             callInfo.RouteValues.Add("id", id);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult EditMissionLog(int id, TFS.Web.ViewModels.FlightLogViewModel flightLog) {
-            var callInfo = new T4MVC_ActionResult("FlightLogs", Actions.EditMissionLog);
+        public override System.Web.Mvc.ActionResult EditFlightLog(int id, TFS.Web.ViewModels.FlightLogViewModel flightLogViewModel) {
+            var callInfo = new T4MVC_ActionResult("FlightLogs", Actions.EditFlightLog);
             callInfo.RouteValues.Add("id", id);
-            callInfo.RouteValues.Add("flightLog", flightLog);
+            callInfo.RouteValues.Add("flightLogViewModel", flightLogViewModel);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult CreateMissionLog() {
-            var callInfo = new T4MVC_ViewResult("FlightLogs", Actions.CreateMissionLog);
+        public override System.Web.Mvc.ViewResult CreateFlightLog() {
+            var callInfo = new T4MVC_ViewResult("FlightLogs", Actions.CreateFlightLog);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CreateMissionLog(TFS.Web.ViewModels.FlightLogViewModel flightLog) {
-            var callInfo = new T4MVC_ActionResult("FlightLogs", Actions.CreateMissionLog);
+        public override System.Web.Mvc.ActionResult CreateFlightLog(TFS.Web.ViewModels.FlightLogViewModel flightLog) {
+            var callInfo = new T4MVC_ActionResult("FlightLogs", Actions.CreateFlightLog);
             callInfo.RouteValues.Add("flightLog", flightLog);
             return callInfo;
         }
@@ -540,9 +540,9 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult CreateMission(int missionLogId) {
+        public override System.Web.Mvc.ViewResult CreateMission(int flightLogId) {
             var callInfo = new T4MVC_ViewResult("FlightLogs", Actions.CreateMission);
-            callInfo.RouteValues.Add("missionLogId", missionLogId);
+            callInfo.RouteValues.Add("flightLogId", flightLogId);
             return callInfo;
         }
 
@@ -565,9 +565,9 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult CreateSquadronLog(int missionLogId) {
+        public override System.Web.Mvc.ViewResult CreateSquadronLog(int flightLogId) {
             var callInfo = new T4MVC_ViewResult("FlightLogs", Actions.CreateSquadronLog);
-            callInfo.RouteValues.Add("missionLogId", missionLogId);
+            callInfo.RouteValues.Add("flightLogId", flightLogId);
             return callInfo;
         }
 
@@ -577,9 +577,9 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult BulkCreateSquadronLog(int missionLogId) {
+        public override System.Web.Mvc.ViewResult BulkCreateSquadronLog(int flightLogId) {
             var callInfo = new T4MVC_ViewResult("FlightLogs", Actions.BulkCreateSquadronLog);
-            callInfo.RouteValues.Add("missionLogId", missionLogId);
+            callInfo.RouteValues.Add("flightLogId", flightLogId);
             return callInfo;
         }
 

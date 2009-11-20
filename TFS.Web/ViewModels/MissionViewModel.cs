@@ -15,7 +15,7 @@ namespace TFS.Web.ViewModels
             Mission = new Mission();
         }
 
-        public int MissionLogId { get; set; }
+        public int FlightLogId { get; set; }
 
         public Mission Mission { get; set; }
     }

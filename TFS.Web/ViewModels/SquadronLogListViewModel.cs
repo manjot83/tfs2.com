@@ -6,7 +6,7 @@ namespace TFS.Web.ViewModels
 {
     public class SquadronLogListViewModel : SortedListViewModel<SquadronLog>
     {
-        public MissionLog MissionLog { get; set; }
+        public FlightLog FlightLog { get; set; }
         public SquadronLogViewModel CurrentSquadronLog { get; set; }
     }
 }

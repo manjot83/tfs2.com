@@ -8,13 +8,13 @@ namespace TFS.Models.FlightLogs
 {
     public interface IFlightLogManager
     {
-        MissionLog GetMissionLog(int id);
+        FlightLog GetFlgithLog(int id);
         Mission GetMission(int id);
         SquadronLog GetSquadronLog(int id);
-        IEnumerable<MissionLog> GetAllMissionLogs();
+        IEnumerable<FlightLog> GetAllFlightLogs();
         IList<Person> GetAvailableSquadronPersons();
         Person GetSquadronPersonForUsername(string username);
 
-        MissionLog CreateNewMissionLog(DateTime logDate, string aircraftMDS, string aircraftSerialNumber, string location);
+        FlightLog CreateNewFlightLog(DateTime logDate, string aircraftMDS, string aircraftSerialNumber, string location);
     }
 }

@@ -11,9 +11,9 @@ namespace TFS.Web.ViewModels
 {
     public class FlightLogViewModel : BaseValidatableEntity
     {
-        public int MissionLogId { get; set; }
+        public int FlightLogId { get; set; }
         [Required]
-        public DateTime MissionLogDate { get; set; }
+        public DateTime FlightLogDate { get; set; }
         [Required]
         public string AircraftMDS { get; set; } // "Mission-Design Series"
         [Required]
@@ -21,7 +21,7 @@ namespace TFS.Web.ViewModels
         [Required]
         public string Location { get; set; } // Todo Change to "Program Location"
 
-        public bool SavedMissionLog { get; set; }
+        public bool SavedFlightLog { get; set; }
 
         public IList<Mission> Missions { get; set; }
         public IList<SquadronLog> SquadronLogs { get; set; }
@@ -29,22 +29,22 @@ namespace TFS.Web.ViewModels
         public override IEnumerable<ValidationError> GetCustomValidationErrors()
         {
             var errors = new List<ValidationError>();
-            if (MissionLogDate == DateTime.MinValue)
-                errors.Add(new ValidationError("MissionLogDate", "Must supply a date", MissionLogDate));
+            if (FlightLogDate == DateTime.MinValue)
+                errors.Add(new ValidationError("FlightLogDate", "Must supply a date", FlightLogDate));
             return errors;
         }
 
-        public static FlightLogViewModel CreateFromMissionLog(MissionLog missionLog)
+        public static FlightLogViewModel CreateFromFlightLog(FlightLog flightLog)
         {
             return new FlightLogViewModel
             {
-                MissionLogId = missionLog.Id.Value,
-                MissionLogDate = missionLog.LogDate,
-                AircraftMDS = missionLog.AircraftMDS,
-                AircraftSerialNumber = missionLog.AircraftSerialNumber,
-                Location = missionLog.Location,
-                Missions = missionLog.Missions.ToList(),
-                SquadronLogs = missionLog.SquadronLogs.ToList(),
+                FlightLogId = flightLog.Id.Value,
+                FlightLogDate = flightLog.LogDate,
+                AircraftMDS = flightLog.AircraftMDS,
+                AircraftSerialNumber = flightLog.AircraftSerialNumber,
+                Location = flightLog.Location,
+                Missions = flightLog.Missions.ToList(),
+                SquadronLogs = flightLog.SquadronLogs.ToList(),
             };
         }
     }

@@ -16,9 +16,9 @@ namespace TFS.Models.Data.FlightLogs
         {
         }
 
-        public MissionLog GetMissionLog(int id)
+        public FlightLog GetFlgithLog(int id)
         {
-            return QueryMissionLogs().Where(x => x.Id == id).FirstOrDefault();
+            return QueryFlightLogs().Where(x => x.Id == id).FirstOrDefault();
         }
 
         public Mission GetMission(int id)
@@ -41,14 +41,14 @@ namespace TFS.Models.Data.FlightLogs
             return Session.Linq<Person>().Where(x => x.User.Username == username).FirstOrDefault();
         }
 
-        public IEnumerable<MissionLog> GetAllMissionLogs()
+        public IEnumerable<FlightLog> GetAllFlightLogs()
         {
-            return QueryMissionLogs().ToList();
+            return QueryFlightLogs().ToList();
         }
 
-        public IQueryable<MissionLog> QueryMissionLogs()
+        public IQueryable<FlightLog> QueryFlightLogs()
         {
-            return Session.Linq<MissionLog>();
+            return Session.Linq<FlightLog>();
         }
 
         public IQueryable<Mission> QueryMissions()
@@ -61,9 +61,9 @@ namespace TFS.Models.Data.FlightLogs
             return Session.Linq<SquadronLog>();
         }
 
-        public MissionLog CreateNewMissionLog(DateTime logDate, string aircraftMDS, string aircraftSerialNumber, string location)
+        public FlightLog CreateNewFlightLog(DateTime logDate, string aircraftMDS, string aircraftSerialNumber, string location)
         {
-            var newMissionLog = new MissionLog
+            var newFlightLog = new FlightLog
             {
                 AircraftMDS = aircraftMDS,
                 AircraftSerialNumber = aircraftSerialNumber,
@@ -71,7 +71,7 @@ namespace TFS.Models.Data.FlightLogs
                 LogDate = logDate,
                 LastModifiedDate = DateTime.Now.ToUniversalTime(),
             };
-            return (MissionLog)Session.SaveOrUpdateCopy(newMissionLog);
+            return (FlightLog)Session.SaveOrUpdateCopy(newFlightLog);
         }
     }
 }

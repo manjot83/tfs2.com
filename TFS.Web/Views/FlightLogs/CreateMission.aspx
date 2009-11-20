@@ -2,10 +2,10 @@
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <p>
-        <%= Html.ActionLink("Back to flight log summary ...", MVC.FlightLogs.EditMissionLog(Model.MissionLogId)) %>
+        <%= Html.ActionLink("Back to flight log summary ...", MVC.FlightLogs.EditFlightLog(Model.FlightLogId))%>
     </p>
     <h1>Add a flight log mission</h1>
-    <% using (Html.BeginForm(MVC.FlightLogs.CreateMission(Model.MissionLogId), FormMethod.Post, new { @class = "standard-form" })) { %>
+    <% using (Html.BeginForm(MVC.FlightLogs.CreateMission(Model.FlightLogId), FormMethod.Post, new { @class = "standard-form" })) { %>
         <% Html.RenderPartial(MVC.FlightLogs.Views.MissionForm); %>
         <div class="button-group">
             <input type="submit" value="Add new flight log mission" />

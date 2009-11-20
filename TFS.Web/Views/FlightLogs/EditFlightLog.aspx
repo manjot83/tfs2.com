@@ -8,13 +8,13 @@
     <h1>Edit flight time summary</h1>
     
     <h3 class="section-header underlined">Header</h3>
-    <% using (Html.BeginForm(MVC.FlightLogs.EditMissionLog(), FormMethod.Post, new { @class = "standard-form" })) { %>
-        <%= Html.Hidden("id", Model.MissionLogId)%>
+    <% using (Html.BeginForm(MVC.FlightLogs.EditFlightLog(), FormMethod.Post, new { @class = "standard-form" })) { %>
+        <%= Html.Hidden("id", Model.FlightLogId)%>
         <div class="field-group">
             <div class="field">
-                <label for="MissionLogDate">Date (mm/dd/yyyy)</label>
-                <%= Html.TextBox("MissionLogDate", Model.MissionLogDate.ToShortDateOrEmptyString(), new { size = "15", maxlength = "10" })%>
-                <%= Html.ValidationMessage("MissionLogDate")%>
+                <label for="FlightLogDate">Date (mm/dd/yyyy)</label>
+                <%= Html.TextBox("FlightLogDate", Model.FlightLogDate.ToShortDateOrEmptyString(), new { size = "15", maxlength = "10" })%>
+                <%= Html.ValidationMessage("FlightLogDate")%>
             </div>
         </div>
         <div class="field-group">
@@ -39,7 +39,7 @@
         <div class="button-group">
             <input type="submit" value="Save changes" />
             <input type="reset" value="Reset" />
-            <% if (Model.SavedMissionLog) { %>
+            <% if (Model.SavedFlightLog) { %>
             <span class="saved-changes">Saved Changes</span>
             <% } %>
         </div>
@@ -76,7 +76,7 @@
     <p><b>No missions entered.</b></p>
     <% } %>
     <% using(Html.BeginForm(MVC.FlightLogs.CreateMission(), FormMethod.Get)) { %>
-        <%= Html.Hidden("MissionLogId", Model.MissionLogId) %>
+        <%= Html.Hidden("FlightLogId", Model.FlightLogId)%>
         <p>
             <input type="submit" value="Add a mission" />
         </p>
@@ -107,13 +107,13 @@
     <p><b>No squadron members entered.</b></p>
     <% } %>    
     <% using(Html.BeginForm(MVC.FlightLogs.CreateSquadronLog(), FormMethod.Get)) { %>
-        <%= Html.Hidden("MissionLogId", Model.MissionLogId) %>
+        <%= Html.Hidden("FlightLogId", Model.FlightLogId)%>
         <p>
             <input type="submit" value="Add a squadron member" />
         </p>
     <% } %>
     <% using(Html.BeginForm(MVC.FlightLogs.BulkCreateSquadronLog(), FormMethod.Get)) { %>
-        <%= Html.Hidden("MissionLogId", Model.MissionLogId) %>
+        <%= Html.Hidden("FlightLogId", Model.FlightLogId)%>
         <p>
             <input type="submit" value="Add several squadron members" />
         </p>
@@ -121,6 +121,6 @@
         
     <h3 class="section-header underlined">Reports</h3>
     <p>
-        Click to download as a <%= Html.ActionLink("PDF", MVC.FlightLogs.DownloadPDF(Model.MissionLogId)) %>
+        Click to download as a <%= Html.ActionLink("PDF", MVC.FlightLogs.DownloadPDF(Model.FlightLogId))%>
     </p>
 </asp:Content>

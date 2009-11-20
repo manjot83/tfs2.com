@@ -80,7 +80,7 @@
     <Compile Include="Configuration\SqlSchemaUtil.cs" />
     <Compile Include="FlightLogs\FlightLogManager.cs" />
     <Compile Include="Mappings\FlightLogs\MissionMap.cs" />
-    <Compile Include="Mappings\FlightLogs\MissionLogMap.cs" />
+    <Compile Include="Mappings\FlightLogs\FlightLogMap.cs" />
     <Compile Include="Mappings\FlightLogs\SquadronLogMap.cs" />
     <Compile Include="Mappings\Images\StaticImageMap.cs" />
     <Compile Include="Mappings\PersonnelRecords\CertificateMap.cs" />

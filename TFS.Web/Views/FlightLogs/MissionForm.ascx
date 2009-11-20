@@ -1,5 +1,5 @@
 <%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<TFS.Web.ViewModels.MissionViewModel>" %>
-<%= Html.Hidden("MissionLogId", Model.MissionLogId) %>
+<%= Html.Hidden("FlightLogId", Model.FlightLogId)%>
 <div class="field-group">
     <div class="field">
         <label for="mission_Name">Mission No.</label>
