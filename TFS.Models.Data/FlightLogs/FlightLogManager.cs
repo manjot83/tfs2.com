@@ -9,7 +9,7 @@ using TFS.Extensions;
 
 namespace TFS.Models.Data.FlightLogs
 {
-    public class FlightLogManager : BaseService, IFlightLogManager
+    public class FlightLogManager : BaseDataAccessObject, IFlightLogManager
     {
         public FlightLogManager(ISession session)
             : base(session)

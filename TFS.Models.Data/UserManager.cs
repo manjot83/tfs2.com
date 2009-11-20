@@ -9,7 +9,7 @@ using TFS.Models.PersonnelRecords;
 
 namespace TFS.Models.Data
 {
-    public class UserManager : BaseService, IUserManager
+    public class UserManager : BaseDataAccessObject, IUserManager
     {
         public UserManager(ISession session)
             : base(session)

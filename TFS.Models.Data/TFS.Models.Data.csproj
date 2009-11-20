@@ -69,7 +69,7 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="BaseService.cs" />
+    <Compile Include="BaseDataAccessObject.cs" />
     <Compile Include="Configuration\FluentConfigurationBuilder.cs" />
     <Compile Include="Configuration\MSSqlBuilder.cs" />
     <Compile Include="Configuration\SQLiteBuilder.cs" />

@@ -6,11 +6,11 @@ using NHibernate;
 
 namespace TFS.Models.Data
 {
-    public abstract class BaseService
+    public abstract class BaseDataAccessObject
     {
         protected readonly ISession Session;
 
-        public BaseService(ISession session)
+        public BaseDataAccessObject(ISession session)
         {
             this.Session = session;
         }

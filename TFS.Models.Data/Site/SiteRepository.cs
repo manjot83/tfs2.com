@@ -8,7 +8,7 @@ using NHibernate.Linq;
 
 namespace TFS.Models.Data.Site
 {
-    public class SiteRepository : BaseService, ISiteRepository
+    public class SiteRepository : BaseDataAccessObject, ISiteRepository
     {
         public SiteRepository(ISession session)
             : base(session)

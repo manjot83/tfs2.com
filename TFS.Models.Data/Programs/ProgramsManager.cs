@@ -8,7 +8,7 @@ using TFS.Models.Programs;
 
 namespace TFS.Models.Data.Programs
 {
-    public class ProgramsManager : BaseService, IProgramsManager
+    public class ProgramsManager : BaseDataAccessObject, IProgramsManager
     {
         public ProgramsManager(ISession session)
             : base(session)
