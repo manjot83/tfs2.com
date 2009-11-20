@@ -4,6 +4,7 @@ using System.Web.UI.WebControls;
 using TFS.Models;
 using TFS.Web.ViewModels;
 using TFS.Web.ActionFilters;
+using TFS.Models.Users;
 
 namespace TFS.Web.Controllers
 {

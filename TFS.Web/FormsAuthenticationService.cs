@@ -3,6 +3,7 @@ using TFS.Models;
 using System.Net;
 using System;
 using System.IO;
+using TFS.Models.Users;
 
 namespace TFS.Web
 {

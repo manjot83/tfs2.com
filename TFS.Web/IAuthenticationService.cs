@@ -1,4 +1,5 @@
 ﻿using TFS.Models;
+using TFS.Models.Users;
 namespace TFS.Web
 {
     public interface IAuthenticationService

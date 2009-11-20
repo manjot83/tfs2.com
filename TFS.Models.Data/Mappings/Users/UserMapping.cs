@@ -5,7 +5,7 @@ using System.Text;
 using FluentNHibernate.Mapping;
 using TFS.Models.Users;
 
-namespace TFS.Models.Mappings.Data
+namespace TFS.Models.Data.Mappings.Users
 {
     public class UserMapping : ClassMap<User>
     {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using TFS.Models;
+using TFS.Models.Users;
 
 namespace TFS.Web.ViewModels
 {

@@ -10,6 +10,7 @@ using TFS.Web.ViewModels;
 using TFS.Models.Reports;
 using System;
 using TFS.Web.ActionFilters;
+using TFS.Models.Users;
 
 namespace TFS.Web.Controllers
 {

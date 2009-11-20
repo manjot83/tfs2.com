@@ -9,6 +9,8 @@ using TFS.Models;
 using TFS.Models.Data;
 using TFS.Web.Controllers;
 using TFS.Models.Data.Configuration;
+using TFS.Models.Users;
+using TFS.Models.Data.Users;
 
 namespace TFS.Web
 {
@@ -35,7 +37,7 @@ namespace TFS.Web
             HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
 #endif
 
-            var mappingAssemblies = new List<Assembly> { typeof(TFS.Models.Data.UserMapping).Assembly };
+            var mappingAssemblies = new List<Assembly> { typeof(TFS.Models.Data.Mappings.Users.UserMapping).Assembly };
 #if SQLITE
             var fluentConfiguration = SQLiteBuilder.CreateConfiguration("TFS_Web", mappingAssemblies);
 #else

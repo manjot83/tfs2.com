@@ -5,6 +5,7 @@ using NHibernate.Tool.hbm2ddl;
 using NUnit.Framework;
 using TFS.Models.Data;
 using TFS.Models.Data.Configuration;
+using TFS.Models.Data.Mappings.Users;
 
 namespace TFS.Models.Tests
 {
