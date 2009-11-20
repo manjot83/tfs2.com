@@ -5,6 +5,8 @@ using TFS.Models;
 using TFS.Web.ViewModels;
 using TFS.Web.ActionFilters;
 using TFS.Models.Users;
+using AutoMapper;
+using System.Collections.Generic;
 
 namespace TFS.Web.Controllers
 {
@@ -29,7 +31,7 @@ namespace TFS.Web.Controllers
         {
             if (string.IsNullOrEmpty(sortType))
                 sortType = "name";
-            var viewModel = new SortedListViewModel<User>()
+            var viewModel = new SortedListViewModel<UserViewModel>()
             {
                 SortDirection = sortDirection ?? SortDirection.Ascending,
                 SortType = sortType,
@@ -56,7 +58,8 @@ namespace TFS.Web.Controllers
                 users = users.OrderByDescending(x => x.Disabled);
             users = users.ToList();
             viewModel.TotalItems = users.Count();
-            viewModel.Items = users.Skip(viewModel.ItemsPerPage * (viewModel.CurrentPage - 1)).Take(viewModel.ItemsPerPage).ToList();
+            users = users.Skip(viewModel.ItemsPerPage * (viewModel.CurrentPage - 1)).Take(viewModel.ItemsPerPage).ToList();
+            viewModel.Items = Mapper.Map<IEnumerable<User>, IEnumerable<UserViewModel>>(users);
             return View(Views.List, viewModel);
         }
 
@@ -65,29 +68,19 @@ namespace TFS.Web.Controllers
         public virtual ViewResult Edit(string username)
         {
             var user = userManager.UserRepository.GetUser(username);
-            var viewModel = new UserViewModel
-            {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                DisplayName = user.DisplayName,
-                Username = user.Username,
-                Disabled = user.Disabled,
-            };
+            var viewModel = Mapper.Map<User, UserViewModel>(user);
             return View(viewModel);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
         [RequireTransaction]
-        public virtual ActionResult Edit(UserViewModel user)
+        public virtual ActionResult Edit(UserViewModel userViewModel)
         {
-            user.Validate(ModelState, string.Empty);
+            userViewModel.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
-                return View(user);
-            var userEntity = userManager.UserRepository.GetUser(user.Username);
-            userEntity.FirstName = user.FirstName;
-            userEntity.LastName = user.LastName;
-            userEntity.DisplayName = user.DisplayName;
-            userEntity.Disabled = user.Disabled;
+                return View(userViewModel);
+            var user = userManager.UserRepository.GetUser(userViewModel.Username);
+            Mapper.Map<UserViewModel, User>(userViewModel, user);
             return RedirectToAction(MVC.Users.List());
         }
 
@@ -99,14 +92,14 @@ namespace TFS.Web.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [RequireTransaction]
-        public virtual ActionResult Create(UserViewModel user)
+        public virtual ActionResult Create(UserViewModel userViewModel)
         {
-            user.Validate(ModelState, string.Empty);
-            if (ModelState.IsValid && userManager.UserRepository.GetUser(user.Username) != null)
+            userViewModel.Validate(ModelState, string.Empty);
+            if (ModelState.IsValid && userManager.UserRepository.GetUser(userViewModel.Username) != null)
                 ModelState.AddModelError("username", "Username must be unique.");
             if (!ModelState.IsValid)
-                return View(user);
-            var newUser = userManager.CreateUser(user.Username, user.FirstName, user.LastName, user.DisplayName);
+                return View(userViewModel);
+            userManager.CreateUser(userViewModel.Username, userViewModel.FirstName, userViewModel.LastName, userViewModel.DisplayName);
             return RedirectToAction(MVC.Users.List());
         }
     }

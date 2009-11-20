@@ -29,6 +29,13 @@ namespace TFS.Web
                 Username = "j.daigle",
                 Email = "j.daigle@tfs2.com",
                 Disabled = false,
+                Roles = new UserRoles
+                {
+                    UserManager = true,
+                    ProgramManager = true,
+                    PersonnelManager = true,
+                    FlightLogManager = true,
+                },
             });
             var user__bill = session.Save(new User
             {

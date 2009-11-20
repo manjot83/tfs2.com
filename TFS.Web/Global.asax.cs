@@ -11,8 +11,7 @@ namespace TFS.Web
     {
         protected void Application_Start()
         {
-            MVCConfiguration.RegisterRoutes(RouteTable.Routes);
-            MVCConfiguration.InitializeIoCAndDataAccess();
+            MVCBootstrapper.SetupApplication();
         }
     }
 }

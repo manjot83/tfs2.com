@@ -2,20 +2,45 @@
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
+using FluentNHibernate.Cfg;
 using NHibernate;
 using StructureMap;
 using StructureMap.Attributes;
-using TFS.Models;
-using TFS.Models.Data;
-using TFS.Web.Controllers;
 using TFS.Models.Data.Configuration;
+using TFS.Web.Controllers;
+using AutoMapper;
 using TFS.Models.Users;
-using TFS.Models.Data.Users;
+using TFS.Web.ViewModels;
 
 namespace TFS.Web
 {
-    public class MVCConfiguration
+    public class MVCBootstrapper
     {
+        public static void SetupApplication()
+        {
+            RegisterRoutes(RouteTable.Routes);
+            InitializeAutoMapper();
+            var fluentConfiguration = InitializeNHibernate();
+            InitializeStructureMap(fluentConfiguration);
+#if SQLITE
+            LoadTestData(fluentConfiguration);
+#endif
+        }
+
+        public static void InitializeAutoMapper()
+        {
+            Mapper.CreateMap<User, UserViewModel>();
+            Mapper.CreateMap<UserViewModel, User>()
+                  .ForMember(x => x.Id, x => x.Ignore())
+                  .ForMember(x => x.Email, x => x.Ignore())
+                  .ForMember(x => x.Roles, x => x.Ignore())
+                  .ForMember(x => x.Person, x => x.Ignore());
+            
+#if DEBUG
+            Mapper.AssertConfigurationIsValid();
+#endif
+        }
+
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
@@ -31,18 +56,21 @@ namespace TFS.Web
 
         }
 
-        public static void InitializeIoCAndDataAccess()
+        public static FluentConfiguration InitializeNHibernate()
         {
 #if DEBUG
             HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
 #endif
-
             var mappingAssemblies = new List<Assembly> { typeof(TFS.Models.Data.Mappings.Users.UserMapping).Assembly };
 #if SQLITE
-            var fluentConfiguration = SQLiteBuilder.CreateConfiguration("TFS_Web", mappingAssemblies);
+            return SQLiteBuilder.CreateConfiguration("TFS_Web", mappingAssemblies);
 #else
-            var fluentConfiguration = MSSqlBuilder.CreateConfiguration("TFS_Web", mappingAssemblies);
+            return MSSqlBuilder.CreateConfiguration("TFS_Web", mappingAssemblies);
 #endif
+        }
+
+        public static void InitializeStructureMap(FluentConfiguration fluentConfiguration)
+        {
             ObjectFactory.Initialize(i =>
             {
                 i.AddRegistry(new DomainModelRegistry(fluentConfiguration));
@@ -57,19 +85,20 @@ namespace TFS.Web
                     .CacheBy(InstanceScope.Hybrid)
                     .TheDefaultIsConcreteType<FormsAuthenticationService>();
             });
-
 #if DEBUG
             ObjectFactory.AssertConfigurationIsValid();
 #endif
-
             ControllerBuilder.Current.SetControllerFactory(new StructureMapControllerFactory());
+        }
 
 #if SQLITE
+        public static void LoadTestData(FluentConfiguration fluentConfiguration)
+        {
             var session = ObjectFactory.GetInstance<ISession>();
             SqlSchemaUtil.GenerateSchema(fluentConfiguration.BuildConfiguration(), session);
             TestData.Execute(session);
             session.Clear();
-#endif
         }
+#endif
     }
 }
