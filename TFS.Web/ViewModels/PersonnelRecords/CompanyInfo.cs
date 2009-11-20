@@ -6,15 +6,15 @@ using TFS.Models;
 using TFS.Models.PersonnelRecords;
 using System.ComponentModel.DataAnnotations;
 
-namespace TFS.Web.ViewModels
+namespace TFS.Web.ViewModels.PersonnelRecords
 {
-    public class PersonnelRecordCompanyInfo : BaseValidatableEntity
+    public class CompanyInfo : BaseValidatableEntity
     {
         [Required]
         public virtual ShirtSize ShirtSize{ get; set; }
         [Required]
         public virtual FlightSuitSize FlightSuitSize { get; set; }
         [Required]
-        public virtual int HirePositionId { get; set; }
+        public virtual int? HirePositionId { get; set; }
     }
 }

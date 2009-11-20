@@ -4,9 +4,9 @@ using System.Linq;
 using System.Web;
 using TFS.Models;
 
-namespace TFS.Web.ViewModels
+namespace TFS.Web.ViewModels.PersonnelRecords
 {
-    public class PersonnelRecordQualificationViewModel : BaseValidatableEntity
+    public class QualificationViewModel : BaseValidatableEntity
     {
     }
 }

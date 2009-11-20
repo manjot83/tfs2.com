@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 using TFS.Models;
 using TFS.Models.PersonnelRecords;
 
-namespace TFS.Web.ViewModels
+namespace TFS.Web.ViewModels.PersonnelRecords
 {
-    public class PersonnelRecordPersonalInfo : BaseValidatableEntity
+    public class PersonalInfo : BaseValidatableEntity
     {
         [Required, StringLength(50)]
         public virtual string LastName { get; set; }
@@ -15,7 +15,7 @@ namespace TFS.Web.ViewModels
         public virtual string MiddleInitial { get; set; }
         [Required]
         //[Range(typeof(DateTime), "01/01/1990", "01/01/2100")]
-        public virtual DateTime DateOfBirth { get; set; }
+        public virtual DateTime? DateOfBirth { get; set; }
         [Required]
         public virtual Gender Gender { get; set; }
         [Required, StringLength(4), RegularExpression(@"\d\d\d\d", ErrorMessage="Must contain 4 numbers.")]

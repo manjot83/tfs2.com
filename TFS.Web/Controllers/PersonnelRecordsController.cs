@@ -11,6 +11,8 @@ using TFS.Models.Reports;
 using System;
 using TFS.Web.ActionFilters;
 using TFS.Models.Users;
+using TFS.Web.ViewModels.PersonnelRecords;
+using AutoMapper;
 
 namespace TFS.Web.Controllers
 {
@@ -82,18 +84,13 @@ namespace TFS.Web.Controllers
 
         [RequireTransaction]
         [AcceptVerbs(HttpVerbs.Post)]
-        public virtual ActionResult EditPersonalInfo(string username, bool editingMyRecord, PersonnelRecordPersonalInfo personalInfo)
+        public virtual ActionResult EditPersonalInfo(string username, bool editingMyRecord, PersonalInfo personalInfo)
         {
             personalInfo.Validate(ModelState, string.Empty);
             var person = userManager.UserRepository.GetUser(username).Person;
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
-            person.FirstName = personalInfo.FirstName;
-            person.LastName = personalInfo.LastName;
-            person.MiddleInitial = personalInfo.MiddleInitial;
-            person.DateOfBirth = personalInfo.DateOfBirth.ToUniversalTime();
-            person.Gender = personalInfo.Gender;
-            person.SocialSecurityLastFour = personalInfo.SocialSecurityLastFour;
+            Mapper.Map<PersonalInfo, Person>(personalInfo, person);
             if (editingMyRecord)
                 return RedirectToAction(MVC.PersonnelRecords.EditMyRecord());
             else
@@ -102,25 +99,26 @@ namespace TFS.Web.Controllers
 
         [RequireTransaction]
         [AcceptVerbs(HttpVerbs.Post)]
-        public virtual ActionResult EditContactInfo(string username, bool editingMyRecord, PersonnelRecordContactInfo contactInfo)
+        public virtual ActionResult EditContactInfo(string username, bool editingMyRecord, ContactInfo contactInfo)
         {
             contactInfo.Validate(ModelState, string.Empty);
             var person = userManager.UserRepository.GetUser(username).Person;
-            if (USState.FromAbbreviation(contactInfo.State.ToUpper()) == null)
+            if (USState.FromAbbreviation(contactInfo.AddressState.ToUpper()) == null)
                 ModelState.AddModelError("State", "Must be a valid US state abbreviation.");
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
-            person.PrimaryPhoneNumber = RegExLib.ParseRegEx(contactInfo.PrimaryPhoneNumber, RegExLib.USPhoneNumber);
-            person.AlternatePhoneNumber = RegExLib.ParseRegEx(contactInfo.AlternatePhoneNumber, RegExLib.USPhoneNumber);
-            person.AlternateEmail = contactInfo.AlternateEmail;
-            person.EmergencyContactName = contactInfo.EmergencyContactName;
-            person.EmergencyContactPhoneNumber = RegExLib.ParseRegEx(contactInfo.EmergencyContactPhoneNumber, RegExLib.USPhoneNumber);
-            if (person.Address == null)
-                person.Address = new TFS.Models.Geography.USAddress();
-            person.Address.StreetAddress = contactInfo.StreetAddress;
-            person.Address.City = contactInfo.City;
-            person.Address.State = USState.FromAbbreviation(contactInfo.State.ToUpper());
-            person.Address.ZipCode = contactInfo.ZipCode;
+            Mapper.Map<ContactInfo, Person>(contactInfo, person);
+            //person.PrimaryPhoneNumber = RegExLib.ParseRegEx(contactInfo.PrimaryPhoneNumber, RegExLib.USPhoneNumber);
+            //person.AlternatePhoneNumber = RegExLib.ParseRegEx(contactInfo.AlternatePhoneNumber, RegExLib.USPhoneNumber);
+            //person.AlternateEmail = contactInfo.AlternateEmail;
+            //person.EmergencyContactName = contactInfo.EmergencyContactName;
+            //person.EmergencyContactPhoneNumber = RegExLib.ParseRegEx(contactInfo.EmergencyContactPhoneNumber, RegExLib.USPhoneNumber);
+            //if (person.Address == null)
+            //    person.Address = new TFS.Models.Geography.USAddress();
+            //person.Address.StreetAddress = contactInfo.StreetAddress;
+            //person.Address.City = contactInfo.City;
+            //person.Address.State = USState.FromAbbreviation(contactInfo.State.ToUpper());
+            //person.Address.ZipCode = contactInfo.ZipCode;
             if (editingMyRecord)
                 return RedirectToAction(MVC.PersonnelRecords.EditMyRecord());
             else
@@ -129,15 +127,16 @@ namespace TFS.Web.Controllers
 
         [RequireTransaction]
         [AcceptVerbs(HttpVerbs.Post)]
-        public virtual ActionResult EditCompanyInfo(string username, bool editingMyRecord, PersonnelRecordCompanyInfo companyInfo)
+        public virtual ActionResult EditCompanyInfo(string username, bool editingMyRecord, CompanyInfo companyInfo)
         {
             companyInfo.Validate(ModelState, string.Empty);
             var person = userManager.UserRepository.GetUser(username).Person;
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
-            person.FlightSuitSize = companyInfo.FlightSuitSize;
-            person.ShirtSize = companyInfo.ShirtSize;
-            person.HirePosition = programsManager.GetPositionById(companyInfo.HirePositionId);
+            Mapper.Map<CompanyInfo, Person>(companyInfo, person);
+            //person.FlightSuitSize = companyInfo.FlightSuitSize;
+            //person.ShirtSize = companyInfo.ShirtSize;
+            //person.HirePosition = programsManager.GetPositionById(companyInfo.HirePositionId);
             if (editingMyRecord)
                 return RedirectToAction(MVC.PersonnelRecords.EditMyRecord());
             else
@@ -146,7 +145,7 @@ namespace TFS.Web.Controllers
 
         [RequireTransaction]
         [AcceptVerbs(HttpVerbs.Post)]
-        public virtual ActionResult EditQualifications(string username, bool editingMyRecord, PersonnelRecordQualificationViewModel qualifications)
+        public virtual ActionResult EditQualifications(string username, bool editingMyRecord, QualificationViewModel qualifications)
         {
             qualifications.Validate(ModelState, string.Empty);
             var person = userManager.UserRepository.GetUser(username).Person;
@@ -161,11 +160,9 @@ namespace TFS.Web.Controllers
 
         private PersonnelRecordViewModel GeneratePersonnelRecordViewModel(Person person, bool editingMyRecord)
         {
-            var viewModel = new PersonnelRecordViewModel
-            {
-                EditingMyRecord = editingMyRecord,
-                Record = person,
-            };
+            var viewModel = new PersonnelRecordViewModel();
+            Mapper.Map<Person, PersonnelRecordViewModel>(person, viewModel);
+            viewModel.EditingMyRecord = editingMyRecord;
             viewModel.SetHirePositions(programsManager.GetAllPositions(), person.HirePosition);
             return viewModel;
         }

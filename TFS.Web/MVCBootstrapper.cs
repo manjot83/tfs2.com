@@ -11,10 +11,13 @@ using TFS.Web.Controllers;
 using AutoMapper;
 using TFS.Models.Users;
 using TFS.Web.ViewModels;
+using TFS.Models.PersonnelRecords;
+using TFS.Web.ViewModels.PersonnelRecords;
+using System;
 
 namespace TFS.Web
 {
-    public class MVCBootstrapper
+    public class MvcBootstrapper
     {
         public static void SetupApplication()
         {
@@ -35,6 +38,32 @@ namespace TFS.Web
                   .ForMember(x => x.Email, x => x.Ignore())
                   .ForMember(x => x.Roles, x => x.Ignore())
                   .ForMember(x => x.Person, x => x.Ignore());
+
+            Mapper.CreateMap<Person, PersonnelRecordViewModel>()
+                  .ForMember(x => x.Username, x => x.MapFrom(p => p.User.Username))
+                  .ForMember(x => x.PersonalInfo, x => x.MapFrom(p => p))
+                  .ForMember(x => x.ContactInfo, x => x.MapFrom(p => p))
+                  .ForMember(x => x.CompanyInfo, x => x.MapFrom(p => p))
+                  .ForMember(x => x.EditingMyRecord, x => x.Ignore())
+                  .ForMember(x => x.HirePositions, x => x.Ignore());
+            Mapper.CreateMap<Person, PersonalInfo>();
+            Mapper.CreateMap<Person, ContactInfo>();
+            Mapper.CreateMap<Person, CompanyInfo>()
+                  .ForMember(x => x.HirePositionId, x => x.MapFrom(p => p.HirePosition != null ? p.HirePosition.Id : null));
+            Mapper.CreateMap<PersonalInfo, Person>()
+                  .ForMember(x => x.Id, x => x.Ignore())
+                  .ForMember(x => x.User, x => x.Ignore())
+                  .ForMember(x => x.Qualifications, x => x.Ignore())
+                  .ForMember(x => x.Address, x => x.Ignore())
+                  .ForMember(x => x.AlternateEmail, x => x.Ignore())
+                  .ForMember(x => x.AlternatePhoneNumber, x => x.Ignore())
+                  .ForMember(x => x.EmergencyContactName, x => x.Ignore())
+                  .ForMember(x => x.EmergencyContactPhoneNumber, x => x.Ignore())
+                  .ForMember(x => x.FlightSuitSize, x => x.Ignore())
+                  .ForMember(x => x.HirePosition, x => x.Ignore())
+                  .ForMember(x => x.PrimaryPhoneNumber, x => x.Ignore())                  
+                  .ForMember(x => x.ShirtSize, x => x.Ignore())
+                  .ForMember(x => x.DateOfBirth, x => x.MapFrom(p => p.DateOfBirth.HasValue ? p.DateOfBirth.Value.ToUniversalTime() : (DateTime?)null));
             
 #if DEBUG
             Mapper.AssertConfigurationIsValid();

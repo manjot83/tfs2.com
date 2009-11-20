@@ -140,7 +140,7 @@
     <Compile Include="Html\PartialExtensions.cs" />
     <Compile Include="Html\SelectListItemExtensions.cs" />
     <Compile Include="IAuthenticationService.cs" />
-    <Compile Include="MVCBootstrapper.cs" />
+    <Compile Include="MvcBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StructureMapControllerFactory.cs" />
     <Compile Include="TestData.cs" />
@@ -153,12 +153,12 @@
     <Compile Include="ViewModels\FlightLogViewModel.cs" />
     <Compile Include="ViewModels\ManageProgramsViewModel.cs" />
     <Compile Include="ViewModels\MissionViewModel.cs" />
-    <Compile Include="ViewModels\PersonnelRecordListViewModel.cs" />
-    <Compile Include="ViewModels\PersonnelRecordCompanyInfo.cs" />
-    <Compile Include="ViewModels\PersonnelRecordContactInfo.cs" />
-    <Compile Include="ViewModels\PersonnelRecordPersonalInfo.cs" />
-    <Compile Include="ViewModels\PersonnelRecordQualificationViewModel.cs" />
-    <Compile Include="ViewModels\PersonnelRecordViewModel.cs" />
+    <Compile Include="ViewModels\PersonnelRecords\PersonnelRecordListViewModel.cs" />
+    <Compile Include="ViewModels\PersonnelRecords\CompanyInfo.cs" />
+    <Compile Include="ViewModels\PersonnelRecords\ContactInfo.cs" />
+    <Compile Include="ViewModels\PersonnelRecords\PersonalInfo.cs" />
+    <Compile Include="ViewModels\PersonnelRecords\QualificationViewModel.cs" />
+    <Compile Include="ViewModels\PersonnelRecords\PersonnelRecordViewModel.cs" />
     <Compile Include="ViewModels\SortedListViewModel.cs" />
     <Compile Include="ViewModels\SquadronLogListViewModel.cs" />
     <Compile Include="ViewModels\SquadronLogViewModel.cs" />

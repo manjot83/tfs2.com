@@ -6,11 +6,15 @@ using TFS.Models.PersonnelRecords;
 using TFS.Models.Programs;
 using System.Web.Mvc;
 
-namespace TFS.Web.ViewModels
+namespace TFS.Web.ViewModels.PersonnelRecords
 {
     public class PersonnelRecordViewModel
     {
-        public Person Record { get; set; }
+        public string Username { get; set; }
+        public PersonalInfo PersonalInfo { get; set; }
+        public ContactInfo ContactInfo { get; set; }
+        public CompanyInfo CompanyInfo { get; set; }
+
         public bool EditingMyRecord { get; set; }
         public IEnumerable<SelectListItem> HirePositions { get; set; }
 

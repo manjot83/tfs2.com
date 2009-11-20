@@ -5,7 +5,7 @@ using System.Web;
 using TFS.Models;
 using TFS.Models.Users;
 
-namespace TFS.Web.ViewModels
+namespace TFS.Web.ViewModels.PersonnelRecords
 {
     public class PersonnelRecordListViewModel : SortedListViewModel<User>
     {

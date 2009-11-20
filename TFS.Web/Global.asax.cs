@@ -11,7 +11,7 @@ namespace TFS.Web
     {
         protected void Application_Start()
         {
-            MVCBootstrapper.SetupApplication();
+            MvcBootstrapper.SetupApplication();
         }
     }
 }

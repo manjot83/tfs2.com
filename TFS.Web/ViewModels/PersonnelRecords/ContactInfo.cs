@@ -7,20 +7,20 @@ using TFS.Models.Geography;
 using System.ComponentModel.DataAnnotations;
 using TFS.Models;
 
-namespace TFS.Web.ViewModels
+namespace TFS.Web.ViewModels.PersonnelRecords
 {
-    public class PersonnelRecordContactInfo : BaseValidatableEntity
+    public class ContactInfo : BaseValidatableEntity
     {
         [Required]
-        public virtual string StreetAddress { get; set; }
+        public virtual string AddressStreetAddress { get; set; }
         [Required]
-        public virtual string City { get; set; }
+        public virtual string AddressCity { get; set; }
         [Required]
         [RegularExpression(@"[A-Z,a-z]{2}", ErrorMessage = "Must contain state abbreviation.")]
-        public virtual string State { get; set; }
+        public virtual string AddressState { get; set; }
         [Required]
         [RegularExpression(@"\d{5}", ErrorMessage = "Must contain 5 numbers.")]
-        public virtual string ZipCode { get; set; }
+        public virtual string AddressZipCode { get; set; }
         [RegularExpression(RegExLib.USPhoneNumber, ErrorMessage = "Must contain a phone number")]
         public virtual string PrimaryPhoneNumber { get; set; }
         [RegularExpression(RegExLib.USPhoneNumber, ErrorMessage = "Must contain a phone number")]
