@@ -43,8 +43,8 @@ namespace TFS.Web.ViewModels
                 AircraftMDS = missionLog.AircraftMDS,
                 AircraftSerialNumber = missionLog.AircraftSerialNumber,
                 Location = missionLog.Location,
-                Missions = missionLog.Missions,
-                SquadronLogs = missionLog.SquadronLogs,
+                Missions = missionLog.Missions.ToList(),
+                SquadronLogs = missionLog.SquadronLogs.ToList(),
             };
         }
     }

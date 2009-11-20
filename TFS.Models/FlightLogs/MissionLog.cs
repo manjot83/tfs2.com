@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using TFS.Models;
+using Iesi.Collections.Generic;
 
 namespace TFS.Models.FlightLogs
 {
@@ -10,8 +11,8 @@ namespace TFS.Models.FlightLogs
     {
         public MissionLog()
         {
-            this.Missions = new List<Mission>();
-            this.SquadronLogs = new List<SquadronLog>();
+            this.Missions = new HashedSet<Mission>();
+            this.SquadronLogs = new HashedSet<SquadronLog>();
 
             // Some domain specific defaults
             OperatingUnit = "Tactical Flight Services";
@@ -32,8 +33,8 @@ namespace TFS.Models.FlightLogs
         [DomainEquality, Required]
         public virtual string Location { get; set; } // Todo Change to "Program Location"
 
-        public virtual IList<Mission> Missions { get; set; }
-        public virtual IList<SquadronLog> SquadronLogs { get; set; }
+        public virtual ISet<Mission> Missions { get; set; }
+        public virtual ISet<SquadronLog> SquadronLogs { get; set; }
 
         public virtual string OperatingUnit { get; set; }
 

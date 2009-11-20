@@ -7,6 +7,7 @@ using TFS.Models.PersonnelRecords;
 using TFS.Models.Reports;
 using System.IO;
 using System.Diagnostics;
+using Iesi.Collections.Generic;
 
 namespace TFS.Models.Tests.Reports
 {
@@ -22,7 +23,7 @@ namespace TFS.Models.Tests.Reports
                 AircraftSerialNumber = "THX1138",
                 Location = "Marietta, GA",
             };
-            missionLog.Missions = new List<Mission>
+            missionLog.Missions = new HashedSet<Mission>
             {
                 new Mission
                 {
@@ -53,7 +54,7 @@ namespace TFS.Models.Tests.Reports
                     AdditionalInfo = "not empty",
                 }
             };
-            missionLog.SquadronLogs = new List<SquadronLog>
+            missionLog.SquadronLogs = new HashedSet<SquadronLog>
             {
                 new SquadronLog
                 {

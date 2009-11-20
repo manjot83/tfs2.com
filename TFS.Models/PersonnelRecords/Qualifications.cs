@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TFS.Models;
 using System.ComponentModel.DataAnnotations;
+using Iesi.Collections.Generic;
 
 namespace TFS.Models.PersonnelRecords
 {
@@ -11,7 +12,7 @@ namespace TFS.Models.PersonnelRecords
     {
         public Qualifications()
         {
-            Certificates = new List<Certificate>();
+            Certificates = new HashedSet<Certificate>();
         }
 
         public virtual int? Id { get; private set; }
@@ -20,7 +21,7 @@ namespace TFS.Models.PersonnelRecords
         [Required]
         public virtual Person Person { get; set; }
 
-        public virtual IList<Certificate> Certificates { get; set; }
+        public virtual ISet<Certificate> Certificates { get; set; }
         public virtual ServiceBranch BranchOfService { get; set; }
         public virtual FCFQualification MilitaryFCFQualification { get; set; }
         public virtual DateTime? LastBFR { get; set; }

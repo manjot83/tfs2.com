@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
@@ -43,7 +44,7 @@ namespace TFS.Models.Reports
             writer.WriteStartElement("Missions");
             for (int i = 0; i < missionLog.Missions.Count; i++)
             {
-                WriteMissionElement(writer, missionLog.Missions[i], i + 1);
+                WriteMissionElement(writer, missionLog.Missions.ToArray()[i], i + 1);
             }
             writer.WriteEndElement();
             writer.WriteStartElement("Squadron");

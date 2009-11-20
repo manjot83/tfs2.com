@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TFS.Models.Images;
 using TFS.Models;
+using Iesi.Collections.Generic;
 
 namespace TFS.Models.Site
 {
@@ -11,7 +12,7 @@ namespace TFS.Models.Site
     {
         public Page()
         {
-            Images = new List<StaticImage>();
+            Images = new HashedSet<StaticImage>();
         }
         public virtual Guid? Id { get; private set; }
         public virtual string URI { get; set; }
@@ -19,6 +20,6 @@ namespace TFS.Models.Site
         public virtual string Content { get; set; }
         public virtual string BannerFileName { get; set; }
         public virtual string HeaderFileName { get; set; }
-        public virtual IList<StaticImage> Images { get; set; }
+        public virtual ISet<StaticImage> Images { get; set; }
     }
 }
