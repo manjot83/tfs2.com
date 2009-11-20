@@ -9,7 +9,7 @@ namespace TFS.Web
 {
     public class FormsAuthenticationService : IAuthenticationService
     {
-        public FormsAuthenticationService(IUserManager userManager)
+        public FormsAuthenticationService(UserManager userManager)
         {
             UserManager = userManager;
         }
@@ -25,7 +25,7 @@ namespace TFS.Web
         public bool Authenticate(string username, string password)
         {
             var cleanedUsername = CleanUpUsername(username);
-            var user = UserManager.GetUser(cleanedUsername);
+            var user = UserManager.UserRepository.GetUser(cleanedUsername);
             if (user == null || user.Disabled)
                 return false;
             var queryString = string.Format("?username={0}&password={1}", cleanedUsername, password);
@@ -64,6 +64,6 @@ namespace TFS.Web
             FormsAuthentication.SignOut();
         }
 
-        public IUserManager UserManager { get; private set; }
+        public UserManager UserManager { get; private set; }
     }
 }

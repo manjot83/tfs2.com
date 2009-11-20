@@ -17,10 +17,10 @@ namespace TFS.Web.Controllers
     [Authorize]
     public partial class PersonnelRecordsController : Controller
     {
-        private readonly IUserManager userManager;
+        private readonly UserManager userManager;
         private readonly IProgramsManager programsManager;
 
-        public PersonnelRecordsController(IUserManager userManager, IProgramsManager programsManager)
+        public PersonnelRecordsController(UserManager userManager, IProgramsManager programsManager)
         {
             this.userManager = userManager;
             this.programsManager = programsManager;
@@ -40,7 +40,7 @@ namespace TFS.Web.Controllers
                 ItemsPerPage = itemsPerPage.HasValue ? itemsPerPage.Value : SortedListViewModel<Person>.DefaultItemsPerPage,
             };
 
-            IEnumerable<User> items = userManager.GetAllActiveUsers();
+            IEnumerable<User> items = userManager.UserRepository.GetAllActiveUsers();
             if (viewModel.IsCurrentSortType("name") && viewModel.SortDirection == SortDirection.Ascending)
                 items = items.OrderBy(x => x.FileByName());
             else if (viewModel.IsCurrentSortType("name"))
@@ -57,7 +57,7 @@ namespace TFS.Web.Controllers
         [RequireTransaction]
         public virtual ViewResult EditRecord(string username)
         {
-            var user = userManager.GetUser(username);
+            var user = userManager.UserRepository.GetUser(username);
             var person = user.Person;
             if (person == null)
                 person = userManager.CreatePersonFor(user);
@@ -70,7 +70,7 @@ namespace TFS.Web.Controllers
         [RequireTransaction]
         public virtual ViewResult EditMyRecord()
         {
-            var user = userManager.GetUser(User.Identity.Name);
+            var user = userManager.UserRepository.GetUser(User.Identity.Name);
             var person = user.Person;
             if (person == null)
                 person = userManager.CreatePersonFor(user);
@@ -85,7 +85,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditPersonalInfo(string username, bool editingMyRecord, PersonnelRecordPersonalInfo personalInfo)
         {
             personalInfo.Validate(ModelState, string.Empty);
-            var person = userManager.GetUser(username).Person;
+            var person = userManager.UserRepository.GetUser(username).Person;
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
             person.FirstName = personalInfo.FirstName;
@@ -105,7 +105,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditContactInfo(string username, bool editingMyRecord, PersonnelRecordContactInfo contactInfo)
         {
             contactInfo.Validate(ModelState, string.Empty);
-            var person = userManager.GetUser(username).Person;
+            var person = userManager.UserRepository.GetUser(username).Person;
             if (USState.FromAbbreviation(contactInfo.State.ToUpper()) == null)
                 ModelState.AddModelError("State", "Must be a valid US state abbreviation.");
             if (!ModelState.IsValid)
@@ -132,7 +132,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditCompanyInfo(string username, bool editingMyRecord, PersonnelRecordCompanyInfo companyInfo)
         {
             companyInfo.Validate(ModelState, string.Empty);
-            var person = userManager.GetUser(username).Person;
+            var person = userManager.UserRepository.GetUser(username).Person;
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
             person.FlightSuitSize = companyInfo.FlightSuitSize;
@@ -149,7 +149,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditQualifications(string username, bool editingMyRecord, PersonnelRecordQualificationViewModel qualifications)
         {
             qualifications.Validate(ModelState, string.Empty);
-            var person = userManager.GetUser(username).Person;
+            var person = userManager.UserRepository.GetUser(username).Person;
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
 
@@ -173,7 +173,7 @@ namespace TFS.Web.Controllers
         [RequireTransaction]
         public virtual FileContentResult DownloadAllAsCsv()
         {
-            var users = userManager.GetAllActiveUsers().OrderBy(x => x.FileByName());
+            var users = userManager.UserRepository.GetAllActiveUsers().OrderBy(x => x.FileByName());
             var reportGenerator = new CsvReportGenerator(new PersonnelFileReport(users));
             var bytes = reportGenerator.GenerateReport();
             return File(bytes, "text/csv", "PersonnelRecords(" + DateTime.Now.ToString("MM-dd-yy") + ").csv");

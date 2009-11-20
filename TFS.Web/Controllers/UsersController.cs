@@ -11,9 +11,9 @@ namespace TFS.Web.Controllers
     [Authorize]
     public partial class UsersController : Controller
     {
-        private readonly IUserManager userManager;
+        private readonly UserManager userManager;
 
-        public UsersController(IUserManager userManager)
+        public UsersController(UserManager userManager)
         {
             this.userManager = userManager;
         }
@@ -37,7 +37,7 @@ namespace TFS.Web.Controllers
                 CurrentPage = page.HasValue ? page.Value : 1,
                 ItemsPerPage = itemsPerPage.HasValue ? itemsPerPage.Value : SortedListViewModel<User>.DefaultItemsPerPage,
             };
-            var users = userManager.GetAllUsers();
+            var users = userManager.UserRepository.GetAllUsers();
             if (viewModel.IsCurrentSortType("name") && viewModel.SortDirection == SortDirection.Ascending)
                 users = users.OrderBy(x => x.LastName);
             else if (viewModel.IsCurrentSortType("name"))
@@ -64,7 +64,7 @@ namespace TFS.Web.Controllers
         [RequireTransaction]
         public virtual ViewResult Edit(string username)
         {
-            var user = userManager.GetUser(username);
+            var user = userManager.UserRepository.GetUser(username);
             var viewModel = new UserViewModel
             {
                 FirstName = user.FirstName,
@@ -83,7 +83,7 @@ namespace TFS.Web.Controllers
             user.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
                 return View(user);
-            var userEntity = userManager.GetUser(user.Username);
+            var userEntity = userManager.UserRepository.GetUser(user.Username);
             userEntity.FirstName = user.FirstName;
             userEntity.LastName = user.LastName;
             userEntity.DisplayName = user.DisplayName;
@@ -102,7 +102,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult Create(UserViewModel user)
         {
             user.Validate(ModelState, string.Empty);
-            if (ModelState.IsValid && userManager.GetUser(user.Username) != null)
+            if (ModelState.IsValid && userManager.UserRepository.GetUser(user.Username) != null)
                 ModelState.AddModelError("username", "Username must be unique.");
             if (!ModelState.IsValid)
                 return View(user);

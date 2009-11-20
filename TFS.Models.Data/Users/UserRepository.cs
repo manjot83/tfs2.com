@@ -10,9 +10,9 @@ using TFS.Models.Users;
 
 namespace TFS.Models.Data.Users
 {
-    public class UserManager : BaseDataAccessObject, IUserManager
+    public class UserRepository : BaseDataAccessObject, IUserRepository
     {
-        public UserManager(ISession session)
+        public UserRepository(ISession session)
             : base(session)
         {
         }
@@ -78,40 +78,9 @@ namespace TFS.Models.Data.Users
         //    return true;
         //}
 
-        public User CreateUser(string username, string firstname, string lastname, string displayname)
+        public User AddUser(User user)
         {
-            var user = new User
-            {
-                Username = username,
-                FirstName = firstname,
-                LastName = lastname,
-                DisplayName = displayname,
-                Disabled = false,
-            };
-            user.SetDefaultEmailAddress(username);
-            return (User)Session.SaveOrUpdateCopy(user);
-        }
-
-        public Person CreatePersonFor(User user)
-        {
-            var person = new Person
-            {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                User = user,
-            };
-            person = (Person)Session.SaveOrUpdateCopy(person);
-            user.Person = person;
-            return person;
-        }
-
-        public Qualifications CreateQualificationsFor(Person person)
-        {
-            var qual = new Qualifications
-            {
-                Person = person,
-            };
-            return (Qualifications)Session.SaveOrUpdateCopy(qual);
+            return Session.SaveOrUpdateCopy<User>(user);
         }
     }
 }

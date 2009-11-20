@@ -96,7 +96,7 @@
     <Compile Include="SessionExtensions.cs" />
     <Compile Include="Site\SiteRepository.cs" />
     <Compile Include="Mappings\Users\UserMapping.cs" />
-    <Compile Include="Users\UserManager.cs" />
+    <Compile Include="Users\UserRepository.cs" />
     <Compile Include="UserTypes\USStateUserType.cs" />
     <Compile Include="UserTypes\UtcDateTimeUserType.cs" />
   </ItemGroup>

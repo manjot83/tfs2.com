@@ -26,14 +26,18 @@ namespace TFS.Web
 
             Scan(x =>
             {
-                x.AssemblyContainingType<IUserManager>();
                 x.AssemblyContainingType<UserManager>();
+                x.AssemblyContainingType<UserRepository>();
                 x.With<StructureMap.Graph.DefaultConventionScanner>();
             });
 
             ForRequestedType<FlightLogManager>()
                 .CacheBy(InstanceScope.Hybrid)
                 .TheDefaultIsConcreteType<FlightLogManager>();
+
+            ForRequestedType<UserManager>()
+                .CacheBy(InstanceScope.Hybrid)
+                .TheDefaultIsConcreteType<UserManager>();
         }
     }
 }
