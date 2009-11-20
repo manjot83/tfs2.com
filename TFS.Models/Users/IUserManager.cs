@@ -5,7 +5,7 @@ using System.Text;
 using TFS.Models;
 using TFS.Models.PersonnelRecords;
 
-namespace TFS.Models
+namespace TFS.Models.Users
 {
     public interface IUserManager
     {

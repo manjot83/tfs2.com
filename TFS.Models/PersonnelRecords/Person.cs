@@ -6,6 +6,7 @@ using TFS.Models;
 using TFS.Models.Geography;
 using TFS.Models.Programs;
 using System.ComponentModel.DataAnnotations;
+using TFS.Models.Users;
 
 namespace TFS.Models.PersonnelRecords
 {

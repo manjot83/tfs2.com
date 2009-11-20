@@ -6,7 +6,7 @@ using TFS.Models;
 using System.ComponentModel.DataAnnotations;
 using TFS.Models.PersonnelRecords;
 
-namespace TFS.Models
+namespace TFS.Models.Users
 {
     public class User : BaseDomainEntity, IKeyedModel
     {
