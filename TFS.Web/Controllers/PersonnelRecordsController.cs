@@ -108,17 +108,6 @@ namespace TFS.Web.Controllers
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
             Mapper.Map<ContactInfo, Person>(contactInfo, person);
-            //person.PrimaryPhoneNumber = RegExLib.ParseRegEx(contactInfo.PrimaryPhoneNumber, RegExLib.USPhoneNumber);
-            //person.AlternatePhoneNumber = RegExLib.ParseRegEx(contactInfo.AlternatePhoneNumber, RegExLib.USPhoneNumber);
-            //person.AlternateEmail = contactInfo.AlternateEmail;
-            //person.EmergencyContactName = contactInfo.EmergencyContactName;
-            //person.EmergencyContactPhoneNumber = RegExLib.ParseRegEx(contactInfo.EmergencyContactPhoneNumber, RegExLib.USPhoneNumber);
-            //if (person.Address == null)
-            //    person.Address = new TFS.Models.Geography.USAddress();
-            //person.Address.StreetAddress = contactInfo.StreetAddress;
-            //person.Address.City = contactInfo.City;
-            //person.Address.State = USState.FromAbbreviation(contactInfo.State.ToUpper());
-            //person.Address.ZipCode = contactInfo.ZipCode;
             if (editingMyRecord)
                 return RedirectToAction(MVC.PersonnelRecords.EditMyRecord());
             else
@@ -134,9 +123,7 @@ namespace TFS.Web.Controllers
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
             Mapper.Map<CompanyInfo, Person>(companyInfo, person);
-            //person.FlightSuitSize = companyInfo.FlightSuitSize;
-            //person.ShirtSize = companyInfo.ShirtSize;
-            //person.HirePosition = programsManager.GetPositionById(companyInfo.HirePositionId);
+            person.HirePosition = programsManager.GetPositionById(companyInfo.HirePositionId.Value);
             if (editingMyRecord)
                 return RedirectToAction(MVC.PersonnelRecords.EditMyRecord());
             else

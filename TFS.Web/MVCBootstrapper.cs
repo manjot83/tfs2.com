@@ -14,6 +14,8 @@ using TFS.Web.ViewModels;
 using TFS.Models.PersonnelRecords;
 using TFS.Web.ViewModels.PersonnelRecords;
 using System;
+using TFS.Models.Geography;
+using TFS.Models;
 
 namespace TFS.Web
 {
@@ -47,7 +49,8 @@ namespace TFS.Web
                   .ForMember(x => x.EditingMyRecord, x => x.Ignore())
                   .ForMember(x => x.HirePositions, x => x.Ignore());
             Mapper.CreateMap<Person, PersonalInfo>();
-            Mapper.CreateMap<Person, ContactInfo>();
+            Mapper.CreateMap<Person, ContactInfo>()
+                  .ForMember(x => x.AddressState, x => x.MapFrom(p => p.Address != null ? p.Address.State.Abbreviation : null));
             Mapper.CreateMap<Person, CompanyInfo>()
                   .ForMember(x => x.HirePositionId, x => x.MapFrom(p => p.HirePosition != null ? p.HirePosition.Id : null));
             Mapper.CreateMap<PersonalInfo, Person>()
@@ -61,10 +64,53 @@ namespace TFS.Web
                   .ForMember(x => x.EmergencyContactPhoneNumber, x => x.Ignore())
                   .ForMember(x => x.FlightSuitSize, x => x.Ignore())
                   .ForMember(x => x.HirePosition, x => x.Ignore())
-                  .ForMember(x => x.PrimaryPhoneNumber, x => x.Ignore())                  
+                  .ForMember(x => x.PrimaryPhoneNumber, x => x.Ignore())
                   .ForMember(x => x.ShirtSize, x => x.Ignore())
                   .ForMember(x => x.DateOfBirth, x => x.MapFrom(p => p.DateOfBirth.HasValue ? p.DateOfBirth.Value.ToUniversalTime() : (DateTime?)null));
-            
+            Mapper.CreateMap<ContactInfo, Person>()
+                  .ForMember(x => x.Id, x => x.Ignore())
+                  .ForMember(x => x.User, x => x.Ignore())
+                  .ForMember(x => x.Qualifications, x => x.Ignore())
+                  .ForMember(x => x.FlightSuitSize, x => x.Ignore())
+                  .ForMember(x => x.HirePosition, x => x.Ignore())
+                  .ForMember(x => x.ShirtSize, x => x.Ignore())
+                  .ForMember(x => x.FirstName, x => x.Ignore())
+                  .ForMember(x => x.LastName, x => x.Ignore())
+                  .ForMember(x => x.MiddleInitial, x => x.Ignore())
+                  .ForMember(x => x.DateOfBirth, x => x.Ignore())
+                  .ForMember(x => x.Gender, x => x.Ignore())
+                  .ForMember(x => x.SocialSecurityLastFour, x => x.Ignore())
+                  .ForMember(x => x.Address, x => x.MapFrom(p =>
+                  {
+                      return new USAddress
+                      {
+                          StreetAddress = p.AddressStreetAddress,
+                          City = p.AddressCity,
+                          State = USState.FromAbbreviation(p.AddressState.ToUpper()),
+                          ZipCode = p.AddressZipCode,
+                      };
+                  }))
+                  .ForMember(x => x.PrimaryPhoneNumber, x => x.MapFrom(p => RegExLib.ParseRegEx(p.PrimaryPhoneNumber, RegExLib.USPhoneNumber)))
+                  .ForMember(x => x.AlternatePhoneNumber, x => x.MapFrom(p => RegExLib.ParseRegEx(p.AlternatePhoneNumber, RegExLib.USPhoneNumber)))
+                  .ForMember(x => x.EmergencyContactPhoneNumber, x => x.MapFrom(p => RegExLib.ParseRegEx(p.EmergencyContactPhoneNumber, RegExLib.USPhoneNumber)));
+            Mapper.CreateMap<CompanyInfo, Person>()
+                  .ForMember(x => x.Id, x => x.Ignore())
+                  .ForMember(x => x.User, x => x.Ignore())
+                  .ForMember(x => x.Qualifications, x => x.Ignore())
+                  .ForMember(x => x.Address, x => x.Ignore())
+                  .ForMember(x => x.AlternateEmail, x => x.Ignore())
+                  .ForMember(x => x.AlternatePhoneNumber, x => x.Ignore())
+                  .ForMember(x => x.EmergencyContactName, x => x.Ignore())
+                  .ForMember(x => x.EmergencyContactPhoneNumber, x => x.Ignore())
+                  .ForMember(x => x.HirePosition, x => x.Ignore())
+                  .ForMember(x => x.PrimaryPhoneNumber, x => x.Ignore())
+                  .ForMember(x => x.FirstName, x => x.Ignore())
+                  .ForMember(x => x.LastName, x => x.Ignore())
+                  .ForMember(x => x.MiddleInitial, x => x.Ignore())
+                  .ForMember(x => x.DateOfBirth, x => x.Ignore())
+                  .ForMember(x => x.Gender, x => x.Ignore())
+                  .ForMember(x => x.SocialSecurityLastFour, x => x.Ignore());
+
 #if DEBUG
             Mapper.AssertConfigurationIsValid();
 #endif
