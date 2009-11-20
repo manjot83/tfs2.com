@@ -86,6 +86,8 @@
     <Compile Include="Reports\FlightTimeSummaryReport.cs" />
     <Compile Include="Reports\ICsvReport.cs" />
     <Compile Include="Reports\IXmlReport.cs" />
+    <Compile Include="Users\Role.cs" />
+    <Compile Include="Users\Roles.cs" />
     <Compile Include="Users\UserManager.cs" />
     <Compile Include="PersonnelRecords\FCFQualification.cs" />
     <Compile Include="PersonnelRecords\FlightSuitSize.cs" />
@@ -106,6 +108,7 @@
     <Compile Include="Site\ISiteRepository.cs" />
     <Compile Include="Users\IUserRepository.cs" />
     <Compile Include="Users\User.cs" />
+    <Compile Include="Users\UserRoles.cs" />
     <Compile Include="Validation\DataAnnotationsValidator.cs" />
     <Compile Include="Validation\IValidatable.cs" />
     <Compile Include="Validation\ValidationError.cs" />

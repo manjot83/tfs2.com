@@ -10,6 +10,11 @@ namespace TFS.Models.Users
 {
     public class User : BaseDomainEntity, IKeyedModel
     {
+        public User()
+        {
+            Roles = new UserRoles();
+        }
+
         public virtual int? Id { get; private set; }
 
         [Required, StringLength(50)]
@@ -24,6 +29,19 @@ namespace TFS.Models.Users
         [Required, StringLength(50)]        
         public virtual string Username { get; set; }
         public virtual bool Disabled { get; set; }
+
+        [Required]
+        public virtual UserRoles Roles { get; set; }
+
+        public virtual bool IsInRole(string role)
+        {
+            return Role.GetRole(role).IsInRole(this);
+        }
+
+        public virtual bool IsInRole(Roles role)
+        {
+            return Role.GetRole(role).IsInRole(this);
+        }
 
         public virtual Person Person { get; set; }
 

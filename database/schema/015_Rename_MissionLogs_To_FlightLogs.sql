@@ -6,7 +6,7 @@ ALTER TABLE SquadronLogs
     DROP CONSTRAINT FK_SquadronLogs_MissionLogs
 GO
 
-ALTER TABLE FlightLogs
+ALTER TABLE MissionLogs
     DROP CONSTRAINT PK_MissionLogs
 GO
 

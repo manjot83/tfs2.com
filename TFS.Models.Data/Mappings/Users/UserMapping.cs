@@ -37,6 +37,23 @@ namespace TFS.Models.Data.Mappings.Users
                 .Not.Nullable();
             Map(x => x.Disabled)
                 .Not.Nullable();
+
+            Component(x => x.Roles, c =>
+                {
+                    c.Map(x => x.UserManager)
+                        .Column("UserManagerRole")
+                        .Not.Nullable();
+                    c.Map(x => x.PersonnelManager)
+                        .Column("PersonnelManagerRole")
+                        .Not.Nullable();
+                    c.Map(x => x.ProgramManager)
+                        .Column("ProgramManagerRole")
+                        .Not.Nullable();
+                    c.Map(x => x.FlightLogManager)
+                         .Column("FlightLogManagerRole")
+                         .Not.Nullable();
+                });
+
         }
     }
 }
