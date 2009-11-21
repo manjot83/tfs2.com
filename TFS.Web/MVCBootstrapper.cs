@@ -32,6 +32,21 @@ namespace TFS.Web
 #endif
         }
 
+        public static void RegisterRoutes(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("{*favicon}", new { favicon = @"(.*/)?favicon.ico(/.*)?" });
+            routes.IgnoreRoute("Content/{*resource}");
+            routes.IgnoreRoute("Scripts/{*resource}");
+
+            routes.MapRoute(
+                string.Empty,
+                "{controller}/{action}/{id}",
+                new { controller = MVC.Dashboard.Name, action = MVC.Dashboard.Actions.Index, id = "" }
+            );
+
+        }
+
         public static void InitializeAutoMapper()
         {
             Mapper.CreateMap<User, UserViewModel>();
@@ -39,7 +54,17 @@ namespace TFS.Web
                   .ForMember(x => x.Id, x => x.Ignore())
                   .ForMember(x => x.Email, x => x.Ignore())
                   .ForMember(x => x.Roles, x => x.Ignore())
-                  .ForMember(x => x.Person, x => x.Ignore());
+                  .ForMember(x => x.Person, x => x.Ignore())
+                  .ForMember(x => x.Roles, x => x.MapFrom(p =>
+                  {
+                      return new UserRoles
+                      {
+                          PersonnelManager = p.RolesPersonnelManager,
+                          UserManager = p.RolesUserManager,
+                          ProgramManager = p.RolesProgramManager,
+                          FlightLogManager = p.RolesFlightLogManager,
+                      };
+                  }));
 
             Mapper.CreateMap<Person, PersonnelRecordViewModel>()
                   .ForMember(x => x.Username, x => x.MapFrom(p => p.User.Username))
@@ -114,21 +139,6 @@ namespace TFS.Web
 #if DEBUG
             Mapper.AssertConfigurationIsValid();
 #endif
-        }
-
-        public static void RegisterRoutes(RouteCollection routes)
-        {
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-            routes.IgnoreRoute("{*favicon}", new { favicon = @"(.*/)?favicon.ico(/.*)?" });
-            routes.IgnoreRoute("Content/{*resource}");
-            routes.IgnoreRoute("Scripts/{*resource}");
-
-            routes.MapRoute(
-                string.Empty,
-                "{controller}/{action}/{id}",
-                new { controller = MVC.Dashboard.Name, action = MVC.Dashboard.Actions.Index, id = "" }
-            );
-
         }
 
         public static FluentConfiguration InitializeNHibernate()

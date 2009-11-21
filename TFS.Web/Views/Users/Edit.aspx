@@ -15,6 +15,13 @@
                 <%= Html.ValidationMessage("disabled")%>
             </div>
         </div>
+        <div class="field-group">
+            <div class="field">
+                <label for="RolesUserManager">Manage users and system permissions.</label>
+                <%= Html.CheckBox("RolesUserManager", Model.RolesUserManager)%>
+                <%= Html.ValidationMessage("RolesUserManager")%>
+            </div>
+        </div>
         <div class="button-group">
             <input type="submit" value="Save" />
             <input type="reset" value="Reset" />

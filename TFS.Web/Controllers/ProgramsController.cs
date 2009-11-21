@@ -10,7 +10,7 @@ using TFS.Web.ActionFilters;
 
 namespace TFS.Web.Controllers
 {
-    [Authorize]
+    [DomainAuthorize]
     public partial class ProgramsController : Controller
     {
         private readonly IProgramsManager programsManager;

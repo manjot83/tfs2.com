@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace TFS.Web.Controllers
 {
-    [Authorize]
+    [DomainAuthorize]
     public partial class UsersController : Controller
     {
         private readonly UserManager userManager;

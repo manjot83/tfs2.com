@@ -9,7 +9,7 @@ using System;
 
 namespace TFS.Web.Controllers
 {
-    [Authorize]
+    [DomainAuthorize]
     public partial class FlightLogsController : Controller
     {
         private readonly FlightLogManager flightLogManager;

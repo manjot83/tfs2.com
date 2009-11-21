@@ -16,7 +16,7 @@ using AutoMapper;
 
 namespace TFS.Web.Controllers
 {
-    [Authorize]
+    [DomainAuthorize]
     public partial class PersonnelRecordsController : Controller
     {
         private readonly UserManager userManager;

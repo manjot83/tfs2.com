@@ -20,5 +20,10 @@ namespace TFS.Web.ViewModels
         public string Email { get; set; }
 
         public bool Disabled { get; set; }
+
+        public bool RolesUserManager { get; set; }
+        public bool RolesPersonnelManager { get; set; }
+        public bool RolesProgramManager { get; set; }
+        public bool RolesFlightLogManager { get; set; }
     }
 }

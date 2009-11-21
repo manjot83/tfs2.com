@@ -51,7 +51,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
-        [Authorize]
+        [DomainAuthorize]
         [RequireTransaction]
         public virtual ViewResult ChangePassword()
         {
@@ -60,7 +60,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        [Authorize]
+        [DomainAuthorize]
         [RequireTransaction]
         public virtual ActionResult ChangePassword(string originalPassword, string newPassword, string confirmNewPassword)
         {
