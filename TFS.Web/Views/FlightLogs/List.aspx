@@ -29,6 +29,9 @@
                     <%= Html.ActionLink("Location", MVC.FlightLogs.List("location", SortDirection.Ascending))%>
                 <% } %>
                 </th>
+                <th>
+                    Reports
+                </th>
             </tr>
         </thead>
         <% foreach (var log in Model.Items) { %>
@@ -40,7 +43,10 @@
                 <%= Html.Encode(log.AircraftMDS + " : " + log.AircraftSerialNumber) %>
             </td>
             <td>
-                    
+                <%= Html.Encode(log.Location) %>
+            </td>
+            <td>
+                <%= Html.ActionLink("PDF", MVC.FlightLogs.DownloadPDF(log.Id.Value)) %>
             </td>
         </tr>
         <% } %>
