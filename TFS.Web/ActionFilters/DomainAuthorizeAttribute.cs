@@ -16,17 +16,20 @@ namespace TFS.Web.ActionFilters
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
             var theSession = ObjectFactory.GetInstance<ISession>();
-            var closeTransaction = theSession.Transaction.IsActive;
-            if (!theSession.Transaction.IsActive)
+            var openAndcloseTransaction = !theSession.Transaction.IsActive;
+            if (openAndcloseTransaction)
                 theSession.BeginTransaction();
-            var formsIdentity = (FormsIdentity)filterContext.HttpContext.User.Identity;
-            var user = ObjectFactory.GetInstance<IUserRepository>().GetUser(formsIdentity.Ticket.Name);
+            var formsIdentity = filterContext.HttpContext.User.Identity as FormsIdentity;
+            User user = null;
+            if (formsIdentity != null)
+                user = ObjectFactory.GetInstance<IUserRepository>().GetUser(formsIdentity.Ticket.Name);
             if (user != null)
             {
                 var roles = user.Roles.ToArray();
-                filterContext.HttpContext.User = new GenericPrincipal(formsIdentity, roles);
+                if (roles.Any())
+                    filterContext.HttpContext.User = new GenericPrincipal(formsIdentity, roles);
             }
-            if (closeTransaction)
+            if (openAndcloseTransaction)
                 theSession.Transaction.Commit();
             base.OnAuthorization(filterContext);
         }

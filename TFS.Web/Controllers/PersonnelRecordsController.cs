@@ -1,18 +1,17 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
-using TFS.Models;
+using AutoMapper;
 using TFS.Models.Geography;
 using TFS.Models.PersonnelRecords;
 using TFS.Models.Programs;
-using TFS.Web.ViewModels;
 using TFS.Models.Reports;
-using System;
-using TFS.Web.ActionFilters;
 using TFS.Models.Users;
+using TFS.Web.ActionFilters;
+using TFS.Web.ViewModels;
 using TFS.Web.ViewModels.PersonnelRecords;
-using AutoMapper;
 
 namespace TFS.Web.Controllers
 {
@@ -33,24 +32,25 @@ namespace TFS.Web.Controllers
         {
             if (string.IsNullOrEmpty(sortType))
                 sortType = "name";
-            var viewModel = new PersonnelRecordListViewModel
+            var viewModel = new SortedListViewModel<PersonnelRecordListViewModel>
             {
                 SortDirection = sortDirection ?? SortDirection.Ascending,
                 SortType = sortType,
                 PagingEnabled = true,
                 CurrentPage = page.HasValue ? page.Value : 1,
-                ItemsPerPage = itemsPerPage.HasValue ? itemsPerPage.Value : SortedListViewModel<Person>.DefaultItemsPerPage,
+                ItemsPerPage = itemsPerPage.HasValue ? itemsPerPage.Value : SortedListViewModel<PersonnelRecordListViewModel>.DefaultItemsPerPage,
             };
 
-            IEnumerable<User> items = userManager.UserRepository.GetAllActiveUsers();
+            IEnumerable<User> users = userManager.UserRepository.GetAllActiveUsers();
+            var items = Mapper.Map<IEnumerable<User>, IEnumerable<PersonnelRecordListViewModel>>(users);
             if (viewModel.IsCurrentSortType("name") && viewModel.SortDirection == SortDirection.Ascending)
-                items = items.OrderBy(x => x.FileByName());
+                items = items.OrderBy(x => x.FileByName);
             else if (viewModel.IsCurrentSortType("name"))
-                items = items.OrderByDescending(x => x.FileByName());
+                items = items.OrderByDescending(x => x.FileByName);
             if (viewModel.IsCurrentSortType("status") && viewModel.SortDirection == SortDirection.Ascending)
-                items = items.OrderBy(x => viewModel.GetMissionInformation(x));
+                items = items.OrderBy(x => x.Status);
             else if (viewModel.IsCurrentSortType("status"))
-                items = items.OrderByDescending(x => viewModel.GetMissionInformation(x));
+                items = items.OrderByDescending(x => x.Status);
             viewModel.SetItems(items.ToList());
 
             return View(Views.List, viewModel);

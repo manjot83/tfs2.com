@@ -1,4 +1,4 @@
-<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.PersonnelRecordListViewModel>" %>
+<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.SortedListViewModel<TFS.Web.ViewModels.PersonnelRecords.PersonnelRecordListViewModel>>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <h1>Personnel Records</h1>
@@ -39,10 +39,10 @@
         <% foreach (var user in Model.Items) { %>
         <tr>
             <td>
-                <%= Html.ActionLink(user.FileByName(), MVC.PersonnelRecords.EditRecord(user.Username))%>
+                <%= Html.ActionLink(user.FileByName, MVC.PersonnelRecords.EditRecord(user.Username))%>
             </td>
             <td>
-                <%= Html.Encode(Model.GetMissionInformation(user)) %>
+                <%= Html.Encode(user.Status) %>
             </td>
         </tr>
         <% } %>

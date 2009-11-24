@@ -7,22 +7,27 @@ using TFS.Models.Users;
 
 namespace TFS.Web.ViewModels.PersonnelRecords
 {
-    public class PersonnelRecordListViewModel : SortedListViewModel<User>
+    public class PersonnelRecordListViewModel
     {
-        public string GetMissionInformation(User user)
+        public string FileByName { get; set; }
+        public string Username { get; set; }
+        public string Status { get; set; }
+
+        public static string GetStatus(User user)
         {
             if (user.Person == null)
-                return "Personnel record not started";
-            if (user.Person.SocialSecurityLastFour == null)
+                return  "Personnel record not started";
+            else if (user.Person.SocialSecurityLastFour == null)
                 return "Missing SSN";
-            if (user.Person.DateOfBirth == null)
+            else if (user.Person.DateOfBirth == null)
                 return "Missing DoB";
-            if (user.Person.PrimaryPhoneNumber == null ||
+            else if (user.Person.PrimaryPhoneNumber == null ||
                 user.Person.EmergencyContactName == null ||
                 user.Person.EmergencyContactPhoneNumber == null ||
                 user.Person.Address == null)
                 return "Missing Contact Info";
-            return string.Empty;
+            else
+                return string.Empty;
         }
     }
 }

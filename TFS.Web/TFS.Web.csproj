@@ -116,6 +116,7 @@
     </Compile>
     <Compile Include="ActionFilters\DomainAuthorizeAttribute.cs" />
     <Compile Include="ActionFilters\RequireTransactionAttribute.cs" />
+    <Compile Include="AutoMapperConfiguration.cs" />
     <Compile Include="ConfigurationHelper.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\FlightLogsController.cs" />

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace TFS.Web.Controllers
 {
-    [DomainAuthorize]
+    [DomainAuthorize(Roles="UserManager")]
     public partial class UsersController : Controller
     {
         private readonly UserManager userManager;
@@ -58,8 +58,7 @@ namespace TFS.Web.Controllers
                 users = users.OrderByDescending(x => x.Disabled);
             users = users.ToList();
             viewModel.TotalItems = users.Count();
-            users = users.Skip(viewModel.ItemsPerPage * (viewModel.CurrentPage - 1)).Take(viewModel.ItemsPerPage).ToList();
-            viewModel.Items = Mapper.Map<IEnumerable<User>, IEnumerable<UserViewModel>>(users);
+            viewModel.SetItems(Mapper.Map<IEnumerable<User>, IEnumerable<UserViewModel>>(users));
             return View(Views.List, viewModel);
         }
 
