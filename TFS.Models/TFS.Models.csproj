@@ -109,7 +109,12 @@
     <Compile Include="Users\User.cs" />
     <Compile Include="Users\UserRoles.cs" />
     <Compile Include="Validation\DataAnnotationsValidator.cs" />
+    <Compile Include="Validation\DateIsInFutureAttribute.cs" />
+    <Compile Include="Validation\DateIsInPastAttribute.cs" />
+    <Compile Include="Validation\DigitsAttribute.cs" />
+    <Compile Include="Validation\StringIsEmailAttribute.cs" />
     <Compile Include="Validation\IValidatable.cs" />
+    <Compile Include="Validation\StringIsNumericAttribute.cs" />
     <Compile Include="Validation\ValidationError.cs" />
   </ItemGroup>
   <ItemGroup>
