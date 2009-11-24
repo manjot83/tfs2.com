@@ -86,7 +86,6 @@
     <Compile Include="Reports\FlightTimeSummaryReport.cs" />
     <Compile Include="Reports\ICsvReport.cs" />
     <Compile Include="Reports\IXmlReport.cs" />
-    <Compile Include="Users\Role.cs" />
     <Compile Include="Users\Roles.cs" />
     <Compile Include="Users\UserManager.cs" />
     <Compile Include="PersonnelRecords\FCFQualification.cs" />

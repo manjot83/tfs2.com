@@ -5,6 +5,7 @@ using System.Text;
 using TFS.Models;
 using System.ComponentModel.DataAnnotations;
 using TFS.Models.PersonnelRecords;
+using TFS.Extensions;
 
 namespace TFS.Models.Users
 {
@@ -26,7 +27,7 @@ namespace TFS.Models.Users
         [Required, StringLength(50)]
         public virtual string Email { get; set; }
         [DomainEquality]
-        [Required, StringLength(50)]        
+        [Required, StringLength(50)]
         public virtual string Username { get; set; }
         public virtual bool Disabled { get; set; }
 
@@ -35,12 +36,26 @@ namespace TFS.Models.Users
 
         public virtual bool IsInRole(string role)
         {
-            return Role.GetRole(role).IsInRole(this);
+            if (Enum.GetNames(typeof(Roles)).Any(x => x.Matches(role)))
+                return IsInRole((Roles)Enum.Parse(typeof(Roles), role, true));
+            throw new ArgumentException(string.Format("Invalid role: {0}", role), "role");
         }
 
         public virtual bool IsInRole(Roles role)
         {
-            return Role.GetRole(role).IsInRole(this);
+            switch (role)
+            {
+                case TFS.Models.Users.Roles.UserManager:
+                    return Roles.UserManager;
+                case TFS.Models.Users.Roles.PersonnelManager:
+                    return Roles.PersonnelManager;
+                case TFS.Models.Users.Roles.ProgramManager:
+                    return Roles.ProgramManager;
+                case TFS.Models.Users.Roles.FlightLogManager:
+                    return Roles.FlightLogManager;
+                default:
+                    return false;
+            }
         }
 
         public virtual Person Person { get; set; }

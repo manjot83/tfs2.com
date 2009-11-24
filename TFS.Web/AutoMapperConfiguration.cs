@@ -17,7 +17,6 @@ namespace TFS.Web
             Mapper.CreateMap<UserViewModel, User>()
                   .ForMember(x => x.Id, x => x.Ignore())
                   .ForMember(x => x.Email, x => x.Ignore())
-                  .ForMember(x => x.Roles, x => x.Ignore())
                   .ForMember(x => x.Person, x => x.Ignore())
                   .ForMember(x => x.Roles, x => x.MapFrom(p =>
                   {

@@ -22,6 +22,11 @@
 	display: inline;
 }
 
+.standard-form .checkboxlabel
+{
+	display: inline;
+}
+
 .standard-form img
 {
 	vertical-align: bottom;
