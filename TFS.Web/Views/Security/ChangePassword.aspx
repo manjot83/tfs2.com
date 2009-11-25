@@ -1,7 +1,7 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Models.Users.User>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Change Password - <%= Html.Encode(Model.Username) %></h1>
+    <div class="header-main">Change Password - <%= Html.Encode(Model.Username) %></div>
     <% using (Html.BeginForm(MVC.Security.ChangePassword(), FormMethod.Post, new { @class = "standard-form" })) { %>
         <div class="field-group">
             <div class="field">

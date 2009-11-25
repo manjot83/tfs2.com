@@ -4,12 +4,15 @@
     <p>
         <%= Html.ActionLink("Back to flight log summary ...", MVC.FlightLogs.EditFlightLog(Model.FlightLogId))%>
     </p>
-    <h1>Add a flight log squadron member</h1>
-    <% using (Html.BeginForm(MVC.FlightLogs.CreateSquadronLog(Model.FlightLogId), FormMethod.Post, new { @class = "standard-form" })) { %>
-        <% Html.RenderPartial(MVC.FlightLogs.Views.SquadronLogForm); %>
-        <div class="button-group">
-            <input type="submit" value="Add new flight log squadron member" />
-            <input type="reset" value="Reset" />
-        </div>
-    <% } %>
+    <div class="header-main">Add a flight log squadron member</div>
+    <fieldset class="standard-form">
+        <legend>Squadron Member</legend>
+        <% using (Html.BeginForm(MVC.FlightLogs.CreateSquadronLog(Model.FlightLogId), FormMethod.Post, new { @class = "fieldset-content" })) { %>
+            <% Html.RenderPartial(MVC.FlightLogs.Views.SquadronLogForm); %>
+            <div class="button-group">
+                <input type="submit" value="Add new flight log squadron member" />
+                <input type="reset" value="Reset" />
+            </div>
+        <% } %>
+    </fieldset>
 </asp:Content>

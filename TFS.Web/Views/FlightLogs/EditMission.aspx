@@ -4,12 +4,15 @@
     <p>
         <%= Html.ActionLink("Back to flight log summary ...", MVC.FlightLogs.EditFlightLog(Model.FlightLogId))%>
     </p>
-    <h1>Edit flight log mission</h1>
-    <% using (Html.BeginForm(MVC.FlightLogs.EditMission(Model.Mission.Id.Value), FormMethod.Post, new { @class = "standard-form" })) { %>
-        <% Html.RenderPartial(MVC.FlightLogs.Views.MissionForm); %>
-        <div class="button-group">
-            <input type="submit" value="Save changes" />
-            <input type="reset" value="Reset" />
-        </div>
-    <% } %>
+    <div class="header-main">Edit flight log mission</div>
+    <fieldset class="standard-form">
+        <legend>Mission Info</legend>
+        <% using (Html.BeginForm(MVC.FlightLogs.EditMission(Model.Mission.Id.Value), FormMethod.Post, new { @class = "fieldset-content" })) { %>
+            <% Html.RenderPartial(MVC.FlightLogs.Views.MissionForm); %>
+            <div class="button-group">
+                <input type="submit" value="Save changes" />
+                <input type="reset" value="Reset" />
+            </div>
+        <% } %>
+    </fieldset>
 </asp:Content>

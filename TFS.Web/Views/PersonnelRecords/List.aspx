@@ -1,7 +1,7 @@
 <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.SortedListViewModel<TFS.Web.ViewModels.PersonnelRecords.PersonnelRecordListViewModel>>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Personnel Records</h1>
+    <div class="header-main">Personnel Records</div>
     <p class="instructions">Below is a list of all active users.</p>
     <ul class="instructions">
         <li>Click on the person's name to see and edit their personnel record.</li>

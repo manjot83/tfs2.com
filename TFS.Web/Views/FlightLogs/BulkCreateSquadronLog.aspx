@@ -4,13 +4,13 @@
     <p>
         <%= Html.ActionLink("Back to flight log summary ...", MVC.FlightLogs.EditFlightLog(Model.FlightLog.Id.Value)) %>
     </p>
-    <h2>Current flight log info:</h2>
+    <div class="header-sub">Current flight log info:</div>
     <p>
         Date: <b><%= Html.Encode(Model.FlightLog.LogDate.ToShortDateOrEmptyString())%></b><br />
         Aircraft: <b><%= Html.Encode(Model.FlightLog.AircraftMDS + " : " + Model.FlightLog.AircraftSerialNumber)%></b><br />
         Location: <b><%= Html.Encode(Model.FlightLog.Location)%></b>
     </p>
-    <h1>Add many flight log squadron members</h1>
+    <div class="header-main">Add many flight log squadron members</div>
     <p>
         Click on any squadron member to edit or see more details.
     </p>
@@ -34,11 +34,14 @@
     <% } else { %>
     <p><b>No squadron members entered.</b></p>
     <% } %>
-    <% using (Html.BeginForm(MVC.FlightLogs.BulkCreateSquadronLog(Model.FlightLog.Id.Value), FormMethod.Post, new { @class = "standard-form" })) { %>
-        <% Html.RenderPartial(MVC.FlightLogs.Views.SquadronLogForm, Model.CurrentSquadronLog); %>
-        <div class="button-group">
-            <input type="submit" value="Add new flight log squadron member" />
-            <input type="reset" value="Reset" />
-        </div>
-    <% } %>
+    <fieldset class="standard-form">
+        <legend>Squadron Member</legend>
+        <% using (Html.BeginForm(MVC.FlightLogs.BulkCreateSquadronLog(Model.FlightLog.Id.Value), FormMethod.Post, new { @class = "fieldset-content" })) { %>
+            <% Html.RenderPartial(MVC.FlightLogs.Views.SquadronLogForm, Model.CurrentSquadronLog); %>
+            <div class="button-group">
+                <input type="submit" value="Add new flight log squadron member" />
+                <input type="reset" value="Reset" />
+            </div>
+        <% } %>
+    </fieldset>
 </asp:Content>

@@ -1,7 +1,7 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.SortedListViewModel<TFS.Models.FlightLogs.FlightLog>>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Flight Time Summaries</h1>
+    <div class="header-main">Flight Time Summaries</div>
     <p>
         Click the date to edit, or <b><%= Html.ActionLink("Create", MVC.FlightLogs.CreateFlightLog())%></b> a new one.
     </p>

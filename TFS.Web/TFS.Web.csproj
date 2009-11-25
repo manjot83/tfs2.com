@@ -221,8 +221,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Config\ConnectionStrings.config" />
-    <Content Include="Content\internal\tags.css" />
-    <Content Include="Content\internal\base.css" />
     <Content Include="Content\internal\icons\book.png" />
     <Content Include="Content\internal\icons\group.png" />
     <Content Include="Content\internal\icons\sort_down.gif" />
@@ -231,9 +229,7 @@
     <Content Include="Content\internal\icons\vcard.png" />
     <Content Include="Content\internal\icons\world.png" />
     <Content Include="Content\internal\images\calendarSelector.png" />
-    <Content Include="Content\internal\list-table.css" />
     <Content Include="Content\internal\reset.css" />
-    <Content Include="Content\internal\standard-form.css" />
     <Content Include="Content\internal\template\bgcontainer.gif" />
     <Content Include="Content\internal\template\bgfooter.gif" />
     <Content Include="Content\internal\template\bgfooter.png" />
@@ -244,7 +240,6 @@
     <Content Include="Content\internal\template\quote.gif" />
     <Content Include="Content\internal\template\sidenavh1.gif" />
     <Content Include="favicon.ico" />
-    <Content Include="StyleTest.html" />
     <Content Include="Views\Dashboard\Index.aspx" />
     <Content Include="Views\FlightLogs\BulkCreateSquadronLog.aspx" />
     <Content Include="Views\FlightLogs\EditSquadronLog.aspx" />
@@ -299,7 +294,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="StructureMap\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v9.0\WebApplications\Microsoft.WebApplication.targets" />

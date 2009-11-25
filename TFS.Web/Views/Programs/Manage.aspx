@@ -5,8 +5,8 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Manage TFS Programs and Positions</h1>
-    <h3>Active Positions</h3>
+    <div class="header-main">Manage TFS Programs and Positions</div>
+    Active Positions
     <ul>
         <% foreach (var position in Model.ActivePositions) { %>
         <li><%= Html.Encode(position.Title) %></li>

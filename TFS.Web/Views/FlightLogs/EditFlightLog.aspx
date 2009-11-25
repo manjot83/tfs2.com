@@ -5,47 +5,49 @@
         <%= Html.ActionLink("Back to flight log summary list...", MVC.FlightLogs.List()) %>
     </p>
     
-    <h1>Edit flight time summary</h1>
+    <div class="header-main">Edit flight time summary</div>
     
-    <h3 class="section-header underlined">Header</h3>
-    <% using (Html.BeginForm(MVC.FlightLogs.EditFlightLog(), FormMethod.Post, new { @class = "standard-form" })) { %>
-        <%= Html.Hidden("id", Model.FlightLogId)%>
-        <div class="field-group">
-            <div class="field">
-                <label for="FlightLogDate">Date (mm/dd/yyyy)</label>
-                <%= Html.TextBox("FlightLogDate", Model.FlightLogDate.ToShortDateOrEmptyString(), new { size = "15", maxlength = "10" })%>
-                <%= Html.ValidationMessage("FlightLogDate")%>
+    <fieldset class="standard-form">
+        <legend>Flight Log Header</legend>
+        <% using (Html.BeginForm(MVC.FlightLogs.EditFlightLog(), FormMethod.Post, new { @class = "fieldset-content" })) { %>
+            <%= Html.Hidden("id", Model.FlightLogId)%>
+            <div class="field-group">
+                <div class="field">
+                    <label for="FlightLogDate">Date (mm/dd/yyyy)</label>
+                    <%= Html.TextBox("FlightLogDate", Model.FlightLogDate.ToShortDateOrEmptyString(), new { size = "15", maxlength = "10" })%>
+                    <%= Html.ValidationMessage("FlightLogDate")%>
+                </div>
             </div>
-        </div>
-        <div class="field-group">
-            <div class="field">
-                <label for="AircraftMDS">Aircraft <acronym title="Mission-Design Series">MDS</acronym></label>
-                <%= Html.TextBox("AircraftMDS", Model.AircraftMDS, new { size = "20", maxlength = "50" })%>
-                <%= Html.ValidationMessage("AircraftMDS")%>
+            <div class="field-group">
+                <div class="field">
+                    <label for="AircraftMDS">Aircraft <acronym title="Mission-Design Series">MDS</acronym></label>
+                    <%= Html.TextBox("AircraftMDS", Model.AircraftMDS, new { size = "20", maxlength = "50" })%>
+                    <%= Html.ValidationMessage("AircraftMDS")%>
+                </div>
+                <div class="field">
+                    <label for="aircraftserialnumber">Aircraft Serial/Tail Number</label>
+                    <%= Html.TextBox("aircraftserialnumber", Model.AircraftSerialNumber, new { size = "20", maxlength = "50" })%>
+                    <%= Html.ValidationMessage("aircraftserialnumber")%>
+                </div>
             </div>
-            <div class="field">
-                <label for="aircraftserialnumber">Aircraft Serial/Tail Number</label>
-                <%= Html.TextBox("aircraftserialnumber", Model.AircraftSerialNumber, new { size = "20", maxlength = "50" })%>
-                <%= Html.ValidationMessage("aircraftserialnumber")%>
+            <div class="field-group">
+                <div class="field">
+                    <label for="location">Flight/Program Location</label>
+                    <%= Html.TextBox("location", Model.Location, new { size = "40", maxlength = "100" })%>
+                    <%= Html.ValidationMessage("location")%>
+                </div>
             </div>
-        </div>
-        <div class="field-group">
-            <div class="field">
-                <label for="location">Flight/Program Location</label>
-                <%= Html.TextBox("location", Model.Location, new { size = "40", maxlength = "100" })%>
-                <%= Html.ValidationMessage("location")%>
+            <div class="button-group">
+                <input type="submit" value="Save changes" />
+                <input type="reset" value="Reset" />
+                <% if (Model.SavedFlightLog) { %>
+                <span class="saved-changes">Saved Changes</span>
+                <% } %>
             </div>
-        </div>
-        <div class="button-group">
-            <input type="submit" value="Save changes" />
-            <input type="reset" value="Reset" />
-            <% if (Model.SavedFlightLog) { %>
-            <span class="saved-changes">Saved Changes</span>
-            <% } %>
-        </div>
-    <% } %>
+        <% } %>
+    </fieldset>
     
-    <h3 class="section-header underlined">Missions</h3>
+    <div class="header-sub">Missions</div>
     <p>
         Click on any mission to edit or see more details.
     </p>
@@ -82,7 +84,7 @@
         </p>
     <% } %>
         
-    <h3 class="section-header underlined">Squadron log</h3>
+    <div class="header-sub">Squadron log</div>        
     <p>
         Click on any squadron member to edit or see more details.
     </p>
@@ -119,7 +121,7 @@
         </p>
     <% } %>
         
-    <h3 class="section-header underlined">Reports</h3>
+    <div class="header-sub">Reports</div>            
     <p>
         Click to download as a <%= Html.ActionLink("PDF", MVC.FlightLogs.DownloadPDF(Model.FlightLogId))%>
     </p>

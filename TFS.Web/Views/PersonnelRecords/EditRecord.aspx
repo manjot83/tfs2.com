@@ -1,7 +1,7 @@
 <%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.PersonnelRecords.PersonnelRecordViewModel>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Edit personnel record - <%= Html.Encode(Model.Username) %></h1>
+    <div class="header-main">Edit personnel record - <%= Html.Encode(Model.Username) %></div>
     <p>
         Use this form to edit personnel information, emergency contact information, and flight qualifications.
     </p>
@@ -76,19 +76,6 @@
             </div>
             <div class="field-group">
                 <div class="field">
-                    <label for="EmergencyContactName">Emergency Contact Name</label>
-                    <%= Html.TextBox("EmergencyContactName", Model.ContactInfo.EmergencyContactName, new { size = "20", maxlength = "50" })%>
-                    <%= Html.ValidationMessage("EmergencyContactName")%>
-                </div>
-                <div class="field">
-                    <label for="EmergencyContactPhoneNumber">Emergency Contact Phone</label>
-                    <%= Html.TextBox("EmergencyContactPhoneNumber", Model.ContactInfo.EmergencyContactPhoneNumber, new { size = "20", maxlength = "15" })%>
-                    <%= Html.ValidationMessage("EmergencyContactPhoneNumber")%>
-                </div>
-            </div>
-            <h4>Address:</h4>
-            <div class="field-group">
-                <div class="field">
                     <label for="AddressStreetAddress">Street Address</label>
                     <%= Html.TextBox("AddressStreetAddress", Model.ContactInfo.AddressStreetAddress, new { size = "50", maxlength = "100" })%>
                     <%= Html.ValidationMessage("AddressStreetAddress")%>
@@ -109,6 +96,18 @@
                     <label for="AddressZipCode">Zip</label>
                     <%= Html.TextBox("AddressZipCode", Model.ContactInfo.AddressZipCode, new { size = "10", maxlength = "5" })%>
                     <%= Html.ValidationMessage("AddressZipCode")%>
+                </div>
+            </div>
+            <div class="field-group">
+                <div class="field">
+                    <label for="EmergencyContactName">Emergency Contact Name</label>
+                    <%= Html.TextBox("EmergencyContactName", Model.ContactInfo.EmergencyContactName, new { size = "20", maxlength = "50" })%>
+                    <%= Html.ValidationMessage("EmergencyContactName")%>
+                </div>
+                <div class="field">
+                    <label for="EmergencyContactPhoneNumber">Emergency Contact Phone</label>
+                    <%= Html.TextBox("EmergencyContactPhoneNumber", Model.ContactInfo.EmergencyContactPhoneNumber, new { size = "20", maxlength = "15" })%>
+                    <%= Html.ValidationMessage("EmergencyContactPhoneNumber")%>
                 </div>
             </div>
             <div class="button-group">
@@ -147,7 +146,9 @@
             </div>
         <% } %>
     </fieldset>
-    <h3 class="section-header underlined">Military Background and Qualifications</h3>
+    <fieldset class="standard-form">
+        <legend>Military Background and Qualifications</legend>
+    </fieldset>
     <%--<% using (Html.BeginForm(MVC.PersonnelRe<cords.EditQualifications(), FormMethod.Post, new { @class = "standard-form" })) { %>
         <%= Html.Hidden("username", Model.Record.User.Username) %>
         <%= Html.Hidden("editingmyrecord", Model.EditingMyRecord)%>
