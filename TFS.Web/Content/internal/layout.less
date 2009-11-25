@@ -1,0 +1,137 @@
+﻿.container {
+	background: #fcf9e7 url(template/bgcontainer.gif) repeat-y;
+	
+	.right {
+		float: right;
+	}
+	
+	.left {
+		float: left;
+	}
+	
+	.clearer {
+		clear: both;
+	}
+	
+	.header {
+		background: url(template/bgheader.png) repeat-x;
+		margin: 0 auto;
+		
+		.title {
+			padding: 10px 30px 10px 30px;
+			color: #E4DBCF;
+			font-size: 3.4em;
+		}
+	}
+	
+	.navigation {
+		margin: 0 auto;
+		padding: 0 18px;
+		height: 44px;
+		background: #FFF url(template/bgnavigation.gif) repeat-x;
+		font-weight: bold;
+		font-size: 1.2em;
+		
+		a {
+			padding: 3px 4px;
+			margin-right: 12px;
+			line-height: 44px;
+			color: #543;
+			text-decoration: none;
+			
+			:hover {
+				text-decoration: underline;
+				color: #420;
+			}			
+		}
+	}
+	
+	.main {
+		clear: both;
+		padding: 0px 20px 12px 0px;
+		
+		.sidenav {
+			float: left;
+			width: 218px;
+			
+			.sidenav-header {
+				margin: 0;
+				padding-top: 6px;
+				padding-left: 12px;
+				height: 22px;
+				background: #BCB39F url(template/sidenavh1.gif) repeat-x;
+				border-bottom: 1px solid #999;
+				border-top: 1px solid #CCC;
+				color: #4A4A44;
+				font-size: 1.2em;
+				font-weight: bold;
+			}
+			
+			ul {
+				margin: 0;
+				padding: 0;
+				font-size: 1.2em;
+				
+				li {
+					border-bottom: 1px solid #A98;
+					border-top: 1px solid #DDC;
+					list-style: none;
+					
+					img {
+						margin-right: 10px;
+						vertical-align: middle;
+					}
+					
+					a {
+						background: #CCC3AF;
+						color: #554;
+						display: block;
+						padding: 8px 4px 8px 12px;
+						text-decoration: none;
+						
+						:hover {
+							background: #D6CCB9;
+							color: #654;
+						}
+					}
+				}
+			}
+		}
+	}
+		
+	.footer {
+		margin: 0 auto;
+		line-height: 40px;		
+		background: #958463 url(template/bgfooter.png) repeat-x;
+		text-align: center;
+		color: #FED;
+		font-size: 1.1em;				
+		
+		.left {
+			padding: 0px 12px;
+				
+			a {
+				color: #FFD;
+				text-decoration: none;
+				
+				:hover {
+					color: #FFF;
+					text-decoration: underline;
+				}
+			}
+		}
+		
+		.right {
+			padding: 0px 12px;
+			color: #C0B8A6;
+			
+			a {
+				color: #C0B8A6;
+				
+				:hover {
+					color: #FFE;
+				}
+			}
+		}
+	}
+}

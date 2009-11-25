@@ -5,5 +5,5 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Select options from the left.</h1>
+    <div class="header-main">Select options from the left.</div>
 </asp:Content>

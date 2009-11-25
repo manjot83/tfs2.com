@@ -1,7 +1,7 @@
 <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.SortedListViewModel<TFS.Web.ViewModels.UserViewModel>>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-    <h1>Users</h1>
+    <div class="header-main">Users</div>
     <p>
         Click the user's name to edit, or <%= Html.ActionLink("Create", MVC.Users.Create()) %> a new one.
     </p>

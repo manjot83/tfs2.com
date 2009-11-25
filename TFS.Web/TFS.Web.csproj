@@ -44,6 +44,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="dotless.Core, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\dotless\dotless.Core.dll</HintPath>
+    </Reference>
     <Reference Include="Elmah, Version=1.1.11517.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\Elmah\Elmah.dll</HintPath>
@@ -262,6 +266,12 @@
     <Content Include="Views\Security\ChangePassword.aspx" />
     <Content Include="Views\Security\LogOn.aspx" />
     <Content Include="Config\AppSettings.config" />
+    <Content Include="Config\dotless.config" />
+    <None Include="Content\internal\forms.less" />
+    <None Include="Content\internal\layout.less" />
+    <None Include="Content\internal\list-table.less" />
+    <None Include="Content\internal\paragraph.less" />
+    <None Include="Content\internal\style.less" />
     <None Include="Content\internal\template\bgfooter.pdn" />
     <None Include="T4MVC.settings.t4" />
     <None Include="T4MVC.tt">
@@ -269,7 +279,6 @@
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </None>
     <Content Include="Views\Shared\Dashboard.Master" />
-    <Content Include="Views\Shared\DashboardSideBar.ascx" />
     <Content Include="Views\Users\Create.aspx" />
     <Content Include="Views\Users\Edit.aspx" />
     <Content Include="Views\Users\List.aspx" />

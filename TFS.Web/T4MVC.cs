@@ -211,9 +211,11 @@ namespace Links {
                 public static readonly string calendarSelector_png = Url("calendarSelector.png");
             }
         
+            public static readonly string layout_less = Url("layout.less");
             public static readonly string list_table_css = Url("list-table.css");
             public static readonly string reset_css = Url("reset.css");
             public static readonly string standard_form_css = Url("standard-form.css");
+            public static readonly string style_less = Url("style.less");
             public static readonly string tags_css = Url("tags.css");
             [CompilerGenerated]
             public static class @template {
@@ -362,7 +364,6 @@ namespace TFS.Web.Controllers {
         [CompilerGenerated]
         public class ActionNames {
             public readonly string Index = "Index";
-            public readonly string GenerateSideBar = "GenerateSideBar";
         }
 
 
@@ -383,11 +384,6 @@ namespace T4MVC {
 
         public override System.Web.Mvc.ViewResult Index() {
             var callInfo = new T4MVC_ViewResult("Dashboard", Actions.Index);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ViewResult GenerateSideBar() {
-            var callInfo = new T4MVC_ViewResult("Dashboard", Actions.GenerateSideBar);
             return callInfo;
         }
 
@@ -686,6 +682,11 @@ namespace TFS.Web.Controllers {
             return new T4MVC_ActionResult(Name, Actions.EditCompanyInfo);
         }
 
+        [NonAction]
+        public System.Web.Mvc.ActionResult EditQualifications() {
+            return new T4MVC_ActionResult(Name, Actions.EditQualifications);
+        }
+
 
         [CompilerGenerated]
         public readonly string Name = "PersonnelRecords";
@@ -701,6 +702,7 @@ namespace TFS.Web.Controllers {
             public readonly string EditPersonalInfo = "EditPersonalInfo";
             public readonly string EditContactInfo = "EditContactInfo";
             public readonly string EditCompanyInfo = "EditCompanyInfo";
+            public readonly string EditQualifications = "EditQualifications";
             public readonly string DownloadAllAsCsv = "DownloadAllAsCsv";
         }
 
@@ -762,6 +764,14 @@ namespace T4MVC {
             callInfo.RouteValues.Add("username", username);
             callInfo.RouteValues.Add("editingMyRecord", editingMyRecord);
             callInfo.RouteValues.Add("companyInfo", companyInfo);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult EditQualifications(string username, bool editingMyRecord, TFS.Web.ViewModels.PersonnelRecords.QualificationViewModel qualifications) {
+            var callInfo = new T4MVC_ActionResult("PersonnelRecords", Actions.EditQualifications);
+            callInfo.RouteValues.Add("username", username);
+            callInfo.RouteValues.Add("editingMyRecord", editingMyRecord);
+            callInfo.RouteValues.Add("qualifications", qualifications);
             return callInfo;
         }
 
@@ -1096,7 +1106,6 @@ namespace T4MVC {
         public ViewNames Views { get { return s_views; } }
         [CompilerGenerated]
         public class ViewNames {
-            public readonly string DashboardSideBar = "DashboardSideBar";
         }
     }
 }

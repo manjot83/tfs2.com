@@ -6,20 +6,16 @@
 <head>
     <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>    
     <link rel="icon" type="image/vnd.microsoft.icon" href="<%= Url.Content("~/favicon.ico") %>" /> 
-    <link type="text/css" rel="stylesheet" href="<%= Url.Content("~/Content/internal/reset.css") %>" />
-    <link type="text/css" rel="stylesheet" href="<%= Url.Content("~/Content/internal/base.css") %>" />
-    <link type="text/css" rel="stylesheet" href="<%= Url.Content("~/Content/internal/tags.css") %>" />
-    <link type="text/css" rel="stylesheet" href="<%= Url.Content("~/Content/internal/list-table.css") %>" />
-    <link type="text/css" rel="stylesheet" href="<%= Url.Content("~/Content/internal/standard-form.css") %>" />
+    <link type="text/css" rel="stylesheet" href="<%= Url.Content("~/Content/internal/style.less") %>" />
 </head>
 <body>
     <div class="container">
         <div class="header">
             <div class="title">
                 <div class="right">
-                    <h1>Operations Center</h1>
+                    <span>Operations Center</span>
                 </div>
-                <h1>Tactical Flight Services</h1>
+                <span>Tactical Flight Services</span>
             </div>
         </div>
         <div class="navigation">
@@ -33,7 +29,25 @@
             </div>
         </div>
         <div class="main">
-            <% Html.RenderAction(MVC.Dashboard.GenerateSideBar()); %>
+            
+            <div class="sidenav">
+                <div class="sidenav-header">Operations</div>
+                <ul>            
+                    <li><%= Html.NavImageLink("Flight Logs", Links.Content.@internal.icons.flightlog_png, MVC.FlightLogs.Index()) %></li>
+                </ul>
+                <div class="sidenav-header">Self Service</div>
+                <ul>
+                    <li><%= Html.NavImageLink("My Personnel File", Links.Content.@internal.icons.vcard_png, MVC.PersonnelRecords.EditMyRecord())%></li>
+                </ul>
+                <div class="sidenav-header">Administration</div>
+                <ul>
+                    <li><%= Html.NavImageLink("Users and Security", Links.Content.@internal.icons.group_png, MVC.Users.Index()) %></li>
+                    <li><%= Html.NavImageLink("Personnel Files", Links.Content.@internal.icons.vcard_png, MVC.PersonnelRecords.List())%></li>
+                    <%--<li><%= Html.NavImageLink("Programs", Links.Content.@internal.icons.book_png, MVC.Programs.Manage())%></li>
+                    <li><%= Html.NavImageLink("Website", Links.Content.@internal.icons.world_png, "#")%></li>--%>
+                </ul>
+            </div>
+            
             <div class="content">
                 <asp:ContentPlaceHolder ID="MainContent" runat="server" />
             </div>

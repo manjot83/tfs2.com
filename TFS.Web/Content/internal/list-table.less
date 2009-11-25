@@ -1,0 +1,60 @@
+﻿.list-table {
+	margin-bottom: 5px;
+	width: 100%;
+	background: #FFFDE5;
+	border-collapse: collapse;
+	border: 2px solid #d3d9ce;
+	
+	thead {
+		text-align: left;
+		
+		tr:hover {
+			background: #FFFDE5;
+		}
+		
+		th {
+			text-align: left;
+			color: #963;
+		}
+		
+		a.sorted-up {
+			background: url(icons/sort_up.gif) right no-repeat;
+			padding-right: 10px;
+		}
+		
+		a.sorted-down {
+			background: url(icons/sort_down.gif) right no-repeat;
+			padding-right: 10px;
+		}
+	}
+			
+	tr {
+		
+		:hover {
+			background-color: #e2fce2;
+		}
+	}
+	
+	td, th {
+		border-bottom: 2px solid #d3d9ce;
+		border-left: 0px solid #d3d9ce;
+		border-right: 0px solid #d3d9ce;
+		padding: 3px;
+		border-collapse: collapse;
+	}
+}
+
+.list-table-pager {
+	padding-bottom: 5px;
+	font-size: 1em;
+	text-align: right;	
+	
+	span {
+		display:inline-block;
+	}
+	
+	select {
+		margin-top: 12px;
+		font-size: 1em;
+	}
+}

@@ -4,7 +4,7 @@
     <p>
         <%= Html.ActionLink("Back to user list...", MVC.Users.List()) %>
     </p>
-    <h1>Edit a user - <%= Html.Encode(Model.Username) %></h1>
+    <div class="header-main">Edit a user - <%= Html.Encode(Model.Username) %></div>
     <% using (Html.BeginForm(MVC.Users.Edit(), FormMethod.Post, new { @class = "standard-form" })) { %>
         <%= Html.Hidden("username", Model.Username) %>
         <h3 class="section-header underlined">User Information</h3>

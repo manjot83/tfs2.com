@@ -4,7 +4,7 @@
     <p>
         <%= Html.ActionLink("Back to user list...", MVC.Users.List()) %>
     </p>
-    <h1>Create a new user</h1>
+    <div class="header-main">Create a new user</div>
     <% using (Html.BeginForm(MVC.Users.Create(), FormMethod.Post, new { @class = "standard-form" })) { %>
         <% Html.RenderPartial(MVC.Users.Views.UserInformation); %>
         <div class="field-group">
