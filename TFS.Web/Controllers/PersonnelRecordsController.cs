@@ -41,7 +41,7 @@ namespace TFS.Web.Controllers
                 ItemsPerPage = itemsPerPage.HasValue ? itemsPerPage.Value : SortedListViewModel<PersonnelRecordListViewModel>.DefaultItemsPerPage,
             };
 
-            IEnumerable<User> users = userManager.UserRepository.GetAllActiveUsers();
+            IEnumerable<User> users = userManager.UserRepository.GetAllActiveUsers().ToList();
             var items = Mapper.Map<IEnumerable<User>, IEnumerable<PersonnelRecordListViewModel>>(users);
             if (viewModel.IsCurrentSortType("name") && viewModel.SortDirection == SortDirection.Ascending)
                 items = items.OrderBy(x => x.FileByName);
