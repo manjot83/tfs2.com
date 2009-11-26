@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.SortedListViewModel<TFS.Models.FlightLogs.FlightLog>>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<SortedListViewModel<TFS.Web.ViewModels.FlightLogs.FlightLogListItemViewModel>>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div class="header-main">Flight Time Summaries</div>
@@ -37,7 +37,7 @@
         <% foreach (var log in Model.Items) { %>
         <tr>
             <td>
-                <%= Html.ActionLink(log.LogDate.ToShortDateString(), MVC.FlightLogs.EditFlightLog(log.Id.Value)) %>
+                <%= Html.ActionLink(log.LogDate.ToShortDateString(), MVC.FlightLogs.EditFlightLog(log.Id)) %>
             </td>
             <td>
                 <%= Html.Encode(log.AircraftMDS + " : " + log.AircraftSerialNumber) %>
@@ -46,7 +46,7 @@
                 <%= Html.Encode(log.Location) %>
             </td>
             <td>
-                <%= Html.ActionLink("PDF", MVC.FlightLogs.DownloadPDF(log.Id.Value)) %>
+                <%= Html.ActionLink("PDF", MVC.FlightLogs.DownloadPDF(log.Id)) %>
             </td>
         </tr>
         <% } %>

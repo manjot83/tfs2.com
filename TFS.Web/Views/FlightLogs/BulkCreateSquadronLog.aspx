@@ -1,8 +1,8 @@
-<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.SquadronLogListViewModel>" %>
+<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.FlightLogs.SquadronLogListViewModel>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <p>
-        <%= Html.ActionLink("Back to flight log summary ...", MVC.FlightLogs.EditFlightLog(Model.FlightLog.Id.Value)) %>
+        <%= Html.ActionLink("Back to flight log summary ...", MVC.FlightLogs.EditFlightLog(Model.FlightLog.Id)) %>
     </p>
     <div class="header-sub">Current flight log info:</div>
     <p>
@@ -25,9 +25,9 @@
         </thead>
         <% foreach (var squadronLog in Model.Items) { %>
         <tr>
-            <td><%= Html.ActionLink(squadronLog.Person.FileByName(), MVC.FlightLogs.EditSquadronLog(squadronLog.Id.Value))%></td>
+            <td><%= Html.ActionLink(squadronLog.PersonFileByName, MVC.FlightLogs.EditSquadronLog(squadronLog.Id.Value))%></td>
             <td><%= Html.Encode(squadronLog.DutyCode) %></td>
-            <td><%= Html.Encode(squadronLog.CalculateTotalHours().ToString("F2")) %> hrs</td>
+            <td><%= Html.Encode(squadronLog.TotalHours.ToString("F2")) %> hrs</td>
         </tr>
         <% } %>
     </table>
@@ -36,7 +36,7 @@
     <% } %>
     <fieldset class="standard-form">
         <legend>Squadron Member</legend>
-        <% using (Html.BeginForm(MVC.FlightLogs.BulkCreateSquadronLog(Model.FlightLog.Id.Value), FormMethod.Post, new { @class = "fieldset-content" })) { %>
+        <% using (Html.BeginForm(MVC.FlightLogs.BulkCreateSquadronLog(Model.FlightLog.Id), FormMethod.Post, new { @class = "fieldset-content" })) { %>
             <% Html.RenderPartial(MVC.FlightLogs.Views.SquadronLogForm, Model.CurrentSquadronLog); %>
             <div class="button-group">
                 <input type="submit" value="Add new flight log squadron member" />

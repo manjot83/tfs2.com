@@ -145,6 +145,7 @@ namespace TFS.Web.Controllers
                 return RedirectToAction(MVC.PersonnelRecords.EditRecord(username));
         }
 
+        [NonAction]
         private PersonnelRecordViewModel GeneratePersonnelRecordViewModel(Person person, bool editingMyRecord)
         {
             var viewModel = new PersonnelRecordViewModel();

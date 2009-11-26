@@ -15,16 +15,9 @@ namespace TFS.Models.FlightLogs
 
         public IFlightLogRepository FlightLogRepository { get; private set; }
 
-        public FlightLog CreateNewFlightLog(DateTime logDate, string aircraftMDS, string aircraftSerialNumber, string location)
+        public FlightLog AddFlightLog(FlightLog flightLog)
         {
-            var flightLog = new FlightLog
-            {
-                AircraftMDS = aircraftMDS,
-                AircraftSerialNumber = aircraftSerialNumber,
-                Location = location,
-                LogDate = logDate,
-                LastModifiedDate = DateTime.UtcNow,
-            };
+            flightLog.MarkedUpdated();
             return FlightLogRepository.AddFlightLog(flightLog);
         }
     }

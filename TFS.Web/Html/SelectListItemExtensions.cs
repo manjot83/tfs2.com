@@ -20,6 +20,17 @@ namespace TFS.Web.Html
             });
         }
 
+        public static IEnumerable<SelectListItem> GenerateSelectListItems<TModel>(this IEnumerable<TModel> items, string id)
+            where TModel : IKeyedModel
+        {
+            return items.Select(x => new SelectListItem
+            {
+                Text = x.DisplayText,
+                Value = x.Id,
+                Selected = x.Id == id,
+            });
+        }
+
         public static IEnumerable<SelectListItem> GenerateSelectListItems(this Enum enumeration)
         {
             var selectedValue = enumeration.ToString();

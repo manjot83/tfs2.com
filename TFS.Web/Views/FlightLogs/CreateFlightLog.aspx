@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.FlightLogViewModel>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.FlightLogs.FlightLogViewModel>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <p>
@@ -10,9 +10,9 @@
         <% using (Html.BeginForm(MVC.FlightLogs.CreateFlightLog(), FormMethod.Post, new { @class = "fieldset-content" })) { %>
             <div class="field-group">
                 <div class="field">
-                    <label for="FlightLogDate">Date (mm/dd/yyyy)</label>
-                    <%= Html.TextBox("FlightLogDate", Model.FlightLogDate.ToShortDateOrEmptyString(), new { size = "15", maxlength = "10" })%>
-                    <%= Html.ValidationMessage("FlightLogDate")%>
+                    <label for="LogDate">Date (mm/dd/yyyy)</label>
+                    <%= Html.TextBox("LogDate", Model.LogDate.ToShortDateOrEmptyString(), new { size = "15", maxlength = "10" })%>
+                    <%= Html.ValidationMessage("LogDate")%>
                 </div>
             </div>
             <div class="field-group">

@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.FlightLogViewModel>" %>
+<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.FlightLogs.FlightLogViewModel>" %>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <p>
@@ -10,12 +10,12 @@
     <fieldset class="standard-form">
         <legend>Flight Log Header</legend>
         <% using (Html.BeginForm(MVC.FlightLogs.EditFlightLog(), FormMethod.Post, new { @class = "fieldset-content" })) { %>
-            <%= Html.Hidden("id", Model.FlightLogId)%>
+            <%= Html.Hidden("id", Model.Id.Value)%>
             <div class="field-group">
                 <div class="field">
-                    <label for="FlightLogDate">Date (mm/dd/yyyy)</label>
-                    <%= Html.TextBox("FlightLogDate", Model.FlightLogDate.ToShortDateOrEmptyString(), new { size = "15", maxlength = "10" })%>
-                    <%= Html.ValidationMessage("FlightLogDate")%>
+                    <label for="LogDate">Date (mm/dd/yyyy)</label>
+                    <%= Html.TextBox("LogDate", Model.LogDate.ToShortDateOrEmptyString(), new { size = "15", maxlength = "10" })%>
+                    <%= Html.ValidationMessage("LogDate")%>
                 </div>
             </div>
             <div class="field-group">
@@ -40,7 +40,7 @@
             <div class="button-group">
                 <input type="submit" value="Save changes" />
                 <input type="reset" value="Reset" />
-                <% if (Model.SavedFlightLog) { %>
+                <% if (Model.PreviouslySaved) { %>
                 <span class="saved-changes">Saved Changes</span>
                 <% } %>
             </div>
@@ -70,7 +70,7 @@
             <td><%= Html.Encode(mission.ToICAO) %></td>
             <td><%= Html.Encode(mission.TakeOffTime) %></td>
             <td><%= Html.Encode(mission.LandingTime) %></td>
-            <td><%= Html.Encode(mission.ComputeFlightTime().TotalHours.ToString("F2")) %> hrs</td>
+            <td><%= Html.Encode(mission.TotalFlightTime.ToString("F2")) %> hrs</td>
         </tr>
         <% } %>
     </table>
@@ -78,7 +78,7 @@
     <p><b>No missions entered.</b></p>
     <% } %>
     <% using(Html.BeginForm(MVC.FlightLogs.CreateMission(), FormMethod.Get)) { %>
-        <%= Html.Hidden("FlightLogId", Model.FlightLogId)%>
+        <%= Html.Hidden("FlightLogId", Model.Id.Value)%>
         <p>
             <input type="submit" value="Add a mission" />
         </p>
@@ -99,9 +99,9 @@
         </thead>
         <% foreach(var squadronLog in Model.SquadronLogs) { %>
         <tr>
-            <td><%= Html.ActionLink(squadronLog.Person.FileByName(), MVC.FlightLogs.EditSquadronLog(squadronLog.Id.Value))%></td>
+            <td><%= Html.ActionLink(squadronLog.PersonFileByName, MVC.FlightLogs.EditSquadronLog(squadronLog.Id.Value))%></td>
             <td><%= Html.Encode(squadronLog.DutyCode) %></td>
-            <td><%= Html.Encode(squadronLog.CalculateTotalHours().ToString("F2")) %> hrs</td>
+            <td><%= Html.Encode(squadronLog.TotalHours.ToString("F2"))%> hrs</td>
         </tr>
         <% } %>
     </table>
@@ -109,13 +109,13 @@
     <p><b>No squadron members entered.</b></p>
     <% } %>    
     <% using(Html.BeginForm(MVC.FlightLogs.CreateSquadronLog(), FormMethod.Get)) { %>
-        <%= Html.Hidden("FlightLogId", Model.FlightLogId)%>
+        <%= Html.Hidden("FlightLogId", Model.Id.Value)%>
         <p>
             <input type="submit" value="Add a squadron member" />
         </p>
     <% } %>
     <% using(Html.BeginForm(MVC.FlightLogs.BulkCreateSquadronLog(), FormMethod.Get)) { %>
-        <%= Html.Hidden("FlightLogId", Model.FlightLogId)%>
+        <%= Html.Hidden("FlightLogId", Model.Id.Value)%>
         <p>
             <input type="submit" value="Add several squadron members" />
         </p>
@@ -123,6 +123,6 @@
         
     <div class="header-sub">Reports</div>            
     <p>
-        Click to download as a <%= Html.ActionLink("PDF", MVC.FlightLogs.DownloadPDF(Model.FlightLogId))%>
+        Click to download as a <%= Html.ActionLink("PDF", MVC.FlightLogs.DownloadPDF(Model.Id.Value))%>
     </p>
 </asp:Content>

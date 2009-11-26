@@ -152,9 +152,11 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationVersion.cs" />
-    <Compile Include="ViewModels\FlightLogViewModel.cs" />
+    <Compile Include="ViewModels\FlightLogs\FlightLogListItemViewModel.cs" />
+    <Compile Include="ViewModels\FlightLogs\FlightLogViewModel.cs" />
+    <Compile Include="ViewModels\FlightLogs\MissionViewModel.cs" />
+    <Compile Include="ViewModels\FlightLogs\SquadronLogViewModel.cs" />
     <Compile Include="ViewModels\ManageProgramsViewModel.cs" />
-    <Compile Include="ViewModels\MissionViewModel.cs" />
     <Compile Include="ViewModels\PersonnelRecords\PersonnelRecordListViewModel.cs" />
     <Compile Include="ViewModels\PersonnelRecords\CompanyInfo.cs" />
     <Compile Include="ViewModels\PersonnelRecords\ContactInfo.cs" />
@@ -162,8 +164,7 @@
     <Compile Include="ViewModels\PersonnelRecords\QualificationViewModel.cs" />
     <Compile Include="ViewModels\PersonnelRecords\PersonnelRecordViewModel.cs" />
     <Compile Include="ViewModels\SortedListViewModel.cs" />
-    <Compile Include="ViewModels\SquadronLogListViewModel.cs" />
-    <Compile Include="ViewModels\SquadronLogViewModel.cs" />
+    <Compile Include="ViewModels\FlightLogs\SquadronLogListViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelExtensions.cs" />
   </ItemGroup>

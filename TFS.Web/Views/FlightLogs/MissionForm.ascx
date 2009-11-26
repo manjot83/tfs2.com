@@ -1,64 +1,64 @@
-<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<TFS.Web.ViewModels.MissionViewModel>" %>
+<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<TFS.Web.ViewModels.FlightLogs.MissionViewModel>" %>
 <%= Html.Hidden("FlightLogId", Model.FlightLogId)%>
 <div class="field-group">
     <div class="field">
-        <label for="mission_Name">Mission No.</label>
-        <%= Html.TextBox("mission.Name", Model.Mission.Name, new { size = "40", maxlength = "50" })%>
-        <%= Html.ValidationMessage("mission.Name")%>
+        <label for="Name">Mission No.</label>
+        <%= Html.TextBox("Name", Model.Name, new { size = "40", maxlength = "50" })%>
+        <%= Html.ValidationMessage("Name")%>
     </div>
 </div>
 <div class="field-group">
     <div class="field">
-        <label for="mission_FromICAO">From (ICAO)</label>
-        <%= Html.TextBox("mission.FromICAO", Model.Mission.FromICAO, new { size = "10", maxlength = "4" })%>
-        <%= Html.ValidationMessage("mission.FromICAO")%>
+        <label for="FromICAO">From (ICAO)</label>
+        <%= Html.TextBox("FromICAO", Model.FromICAO, new { size = "10", maxlength = "4" })%>
+        <%= Html.ValidationMessage("FromICAO")%>
     </div>
     <div class="field">
-        <label for="mission_ToICAO">To (ICAO)</label>
-        <%= Html.TextBox("mission.ToICAO", Model.Mission.ToICAO, new { size = "10", maxlength = "4" })%>
-        <%= Html.ValidationMessage("mission.ToICAO")%>
-    </div>
-</div>
-<div class="field-group">
-    <div class="field">
-        <label for="mission_TakeOffTime">Take Off Time</label>
-        <%= Html.TextBox("mission.TakeOffTime", Model.Mission.TakeOffTime, new { size = "10", maxlength = "4" })%>
-        <%= Html.ValidationMessage("mission.TakeOffTime")%>
-    </div>
-    <div class="field">
-        <label for="mission_LandingTime">Land Time</label>
-        <%= Html.TextBox("mission.LandingTime", Model.Mission.LandingTime, new { size = "10", maxlength = "4" })%>
-        <%= Html.ValidationMessage("mission.LandingTime")%>
+        <label for="ToICAO">To (ICAO)</label>
+        <%= Html.TextBox("ToICAO", Model.ToICAO, new { size = "10", maxlength = "4" })%>
+        <%= Html.ValidationMessage("ToICAO")%>
     </div>
 </div>
 <div class="field-group">
     <div class="field">
-        <label for="mission_TouchAndGos">Touch/Go</label>
-        <%= Html.TextBox("mission.TouchAndGos", Model.Mission.TouchAndGos, new { size = "10", maxlength = "2" })%>
-        <%= Html.ValidationMessage("mission.TouchAndGos")%>
+        <label for="TakeOffTime">Take Off Time</label>
+        <%= Html.TextBox("TakeOffTime", Model.TakeOffTime, new { size = "10", maxlength = "4" })%>
+        <%= Html.ValidationMessage("TakeOffTime")%>
     </div>
     <div class="field">
-        <label for="mission_FullStops">Full Stop</label>
-        <%= Html.TextBox("mission.FullStops", Model.Mission.FullStops, new { size = "10", maxlength = "2" })%>
-        <%= Html.ValidationMessage("mission.FullStops")%>
-    </div>
-</div>
-<div class="field-group">
-    <div class="field">
-        <label for="mission_Sorties">Sorties</label>
-        <%= Html.TextBox("mission.Sorties", Model.Mission.Sorties, new { size = "10", maxlength = "2" })%>
-        <%= Html.ValidationMessage("mission.Sorties")%>
-    </div>
-    <div class="field">
-        <label for="mission_Totals">Total</label>
-        <%= Html.TextBox("mission.Totals", Model.Mission.Totals, new { size = "10", maxlength = "2" })%>
-        <%= Html.ValidationMessage("mission.Totals")%>
+        <label for="LandingTime">Land Time</label>
+        <%= Html.TextBox("LandingTime", Model.LandingTime, new { size = "10", maxlength = "4" })%>
+        <%= Html.ValidationMessage("LandingTime")%>
     </div>
 </div>
 <div class="field-group">
     <div class="field">
-        <label for="mission_AdditionalInfo">Special Use</label>
-        <%= Html.TextBox("mission.AdditionalInfo", Model.Mission.AdditionalInfo, new { size = "60", maxlength = "100" })%>
-        <%= Html.ValidationMessage("mission.AdditionalInfo")%>
+        <label for="TouchAndGos">Touch/Go</label>
+        <%= Html.TextBox("TouchAndGos", Model.TouchAndGos, new { size = "10", maxlength = "2" })%>
+        <%= Html.ValidationMessage("TouchAndGos")%>
+    </div>
+    <div class="field">
+        <label for="FullStops">Full Stop</label>
+        <%= Html.TextBox("FullStops", Model.FullStops, new { size = "10", maxlength = "2" })%>
+        <%= Html.ValidationMessage("FullStops")%>
+    </div>
+</div>
+<div class="field-group">
+    <div class="field">
+        <label for="Sorties">Sorties</label>
+        <%= Html.TextBox("Sorties", Model.Sorties, new { size = "10", maxlength = "2" })%>
+        <%= Html.ValidationMessage("Sorties")%>
+    </div>
+    <div class="field">
+        <label for="Totals">Total</label>
+        <%= Html.TextBox("Totals", Model.Totals, new { size = "10", maxlength = "2" })%>
+        <%= Html.ValidationMessage("Totals")%>
+    </div>
+</div>
+<div class="field-group">
+    <div class="field">
+        <label for="AdditionalInfo">Special Use</label>
+        <%= Html.TextBox("AdditionalInfo", Model.AdditionalInfo, new { size = "60", maxlength = "100" })%>
+        <%= Html.ValidationMessage("AdditionalInfo")%>
     </div>
 </div>

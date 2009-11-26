@@ -188,7 +188,7 @@ namespace Links {
             private const string URLPATH = "~/Content/internal";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string base_css = Url("base.css");
+            public static readonly string forms_less = Url("forms.less");
             [CompilerGenerated]
             public static class @icons {
                 private const string URLPATH = "~/Content/internal/icons";
@@ -212,11 +212,10 @@ namespace Links {
             }
         
             public static readonly string layout_less = Url("layout.less");
-            public static readonly string list_table_css = Url("list-table.css");
+            public static readonly string list_table_less = Url("list-table.less");
+            public static readonly string paragraph_less = Url("paragraph.less");
             public static readonly string reset_css = Url("reset.css");
-            public static readonly string standard_form_css = Url("standard-form.css");
             public static readonly string style_less = Url("style.less");
-            public static readonly string tags_css = Url("tags.css");
             [CompilerGenerated]
             public static class @template {
                 private const string URLPATH = "~/Content/internal/template";
@@ -505,7 +504,7 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult EditFlightLog(int id, TFS.Web.ViewModels.FlightLogViewModel flightLogViewModel) {
+        public override System.Web.Mvc.ActionResult EditFlightLog(int id, TFS.Web.ViewModels.FlightLogs.FlightLogViewModel flightLogViewModel) {
             var callInfo = new T4MVC_ActionResult("FlightLogs", Actions.EditFlightLog);
             callInfo.RouteValues.Add("id", id);
             callInfo.RouteValues.Add("flightLogViewModel", flightLogViewModel);
@@ -517,9 +516,9 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CreateFlightLog(TFS.Web.ViewModels.FlightLogViewModel flightLog) {
+        public override System.Web.Mvc.ActionResult CreateFlightLog(TFS.Web.ViewModels.FlightLogs.FlightLogViewModel flightLogViewModel) {
             var callInfo = new T4MVC_ActionResult("FlightLogs", Actions.CreateFlightLog);
-            callInfo.RouteValues.Add("flightLog", flightLog);
+            callInfo.RouteValues.Add("flightLogViewModel", flightLogViewModel);
             return callInfo;
         }
 
@@ -529,7 +528,7 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult EditMission(int id, TFS.Web.ViewModels.MissionViewModel missionViewModel) {
+        public override System.Web.Mvc.ActionResult EditMission(int id, TFS.Web.ViewModels.FlightLogs.MissionViewModel missionViewModel) {
             var callInfo = new T4MVC_ActionResult("FlightLogs", Actions.EditMission);
             callInfo.RouteValues.Add("id", id);
             callInfo.RouteValues.Add("missionViewModel", missionViewModel);
@@ -542,7 +541,7 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CreateMission(TFS.Web.ViewModels.MissionViewModel missionViewModel) {
+        public override System.Web.Mvc.ActionResult CreateMission(TFS.Web.ViewModels.FlightLogs.MissionViewModel missionViewModel) {
             var callInfo = new T4MVC_ActionResult("FlightLogs", Actions.CreateMission);
             callInfo.RouteValues.Add("missionViewModel", missionViewModel);
             return callInfo;
@@ -554,7 +553,7 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult EditSquadronLog(int id, TFS.Web.ViewModels.SquadronLogViewModel squadronLogViewModel) {
+        public override System.Web.Mvc.ActionResult EditSquadronLog(int id, TFS.Web.ViewModels.FlightLogs.SquadronLogViewModel squadronLogViewModel) {
             var callInfo = new T4MVC_ActionResult("FlightLogs", Actions.EditSquadronLog);
             callInfo.RouteValues.Add("id", id);
             callInfo.RouteValues.Add("squadronLogViewModel", squadronLogViewModel);
@@ -567,7 +566,7 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult CreateSquadronLog(TFS.Web.ViewModels.SquadronLogViewModel squadronLogViewModel) {
+        public override System.Web.Mvc.ActionResult CreateSquadronLog(TFS.Web.ViewModels.FlightLogs.SquadronLogViewModel squadronLogViewModel) {
             var callInfo = new T4MVC_ActionResult("FlightLogs", Actions.CreateSquadronLog);
             callInfo.RouteValues.Add("squadronLogViewModel", squadronLogViewModel);
             return callInfo;
@@ -579,7 +578,7 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult BulkCreateSquadronLog(TFS.Web.ViewModels.SquadronLogViewModel squadronLogViewModel) {
+        public override System.Web.Mvc.ActionResult BulkCreateSquadronLog(TFS.Web.ViewModels.FlightLogs.SquadronLogViewModel squadronLogViewModel) {
             var callInfo = new T4MVC_ActionResult("FlightLogs", Actions.BulkCreateSquadronLog);
             callInfo.RouteValues.Add("squadronLogViewModel", squadronLogViewModel);
             return callInfo;
