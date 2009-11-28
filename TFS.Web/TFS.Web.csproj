@@ -257,6 +257,8 @@
     <Content Include="Views\FlightLogs\CreateFlightLog.aspx" />
     <Content Include="Views\FlightLogs\MissionForm.ascx" />
     <Content Include="Views\FlightLogs\SquadronLogForm.ascx" />
+    <Content Include="Views\FlightPrograms\EditPosition.aspx" />
+    <Content Include="Views\FlightPrograms\CreatePosition.aspx" />
     <Content Include="Views\FlightPrograms\Manage.aspx" />
     <Content Include="Views\PersonnelRecords\EditRecord.aspx" />
     <Content Include="Views\PersonnelRecords\List.aspx" />
@@ -279,6 +281,7 @@
     <Content Include="Views\Users\Create.aspx" />
     <Content Include="Views\Users\Edit.aspx" />
     <Content Include="Views\Users\List.aspx" />
+    <Content Include="Views\FlightPrograms\PositionTitle.ascx" />
     <Content Include="Views\Users\UserInformation.ascx" />
   </ItemGroup>
   <ItemGroup>

@@ -7,6 +7,7 @@ using System.Web.Mvc.Ajax;
 using TFS.Web.ActionFilters;
 using TFS.Models.FlightPrograms;
 using TFS.Web.ViewModels.FlightPrograms;
+using TFS.Web.ViewModels;
 using AutoMapper;
 
 namespace TFS.Web.Controllers
@@ -14,11 +15,11 @@ namespace TFS.Web.Controllers
     [DomainAuthorize]
     public partial class FlightProgramsController : Controller
     {
-        private readonly FlightProgramsManager programsManager;
+        private readonly FlightProgramsManager flightProgramsManager;
 
-        public FlightProgramsController(FlightProgramsManager programsManager)
+        public FlightProgramsController(FlightProgramsManager flightProgramsManager)
         {
-            this.programsManager = programsManager;
+            this.flightProgramsManager = flightProgramsManager;
         }
 
         [RequireTransaction]
@@ -36,10 +37,10 @@ namespace TFS.Web.Controllers
             };
             IEnumerable<FlightProgram> programs = null;
             if (viewModel.ShowAllActivePrograms)
-                programs = programsManager.ProgramsRepository.GetAllActivePrograms();
+                programs = flightProgramsManager.ProgramsRepository.GetAllActivePrograms();
             else
-                programs = programsManager.ProgramsRepository.GetAllPrograms();
-            var positions = programsManager.ProgramsRepository.GetAllPositions();                        
+                programs = flightProgramsManager.ProgramsRepository.GetAllPrograms();
+            var positions = flightProgramsManager.ProgramsRepository.GetAllPositions();                        
             viewModel.Positions = Mapper.Map<IEnumerable<Position>, IEnumerable<PositionViewModel>>(positions);
             viewModel.FlightPrograms = Mapper.Map<IEnumerable<FlightProgram>, IEnumerable<FlightProgramListItemViewModel>>(programs);
             return View(viewModel);
@@ -61,14 +62,42 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult CreatePosition()
         {
-            throw new NotImplementedException();
+            return View(Views.CreatePosition, new PositionViewModel());
+        }
+
+        [RequireTransaction]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual ActionResult CreatePosition(PositionViewModel positionViewModel)
+        {
+            positionViewModel.Validate(ModelState, string.Empty);
+            if (!ModelState.IsValid)
+                return View(Views.CreatePosition, positionViewModel);
+            flightProgramsManager.CreateNewPosition(positionViewModel.Title);
+            return RedirectToAction(MVC.FlightPrograms.Manage());
         }
 
         [RequireTransaction]
         [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult RenamePosition(int id)
         {
-            throw new NotImplementedException();
+            var position = flightProgramsManager.ProgramsRepository.GetPositionById(id);
+            var viewModel = Mapper.Map<Position, PositionViewModel>(position);
+            return View(Views.EditPosition, viewModel);
+        }
+
+        [RequireTransaction]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual ActionResult RenamePosition(int id, PositionViewModel positionViewModel)
+        {
+            var position = flightProgramsManager.ProgramsRepository.GetPositionById(id);
+            positionViewModel.Validate(ModelState, string.Empty);
+            if (!ModelState.IsValid)
+            {
+                var viewModel = Mapper.Map<Position, PositionViewModel>(position);
+                return View(Views.EditPosition, viewModel);
+            }
+            Mapper.Map<PositionViewModel, Position>(positionViewModel, position);
+            return RedirectToAction(MVC.FlightPrograms.Manage());
         }
     }
 }

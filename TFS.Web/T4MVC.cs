@@ -25,7 +25,6 @@ public static class MVC {
     public static TFS.Web.Controllers.FlightProgramsController FlightPrograms = new T4MVC_FlightProgramsController();
     public static TFS.Web.Controllers.ImagesController Images = new T4MVC_ImagesController();
     public static TFS.Web.Controllers.PersonnelRecordsController PersonnelRecords = new T4MVC_PersonnelRecordsController();
-    public static TFS.Web.Controllers.ProgramsController Programs = new T4MVC_ProgramsController();
     public static TFS.Web.Controllers.SecurityController Security = new T4MVC_SecurityController();
     public static TFS.Web.Controllers.SiteController Site = new T4MVC_SiteController();
     public static TFS.Web.Controllers.UsersController Users = new T4MVC_UsersController();
@@ -643,7 +642,10 @@ namespace TFS.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [CompilerGenerated]
         public class ViewNames {
+            public readonly string CreatePosition = "CreatePosition";
+            public readonly string EditPosition = "EditPosition";
             public readonly string Manage = "Manage";
+            public readonly string PositionTitle = "PositionTitle";
         }
     }
 }
@@ -872,65 +874,6 @@ namespace T4MVC {
 
         public override System.Web.Mvc.FileContentResult DownloadAllAsCsv() {
             var callInfo = new T4MVC_FileContentResult("PersonnelRecords", Actions.DownloadAllAsCsv);
-            return callInfo;
-        }
-
-    }
-}
-
-namespace TFS.Web.Controllers {
-    public partial class ProgramsController {
-
-        [CompilerGenerated]
-        protected ProgramsController(Dummy d) { }
-
-        protected RedirectToRouteResult RedirectToAction(ActionResult result) {
-            var callInfo = (IT4MVCActionResult)result;
-            return RedirectToRoute(callInfo.RouteValues);
-        }
-
-        [NonAction]
-        public System.Web.Mvc.RedirectToRouteResult AddNewPosition() {
-            return new T4MVC_RedirectToRouteResult(Name, Actions.AddNewPosition);
-        }
-
-
-        [CompilerGenerated]
-        public readonly string Name = "Programs";
-
-        static readonly ActionNames s_actions = new ActionNames();
-        [CompilerGenerated]
-        public ActionNames Actions { get { return s_actions; } }
-        [CompilerGenerated]
-        public class ActionNames {
-            public readonly string Manage = "Manage";
-            public readonly string AddNewPosition = "AddNewPosition";
-        }
-
-
-        static readonly ViewNames s_views = new ViewNames();
-        [CompilerGenerated]
-        public ViewNames Views { get { return s_views; } }
-        [CompilerGenerated]
-        public class ViewNames {
-            public readonly string Manage = "Manage";
-        }
-    }
-}
-
-namespace T4MVC {
-    [CompilerGenerated]
-    public class T4MVC_ProgramsController: TFS.Web.Controllers.ProgramsController {
-        public T4MVC_ProgramsController() : base(Dummy.Instance) { }
-
-        public override System.Web.Mvc.ViewResult Manage() {
-            var callInfo = new T4MVC_ViewResult("Programs", Actions.Manage);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.RedirectToRouteResult AddNewPosition(string title) {
-            var callInfo = new T4MVC_RedirectToRouteResult("Programs", Actions.AddNewPosition);
-            callInfo.RouteValues.Add("title", title);
             return callInfo;
         }
 
