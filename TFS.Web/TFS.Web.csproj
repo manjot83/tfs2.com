@@ -120,9 +120,9 @@
     <Compile Include="ConfigurationHelper.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\FlightLogsController.cs" />
+    <Compile Include="Controllers\FlightProgramsController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\PersonnelRecordsController.cs" />
-    <Compile Include="Controllers\ProgramsController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -156,6 +156,11 @@
     <Compile Include="ViewModels\FlightLogs\FlightLogViewModel.cs" />
     <Compile Include="ViewModels\FlightLogs\MissionViewModel.cs" />
     <Compile Include="ViewModels\FlightLogs\SquadronLogViewModel.cs" />
+    <Compile Include="ViewModels\FlightPrograms\DashboardViewModel.cs" />
+    <Compile Include="ViewModels\FlightPrograms\FlightProgramListItemViewModel.cs" />
+    <Compile Include="ViewModels\FlightPrograms\FlightProgramViewModel.cs" />
+    <Compile Include="ViewModels\FlightPrograms\PositionViewModel.cs" />
+    <Compile Include="ViewModels\FlightPrograms\ProgramLocationViewModel.cs" />
     <Compile Include="ViewModels\ManageProgramsViewModel.cs" />
     <Compile Include="ViewModels\PersonnelRecords\PersonnelRecordListViewModel.cs" />
     <Compile Include="ViewModels\PersonnelRecords\CompanyInfo.cs" />
@@ -252,9 +257,9 @@
     <Content Include="Views\FlightLogs\CreateFlightLog.aspx" />
     <Content Include="Views\FlightLogs\MissionForm.ascx" />
     <Content Include="Views\FlightLogs\SquadronLogForm.ascx" />
+    <Content Include="Views\FlightPrograms\Manage.aspx" />
     <Content Include="Views\PersonnelRecords\EditRecord.aspx" />
     <Content Include="Views\PersonnelRecords\List.aspx" />
-    <Content Include="Views\Programs\Manage.aspx" />
     <Content Include="Views\Security\ChangePassword.aspx" />
     <Content Include="Views\Security\LogOn.aspx" />
     <Content Include="Config\AppSettings.config" />

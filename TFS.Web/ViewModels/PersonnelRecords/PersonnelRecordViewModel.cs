@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using TFS.Models.PersonnelRecords;
-using TFS.Models.Programs;
+using TFS.Models.FlightPrograms;
 using System.Web.Mvc;
 
 namespace TFS.Web.ViewModels.PersonnelRecords

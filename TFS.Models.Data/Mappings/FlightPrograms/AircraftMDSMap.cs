@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TFS.Models.Programs;
+using TFS.Models.FlightPrograms;
 using FluentNHibernate.Mapping;
 
-namespace TFS.Models.Data.Mappings.Programs
+namespace TFS.Models.Data.Mappings.FlightPrograms
 {
-    public class PositionMap : ClassMap<Position>
+    public class AircraftMDSMap : ClassMap<AircraftMDS>
     {
-        public PositionMap()
+        public AircraftMDSMap()
         {
-            Table("Positions");
+            Table("AircraftMDS");
 
             Id(x => x.Id)
                 .GeneratedBy.Identity()
                 .Not.Nullable();
 
-            Map(x => x.Title)
+            Map(x => x.Name)
                 .Length(50)
                 .Not.Nullable();
         }

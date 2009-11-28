@@ -1,5 +1,9 @@
 <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.UserViewModel>" %>
 
+<asp:Content ContentPlaceHolderID="TitleContent" runat="server">
+Edit a New User
+</asp:Content>
+
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <p>
         <%= Html.ActionLink("Back to user list...", MVC.Users.List()) %>

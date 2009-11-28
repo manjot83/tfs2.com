@@ -4,14 +4,18 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 
-namespace TFS.Models.Programs
+namespace TFS.Models.FlightPrograms
 {
-    public class AircraftMDS : BaseDomainEntity
+    public class ProgramLocation : BaseDomainObject
     {
         public virtual int? Id { get; private set; }
 
         [DomainEquality]
-        [Required, StringLength(50)]
+        [Required]
+        public virtual FlightProgram Program { get; set; }
+
+        [DomainEquality]
+        [Required, StringLength(100)]
         public virtual string Name { get; set; }
     }
 }

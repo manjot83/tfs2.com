@@ -1,4 +1,8 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.UserViewModel>" %>
+<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.UserViewModel>" %>
+
+<asp:Content ContentPlaceHolderID="TitleContent" runat="server">
+Create a New User
+</asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <p>

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using TFS.Models;
 using TFS.Models.Geography;
-using TFS.Models.Programs;
+using TFS.Models.FlightPrograms;
 using System.ComponentModel.DataAnnotations;
 using TFS.Models.Users;
 
 namespace TFS.Models.PersonnelRecords
 {
-    public class Person : BaseDomainEntity, IKeyedModel
+    public class Person : BaseDomainObject, IKeyedModel
     {
         public virtual int? Id { get; private set; }
 

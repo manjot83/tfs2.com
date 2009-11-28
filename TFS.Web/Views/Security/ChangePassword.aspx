@@ -1,4 +1,8 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Models.Users.User>" %>
+<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Models.Users.User>" %>
+
+<asp:Content ContentPlaceHolderID="TitleContent" runat="server">
+Change Password
+</asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div class="header-main">Change Password - <%= Html.Encode(Model.Username) %></div>

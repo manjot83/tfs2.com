@@ -6,7 +6,7 @@ using System.Web.UI.WebControls;
 using AutoMapper;
 using TFS.Models.Geography;
 using TFS.Models.PersonnelRecords;
-using TFS.Models.Programs;
+using TFS.Models.FlightPrograms;
 using TFS.Models.Reports;
 using TFS.Models.Users;
 using TFS.Web.ActionFilters;
@@ -19,9 +19,9 @@ namespace TFS.Web.Controllers
     public partial class PersonnelRecordsController : Controller
     {
         private readonly UserManager userManager;
-        private readonly IProgramsManager programsManager;
+        private readonly FlightProgramsManager programsManager;
 
-        public PersonnelRecordsController(UserManager userManager, IProgramsManager programsManager)
+        public PersonnelRecordsController(UserManager userManager, FlightProgramsManager programsManager)
         {
             this.userManager = userManager;
             this.programsManager = programsManager;
@@ -123,7 +123,7 @@ namespace TFS.Web.Controllers
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
             Mapper.Map<CompanyInfo, Person>(companyInfo, person);
-            person.HirePosition = programsManager.GetPositionById(companyInfo.HirePositionId.Value);
+            person.HirePosition = programsManager.ProgramsRepository.GetPositionById(companyInfo.HirePositionId.Value);
             if (editingMyRecord)
                 return RedirectToAction(MVC.PersonnelRecords.EditMyRecord());
             else
@@ -151,7 +151,7 @@ namespace TFS.Web.Controllers
             var viewModel = new PersonnelRecordViewModel();
             Mapper.Map<Person, PersonnelRecordViewModel>(person, viewModel);
             viewModel.EditingMyRecord = editingMyRecord;
-            viewModel.SetHirePositions(programsManager.GetAllPositions(), person.HirePosition);
+            viewModel.SetHirePositions(programsManager.ProgramsRepository.GetAllPositions(), person.HirePosition);
             return viewModel;
         }
 

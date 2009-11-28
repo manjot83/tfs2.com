@@ -1,7 +1,7 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
+<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
 
 <asp:Content ContentPlaceHolderID="TitleContent" runat="server">
-	Tactical Flight Services | Log On
+	Tactical Flight Services - Log On
 </asp:Content>
 
 <asp:Content  ContentPlaceHolderID="HeaderContent" runat="server">

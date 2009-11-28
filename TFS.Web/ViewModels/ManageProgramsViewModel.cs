@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using TFS.Models.Programs;
+using TFS.Models.FlightPrograms;
 
 namespace TFS.Web.ViewModels
 {

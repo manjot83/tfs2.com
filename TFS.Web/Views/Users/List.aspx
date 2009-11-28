@@ -1,5 +1,9 @@
 <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.SortedListViewModel<TFS.Web.ViewModels.UserViewModel>>" %>
 
+<asp:Content ContentPlaceHolderID="TitleContent" runat="server">
+Users
+</asp:Content>
+
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div class="header-main">Users</div>    
     <p>

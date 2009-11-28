@@ -9,7 +9,7 @@ using TFS.Models;
 
 namespace TFS.Web.ViewModels.PersonnelRecords
 {
-    public class ContactInfo : BaseValidatableEntity
+    public class ContactInfo : BaseValidatableObject
     {
         [Required]
         public virtual string AddressStreetAddress { get; set; }

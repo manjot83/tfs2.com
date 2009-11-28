@@ -7,7 +7,7 @@ using TFS.Models;
 namespace TFS.Models
 {
     [Serializable]
-    public abstract class BaseDomainEntity : BaseValidatableEntity
+    public abstract class BaseDomainObject : BaseValidatableObject
     {
         [ThreadStatic]
         private static Dictionary<Type, IEnumerable<PropertyInfo>> domainEqualityPropertiesDictionary;
@@ -15,7 +15,7 @@ namespace TFS.Models
 
         public override bool Equals(object obj)
         {
-            var compareTo = obj as BaseDomainEntity;
+            var compareTo = obj as BaseDomainObject;
 
             if (ReferenceEquals(this, compareTo))
                 return true;
@@ -25,7 +25,7 @@ namespace TFS.Models
                    HasSameDomainEqualityAs(compareTo);
         }
 
-        public static bool operator ==(BaseDomainEntity object1, BaseDomainEntity object2)
+        public static bool operator ==(BaseDomainObject object1, BaseDomainObject object2)
         {
             var object1Null = object.ReferenceEquals(object1, null);
             var object2Null = object.ReferenceEquals(object2, null);
@@ -36,7 +36,7 @@ namespace TFS.Models
             return object1.Equals(object2);
         }
 
-        public static bool operator !=(BaseDomainEntity object1, BaseDomainEntity object2)
+        public static bool operator !=(BaseDomainObject object1, BaseDomainObject object2)
         {
             return !(object1 == object2);
         }
@@ -60,7 +60,7 @@ namespace TFS.Models
             }
         }
 
-        public virtual bool HasSameDomainEqualityAs(BaseDomainEntity compareTo)
+        public virtual bool HasSameDomainEqualityAs(BaseDomainObject compareTo)
         {
             var domainEqualityProperties = GetDomainEqualityProperties();
 

@@ -8,7 +8,7 @@ using Iesi.Collections.Generic;
 
 namespace TFS.Models.PersonnelRecords
 {
-    public class Qualifications : BaseDomainEntity
+    public class Qualifications : BaseDomainObject
     {
         public Qualifications()
         {

@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TFS.Web.ViewModels.PersonnelRecords
 {
-    public class CompanyInfo : BaseValidatableEntity
+    public class CompanyInfo : BaseValidatableObject
     {
         [Required]
         public virtual ShirtSize ShirtSize{ get; set; }

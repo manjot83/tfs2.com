@@ -9,7 +9,7 @@ using TFS.Extensions;
 
 namespace TFS.Models.Users
 {
-    public class User : BaseDomainEntity, IKeyedModel
+    public class User : BaseDomainObject, IKeyedModel
     {
         public User()
         {

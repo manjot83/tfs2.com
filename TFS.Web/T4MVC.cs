@@ -22,6 +22,7 @@ using T4MVC;
 public static class MVC {
     public static TFS.Web.Controllers.DashboardController Dashboard = new T4MVC_DashboardController();
     public static TFS.Web.Controllers.FlightLogsController FlightLogs = new T4MVC_FlightLogsController();
+    public static TFS.Web.Controllers.FlightProgramsController FlightPrograms = new T4MVC_FlightProgramsController();
     public static TFS.Web.Controllers.ImagesController Images = new T4MVC_ImagesController();
     public static TFS.Web.Controllers.PersonnelRecordsController PersonnelRecords = new T4MVC_PersonnelRecordsController();
     public static TFS.Web.Controllers.ProgramsController Programs = new T4MVC_ProgramsController();
@@ -586,6 +587,101 @@ namespace T4MVC {
 
         public override System.Web.Mvc.FileContentResult DownloadPDF(int id) {
             var callInfo = new T4MVC_FileContentResult("FlightLogs", Actions.DownloadPDF);
+            callInfo.RouteValues.Add("id", id);
+            return callInfo;
+        }
+
+    }
+}
+
+namespace TFS.Web.Controllers {
+    public partial class FlightProgramsController {
+
+        [CompilerGenerated]
+        protected FlightProgramsController(Dummy d) { }
+
+        protected RedirectToRouteResult RedirectToAction(ActionResult result) {
+            var callInfo = (IT4MVCActionResult)result;
+            return RedirectToRoute(callInfo.RouteValues);
+        }
+
+        [NonAction]
+        public System.Web.Mvc.ViewResult Manage() {
+            return new T4MVC_ViewResult(Name, Actions.Manage);
+        }
+
+        [NonAction]
+        public System.Web.Mvc.ViewResult EditFlightProgram() {
+            return new T4MVC_ViewResult(Name, Actions.EditFlightProgram);
+        }
+
+        [NonAction]
+        public System.Web.Mvc.ViewResult RenamePosition() {
+            return new T4MVC_ViewResult(Name, Actions.RenamePosition);
+        }
+
+
+        [CompilerGenerated]
+        public readonly string Name = "FlightPrograms";
+
+        static readonly ActionNames s_actions = new ActionNames();
+        [CompilerGenerated]
+        public ActionNames Actions { get { return s_actions; } }
+        [CompilerGenerated]
+        public class ActionNames {
+            public readonly string Index = "Index";
+            public readonly string Manage = "Manage";
+            public readonly string CreateFlightProgram = "CreateFlightProgram";
+            public readonly string EditFlightProgram = "EditFlightProgram";
+            public readonly string CreatePosition = "CreatePosition";
+            public readonly string RenamePosition = "RenamePosition";
+        }
+
+
+        static readonly ViewNames s_views = new ViewNames();
+        [CompilerGenerated]
+        public ViewNames Views { get { return s_views; } }
+        [CompilerGenerated]
+        public class ViewNames {
+            public readonly string Manage = "Manage";
+        }
+    }
+}
+
+namespace T4MVC {
+    [CompilerGenerated]
+    public class T4MVC_FlightProgramsController: TFS.Web.Controllers.FlightProgramsController {
+        public T4MVC_FlightProgramsController() : base(Dummy.Instance) { }
+
+        public override System.Web.Mvc.ViewResult Index() {
+            var callInfo = new T4MVC_ViewResult("FlightPrograms", Actions.Index);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult Manage(bool? showAllActivePrograms) {
+            var callInfo = new T4MVC_ViewResult("FlightPrograms", Actions.Manage);
+            callInfo.RouteValues.Add("showAllActivePrograms", showAllActivePrograms);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult CreateFlightProgram() {
+            var callInfo = new T4MVC_ViewResult("FlightPrograms", Actions.CreateFlightProgram);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult EditFlightProgram(int id) {
+            var callInfo = new T4MVC_ViewResult("FlightPrograms", Actions.EditFlightProgram);
+            callInfo.RouteValues.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult CreatePosition() {
+            var callInfo = new T4MVC_ViewResult("FlightPrograms", Actions.CreatePosition);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult RenamePosition(int id) {
+            var callInfo = new T4MVC_ViewResult("FlightPrograms", Actions.RenamePosition);
             callInfo.RouteValues.Add("id", id);
             return callInfo;
         }

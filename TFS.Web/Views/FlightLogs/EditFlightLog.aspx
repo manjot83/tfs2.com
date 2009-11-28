@@ -1,4 +1,8 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.FlightLogs.FlightLogViewModel>" %>
+<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.FlightLogs.FlightLogViewModel>" %>
+
+<asp:Content ContentPlaceHolderID="TitleContent" runat="server">
+Edit Flight Log
+</asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <p>

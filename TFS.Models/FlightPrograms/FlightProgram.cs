@@ -5,9 +5,9 @@ using System.Text;
 using Iesi.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace TFS.Models.Programs
+namespace TFS.Models.FlightPrograms
 {
-    public class FlightProgram : BaseDomainEntity
+    public class FlightProgram : BaseDomainObject
     {
         public FlightProgram()
         {

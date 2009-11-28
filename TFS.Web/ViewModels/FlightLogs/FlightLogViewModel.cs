@@ -8,7 +8,7 @@ using TFS.Models;
 
 namespace TFS.Web.ViewModels.FlightLogs
 {
-    public class FlightLogViewModel : BaseValidatableEntity
+    public class FlightLogViewModel : BaseValidatableObject
     {
         public int? Id { get; set; }
         [Required]

@@ -1,5 +1,9 @@
 <%@ Page Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.FlightLogs.SquadronLogListViewModel>" %>
 
+<asp:Content ContentPlaceHolderID="TitleContent" runat="server">
+Add Squadron Logs
+</asp:Content>
+
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <p>
         <%= Html.ActionLink("Back to flight log summary ...", MVC.FlightLogs.EditFlightLog(Model.FlightLog.Id)) %>

@@ -9,6 +9,7 @@ using FluentNHibernate.Cfg;
 using TFS.Models.Data.Users;
 using TFS.Models.Users;
 using TFS.Models.FlightLogs;
+using TFS.Models.FlightPrograms;
 
 namespace TFS.Web
 {
@@ -26,7 +27,7 @@ namespace TFS.Web
 
             Scan(x =>
             {
-                x.AssemblyContainingType<UserManager>();
+                x.AssemblyContainingType<IUserRepository>();
                 x.AssemblyContainingType<UserRepository>();
                 x.With<StructureMap.Graph.DefaultConventionScanner>();
             });
@@ -34,6 +35,10 @@ namespace TFS.Web
             ForRequestedType<FlightLogManager>()
                 .CacheBy(InstanceScope.Hybrid)
                 .TheDefaultIsConcreteType<FlightLogManager>();
+
+            ForRequestedType<FlightProgramsManager>()
+                .CacheBy(InstanceScope.Hybrid)
+                .TheDefaultIsConcreteType<FlightProgramsManager>();
 
             ForRequestedType<UserManager>()
                 .CacheBy(InstanceScope.Hybrid)

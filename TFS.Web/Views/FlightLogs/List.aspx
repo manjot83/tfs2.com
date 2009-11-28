@@ -1,4 +1,8 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<SortedListViewModel<TFS.Web.ViewModels.FlightLogs.FlightLogListItemViewModel>>" %>
+<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<SortedListViewModel<TFS.Web.ViewModels.FlightLogs.FlightLogListItemViewModel>>" %>
+
+<asp:Content ContentPlaceHolderID="TitleContent" runat="server">
+Flight Logs
+</asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div class="header-main">Flight Time Summaries</div>

@@ -8,6 +8,8 @@ using TFS.Web.ViewModels;
 using TFS.Web.ViewModels.PersonnelRecords;
 using TFS.Models.FlightLogs;
 using TFS.Web.ViewModels.FlightLogs;
+using TFS.Models.FlightPrograms;
+using TFS.Web.ViewModels.FlightPrograms;
 
 namespace TFS.Web
 {
@@ -18,10 +20,27 @@ namespace TFS.Web
             Setup_UserViewModel();
             Setup_PersonnelRecordViewModel();
             Setup_FlightLogViewModel();
+            Setup_FlightPrograms();
 
 #if DEBUG
             Mapper.AssertConfigurationIsValid();
 #endif
+        }
+
+        private static void Setup_FlightPrograms()
+        {
+            Mapper.CreateMap<FlightProgram, FlightProgramListItemViewModel>();
+            Mapper.CreateMap<FlightProgram, FlightProgramViewModel>();
+            Mapper.CreateMap<FlightProgramViewModel, FlightProgram>()
+                  .ForMember(x => x.Id, m => m.Ignore())
+                  .ForMember(x => x.Locations, m => m.Ignore());
+            Mapper.CreateMap<ProgramLocation, ProgramLocationViewModel>();
+            Mapper.CreateMap<ProgramLocationViewModel, ProgramLocation>()
+                  .ForMember(x => x.Id, m => m.Ignore())
+                  .ForMember(x => x.Program, m => m.Ignore());
+            Mapper.CreateMap<Position, PositionViewModel>();
+            Mapper.CreateMap<PositionViewModel, Position>()
+                   .ForMember(x => x.Id, m => m.Ignore());
         }
 
         private static void Setup_FlightLogViewModel()

@@ -1,4 +1,8 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.PersonnelRecords.PersonnelRecordViewModel>" %>
+<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Dashboard.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Web.ViewModels.PersonnelRecords.PersonnelRecordViewModel>" %>
+
+<asp:Content ContentPlaceHolderID="TitleContent" runat="server">
+Edit Personnel Record
+</asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div class="header-main">Edit personnel record - <%= Html.Encode(Model.Username) %></div>

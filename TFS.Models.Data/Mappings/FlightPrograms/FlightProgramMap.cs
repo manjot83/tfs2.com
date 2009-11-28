@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TFS.Models.Programs;
+using TFS.Models.FlightPrograms;
 using FluentNHibernate.Mapping;
 
-namespace TFS.Models.Data.Mappings.Programs
+namespace TFS.Models.Data.Mappings.FlightPrograms
 {
     public class FlightProgramMap : ClassMap<FlightProgram>
     {

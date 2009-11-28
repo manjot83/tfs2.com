@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Models.Site.Page>" %>
+<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<TFS.Models.Site.Page>" %>
 
 <asp:Content ContentPlaceHolderID="TitleContent" runat="server">
     <%= Html.Encode(Model.Title) %>

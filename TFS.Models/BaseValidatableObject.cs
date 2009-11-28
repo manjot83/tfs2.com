@@ -7,11 +7,11 @@ using TFS.Models.Validation;
 namespace TFS.Models
 {
     [Serializable]
-    public abstract class BaseValidatableEntity : IValidatable
+    public abstract class BaseValidatableObject : IValidatable
     {
         private readonly static DataAnnotationsValidator Validator;
 
-        static BaseValidatableEntity()
+        static BaseValidatableObject()
         {
             Validator = new DataAnnotationsValidator();
         }

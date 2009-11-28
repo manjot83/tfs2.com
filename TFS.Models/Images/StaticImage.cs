@@ -7,7 +7,7 @@ using TFS.Models;
 
 namespace TFS.Models.Images
 {
-    public class StaticImage : BaseDomainEntity
+    public class StaticImage : BaseDomainObject
     {
         public virtual Guid? Id { get; private set; }
         public virtual string MimeType { get; set; }

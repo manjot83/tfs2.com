@@ -7,7 +7,7 @@ using Iesi.Collections.Generic;
 
 namespace TFS.Models.FlightLogs
 {
-    public class FlightLog : BaseDomainEntity
+    public class FlightLog : BaseDomainObject
     {
         public FlightLog()
         {

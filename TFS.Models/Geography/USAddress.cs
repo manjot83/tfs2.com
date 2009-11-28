@@ -6,7 +6,7 @@ using TFS.Models;
 
 namespace TFS.Models.Geography
 {
-    public class USAddress : BaseDomainEntity
+    public class USAddress : BaseDomainObject
     {
         public virtual string StreetAddress { get; set; }
         public virtual string City { get; set; }

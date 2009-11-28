@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TFS.Models.Users
 {
-    public class UserRoles : BaseDomainEntity
+    public class UserRoles : BaseDomainObject
     {
         [Required]
         [DomainEquality]
