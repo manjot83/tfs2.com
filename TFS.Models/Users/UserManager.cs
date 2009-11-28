@@ -36,8 +36,6 @@ namespace TFS.Models.Users
                 throw new InvalidOperationException("User already has a Person object attached");
             var person = new Person
             {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
                 User = user,
             };
             user.Person = person;

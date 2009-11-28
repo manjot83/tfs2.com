@@ -8,6 +8,7 @@ using TFS.Models.Reports;
 using System.IO;
 using System.Diagnostics;
 using Iesi.Collections.Generic;
+using TFS.Models.Users;
 
 namespace TFS.Models.Tests.Reports
 {
@@ -61,8 +62,11 @@ namespace TFS.Models.Tests.Reports
                     FlightLog = flightLog,
                     Person = new Person
                     {
-                        FirstName = "Joseph",
-                        LastName = "Daigle",
+                        User = new User 
+                        {
+                            FirstName = "Joseph",
+                            LastName = "Daigle",
+                        },
                         SocialSecurityLastFour = "0728",
                     },
                     DutyCode = DutyCode.PIC,
@@ -75,8 +79,11 @@ namespace TFS.Models.Tests.Reports
                     FlightLog = flightLog,
                     Person = new Person
                     {
-                        FirstName = "Joseph",
-                        LastName = "Daigle",
+                        User = new User 
+                        {
+                            FirstName = "Joseph",
+                            LastName = "Daigle",
+                        },   
                         SocialSecurityLastFour = "0728",
                     },
                     DutyCode = DutyCode.EP,

@@ -24,23 +24,28 @@ namespace TFS.Web.Controllers
         [RequireTransaction]
         public virtual ViewResult Index()
         {
-            return List(null, null, null, null);
+            return List(null, null, null, null, null);
         }
 
         [RequireTransaction]
-        public virtual ViewResult List(string sortType, SortDirection? sortDirection, int? page, int? itemsPerPage)
+        public virtual ViewResult List(string sortType, SortDirection? sortDirection, int? page, int? itemsPerPage, bool? showAll)
         {
             if (string.IsNullOrEmpty(sortType))
                 sortType = "name";
             var viewModel = new SortedListViewModel<UserViewModel>()
             {
+                ShowAll = showAll.HasValue && showAll.Value,
                 SortDirection = sortDirection ?? SortDirection.Ascending,
                 SortType = sortType,
                 PagingEnabled = true,
                 CurrentPage = page.HasValue ? page.Value : 1,
                 ItemsPerPage = itemsPerPage.HasValue ? itemsPerPage.Value : SortedListViewModel<User>.DefaultItemsPerPage,
             };
-            var users = userManager.UserRepository.GetAllUsers();
+            IEnumerable<User> users = null;
+            if (viewModel.ShowAll)
+                users = userManager.UserRepository.GetAllUsers();
+            else
+                users = userManager.UserRepository.GetAllActiveUsers();            
             if (viewModel.IsCurrentSortType("name") && viewModel.SortDirection == SortDirection.Ascending)
                 users = users.OrderBy(x => x.LastName);
             else if (viewModel.IsCurrentSortType("name"))

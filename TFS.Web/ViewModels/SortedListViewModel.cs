@@ -11,6 +11,8 @@ namespace TFS.Web.ViewModels
 
         public IEnumerable<TItemType> Items { get; set; }
 
+        public bool ShowAll { get; set; }
+
         public string SortType { get; set; }
         public SortDirection SortDirection { get; set; }
 

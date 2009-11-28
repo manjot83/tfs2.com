@@ -1061,12 +1061,13 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult List(string sortType, System.Web.UI.WebControls.SortDirection? sortDirection, int? page, int? itemsPerPage) {
+        public override System.Web.Mvc.ViewResult List(string sortType, System.Web.UI.WebControls.SortDirection? sortDirection, int? page, int? itemsPerPage, bool? showAll) {
             var callInfo = new T4MVC_ViewResult("Users", Actions.List);
             callInfo.RouteValues.Add("sortType", sortType);
             callInfo.RouteValues.Add("sortDirection", sortDirection);
             callInfo.RouteValues.Add("page", page);
             callInfo.RouteValues.Add("itemsPerPage", itemsPerPage);
+            callInfo.RouteValues.Add("showAll", showAll);
             return callInfo;
         }
 

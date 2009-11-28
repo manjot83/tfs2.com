@@ -63,7 +63,9 @@ namespace TFS.Web
                   .ForMember(x => x.CompanyInfo, m => m.MapFrom(x => x))
                   .ForMember(x => x.EditingMyRecord, m => m.Ignore())
                   .ForMember(x => x.HirePositions, m => m.Ignore());
-            Mapper.CreateMap<Person, PersonalInfo>();
+            Mapper.CreateMap<Person, PersonalInfo>()
+                  .ForMember(x => x.FirstName, m => m.MapFrom(x => x.User.FirstName))
+                  .ForMember(x => x.LastName, m => m.MapFrom(x => x.User.LastName));
             Mapper.CreateMap<Person, ContactInfo>()
                   .ForMember(x => x.AddressState, m => m.MapFrom(x => x.Address != null ? x.Address.State.Abbreviation : null));
             Mapper.CreateMap<Person, CompanyInfo>()
@@ -81,7 +83,11 @@ namespace TFS.Web
                   .ForMember(x => x.HirePosition, m => m.Ignore())
                   .ForMember(x => x.PrimaryPhoneNumber, m => m.Ignore())
                   .ForMember(x => x.ShirtSize, m => m.Ignore())
-                  .ForMember(x => x.DateOfBirth, m => m.MapFrom(x => x.DateOfBirth.HasValue ? x.DateOfBirth.Value.ToUniversalTime() : (DateTime?)null));
+                  .ForMember(x => x.DateOfBirth, m => m.MapFrom(x => x.DateOfBirth.HasValue ? x.DateOfBirth.Value.ToUniversalTime() : (DateTime?)null))
+                  .AfterMap((x,y) => {
+                      y.User.FirstName = x.FirstName;
+                      y.User.LastName = x.LastName;
+                  });
             Mapper.CreateMap<ContactInfo, Person>()
                   .ForMember(x => x.Id, m => m.Ignore())
                   .ForMember(x => x.User, m => m.Ignore())
@@ -89,8 +95,6 @@ namespace TFS.Web
                   .ForMember(x => x.FlightSuitSize, m => m.Ignore())
                   .ForMember(x => x.HirePosition, m => m.Ignore())
                   .ForMember(x => x.ShirtSize, m => m.Ignore())
-                  .ForMember(x => x.FirstName, m => m.Ignore())
-                  .ForMember(x => x.LastName, m => m.Ignore())
                   .ForMember(x => x.MiddleInitial, m => m.Ignore())
                   .ForMember(x => x.DateOfBirth, m => m.Ignore())
                   .ForMember(x => x.Gender, m => m.Ignore())
@@ -119,8 +123,6 @@ namespace TFS.Web
                   .ForMember(x => x.EmergencyContactPhoneNumber, m => m.Ignore())
                   .ForMember(x => x.HirePosition, m => m.Ignore())
                   .ForMember(x => x.PrimaryPhoneNumber, m => m.Ignore())
-                  .ForMember(x => x.FirstName, m => m.Ignore())
-                  .ForMember(x => x.LastName, m => m.Ignore())
                   .ForMember(x => x.MiddleInitial, m => m.Ignore())
                   .ForMember(x => x.DateOfBirth, m => m.Ignore())
                   .ForMember(x => x.Gender, m => m.Ignore())

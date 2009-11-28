@@ -30,13 +30,7 @@ namespace TFS.Models.Data.Mappings.PersonnelRecords
                 .ForeignKey("FK_Persons_Positions")
                 .Column("HirePositionId")
                 .Nullable();
-
-            Map(x => x.LastName)
-                .Length(50)
-                .Nullable();
-            Map(x => x.FirstName)
-                .Length(50)
-                .Nullable();
+            
             Map(x => x.MiddleInitial)
                 .Length(50)
                 .Nullable();
