@@ -17,5 +17,11 @@ namespace TFS.Models.FlightPrograms
             var position = new Position { Title = title };
             return ProgramsRepository.AddPosition(position);
         }
+
+        public FlightProgram CreateNewFlightProgram(FlightProgram flightProgram)
+        {
+            flightProgram.Active = true;
+            return ProgramsRepository.AddProgram(flightProgram);
+        }
     }
 }

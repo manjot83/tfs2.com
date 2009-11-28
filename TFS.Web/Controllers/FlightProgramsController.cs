@@ -29,34 +29,63 @@ namespace TFS.Web.Controllers
         }
 
         [RequireTransaction]
-        public virtual ViewResult Manage(bool? showAllActivePrograms)
+        public virtual ViewResult Manage(bool? showAllPrograms)
         {
             var viewModel = new DashboardViewModel()
             {
-                ShowAllActivePrograms = showAllActivePrograms.HasValue && showAllActivePrograms.Value,
+                ShowAllPrograms = showAllPrograms.HasValue && showAllPrograms.Value,
             };
             IEnumerable<FlightProgram> programs = null;
-            if (viewModel.ShowAllActivePrograms)
-                programs = flightProgramsManager.ProgramsRepository.GetAllActivePrograms();
-            else
+            if (viewModel.ShowAllPrograms)
                 programs = flightProgramsManager.ProgramsRepository.GetAllPrograms();
+            else
+                programs = flightProgramsManager.ProgramsRepository.GetAllActivePrograms();
             var positions = flightProgramsManager.ProgramsRepository.GetAllPositions();                        
             viewModel.Positions = Mapper.Map<IEnumerable<Position>, IEnumerable<PositionViewModel>>(positions);
             viewModel.FlightPrograms = Mapper.Map<IEnumerable<FlightProgram>, IEnumerable<FlightProgramListItemViewModel>>(programs);
-            return View(viewModel);
+            return View(Views.Manage, viewModel);
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult CreateFlightProgram()
         {
-            throw new NotImplementedException();
+            return View(Views.CreateFlightProgram, new FlightProgramViewModel());
+        }
+
+        [RequireTransaction]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual ActionResult CreateFlightProgram(FlightProgramViewModel flightProgramViewModel)
+        {
+            flightProgramViewModel.Validate(ModelState, string.Empty);
+            if (!ModelState.IsValid)
+                return View(Views.CreateFlightProgram, flightProgramViewModel);
+            var flightProgram = Mapper.Map<FlightProgramViewModel, FlightProgram>(flightProgramViewModel);
+            flightProgram = flightProgramsManager.CreateNewFlightProgram(flightProgram);
+            return RedirectToAction(MVC.FlightPrograms.EditFlightProgram(flightProgram.Id.Value));
         }
 
         [RequireTransaction]
         [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult EditFlightProgram(int id)
         {
-            throw new NotImplementedException();
+            var flightProgram = flightProgramsManager.ProgramsRepository.GetProgramById(id);
+            var viewModel = Mapper.Map<FlightProgram, FlightProgramViewModel>(flightProgram);
+            return View(Views.EditFlightProgram, viewModel);
+        }
+
+        [RequireTransaction]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual ActionResult EditFlightProgram(int id, FlightProgramViewModel flightProgramViewModel)
+        {
+            var flightProgram = flightProgramsManager.ProgramsRepository.GetProgramById(id);
+            flightProgramViewModel.Validate(ModelState, string.Empty);
+            if (!ModelState.IsValid)
+            {
+                var viewModel = Mapper.Map<FlightProgram, FlightProgramViewModel>(flightProgram);
+                return View(Views.EditFlightProgram, viewModel);
+            }
+            Mapper.Map<FlightProgramViewModel, FlightProgram>(flightProgramViewModel, flightProgram);
+            return this.RedirectToSuccess(MVC.FlightPrograms.EditFlightProgram(id));
         }
 
         [AcceptVerbs(HttpVerbs.Get)]

@@ -2,7 +2,7 @@
 <div class="field-group">
     <div class="field">
         <label for="Title">Title</label>
-        <%= Html.TextBox("Title", Model.Title, new { size = "20", maxlength = "50" })%>
+        <%= Html.TextBox("Title", Model.Title, new { size = "30", maxlength = "50" })%>
         <%= Html.ValidationMessage("Title")%>
     </div>
 </div>

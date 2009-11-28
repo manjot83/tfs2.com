@@ -642,8 +642,11 @@ namespace TFS.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [CompilerGenerated]
         public class ViewNames {
+            public readonly string CreateFlightProgram = "CreateFlightProgram";
             public readonly string CreatePosition = "CreatePosition";
+            public readonly string EditFlightProgram = "EditFlightProgram";
             public readonly string EditPosition = "EditPosition";
+            public readonly string FlightProgramInfo = "FlightProgramInfo";
             public readonly string Manage = "Manage";
             public readonly string PositionTitle = "PositionTitle";
         }
@@ -660,14 +663,20 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult Manage(bool? showAllActivePrograms) {
+        public override System.Web.Mvc.ViewResult Manage(bool? showAllPrograms) {
             var callInfo = new T4MVC_ViewResult("FlightPrograms", Actions.Manage);
-            callInfo.RouteValues.Add("showAllActivePrograms", showAllActivePrograms);
+            callInfo.RouteValues.Add("showAllPrograms", showAllPrograms);
             return callInfo;
         }
 
         public override System.Web.Mvc.ViewResult CreateFlightProgram() {
             var callInfo = new T4MVC_ViewResult("FlightPrograms", Actions.CreateFlightProgram);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult CreateFlightProgram(TFS.Web.ViewModels.FlightPrograms.FlightProgramViewModel flightProgramViewModel) {
+            var callInfo = new T4MVC_ActionResult("FlightPrograms", Actions.CreateFlightProgram);
+            callInfo.RouteValues.Add("flightProgramViewModel", flightProgramViewModel);
             return callInfo;
         }
 
@@ -677,14 +686,34 @@ namespace T4MVC {
             return callInfo;
         }
 
+        public override System.Web.Mvc.ActionResult EditFlightProgram(int id, TFS.Web.ViewModels.FlightPrograms.FlightProgramViewModel flightProgramViewModel) {
+            var callInfo = new T4MVC_ActionResult("FlightPrograms", Actions.EditFlightProgram);
+            callInfo.RouteValues.Add("id", id);
+            callInfo.RouteValues.Add("flightProgramViewModel", flightProgramViewModel);
+            return callInfo;
+        }
+
         public override System.Web.Mvc.ViewResult CreatePosition() {
             var callInfo = new T4MVC_ViewResult("FlightPrograms", Actions.CreatePosition);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult CreatePosition(TFS.Web.ViewModels.FlightPrograms.PositionViewModel positionViewModel) {
+            var callInfo = new T4MVC_ActionResult("FlightPrograms", Actions.CreatePosition);
+            callInfo.RouteValues.Add("positionViewModel", positionViewModel);
             return callInfo;
         }
 
         public override System.Web.Mvc.ViewResult RenamePosition(int id) {
             var callInfo = new T4MVC_ViewResult("FlightPrograms", Actions.RenamePosition);
             callInfo.RouteValues.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult RenamePosition(int id, TFS.Web.ViewModels.FlightPrograms.PositionViewModel positionViewModel) {
+            var callInfo = new T4MVC_ActionResult("FlightPrograms", Actions.RenamePosition);
+            callInfo.RouteValues.Add("id", id);
+            callInfo.RouteValues.Add("positionViewModel", positionViewModel);
             return callInfo;
         }
 
@@ -1145,6 +1174,7 @@ namespace T4MVC {
         public ViewNames Views { get { return s_views; } }
         [CompilerGenerated]
         public class ViewNames {
+            public readonly string Success = "Success";
         }
     }
 }

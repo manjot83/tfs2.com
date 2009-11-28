@@ -6,7 +6,7 @@
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div class="header-main">Flight Programs</div>
     <p>
-        <% if (Model.ShowAllActivePrograms) { %>
+        <% if (Model.ShowAllPrograms) { %>
         Current showing <u>ALL</u> flight programs. Click to show only <%= Html.ActionLink("ACTIVE", MVC.FlightPrograms.Manage(false)) %> flight programs.
         <% } else { %>
         Current showing only <u>ACTIVE</u> flight programs. Click to show <%= Html.ActionLink("ALL", MVC.FlightPrograms.Manage(true)) %> flight programs.

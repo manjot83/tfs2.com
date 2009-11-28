@@ -118,6 +118,7 @@
     <Compile Include="ActionFilters\RequireTransactionAttribute.cs" />
     <Compile Include="AutoMapperConfiguration.cs" />
     <Compile Include="ConfigurationHelper.cs" />
+    <Compile Include="Controllers\ControllerExtension.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\FlightLogsController.cs" />
     <Compile Include="Controllers\FlightProgramsController.cs" />
@@ -170,6 +171,7 @@
     <Compile Include="ViewModels\PersonnelRecords\PersonnelRecordViewModel.cs" />
     <Compile Include="ViewModels\SortedListViewModel.cs" />
     <Compile Include="ViewModels\FlightLogs\SquadronLogListViewModel.cs" />
+    <Compile Include="ViewModels\SuccessViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\ViewModelExtensions.cs" />
   </ItemGroup>
@@ -226,6 +228,7 @@
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="404.html" />
     <Content Include="Config\ConnectionStrings.config" />
     <Content Include="Content\internal\icons\book.png" />
     <Content Include="Content\internal\icons\group.png" />
@@ -245,6 +248,7 @@
     <Content Include="Content\internal\template\li.gif" />
     <Content Include="Content\internal\template\quote.gif" />
     <Content Include="Content\internal\template\sidenavh1.gif" />
+    <Content Include="500.html" />
     <Content Include="favicon.ico" />
     <Content Include="Views\Dashboard\Index.aspx" />
     <Content Include="Views\FlightLogs\BulkCreateSquadronLog.aspx" />
@@ -257,8 +261,11 @@
     <Content Include="Views\FlightLogs\CreateFlightLog.aspx" />
     <Content Include="Views\FlightLogs\MissionForm.ascx" />
     <Content Include="Views\FlightLogs\SquadronLogForm.ascx" />
+    <Content Include="Views\FlightPrograms\CreateFlightProgram.aspx" />
+    <Content Include="Views\FlightPrograms\EditFlightProgram.aspx" />
     <Content Include="Views\FlightPrograms\EditPosition.aspx" />
     <Content Include="Views\FlightPrograms\CreatePosition.aspx" />
+    <Content Include="Views\FlightPrograms\FlightProgramInfo.ascx" />
     <Content Include="Views\FlightPrograms\Manage.aspx" />
     <Content Include="Views\PersonnelRecords\EditRecord.aspx" />
     <Content Include="Views\PersonnelRecords\List.aspx" />
@@ -278,6 +285,7 @@
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </None>
     <Content Include="Views\Shared\Dashboard.Master" />
+    <Content Include="Views\Shared\Success.aspx" />
     <Content Include="Views\Users\Create.aspx" />
     <Content Include="Views\Users\Edit.aspx" />
     <Content Include="Views\Users\List.aspx" />
