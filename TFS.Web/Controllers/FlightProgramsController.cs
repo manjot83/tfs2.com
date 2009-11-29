@@ -128,5 +128,19 @@ namespace TFS.Web.Controllers
             Mapper.Map<PositionViewModel, Position>(positionViewModel, position);
             return RedirectToAction(MVC.FlightPrograms.Manage());
         }
+
+        [RequireTransaction]
+        [AcceptVerbs(HttpVerbs.Get)]
+        public virtual ViewResult CreateFlightLocation(int flightProgramId)
+        {
+            throw new NotImplementedException();
+        }
+
+        [RequireTransaction]
+        [AcceptVerbs(HttpVerbs.Get)]
+        public virtual ViewResult EditFlightLocation(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
