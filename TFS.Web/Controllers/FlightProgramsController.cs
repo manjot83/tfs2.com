@@ -40,7 +40,7 @@ namespace TFS.Web.Controllers
                 programs = flightProgramsManager.ProgramsRepository.GetAllPrograms();
             else
                 programs = flightProgramsManager.ProgramsRepository.GetAllActivePrograms();
-            var positions = flightProgramsManager.ProgramsRepository.GetAllPositions();                        
+            var positions = flightProgramsManager.ProgramsRepository.GetAllPositions();
             viewModel.Positions = Mapper.Map<IEnumerable<Position>, IEnumerable<PositionViewModel>>(positions);
             viewModel.FlightPrograms = Mapper.Map<IEnumerable<FlightProgram>, IEnumerable<FlightProgramListItemViewModel>>(programs);
             return View(Views.Manage, viewModel);
@@ -131,16 +131,47 @@ namespace TFS.Web.Controllers
 
         [RequireTransaction]
         [AcceptVerbs(HttpVerbs.Get)]
-        public virtual ViewResult CreateFlightLocation(int flightProgramId)
+        public virtual ViewResult CreateProgramLocation(int flightProgramId)
         {
-            throw new NotImplementedException();
+            var program = flightProgramsManager.ProgramsRepository.GetProgramById(flightProgramId);
+            return View(Views.CreateProgramLocation, new ProgramLocationViewModel() { ProgramId = program.Id.Value, ProgramName = program.Name });
+        }
+
+        [RequireTransaction]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual ActionResult CreateProgramLocation(ProgramLocationViewModel programLocationViewModel)
+        {
+            programLocationViewModel.Validate(ModelState, string.Empty);
+            if (!ModelState.IsValid)
+                return View(Views.CreateProgramLocation, programLocationViewModel);
+            var program = flightProgramsManager.ProgramsRepository.GetProgramById(programLocationViewModel.ProgramId);
+            var location = Mapper.Map<ProgramLocationViewModel, ProgramLocation>(programLocationViewModel);
+            program.AddLocation(location);
+            return RedirectToAction(MVC.FlightPrograms.EditFlightProgram(program.Id.Value));
         }
 
         [RequireTransaction]
         [AcceptVerbs(HttpVerbs.Get)]
-        public virtual ViewResult EditFlightLocation(int id)
+        public virtual ViewResult EditProgramLocation(int id)
         {
-            throw new NotImplementedException();
+            var location = flightProgramsManager.ProgramsRepository.GetProgramLocationById(id);
+            var viewModel = Mapper.Map<ProgramLocation, ProgramLocationViewModel>(location);
+            return View(Views.EditProgramLocation, viewModel);
+        }
+
+        [RequireTransaction]
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual ActionResult EditProgramLocation(ProgramLocationViewModel programLocationViewModel)
+        {
+            var location = flightProgramsManager.ProgramsRepository.GetProgramLocationById(programLocationViewModel.Id.Value);
+            programLocationViewModel.Validate(ModelState, string.Empty);
+            if (!ModelState.IsValid)
+            {
+                var viewModel = Mapper.Map<ProgramLocation, ProgramLocationViewModel>(location);
+                return View(Views.EditProgramLocation, viewModel);
+            }
+            Mapper.Map<ProgramLocationViewModel, ProgramLocation>(programLocationViewModel, location);
+            return RedirectToAction(MVC.FlightPrograms.EditFlightProgram(programLocationViewModel.ProgramId));
         }
     }
 }

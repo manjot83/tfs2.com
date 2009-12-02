@@ -38,14 +38,14 @@
         </thead>
         <% foreach(var location in Model.Locations) { %>
         <tr>
-            <td><%= Html.ActionLink(location.Name, MVC.FlightPrograms.EditFlightLocation(location.Id.Value)) %></td>
+            <td><%= Html.ActionLink(location.Name, MVC.FlightPrograms.EditProgramLocation(location.Id.Value)) %></td>
         </tr>
         <% } %>
     </table>
     <% } else { %>
     <p><b>No locations found.</b></p>
     <% } %>
-    <% using(Html.BeginForm(MVC.FlightPrograms.CreateFlightLocation(), FormMethod.Get)) { %>
+    <% using(Html.BeginForm(MVC.FlightPrograms.CreateProgramLocation(), FormMethod.Get)) { %>
         <%= Html.Hidden("FlightProgramId", Model.Id.Value)%>
         <p>
             <input type="submit" value="Add a location" />

@@ -51,5 +51,10 @@ namespace TFS.Models.Data.FlightPrograms
         {
             return Session.SaveOrUpdateCopy<FlightProgram>(program);
         }
+
+        public ProgramLocation GetProgramLocationById(int id)
+        {
+            return Session.Get<ProgramLocation>(id);
+        }
     }
 }

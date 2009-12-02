@@ -7,7 +7,7 @@ using StructureMap;
 using NHibernate;
 using TFS.Models;
 using TFS.Extensions;
-using TFS.Models.Programs;
+using TFS.Models.FlightPrograms;
 using TFS.Models.PersonnelRecords;
 using TFS.Models.FlightLogs;
 using TFS.Models.Users;
@@ -75,8 +75,6 @@ namespace TFS.Web
             {
                 User = session.Get<User>(user_joseph),
                 HirePosition = session.Get<Position>(position_pilot),
-                FirstName = "Joe",
-                LastName = "Daigle",
                 DateOfBirth = new DateTime(1985, 5, 2).ToUniversalTime(),
             };
             person_joseph_entity.Qualifications = new Qualifications()
@@ -89,8 +87,6 @@ namespace TFS.Web
             {
                 User = session.Get<User>(user__bill),
                 HirePosition = session.Get<Position>(position_pilot),
-                FirstName = "Bill",
-                LastName = "Petit",
                 DateOfBirth = new DateTime(1985, 5, 2).ToUniversalTime(),
             };
             person_bill_entity.Qualifications = new Qualifications()
@@ -114,8 +110,6 @@ namespace TFS.Web
                 {
                     User = session.Get<User>(user),
                     HirePosition = session.Get<Position>(position_pilot),
-                    FirstName = "Fake",
-                    LastName = "User" + i,
                 };
                 person.Qualifications = new Qualifications()
                 {

@@ -620,13 +620,13 @@ namespace TFS.Web.Controllers {
         }
 
         [NonAction]
-        public System.Web.Mvc.ViewResult CreateFlightLocation() {
-            return new T4MVC_ViewResult(Name, Actions.CreateFlightLocation);
+        public System.Web.Mvc.ViewResult CreateProgramLocation() {
+            return new T4MVC_ViewResult(Name, Actions.CreateProgramLocation);
         }
 
         [NonAction]
-        public System.Web.Mvc.ViewResult EditFlightLocation() {
-            return new T4MVC_ViewResult(Name, Actions.EditFlightLocation);
+        public System.Web.Mvc.ViewResult EditProgramLocation() {
+            return new T4MVC_ViewResult(Name, Actions.EditProgramLocation);
         }
 
 
@@ -644,8 +644,8 @@ namespace TFS.Web.Controllers {
             public readonly string EditFlightProgram = "EditFlightProgram";
             public readonly string CreatePosition = "CreatePosition";
             public readonly string RenamePosition = "RenamePosition";
-            public readonly string CreateFlightLocation = "CreateFlightLocation";
-            public readonly string EditFlightLocation = "EditFlightLocation";
+            public readonly string CreateProgramLocation = "CreateProgramLocation";
+            public readonly string EditProgramLocation = "EditProgramLocation";
         }
 
 
@@ -656,11 +656,14 @@ namespace TFS.Web.Controllers {
         public class ViewNames {
             public readonly string CreateFlightProgram = "CreateFlightProgram";
             public readonly string CreatePosition = "CreatePosition";
+            public readonly string CreateProgramLocation = "CreateProgramLocation";
             public readonly string EditFlightProgram = "EditFlightProgram";
             public readonly string EditPosition = "EditPosition";
+            public readonly string EditProgramLocation = "EditProgramLocation";
             public readonly string FlightProgramInfo = "FlightProgramInfo";
             public readonly string Manage = "Manage";
             public readonly string PositionTitle = "PositionTitle";
+            public readonly string ProgramLocationInfo = "ProgramLocationInfo";
         }
     }
 }
@@ -729,15 +732,27 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult CreateFlightLocation(int flightProgramId) {
-            var callInfo = new T4MVC_ViewResult("FlightPrograms", Actions.CreateFlightLocation);
+        public override System.Web.Mvc.ViewResult CreateProgramLocation(int flightProgramId) {
+            var callInfo = new T4MVC_ViewResult("FlightPrograms", Actions.CreateProgramLocation);
             callInfo.RouteValues.Add("flightProgramId", flightProgramId);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult EditFlightLocation(int id) {
-            var callInfo = new T4MVC_ViewResult("FlightPrograms", Actions.EditFlightLocation);
+        public override System.Web.Mvc.ActionResult CreateProgramLocation(TFS.Web.ViewModels.FlightPrograms.ProgramLocationViewModel programLocationViewModel) {
+            var callInfo = new T4MVC_ActionResult("FlightPrograms", Actions.CreateProgramLocation);
+            callInfo.RouteValues.Add("programLocationViewModel", programLocationViewModel);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult EditProgramLocation(int id) {
+            var callInfo = new T4MVC_ViewResult("FlightPrograms", Actions.EditProgramLocation);
             callInfo.RouteValues.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult EditProgramLocation(TFS.Web.ViewModels.FlightPrograms.ProgramLocationViewModel programLocationViewModel) {
+            var callInfo = new T4MVC_ActionResult("FlightPrograms", Actions.EditProgramLocation);
+            callInfo.RouteValues.Add("programLocationViewModel", programLocationViewModel);
             return callInfo;
         }
 

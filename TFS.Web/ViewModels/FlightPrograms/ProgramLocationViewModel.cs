@@ -12,6 +12,7 @@ namespace TFS.Web.ViewModels.FlightPrograms
         public int? Id { get; set; }
 
         public int ProgramId { get; set; }
+        public string ProgramName { get; set; }
 
         [Required, StringLength(100)]
         public string Name { get; set; }

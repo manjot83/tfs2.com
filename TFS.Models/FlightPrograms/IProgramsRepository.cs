@@ -15,5 +15,7 @@ namespace TFS.Models.FlightPrograms
         IEnumerable<FlightProgram> GetAllPrograms();
         FlightProgram GetProgramById(int id);
         FlightProgram AddProgram(FlightProgram program);
+
+        ProgramLocation GetProgramLocationById(int id);
     }
 }

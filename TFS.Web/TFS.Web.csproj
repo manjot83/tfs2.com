@@ -262,11 +262,14 @@
     <Content Include="Views\FlightLogs\MissionForm.ascx" />
     <Content Include="Views\FlightLogs\SquadronLogForm.ascx" />
     <Content Include="Views\FlightPrograms\CreateFlightProgram.aspx" />
+    <Content Include="Views\FlightPrograms\CreateProgramLocation.aspx" />
     <Content Include="Views\FlightPrograms\EditFlightProgram.aspx" />
     <Content Include="Views\FlightPrograms\EditPosition.aspx" />
     <Content Include="Views\FlightPrograms\CreatePosition.aspx" />
+    <Content Include="Views\FlightPrograms\EditProgramLocation.aspx" />
     <Content Include="Views\FlightPrograms\FlightProgramInfo.ascx" />
     <Content Include="Views\FlightPrograms\Manage.aspx" />
+    <Content Include="Views\FlightPrograms\ProgramLocationInfo.ascx" />
     <Content Include="Views\PersonnelRecords\EditRecord.aspx" />
     <Content Include="Views\PersonnelRecords\List.aspx" />
     <Content Include="Views\Security\ChangePassword.aspx" />

@@ -28,5 +28,12 @@ namespace TFS.Models.FlightPrograms
         public virtual bool Active { get; set; }
 
         public virtual ISet<ProgramLocation> Locations { get; set; }
+
+        public virtual void AddLocation(ProgramLocation location)
+        {
+            location.Program = this;
+            location.Validate();
+            Locations.Add(location);
+        }
     }
 }
