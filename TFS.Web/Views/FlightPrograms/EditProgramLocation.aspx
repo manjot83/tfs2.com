@@ -8,7 +8,7 @@
     <p>
         <%= Html.ActionLink("Back to flight program...", MVC.FlightPrograms.EditFlightProgram(Model.ProgramId))%>
     </p>
-    <div class="header-main">Edit a program location - <%= Html.Encode(Model.ProgramName) %></div>
+    <div class="header-main">Edit program location for "<%= Html.Encode(Model.ProgramName) %>"</div>
     <fieldset class="standard-form">
         <legend>Location</legend>
         <% using (Html.BeginForm(MVC.FlightPrograms.EditProgramLocation(), FormMethod.Post, new { @class = "fieldset-content" })) { %>

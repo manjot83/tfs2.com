@@ -7,9 +7,9 @@
     <div class="header-main">Flight Programs</div>
     <p>
         <% if (Model.ShowAllPrograms) { %>
-        Current showing <u>ALL</u> flight programs. Click to show only <%= Html.ActionLink("ACTIVE", MVC.FlightPrograms.Manage(false)) %> flight programs.
+        Current showing ALL flight programs. Click to show only <%= Html.ActionLink("ACTIVE", MVC.FlightPrograms.Manage(false)) %> flight programs.
         <% } else { %>
-        Current showing only <u>ACTIVE</u> flight programs. Click to show <%= Html.ActionLink("ALL", MVC.FlightPrograms.Manage(true)) %> flight programs.
+        Current showing only ACTIVE flight programs. Click to show <%= Html.ActionLink("ALL", MVC.FlightPrograms.Manage(true)) %> flight programs.
         <% } %>
     </p>
     <p>

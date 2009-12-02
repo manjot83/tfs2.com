@@ -8,9 +8,9 @@ Users
     <div class="header-main">Users</div>    
     <p>
         <% if (Model.ShowAll) { %>
-        Current showing <u>ALL</u> users. Click to show only <%= Html.ActionLink("ACTIVE", MVC.Users.List(Model.SortType, Model.SortDirection, Model.CurrentPage, Model.ItemsPerPage, false))%> users.
+        Current showing ALL users. Click to show only <%= Html.ActionLink("ACTIVE", MVC.Users.List(Model.SortType, Model.SortDirection, Model.CurrentPage, Model.ItemsPerPage, false))%> users.
         <% } else { %>
-        Current showing only <u>ACTIVE</u> users. Click to show <%= Html.ActionLink("ALL", MVC.Users.List(Model.SortType, Model.SortDirection, Model.CurrentPage, Model.ItemsPerPage, true))%> users.
+        Current showing only ACTIVE users. Click to show <%= Html.ActionLink("ALL", MVC.Users.List(Model.SortType, Model.SortDirection, Model.CurrentPage, Model.ItemsPerPage, true))%> users.
         <% } %>
     </p>
     <p>
