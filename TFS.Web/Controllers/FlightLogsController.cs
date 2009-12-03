@@ -9,6 +9,7 @@ using System;
 using TFS.Web.ViewModels.FlightLogs;
 using AutoMapper;
 using System.Collections.Generic;
+using TFS.Models.FlightPrograms;
 
 namespace TFS.Web.Controllers
 {
@@ -39,19 +40,24 @@ namespace TFS.Web.Controllers
             viewModel.SortDirection = sortDirection ?? SortDirection.Ascending;
             viewModel.SortType = sortType;
             var flightLogs = flightLogManager.FlightLogRepository.GetAllFlightLogs();
+            var viewModelItems = Mapper.Map<IEnumerable<FlightLog>, IEnumerable<FlightLogListItemViewModel>>(flightLogs.ToList());
             if (viewModel.IsCurrentSortType("date") && viewModel.SortDirection == SortDirection.Ascending)
-                flightLogs = flightLogs.OrderBy(x => x.LogDate);
+                viewModelItems = viewModelItems.OrderBy(x => x.LogDate);
             else if (viewModel.IsCurrentSortType("date"))
-                flightLogs = flightLogs.OrderByDescending(x => x.LogDate);
+                viewModelItems = viewModelItems.OrderByDescending(x => x.LogDate);
             if (viewModel.IsCurrentSortType("aircraft") && viewModel.SortDirection == SortDirection.Ascending)
-                flightLogs = flightLogs.OrderBy(x => x.AircraftMDS);
+                viewModelItems = viewModelItems.OrderBy(x => x.AircraftMDS);
             else if (viewModel.IsCurrentSortType("aircraft"))
-                flightLogs = flightLogs.OrderByDescending(x => x.AircraftMDS);
+                viewModelItems = viewModelItems.OrderByDescending(x => x.AircraftMDS);
+            if (viewModel.IsCurrentSortType("program") && viewModel.SortDirection == SortDirection.Ascending)
+                viewModelItems = viewModelItems.OrderBy(x => x.Program);
+            else if (viewModel.IsCurrentSortType("program"))
+                viewModelItems = viewModelItems.OrderByDescending(x => x.Program);
             if (viewModel.IsCurrentSortType("location") && viewModel.SortDirection == SortDirection.Ascending)
-                flightLogs = flightLogs.OrderBy(x => x.Location);
+                viewModelItems = viewModelItems.OrderBy(x => x.Location);
             else if (viewModel.IsCurrentSortType("location"))
-                flightLogs = flightLogs.OrderByDescending(x => x.Location);
-            viewModel.Items = Mapper.Map<IEnumerable<FlightLog>, IEnumerable<FlightLogListItemViewModel>>(flightLogs.ToList());
+                viewModelItems = viewModelItems.OrderByDescending(x => x.Location);
+            viewModel.Items = viewModelItems.ToList();
             return View(Views.List, viewModel);
         }
 
@@ -60,7 +66,7 @@ namespace TFS.Web.Controllers
         public virtual ViewResult EditFlightLog(int id)
         {
             var flightLog = flightLogManager.FlightLogRepository.GetFlightLogById(id);
-            var viewModel = Mapper.Map<FlightLog, FlightLogViewModel>(flightLog);
+            var viewModel = CreateFlightLogViewModel(flightLog);
             viewModel.PreviouslySaved = (bool?)TempData["SavedFlightLog"] ?? false;
             return View(viewModel);
         }
@@ -73,10 +79,11 @@ namespace TFS.Web.Controllers
             flightLogViewModel.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
             {
-                var viewModel = Mapper.Map<FlightLog, FlightLogViewModel>(flightLog);
+                var viewModel = CreateFlightLogViewModel(flightLog);
                 return View(viewModel);
             }
             Mapper.Map<FlightLogViewModel, FlightLog>(flightLogViewModel, flightLog);
+            flightLog.Location = flightLogManager.FlightProgramsRepository.GetProgramLocationById(flightLogViewModel.LocationId);
             flightLog.MarkedUpdated();
             TempData["SavedFlightLog"] = true;
             return RedirectToAction(MVC.FlightLogs.EditFlightLog(id));
@@ -85,7 +92,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult CreateFlightLog()
         {
-            return View(new FlightLogViewModel());
+            return View(CreateFlightLogViewModel(null));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -94,10 +101,25 @@ namespace TFS.Web.Controllers
         {
             flightLogViewModel.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
-                return View(flightLogViewModel);
+                return View(CreateFlightLogViewModel(null));
             var flightLog = Mapper.Map<FlightLogViewModel, FlightLog>(flightLogViewModel);
+            flightLog.Location = flightLogManager.FlightProgramsRepository.GetProgramLocationById(flightLogViewModel.LocationId);
             flightLog = flightLogManager.AddFlightLog(flightLog);
             return RedirectToAction(MVC.FlightLogs.EditFlightLog(flightLog.Id.Value));
+        }
+
+        [NonAction]
+        private FlightLogViewModel CreateFlightLogViewModel(FlightLog flightLog)
+        {
+            var viewModel = new FlightLogViewModel();
+            var activeLocations = flightLogManager.FlightProgramsRepository.GetAllActiveProgramLocations();
+            if (flightLog != null)
+            {
+                Mapper.Map<FlightLog, FlightLogViewModel>(flightLog, viewModel);
+                activeLocations = activeLocations.Union(new ProgramLocation[] { flightLog.Location });
+            }
+            viewModel.SetActiveLocations(activeLocations);
+            return viewModel;
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
@@ -235,7 +257,7 @@ namespace TFS.Web.Controllers
             viewModel.Items = Mapper.Map<IEnumerable<SquadronLog>, IEnumerable<SquadronLogViewModel>>(squadronLogs.ToList());
             viewModel.CurrentSquadronLog = squadronLogViewModel;
             if (squadronLogViewModel == null)
-                viewModel.CurrentSquadronLog = new SquadronLogViewModel() { FlightLogId = flightLogId };            
+                viewModel.CurrentSquadronLog = new SquadronLogViewModel() { FlightLogId = flightLogId };
             viewModel.CurrentSquadronLog.SetAvailablePersons(flightLogManager.FlightLogRepository.GetAvailableSquadronPersons());
             return viewModel;
         }

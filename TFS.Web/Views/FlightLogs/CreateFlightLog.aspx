@@ -33,9 +33,9 @@ Create Flight Log
             </div>
             <div class="field-group">
                 <div class="field">
-                    <label for="location">Flight/Program Location</label>
-                    <%= Html.TextBox("location", Model.Location, new { size = "40", maxlength = "100" })%>
-                    <%= Html.ValidationMessage("location")%>
+                    <label for="LocationId">Flight/Program Location</label>
+                    <%= Html.DropDownList("LocationId", Model.ActiveLocations) %>
+                    <%= Html.ValidationMessage("LocationId")%>
                 </div>
             </div>
             <div class="button-group">

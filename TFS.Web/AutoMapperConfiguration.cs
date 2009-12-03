@@ -45,8 +45,11 @@ namespace TFS.Web
 
         private static void Setup_FlightLogViewModel()
         {
-            Mapper.CreateMap<FlightLog, FlightLogListItemViewModel>();
+            Mapper.CreateMap<FlightLog, FlightLogListItemViewModel>()
+                  .ForMember(x => x.Location, m => m.MapFrom(x => x.Location.Name))
+                  .ForMember(x => x.Program, m => m.MapFrom(x => x.Location.Program.Name));
             Mapper.CreateMap<FlightLog, FlightLogViewModel>()
+                  .ForMember(x => x.ActiveLocations, m => m.Ignore())
                   .ForMember(x => x.PreviouslySaved, m => m.Ignore());
             Mapper.CreateMap<FlightLogViewModel, FlightLog>()
                   .ForMember(x => x.LogDate, m => m.MapFrom(x => x.LogDate.ToUniversalTime()))
@@ -54,7 +57,8 @@ namespace TFS.Web
                   .ForMember(x => x.LastModifiedDate, m => m.Ignore())
                   .ForMember(x => x.OperatingUnit, m => m.Ignore())
                   .ForMember(x => x.Missions, m => m.Ignore())
-                  .ForMember(x => x.SquadronLogs, m => m.Ignore());
+                  .ForMember(x => x.SquadronLogs, m => m.Ignore())
+                  .ForMember(x => x.Location, m => m.Ignore());
             Mapper.CreateMap<Mission, MissionViewModel>()
                   .ForMember(x => x.FlightLogId, m => m.MapFrom(x => x.FlightLog.Id.Value))
                   .ForMember(x => x.TotalFlightTime, m => m.MapFrom(x => x.ComputeFlightTime().TotalHours));

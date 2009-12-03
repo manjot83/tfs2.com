@@ -27,6 +27,13 @@ Flight Logs
                 <% } %>                    
                 </th>
                 <th>
+                <% if (Model.IsCurrentSortType("program")) { %>
+                    <%= Html.ActionLink("Program", MVC.FlightLogs.List("program", Model.GetReverseSortDirection()), new { @class = Model.SortDirectionClass("sorted-down", "sorted-up") })%>
+                <% } else { %>
+                    <%= Html.ActionLink("Program", MVC.FlightLogs.List("program", SortDirection.Ascending))%>
+                <% } %>
+                </th>
+                <th>
                 <% if (Model.IsCurrentSortType("location")) { %>
                     <%= Html.ActionLink("Location", MVC.FlightLogs.List("location", Model.GetReverseSortDirection()), new { @class = Model.SortDirectionClass("sorted-down", "sorted-up") })%>
                 <% } else { %>
@@ -45,6 +52,9 @@ Flight Logs
             </td>
             <td>
                 <%= Html.Encode(log.AircraftMDS + " : " + log.AircraftSerialNumber) %>
+            </td>
+            <td>
+                <%= Html.Encode(log.Program) %>
             </td>
             <td>
                 <%= Html.Encode(log.Location) %>
