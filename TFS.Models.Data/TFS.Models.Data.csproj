@@ -79,10 +79,14 @@
     <Compile Include="Configuration\SQLiteBuilder.cs" />
     <Compile Include="Configuration\SqlSchemaUtil.cs" />
     <Compile Include="FlightLogs\FlightLogRepository.cs" />
+    <Compile Include="Help\HelpRepository.cs" />
     <Compile Include="Mappings\FlightLogs\MissionMap.cs" />
     <Compile Include="Mappings\FlightLogs\FlightLogMap.cs" />
     <Compile Include="Mappings\FlightLogs\SquadronLogMap.cs" />
+    <Compile Include="Mappings\Help\AnswerClassMap.cs" />
+    <Compile Include="Mappings\Help\QuestionClassMap.cs" />
     <Compile Include="Mappings\Images\StaticImageMap.cs" />
+    <Compile Include="Mappings\MappingExtensions.cs" />
     <Compile Include="Mappings\PersonnelRecords\CertificateMap.cs" />
     <Compile Include="Mappings\PersonnelRecords\PersonMap.cs" />
     <Compile Include="Mappings\PersonnelRecords\QualificationsMap.cs" />

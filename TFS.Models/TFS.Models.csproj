@@ -75,6 +75,10 @@
     <Compile Include="FlightLogs\SquadronLog.cs" />
     <Compile Include="Geography\USAddress.cs" />
     <Compile Include="Geography\USState.cs" />
+    <Compile Include="Help\Answer.cs" />
+    <Compile Include="Help\HelpManager.cs" />
+    <Compile Include="Help\IHelpRepository.cs" />
+    <Compile Include="Help\Question.cs" />
     <Compile Include="IKeyedModel.cs" />
     <Compile Include="Images\IImageFinder.cs" />
     <Compile Include="Images\StaticImage.cs" />
@@ -112,6 +116,7 @@
     <Compile Include="Validation\DataAnnotationsValidator.cs" />
     <Compile Include="Validation\DateIsInFutureAttribute.cs" />
     <Compile Include="Validation\DateIsInPastAttribute.cs" />
+    <Compile Include="Validation\DateTimeKindAttribute.cs" />
     <Compile Include="Validation\DigitsAttribute.cs" />
     <Compile Include="Validation\StringIsEmailAttribute.cs" />
     <Compile Include="Validation\IValidatable.cs" />

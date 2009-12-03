@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TFS.Models.PersonnelRecords;
 
 namespace TFS.Models.Users
 {
@@ -12,5 +13,8 @@ namespace TFS.Models.Users
         User GetUser(string username);
 
         User AddUser(User user);
+
+        IList<Person> GetAllActivePersons();
+        Person GetPersonForUser(string username);
     }
 }

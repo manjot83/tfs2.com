@@ -12,12 +12,9 @@ namespace TFS.Models.Data.FlightLogs
 {
     public class FlightLogRepository : BaseDataAccessObject, IFlightLogRepository
     {
-        private readonly IUserRepository userRepository;
-
-        public FlightLogRepository(ISession session, IUserRepository userRepository)
+        public FlightLogRepository(ISession session)
             : base(session)
         {
-            this.userRepository = userRepository;
         }
 
         public IEnumerable<FlightLog> GetAllFlightLogs()
@@ -38,20 +35,6 @@ namespace TFS.Models.Data.FlightLogs
         public SquadronLog GetSquadronLogById(int id)
         {
             return QuerySquadronLogs().Where(x => x.Id == id).FirstOrDefault();
-        }
-
-        public IList<Person> GetAvailableSquadronPersons()
-        {
-            return userRepository.GetAllActiveUsers()
-                .ToList()
-                .Where(x => x.Person != null)
-                .Select(x => x.Person).ToList();
-        }
-
-        public Person GetSquadronPersonForUsername(string username)
-        {
-            var user = userRepository.GetUser(username);
-            return user != null ? user.Person : null;
         }
 
         public IQueryable<FlightLog> QueryFlightLogs()

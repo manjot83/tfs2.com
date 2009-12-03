@@ -173,8 +173,7 @@ namespace TFS.Web.Controllers
         public virtual ViewResult EditSquadronLog(int id)
         {
             var squadronLog = flightLogManager.FlightLogRepository.GetSquadronLogById(id);
-            var viewModel = Mapper.Map<SquadronLog, SquadronLogViewModel>(squadronLog);
-            viewModel.SetAvailablePersons(flightLogManager.FlightLogRepository.GetAvailableSquadronPersons());
+            var viewModel = CreateSquadronLogViewModel(squadronLog);
             return View(viewModel);
         }
 
@@ -186,12 +185,11 @@ namespace TFS.Web.Controllers
             squadronLogViewModel.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
             {
-                var viewModel = Mapper.Map<SquadronLog, SquadronLogViewModel>(squadronLog);
-                viewModel.SetAvailablePersons(flightLogManager.FlightLogRepository.GetAvailableSquadronPersons());
+                var viewModel = CreateSquadronLogViewModel(squadronLog);
                 return View(viewModel);
             }
             Mapper.Map<SquadronLogViewModel, SquadronLog>(squadronLogViewModel, squadronLog);
-            squadronLog.Person = flightLogManager.FlightLogRepository.GetSquadronPersonForUsername(squadronLogViewModel.PersonUsername);
+            squadronLog.Person = flightLogManager.UserRepository.GetPersonForUser(squadronLogViewModel.PersonUsername);
             squadronLog.MarkedUpdated();
             return RedirectToAction(MVC.FlightLogs.EditFlightLog(squadronLogViewModel.FlightLogId.Value));
         }
@@ -200,8 +198,8 @@ namespace TFS.Web.Controllers
         [RequireTransaction]
         public virtual ViewResult CreateSquadronLog(int flightLogId)
         {
-            var viewModel = new SquadronLogViewModel() { FlightLogId = flightLogId };
-            viewModel.SetAvailablePersons(flightLogManager.FlightLogRepository.GetAvailableSquadronPersons());
+            var viewModel = CreateSquadronLogViewModel(null);
+            viewModel.FlightLogId = flightLogId;
             return View(viewModel);
         }
 
@@ -212,14 +210,26 @@ namespace TFS.Web.Controllers
             squadronLogViewModel.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
             {
-                squadronLogViewModel.SetAvailablePersons(flightLogManager.FlightLogRepository.GetAvailableSquadronPersons());
-                return View(squadronLogViewModel);
+                var viewModel = CreateSquadronLogViewModel(null);
+                viewModel.FlightLogId = squadronLogViewModel.FlightLogId.Value;
+                return View(viewModel);
             }
             var flightLog = flightLogManager.FlightLogRepository.GetFlightLogById(squadronLogViewModel.FlightLogId.Value);
             var squadronLog = Mapper.Map<SquadronLogViewModel, SquadronLog>(squadronLogViewModel);
-            squadronLog.Person = flightLogManager.FlightLogRepository.GetSquadronPersonForUsername(squadronLogViewModel.PersonUsername);
+            squadronLog.Person = flightLogManager.UserRepository.GetPersonForUser(squadronLogViewModel.PersonUsername);
             flightLog.AddSquadronLog(squadronLog);
             return RedirectToAction(MVC.FlightLogs.EditFlightLog(squadronLogViewModel.FlightLogId.Value));
+        }
+
+        private SquadronLogViewModel CreateSquadronLogViewModel(SquadronLog squadronLog)
+        {
+            var viewModel = new SquadronLogViewModel();
+            if (squadronLog != null)
+            {
+                Mapper.Map<SquadronLog, SquadronLogViewModel>(squadronLog, viewModel);
+            }
+            viewModel.SetAvailablePersons(flightLogManager.UserRepository.GetAllActivePersons());
+            return viewModel;
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
@@ -242,7 +252,7 @@ namespace TFS.Web.Controllers
             }
             var flightLog = flightLogManager.FlightLogRepository.GetFlightLogById(squadronLogViewModel.FlightLogId.Value);
             var squadronLog = Mapper.Map<SquadronLogViewModel, SquadronLog>(squadronLogViewModel);
-            squadronLog.Person = flightLogManager.FlightLogRepository.GetSquadronPersonForUsername(squadronLogViewModel.PersonUsername);
+            squadronLog.Person = flightLogManager.UserRepository.GetPersonForUser(squadronLogViewModel.PersonUsername);
             flightLog.AddSquadronLog(squadronLog);
             return RedirectToAction(MVC.FlightLogs.BulkCreateSquadronLog(squadronLogViewModel.FlightLogId.Value));
         }
@@ -258,7 +268,7 @@ namespace TFS.Web.Controllers
             viewModel.CurrentSquadronLog = squadronLogViewModel;
             if (squadronLogViewModel == null)
                 viewModel.CurrentSquadronLog = new SquadronLogViewModel() { FlightLogId = flightLogId };
-            viewModel.CurrentSquadronLog.SetAvailablePersons(flightLogManager.FlightLogRepository.GetAvailableSquadronPersons());
+            viewModel.CurrentSquadronLog.SetAvailablePersons(flightLogManager.UserRepository.GetAllActivePersons());
             return viewModel;
         }
 

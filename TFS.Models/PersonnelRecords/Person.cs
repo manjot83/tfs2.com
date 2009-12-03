@@ -14,7 +14,7 @@ namespace TFS.Models.PersonnelRecords
     {
         public virtual int? Id { get; private set; }
 
-        [DomainEquality]
+        [DomainEquality, Required]
         public virtual User User { get; set; }
 
         public virtual string MiddleInitial { get; set; }

@@ -39,6 +39,7 @@ namespace TFS.Models.Users
                 User = user,
             };
             user.Person = person;
+            user.Validate();
             return person;
         }
 
@@ -51,6 +52,7 @@ namespace TFS.Models.Users
                 Person = person,
             };
             person.Qualifications = qual;
+            person.Validate();
             return qual;
         }
     }

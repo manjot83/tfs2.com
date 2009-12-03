@@ -5,6 +5,7 @@ using System.Linq;
 using TFS.Models;
 using Iesi.Collections.Generic;
 using TFS.Models.FlightPrograms;
+using TFS.Models.Validation;
 
 namespace TFS.Models.FlightLogs
 {
@@ -21,9 +22,9 @@ namespace TFS.Models.FlightLogs
 
         public virtual int? Id { get; set; }
 
-        [DomainEquality, Required]
+        [DomainEquality, Required, DateTimeKind(DateTimeKind.Utc)]
         public virtual DateTime LogDate { get; set; }
-        [DomainEquality, Required]
+        [DomainEquality, Required, DateTimeKind(DateTimeKind.Utc)]
         public virtual DateTime LastModifiedDate { get; set; }
 
         [DomainEquality, Required]
@@ -74,6 +75,7 @@ namespace TFS.Models.FlightLogs
             mission.FlightLog = this;
             mission.MarkedUpdated();
             Missions.Add(mission);
+            mission.Validate();
             return mission;
         }
         public virtual SquadronLog AddSquadronLog(SquadronLog squadronLog)
@@ -81,6 +83,7 @@ namespace TFS.Models.FlightLogs
             squadronLog.FlightLog = this;
             squadronLog.MarkedUpdated();
             SquadronLogs.Add(squadronLog);
+            squadronLog.Validate();
             return squadronLog;
         }
     }

@@ -83,5 +83,19 @@ namespace TFS.Models.Data.Users
             user.Validate();
             return Session.SaveOrUpdateCopy<User>(user);
         }
+
+        public IList<Person> GetAllActivePersons()
+        {
+            return GetAllActiveUsers()
+                .ToList()
+                .Where(x => x.Person != null)
+                .Select(x => x.Person).ToList();
+        }
+
+        public Person GetPersonForUser(string username)
+        {
+            var user = GetUser(username);
+            return user != null ? user.Person : null;
+        }
     }
 }

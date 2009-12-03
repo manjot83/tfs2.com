@@ -29,6 +29,7 @@ namespace TFS.Models.Data.FlightPrograms
         {
             if (GetAllPositions().Any(x => x.Title.Matches(position.Title)))
                 throw new InvalidOperationException(string.Format("A position with the title {0} already exists", position.Title));
+            position.Validate();
             return Session.SaveOrUpdateCopy<Position>(position);
         }
 
@@ -49,6 +50,7 @@ namespace TFS.Models.Data.FlightPrograms
 
         public FlightProgram AddProgram(FlightProgram program)
         {
+            program.Validate();
             return Session.SaveOrUpdateCopy<FlightProgram>(program);
         }
 

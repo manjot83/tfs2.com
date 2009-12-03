@@ -13,9 +13,6 @@ namespace TFS.Models.FlightLogs
         FlightLog GetFlightLogById(int id);
         Mission GetMissionById(int id);
         SquadronLog GetSquadronLogById(int id);
-        
-        IList<Person> GetAvailableSquadronPersons();
-        Person GetSquadronPersonForUsername(string username);
 
         FlightLog AddFlightLog(FlightLog flightLog);
     }
