@@ -5,12 +5,12 @@ namespace TFS.Models.FlightPrograms
 {
     public class FlightProgramsManager
     {
-        public FlightProgramsManager(IProgramsRepository programsRepository)
+        public FlightProgramsManager(IFlightProgramsRepository programsRepository)
         {
             ProgramsRepository = programsRepository;
         }
 
-        public IProgramsRepository ProgramsRepository { get; private set; }
+        public IFlightProgramsRepository ProgramsRepository { get; private set; }
 
         public Position CreateNewPosition(string title)
         {

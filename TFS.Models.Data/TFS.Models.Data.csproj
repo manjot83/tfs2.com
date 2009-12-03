@@ -90,7 +90,7 @@
     <Compile Include="Mappings\FlightPrograms\FlightProgramMap.cs" />
     <Compile Include="Mappings\FlightPrograms\PositionMap.cs" />
     <Compile Include="Mappings\FlightPrograms\ProgramLocationMap.cs" />
-    <Compile Include="FlightPrograms\ProgramsRepository.cs" />
+    <Compile Include="FlightPrograms\FlightProgramsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Mappings\Site\PageMap.cs" />
     <Compile Include="SessionExtensions.cs" />

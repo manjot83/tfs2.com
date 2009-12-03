@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TFS.Models.FlightPrograms
 {
-    public interface IProgramsRepository
+    public interface IFlightProgramsRepository
     {
         IList<Position> GetAllPositions();
         Position GetPositionById(int id);
@@ -16,6 +16,7 @@ namespace TFS.Models.FlightPrograms
         FlightProgram GetProgramById(int id);
         FlightProgram AddProgram(FlightProgram program);
 
+        IEnumerable<ProgramLocation> GetAllActiveProgramLocations();
         ProgramLocation GetProgramLocationById(int id);
     }
 }

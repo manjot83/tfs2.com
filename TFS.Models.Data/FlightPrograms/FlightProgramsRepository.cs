@@ -8,9 +8,9 @@ using TFS.Models.FlightPrograms;
 
 namespace TFS.Models.Data.FlightPrograms
 {
-    public class ProgramsRepository : BaseDataAccessObject, IProgramsRepository
+    public class FlightProgramsRepository : BaseDataAccessObject, IFlightProgramsRepository
     {
-        public ProgramsRepository(ISession session)
+        public FlightProgramsRepository(ISession session)
             : base(session)
         {
         }
@@ -55,6 +55,11 @@ namespace TFS.Models.Data.FlightPrograms
         public ProgramLocation GetProgramLocationById(int id)
         {
             return Session.Get<ProgramLocation>(id);
+        }
+
+        public IEnumerable<ProgramLocation> GetAllActiveProgramLocations()
+        {
+            return Session.Linq<ProgramLocation>().Where(x => x.Program.Active).ToList();
         }
     }
 }

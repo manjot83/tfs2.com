@@ -81,7 +81,7 @@
     <Compile Include="InvalidModelException.cs" />
     <Compile Include="FlightPrograms\AircraftMDS.cs" />
     <Compile Include="FlightPrograms\FlightProgram.cs" />
-    <Compile Include="FlightPrograms\IProgramsRepository.cs" />
+    <Compile Include="FlightPrograms\IFlightProgramsRepository.cs" />
     <Compile Include="FlightPrograms\ProgramLocation.cs" />
     <Compile Include="Reports\CsvReportGenerator.cs" />
     <Compile Include="Reports\FlightTimeSummaryReport.cs" />
