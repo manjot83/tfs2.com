@@ -4,7 +4,6 @@ DECLARE @flightProgramId INT
 
 IF NOT EXISTS(SELECT * FROM [ProgramLocations])
     BEGIN
-        DBCC CHECKIDENT ([ProgramLocations], reseed, 0)
         INSERT INTO [FlightPrograms] ([Name],[AccountName],[Active])
                VALUES ('Dummy Program', 'Dummy Program', 1)
         SET @flightProgramId = (SELECT TOP 1 [Id] FROM [FlightPrograms])
