@@ -9,6 +9,7 @@ using System.IO;
 using System.Diagnostics;
 using Iesi.Collections.Generic;
 using TFS.Models.Users;
+using TFS.Models.FlightPrograms;
 
 namespace TFS.Models.Tests.Reports
 {
@@ -22,7 +23,16 @@ namespace TFS.Models.Tests.Reports
                 LogDate = DateTime.UtcNow,
                 AircraftMDS = "C130J",
                 AircraftSerialNumber = "THX1138",
-                Location = "Marietta, GA",
+                Location = new ProgramLocation()
+                {
+                    Name = "Marietta, GA",
+                    Program = new FlightProgram()
+                    {
+                        Name = "TFS",
+                        AccountName = "TFS",
+                        Active = true,
+                    },
+                },
             };
             flightLog.Missions = new HashedSet<Mission>
             {

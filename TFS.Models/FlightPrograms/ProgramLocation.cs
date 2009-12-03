@@ -17,5 +17,10 @@ namespace TFS.Models.FlightPrograms
         [DomainEquality]
         [Required, StringLength(100)]
         public virtual string Name { get; set; }
+
+        public virtual string ToDisplayString()
+        {
+            return Program.Name + " / " + Name;
+        }
     }
 }

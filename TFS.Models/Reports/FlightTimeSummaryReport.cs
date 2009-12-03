@@ -107,7 +107,7 @@ namespace TFS.Models.Reports
             writer.WriteAttributeString("Date", flightLog.LogDate.ToString("MM/dd/yy"));
             writer.WriteAttributeString("MDS", flightLog.AircraftMDS);
             writer.WriteAttributeString("SerialNumber", flightLog.AircraftSerialNumber);
-            writer.WriteAttributeString("Location", flightLog.Location);
+            writer.WriteAttributeString("Location", flightLog.Location.ToDisplayString());
             writer.WriteAttributeString("OperatingUnit", flightLog.OperatingUnit);
             writer.WriteAttributeString("GeneratedDate", DateTime.UtcNow.ToString("MM/dd/yy"));
         }

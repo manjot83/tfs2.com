@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using TFS.Models;
 using Iesi.Collections.Generic;
+using TFS.Models.FlightPrograms;
 
 namespace TFS.Models.FlightLogs
 {
@@ -31,7 +32,7 @@ namespace TFS.Models.FlightLogs
         public virtual string AircraftSerialNumber { get; set; } // "Serial No." or Tail Number
 
         [DomainEquality, Required]
-        public virtual string Location { get; set; } // Todo Change to "Program Location"
+        public virtual ProgramLocation Location { get; set; }
 
         public virtual ISet<Mission> Missions { get; set; }
         public virtual ISet<SquadronLog> SquadronLogs { get; set; }

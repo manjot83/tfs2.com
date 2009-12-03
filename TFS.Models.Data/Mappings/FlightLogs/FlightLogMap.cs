@@ -14,6 +14,25 @@ namespace TFS.Models.Data.Mappings.FlightLogs
                 .GeneratedBy.Identity()
                 .Not.Nullable();
 
+            Map(x => x.LogDate)
+                .CustomType<UtcDateTimeUserType>()
+                .Not.Nullable();
+            Map(x => x.LastModifiedDate)
+                .CustomType<UtcDateTimeUserType>()
+                .Not.Nullable();
+            Map(x => x.AircraftMDS)
+                .Length(50)
+                .Not.Nullable();
+            Map(x => x.AircraftSerialNumber)
+                .Length(50)
+                .Not.Nullable();
+
+            References(x => x.Location)
+                .ForeignKey("FK_FlightLogs_ProgramLocations")
+                .Column("ProgramLocationId")
+                //.Cascade.None()
+                .Not.Nullable();
+
             HasMany(x => x.Missions)
                 .KeyColumn("FlightLogId")
                 .Inverse()
@@ -22,22 +41,6 @@ namespace TFS.Models.Data.Mappings.FlightLogs
                 .KeyColumn("FlightLogId")
                 .Inverse()
                 .Cascade.SaveUpdate();
-
-            Map(x => x.LogDate)
-                .CustomType<UtcDateTimeUserType>()
-                .Not.Nullable();
-            Map(x => x.LastModifiedDate)
-                .CustomType<UtcDateTimeUserType>()
-                .Not.Nullable();
-            Map(x => x.Location)
-                .Length(100)
-                .Not.Nullable();
-            Map(x => x.AircraftMDS)
-                .Length(50)
-                .Not.Nullable();
-            Map(x => x.AircraftSerialNumber)
-                .Length(50)
-                .Not.Nullable();
         }
     }
 }
