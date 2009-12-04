@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using StructureMap.Configuration.DSL;
+﻿using FluentNHibernate.Cfg;
 using NHibernate;
 using StructureMap.Attributes;
-using FluentNHibernate.Cfg;
-using TFS.Models.Data.Users;
-using TFS.Models.Users;
+using StructureMap.Configuration.DSL;
+using TFS.Models;
+using TFS.Models.Data;
 using TFS.Models.FlightLogs;
 using TFS.Models.FlightPrograms;
+using TFS.Models.Users;
 
 namespace TFS.Web
 {
@@ -27,8 +24,8 @@ namespace TFS.Web
 
             Scan(x =>
             {
-                x.AssemblyContainingType<IUserRepository>();
-                x.AssemblyContainingType<UserRepository>();
+                x.AssemblyContainingType<IUnitOfWork>();
+                x.AssemblyContainingType<UnitOfWork>();
                 x.With<StructureMap.Graph.DefaultConventionScanner>();
             });
 

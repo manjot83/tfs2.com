@@ -1,6 +1,6 @@
-﻿using System.Web.Mvc;
-using NHibernate;
-using StructureMap;
+﻿using System;
+using System.Web.Mvc;
+using TFS.Models;
 
 namespace TFS.Web.ActionFilters
 {
@@ -8,31 +8,25 @@ namespace TFS.Web.ActionFilters
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var theSession = ObjectFactory.GetInstance<ISession>();
-            if (!theSession.Transaction.IsActive)
-            {
-                theSession.BeginTransaction();
-            }
+            var container = filterContext.HttpContext.ApplicationInstance as ICanResolveDependencies;
+            if (container == null)
+                throw new InvalidOperationException("HttpApplication must implemented ICanResolveDependencies");
+
+            var unitOfWork = container.Resolve<IUnitOfWork>();
+            unitOfWork.Begin();
         }
 
         public override void OnResultExecuted(ResultExecutedContext filterContext)
         {
-            var theSession = ObjectFactory.GetInstance<ISession>();
-            if (theSession.Transaction.IsActive)
-            {
-                try
-                {
-                    if (filterContext.Exception == null &&
-                        filterContext.Controller.ViewData.ModelState.IsValid)
-                        theSession.Transaction.Commit();
-                    else
-                        theSession.Transaction.Rollback();
-                }
-                finally
-                {
-                    theSession.Close();
-                }
-            }
+            var container = filterContext.HttpContext.ApplicationInstance as ICanResolveDependencies;
+            if (container == null)
+                throw new InvalidOperationException("HttpApplication must implemented ICanResolveDependencies");
+
+            var unitOfWork = container.Resolve<IUnitOfWork>();
+            if (filterContext.Exception == null)
+                unitOfWork.Finish();
+            else
+                unitOfWork.Abort();
         }
     }
 }

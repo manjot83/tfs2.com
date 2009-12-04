@@ -8,9 +8,12 @@ namespace TFS.Web
     {
         protected override IController GetControllerInstance(Type controllerType)
         {
+            var container = RequestContext.HttpContext.ApplicationInstance as ICanResolveDependencies;
+            if (container == null)
+                throw new InvalidOperationException("HttpApplication must implemented ICanResolveDependencies");
             if (controllerType == null)
                 return base.GetControllerInstance(controllerType);
-            return (IController)ObjectFactory.GetInstance(controllerType) ??
+            return (IController)container.Resolve(controllerType) ??
                    base.GetControllerInstance(controllerType);
         }
     }

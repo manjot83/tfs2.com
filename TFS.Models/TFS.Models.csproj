@@ -87,6 +87,7 @@
     <Compile Include="FlightPrograms\FlightProgram.cs" />
     <Compile Include="FlightPrograms\IFlightProgramsRepository.cs" />
     <Compile Include="FlightPrograms\ProgramLocation.cs" />
+    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Messages\Announcement.cs" />
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Reports\CsvReportGenerator.cs" />
