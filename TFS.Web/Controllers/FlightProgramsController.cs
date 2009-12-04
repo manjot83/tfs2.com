@@ -9,17 +9,21 @@ using TFS.Models.FlightPrograms;
 using TFS.Web.ViewModels.FlightPrograms;
 using TFS.Web.ViewModels;
 using AutoMapper;
+using NHibernate;
+using TFS.Models;
 
 namespace TFS.Web.Controllers
 {
     [DomainAuthorize]
     public partial class FlightProgramsController : Controller
     {
-        private readonly FlightProgramsManager flightProgramsManager;
+        private readonly IDomainModelRoot domainModelRoot;
+        private readonly IFlightProgramsRepository flightProgramsRepository;
 
-        public FlightProgramsController(FlightProgramsManager flightProgramsManager)
+        public FlightProgramsController(IDomainModelRoot domainModelRoot, IFlightProgramsRepository flightProgramsRepository)
         {
-            this.flightProgramsManager = flightProgramsManager;
+            this.domainModelRoot = domainModelRoot;
+            this.flightProgramsRepository = flightProgramsRepository;
         }
 
         [RequireTransaction]
@@ -37,10 +41,10 @@ namespace TFS.Web.Controllers
             };
             IEnumerable<FlightProgram> programs = null;
             if (viewModel.ShowAllPrograms)
-                programs = flightProgramsManager.ProgramsRepository.GetAllPrograms();
+                programs = flightProgramsRepository.GetAllPrograms();
             else
-                programs = flightProgramsManager.ProgramsRepository.GetAllActivePrograms();
-            var positions = flightProgramsManager.ProgramsRepository.GetAllPositions();
+                programs = flightProgramsRepository.GetAllActivePrograms();
+            var positions = flightProgramsRepository.GetAllPositions();
             viewModel.Positions = Mapper.Map<IEnumerable<Position>, IEnumerable<PositionViewModel>>(positions);
             viewModel.FlightPrograms = Mapper.Map<IEnumerable<FlightProgram>, IEnumerable<FlightProgramListItemViewModel>>(programs);
             return View(Views.Manage, viewModel);
@@ -60,7 +64,7 @@ namespace TFS.Web.Controllers
             if (!ModelState.IsValid)
                 return View(Views.CreateFlightProgram, flightProgramViewModel);
             var flightProgram = Mapper.Map<FlightProgramViewModel, FlightProgram>(flightProgramViewModel);
-            flightProgram = flightProgramsManager.CreateNewFlightProgram(flightProgram);
+            flightProgram = flightProgramsRepository.AddNewFlightProgram(flightProgram);
             return RedirectToAction(MVC.FlightPrograms.EditFlightProgram(flightProgram.Id.Value));
         }
 
@@ -68,7 +72,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult EditFlightProgram(int id)
         {
-            var flightProgram = flightProgramsManager.ProgramsRepository.GetProgramById(id);
+            var flightProgram = domainModelRoot.GetDomainObject<FlightProgram>(id);
             var viewModel = Mapper.Map<FlightProgram, FlightProgramViewModel>(flightProgram);
             return View(Views.EditFlightProgram, viewModel);
         }
@@ -77,7 +81,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult EditFlightProgram(int id, FlightProgramViewModel flightProgramViewModel)
         {
-            var flightProgram = flightProgramsManager.ProgramsRepository.GetProgramById(id);
+            var flightProgram = domainModelRoot.GetDomainObject<FlightProgram>(id);
             flightProgramViewModel.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
             {
@@ -101,7 +105,7 @@ namespace TFS.Web.Controllers
             positionViewModel.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
                 return View(Views.CreatePosition, positionViewModel);
-            flightProgramsManager.CreateNewPosition(positionViewModel.Title);
+            flightProgramsRepository.AddNewPosition(positionViewModel.Title);
             return RedirectToAction(MVC.FlightPrograms.Manage());
         }
 
@@ -109,7 +113,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult RenamePosition(int id)
         {
-            var position = flightProgramsManager.ProgramsRepository.GetPositionById(id);
+            var position = domainModelRoot.GetDomainObject<Position>(id);
             var viewModel = Mapper.Map<Position, PositionViewModel>(position);
             return View(Views.EditPosition, viewModel);
         }
@@ -118,7 +122,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult RenamePosition(int id, PositionViewModel positionViewModel)
         {
-            var position = flightProgramsManager.ProgramsRepository.GetPositionById(id);
+            var position = domainModelRoot.GetDomainObject<Position>(id);
             positionViewModel.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
             {
@@ -133,7 +137,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult CreateProgramLocation(int flightProgramId)
         {
-            var program = flightProgramsManager.ProgramsRepository.GetProgramById(flightProgramId);
+            var program = domainModelRoot.GetDomainObject<FlightProgram>(flightProgramId);
             return View(Views.CreateProgramLocation, new ProgramLocationViewModel() { ProgramId = program.Id.Value, ProgramName = program.Name });
         }
 
@@ -144,7 +148,7 @@ namespace TFS.Web.Controllers
             programLocationViewModel.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
                 return View(Views.CreateProgramLocation, programLocationViewModel);
-            var program = flightProgramsManager.ProgramsRepository.GetProgramById(programLocationViewModel.ProgramId);
+            var program = domainModelRoot.GetDomainObject<FlightProgram>(programLocationViewModel.ProgramId);
             var location = Mapper.Map<ProgramLocationViewModel, ProgramLocation>(programLocationViewModel);
             program.AddLocation(location);
             return RedirectToAction(MVC.FlightPrograms.EditFlightProgram(program.Id.Value));
@@ -154,7 +158,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult EditProgramLocation(int id)
         {
-            var location = flightProgramsManager.ProgramsRepository.GetProgramLocationById(id);
+            var location = domainModelRoot.GetDomainObject<ProgramLocation>(id);
             var viewModel = Mapper.Map<ProgramLocation, ProgramLocationViewModel>(location);
             return View(Views.EditProgramLocation, viewModel);
         }
@@ -163,7 +167,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult EditProgramLocation(ProgramLocationViewModel programLocationViewModel)
         {
-            var location = flightProgramsManager.ProgramsRepository.GetProgramLocationById(programLocationViewModel.Id.Value);
+            var location = domainModelRoot.GetDomainObject<ProgramLocation>(programLocationViewModel.Id.Value);
             programLocationViewModel.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
             {

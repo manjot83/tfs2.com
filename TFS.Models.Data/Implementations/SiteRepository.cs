@@ -6,7 +6,7 @@ using TFS.Models.Site;
 using NHibernate;
 using NHibernate.Linq;
 
-namespace TFS.Models.Data.Site
+namespace TFS.Models.Data.Implementations
 {
     public class SiteRepository : BaseDataAccessObject, ISiteRepository
     {

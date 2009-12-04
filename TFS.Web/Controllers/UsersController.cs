@@ -14,11 +14,11 @@ namespace TFS.Web.Controllers
     [DomainAuthorize]
     public partial class UsersController : Controller
     {
-        private readonly UserManager userManager;
+        private readonly IUserRepository userRepository;
 
-        public UsersController(UserManager userManager)
+        public UsersController(IUserRepository userRepository)
         {
-            this.userManager = userManager;
+            this.userRepository = userRepository;
         }
 
         [RequireTransaction]
@@ -43,9 +43,9 @@ namespace TFS.Web.Controllers
             };
             IEnumerable<User> users = null;
             if (viewModel.ShowAll)
-                users = userManager.UserRepository.GetAllUsers();
+                users = userRepository.GetAllUsers();
             else
-                users = userManager.UserRepository.GetAllActiveUsers();            
+                users = userRepository.GetAllActiveUsers();            
             if (viewModel.IsCurrentSortType("name") && viewModel.SortDirection == SortDirection.Ascending)
                 users = users.OrderBy(x => x.LastName);
             else if (viewModel.IsCurrentSortType("name"))
@@ -72,7 +72,7 @@ namespace TFS.Web.Controllers
         [RequireTransaction]
         public virtual ViewResult Edit(string username)
         {
-            var user = userManager.UserRepository.GetUser(username);
+            var user = this.GetUser(username);
             var viewModel = Mapper.Map<User, UserViewModel>(user);
             return View(viewModel);
         }
@@ -84,7 +84,7 @@ namespace TFS.Web.Controllers
             userViewModel.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
                 return View(userViewModel);
-            var user = userManager.UserRepository.GetUser(userViewModel.Username);
+            var user = userRepository.GetUser(userViewModel.Username);
             Mapper.Map<UserViewModel, User>(userViewModel, user);
             return RedirectToAction(MVC.Users.List());
         }
@@ -100,11 +100,11 @@ namespace TFS.Web.Controllers
         public virtual ActionResult Create(UserViewModel userViewModel)
         {
             userViewModel.Validate(ModelState, string.Empty);
-            if (ModelState.IsValid && userManager.UserRepository.GetUser(userViewModel.Username) != null)
+            if (ModelState.IsValid && userRepository.GetUser(userViewModel.Username) != null)
                 ModelState.AddModelError("username", "Username must be unique.");
             if (!ModelState.IsValid)
                 return View(userViewModel);
-            userManager.CreateUser(userViewModel.Username, userViewModel.FirstName, userViewModel.LastName, userViewModel.DisplayName);
+            userRepository.CreateUser(userViewModel.Username, userViewModel.FirstName, userViewModel.LastName, userViewModel.DisplayName);
             return RedirectToAction(MVC.Users.List());
         }
     }

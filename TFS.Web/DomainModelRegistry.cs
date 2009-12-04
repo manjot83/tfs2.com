@@ -28,18 +28,6 @@ namespace TFS.Web
                 x.AssemblyContainingType<UnitOfWork>();
                 x.With<StructureMap.Graph.DefaultConventionScanner>();
             });
-
-            ForRequestedType<FlightLogManager>()
-                .CacheBy(InstanceScope.Hybrid)
-                .TheDefaultIsConcreteType<FlightLogManager>();
-
-            ForRequestedType<FlightProgramsManager>()
-                .CacheBy(InstanceScope.Hybrid)
-                .TheDefaultIsConcreteType<FlightProgramsManager>();
-
-            ForRequestedType<UserManager>()
-                .CacheBy(InstanceScope.Hybrid)
-                .TheDefaultIsConcreteType<UserManager>();
         }
     }
 }

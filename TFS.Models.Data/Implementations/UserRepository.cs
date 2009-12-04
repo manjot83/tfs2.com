@@ -8,7 +8,7 @@ using NHibernate.Linq;
 using TFS.Models.PersonnelRecords;
 using TFS.Models.Users;
 
-namespace TFS.Models.Data.Users
+namespace TFS.Models.Data.Implementations
 {
     public class UserRepository : BaseDataAccessObject, IUserRepository
     {
@@ -78,12 +78,6 @@ namespace TFS.Models.Data.Users
         //    return true;
         //}
 
-        public User AddUser(User user)
-        {
-            user.Validate();
-            return Session.SaveOrUpdateCopy<User>(user);
-        }
-
         public IList<Person> GetAllActivePersons()
         {
             return GetAllActiveUsers()
@@ -96,6 +90,47 @@ namespace TFS.Models.Data.Users
         {
             var user = GetUser(username);
             return user != null ? user.Person : null;
+        }
+
+        public User CreateUser(string username, string firstname, string lastname, string displayname)
+        {
+            var user = new User
+            {
+                Username = username,
+                FirstName = firstname,
+                LastName = lastname,
+                DisplayName = displayname,
+                Disabled = false,
+            };
+            user.SetDefaultEmailAddress(username);
+            user.Validate();
+            return Session.SaveOrUpdateCopy<User>(user);
+        }
+
+        public Person CreatePersonFor(User user)
+        {
+            if (user.Person != null)
+                throw new InvalidOperationException("User already has a Person object attached");
+            var person = new Person
+            {
+                User = user,
+            };
+            user.Person = person;
+            user.Validate();
+            return person;
+        }
+
+        public Qualifications CreateQualificationsFor(Person person)
+        {
+            if (person.Qualifications != null)
+                throw new InvalidOperationException("Person already has a Qualifications object attached");
+            var qual = new Qualifications
+            {
+                Person = person,
+            };
+            person.Qualifications = qual;
+            person.Validate();
+            return qual;
         }
     }
 }

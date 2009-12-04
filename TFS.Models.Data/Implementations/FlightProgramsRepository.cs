@@ -6,7 +6,7 @@ using NHibernate.Linq;
 using TFS.Extensions;
 using TFS.Models.FlightPrograms;
 
-namespace TFS.Models.Data.FlightPrograms
+namespace TFS.Models.Data.Implementations
 {
     public class FlightProgramsRepository : BaseDataAccessObject, IFlightProgramsRepository
     {
@@ -20,15 +20,11 @@ namespace TFS.Models.Data.FlightPrograms
             return Session.Linq<Position>().ToList();
         }
 
-        public Position GetPositionById(int id)
+        public Position AddNewPosition(string title)
         {
-            return Session.Get<Position>(id);
-        }
-
-        public Position AddPosition(Position position)
-        {
-            if (GetAllPositions().Any(x => x.Title.Matches(position.Title)))
-                throw new InvalidOperationException(string.Format("A position with the title {0} already exists", position.Title));
+            if (GetAllPositions().Any(x => x.Title.Matches(title)))
+                throw new InvalidOperationException(string.Format("A position with the title {0} already exists", title));
+            var position = new Position { Title = title };
             position.Validate();
             return Session.SaveOrUpdateCopy<Position>(position);
         }
@@ -43,20 +39,11 @@ namespace TFS.Models.Data.FlightPrograms
             return Session.Linq<FlightProgram>().ToList();
         }
 
-        public FlightProgram GetProgramById(int id)
+        public FlightProgram AddNewFlightProgram(FlightProgram flightProgram)
         {
-            return Session.Get<FlightProgram>(id);
-        }
-
-        public FlightProgram AddProgram(FlightProgram program)
-        {
-            program.Validate();
-            return Session.SaveOrUpdateCopy<FlightProgram>(program);
-        }
-
-        public ProgramLocation GetProgramLocationById(int id)
-        {
-            return Session.Get<ProgramLocation>(id);
+            flightProgram.Active = true;
+            flightProgram.Validate();
+            return Session.SaveOrUpdateCopy<FlightProgram>(flightProgram);
         }
 
         public IEnumerable<ProgramLocation> GetAllActiveProgramLocations()

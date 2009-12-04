@@ -12,19 +12,22 @@ using TFS.Models.Users;
 using TFS.Web.ActionFilters;
 using TFS.Web.ViewModels;
 using TFS.Web.ViewModels.PersonnelRecords;
+using TFS.Models;
 
 namespace TFS.Web.Controllers
 {
     [DomainAuthorize]
     public partial class PersonnelRecordsController : Controller
     {
-        private readonly UserManager userManager;
-        private readonly FlightProgramsManager programsManager;
+        private readonly IDomainModelRoot domainModelRoot;
+        private readonly IUserRepository userRepository;
+        private readonly IFlightProgramsRepository flightProgramsRepository;
 
-        public PersonnelRecordsController(UserManager userManager, FlightProgramsManager programsManager)
+        public PersonnelRecordsController(IDomainModelRoot domainModelRoot, IUserRepository userRepository, IFlightProgramsRepository flightProgramsRepository)
         {
-            this.userManager = userManager;
-            this.programsManager = programsManager;
+            this.domainModelRoot = domainModelRoot;
+            this.userRepository = userRepository;
+            this.flightProgramsRepository = flightProgramsRepository;
         }
 
         [RequireTransaction]
@@ -41,7 +44,7 @@ namespace TFS.Web.Controllers
                 ItemsPerPage = itemsPerPage.HasValue ? itemsPerPage.Value : SortedListViewModel<PersonnelRecordListViewModel>.DefaultItemsPerPage,
             };
 
-            IEnumerable<User> users = userManager.UserRepository.GetAllActiveUsers().ToList();
+            IEnumerable<User> users = userRepository.GetAllActiveUsers().ToList();
             var items = Mapper.Map<IEnumerable<User>, IEnumerable<PersonnelRecordListViewModel>>(users);
             if (viewModel.IsCurrentSortType("name") && viewModel.SortDirection == SortDirection.Ascending)
                 items = items.OrderBy(x => x.FileByName);
@@ -59,12 +62,12 @@ namespace TFS.Web.Controllers
         [RequireTransaction]
         public virtual ViewResult EditRecord(string username)
         {
-            var user = userManager.UserRepository.GetUser(username);
+            var user = userRepository.GetUser(username);
             var person = user.Person;
             if (person == null)
-                person = userManager.CreatePersonFor(user);
+                person = userRepository.CreatePersonFor(user);
             if (person.Qualifications == null)
-                userManager.CreateQualificationsFor(person);
+                userRepository.CreateQualificationsFor(person);
             var viewModel = GeneratePersonnelRecordViewModel(person, false);
             return View(MVC.PersonnelRecords.Views.EditRecord, viewModel);
         }
@@ -72,12 +75,12 @@ namespace TFS.Web.Controllers
         [RequireTransaction]
         public virtual ViewResult EditMyRecord()
         {
-            var user = userManager.UserRepository.GetUser(User.Identity.Name);
+            var user = this.GetCurrentUser();
             var person = user.Person;
             if (person == null)
-                person = userManager.CreatePersonFor(user);
+                person = userRepository.CreatePersonFor(user);
             if (person.Qualifications == null)
-                userManager.CreateQualificationsFor(person);
+                userRepository.CreateQualificationsFor(person);
             var viewModel = GeneratePersonnelRecordViewModel(person, true);
             return View(MVC.PersonnelRecords.Views.EditRecord, viewModel);
         }
@@ -87,7 +90,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditPersonalInfo(string username, bool editingMyRecord, PersonalInfo personalInfo)
         {
             personalInfo.Validate(ModelState, string.Empty);
-            var person = userManager.UserRepository.GetUser(username).Person;
+            var person = this.GetUser(username).Person;
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
             Mapper.Map<PersonalInfo, Person>(personalInfo, person);
@@ -102,7 +105,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditContactInfo(string username, bool editingMyRecord, ContactInfo contactInfo)
         {
             contactInfo.Validate(ModelState, string.Empty);
-            var person = userManager.UserRepository.GetUser(username).Person;
+            var person = this.GetUser(username).Person;
             if (USState.FromAbbreviation(contactInfo.AddressState.ToUpper()) == null)
                 ModelState.AddModelError("State", "Must be a valid US state abbreviation.");
             if (!ModelState.IsValid)
@@ -119,11 +122,11 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditCompanyInfo(string username, bool editingMyRecord, CompanyInfo companyInfo)
         {
             companyInfo.Validate(ModelState, string.Empty);
-            var person = userManager.UserRepository.GetUser(username).Person;
+            var person = this.GetUser(username).Person;
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
             Mapper.Map<CompanyInfo, Person>(companyInfo, person);
-            person.HirePosition = programsManager.ProgramsRepository.GetPositionById(companyInfo.HirePositionId.Value);
+            person.HirePosition = domainModelRoot.GetDomainObject<Position>(companyInfo.HirePositionId.Value);
             if (editingMyRecord)
                 return RedirectToAction(MVC.PersonnelRecords.EditMyRecord());
             else
@@ -135,7 +138,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditQualifications(string username, bool editingMyRecord, QualificationViewModel qualifications)
         {
             qualifications.Validate(ModelState, string.Empty);
-            var person = userManager.UserRepository.GetUser(username).Person;
+            var person = this.GetUser(username).Person;
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
 
@@ -151,14 +154,14 @@ namespace TFS.Web.Controllers
             var viewModel = new PersonnelRecordViewModel();
             Mapper.Map<Person, PersonnelRecordViewModel>(person, viewModel);
             viewModel.EditingMyRecord = editingMyRecord;
-            viewModel.SetHirePositions(programsManager.ProgramsRepository.GetAllPositions(), person.HirePosition);
+            viewModel.SetHirePositions(flightProgramsRepository.GetAllPositions(), person.HirePosition);
             return viewModel;
         }
 
         [RequireTransaction]
         public virtual FileContentResult DownloadAllAsCsv()
         {
-            var users = userManager.UserRepository.GetAllActiveUsers().OrderBy(x => x.FileByName());
+            var users = userRepository.GetAllActiveUsers().OrderBy(x => x.FileByName());
             var reportGenerator = new CsvReportGenerator(new PersonnelFileReport(users));
             var bytes = reportGenerator.GenerateReport();
             return File(bytes, "text/csv", "PersonnelRecords(" + DateTime.Now.ToString("MM-dd-yy") + ").csv");

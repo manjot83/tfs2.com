@@ -9,7 +9,6 @@ namespace TFS.Models.Help
     {
         IEnumerable<Question> GetAllQuestions();
         IEnumerable<Question> GetRecentQuestions(int maxResult);
-        Question GetQuestionById(int id);
         Question AddQuestion(Question question);
     }
 }

@@ -68,7 +68,6 @@
     <Compile Include="DomainModelException.cs" />
     <Compile Include="DomainEqualityAttribute.cs" />
     <Compile Include="FlightLogs\DutyCode.cs" />
-    <Compile Include="FlightLogs\FlightLogManager.cs" />
     <Compile Include="FlightLogs\IFlightLogRepository.cs" />
     <Compile Include="FlightLogs\Mission.cs" />
     <Compile Include="FlightLogs\FlightLog.cs" />
@@ -76,9 +75,9 @@
     <Compile Include="Geography\USAddress.cs" />
     <Compile Include="Geography\USState.cs" />
     <Compile Include="Help\Answer.cs" />
-    <Compile Include="Help\HelpManager.cs" />
     <Compile Include="Help\IHelpRepository.cs" />
     <Compile Include="Help\Question.cs" />
+    <Compile Include="IDomainModelRoot.cs" />
     <Compile Include="IKeyedModel.cs" />
     <Compile Include="Images\IImageFinder.cs" />
     <Compile Include="Images\StaticImage.cs" />
@@ -95,7 +94,6 @@
     <Compile Include="Reports\ICsvReport.cs" />
     <Compile Include="Reports\IXmlReport.cs" />
     <Compile Include="Users\Roles.cs" />
-    <Compile Include="Users\UserManager.cs" />
     <Compile Include="PersonnelRecords\FCFQualification.cs" />
     <Compile Include="PersonnelRecords\FlightSuitSize.cs" />
     <Compile Include="PersonnelRecords\Gender.cs" />
@@ -105,7 +103,6 @@
     <Compile Include="PersonnelRecords\Qualifications.cs" />
     <Compile Include="PersonnelRecords\ServiceBranch.cs" />
     <Compile Include="PersonnelRecords\ShirtSize.cs" />
-    <Compile Include="FlightPrograms\FlightProgramsManager.cs" />
     <Compile Include="FlightPrograms\Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegExLib.cs" />

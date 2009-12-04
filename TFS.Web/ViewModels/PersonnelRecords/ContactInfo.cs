@@ -5,7 +5,6 @@ using System.Web;
 using TFS.Models;
 using TFS.Models.Geography;
 using System.ComponentModel.DataAnnotations;
-using TFS.Models;
 
 namespace TFS.Web.ViewModels.PersonnelRecords
 {

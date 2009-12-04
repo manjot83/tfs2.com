@@ -8,15 +8,12 @@ namespace TFS.Models.FlightPrograms
     public interface IFlightProgramsRepository
     {
         IList<Position> GetAllPositions();
-        Position GetPositionById(int id);
-        Position AddPosition(Position position);
+        Position AddNewPosition(string title);
 
         IEnumerable<FlightProgram> GetAllActivePrograms();
         IEnumerable<FlightProgram> GetAllPrograms();
-        FlightProgram GetProgramById(int id);
-        FlightProgram AddProgram(FlightProgram program);
+        FlightProgram AddNewFlightProgram(FlightProgram flightProgram);
 
         IEnumerable<ProgramLocation> GetAllActiveProgramLocations();
-        ProgramLocation GetProgramLocationById(int id);
     }
 }

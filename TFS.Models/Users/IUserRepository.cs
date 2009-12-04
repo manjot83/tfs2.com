@@ -12,9 +12,11 @@ namespace TFS.Models.Users
         IEnumerable<User> GetAllUsers();
         User GetUser(string username);
 
-        User AddUser(User user);
-
         IList<Person> GetAllActivePersons();
         Person GetPersonForUser(string username);
+
+        User CreateUser(string username, string firstname, string lastname, string displayname);
+        Person CreatePersonFor(User user);
+        Qualifications CreateQualificationsFor(Person person);
     }
 }

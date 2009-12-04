@@ -3,8 +3,9 @@ using System.Linq;
 using NHibernate;
 using NHibernate.Linq;
 using TFS.Models.Help;
+using System;
 
-namespace TFS.Models.Data.Help
+namespace TFS.Models.Data.Implementations
 {
     public class HelpRepository : BaseDataAccessObject, IHelpRepository
     {
@@ -23,13 +24,10 @@ namespace TFS.Models.Data.Help
             return Session.Linq<Question>().Take(maxResult).ToList();
         }
 
-        public Question GetQuestionById(int id)
-        {
-            return Session.Get<Question>(id);
-        }
-
         public Question AddQuestion(Question question)
         {
+            question.AskedOnDate = DateTime.UtcNow;
+            question.LastModifiedDate = question.AskedOnDate;
             question.Validate();
             return Session.SaveOrUpdateCopy<Question>(question);
         }
