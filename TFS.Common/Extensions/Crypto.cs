@@ -12,9 +12,9 @@ namespace TFS.Extensions
         {
             MD5,
             SHA1,
-            //SHA256,
-            //SHA384,
-            //SHA512,
+            SHA256,
+            SHA384,
+            SHA512,
         }
 
         public enum SymmetricAlgorithm
@@ -25,48 +25,50 @@ namespace TFS.Extensions
             TripleDES,
         }
 
-        /// <summary>
-        /// Hashes the specified string using the specified algorithm.
-        /// </summary>
-        /// <param name="plaintext">The plaintext.</param>
-        /// <param name="algorithm">The hashing algorithm to use.</param>
-        /// <returns>The base64 encoded hash string.</returns>
         public static string Hash(this string plaintext, HashAlgorithm algorithm)
         {
             if (string.IsNullOrEmpty(plaintext))
                 throw new ArgumentNullException("plaintext", "Cannot hash an empty string.");
+            var clearBuffer = UTF8Encoding.Default.GetBytes(plaintext);
+            return Hash(clearBuffer, algorithm);
+        }
+
+        public static string Hash(this string plaintext, string salt, HashAlgorithm algorithm)
+        {
+            var cleartextBuffer = Encoding.Unicode.GetBytes(plaintext);
+            var saltBuffer = Convert.FromBase64String(salt);
+            var combinedBuffer = new byte[saltBuffer.Length + cleartextBuffer.Length];
+            Buffer.BlockCopy(saltBuffer, 0, combinedBuffer, 0, saltBuffer.Length);
+            Buffer.BlockCopy(cleartextBuffer, 0, combinedBuffer, saltBuffer.Length, cleartextBuffer.Length);
+            return Hash(combinedBuffer, algorithm);
+        }
+
+        private static string Hash(byte[] clearBuffer, HashAlgorithm algorithm)
+        {
             System.Security.Cryptography.HashAlgorithm hashAlgorithm;
             switch (algorithm)
-            {                
+            {
                 case HashAlgorithm.MD5:
                     hashAlgorithm = new MD5CryptoServiceProvider();
-                    break;                
+                    break;
                 case HashAlgorithm.SHA1:
                 default:
                     hashAlgorithm = new SHA1CryptoServiceProvider();
                     break;
-                //case HashAlgorithmEnum.SHA256:
-                //    hashAlgorithm = new SHA256CryptoServiceProvider();
-                //    break;
-                //case HashAlgorithmEnum.SHA384:
-                //    hashAlgorithm = new SHA384CryptoServiceProvider();
-                //    break;                
-                //case HashAlgorithmEnum.SHA512:
-                //    hashAlgorithm = new SHA512CryptoServiceProvider();
-                //    break;
+                case HashAlgorithm.SHA256:
+                    hashAlgorithm = new SHA256CryptoServiceProvider();
+                    break;
+                case HashAlgorithm.SHA384:
+                    hashAlgorithm = new SHA384CryptoServiceProvider();
+                    break;
+                case HashAlgorithm.SHA512:
+                    hashAlgorithm = new SHA512CryptoServiceProvider();
+                    break;
             }
-            var unhashedBuffer = UTF8Encoding.Default.GetBytes(plaintext);
-            var hashedBuffer = hashAlgorithm.ComputeHash(unhashedBuffer);
-            return Convert.ToBase64String(hashedBuffer);
+            var encryptedBuffer = hashAlgorithm.ComputeHash(clearBuffer);
+            return Convert.ToBase64String(encryptedBuffer);
         }
 
-        /// <summary>
-        /// Encryptes the text using the specified symmetric algorithm and the provided key.
-        /// </summary>
-        /// <param name="plaintext">The plaintext.</param>
-        /// <param name="key">The secret key for the symmetric algorithm.</param>
-        /// <param name="algorithm">The symmetric algorithm to use.</param>
-        /// <returns>The base64 encoded cipher text string.</returns>
         public static string SymmetricEncrypt(this string plaintext, string key, SymmetricAlgorithm algorithm)
         {
             if (string.IsNullOrEmpty(plaintext))
@@ -77,10 +79,10 @@ namespace TFS.Extensions
             byte[] keyBuffer = Convert.FromBase64String(key.Hash(HashAlgorithm.MD5));
             byte[] plainTextBuffer = UTF8Encoding.UTF8.GetBytes(plaintext);
 
-            System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm;            
-            switch(algorithm)
-            {                
-                //case SymmetricAlgorithmEnum.DES:
+            System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm;
+            switch (algorithm)
+            {
+                //case SymmetricAlgorithm.DES:
                 //    symmetricAlgorithm = new DESCryptoServiceProvider();
                 //    break;
                 case SymmetricAlgorithm.RC2:
@@ -106,13 +108,6 @@ namespace TFS.Extensions
             return Convert.ToBase64String(cipherBuffer);
         }
 
-        /// <summary>
-        /// Decryptes the text using the specified symmetric algorithm and the provided key.
-        /// </summary>
-        /// <param name="cipherText">The base64 encoded cipher text string.</param>
-        /// <param name="key">The secret key for the symmetric algorithm.</param>
-        /// <param name="algorithm">The symmetric algorithm to use.</param>
-        /// <returns>The plain text.</returns>
         public static string SymmetricDecrypt(this string cipherText, string key, SymmetricAlgorithm algorithm)
         {
             if (string.IsNullOrEmpty(cipherText))
@@ -126,9 +121,9 @@ namespace TFS.Extensions
             System.Security.Cryptography.SymmetricAlgorithm symmetricAlgorithm;
             switch (algorithm)
             {
-               // case SymmetricAlgorithmEnum.DES:
-               //     symmetricAlgorithm = new DESCryptoServiceProvider();
-               //     break;
+                //case SymmetricAlgorithm.DES:
+                //    symmetricAlgorithm = new DESCryptoServiceProvider();
+                //    break;
                 case SymmetricAlgorithm.RC2:
                     symmetricAlgorithm = new RC2CryptoServiceProvider();
                     break;
@@ -152,12 +147,6 @@ namespace TFS.Extensions
             return UTF8Encoding.Default.GetString(plainTextBuffer);
         }
 
-        /// <summary>
-        /// Computes a hash value of the string, and signs the resulting hash value with the RSA private key supplied.
-        /// </summary>
-        /// <param name="plaintext">The plaintext.</param>
-        /// <param name="rsaKey">The RSA private key.</param>
-        /// <returns>The base64 encoded signed hash string.</returns>
         public static string RSASign(this string plaintext, RSAParameters rsaKey)
         {
             if (string.IsNullOrEmpty(plaintext))
@@ -171,19 +160,12 @@ namespace TFS.Extensions
             return Convert.ToBase64String(signedHashBuffer);
         }
 
-        /// <summary>
-        /// Verifies the string with the base64 encoded signed hash value provided, and the RSA public key supplied.
-        /// </summary>
-        /// <param name="plaintext">The plaintext.</param>
-        /// <param name="signedHash">The signed hash.</param>
-        /// <param name="rsaKey">The RSA public key.</param>
-        /// <returns>True if the signature is verified aga</returns>
         public static bool RSAVerifySigned(this string plaintext, string signedHash, RSAParameters rsaKey)
         {
             if (string.IsNullOrEmpty(plaintext))
                 throw new ArgumentNullException("plaintext", "Cannot verify an empty string.");
             if (string.IsNullOrEmpty(signedHash))
-                throw new ArgumentNullException("signedHash", "Cannot verify against an empty signed hash.");            
+                throw new ArgumentNullException("signedHash", "Cannot verify against an empty signed hash.");
 
             byte[] plainTextBuffer = UTF8Encoding.UTF8.GetBytes(plaintext);
             byte[] signedHashBuffer = Convert.FromBase64String(signedHash);
@@ -192,6 +174,6 @@ namespace TFS.Extensions
             var verified = rsaProvider.VerifyData(plainTextBuffer, new SHA1CryptoServiceProvider(), signedHashBuffer);
             rsaProvider.Clear();
             return verified;
-        }        
+        }
     }
 }
