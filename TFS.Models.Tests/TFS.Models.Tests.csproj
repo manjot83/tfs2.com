@@ -97,7 +97,7 @@
     <Compile Include="CRUD\Messages\AnnouncementCrudTests.cs" />
     <Compile Include="CRUD\Messages\UserAlertCrudTests.cs" />
     <Compile Include="CRUD\Messages\SystemAlertCrudTests.cs" />
-    <Compile Include="CRUD\Messages\MessageCurdTests.cs" />
+    <Compile Include="CRUD\Messages\MessageCrudTests.cs" />
     <Compile Include="CRUD\Users\UserCrudTests.cs" />
     <Compile Include="Reports\FlightTimeSummaryTests.cs" />
     <Compile Include="SchemaGeneration.cs" />

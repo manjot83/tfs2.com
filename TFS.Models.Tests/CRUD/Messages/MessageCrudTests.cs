@@ -8,7 +8,7 @@ using TFS.Extensions;
 
 namespace TFS.Models.Tests.CRUD.Messages
 {
-    public class MessageCurdTests : BaseCrudTest<Message>
+    public class MessageCrudTests : BaseCrudTest<Message>
     {
         protected override Message BuildEntity()
         {
