@@ -8,6 +8,8 @@ namespace TFS.Models.Data.Mappings.Messages
     {
         public MessageClassMap()
         {
+            Table("Messages");
+
             Id(x => x.Id)
                 .GeneratedBy.Identity();
 

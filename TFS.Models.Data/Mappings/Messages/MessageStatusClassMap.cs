@@ -8,6 +8,8 @@ namespace TFS.Models.Data.Mappings.Messages
     {
         public MessageStatusClassMap()
         {
+            Table("MessagesForUsers");
+
             CompositeId()
                 .KeyReference(x => x.User,
                               "UserId",
