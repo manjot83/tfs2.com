@@ -7,5 +7,9 @@ namespace TFS.Models.Messages
 {
     public interface IMessagesRepository
     {
+        IEnumerable<Message> GetAllActiveNonUserMessages();
+
+        IEnumerable<Announcement> GetAllAnnouncements();
+        IEnumerable<SystemAlert> GetAllSystemAlerts();
     }
 }

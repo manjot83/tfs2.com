@@ -8,6 +8,8 @@ namespace TFS.Models.Messages
 {
     public class SystemAlert : Message
     {
+        public override MessageType MessageType { get { return MessageType.SystemAlert; } }
+
         [Required]
         public virtual string Content { get; set; }
     }

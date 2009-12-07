@@ -24,6 +24,7 @@ public static class MVC {
     public static TFS.Web.Controllers.FlightLogsController FlightLogs = new T4MVC_FlightLogsController();
     public static TFS.Web.Controllers.FlightProgramsController FlightPrograms = new T4MVC_FlightProgramsController();
     public static TFS.Web.Controllers.ImagesController Images = new T4MVC_ImagesController();
+    public static TFS.Web.Controllers.MessagesController Messages = new T4MVC_MessagesController();
     public static TFS.Web.Controllers.PersonnelRecordsController PersonnelRecords = new T4MVC_PersonnelRecordsController();
     public static TFS.Web.Controllers.SecurityController Security = new T4MVC_SecurityController();
     public static TFS.Web.Controllers.SiteController Site = new T4MVC_SiteController();
@@ -804,6 +805,62 @@ namespace T4MVC {
 
         public override System.Web.Mvc.ActionResult StaticImage(System.Guid id) {
             var callInfo = new T4MVC_ActionResult("Images", Actions.StaticImage);
+            callInfo.RouteValues.Add("id", id);
+            return callInfo;
+        }
+
+    }
+}
+
+namespace TFS.Web.Controllers {
+    public partial class MessagesController {
+
+        [CompilerGenerated]
+        protected MessagesController(Dummy d) { }
+
+        protected RedirectToRouteResult RedirectToAction(ActionResult result) {
+            var callInfo = (IT4MVCActionResult)result;
+            return RedirectToRoute(callInfo.RouteValues);
+        }
+
+        [NonAction]
+        public System.Web.Mvc.ViewResult ViewAnnouncement() {
+            return new T4MVC_ViewResult(Name, Actions.ViewAnnouncement);
+        }
+
+
+        [CompilerGenerated]
+        public readonly string Name = "Messages";
+
+        static readonly ActionNames s_actions = new ActionNames();
+        [CompilerGenerated]
+        public ActionNames Actions { get { return s_actions; } }
+        [CompilerGenerated]
+        public class ActionNames {
+            public readonly string ViewAnnouncement = "ViewAnnouncement";
+        }
+
+
+        static readonly ViewNames s_views = new ViewNames();
+        [CompilerGenerated]
+        public ViewNames Views { get { return s_views; } }
+        [CompilerGenerated]
+        public class ViewNames {
+            public readonly string CreateMessage = "CreateMessage";
+            public readonly string EditMessage = "EditMessage";
+            public readonly string ListMessages = "ListMessages";
+            public readonly string ViewMessage = "ViewMessage";
+        }
+    }
+}
+
+namespace T4MVC {
+    [CompilerGenerated]
+    public class T4MVC_MessagesController: TFS.Web.Controllers.MessagesController {
+        public T4MVC_MessagesController() : base(Dummy.Instance) { }
+
+        public override System.Web.Mvc.ViewResult ViewAnnouncement(int id) {
+            var callInfo = new T4MVC_ViewResult("Messages", Actions.ViewAnnouncement);
             callInfo.RouteValues.Add("id", id);
             return callInfo;
         }

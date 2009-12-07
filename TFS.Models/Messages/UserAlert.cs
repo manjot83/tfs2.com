@@ -9,6 +9,8 @@ namespace TFS.Models.Messages
 {
     public class UserAlert : Message
     {
+        public override MessageType MessageType { get { return MessageType.UserAlert; } }
+
         [Required, DomainEquality]
         public virtual User User { get; set; }
 

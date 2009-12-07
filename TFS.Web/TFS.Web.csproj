@@ -123,6 +123,7 @@
     <Compile Include="Controllers\FlightLogsController.cs" />
     <Compile Include="Controllers\FlightProgramsController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
+    <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Controllers\PersonnelRecordsController.cs" />
     <Compile Include="Controllers\SecurityController.cs" />
     <Compile Include="Controllers\SiteController.cs" />
@@ -164,6 +165,10 @@
     <Compile Include="ViewModels\FlightPrograms\PositionViewModel.cs" />
     <Compile Include="ViewModels\FlightPrograms\ProgramLocationViewModel.cs" />
     <Compile Include="ViewModels\ManageProgramsViewModel.cs" />
+    <Compile Include="ViewModels\Messages\AnnouncementViewModel.cs" />
+    <Compile Include="ViewModels\Messages\MessageViewModel.cs" />
+    <Compile Include="ViewModels\Messages\SystemAlertViewModel.cs" />
+    <Compile Include="ViewModels\Messages\UserAlertViewModel.cs" />
     <Compile Include="ViewModels\PersonnelRecords\PersonnelRecordListViewModel.cs" />
     <Compile Include="ViewModels\PersonnelRecords\CompanyInfo.cs" />
     <Compile Include="ViewModels\PersonnelRecords\ContactInfo.cs" />
@@ -271,6 +276,10 @@
     <Content Include="Views\FlightPrograms\FlightProgramInfo.ascx" />
     <Content Include="Views\FlightPrograms\Manage.aspx" />
     <Content Include="Views\FlightPrograms\ProgramLocationInfo.ascx" />
+    <Content Include="Views\Messages\CreateMessage.aspx" />
+    <Content Include="Views\Messages\EditMessage.aspx" />
+    <Content Include="Views\Messages\ListMessages.aspx" />
+    <Content Include="Views\Messages\ViewMessage.aspx" />
     <Content Include="Views\PersonnelRecords\EditRecord.aspx" />
     <Content Include="Views\PersonnelRecords\List.aspx" />
     <Content Include="Views\Security\ChangePassword.aspx" />

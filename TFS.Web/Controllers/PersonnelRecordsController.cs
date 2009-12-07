@@ -13,19 +13,20 @@ using TFS.Web.ActionFilters;
 using TFS.Web.ViewModels;
 using TFS.Web.ViewModels.PersonnelRecords;
 using TFS.Models;
+using NHibernate;
 
 namespace TFS.Web.Controllers
 {
     [DomainAuthorize]
     public partial class PersonnelRecordsController : Controller
     {
-        private readonly IDomainModelRoot domainModelRoot;
+        private readonly ISession session;
         private readonly IUserRepository userRepository;
         private readonly IFlightProgramsRepository flightProgramsRepository;
 
-        public PersonnelRecordsController(IDomainModelRoot domainModelRoot, IUserRepository userRepository, IFlightProgramsRepository flightProgramsRepository)
+        public PersonnelRecordsController(ISession session, IUserRepository userRepository, IFlightProgramsRepository flightProgramsRepository)
         {
-            this.domainModelRoot = domainModelRoot;
+            this.session = session;
             this.userRepository = userRepository;
             this.flightProgramsRepository = flightProgramsRepository;
         }
@@ -126,7 +127,7 @@ namespace TFS.Web.Controllers
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
             Mapper.Map<CompanyInfo, Person>(companyInfo, person);
-            person.HirePosition = domainModelRoot.GetDomainObject<Position>(companyInfo.HirePositionId.Value);
+            person.HirePosition = session.Get<Position>(companyInfo.HirePositionId.Value);
             if (editingMyRecord)
                 return RedirectToAction(MVC.PersonnelRecords.EditMyRecord());
             else

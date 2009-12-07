@@ -9,6 +9,8 @@ namespace TFS.Models.Messages
 {
     public class Announcement : Message
     {
+        public override MessageType MessageType { get { return MessageType.Announcement; } }
+
         [Required]
         public virtual User CreatedBy { get; set; }
 

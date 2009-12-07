@@ -78,7 +78,6 @@
     <Compile Include="Configuration\MSSqlBuilder.cs" />
     <Compile Include="Configuration\SQLiteBuilder.cs" />
     <Compile Include="Configuration\SqlSchemaUtil.cs" />
-    <Compile Include="DomainModelRoot.cs" />
     <Compile Include="Implementations\FlightLogRepository.cs" />
     <Compile Include="Implementations\HelpRepository.cs" />
     <Compile Include="Mappings\FlightLogs\MissionMap.cs" />

@@ -10,6 +10,8 @@ using TFS.Models.FlightLogs;
 using TFS.Web.ViewModels.FlightLogs;
 using TFS.Models.FlightPrograms;
 using TFS.Web.ViewModels.FlightPrograms;
+using TFS.Models.Messages;
+using TFS.Web.ViewModels.Messages;
 
 namespace TFS.Web
 {
@@ -21,10 +23,25 @@ namespace TFS.Web
             Setup_PersonnelRecordViewModel();
             Setup_FlightLogViewModel();
             Setup_FlightPrograms();
+            Setup_Messages();
 
 #if DEBUG
             Mapper.AssertConfigurationIsValid();
 #endif
+        }
+
+        private static void Setup_Messages()
+        {
+            Mapper.CreateMap<Message, MessageViewModel>()
+                  .ForMember(x => x.CanEdit, m => m.Ignore());
+            Mapper.CreateMap<Announcement, AnnouncementViewModel>()
+                   .ForMember(x => x.CanEdit, m => m.Ignore());
+            Mapper.CreateMap<UserAlert, UserAlertViewModel>()
+                  .ForMember(x => x.ForUsername, m => m.MapFrom(x => x.User.Username))
+                  .ForMember(x => x.ForFileByName, m => m.MapFrom(x => x.User.FileByName()))
+                  .ForMember(x => x.CanEdit, m => m.Ignore());
+            Mapper.CreateMap<SystemAlert, SystemAlertViewModel>()
+                  .ForMember(x => x.CanEdit, m => m.Ignore());
         }
 
         private static void Setup_FlightPrograms()

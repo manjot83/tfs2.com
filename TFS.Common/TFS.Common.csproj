@@ -52,6 +52,7 @@
     <Compile Include="Extensions\Attributes.cs" />
     <Compile Include="Extensions\Crypto.cs" />
     <Compile Include="Extensions\DateTimeExtensions.cs" />
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\VersionExtensions.cs" />
     <Compile Include="Helpers\ContractUtils.cs" />

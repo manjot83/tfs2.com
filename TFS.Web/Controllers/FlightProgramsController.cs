@@ -17,12 +17,12 @@ namespace TFS.Web.Controllers
     [DomainAuthorize]
     public partial class FlightProgramsController : Controller
     {
-        private readonly IDomainModelRoot domainModelRoot;
+        private readonly ISession session;
         private readonly IFlightProgramsRepository flightProgramsRepository;
 
-        public FlightProgramsController(IDomainModelRoot domainModelRoot, IFlightProgramsRepository flightProgramsRepository)
+        public FlightProgramsController(ISession session, IFlightProgramsRepository flightProgramsRepository)
         {
-            this.domainModelRoot = domainModelRoot;
+            this.session = session;
             this.flightProgramsRepository = flightProgramsRepository;
         }
 
@@ -72,7 +72,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult EditFlightProgram(int id)
         {
-            var flightProgram = domainModelRoot.GetDomainObject<FlightProgram>(id);
+            var flightProgram = session.Get<FlightProgram>(id);
             var viewModel = Mapper.Map<FlightProgram, FlightProgramViewModel>(flightProgram);
             return View(Views.EditFlightProgram, viewModel);
         }
@@ -81,7 +81,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult EditFlightProgram(int id, FlightProgramViewModel flightProgramViewModel)
         {
-            var flightProgram = domainModelRoot.GetDomainObject<FlightProgram>(id);
+            var flightProgram = session.Get<FlightProgram>(id);
             flightProgramViewModel.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
             {
@@ -113,7 +113,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult RenamePosition(int id)
         {
-            var position = domainModelRoot.GetDomainObject<Position>(id);
+            var position = session.Get<Position>(id);
             var viewModel = Mapper.Map<Position, PositionViewModel>(position);
             return View(Views.EditPosition, viewModel);
         }
@@ -122,7 +122,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult RenamePosition(int id, PositionViewModel positionViewModel)
         {
-            var position = domainModelRoot.GetDomainObject<Position>(id);
+            var position = session.Get<Position>(id);
             positionViewModel.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
             {
@@ -137,7 +137,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult CreateProgramLocation(int flightProgramId)
         {
-            var program = domainModelRoot.GetDomainObject<FlightProgram>(flightProgramId);
+            var program = session.Get<FlightProgram>(flightProgramId);
             return View(Views.CreateProgramLocation, new ProgramLocationViewModel() { ProgramId = program.Id.Value, ProgramName = program.Name });
         }
 
@@ -148,7 +148,7 @@ namespace TFS.Web.Controllers
             programLocationViewModel.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
                 return View(Views.CreateProgramLocation, programLocationViewModel);
-            var program = domainModelRoot.GetDomainObject<FlightProgram>(programLocationViewModel.ProgramId);
+            var program = session.Get<FlightProgram>(programLocationViewModel.ProgramId);
             var location = Mapper.Map<ProgramLocationViewModel, ProgramLocation>(programLocationViewModel);
             program.AddLocation(location);
             return RedirectToAction(MVC.FlightPrograms.EditFlightProgram(program.Id.Value));
@@ -158,7 +158,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult EditProgramLocation(int id)
         {
-            var location = domainModelRoot.GetDomainObject<ProgramLocation>(id);
+            var location = session.Get<ProgramLocation>(id);
             var viewModel = Mapper.Map<ProgramLocation, ProgramLocationViewModel>(location);
             return View(Views.EditProgramLocation, viewModel);
         }
@@ -167,7 +167,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult EditProgramLocation(ProgramLocationViewModel programLocationViewModel)
         {
-            var location = domainModelRoot.GetDomainObject<ProgramLocation>(programLocationViewModel.Id.Value);
+            var location = session.Get<ProgramLocation>(programLocationViewModel.Id.Value);
             programLocationViewModel.Validate(ModelState, string.Empty);
             if (!ModelState.IsValid)
             {

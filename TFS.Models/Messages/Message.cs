@@ -17,6 +17,8 @@ namespace TFS.Models.Messages
             MessageStatusForUsers = new HashedSet<MessageStatus>();
         }
 
+        public abstract MessageType MessageType { get; }
+
         public virtual int? Id { get; private set; }
 
         [DomainEquality, Required, StringLength(100)]
