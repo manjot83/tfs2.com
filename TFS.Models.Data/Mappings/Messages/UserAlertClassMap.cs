@@ -7,23 +7,20 @@ using FluentNHibernate.Mapping;
 
 namespace TFS.Models.Data.Mappings.Messages
 {
-    public class AnnouncementClassMap : SubclassMap<Announcement>
+    public class UserAlertClassMap : SubclassMap<UserAlert>
     {
-        public AnnouncementClassMap()
+        public UserAlertClassMap()
         {
-            DiscriminatorValue((int)MessageType.Announcement);
+            DiscriminatorValue((int)MessageType.UserAlert);
 
             Map(x => x.Content)
                 .Column("Content")
                 .WithMaxLength()
                 .Nullable(); // Must be nullable because of table-per-hierarchy
-            Map(x => x.Urgent)
-                .Column("Urgent")
-                .Nullable(); // Must be nullable because of table-per-hierarchy
 
-            References(x => x.CreatedBy)
-                .Column("Announcement_CreatedBy")
-                .ForeignKey("FK_Announcement_Messages_Users")
+            References(x => x.User)
+                .Column("UserAlert_UserId")
+                .ForeignKey("FK_UserAlert_Messages_Users")
                 .Nullable(); // Must be nullable because of table-per-hierarchy
         }
     }

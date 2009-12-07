@@ -9,5 +9,7 @@ namespace TFS.Models.Data.Mappings.Messages
     {
         Unknown = 0,
         Announcement = 1,
+        SystemAlert = 2,
+        UserAlert = 3,
     }
 }
