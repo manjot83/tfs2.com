@@ -22,7 +22,7 @@ namespace TFS.Models.Data.Mappings.Messages
 
             Map(x => x.SeenAtDate)
                 .CustomType<UtcDateTimeUserType>()
-                .Nullable();
+                .Not.Nullable();
         }
     }
 }

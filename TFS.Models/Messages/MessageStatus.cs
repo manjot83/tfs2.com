@@ -13,7 +13,7 @@ namespace TFS.Models.Messages
         [Required, DomainEquality]
         public virtual Message Message { get; set; }
 
-        [DomainEquality, DateTimeKind(DateTimeKind.Utc)]
+        [Required, DomainEquality, DateTimeKind(DateTimeKind.Utc)]
         public virtual DateTime? SeenAtDate { get; set; }
     }
 }
