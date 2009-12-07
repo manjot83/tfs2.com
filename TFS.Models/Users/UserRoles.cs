@@ -8,20 +8,16 @@ namespace TFS.Models.Users
 {
     public class UserRoles : BaseDomainObject
     {
-        [Required]
-        [DomainEquality]
+        [Required, DomainEquality]
         public virtual bool UserManager { get; set; }
 
-        [Required]
-        [DomainEquality]
+        [Required, DomainEquality]
         public virtual bool PersonnelManager { get; set; }
 
-        [Required]
-        [DomainEquality]
+        [Required, DomainEquality]
         public virtual bool ProgramManager { get; set; }
 
-        [Required]
-        [DomainEquality]
+        [Required, DomainEquality]
         public virtual bool FlightLogManager { get; set; }
 
         public virtual string[] ToArray()

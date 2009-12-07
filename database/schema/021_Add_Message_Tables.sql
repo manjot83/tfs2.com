@@ -2,9 +2,9 @@
    Id INT IDENTITY NOT NULL,
    MessageType INT NOT NULL,
    Title NVARCHAR(100) NOT NULL,
-   ActiveFromDate DATETIME NOT NULL,
-   ActiveToDate DATETIME NOT NULL,
-   Content NVARCHAR(255) NULL,
+   ActiveFromDate datetime2(7) NOT NULL,
+   ActiveToDate datetime2(7) NOT NULL,
+   Content NVARCHAR(MAX) NULL,
    Urgent BIT NULL,
    Announcement_CreatedBy INT NULL,
    UserAlert_UserId INT NULL,
@@ -14,7 +14,7 @@
 CREATE TABLE [MessagesForUsers] (
    UserId INT NOT NULL,
    MessageId INT NOT NULL,
-   SeenAtDate DATETIME NOT NULL,
+   SeenAtDate datetime2(7) NOT NULL,
    CONSTRAINT [PK_MessagesForUsers] PRIMARY KEY CLUSTERED (UserId, MessageId)
 )
 

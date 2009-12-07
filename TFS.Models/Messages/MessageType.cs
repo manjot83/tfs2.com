@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace TFS.Models.Data.Mappings.Messages
+namespace TFS.Models.Messages
 {
     public enum MessageType : int
     {
