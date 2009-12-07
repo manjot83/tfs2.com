@@ -88,7 +88,10 @@
     <Compile Include="Mappings\Help\QuestionClassMap.cs" />
     <Compile Include="Mappings\Images\StaticImageMap.cs" />
     <Compile Include="Mappings\MappingExtensions.cs" />
+    <Compile Include="Mappings\Messages\AnnouncementClassMap.cs" />
     <Compile Include="Mappings\Messages\MessageClassMap.cs" />
+    <Compile Include="Mappings\Messages\MessageStatusClassMap.cs" />
+    <Compile Include="Mappings\Messages\MessageType.cs" />
     <Compile Include="Mappings\PersonnelRecords\CertificateMap.cs" />
     <Compile Include="Mappings\PersonnelRecords\PersonMap.cs" />
     <Compile Include="Mappings\PersonnelRecords\QualificationsMap.cs" />

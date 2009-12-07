@@ -30,6 +30,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug with SQLite|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;SQLITE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="FluentNHibernate, Version=1.0.0.595, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -86,6 +94,8 @@
     </Compile>
     <Compile Include="BaseNHibernateTest.cs" />
     <Compile Include="CRUD\BaseCrudTest.cs" />
+    <Compile Include="CRUD\Messages\AnnouncementCrudTests.cs" />
+    <Compile Include="CRUD\Messages\MessageCurdTests.cs" />
     <Compile Include="CRUD\Users\UserCrudTests.cs" />
     <Compile Include="Reports\FlightTimeSummaryTests.cs" />
     <Compile Include="SchemaGeneration.cs" />

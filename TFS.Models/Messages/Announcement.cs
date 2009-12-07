@@ -10,7 +10,7 @@ namespace TFS.Models.Messages
     public class Announcement : Message
     {
         [Required]
-        public virtual User CreateBy { get; set; }
+        public virtual User CreatedBy { get; set; }
 
         [Required]
         public virtual string Content { get; set; }

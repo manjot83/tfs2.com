@@ -10,11 +10,11 @@ using Iesi.Collections.Generic;
 
 namespace TFS.Models.Messages
 {
-    public class Message : BaseDomainObject
+    public abstract class Message : BaseDomainObject
     {
         public Message()
         {
-            UserStatuses = new HashedSet<MessageStatus>();
+            MessageStatusForUsers = new HashedSet<MessageStatus>();
         }
 
         public virtual int? Id { get; private set; }
@@ -28,12 +28,20 @@ namespace TFS.Models.Messages
         [DomainEquality, Required, DateTimeKind(DateTimeKind.Utc)]
         public virtual DateTime ActiveToDate { get; set; }
 
-        public virtual ISet<MessageStatus> UserStatuses { get; set; }
+        public virtual ISet<MessageStatus> MessageStatusForUsers { get; set; }
 
-        //public virtual void MarkSeenBy(User user)
-        //{
-        //    if (!SeenBy.Contains(user))
-        //        SeenBy.Add(user);
-        //}
+        public virtual void MarkSeenBy(User user)
+        {
+            if (!MessageStatusForUsers.Any(x => x.User == user))
+            {
+                var status = new MessageStatus
+                {
+                    Message = this,
+                    User = user,
+                    SeenAtDate = DateTime.UtcNow,
+                };
+                MessageStatusForUsers.Add(status);
+            }
+        }
     }
 }

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using TFS.Models.Messages;
-using FluentNHibernate.Mapping;
+﻿using FluentNHibernate.Mapping;
 using TFS.Models.Data.UserTypes;
+using TFS.Models.Messages;
 
 namespace TFS.Models.Data.Mappings.Messages
 {
@@ -25,22 +21,12 @@ namespace TFS.Models.Data.Mappings.Messages
                 .CustomType<UtcDateTimeUserType>()
                 .Not.Nullable();
 
-            HasMany(x => x.UserStatuses)
+            HasMany(x => x.MessageStatusForUsers)
                 .LazyLoad()
-                .Table("MessagesForUsers")
-                .KeyColumn("MessageId")
-                .ForeignKeyConstraintName("FK_MessagesForUsers_Messages")
-                .Component(c =>
-                {
-                    c.ParentReference(x => x.Message);
-                    c.Map(x => x.SeenAtDate)
-                        .CustomType<UtcDateTimeUserType>()
-                        .Nullable();
-                    c.References(x => x.User)
-                        .Column("UserId")
-                        .ForeignKey("FK_MessagesForUsers_Users")
-                        .Not.Nullable();
-                });
+                .Inverse()
+                .KeyColumn("MessageId");
+
+            DiscriminateSubClassesOnColumn<int>("MessageType", (int)MessageType.Unknown);
         }
     }
 }

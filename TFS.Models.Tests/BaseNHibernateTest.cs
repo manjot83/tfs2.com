@@ -23,8 +23,20 @@ namespace TFS.Models.Tests
             HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
 
             var mappingAssemblies = new List<Assembly> { typeof(MappingExtensions).Assembly };
+#if SQLITE
+            cfg = SQLiteBuilder.CreateConfiguration("TFS_Models_Specs", mappingAssemblies).BuildConfiguration();
+#else
             cfg = FluentConfigurationBuilder.CreateFluentConfiguration(MsSqlConfiguration.MsSql2008.ConnectionString(@"Server=.\SQLEXPRESS;Database=dev_tfs2.com;Trusted_Connection=yes;"), mappingAssemblies).BuildConfiguration();
+#endif
+            
             sessionFactory = cfg.BuildSessionFactory();
+                        
+#if SQLITE
+            using (var session = sessionFactory.OpenSession())
+            {
+                SqlSchemaUtil.GenerateSchema(cfg, session);
+            }
+#endif
         }
 
         [SetUp]
