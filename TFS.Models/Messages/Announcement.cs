@@ -15,9 +15,6 @@ namespace TFS.Models.Messages
         public virtual User CreatedBy { get; set; }
 
         [Required]
-        public virtual string Content { get; set; }
-
-        [Required]
         public virtual bool Urgent { get; set; }
     }
 }

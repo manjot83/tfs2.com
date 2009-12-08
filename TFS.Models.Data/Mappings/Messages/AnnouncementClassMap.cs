@@ -13,10 +13,6 @@ namespace TFS.Models.Data.Mappings.Messages
         {
             DiscriminatorValue((int)MessageType.Announcement);
 
-            Map(x => x.Content)
-                .Column("Content")
-                .WithMaxLength()
-                .Nullable(); // Must be nullable because of table-per-hierarchy
             Map(x => x.Urgent)
                 .Column("Urgent")
                 .Nullable(); // Must be nullable because of table-per-hierarchy

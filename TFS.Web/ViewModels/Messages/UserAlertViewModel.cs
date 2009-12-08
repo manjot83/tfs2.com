@@ -12,12 +12,5 @@ namespace TFS.Web.ViewModels.Messages
         public string ForFileByName { get; set; }
         [Required]
         public string ForUsername { get; set; }
-        [Required]
-        public string Content { get; set; }
-
-        public override MessageType MessageType
-        {
-            get { return MessageType.UserAlert; }
-        }
     }
 }

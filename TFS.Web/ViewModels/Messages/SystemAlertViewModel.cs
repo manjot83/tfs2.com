@@ -9,12 +9,5 @@ namespace TFS.Web.ViewModels.Messages
 {
     public class SystemAlertViewModel : MessageViewModel
     {
-        [Required]
-        public string Content { get; set; }
-
-        public override MessageType MessageType
-        {
-            get { return MessageType.SystemAlert; }
-        }
     }
 }

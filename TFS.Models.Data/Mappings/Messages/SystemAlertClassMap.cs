@@ -12,11 +12,6 @@ namespace TFS.Models.Data.Mappings.Messages
         public SystemAlertClassMap()
         {
             DiscriminatorValue((int)MessageType.SystemAlert);
-
-            Map(x => x.Content)
-                .Column("Content")
-                .WithMaxLength()
-                .Nullable(); // Must be nullable because of table-per-hierarchy
         }
     }
 }

@@ -13,13 +13,6 @@ namespace TFS.Web.ViewModels.Messages
         [Required]
         public string CreatedByUsername { get; set; }
         [Required]
-        public string Content { get; set; }
-        [Required]
         public bool Urgent { get; set; }
-
-        public override MessageType MessageType
-        {
-            get { return MessageType.Announcement; } 
-        }
     }
 }

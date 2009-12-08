@@ -32,8 +32,6 @@ namespace TFS.Web
 
         private static void Setup_Messages()
         {
-            Mapper.CreateMap<Message, MessageViewModel>()
-                  .ForMember(x => x.CanEdit, m => m.Ignore());
             Mapper.CreateMap<Announcement, AnnouncementViewModel>()
                    .ForMember(x => x.CanEdit, m => m.Ignore());
             Mapper.CreateMap<UserAlert, UserAlertViewModel>()

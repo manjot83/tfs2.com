@@ -30,9 +30,13 @@ namespace TFS.Web.Controllers
         public virtual ViewResult ListMessages()
         {
             var viewModel = new SortedListViewModel<MessageViewModel>();
-            var messages = messagesRepository.GetAllActiveNonUserMessages()
-                                             .OrderByDescending(x => x.ActiveFromDate);
-            viewModel.SetItems(Mapper.Map<IEnumerable<Message>, IEnumerable<MessageViewModel>>(messages));
+            var allRecentMessages = messagesRepository.GetAllActiveNonUserMessages();
+            var announcements = allRecentMessages.Where(x => x.MessageType == MessageType.Announcement).Cast<Announcement>();
+            var systemAlerts = allRecentMessages.Where(x => x.MessageType == MessageType.SystemAlert).Cast<SystemAlert>();
+            var messages = Mapper.Map<IEnumerable<Announcement>, IEnumerable<AnnouncementViewModel>>(announcements).Cast<MessageViewModel>()
+                   .Concat(Mapper.Map<IEnumerable<SystemAlert>, IEnumerable<SystemAlertViewModel>>(systemAlerts).Cast<MessageViewModel>());
+            messages = messages.OrderByDescending(x => x.ActiveFromDate);
+            viewModel.SetItems(messages);
             viewModel.Items.ForEach(x => x.CanEdit = DetermineCanEdit());
             return View(Views.ListMessages, viewModel);
         }
@@ -40,15 +44,23 @@ namespace TFS.Web.Controllers
         public virtual ViewResult ListAllMessages(MessageType messageType)
         {
             var viewModel = new SortedListViewModel<MessageViewModel>();
-            IEnumerable<Message> messages;
+            IEnumerable<MessageViewModel> messages;
             if (messageType == MessageType.Announcement)
-                messages = messagesRepository.GetAllAnnouncements().Cast<Message>();
+            {
+                var announcements = messagesRepository.GetAllAnnouncements();
+                messages = Mapper.Map<IEnumerable<Announcement>, IEnumerable<AnnouncementViewModel>>(announcements).Cast<MessageViewModel>();
+            }
             else if (messageType == MessageType.SystemAlert)
-                messages = messagesRepository.GetAllSystemAlerts().Cast<Message>();
+            {
+                var systemAlerts = messagesRepository.GetAllSystemAlerts();
+                messages = Mapper.Map<IEnumerable<SystemAlert>, IEnumerable<SystemAlertViewModel>>(systemAlerts).Cast<MessageViewModel>();
+            }
             else
+            {
                 throw new InvalidOperationException("Invalid Message Type");
+            }
             messages = messages.OrderByDescending(x => x.ActiveFromDate);
-            viewModel.SetItems(Mapper.Map<IEnumerable<Message>, IEnumerable<MessageViewModel>>(messages));
+            viewModel.SetItems(messages);
             viewModel.Items.ForEach(x => x.CanEdit = DetermineCanEdit());
             return View(Views.ListMessages, viewModel);
         }

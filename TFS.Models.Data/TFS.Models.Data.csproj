@@ -80,6 +80,7 @@
     <Compile Include="Configuration\SqlSchemaUtil.cs" />
     <Compile Include="Implementations\FlightLogRepository.cs" />
     <Compile Include="Implementations\HelpRepository.cs" />
+    <Compile Include="Implementations\MessagesRepository.cs" />
     <Compile Include="Mappings\FlightLogs\MissionMap.cs" />
     <Compile Include="Mappings\FlightLogs\FlightLogMap.cs" />
     <Compile Include="Mappings\FlightLogs\SquadronLogMap.cs" />

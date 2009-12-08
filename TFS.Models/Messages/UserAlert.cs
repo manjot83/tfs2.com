@@ -13,8 +13,5 @@ namespace TFS.Models.Messages
 
         [Required, DomainEquality]
         public virtual User User { get; set; }
-
-        [Required]
-        public virtual String Content { get; set; }
     }
 }

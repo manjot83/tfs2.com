@@ -36,6 +36,8 @@ namespace TFS.Web.ViewModels
         public void SetItems(IEnumerable<TItemType> items)
         {
             TotalItems = items.Count();
+            if (ItemsPerPage == 0)
+                ItemsPerPage = TotalItems;
             Items = items.Skip(ItemsPerPage * (CurrentPage - 1)).Take(ItemsPerPage).ToList();            
         }
 

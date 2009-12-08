@@ -195,13 +195,16 @@ namespace Links {
                 private const string URLPATH = "~/Content/internal/icons";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string book_png = Url("book.png");
-                public static readonly string flightlog_png = Url("flightlog.png");
-                public static readonly string group_png = Url("group.png");
+                public static readonly string announcements_png = Url("announcements.png");
+                public static readonly string exclamation_png = Url("exclamation.png");
+                public static readonly string flightlogs_png = Url("flightlogs.png");
+                public static readonly string flightprograms_png = Url("flightprograms.png");
+                public static readonly string personnelfiles_png = Url("personnelfiles.png");
                 public static readonly string sort_down_gif = Url("sort_down.gif");
                 public static readonly string sort_up_gif = Url("sort_up.gif");
-                public static readonly string vcard_png = Url("vcard.png");
-                public static readonly string world_png = Url("world.png");
+                public static readonly string systemalert_png = Url("systemalert.png");
+                public static readonly string users_png = Url("users.png");
+                public static readonly string website_png = Url("website.png");
             }
         
             [CompilerGenerated]
@@ -824,8 +827,23 @@ namespace TFS.Web.Controllers {
         }
 
         [NonAction]
+        public System.Web.Mvc.ViewResult ListAllMessages() {
+            return new T4MVC_ViewResult(Name, Actions.ListAllMessages);
+        }
+
+        [NonAction]
         public System.Web.Mvc.ViewResult ViewAnnouncement() {
             return new T4MVC_ViewResult(Name, Actions.ViewAnnouncement);
+        }
+
+        [NonAction]
+        public System.Web.Mvc.ViewResult ViewSystemAlert() {
+            return new T4MVC_ViewResult(Name, Actions.ViewSystemAlert);
+        }
+
+        [NonAction]
+        public System.Web.Mvc.ViewResult ViewUserAlert() {
+            return new T4MVC_ViewResult(Name, Actions.ViewUserAlert);
         }
 
 
@@ -837,7 +855,11 @@ namespace TFS.Web.Controllers {
         public ActionNames Actions { get { return s_actions; } }
         [CompilerGenerated]
         public class ActionNames {
+            public readonly string ListMessages = "ListMessages";
+            public readonly string ListAllMessages = "ListAllMessages";
             public readonly string ViewAnnouncement = "ViewAnnouncement";
+            public readonly string ViewSystemAlert = "ViewSystemAlert";
+            public readonly string ViewUserAlert = "ViewUserAlert";
         }
 
 
@@ -849,7 +871,10 @@ namespace TFS.Web.Controllers {
             public readonly string CreateMessage = "CreateMessage";
             public readonly string EditMessage = "EditMessage";
             public readonly string ListMessages = "ListMessages";
+            public readonly string ViewAnnouncement = "ViewAnnouncement";
             public readonly string ViewMessage = "ViewMessage";
+            public readonly string ViewSystemAlert = "ViewSystemAlert";
+            public readonly string ViewUserAlert = "ViewUserAlert";
         }
     }
 }
@@ -859,8 +884,31 @@ namespace T4MVC {
     public class T4MVC_MessagesController: TFS.Web.Controllers.MessagesController {
         public T4MVC_MessagesController() : base(Dummy.Instance) { }
 
+        public override System.Web.Mvc.ViewResult ListMessages() {
+            var callInfo = new T4MVC_ViewResult("Messages", Actions.ListMessages);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult ListAllMessages(TFS.Models.Messages.MessageType messageType) {
+            var callInfo = new T4MVC_ViewResult("Messages", Actions.ListAllMessages);
+            callInfo.RouteValues.Add("messageType", messageType);
+            return callInfo;
+        }
+
         public override System.Web.Mvc.ViewResult ViewAnnouncement(int id) {
             var callInfo = new T4MVC_ViewResult("Messages", Actions.ViewAnnouncement);
+            callInfo.RouteValues.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult ViewSystemAlert(int id) {
+            var callInfo = new T4MVC_ViewResult("Messages", Actions.ViewSystemAlert);
+            callInfo.RouteValues.Add("id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult ViewUserAlert(int id) {
+            var callInfo = new T4MVC_ViewResult("Messages", Actions.ViewUserAlert);
             callInfo.RouteValues.Add("id", id);
             return callInfo;
         }

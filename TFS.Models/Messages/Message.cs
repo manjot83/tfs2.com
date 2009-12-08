@@ -30,6 +30,9 @@ namespace TFS.Models.Messages
         [DomainEquality, Required, DateTimeKind(DateTimeKind.Utc)]
         public virtual DateTime ActiveToDate { get; set; }
 
+        [Required]
+        public virtual string Content { get; set; }
+
         public virtual ISet<MessageStatus> MessageStatusForUsers { get; set; }
 
         public virtual void MarkSeenBy(User user)

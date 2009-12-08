@@ -22,6 +22,10 @@ namespace TFS.Models.Data.Mappings.Messages
             Map(x => x.ActiveToDate)
                 .CustomType<UtcDateTimeUserType>()
                 .Not.Nullable();
+            Map(x => x.Content)
+                .Column("Content")
+                .WithMaxLength()
+                .Nullable(); // Must be nullable because of table-per-hierarchy
 
             HasMany(x => x.MessageStatusForUsers)
                 .LazyLoad()

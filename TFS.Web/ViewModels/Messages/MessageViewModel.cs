@@ -19,8 +19,26 @@ namespace TFS.Web.ViewModels.Messages
         [Required, DateTimeKind(DateTimeKind.Utc)]
         public DateTime? ActiveToDate { get; set; }
 
-        public abstract MessageType MessageType { get; }
+        [Required]
+        public string Content { get; set; }
+
+        public MessageType MessageType { get; set; }
 
         public bool CanEdit { get; set; }
+
+        public AnnouncementViewModel AsAnnouncement()
+        {
+            return this as AnnouncementViewModel;
+        }
+
+        public SystemAlertViewModel AsSystemAlert()
+        {
+            return this as SystemAlertViewModel;
+        }
+
+        public UserAlertViewModel AsUserAlert()
+        {
+            return this as UserAlertViewModel;
+        }
     }
 }

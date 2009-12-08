@@ -236,13 +236,16 @@
   <ItemGroup>
     <Content Include="404.html" />
     <Content Include="Config\ConnectionStrings.config" />
-    <Content Include="Content\internal\icons\book.png" />
-    <Content Include="Content\internal\icons\group.png" />
+    <Content Include="Content\internal\icons\systemalert.png" />
+    <Content Include="Content\internal\icons\exclamation.png" />
+    <Content Include="Content\internal\icons\flightprograms.png" />
+    <Content Include="Content\internal\icons\users.png" />
+    <Content Include="Content\internal\icons\announcements.png" />
     <Content Include="Content\internal\icons\sort_down.gif" />
     <Content Include="Content\internal\icons\sort_up.gif" />
-    <Content Include="Content\internal\icons\flightlog.png" />
-    <Content Include="Content\internal\icons\vcard.png" />
-    <Content Include="Content\internal\icons\world.png" />
+    <Content Include="Content\internal\icons\flightlogs.png" />
+    <Content Include="Content\internal\icons\personnelfiles.png" />
+    <Content Include="Content\internal\icons\website.png" />
     <Content Include="Content\internal\images\calendarSelector.png" />
     <Content Include="Content\internal\reset.css" />
     <Content Include="Content\internal\template\bgcontainer.gif" />
@@ -279,7 +282,10 @@
     <Content Include="Views\Messages\CreateMessage.aspx" />
     <Content Include="Views\Messages\EditMessage.aspx" />
     <Content Include="Views\Messages\ListMessages.aspx" />
+    <Content Include="Views\Messages\ViewAnnouncement.ascx" />
     <Content Include="Views\Messages\ViewMessage.aspx" />
+    <Content Include="Views\Messages\ViewSystemAlert.ascx" />
+    <Content Include="Views\Messages\ViewUserAlert.ascx" />
     <Content Include="Views\PersonnelRecords\EditRecord.aspx" />
     <Content Include="Views\PersonnelRecords\List.aspx" />
     <Content Include="Views\Security\ChangePassword.aspx" />

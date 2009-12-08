@@ -10,7 +10,7 @@ Personnel Records
     <ul class="instructions">
         <li>Click on the person's name to see and edit their personnel record.</li>
         <li>Sort by status to find people with missing key information (key information includes SSN, date of birth, and contact information).</li>
-        <li>Click to download as a <%= Html.ActionLink("CSV", MVC.PersonnelRecords.DownloadAllAsCsv()) %> for Excel.</li>
+        <li>Click to download as a <b><%= Html.ActionLink("CSV", MVC.PersonnelRecords.DownloadAllAsCsv()) %></b> for Excel.</li>
     </ul>
     <div class="list-table-pager">
         <% if (Model.HasPreviousPage()) { %>

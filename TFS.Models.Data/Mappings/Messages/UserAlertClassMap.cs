@@ -13,11 +13,6 @@ namespace TFS.Models.Data.Mappings.Messages
         {
             DiscriminatorValue((int)MessageType.UserAlert);
 
-            Map(x => x.Content)
-                .Column("Content")
-                .WithMaxLength()
-                .Nullable(); // Must be nullable because of table-per-hierarchy
-
             References(x => x.User)
                 .Column("UserAlert_UserId")
                 .ForeignKey("FK_UserAlert_Messages_Users")
