@@ -10,7 +10,6 @@ namespace TFS.Web.ViewModels.Messages
     public class AnnouncementViewModel : MessageViewModel
     {
         public string CreatedByFileByName { get; set; }
-        [Required]
         public string CreatedByUsername { get; set; }
         [Required]
         public bool Urgent { get; set; }

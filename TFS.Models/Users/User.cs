@@ -36,26 +36,12 @@ namespace TFS.Models.Users
 
         public virtual bool IsInRole(string role)
         {
-            if (Enum.GetNames(typeof(Roles)).Any(x => x.Matches(role)))
-                return IsInRole((Roles)Enum.Parse(typeof(Roles), role, true));
-            throw new ArgumentException(string.Format("Invalid role: {0}", role), "role");
+            return Roles.IsInRole(role);
         }
 
         public virtual bool IsInRole(Roles role)
         {
-            switch (role)
-            {
-                case TFS.Models.Users.Roles.UserManager:
-                    return Roles.UserManager;
-                case TFS.Models.Users.Roles.PersonnelManager:
-                    return Roles.PersonnelManager;
-                case TFS.Models.Users.Roles.ProgramManager:
-                    return Roles.ProgramManager;
-                case TFS.Models.Users.Roles.FlightLogManager:
-                    return Roles.FlightLogManager;
-                default:
-                    return false;
-            }
+            return Roles.IsInRole(role);
         }
 
         public virtual Person Person { get; set; }

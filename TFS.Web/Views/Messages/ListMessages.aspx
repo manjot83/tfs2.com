@@ -14,6 +14,11 @@
         <li><b><%= Html.ActionLink("All Announcements", MVC.Messages.ListAllMessages(TFS.Models.Messages.MessageType.Announcement)) %></b></li>
         <li><b><%= Html.ActionLink("All System Alerts", MVC.Messages.ListAllMessages(TFS.Models.Messages.MessageType.SystemAlert)) %></b></li>
     </ul>
+    <% if ((bool)ViewData["CanEdit"]) { %>
+    <p>
+        EDIT
+    </p>
+    <% } %>
     <% if (Model.Items.Any()) { %>
     <table class="list-table">
         <thead>
@@ -31,13 +36,9 @@
                 <% } %>
             </td>
             <td>
-                <% if (message.MessageType == TFS.Models.Messages.MessageType.SystemAlert) { %>
-                <%= Html.ActionLink(message.Title, MVC.Messages.ViewSystemAlert(message.Id.Value)) %>
-                <% } else if (message.MessageType == TFS.Models.Messages.MessageType.Announcement) { %>
-                <%= Html.ActionLink(message.Title, MVC.Messages.ViewAnnouncement(message.Id.Value)) %>
-                    <% if (message.AsAnnouncement().Urgent) { %>
+                <%= Html.ActionLink(message.Title, MVC.Messages.ViewMessage(message.Id.Value)) %>
+                <% if (message.MessageType == TFS.Models.Messages.MessageType.Announcement && message.AsAnnouncement().Urgent) { %>
                     <span class="urgent">HOT ITEM</span>
-                    <% } %>
                 <% } %>
             </td>
             <td>

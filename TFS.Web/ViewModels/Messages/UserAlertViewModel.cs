@@ -10,7 +10,6 @@ namespace TFS.Web.ViewModels.Messages
     public class UserAlertViewModel : MessageViewModel
     {
         public string ForFileByName { get; set; }
-        [Required]
         public string ForUsername { get; set; }
     }
 }

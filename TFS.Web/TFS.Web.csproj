@@ -280,7 +280,9 @@
     <Content Include="Views\FlightPrograms\Manage.aspx" />
     <Content Include="Views\FlightPrograms\ProgramLocationInfo.ascx" />
     <Content Include="Views\Messages\CreateMessage.aspx" />
+    <Content Include="Views\Messages\EditAnnouncement.ascx" />
     <Content Include="Views\Messages\EditMessage.aspx" />
+    <Content Include="Views\Messages\EditSystemAlert.ascx" />
     <Content Include="Views\Messages\ListMessages.aspx" />
     <Content Include="Views\Messages\ViewAnnouncement.ascx" />
     <Content Include="Views\Messages\ViewMessage.aspx" />

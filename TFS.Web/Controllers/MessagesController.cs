@@ -37,7 +37,7 @@ namespace TFS.Web.Controllers
                    .Concat(Mapper.Map<IEnumerable<SystemAlert>, IEnumerable<SystemAlertViewModel>>(systemAlerts).Cast<MessageViewModel>());
             messages = messages.OrderByDescending(x => x.ActiveFromDate);
             viewModel.SetItems(messages);
-            viewModel.Items.ForEach(x => x.CanEdit = DetermineCanEdit());
+            ViewData["CanEdit"] = DetermineCanEdit();
             return View(Views.ListMessages, viewModel);
         }
 
@@ -45,48 +45,87 @@ namespace TFS.Web.Controllers
         {
             var viewModel = new SortedListViewModel<MessageViewModel>();
             IEnumerable<MessageViewModel> messages;
-            if (messageType == MessageType.Announcement)
+            switch (messageType)
             {
-                var announcements = messagesRepository.GetAllAnnouncements();
-                messages = Mapper.Map<IEnumerable<Announcement>, IEnumerable<AnnouncementViewModel>>(announcements).Cast<MessageViewModel>();
-            }
-            else if (messageType == MessageType.SystemAlert)
-            {
-                var systemAlerts = messagesRepository.GetAllSystemAlerts();
-                messages = Mapper.Map<IEnumerable<SystemAlert>, IEnumerable<SystemAlertViewModel>>(systemAlerts).Cast<MessageViewModel>();
-            }
-            else
-            {
-                throw new InvalidOperationException("Invalid Message Type");
+                case MessageType.Announcement:
+                    var announcements = messagesRepository.GetAllAnnouncements();
+                    messages = Mapper.Map<IEnumerable<Announcement>, IEnumerable<AnnouncementViewModel>>(announcements).Cast<MessageViewModel>();
+                    break;
+                case MessageType.SystemAlert:
+                    var systemAlerts = messagesRepository.GetAllSystemAlerts();
+                    messages = Mapper.Map<IEnumerable<SystemAlert>, IEnumerable<SystemAlertViewModel>>(systemAlerts).Cast<MessageViewModel>();
+                    break;
+                default:
+                    throw new InvalidOperationException("Invalid Message Type");
             }
             messages = messages.OrderByDescending(x => x.ActiveFromDate);
             viewModel.SetItems(messages);
-            viewModel.Items.ForEach(x => x.CanEdit = DetermineCanEdit());
+            ViewData["CanEdit"] = DetermineCanEdit();
             return View(Views.ListMessages, viewModel);
         }
 
-        public virtual ViewResult ViewAnnouncement(int id)
+        public virtual ViewResult CreateMessage(MessageType messageType)
         {
-            var announcement = session.Get<Announcement>(id);
-            var viewModel = Mapper.Map<Announcement, AnnouncementViewModel>(announcement);
+            MessageViewModel viewModel = null;
+            switch (messageType)
+            {
+                case MessageType.Announcement:
+                    viewModel = new AnnouncementViewModel();
+                    break;
+                case MessageType.SystemAlert:
+                    viewModel = new SystemAlertViewModel();
+                    break;
+                default:
+                    throw new InvalidOperationException("Invalid Message Type");
+            }
+            return View(Views.CreateMessage, viewModel);
+        }
+
+        public virtual ViewResult ViewMessage(int id)
+        {
+            var message = session.Get<Message>(id);
+            MessageViewModel viewModel = null;
+            switch (message.MessageType)
+            {
+                case MessageType.Announcement:
+                    viewModel = Mapper.Map<Announcement, AnnouncementViewModel>((Announcement)message);
+                    break;
+                case MessageType.SystemAlert:
+                    viewModel = Mapper.Map<SystemAlert, SystemAlertViewModel>((SystemAlert)message);
+                    break;
+                case MessageType.UserAlert:
+                    viewModel = Mapper.Map<UserAlert, UserAlertViewModel>((UserAlert)message);
+                    break;
+                default:
+                    throw new InvalidOperationException("Invalid Message Type");
+            }
             viewModel.CanEdit = DetermineCanEdit();
             return View(Views.ViewMessage, viewModel);
         }
 
-        public virtual ViewResult ViewSystemAlert(int id)
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual ActionResult CreateAnnouncement(AnnouncementViewModel announcementViewModel)
         {
-            var systemAlert = session.Get<SystemAlert>(id);
-            var viewModel = Mapper.Map<SystemAlert, SystemAlertViewModel>(systemAlert);
-            viewModel.CanEdit = DetermineCanEdit();
-            return View(Views.ViewMessage, viewModel);
+            announcementViewModel.Validate(ModelState, string.Empty);
+            if (!ModelState.IsValid)
+                return View(Views.CreateMessage, announcementViewModel);
+            var announcement = Mapper.Map<AnnouncementViewModel, Announcement>(announcementViewModel);
+            announcement.CreatedBy = this.GetCurrentUser();
+            announcement.ActiveFromDate = DateTime.Today.ToUniversalTime().WithoutMilliseconds();
+            session.Save(announcement);
+            return RedirectToAction(MVC.Dashboard.Index());
         }
 
-        public virtual ViewResult ViewUserAlert(int id)
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual ActionResult CreateSystemAlert(SystemAlertViewModel systemAlertViewModel)
         {
-            var userAlert = session.Get<UserAlert>(id);
-            var viewModel = Mapper.Map<UserAlert, UserAlertViewModel>(userAlert);
-            viewModel.CanEdit = DetermineCanEdit();
-            return View(Views.ViewMessage, viewModel);
+            systemAlertViewModel.Validate(ModelState, string.Empty);
+            if (!ModelState.IsValid)
+                return View(Views.CreateMessage, systemAlertViewModel);
+            var aystemAlert = Mapper.Map<SystemAlertViewModel, SystemAlert>(systemAlertViewModel);
+            aystemAlert.ActiveFromDate = DateTime.Today.ToUniversalTime().WithoutMilliseconds();
+            session.Save(aystemAlert);
+            return RedirectToAction(MVC.Dashboard.Index());
         }
 
         [NonAction]

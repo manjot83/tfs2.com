@@ -13,7 +13,6 @@ namespace TFS.Web.ViewModels.Messages
         [Required, StringLength(100)]
         public string Title { get; set; }
 
-        [Required, DateTimeKind(DateTimeKind.Utc)]
         public DateTime? ActiveFromDate { get; set; }
 
         [Required, DateTimeKind(DateTimeKind.Utc)]

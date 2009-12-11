@@ -832,18 +832,23 @@ namespace TFS.Web.Controllers {
         }
 
         [NonAction]
-        public System.Web.Mvc.ViewResult ViewAnnouncement() {
-            return new T4MVC_ViewResult(Name, Actions.ViewAnnouncement);
+        public System.Web.Mvc.ViewResult CreateMessage() {
+            return new T4MVC_ViewResult(Name, Actions.CreateMessage);
         }
 
         [NonAction]
-        public System.Web.Mvc.ViewResult ViewSystemAlert() {
-            return new T4MVC_ViewResult(Name, Actions.ViewSystemAlert);
+        public System.Web.Mvc.ViewResult ViewMessage() {
+            return new T4MVC_ViewResult(Name, Actions.ViewMessage);
         }
 
         [NonAction]
-        public System.Web.Mvc.ViewResult ViewUserAlert() {
-            return new T4MVC_ViewResult(Name, Actions.ViewUserAlert);
+        public System.Web.Mvc.ActionResult CreateAnnouncement() {
+            return new T4MVC_ActionResult(Name, Actions.CreateAnnouncement);
+        }
+
+        [NonAction]
+        public System.Web.Mvc.ActionResult CreateSystemAlert() {
+            return new T4MVC_ActionResult(Name, Actions.CreateSystemAlert);
         }
 
 
@@ -857,9 +862,10 @@ namespace TFS.Web.Controllers {
         public class ActionNames {
             public readonly string ListMessages = "ListMessages";
             public readonly string ListAllMessages = "ListAllMessages";
-            public readonly string ViewAnnouncement = "ViewAnnouncement";
-            public readonly string ViewSystemAlert = "ViewSystemAlert";
-            public readonly string ViewUserAlert = "ViewUserAlert";
+            public readonly string CreateMessage = "CreateMessage";
+            public readonly string ViewMessage = "ViewMessage";
+            public readonly string CreateAnnouncement = "CreateAnnouncement";
+            public readonly string CreateSystemAlert = "CreateSystemAlert";
         }
 
 
@@ -869,7 +875,9 @@ namespace TFS.Web.Controllers {
         [CompilerGenerated]
         public class ViewNames {
             public readonly string CreateMessage = "CreateMessage";
+            public readonly string EditAnnouncement = "EditAnnouncement";
             public readonly string EditMessage = "EditMessage";
+            public readonly string EditSystemAlert = "EditSystemAlert";
             public readonly string ListMessages = "ListMessages";
             public readonly string ViewAnnouncement = "ViewAnnouncement";
             public readonly string ViewMessage = "ViewMessage";
@@ -895,21 +903,27 @@ namespace T4MVC {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult ViewAnnouncement(int id) {
-            var callInfo = new T4MVC_ViewResult("Messages", Actions.ViewAnnouncement);
+        public override System.Web.Mvc.ViewResult CreateMessage(TFS.Models.Messages.MessageType messageType) {
+            var callInfo = new T4MVC_ViewResult("Messages", Actions.CreateMessage);
+            callInfo.RouteValues.Add("messageType", messageType);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult ViewMessage(int id) {
+            var callInfo = new T4MVC_ViewResult("Messages", Actions.ViewMessage);
             callInfo.RouteValues.Add("id", id);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult ViewSystemAlert(int id) {
-            var callInfo = new T4MVC_ViewResult("Messages", Actions.ViewSystemAlert);
-            callInfo.RouteValues.Add("id", id);
+        public override System.Web.Mvc.ActionResult CreateAnnouncement(TFS.Web.ViewModels.Messages.AnnouncementViewModel announcementViewModel) {
+            var callInfo = new T4MVC_ActionResult("Messages", Actions.CreateAnnouncement);
+            callInfo.RouteValues.Add("announcementViewModel", announcementViewModel);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult ViewUserAlert(int id) {
-            var callInfo = new T4MVC_ViewResult("Messages", Actions.ViewUserAlert);
-            callInfo.RouteValues.Add("id", id);
+        public override System.Web.Mvc.ActionResult CreateSystemAlert(TFS.Web.ViewModels.Messages.SystemAlertViewModel systemAlertViewModel) {
+            var callInfo = new T4MVC_ActionResult("Messages", Actions.CreateSystemAlert);
+            callInfo.RouteValues.Add("systemAlertViewModel", systemAlertViewModel);
             return callInfo;
         }
 
