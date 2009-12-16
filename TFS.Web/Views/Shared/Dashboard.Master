@@ -6,7 +6,7 @@
 <head>
     <title>Tactical Flight Services - <asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>    
     <link rel="icon" type="image/vnd.microsoft.icon" href="<%= Url.Content("~/favicon.ico") %>" /> 
-    <link type="text/css" rel="stylesheet" href="<%= Url.Content("~/Content/internal/style.less") %>" />
+    <asp:ContentPlaceHolder ID="StyleSheet" runat="server" />
 </head>
 <body>
     <div class="container">
@@ -71,6 +71,6 @@
         </div>
     </div>    
     <!-- Javascript Here -->
-    <asp:ContentPlaceHolder ID="AdditionalJavascript" runat="server" />
+    <asp:ContentPlaceHolder ID="Javascript" runat="server" />
 </body>
 </html>

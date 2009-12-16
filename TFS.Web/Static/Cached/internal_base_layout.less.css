@@ -1,0 +1,102 @@
+﻿.container { background: #fcf9e7 URL(../images/internal_template/bgcontainer.gif) repeat-y; }
+.container .right { float: right; }
+.container .left { float: left; }
+.container .clearer { clear: both; }
+.container .header {
+  background: URL(../images/internal_template/bgheader.png) repeat-x;
+  margin: 0 auto;
+  height: 61px;
+}
+.container .header .title {
+  padding: 10px 30px 10px 30px;
+  color: #e4dbcf;
+  font-size: 260%;
+}
+.container .navigation {
+  margin: 0 auto;
+  padding: 0 18px;
+  height: 44px;
+  background: #ffffff URL(../images/internal_template/bgnavigation.gif) repeat-x;
+  font-weight: bold;
+  font-size: 93%;
+}
+.container .navigation a {
+  padding: 3px 4px;
+  margin-right: 12px;
+  line-height: 44px;
+  color: #554433;
+  text-decoration: none;
+}
+.container .navigation a:hover {
+  text-decoration: underline;
+  color: #442200;
+}
+.container .main {
+  clear: both;
+  padding: 0px 20px 12px 0px;
+}
+.container .main .sidenav {
+  float: left;
+  width: 218px;
+}
+.container .main .sidenav .sidenav-header {
+  margin: 0;
+  padding-top: 6px;
+  padding-left: 12px;
+  height: 22px;
+  background: #bcb39f URL(../images/internal_template/sidenavh1.gif) repeat-x;
+  border-bottom: 1px solid #999999;
+  border-top: 1px solid #cccccc;
+  color: #4a4a44;
+  font-size: 93%;
+  font-weight: bold;
+}
+.container .main .sidenav ul {
+  margin: 0;
+  padding: 0;
+  font-size: 93%;
+}
+.container .main .sidenav ul li {
+  border-bottom: 1px solid #aa9988;
+  border-top: 1px solid #ddddcc;
+  list-style: none;
+  margin: 0;
+}
+.container .main .sidenav ul li img {
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.container .main .sidenav ul li a {
+  background: #ccc3af;
+  color: #555544;
+  display: block;
+  padding: 8px 4px 8px 12px;
+  text-decoration: none;
+}
+.container .main .sidenav ul li a:hover {
+  background: #d6ccb9;
+  color: #665544;
+}
+.container .footer {
+  margin: 0 auto;
+  line-height: 40px;
+  background: #958463 URL(../images/internal_template/bgfooter.png) repeat-x;
+  text-align: center;
+  color: #ffeedd;
+  font-size: 85%;
+}
+.container .footer .left { padding: 0px 12px; }
+.container .footer .left a {
+  color: #ffffdd;
+  text-decoration: none;
+}
+.container .footer .left a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+.container .footer .right {
+  padding: 0px 12px;
+  color: #c0b8a6;
+}
+.container .footer .right a { color: #c0b8a6; }
+.container .footer .right a:hover { color: #ffffee; }

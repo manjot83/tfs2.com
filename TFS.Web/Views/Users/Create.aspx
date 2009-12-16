@@ -4,6 +4,10 @@
 Create a New User
 </asp:Content>
 
+<asp:Content ContentPlaceHolderID="StyleSheet" runat="server">
+<%= Html.StylesheetsFor(Tags.CSS_INTERNAL_BASE) %>
+</asp:Content>
+
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <p>
         <%= Html.ActionLink("Back to user list...", MVC.Users.List()) %>

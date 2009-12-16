@@ -55,6 +55,7 @@
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\VersionExtensions.cs" />
+    <Compile Include="Helpers\CompoundKey.cs" />
     <Compile Include="Helpers\ContractUtils.cs" />
     <Compile Include="Helpers\PreconditionViolationException.cs" />
     <Compile Include="Helpers\ReflectionHelper.cs" />

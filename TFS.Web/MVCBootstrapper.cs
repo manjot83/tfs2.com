@@ -18,6 +18,7 @@ namespace TFS.Web
             InitializeAutoMapper();
             var fluentConfiguration = InitializeNHibernate();
             InitializeStructureMap(fluentConfiguration);
+            InitializeAssetCaching();
 #if SQLITE
             LoadTestData(fluentConfiguration);
 #endif
@@ -41,6 +42,11 @@ namespace TFS.Web
         public static void InitializeAutoMapper()
         {
             AutoMapperConfiguration.InitializeAutoMapper();
+        }
+
+        public static void InitializeAssetCaching()
+        {
+            Tags.ConfigureTags();
         }
 
         public static FluentConfiguration InitializeNHibernate()

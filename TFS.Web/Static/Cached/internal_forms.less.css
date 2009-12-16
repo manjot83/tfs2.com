@@ -1,0 +1,80 @@
+﻿input {
+  padding: 2px;
+  border: solid 1px #c9c9c9;
+  color: #555555;
+  font-size: 1.1em;
+}
+input:focus, input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover, select:focus { border-color: #c29100; }
+input[type="button"] {
+  padding: 2px;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #f2f2f2;
+}
+input[type="submit"] {
+  padding: 2px;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #f2f2f2;
+}
+input[type="reset"] {
+  padding: 2px;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #f2f2f2;
+}
+input[type="checkbox"], input[type="checkbox"]:focus { border: none; }
+select {
+  padding: 1px;
+  border: solid 1px #c9c9c9;
+  font-size: 1.1em;
+  height: 22px;
+}
+.field-validation-error { color: Red; }
+fieldset.standard-form {
+  display: block;
+  border: 1px solid #c9c9c9;
+}
+fieldset.standard-form legend {
+  margin-left: 10px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+fieldset.standard-form .fieldset-content {
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.standard-form {
+  font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 15px;
+}
+.standard-form label {
+  display: block;
+  padding-bottom: 2px;
+  font-weight: bold;
+}
+.standard-form input {
+  margin: 0px;
+  display: block;
+}
+.standard-form select {
+  margin: 0px;
+  display: block;
+}
+.standard-form .checkboxlabel, .standard-form input[type="checkbox"], .standard-form .button-group input { display: inline; }
+.standard-form img { vertical-align: bottom; }
+.standard-form .inline { display: inherit; }
+.standard-form .field-group {
+  display: block;
+  padding: 5px 0px 5px 0px;
+}
+.standard-form .field-group .field {
+  padding: 5px 0px 5px 0px;
+  vertical-align: top;
+  display: inline-block;
+}
+.standard-form .button-group { padding: 5px 0px 5px 0px; }
+input[type="hidden"] { display: none; }
