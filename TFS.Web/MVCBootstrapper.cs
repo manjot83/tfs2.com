@@ -3,19 +3,10 @@ using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
 using FluentNHibernate.Cfg;
-using NHibernate;
 using StructureMap;
 using StructureMap.Attributes;
 using TFS.Models.Data.Configuration;
 using TFS.Web.Controllers;
-using AutoMapper;
-using TFS.Models.Users;
-using TFS.Web.ViewModels;
-using TFS.Models.PersonnelRecords;
-using TFS.Web.ViewModels.PersonnelRecords;
-using System;
-using TFS.Models.Geography;
-using TFS.Models;
 
 namespace TFS.Web
 {
@@ -80,6 +71,10 @@ namespace TFS.Web
                 i.ForRequestedType<IAuthenticationService>()
                     .CacheBy(InstanceScope.Hybrid)
                     .TheDefaultIsConcreteType<FormsAuthenticationService>();
+
+                i.ForRequestedType<IApplicationSettings>()
+                    .CacheBy(InstanceScope.Singleton)
+                    .TheDefault.Is.ConstructedBy(x => new ApplicationSettings());
             });
 #if DEBUG
             ObjectFactory.AssertConfigurationIsValid();

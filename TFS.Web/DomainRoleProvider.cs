@@ -6,7 +6,7 @@ using System.Web.Security;
 using TFS.Models;
 using TFS.Models.Users;
 
-namespace TFS.Web.Helpers
+namespace TFS.Web
 {
     public class DomainRoleProvider : RoleProvider
     {

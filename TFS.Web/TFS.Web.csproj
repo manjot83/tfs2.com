@@ -115,8 +115,8 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="ActionFilters\UnitOfWorkAttribute.cs" />
+    <Compile Include="ApplicationSettings.cs" />
     <Compile Include="AutoMapperConfiguration.cs" />
-    <Compile Include="ConfigurationHelper.cs" />
     <Compile Include="Controllers\ControllerExtension.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\FlightLogsController.cs" />
@@ -136,13 +136,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\DomainRoleProvider.cs" />
+    <Compile Include="DomainRoleProvider.cs" />
     <Compile Include="Html\DateTimeExtensions.cs" />
     <Compile Include="Html\ImageHelper.cs" />
     <Compile Include="Html\ImageLinkExtensions.cs" />
     <Compile Include="Html\Markdown.cs" />
     <Compile Include="Html\PartialExtensions.cs" />
     <Compile Include="Html\SelectListItemExtensions.cs" />
+    <Compile Include="IApplicationSettings.cs" />
     <Compile Include="IAuthenticationService.cs" />
     <Compile Include="ICanResolveDependencies.cs" />
     <Compile Include="MvcBootstrapper.cs" />
