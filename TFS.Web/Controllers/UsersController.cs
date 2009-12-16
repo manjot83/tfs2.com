@@ -10,8 +10,8 @@ using System.Collections.Generic;
 
 namespace TFS.Web.Controllers
 {
-    //[DomainAuthorize(Roles="UserManager")]
-    [DomainAuthorize]
+    //[Authorize(Roles="UserManager")]
+    [Authorize]
     public partial class UsersController : Controller
     {
         private readonly IUserRepository userRepository;
@@ -21,13 +21,13 @@ namespace TFS.Web.Controllers
             this.userRepository = userRepository;
         }
 
-        [RequireTransaction]
+        [UnitOfWork]
         public virtual ViewResult Index()
         {
             return List(null, null, null, null, null);
         }
 
-        [RequireTransaction]
+        [UnitOfWork]
         public virtual ViewResult List(string sortType, SortDirection? sortDirection, int? page, int? itemsPerPage, bool? showAll)
         {
             if (string.IsNullOrEmpty(sortType))
@@ -69,7 +69,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
-        [RequireTransaction]
+        [UnitOfWork]
         public virtual ViewResult Edit(string username)
         {
             var user = this.GetUser(username);
@@ -78,7 +78,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        [RequireTransaction]
+        [UnitOfWork]
         public virtual ActionResult Edit(UserViewModel userViewModel)
         {
             userViewModel.Validate(ModelState, string.Empty);
@@ -96,7 +96,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        [RequireTransaction]
+        [UnitOfWork]
         public virtual ActionResult Create(UserViewModel userViewModel)
         {
             userViewModel.Validate(ModelState, string.Empty);

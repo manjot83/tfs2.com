@@ -114,8 +114,7 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="ActionFilters\DomainAuthorizeAttribute.cs" />
-    <Compile Include="ActionFilters\RequireTransactionAttribute.cs" />
+    <Compile Include="ActionFilters\UnitOfWorkAttribute.cs" />
     <Compile Include="AutoMapperConfiguration.cs" />
     <Compile Include="ConfigurationHelper.cs" />
     <Compile Include="Controllers\ControllerExtension.cs" />
@@ -137,6 +136,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DomainRoleProvider.cs" />
     <Compile Include="Html\DateTimeExtensions.cs" />
     <Compile Include="Html\ImageHelper.cs" />
     <Compile Include="Html\ImageLinkExtensions.cs" />

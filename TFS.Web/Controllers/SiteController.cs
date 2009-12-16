@@ -23,41 +23,41 @@ namespace TFS.Web.Controllers
             this.siteRepository = siteRepository;
         }
 
-        [RequireTransaction]
+        [UnitOfWork]
         public virtual RedirectToRouteResult Index()
         {
             return this.RedirectToAction(MVC.Site.Actions.Home);
         }
 
-        [RequireTransaction]
+        [UnitOfWork]
         public virtual ViewResult Home()
         {
             var page = siteRepository.GetPage(URI_HOME);
             return View(MVC.Site.Views.SitePage, page);
         }
 
-        [RequireTransaction]
+        [UnitOfWork]
         public virtual ViewResult Services()
         {
             var page = siteRepository.GetPage(URI_SERVICES);
             return View(MVC.Site.Views.SitePage, page);
         }
 
-        [RequireTransaction]
+        [UnitOfWork]
         public virtual ViewResult Programs()
         {
             var page = siteRepository.GetPage(URI_PROGRAMS);
             return View(MVC.Site.Views.SitePage, page);
         }
 
-        [RequireTransaction]
+        [UnitOfWork]
         public virtual ViewResult Experience()
         {
             var page = siteRepository.GetPage(URI_EXPERIENCE);
             return View(MVC.Site.Views.SitePage, page);
         }
 
-        [RequireTransaction]
+        [UnitOfWork]
         public virtual ViewResult Contact()
         {
             var page = siteRepository.GetPage(URI_CONTACT);

@@ -8,7 +8,7 @@ using TFS.Web.ActionFilters;
 
 namespace TFS.Web.Controllers
 {
-    [DomainAuthorize]
+    [Authorize]
     public partial class DashboardController : Controller
     {
         public virtual ViewResult Index()

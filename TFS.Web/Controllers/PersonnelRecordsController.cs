@@ -17,7 +17,7 @@ using NHibernate;
 
 namespace TFS.Web.Controllers
 {
-    [DomainAuthorize]
+    [Authorize]
     public partial class PersonnelRecordsController : Controller
     {
         private readonly ISession session;
@@ -31,7 +31,7 @@ namespace TFS.Web.Controllers
             this.flightProgramsRepository = flightProgramsRepository;
         }
 
-        [RequireTransaction]
+        [UnitOfWork]
         public virtual ViewResult List(string sortType, SortDirection? sortDirection, int? page, int? itemsPerPage)
         {
             if (string.IsNullOrEmpty(sortType))
@@ -60,7 +60,7 @@ namespace TFS.Web.Controllers
             return View(Views.List, viewModel);
         }
 
-        [RequireTransaction]
+        [UnitOfWork]
         public virtual ViewResult EditRecord(string username)
         {
             var user = userRepository.GetUser(username);
@@ -73,7 +73,7 @@ namespace TFS.Web.Controllers
             return View(MVC.PersonnelRecords.Views.EditRecord, viewModel);
         }
 
-        [RequireTransaction]
+        [UnitOfWork]
         public virtual ViewResult EditMyRecord()
         {
             var user = this.GetCurrentUser();
@@ -86,7 +86,7 @@ namespace TFS.Web.Controllers
             return View(MVC.PersonnelRecords.Views.EditRecord, viewModel);
         }
 
-        [RequireTransaction]
+        [UnitOfWork]
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult EditPersonalInfo(string username, bool editingMyRecord, PersonalInfo personalInfo)
         {
@@ -101,7 +101,7 @@ namespace TFS.Web.Controllers
                 return RedirectToAction(MVC.PersonnelRecords.EditRecord(username));
         }
 
-        [RequireTransaction]
+        [UnitOfWork]
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult EditContactInfo(string username, bool editingMyRecord, ContactInfo contactInfo)
         {
@@ -118,7 +118,7 @@ namespace TFS.Web.Controllers
                 return RedirectToAction(MVC.PersonnelRecords.EditRecord(username));
         }
 
-        [RequireTransaction]
+        [UnitOfWork]
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult EditCompanyInfo(string username, bool editingMyRecord, CompanyInfo companyInfo)
         {
@@ -134,7 +134,7 @@ namespace TFS.Web.Controllers
                 return RedirectToAction(MVC.PersonnelRecords.EditRecord(username));
         }
 
-        [RequireTransaction]
+        [UnitOfWork]
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult EditQualifications(string username, bool editingMyRecord, QualificationViewModel qualifications)
         {
@@ -159,7 +159,7 @@ namespace TFS.Web.Controllers
             return viewModel;
         }
 
-        [RequireTransaction]
+        [UnitOfWork]
         public virtual FileContentResult DownloadAllAsCsv()
         {
             var users = userRepository.GetAllActiveUsers().OrderBy(x => x.FileByName());

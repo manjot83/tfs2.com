@@ -15,7 +15,7 @@ using NHibernate;
 
 namespace TFS.Web.Controllers
 {
-    [DomainAuthorize, RequireTransaction]
+    [Authorize, UnitOfWork]
     public partial class FlightLogsController : Controller
     {
         private readonly ISession session;

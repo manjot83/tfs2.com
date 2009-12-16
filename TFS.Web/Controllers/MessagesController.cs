@@ -15,7 +15,7 @@ using TFS.Extensions;
 
 namespace TFS.Web.Controllers
 {
-    [DomainAuthorize, RequireTransaction]
+    [Authorize, UnitOfWork]
     public partial class MessagesController : Controller
     {
         private readonly ISession session;

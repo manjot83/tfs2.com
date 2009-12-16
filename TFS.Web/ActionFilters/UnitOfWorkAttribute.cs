@@ -4,7 +4,7 @@ using TFS.Models;
 
 namespace TFS.Web.ActionFilters
 {
-    public class RequireTransactionAttribute : ActionFilterAttribute
+    public class UnitOfWorkAttribute : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext filterContext)
         {
@@ -16,7 +16,7 @@ namespace TFS.Web.ActionFilters
             unitOfWork.Begin();
         }
 
-        public override void OnResultExecuted(ResultExecutedContext filterContext)
+        public override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             var container = filterContext.HttpContext.ApplicationInstance as ICanResolveDependencies;
             if (container == null)

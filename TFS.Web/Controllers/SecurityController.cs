@@ -24,7 +24,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        [RequireTransaction]
+        [UnitOfWork]
         public virtual ActionResult LogOn(string userName, string password, bool rememberMe, Uri returnUrl)
         {
             if (!authenticationService.Authenticate(userName, password))
@@ -51,8 +51,8 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
-        [DomainAuthorize]
-        [RequireTransaction]
+        [Authorize]
+        [UnitOfWork]
         public virtual ViewResult ChangePassword()
         {
             var user = this.GetCurrentUser();
@@ -60,8 +60,8 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        [DomainAuthorize]
-        [RequireTransaction]
+        [Authorize]
+        [UnitOfWork]
         public virtual ActionResult ChangePassword(string originalPassword, string newPassword, string confirmNewPassword)
         {
             if (string.IsNullOrEmpty(originalPassword))

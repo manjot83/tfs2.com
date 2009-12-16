@@ -18,7 +18,7 @@ namespace TFS.Web.Controllers
             this.imageFinder = imageFinder;
         }
 
-        [RequireTransaction]
+        [UnitOfWork]
         public virtual ActionResult StaticImage(Guid id)
         {
             var imageInfo = imageFinder.GetStaticImage(id);
