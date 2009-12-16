@@ -23,10 +23,10 @@ namespace TFS.Web.ActionFilters
                 throw new InvalidOperationException("HttpApplication must implemented ICanResolveDependencies");
 
             var unitOfWork = container.Resolve<IUnitOfWork>();
-            if (filterContext.Exception == null)
-                unitOfWork.Finish();
-            else
+            if (filterContext.Canceled || filterContext.Exception != null)
                 unitOfWork.Abort();
+            else
+                unitOfWork.Finish();
         }
     }
 }
