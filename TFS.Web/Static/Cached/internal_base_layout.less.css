@@ -1,9 +1,9 @@
-﻿.container { background: #fcf9e7 URL(../images/internal_template/bgcontainer.gif) repeat-y; }
+﻿.container { background: #fcf9e7 URL(../images/internal_template/bgcontainer.gif?r=633965619572546587) repeat-y; }
 .container .right { float: right; }
 .container .left { float: left; }
 .container .clearer { clear: both; }
 .container .header {
-  background: URL(../images/internal_template/bgheader.png) repeat-x;
+  background: URL(../images/internal_template/bgheader.png?r=633965619572546587) repeat-x;
   margin: 0 auto;
   height: 61px;
 }
@@ -16,7 +16,7 @@
   margin: 0 auto;
   padding: 0 18px;
   height: 44px;
-  background: #ffffff URL(../images/internal_template/bgnavigation.gif) repeat-x;
+  background: #ffffff URL(../images/internal_template/bgnavigation.gif?r=633965619572546587) repeat-x;
   font-weight: bold;
   font-size: 93%;
 }
@@ -44,7 +44,7 @@
   padding-top: 6px;
   padding-left: 12px;
   height: 22px;
-  background: #bcb39f URL(../images/internal_template/sidenavh1.gif) repeat-x;
+  background: #bcb39f URL(../images/internal_template/sidenavh1.gif?r=633965619572546587) repeat-x;
   border-bottom: 1px solid #999999;
   border-top: 1px solid #cccccc;
   color: #4a4a44;
@@ -80,7 +80,7 @@
 .container .footer {
   margin: 0 auto;
   line-height: 40px;
-  background: #958463 URL(../images/internal_template/bgfooter.png) repeat-x;
+  background: #958463 URL(../images/internal_template/bgfooter.png?r=633965619572546587) repeat-x;
   text-align: center;
   color: #ffeedd;
   font-size: 85%;

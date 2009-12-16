@@ -273,6 +273,8 @@
     <Content Include="500.html" />
     <Content Include="favicon.ico" />
     <Content Include="Static\css\internal_base_style.css" />
+    <Content Include="Static\css\internal_forms_layout.css" />
+    <Content Include="Static\css\internal_forms_style.css" />
     <Content Include="Static\css\yui_base.css" />
     <Content Include="Static\css\yui_fonts.css" />
     <Content Include="Static\css\yui_reset.css" />
@@ -337,7 +339,6 @@
     <None Include="Content\internal\paragraph.less" />
     <None Include="Content\internal\style.less" />
     <None Include="Content\internal\template\bgfooter.pdn" />
-    <None Include="Static\css\internal_forms.less" />
     <None Include="Static\css\internal_base_layout.less" />
     <None Include="Static\css\internal_list-table.less" />
     <None Include="Static\images\internal_template\bgfooter.pdn" />

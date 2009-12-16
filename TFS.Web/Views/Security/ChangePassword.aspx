@@ -4,10 +4,6 @@
 Change Password
 </asp:Content>
 
-<asp:Content ContentPlaceHolderID="StyleSheet" runat="server">
-<%= Html.StylesheetsFor(Tags.CSS_INTERNAL_BASE) %>
-</asp:Content>
-
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div class="header-main">Change Password - <%= Html.Encode(Model.Username) %></div>
     <% using (Html.BeginForm(MVC.Security.ChangePassword(), FormMethod.Post, new { @class = "standard-form" })) { %>

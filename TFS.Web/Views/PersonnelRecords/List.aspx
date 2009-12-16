@@ -4,10 +4,6 @@
 Personnel Records
 </asp:Content>
 
-<asp:Content ContentPlaceHolderID="StyleSheet" runat="server">
-<%= Html.StylesheetsFor(Tags.CSS_INTERNAL_BASE) %>
-</asp:Content>
-
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div class="header-main">Personnel Records</div>
     <p class="instructions">Below is a list of all active users.</p>

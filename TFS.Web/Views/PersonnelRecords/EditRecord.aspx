@@ -4,10 +4,6 @@
 Edit Personnel Record
 </asp:Content>
 
-<asp:Content ContentPlaceHolderID="StyleSheet" runat="server">
-<%= Html.StylesheetsFor(Tags.CSS_INTERNAL_BASE) %>
-</asp:Content>
-
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <div class="header-main">Edit personnel record - <%= Html.Encode(Model.Username) %></div>
     <p>

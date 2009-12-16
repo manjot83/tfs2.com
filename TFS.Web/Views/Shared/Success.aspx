@@ -4,10 +4,6 @@
 	Success
 </asp:Content>
 
-<asp:Content ContentPlaceHolderID="StyleSheet" runat="server">
-<%= Html.StylesheetsFor(Tags.CSS_INTERNAL_BASE) %>
-</asp:Content>
-
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
     <p>This action was completed successfully.</p>
     <% using(Html.BeginForm(Model.RedirectRoute, FormMethod.Get)) { %>
