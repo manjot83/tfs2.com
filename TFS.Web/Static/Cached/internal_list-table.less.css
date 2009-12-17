@@ -8,11 +8,11 @@
 .list-table thead, .list-table thead th { text-align: left; }
 .list-table thead tr:hover { background: #fffde5; }
 .list-table thead a.sorted-up {
-  background: URL(../images/icons/sort_up.gif) right no-repeat;
+  background: URL(../images/icons/sort_up.gif?r=633965619572596590) right no-repeat;
   padding-right: 10px;
 }
 .list-table thead a.sorted-down {
-  background: URL(../images/icons/sort_down.gif) right no-repeat;
+  background: URL(../images/icons/sort_down.gif?r=633965619572596590) right no-repeat;
   padding-right: 10px;
 }
 .list-table tr:hover { background-color: #e2fce2; }

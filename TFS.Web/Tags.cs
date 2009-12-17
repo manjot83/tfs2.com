@@ -16,10 +16,11 @@ namespace TFS.Web
             AssetCache.AddCss(CSS_INTERNAL_BASE, "~/Static/css/yui_reset.css",
                                                  "~/Static/css/yui_fonts.css",                                 
                                                  "~/Static/css/yui_base.css",
-                                                 "~/Static/css/internal_base_style.css",
                                                  "~/Static/css/internal_base_layout.less",
-                                                 "~/Static/css/internal_list-table.less",
-                                                 "~/Static/css/internal_forms.less");
+                                                 "~/Static/css/internal_base_style.css",                                                 
+                                                 "~/Static/css/internal_forms_layout.css",
+                                                 "~/Static/css/internal_forms_style.css",
+                                                 "~/Static/css/internal_list-table.less");
 
             AssetCache.AddCssProcessor(new DotLessResourceProcessor());
             AssetCache.AddCssProcessor(new ResourceEmbeddedUrlProcessor());

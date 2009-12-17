@@ -1,0 +1,88 @@
+﻿fieldset.standard-form
+{
+	display: block;
+	border: 1px solid #C9C9C9;
+}
+
+fieldset.standard-form legend
+{
+	margin-left: 10px;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+fieldset.standard-form .fieldset-content
+{
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.standard-form
+{
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+.standard-form label
+{
+	display: block;
+	padding-bottom: 2px;
+	font-weight: bold;
+}
+
+.standard-form input
+{
+	margin: 0px;
+	display: block;
+}
+
+.standard-form select
+{
+	margin: 0px;
+	display: block;
+}
+
+.standard-form .checkboxlabel
+{
+	display: inline;
+}
+
+.standard-form input[type="checkbox"]
+{
+	display: inline;
+}
+
+.standard-form img
+{
+	vertical-align: bottom;
+}
+
+.standard-form .inline
+{
+	display: inherit;
+}
+
+.standard-form .field-group
+{
+	display: block;
+	padding: 5px 0px 5px 0px;
+}
+.standard-form .field-group .field
+{
+	padding: 5px 0px 5px 0px;
+	vertical-align: top;
+	display: inline-block;
+}
+
+
+.standard-form .button-group
+{
+	padding: 5px 0px 5px 0px;
+}
+.standard-form .button-group input
+{
+	display: inline;
+}
+
+

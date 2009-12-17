@@ -1,0 +1,55 @@
+﻿input
+{
+	padding: 2px;
+	border: solid 1px #C9C9C9;
+	color: #555;
+}
+input:focus
+{
+	border-color: #C29100;
+}
+
+
+input[type="button"], input[type="submit"], input[type="reset"]
+{
+	padding: 2px;
+	font-weight: bold;
+	background-color: #F2F2F2;
+}
+input[type="button"]:hover, input[type="submit"]:hover, input[type="reset"]:hover
+{
+	border-color: #C29100;
+}
+
+
+input[type="checkbox"]
+{
+	border: none;
+}
+input[type="checkbox"]:focus
+{
+	border: none;
+}
+
+
+select
+{
+	padding: 1px;
+	border: solid 1px #C9C9C9;
+	height: 22px;
+}
+select:focus
+{
+	border-color: #C29100;
+}
+
+
+.field-validation-error
+{
+	color: Red;
+}
+
+
+input[type="hidden"] {
+	display: none;
+}
