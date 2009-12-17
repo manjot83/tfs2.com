@@ -291,6 +291,7 @@
     <Content Include="Static\images\internal_template\bgfooter.gif" />
     <Content Include="Static\images\internal_template\bgfooter.png" />
     <Content Include="Static\images\internal_template\bgheader.gif" />
+    <Content Include="Static\images\internal_template\bgheader.png" />
     <Content Include="Static\images\internal_template\bgnavigation.gif" />
     <Content Include="Static\images\internal_template\bgul.gif" />
     <Content Include="Static\images\internal_template\li.gif" />
