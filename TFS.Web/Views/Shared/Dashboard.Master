@@ -33,18 +33,18 @@
             <div class="sidenav">
                 <div class="sidenav-header">Operations</div>
                 <ul>            
-                    <li><%= Html.NavImageLink("Flight Logs", Links.Content.@internal.icons.flightlogs_png, MVC.FlightLogs.Index()) %></li>
-                    <li><%= Html.NavImageLink("Announcements", Links.Content.@internal.icons.announcements_png, MVC.Messages.ListMessages()) %></li>
+                    <li><%= Html.NavImageLink("Flight Logs", Tags.IMG_NAV_FLIGHTLOGS, MVC.FlightLogs.Index())%></li>
+                    <li><%= Html.NavImageLink("Announcements", Tags.IMG_NAV_ANNOUNCEMENTS, MVC.Messages.ListMessages())%></li>
                 </ul>
                 <div class="sidenav-header">Self Service</div>
                 <ul>
-                    <li><%= Html.NavImageLink("My Personnel File", Links.Content.@internal.icons.personnelfiles_png, MVC.PersonnelRecords.EditMyRecord())%></li>
+                    <li><%= Html.NavImageLink("My Personnel File", Tags.IMG_NAV_PERSONNELFILES, MVC.PersonnelRecords.EditMyRecord())%></li>
                 </ul>
                 <div class="sidenav-header">Administration</div>
                 <ul>
-                    <li><%= Html.NavImageLink("Users and Security", Links.Content.@internal.icons.users_png, MVC.Users.Index()) %></li>
-                    <li><%= Html.NavImageLink("Personnel Files", Links.Content.@internal.icons.personnelfiles_png, MVC.PersonnelRecords.List())%></li>
-                    <li><%= Html.NavImageLink("Flight Programs", Links.Content.@internal.icons.flightprograms_png, MVC.FlightPrograms.Manage())%></li>
+                    <li><%= Html.NavImageLink("Users and Security", Tags.IMG_NAV_USERS, MVC.Users.Index())%></li>
+                    <li><%= Html.NavImageLink("Personnel Files", Tags.IMG_NAV_PERSONNELFILES, MVC.PersonnelRecords.List())%></li>
+                    <li><%= Html.NavImageLink("Flight Programs", Tags.IMG_NAV_FLIGHTPROGRAMS, MVC.FlightPrograms.Manage())%></li>
                     <%--<li><%= Html.NavImageLink("Website", Links.Content.@internal.icons.world_png, "#")%></li>--%>
                 </ul>
             </div>

@@ -13,17 +13,23 @@ namespace TFS.Web
 #else
             AssetCache.CompressAssets = true;
 #endif
-            AssetCache.AddCss(CSS_INTERNAL_BASE, "~/Static/css/yui_reset.css",
-                                                 "~/Static/css/yui_fonts.css",                                 
-                                                 "~/Static/css/yui_base.css",
-                                                 "~/Static/css/internal_base_layout.less",
-                                                 "~/Static/css/internal_base_style.css",                                                 
-                                                 "~/Static/css/internal_forms_layout.css",
-                                                 "~/Static/css/internal_forms_style.css",
-                                                 "~/Static/css/internal_list-table.less");
+            AssetCache.AddCss(CSS_INTERNAL_BASE, Links.Static.css.yui_reset_css,
+                                                 Links.Static.css.yui_fonts_css,
+                                                 Links.Static.css.yui_base_css,
+                                                 Links.Static.css.internal_base_layout_less,
+                                                 Links.Static.css.internal_base_style_css,
+                                                 Links.Static.css.internal_forms_layout_css,
+                                                 Links.Static.css.internal_forms_style_css,
+                                                 Links.Static.css.internal_list_table_less);
 
             AssetCache.AddCssProcessor(new DotLessResourceProcessor());
             AssetCache.AddCssProcessor(new ResourceEmbeddedUrlProcessor());
+
+            AssetCache.AddFile(IMG_NAV_FLIGHTLOGS, Links.Static.images.icons.flightlogs_png);
+            AssetCache.AddFile(IMG_NAV_ANNOUNCEMENTS, Links.Static.images.icons.announcements_png);
+            AssetCache.AddFile(IMG_NAV_PERSONNELFILES, Links.Static.images.icons.personnelfiles_png);
+            AssetCache.AddFile(IMG_NAV_USERS, Links.Static.images.icons.users_png);
+            AssetCache.AddFile(IMG_NAV_FLIGHTPROGRAMS, Links.Static.images.icons.flightprograms_png);
 
             AssetCache.AssertConfigurationIsValid();
 #if DEBUG
@@ -35,6 +41,12 @@ namespace TFS.Web
         }
 
         public const string CSS_INTERNAL_BASE = "internalbase";
+
+        public const string IMG_NAV_FLIGHTLOGS = "navflightlogs";
+        public const string IMG_NAV_ANNOUNCEMENTS = "navannouncements";
+        public const string IMG_NAV_PERSONNELFILES = "navpersonnelfiles";
+        public const string IMG_NAV_USERS = "navusers";
+        public const string IMG_NAV_FLIGHTPROGRAMS = "navflightprograms";
     }
 }
 

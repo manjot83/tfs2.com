@@ -169,14 +169,75 @@ public class T4MVC_RedirectToRouteResult : System.Web.Mvc.RedirectToRouteResult,
 
 namespace Links {
     [CompilerGenerated]
-    public static class @Scripts {
-        private const string URLPATH = "~/Scripts";
+    public static class @Static {
+        private const string URLPATH = "~/Static";
         public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-        public static readonly string jquery_1_3_2_vsdoc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.3.2-vsdoc.min.js") ? Url("jquery-1.3.2-vsdoc.min.js") : Url("jquery-1.3.2-vsdoc.js");
-        public static readonly string jquery_1_3_2_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.3.2.min.js") ? Url("jquery-1.3.2.min.js") : Url("jquery-1.3.2.js");
-        public static readonly string jquery_1_3_2_min_vsdoc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.3.2.min-vsdoc.min.js") ? Url("jquery-1.3.2.min-vsdoc.min.js") : Url("jquery-1.3.2.min-vsdoc.js");
-        public static readonly string jquery_1_3_2_min_js = Url("jquery-1.3.2.min.js");
+        [CompilerGenerated]
+        public static class @css {
+            private const string URLPATH = "~/Static/css";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string internal_base_layout_less = Url("internal_base_layout.less");
+            public static readonly string internal_base_style_css = Url("internal_base_style.css");
+            public static readonly string internal_forms_layout_css = Url("internal_forms_layout.css");
+            public static readonly string internal_forms_style_css = Url("internal_forms_style.css");
+            public static readonly string internal_list_table_less = Url("internal_list-table.less");
+            public static readonly string yui_base_css = Url("yui_base.css");
+            public static readonly string yui_fonts_css = Url("yui_fonts.css");
+            public static readonly string yui_reset_css = Url("yui_reset.css");
+        }
+    
+        [CompilerGenerated]
+        public static class @images {
+            private const string URLPATH = "~/Static/images";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string calendarSelector_png = Url("calendarSelector.png");
+            [CompilerGenerated]
+            public static class @icons {
+                private const string URLPATH = "~/Static/images/icons";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string announcements_png = Url("announcements.png");
+                public static readonly string exclamation_png = Url("exclamation.png");
+                public static readonly string flightlogs_png = Url("flightlogs.png");
+                public static readonly string flightprograms_png = Url("flightprograms.png");
+                public static readonly string personnelfiles_png = Url("personnelfiles.png");
+                public static readonly string sort_down_gif = Url("sort_down.gif");
+                public static readonly string sort_up_gif = Url("sort_up.gif");
+                public static readonly string systemalert_png = Url("systemalert.png");
+                public static readonly string users_png = Url("users.png");
+                public static readonly string website_png = Url("website.png");
+            }
+        
+            [CompilerGenerated]
+            public static class @internal_template {
+                private const string URLPATH = "~/Static/images/internal_template";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string bgcontainer_gif = Url("bgcontainer.gif");
+                public static readonly string bgfooter_gif = Url("bgfooter.gif");
+                public static readonly string bgfooter_pdn = Url("bgfooter.pdn");
+                public static readonly string bgfooter_png = Url("bgfooter.png");
+                public static readonly string bgheader_gif = Url("bgheader.gif");
+                public static readonly string bgnavigation_gif = Url("bgnavigation.gif");
+                public static readonly string bgul_gif = Url("bgul.gif");
+                public static readonly string li_gif = Url("li.gif");
+                public static readonly string quote_gif = Url("quote.gif");
+                public static readonly string sidenavh1_gif = Url("sidenavh1.gif");
+            }
+        
+        }
+    
+        [CompilerGenerated]
+        public static class @js {
+            private const string URLPATH = "~/Static/js";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string jquery_1_3_2_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.3.2.min.js") ? Url("jquery-1.3.2.min.js") : Url("jquery-1.3.2.js");
+        }
+    
     }
 
     [CompilerGenerated]

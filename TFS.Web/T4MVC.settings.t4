@@ -21,7 +21,7 @@ const string LinksNamespace = "Links";
 
 // Folders containing static files for which links are generated (e.g. Links.Scripts.Map_js)
 readonly string[] StaticFilesFolders = new string[] {
-    "Scripts",
+    "Static",
     "Content",
 };
 
