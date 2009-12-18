@@ -43,3 +43,4 @@ TestResult.xml
 TFS.Web/App_Data/*.xml
 TFS.Web.Deploy/Debug
 TFS.Web.Deploy/Release
+TFS.Web/Static/Cached
