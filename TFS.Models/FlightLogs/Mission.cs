@@ -22,9 +22,9 @@ namespace TFS.Models.FlightLogs
         [DomainEquality, Required, StringLength(4)]
         public virtual string ToICAO { get; set; }
 
-        [DomainEquality, Required, StringLength(4), RegularExpression(@"[0-2][0-9][0-5][0-9]", ErrorMessage = "Must be in the format HHMM")]
+        [DomainEquality, Required, StringLength(4), MilitaryTimeFormat, RegularExpression(@"[0-2][0-9][0-5][0-9]", ErrorMessage = "Must be in the format HHMM")]
         public virtual string TakeOffTime { get; set; }
-        [DomainEquality, Required, StringLength(4), RegularExpression(@"[0-2][0-9][0-5][0-9]", ErrorMessage = "Must be in the format HHMM")]
+        [DomainEquality, Required, StringLength(4), MilitaryTimeFormat, RegularExpression(@"[0-2][0-9][0-5][0-9]", ErrorMessage = "Must be in the format HHMM")]
         public virtual string LandingTime { get; set; }
 
         public static TimeSpan ComputeFlightTime(DateTime logDate, string takeOffTime, string landingTime)
@@ -53,18 +53,6 @@ namespace TFS.Models.FlightLogs
         public virtual void MarkedUpdated()
         {
             FlightLog.MarkedUpdated();
-        }
-
-        public override IEnumerable<ValidationError> GetCustomValidationErrors()
-        {
-            var errors = new List<ValidationError>();
-            var takeOffTime = 0;
-            if (!int.TryParse(TakeOffTime, out takeOffTime) || takeOffTime > 2359 || takeOffTime < 0)
-                errors.Add(new ValidationError("TakeOffTime", "Must represent 24hr time in the format HHMM", TakeOffTime));
-            var landingTime = 0;
-            if (!int.TryParse(LandingTime, out landingTime) || landingTime > 2359 || landingTime < 0)
-                errors.Add(new ValidationError("LandingTime", "Must represent 24hr time in the format HHMM", TakeOffTime));
-            return errors;
         }
     }
 }

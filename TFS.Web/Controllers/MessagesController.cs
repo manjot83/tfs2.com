@@ -106,7 +106,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult CreateAnnouncement(AnnouncementViewModel announcementViewModel)
         {
-            announcementViewModel.Validate(ModelState, string.Empty);
+            this.Validate(announcementViewModel, string.Empty);
             if (!ModelState.IsValid)
                 return View(Views.CreateMessage, announcementViewModel);
             var announcement = Mapper.Map<AnnouncementViewModel, Announcement>(announcementViewModel);
@@ -119,7 +119,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult CreateSystemAlert(SystemAlertViewModel systemAlertViewModel)
         {
-            systemAlertViewModel.Validate(ModelState, string.Empty);
+            this.Validate(systemAlertViewModel, string.Empty);
             if (!ModelState.IsValid)
                 return View(Views.CreateMessage, systemAlertViewModel);
             var aystemAlert = Mapper.Map<SystemAlertViewModel, SystemAlert>(systemAlertViewModel);

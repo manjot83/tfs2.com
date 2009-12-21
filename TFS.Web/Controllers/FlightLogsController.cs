@@ -80,7 +80,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditFlightLog(int id, FlightLogViewModel flightLogViewModel)
         {
             var flightLog = session.Get<FlightLog>(id);
-            flightLogViewModel.Validate(ModelState, string.Empty);
+            this.Validate(flightLogViewModel, string.Empty);
             if (!ModelState.IsValid)
             {
                 var viewModel = CreateFlightLogViewModel(flightLog);
@@ -102,7 +102,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult CreateFlightLog(FlightLogViewModel flightLogViewModel)
         {
-            flightLogViewModel.Validate(ModelState, string.Empty);
+            this.Validate(flightLogViewModel, string.Empty);
             if (!ModelState.IsValid)
                 return View(CreateFlightLogViewModel(null));
             var flightLog = Mapper.Map<FlightLogViewModel, FlightLog>(flightLogViewModel);
@@ -137,7 +137,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditMission(int id, MissionViewModel missionViewModel)
         {
             var mission = session.Get<Mission>(id);
-            missionViewModel.Validate(ModelState, string.Empty);
+            this.Validate(missionViewModel, string.Empty);
             if (!ModelState.IsValid)
             {
                 var viewModel = Mapper.Map<Mission, MissionViewModel>(mission);
@@ -157,7 +157,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult CreateMission(MissionViewModel missionViewModel)
         {
-            missionViewModel.Validate(ModelState, string.Empty);
+            this.Validate(missionViewModel, string.Empty);
             if (!ModelState.IsValid)
             {
                 return View(missionViewModel);
@@ -180,7 +180,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditSquadronLog(int id, SquadronLogViewModel squadronLogViewModel)
         {
             var squadronLog = session.Get<SquadronLog>(id);
-            squadronLogViewModel.Validate(ModelState, string.Empty);
+            this.Validate(squadronLogViewModel, string.Empty);
             if (!ModelState.IsValid)
             {
                 var viewModel = CreateSquadronLogViewModel(squadronLog);
@@ -203,7 +203,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult CreateSquadronLog(SquadronLogViewModel squadronLogViewModel)
         {
-            squadronLogViewModel.Validate(ModelState, string.Empty);
+            this.Validate(squadronLogViewModel, string.Empty);
             if (!ModelState.IsValid)
             {
                 var viewModel = CreateSquadronLogViewModel(null);
@@ -238,7 +238,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult BulkCreateSquadronLog(SquadronLogViewModel squadronLogViewModel)
         {
-            squadronLogViewModel.Validate(ModelState, string.Empty);
+            this.Validate(squadronLogViewModel, string.Empty);
             if (!ModelState.IsValid)
             {
                 var viewModel = CreateSquadronLogListViewModel(squadronLogViewModel.FlightLogId.Value, squadronLogViewModel);

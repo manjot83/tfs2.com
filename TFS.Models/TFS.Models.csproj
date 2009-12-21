@@ -64,7 +64,6 @@
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
     <Compile Include="BaseDomainObject.cs" />
-    <Compile Include="BaseValidatableObject.cs" />
     <Compile Include="DomainModelException.cs" />
     <Compile Include="DomainEqualityAttribute.cs" />
     <Compile Include="FlightLogs\DutyCode.cs" />
@@ -120,10 +119,11 @@
     <Compile Include="Validation\DataAnnotationsValidator.cs" />
     <Compile Include="Validation\DateIsInFutureAttribute.cs" />
     <Compile Include="Validation\DateIsInPastAttribute.cs" />
+    <Compile Include="Validation\DateRangeAttribute.cs" />
     <Compile Include="Validation\DateTimeKindAttribute.cs" />
     <Compile Include="Validation\DigitsAttribute.cs" />
+    <Compile Include="Validation\MilitaryTimeFormatAttribute.cs" />
     <Compile Include="Validation\StringIsEmailAttribute.cs" />
-    <Compile Include="Validation\IValidatable.cs" />
     <Compile Include="Validation\StringIsNumericAttribute.cs" />
     <Compile Include="Validation\ValidationError.cs" />
   </ItemGroup>

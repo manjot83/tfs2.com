@@ -195,7 +195,6 @@
     <Compile Include="ViewModels\FlightLogs\SquadronLogListViewModel.cs" />
     <Compile Include="ViewModels\SuccessViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\public\banners\aircrew_login.gif" />

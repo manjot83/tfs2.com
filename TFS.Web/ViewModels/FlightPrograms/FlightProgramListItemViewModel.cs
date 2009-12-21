@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TFS.Web.ViewModels.FlightPrograms
 {
-    public class FlightProgramListItemViewModel : BaseValidatableObject
+    public class FlightProgramListItemViewModel
     {
         public int? Id { get; set; }
 

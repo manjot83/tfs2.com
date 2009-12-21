@@ -14,10 +14,34 @@ namespace TFS.Models.Validation
 
         public IEnumerable<ValidationError> ValidationErrorsFor(object value)
         {
-            return from prop in TypeDescriptor.GetProperties(value).Cast<PropertyDescriptor>()
-                   from attribute in prop.Attributes.OfType<ValidationAttribute>()
-                   where !attribute.IsValid(prop.GetValue(value))
-                   select new ValidationError(prop.Name, attribute.FormatErrorMessage(string.Empty), value);
+            var errors = GetValidationErrorsForType(value);
+            foreach (var property in TypeDescriptor.GetProperties(value).Cast<PropertyDescriptor>())
+                errors = errors.Concat(GetValidationErrorsForProperty(property, value));
+            return errors.ToArray();
+        }
+
+
+        private IEnumerable<ValidationError> GetValidationErrorsForType(object value)
+        {
+            return TypeDescriptor.GetAttributes(value)
+                .OfType<ValidationAttribute>()
+                .Where(x => !x.IsValid(value))
+                .Select(x => new ValidationError(string.Empty, x.FormatErrorMessage(string.Empty), value));
+        }
+
+        private IEnumerable<ValidationError> GetValidationErrorsForProperty(PropertyDescriptor property, object model)
+        {
+            return property.Attributes
+                .OfType<ValidationAttribute>()
+                .Where(x => !x.IsValid(property.GetValue(model)))
+                .Select(x => new ValidationError(property.Name, x.FormatErrorMessage(property.Name), model));
+        }
+
+        public void Validate(object value)
+        {
+            var validationErrors = ValidationErrorsFor(value);
+            if (validationErrors.Any())
+                throw new InvalidModelException(validationErrors);
         }
     }
 }

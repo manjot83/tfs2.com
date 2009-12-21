@@ -60,7 +60,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult CreateFlightProgram(FlightProgramViewModel flightProgramViewModel)
         {
-            flightProgramViewModel.Validate(ModelState, string.Empty);
+            this.Validate(flightProgramViewModel, string.Empty);
             if (!ModelState.IsValid)
                 return View(Views.CreateFlightProgram, flightProgramViewModel);
             var flightProgram = Mapper.Map<FlightProgramViewModel, FlightProgram>(flightProgramViewModel);
@@ -82,7 +82,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditFlightProgram(int id, FlightProgramViewModel flightProgramViewModel)
         {
             var flightProgram = session.Get<FlightProgram>(id);
-            flightProgramViewModel.Validate(ModelState, string.Empty);
+            this.Validate(flightProgramViewModel, string.Empty);
             if (!ModelState.IsValid)
             {
                 var viewModel = Mapper.Map<FlightProgram, FlightProgramViewModel>(flightProgram);
@@ -102,7 +102,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult CreatePosition(PositionViewModel positionViewModel)
         {
-            positionViewModel.Validate(ModelState, string.Empty);
+            this.Validate(positionViewModel, string.Empty);
             if (!ModelState.IsValid)
                 return View(Views.CreatePosition, positionViewModel);
             flightProgramsRepository.AddNewPosition(positionViewModel.Title);
@@ -123,7 +123,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult RenamePosition(int id, PositionViewModel positionViewModel)
         {
             var position = session.Get<Position>(id);
-            positionViewModel.Validate(ModelState, string.Empty);
+            this.Validate(positionViewModel, string.Empty);            
             if (!ModelState.IsValid)
             {
                 var viewModel = Mapper.Map<Position, PositionViewModel>(position);
@@ -145,7 +145,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult CreateProgramLocation(ProgramLocationViewModel programLocationViewModel)
         {
-            programLocationViewModel.Validate(ModelState, string.Empty);
+            this.Validate(programLocationViewModel, string.Empty);
             if (!ModelState.IsValid)
                 return View(Views.CreateProgramLocation, programLocationViewModel);
             var program = session.Get<FlightProgram>(programLocationViewModel.ProgramId);
@@ -168,7 +168,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditProgramLocation(ProgramLocationViewModel programLocationViewModel)
         {
             var location = session.Get<ProgramLocation>(programLocationViewModel.Id.Value);
-            programLocationViewModel.Validate(ModelState, string.Empty);
+            this.Validate(programLocationViewModel, string.Empty);
             if (!ModelState.IsValid)
             {
                 var viewModel = Mapper.Map<ProgramLocation, ProgramLocationViewModel>(location);

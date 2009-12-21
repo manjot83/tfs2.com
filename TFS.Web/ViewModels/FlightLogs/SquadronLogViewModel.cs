@@ -9,7 +9,7 @@ using TFS.Models.FlightLogs;
 
 namespace TFS.Web.ViewModels.FlightLogs
 {
-    public class SquadronLogViewModel : BaseValidatableObject
+    public class SquadronLogViewModel
     {
         public int? Id { get; set; }
         public int? FlightLogId { get; set; }

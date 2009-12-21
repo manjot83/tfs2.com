@@ -10,10 +10,10 @@ using TFS.Models.FlightPrograms;
 
 namespace TFS.Web.ViewModels.FlightLogs
 {
-    public class FlightLogViewModel : BaseValidatableObject
+    public class FlightLogViewModel
     {
         public int? Id { get; set; }
-        [Required]
+        [Required, DateRange(Exclusive = true)]
         public DateTime LogDate { get; set; }
         [Required]
         public string AircraftMDS { get; set; } // "Mission-Design Series"
@@ -37,14 +37,6 @@ namespace TFS.Web.ViewModels.FlightLogs
                 Value = x.Id.Value.ToString(),
                 Selected = LocationId == x.Id.Value,
             });
-        }
-
-        public override IEnumerable<ValidationError> GetCustomValidationErrors()
-        {
-            var errors = new List<ValidationError>();
-            if (LogDate == DateTime.MinValue)
-                errors.Add(new ValidationError("LogDate", "Flight Log Date Required", LogDate));
-            return errors;
         }
     }
 }

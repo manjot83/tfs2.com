@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TFS.Web.ViewModels.PersonnelRecords
 {
-    public class ContactInfo : BaseValidatableObject
+    public class ContactInfo
     {
         [Required]
         public virtual string AddressStreetAddress { get; set; }

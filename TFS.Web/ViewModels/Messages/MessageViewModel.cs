@@ -6,7 +6,7 @@ using TFS.Models.Validation;
 
 namespace TFS.Web.ViewModels.Messages
 {
-    public abstract class MessageViewModel : BaseValidatableObject
+    public abstract class MessageViewModel
     {
         public int? Id { get; set; }
 

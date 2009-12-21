@@ -81,7 +81,7 @@ namespace TFS.Web.Controllers
         [UnitOfWork]
         public virtual ActionResult Edit(UserViewModel userViewModel)
         {
-            userViewModel.Validate(ModelState, string.Empty);
+            this.Validate(userViewModel, string.Empty);
             if (!ModelState.IsValid)
                 return View(userViewModel);
             var user = userRepository.GetUser(userViewModel.Username);
@@ -99,7 +99,7 @@ namespace TFS.Web.Controllers
         [UnitOfWork]
         public virtual ActionResult Create(UserViewModel userViewModel)
         {
-            userViewModel.Validate(ModelState, string.Empty);
+            this.Validate(userViewModel, string.Empty);
             if (ModelState.IsValid && userRepository.GetUser(userViewModel.Username) != null)
                 ModelState.AddModelError("username", "Username must be unique.");
             if (!ModelState.IsValid)

@@ -3,15 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using TFS.Models;
+using TFS.Models.Validation;
 
 namespace TFS.Models
 {
     [Serializable]
-    public abstract class BaseDomainObject : BaseValidatableObject
+    public abstract class BaseDomainObject
     {
         [ThreadStatic]
         private static Dictionary<Type, IEnumerable<PropertyInfo>> domainEqualityPropertiesDictionary;
         private const int HASH_MULTIPLIER = 42;
+        private readonly static DataAnnotationsValidator Validator;
+
+        static BaseDomainObject()
+        {
+            Validator = new DataAnnotationsValidator();
+        }
 
         public override bool Equals(object obj)
         {
@@ -101,6 +108,11 @@ namespace TFS.Models
         {
             return GetType().GetProperties()
                 .Where(p => Attribute.IsDefined(p, typeof(DomainEqualityAttribute), true));
+        }
+
+        public virtual void Validate()
+        {
+            Validator.Validate(this);
         }
     }
 }

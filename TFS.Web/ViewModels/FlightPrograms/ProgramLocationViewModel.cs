@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TFS.Web.ViewModels.FlightPrograms
 {
-    public class ProgramLocationViewModel : BaseValidatableObject
+    public class ProgramLocationViewModel
     {
         public int? Id { get; set; }
 

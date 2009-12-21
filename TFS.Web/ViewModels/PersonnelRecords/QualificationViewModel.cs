@@ -6,7 +6,7 @@ using TFS.Models;
 
 namespace TFS.Web.ViewModels.PersonnelRecords
 {
-    public class QualificationViewModel : BaseValidatableObject
+    public class QualificationViewModel
     {
     }
 }

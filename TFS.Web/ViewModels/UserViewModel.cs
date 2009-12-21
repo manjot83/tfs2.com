@@ -3,7 +3,7 @@ using TFS.Models;
 
 namespace TFS.Web.ViewModels
 {
-    public class UserViewModel : BaseValidatableObject
+    public class UserViewModel
     {
         [Required, StringLength(50)]
         public string Username { get; set; }

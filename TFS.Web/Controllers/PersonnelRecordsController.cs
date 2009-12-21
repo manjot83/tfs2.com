@@ -90,7 +90,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult EditPersonalInfo(string username, bool editingMyRecord, PersonalInfo personalInfo)
         {
-            personalInfo.Validate(ModelState, string.Empty);
+            this.Validate(personalInfo, string.Empty);
             var person = this.GetUser(username).Person;
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
@@ -105,7 +105,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult EditContactInfo(string username, bool editingMyRecord, ContactInfo contactInfo)
         {
-            contactInfo.Validate(ModelState, string.Empty);
+            this.Validate(contactInfo, string.Empty);
             var person = this.GetUser(username).Person;
             if (USState.FromAbbreviation(contactInfo.AddressState.ToUpper()) == null)
                 ModelState.AddModelError("State", "Must be a valid US state abbreviation.");
@@ -122,7 +122,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult EditCompanyInfo(string username, bool editingMyRecord, CompanyInfo companyInfo)
         {
-            companyInfo.Validate(ModelState, string.Empty);
+            this.Validate(companyInfo, string.Empty);
             var person = this.GetUser(username).Person;
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
@@ -138,7 +138,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult EditQualifications(string username, bool editingMyRecord, QualificationViewModel qualifications)
         {
-            qualifications.Validate(ModelState, string.Empty);
+            this.Validate(qualifications, string.Empty);
             var person = this.GetUser(username).Person;
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
