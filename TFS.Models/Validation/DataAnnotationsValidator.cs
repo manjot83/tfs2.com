@@ -34,7 +34,7 @@ namespace TFS.Models.Validation
             return property.Attributes
                 .OfType<ValidationAttribute>()
                 .Where(x => !x.IsValid(property.GetValue(model)))
-                .Select(x => new ValidationError(property.Name, x.FormatErrorMessage(property.Name), model));
+                .Select(x => new ValidationError(property.Name, x.FormatErrorMessage(string.Empty), model));
         }
 
         public void Validate(object value)
