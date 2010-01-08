@@ -156,7 +156,7 @@ SelectMethod="FetchByTimesheetID">
     </tr>
     <tr style="background-color: #CCCCCC;">
         <td align="left">Ops Supervisor Signature</td>
-        <td align="center" style="background-color: #FFFFFF; border: solid 1px black; border-bottom: none; border-top: none;"><i><b>MBO</b></i></td>
+        <td align="center" style="background-color: #FFFFFF; border: solid 1px black; border-bottom: none; border-top: none;"><i><b>JG</b></i></td>
         <td align="center">&nbsp;</td>
         <td align="center">&nbsp;</td>
         <td align="center">&nbsp;</td>
