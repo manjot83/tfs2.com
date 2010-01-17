@@ -10,7 +10,7 @@ using TFS.Models.Users;
 
 namespace TFS.Models.Data.Implementations
 {
-    public class FlightLogRepository : BaseDataAccessObject, IFlightLogRepository
+    public class FlightLogRepository : NHibernateRepository, IFlightLogRepository
     {
         public FlightLogRepository(ISession session)
             : base(session)

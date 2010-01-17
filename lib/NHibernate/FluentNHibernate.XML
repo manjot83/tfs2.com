@@ -513,6 +513,12 @@
             Join convention, implement this interface to alter join mappings.
             </summary>
         </member>
+        <member name="T:FluentNHibernate.Conventions.IClassConvention">
+            <summary>
+            Convention for a single class mapping. Implement this interface to apply
+            changes to class mappings.
+            </summary>
+        </member>
         <member name="T:FluentNHibernate.Conventions.ISubclassConvention">
             <summary>
             Subclass convention, implement this interface to alter subclass mappings.
@@ -521,6 +527,31 @@
         <member name="T:FluentNHibernate.Conventions.IHasOneConvention">
             <summary>
             HasOne convention, used for applying changes to one-to-one relationships.
+            </summary>
+        </member>
+        <member name="M:FluentNHibernate.Conventions.ProxyConvention.Apply(FluentNHibernate.Conventions.Instances.IClassInstance)">
+            <summary>
+            Apply changes to the target
+            </summary>
+        </member>
+        <member name="M:FluentNHibernate.Conventions.ProxyConvention.Apply(FluentNHibernate.Conventions.Instances.ISubclassInstance)">
+            <summary>
+            Apply changes to the target
+            </summary>
+        </member>
+        <member name="M:FluentNHibernate.Conventions.ProxyConvention.Apply(FluentNHibernate.Conventions.Instances.IManyToOneInstance)">
+            <summary>
+            Apply changes to the target
+            </summary>
+        </member>
+        <member name="M:FluentNHibernate.Conventions.ProxyConvention.Apply(FluentNHibernate.Conventions.Instances.ICollectionInstance)">
+            <summary>
+            Apply changes to the target
+            </summary>
+        </member>
+        <member name="M:FluentNHibernate.Conventions.ProxyConvention.Apply(FluentNHibernate.Conventions.Instances.IOneToOneInstance)">
+            <summary>
+            Apply changes to the target
             </summary>
         </member>
         <member name="T:FluentNHibernate.Conventions.IVersionConvention">
@@ -792,12 +823,6 @@
             Adds a column to the index if columns have not yet been specified
             </summary>
             <param name="columnName">The column name to add</param>
-        </member>
-        <member name="T:FluentNHibernate.Conventions.IClassConvention">
-            <summary>
-            Convention for a single class mapping. Implement this interface to apply
-            changes to class mappings.
-            </summary>
         </member>
         <member name="T:FluentNHibernate.Conventions.IIdConvention">
             <summary>
@@ -1129,6 +1154,13 @@
             Initializes a new instance of the <see cref="T:FluentNHibernate.Cfg.Db.OracleClientConfiguration"/> class using the
             MS Oracle Client (System.Data.OracleClient) library specifying the Oracle 10g dialect.
             This allows for ANSI join syntax.
+            </summary>
+        </member>
+        <member name="P:FluentNHibernate.Cfg.Db.OracleConfiguration.Oracle8">
+            <summary>
+            Initializes a new instance of the <see cref="T:FluentNHibernate.Cfg.Db.OracleConfiguration"/> class using the
+            Oracle Data Provider (Oracle.DataAccess) library specifying the Oracle 8i dialect.
+            The Oracle.DataAccess library must be available to the calling application/library.
             </summary>
         </member>
         <member name="P:FluentNHibernate.Cfg.Db.OracleConfiguration.Oracle9">

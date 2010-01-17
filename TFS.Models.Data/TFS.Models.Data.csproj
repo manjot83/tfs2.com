@@ -55,6 +55,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\NHibernate\NHibernate.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="StructureMap, Version=2.5.4.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -73,14 +77,14 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="BaseDataAccessObject.cs" />
-    <Compile Include="Configuration\FluentConfigurationBuilder.cs" />
-    <Compile Include="Configuration\MSSqlBuilder.cs" />
-    <Compile Include="Configuration\SQLiteBuilder.cs" />
-    <Compile Include="Configuration\SqlSchemaUtil.cs" />
+    <Compile Include="Configuration\ConfigurationBuilder.cs" />
+    <Compile Include="Configuration\CoreRegistry.cs" />
+    <Compile Include="Configuration\DatabaseBuilder.cs" />
+    <Compile Include="NHibernateRepository.cs" />
     <Compile Include="Implementations\FlightLogRepository.cs" />
     <Compile Include="Implementations\HelpRepository.cs" />
     <Compile Include="Implementations\MessagesRepository.cs" />
+    <Compile Include="INHibernateUnitOfWork.cs" />
     <Compile Include="Mappings\FlightLogs\MissionMap.cs" />
     <Compile Include="Mappings\FlightLogs\FlightLogMap.cs" />
     <Compile Include="Mappings\FlightLogs\SquadronLogMap.cs" />
@@ -106,7 +110,7 @@
     <Compile Include="SessionExtensions.cs" />
     <Compile Include="Implementations\SiteRepository.cs" />
     <Compile Include="Mappings\Users\UserMapping.cs" />
-    <Compile Include="UnitOfWork.cs" />
+    <Compile Include="NHibernateUnitOfWork.cs" />
     <Compile Include="Implementations\UserRepository.cs" />
     <Compile Include="UserTypes\USStateUserType.cs" />
     <Compile Include="UserTypes\UtcDateTimeUserType.cs" />

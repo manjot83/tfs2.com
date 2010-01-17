@@ -8,7 +8,7 @@ using TFS.Models.FlightPrograms;
 
 namespace TFS.Models.Data.Implementations
 {
-    public class FlightProgramsRepository : BaseDataAccessObject, IFlightProgramsRepository
+    public class FlightProgramsRepository : NHibernateRepository, IFlightProgramsRepository
     {
         public FlightProgramsRepository(ISession session)
             : base(session)

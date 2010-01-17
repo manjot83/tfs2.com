@@ -17,7 +17,7 @@ namespace TFS.Web
                 throw new InvalidOperationException("HttpApplication must implemented ICanResolveDependencies");
 
             var unitOfWork = container.Resolve<IUnitOfWork>();
-            unitOfWork.Begin();
+            unitOfWork.Start();
             try
             {
                 string[] roles = new string[0];

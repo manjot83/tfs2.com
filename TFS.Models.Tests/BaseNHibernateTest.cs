@@ -14,7 +14,7 @@ namespace TFS.Models.Tests
         private NHibernate.Cfg.Configuration cfg;
         private ISessionFactory sessionFactory;
 
-        protected ISession Session { get; private set; }
+        protected NHibernateRepository Repository { get; private set; }
         protected IUnitOfWork UnitOfWork { get; private set; }
 
         [TestFixtureSetUp]
@@ -24,17 +24,17 @@ namespace TFS.Models.Tests
 
             var mappingAssemblies = new List<Assembly> { typeof(MappingExtensions).Assembly };
 #if SQLITE
-            cfg = SQLiteBuilder.CreateConfiguration("TFS_Models_Specs", mappingAssemblies).BuildConfiguration();
+            cfg = ConfigurationBuilder.CreateMsSql2005Configuration("TFS_Models_Specs", mappingAssemblies);
 #else
-            cfg = FluentConfigurationBuilder.CreateFluentConfiguration(MsSqlConfiguration.MsSql2008.ConnectionString(@"Server=.\SQLEXPRESS;Database=dev_tfs2.com;Trusted_Connection=yes;"), mappingAssemblies).BuildConfiguration();
+            cfg = ConfigurationBuilder.CreateMsSql2005Configuration(MsSqlConfiguration.MsSql2008.ConnectionString(@"Server=.\SQLEXPRESS;Database=dev_tfs2.com;Trusted_Connection=yes;"), mappingAssemblies);
 #endif
-            
+
             sessionFactory = cfg.BuildSessionFactory();
                         
 #if SQLITE
             using (var session = sessionFactory.OpenSession())
             {
-                SqlSchemaUtil.GenerateSchema(cfg, session);
+                new DatabaseBuilder(cfg, session).BuildSchema();
             }
 #endif
         }
@@ -42,16 +42,15 @@ namespace TFS.Models.Tests
         [SetUp]
         public virtual void SetUp()
         {
-            Session = sessionFactory.OpenSession();
-            UnitOfWork = new UnitOfWork(Session);
-            UnitOfWork.Begin();
+            UnitOfWork = new NHibernateUnitOfWork(sessionFactory);
+            UnitOfWork.Start();
+            Repository = new NHibernateRepository(((INHibernateUnitOfWork)UnitOfWork).Session);
         }
 
         [TearDown]
         public virtual void TearDown()
         {
             UnitOfWork.Abort();
-            Session.Close();
         }
     }
 }

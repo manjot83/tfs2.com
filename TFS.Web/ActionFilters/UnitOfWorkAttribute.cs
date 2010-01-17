@@ -13,7 +13,7 @@ namespace TFS.Web.ActionFilters
                 throw new InvalidOperationException("HttpApplication must implemented ICanResolveDependencies");
 
             var unitOfWork = container.Resolve<IUnitOfWork>();
-            unitOfWork.Begin();
+            unitOfWork.Start();
         }
 
         public override void OnActionExecuted(ActionExecutedContext filterContext)

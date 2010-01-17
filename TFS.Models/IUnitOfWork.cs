@@ -7,7 +7,7 @@ namespace TFS.Models
 {
     public interface IUnitOfWork
     {
-        void Begin();
+        void Start();
         void Finish();
         void Abort();
     }

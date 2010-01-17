@@ -10,7 +10,7 @@ using TFS.Models.Users;
 
 namespace TFS.Models.Data.Implementations
 {
-    public class UserRepository : BaseDataAccessObject, IUserRepository
+    public class UserRepository : NHibernateRepository, IUserRepository
     {
         public UserRepository(ISession session)
             : base(session)

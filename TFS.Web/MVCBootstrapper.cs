@@ -7,6 +7,8 @@ using StructureMap;
 using StructureMap.Attributes;
 using TFS.Models.Data.Configuration;
 using TFS.Web.Controllers;
+using TFS.Models;
+using TFS.Models.Data;
 
 namespace TFS.Web
 {
@@ -16,11 +18,11 @@ namespace TFS.Web
         {
             RegisterRoutes(RouteTable.Routes);
             InitializeAutoMapper();
-            var fluentConfiguration = InitializeNHibernate();
-            InitializeStructureMap(fluentConfiguration);
+            var cfg = InitializeNHibernate();
+            InitializeStructureMap(cfg);
             InitializeAssetCaching();
 #if SQLITE
-            LoadTestData(fluentConfiguration);
+            LoadTestData(cfg);
 #endif
         }
 
@@ -49,24 +51,25 @@ namespace TFS.Web
             Tags.ConfigureTags();
         }
 
-        public static FluentConfiguration InitializeNHibernate()
+        public static NHibernate.Cfg.Configuration InitializeNHibernate()
         {
 #if DEBUG
             HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
 #endif
             var mappingAssemblies = new List<Assembly> { typeof(TFS.Models.Data.Mappings.Users.UserMapping).Assembly };
 #if SQLITE
-            return SQLiteBuilder.CreateConfiguration("TFS_Web", mappingAssemblies);
+            return ConfigurationBuilder.CreateMsSql2005Configuration("TFS_Web", mappingAssemblies);
 #else
-            return MSSqlBuilder.CreateConfiguration("TFS_Web", mappingAssemblies);
+            return ConfigurationBuilder.CreateMsSql2005Configuration("TFS_Web", mappingAssemblies);
 #endif
         }
 
-        public static void InitializeStructureMap(FluentConfiguration fluentConfiguration)
+        public static void InitializeStructureMap(NHibernate.Cfg.Configuration cfg)
         {
+            var coreRegistry = new CoreRegistry(cfg);
             ObjectFactory.Initialize(i =>
             {
-                i.AddRegistry(new DomainModelRegistry(fluentConfiguration));
+                i.AddRegistry(coreRegistry);
 
                 i.Scan(s =>
                 {
@@ -74,13 +77,12 @@ namespace TFS.Web
                     s.AddAllTypesOf<IController>();
                 });
 
-                i.ForRequestedType<IAuthenticationService>()
-                    .CacheBy(InstanceScope.Hybrid)
-                    .TheDefaultIsConcreteType<FormsAuthenticationService>();
+                i.For<IAuthenticationService>()
+                    .HybridHttpOrThreadLocalScoped()
+                    .Use<FormsAuthenticationService>();
 
-                i.ForRequestedType<IApplicationSettings>()
-                    .CacheBy(InstanceScope.Singleton)
-                    .TheDefault.Is.ConstructedBy(x => new ApplicationSettings());
+                i.ForSingletonOf<IApplicationSettings>()
+                    .Use(x => new ApplicationSettings());
             });
 #if DEBUG
             ObjectFactory.AssertConfigurationIsValid();
@@ -89,12 +91,14 @@ namespace TFS.Web
         }
 
 #if SQLITE
-        public static void LoadTestData(FluentConfiguration fluentConfiguration)
+        public static void LoadTestData(NHibernate.Cfg.Configuration cfg)
         {
-            var session = ObjectFactory.GetInstance<ISession>();
-            SqlSchemaUtil.GenerateSchema(fluentConfiguration.BuildConfiguration(), session);
-            TestData.Execute(session);
-            session.Clear();
+            var unitOfWork = ObjectFactory.GetInstance<IUnitOfWork>() as INHibernateUnitOfWork;
+            new DatabaseBuilder(cfg, unitOfWork.Session);
+            unitOfWork.Start();
+            TestData.Execute(unitOfWork.Session);
+            unitOfWork.Finish();
+            unitOfWork.Session.Clear();
         }
 #endif
     }

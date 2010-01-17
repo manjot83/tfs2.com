@@ -7,7 +7,7 @@ using System;
 
 namespace TFS.Models.Data.Implementations
 {
-    public class HelpRepository : BaseDataAccessObject, IHelpRepository
+    public class HelpRepository : NHibernateRepository, IHelpRepository
     {
         public HelpRepository(ISession session)
             : base(session)

@@ -8,7 +8,7 @@ using NHibernate.Linq;
 
 namespace TFS.Models.Data.Implementations
 {
-    public class MessagesRepository : BaseDataAccessObject, IMessagesRepository
+    public class MessagesRepository : NHibernateRepository, IMessagesRepository
     {
         public MessagesRepository(ISession session)
             : base(session)
