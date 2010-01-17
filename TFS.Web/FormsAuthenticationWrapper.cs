@@ -7,12 +7,12 @@ using TFS.Models.Users;
 
 namespace TFS.Web
 {
-    public class FormsAuthenticationService : IAuthenticationService
+    public class FormsAuthenticationWrapper : IAuthenticationService
     {
         private readonly IUserRepository userRepository;
         private readonly IApplicationSettings applicationSettings;
 
-        public FormsAuthenticationService(IUserRepository userRepository, IApplicationSettings applicationSettings)
+        public FormsAuthenticationWrapper(IUserRepository userRepository, IApplicationSettings applicationSettings)
         {
             this.userRepository = userRepository;
             this.applicationSettings = applicationSettings;

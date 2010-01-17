@@ -1,4 +1,4 @@
-﻿#if SQLITE
+﻿#if TESTDATA
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -123,7 +123,7 @@ namespace TFS.Web
             {
                 LogDate = DateTime.Now.ToUniversalTime(),
                 LastModifiedDate = DateTime.Now.ToUniversalTime(),
-                Location = "Wako TX",
+                //Location = "Wako TX",
                 AircraftMDS = "C-130J",
                 AircraftSerialNumber = "THX 1138",
             });

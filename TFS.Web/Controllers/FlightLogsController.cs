@@ -4,7 +4,6 @@ using System.Web.UI.WebControls;
 using TFS.Models.FlightLogs;
 using TFS.Web.ViewModels;
 using TFS.Models.Reports;
-using TFS.Web.ActionFilters;
 using System;
 using TFS.Web.ViewModels.FlightLogs;
 using AutoMapper;
@@ -15,7 +14,7 @@ using NHibernate;
 
 namespace TFS.Web.Controllers
 {
-    [Authorize, UnitOfWork]
+    [Authorize]
     public partial class FlightLogsController : Controller
     {
         private readonly ISession session;

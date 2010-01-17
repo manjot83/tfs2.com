@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
-using TFS.Web.ActionFilters;
 
 namespace TFS.Web.Controllers
 {
@@ -24,7 +23,6 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        [UnitOfWork]
         public virtual ActionResult LogOn(string userName, string password, bool rememberMe, Uri returnUrl)
         {
             if (!authenticationService.Authenticate(userName, password))
@@ -52,7 +50,6 @@ namespace TFS.Web.Controllers
 
         [AcceptVerbs(HttpVerbs.Get)]
         [Authorize]
-        [UnitOfWork]
         public virtual ViewResult ChangePassword()
         {
             var user = this.GetCurrentUser();
@@ -61,7 +58,6 @@ namespace TFS.Web.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Authorize]
-        [UnitOfWork]
         public virtual ActionResult ChangePassword(string originalPassword, string newPassword, string confirmNewPassword)
         {
             if (string.IsNullOrEmpty(originalPassword))

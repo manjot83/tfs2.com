@@ -31,10 +31,18 @@
     <WarningLevel>4</WarningLevel>
     <MvcBuildViews>true</MvcBuildViews>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug with SQLite|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DEBUG TESTDATA SQLITE|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;SQLITE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;TESTDATA SQLITE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DEBUG TESTDATA|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;TESTDATA</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
@@ -43,10 +51,6 @@
     <Reference Include="AutoMapper, Version=0.4.0.126, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\AutoMapper.dll</HintPath>
-    </Reference>
-    <Reference Include="dotless.Core, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\dotless\dotless.Core.dll</HintPath>
     </Reference>
     <Reference Include="Elmah, Version=1.1.11517.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -75,6 +79,10 @@
     <Reference Include="NHibernate.ByteCode.Castle, Version=2.1.2.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\NHibernate\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="Pithy, Version=2009.12.22.1000, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\pithy\Pithy.dll</HintPath>
     </Reference>
     <Reference Include="StructureMap, Version=2.5.2.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -109,26 +117,13 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Mobile" />
-    <Reference Include="Yahoo.Yui.Compressor, Version=1.4.1.0, Culture=neutral, PublicKeyToken=f8b4b81ec75097e2, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\lib\Yahoo.Yui.Compressor\Yahoo.Yui.Compressor.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="ActionFilters\UnitOfWorkAttribute.cs" />
     <Compile Include="ApplicationSettings.cs" />
-    <Compile Include="AssetCaching\AssetCache.cs" />
-    <Compile Include="AssetCaching\AssetKey.cs" />
-    <Compile Include="AssetCaching\AssetLocation.cs" />
-    <Compile Include="AssetCaching\AssetTag.cs" />
-    <Compile Include="AssetCaching\AssetType.cs" />
-    <Compile Include="AssetCaching\DotLessResourceProcessor.cs" />
-    <Compile Include="AssetCaching\IResourceProcessor.cs" />
-    <Compile Include="AssetCaching\ResourceEmbeddedUrlProcessor.cs" />
-    <Compile Include="AutoMapperConfiguration.cs" />
+    <Compile Include="Bootstrapping\AutoMapperConfiguration.cs" />
     <Compile Include="Controllers\ControllerExtension.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\FlightLogsController.cs" />
@@ -143,7 +138,7 @@
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="FormsAuthenticationService.cs" />
+    <Compile Include="FormsAuthenticationWrapper.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -158,9 +153,8 @@
     <Compile Include="IApplicationSettings.cs" />
     <Compile Include="IAuthenticationService.cs" />
     <Compile Include="ICanResolveDependencies.cs" />
-    <Compile Include="MvcBootstrapper.cs" />
+    <Compile Include="Bootstrapping\MvcBootstrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StaticResourceAssetId.cs" />
     <Compile Include="StructureMapControllerFactory.cs" />
     <Compile Include="Tags.cs" />
     <Compile Include="TestData.cs" />
@@ -170,6 +164,7 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="ApplicationVersion.cs" />
+    <Compile Include="TransactionalActionInvoker.cs" />
     <Compile Include="ViewModels\FlightLogs\FlightLogListItemViewModel.cs" />
     <Compile Include="ViewModels\FlightLogs\FlightLogViewModel.cs" />
     <Compile Include="ViewModels\FlightLogs\MissionViewModel.cs" />
@@ -372,6 +367,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ActionFilters\" />
     <Folder Include="App_Data\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

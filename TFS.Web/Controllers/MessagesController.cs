@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using TFS.Models;
-using TFS.Web.ActionFilters;
 using TFS.Web.ViewModels.Messages;
 using TFS.Models.Messages;
 using AutoMapper;
@@ -15,7 +14,7 @@ using TFS.Extensions;
 
 namespace TFS.Web.Controllers
 {
-    [Authorize, UnitOfWork]
+    [Authorize]
     public partial class MessagesController : Controller
     {
         private readonly ISession session;

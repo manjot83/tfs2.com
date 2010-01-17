@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using TFS.Models.Site;
-using TFS.Web.ActionFilters;
 
 namespace TFS.Web.Controllers
 {
@@ -23,41 +22,35 @@ namespace TFS.Web.Controllers
             this.siteRepository = siteRepository;
         }
 
-        [UnitOfWork]
         public virtual RedirectToRouteResult Index()
         {
-            return this.RedirectToAction(MVC.Site.Actions.Home);
+            return this.RedirectToAction(Actions.Home());
         }
 
-        [UnitOfWork]
         public virtual ViewResult Home()
         {
             var page = siteRepository.GetPage(URI_HOME);
             return View(MVC.Site.Views.SitePage, page);
         }
 
-        [UnitOfWork]
         public virtual ViewResult Services()
         {
             var page = siteRepository.GetPage(URI_SERVICES);
             return View(MVC.Site.Views.SitePage, page);
         }
 
-        [UnitOfWork]
         public virtual ViewResult Programs()
         {
             var page = siteRepository.GetPage(URI_PROGRAMS);
             return View(MVC.Site.Views.SitePage, page);
         }
 
-        [UnitOfWork]
         public virtual ViewResult Experience()
         {
             var page = siteRepository.GetPage(URI_EXPERIENCE);
             return View(MVC.Site.Views.SitePage, page);
         }
 
-        [UnitOfWork]
         public virtual ViewResult Contact()
         {
             var page = siteRepository.GetPage(URI_CONTACT);

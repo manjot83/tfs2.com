@@ -2,7 +2,8 @@
 using System.Text;
 using System.Web.Mvc;
 using System.Web.Routing;
-using TFS.Web.AssetCaching;
+using Pithy;
+using Pithy.CacheBuster;
 
 namespace TFS.Web.Html
 {
@@ -22,7 +23,7 @@ namespace TFS.Web.Html
             var urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext);
             TagBuilder link = new TagBuilder("script");
             link.MergeAttribute("type", "text/javascript");
-            link.MergeAttribute("src", urlHelper.Content(file) + "?r=" + StaticResourceAssetId.Key);
+            link.MergeAttribute("src", urlHelper.Content(file) + "?r=" + CachedResourceId.Key);
             return link.ToString(TagRenderMode.Normal);
         }
 
@@ -48,7 +49,7 @@ namespace TFS.Web.Html
             link.MergeAttribute("type", "text/css");
             if (!string.IsNullOrEmpty(media))
                 link.MergeAttribute("media", media);
-            link.MergeAttribute("href", urlHelper.Content(file) + "?r=" + StaticResourceAssetId.Key);
+            link.MergeAttribute("href", urlHelper.Content(file) + "?r=" + CachedResourceId.Key);
             return link.ToString(TagRenderMode.SelfClosing);
         }
 
@@ -84,7 +85,7 @@ namespace TFS.Web.Html
         {
             var urlHelper = new UrlHelper(htmlHelper.ViewContext.RequestContext);
             TagBuilder img = new TagBuilder("img");
-            img.MergeAttribute("src", urlHelper.Content(file) + "?r=" + StaticResourceAssetId.Key);
+            img.MergeAttribute("src", urlHelper.Content(file) + "?r=" + CachedResourceId.Key);
             img.MergeAttribute("alt", alt);
             img.MergeAttributes(new RouteValueDictionary(htmlAttributes), true);
             return img.ToString(TagRenderMode.SelfClosing);

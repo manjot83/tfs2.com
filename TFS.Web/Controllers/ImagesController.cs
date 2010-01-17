@@ -5,7 +5,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using TFS.Models.Images;
-using TFS.Web.ActionFilters;
 
 namespace TFS.Web.Controllers
 {
@@ -18,7 +17,6 @@ namespace TFS.Web.Controllers
             this.imageFinder = imageFinder;
         }
 
-        [UnitOfWork]
         public virtual ActionResult StaticImage(Guid id)
         {
             var imageInfo = imageFinder.GetStaticImage(id);

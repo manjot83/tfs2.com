@@ -1,17 +1,17 @@
 ﻿using System;
 using AutoMapper;
 using TFS.Models;
+using TFS.Models.FlightLogs;
+using TFS.Models.FlightPrograms;
 using TFS.Models.Geography;
+using TFS.Models.Messages;
 using TFS.Models.PersonnelRecords;
 using TFS.Models.Users;
 using TFS.Web.ViewModels;
-using TFS.Web.ViewModels.PersonnelRecords;
-using TFS.Models.FlightLogs;
 using TFS.Web.ViewModels.FlightLogs;
-using TFS.Models.FlightPrograms;
 using TFS.Web.ViewModels.FlightPrograms;
-using TFS.Models.Messages;
 using TFS.Web.ViewModels.Messages;
+using TFS.Web.ViewModels.PersonnelRecords;
 
 namespace TFS.Web
 {
@@ -122,7 +122,8 @@ namespace TFS.Web
                   .ForMember(x => x.PrimaryPhoneNumber, m => m.Ignore())
                   .ForMember(x => x.ShirtSize, m => m.Ignore())
                   .ForMember(x => x.DateOfBirth, m => m.MapFrom(x => x.DateOfBirth.HasValue ? x.DateOfBirth.Value.ToUniversalTime() : (DateTime?)null))
-                  .AfterMap((x,y) => {
+                  .AfterMap((x, y) =>
+                  {
                       y.User.FirstName = x.FirstName;
                       y.User.LastName = x.LastName;
                   });

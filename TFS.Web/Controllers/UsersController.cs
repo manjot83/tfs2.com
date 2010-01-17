@@ -3,7 +3,6 @@ using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using TFS.Models;
 using TFS.Web.ViewModels;
-using TFS.Web.ActionFilters;
 using TFS.Models.Users;
 using AutoMapper;
 using System.Collections.Generic;
@@ -21,13 +20,11 @@ namespace TFS.Web.Controllers
             this.userRepository = userRepository;
         }
 
-        [UnitOfWork]
         public virtual ViewResult Index()
         {
             return List(null, null, null, null, null);
         }
 
-        [UnitOfWork]
         public virtual ViewResult List(string sortType, SortDirection? sortDirection, int? page, int? itemsPerPage, bool? showAll)
         {
             if (string.IsNullOrEmpty(sortType))
@@ -69,7 +66,6 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
-        [UnitOfWork]
         public virtual ViewResult Edit(string username)
         {
             var user = this.GetUser(username);
@@ -78,7 +74,6 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        [UnitOfWork]
         public virtual ActionResult Edit(UserViewModel userViewModel)
         {
             this.Validate(userViewModel, string.Empty);
@@ -96,7 +91,6 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        [UnitOfWork]
         public virtual ActionResult Create(UserViewModel userViewModel)
         {
             this.Validate(userViewModel, string.Empty);

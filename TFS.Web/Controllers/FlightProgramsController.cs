@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
-using TFS.Web.ActionFilters;
 using TFS.Models.FlightPrograms;
 using TFS.Web.ViewModels.FlightPrograms;
 using TFS.Web.ViewModels;
@@ -26,13 +25,11 @@ namespace TFS.Web.Controllers
             this.flightProgramsRepository = flightProgramsRepository;
         }
 
-        [UnitOfWork]
         public virtual ViewResult Index()
         {
             return Manage(null);
         }
 
-        [UnitOfWork]
         public virtual ViewResult Manage(bool? showAllPrograms)
         {
             var viewModel = new DashboardViewModel()
@@ -56,7 +53,6 @@ namespace TFS.Web.Controllers
             return View(Views.CreateFlightProgram, new FlightProgramViewModel());
         }
 
-        [UnitOfWork]
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult CreateFlightProgram(FlightProgramViewModel flightProgramViewModel)
         {
@@ -68,7 +64,6 @@ namespace TFS.Web.Controllers
             return RedirectToAction(MVC.FlightPrograms.EditFlightProgram(flightProgram.Id.Value));
         }
 
-        [UnitOfWork]
         [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult EditFlightProgram(int id)
         {
@@ -77,7 +72,6 @@ namespace TFS.Web.Controllers
             return View(Views.EditFlightProgram, viewModel);
         }
 
-        [UnitOfWork]
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult EditFlightProgram(int id, FlightProgramViewModel flightProgramViewModel)
         {
@@ -98,7 +92,6 @@ namespace TFS.Web.Controllers
             return View(Views.CreatePosition, new PositionViewModel());
         }
 
-        [UnitOfWork]
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult CreatePosition(PositionViewModel positionViewModel)
         {
@@ -109,7 +102,6 @@ namespace TFS.Web.Controllers
             return RedirectToAction(MVC.FlightPrograms.Manage());
         }
 
-        [UnitOfWork]
         [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult RenamePosition(int id)
         {
@@ -118,7 +110,6 @@ namespace TFS.Web.Controllers
             return View(Views.EditPosition, viewModel);
         }
 
-        [UnitOfWork]
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult RenamePosition(int id, PositionViewModel positionViewModel)
         {
@@ -133,7 +124,6 @@ namespace TFS.Web.Controllers
             return RedirectToAction(MVC.FlightPrograms.Manage());
         }
 
-        [UnitOfWork]
         [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult CreateProgramLocation(int flightProgramId)
         {
@@ -141,7 +131,6 @@ namespace TFS.Web.Controllers
             return View(Views.CreateProgramLocation, new ProgramLocationViewModel() { ProgramId = program.Id.Value, ProgramName = program.Name });
         }
 
-        [UnitOfWork]
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult CreateProgramLocation(ProgramLocationViewModel programLocationViewModel)
         {
@@ -154,7 +143,6 @@ namespace TFS.Web.Controllers
             return RedirectToAction(MVC.FlightPrograms.EditFlightProgram(program.Id.Value));
         }
 
-        [UnitOfWork]
         [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult EditProgramLocation(int id)
         {
@@ -163,7 +151,6 @@ namespace TFS.Web.Controllers
             return View(Views.EditProgramLocation, viewModel);
         }
 
-        [UnitOfWork]
         [AcceptVerbs(HttpVerbs.Post)]
         public virtual ActionResult EditProgramLocation(ProgramLocationViewModel programLocationViewModel)
         {

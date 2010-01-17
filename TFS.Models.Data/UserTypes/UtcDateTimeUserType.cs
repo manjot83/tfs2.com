@@ -34,7 +34,7 @@ namespace TFS.Models.Data.UserTypes
 
         SqlType[] IUserType.SqlTypes
         {
-#if SQLITE
+#if !MSSQL2008
             get { return new[] { SqlTypeFactory.DateTime }; }
 #else
             get { return new[] { SqlTypeFactory.DateTime2 }; }
