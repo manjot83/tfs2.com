@@ -273,6 +273,15 @@
     <Content Include="Static\css\yui_reset.css" />
     <Content Include="Static\images\calendarSelector.png" />
     <Content Include="Static\images\icons\announcements.png" />
+    <Content Include="Static\images\icons\application.png" />
+    <Content Include="Static\images\icons\lock.png" />
+    <Content Include="Static\images\icons\clock.png" />
+    <Content Include="Static\images\icons\calendar.png" />
+    <Content Include="Static\images\icons\email.png" />
+    <Content Include="Static\images\icons\cog.png" />
+    <Content Include="Static\images\icons\folder.png" />
+    <Content Include="Static\images\icons\map.png" />
+    <Content Include="Static\images\icons\shield.png" />
     <Content Include="Static\images\icons\exclamation.png" />
     <Content Include="Static\images\icons\flightlogs.png" />
     <Content Include="Static\images\icons\flightprograms.png" />
@@ -292,6 +301,7 @@
     <Content Include="Static\images\internal_template\li.gif" />
     <Content Include="Static\images\internal_template\quote.gif" />
     <Content Include="Static\images\internal_template\sidenavh1.gif" />
+    <Content Include="Static\images\icons\world.png" />
     <Content Include="Views\Dashboard\Index.aspx" />
     <Content Include="Views\FlightLogs\BulkCreateSquadronLog.aspx" />
     <Content Include="Views\FlightLogs\EditSquadronLog.aspx" />

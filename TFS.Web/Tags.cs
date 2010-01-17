@@ -27,11 +27,21 @@ namespace TFS.Web
             AssetCache.AddCssProcessor(new DotLessResourceProcessor());
             AssetCache.AddCssProcessor(new CacheBusterEmbeddedUrlProcessor());
 
+            AssetCache.AddFile(IMG_NAV_EMAIL, Links.Static.images.icons.email_png);
+            AssetCache.AddFile(IMG_NAV_SRF, Links.Static.images.icons.shield_png);
+            AssetCache.AddFile(IMG_NAV_FCIF, Links.Static.images.icons.cog_png);
+            AssetCache.AddFile(IMG_NAV_FOLDER, Links.Static.images.icons.folder_png);
+            AssetCache.AddFile(IMG_NAV_AVAILABILITY, Links.Static.images.icons.calendar_png);
+            AssetCache.AddFile(IMG_NAV_PASSWORD, Links.Static.images.icons.lock_png);
+            AssetCache.AddFile(IMG_NAV_TIMECARDS, Links.Static.images.icons.clock_png);
+            AssetCache.AddFile(IMG_NAV_TRAVEL, Links.Static.images.icons.map_png);
             AssetCache.AddFile(IMG_NAV_FLIGHTLOGS, Links.Static.images.icons.flightlogs_png);
             AssetCache.AddFile(IMG_NAV_ANNOUNCEMENTS, Links.Static.images.icons.announcements_png);
             AssetCache.AddFile(IMG_NAV_PERSONNELFILES, Links.Static.images.icons.personnelfiles_png);
             AssetCache.AddFile(IMG_NAV_USERS, Links.Static.images.icons.users_png);
             AssetCache.AddFile(IMG_NAV_FLIGHTPROGRAMS, Links.Static.images.icons.flightprograms_png);
+            AssetCache.AddFile(IMG_NAV_WEBSITE, Links.Static.images.icons.world_png);
+            AssetCache.AddFile(IMG_NAV_APPLICATIONS, Links.Static.images.icons.application_png);
 
             AssetCache.AssertConfigurationIsValid();
 #if DEBUG
@@ -44,11 +54,21 @@ namespace TFS.Web
 
         public const string CSS_INTERNAL_BASE = "internalbase";
 
+        public const string IMG_NAV_EMAIL = "IMG_NAV_EMAIL";
+        public const string IMG_NAV_SRF = "IMG_NAV_SRF";
+        public const string IMG_NAV_FCIF = "IMG_NAV_FCIF";
+        public const string IMG_NAV_FOLDER = "IMG_NAV_FOLDER";
+        public const string IMG_NAV_AVAILABILITY = "IMG_NAV_AVAILABILITY";
+        public const string IMG_NAV_PASSWORD = "IMG_NAV_PASSWORD";
+        public const string IMG_NAV_TIMECARDS = "IMG_NAV_TIMECARDS";
+        public const string IMG_NAV_TRAVEL = "IMG_NAV_TRAVEL";
         public const string IMG_NAV_FLIGHTLOGS = "navflightlogs";
         public const string IMG_NAV_ANNOUNCEMENTS = "navannouncements";
         public const string IMG_NAV_PERSONNELFILES = "navpersonnelfiles";
         public const string IMG_NAV_USERS = "navusers";
         public const string IMG_NAV_FLIGHTPROGRAMS = "navflightprograms";
+        public const string IMG_NAV_WEBSITE = "IMG_NAV_WEBSITE";
+        public const string IMG_NAV_APPLICATIONS = "IMG_NAV_APPLICATIONS";
     }
 }
 

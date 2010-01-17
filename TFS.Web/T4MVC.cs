@@ -381,15 +381,25 @@ namespace Links {
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string announcements_png = Url("announcements.png");
+                public static readonly string application_png = Url("application.png");
+                public static readonly string calendar_png = Url("calendar.png");
+                public static readonly string clock_png = Url("clock.png");
+                public static readonly string cog_png = Url("cog.png");
+                public static readonly string email_png = Url("email.png");
                 public static readonly string exclamation_png = Url("exclamation.png");
                 public static readonly string flightlogs_png = Url("flightlogs.png");
                 public static readonly string flightprograms_png = Url("flightprograms.png");
+                public static readonly string folder_png = Url("folder.png");
+                public static readonly string lock_png = Url("lock.png");
+                public static readonly string map_png = Url("map.png");
                 public static readonly string personnelfiles_png = Url("personnelfiles.png");
+                public static readonly string shield_png = Url("shield.png");
                 public static readonly string sort_down_gif = Url("sort_down.gif");
                 public static readonly string sort_up_gif = Url("sort_up.gif");
                 public static readonly string systemalert_png = Url("systemalert.png");
                 public static readonly string users_png = Url("users.png");
                 public static readonly string website_png = Url("website.png");
+                public static readonly string world_png = Url("world.png");
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
