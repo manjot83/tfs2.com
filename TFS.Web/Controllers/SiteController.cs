@@ -22,9 +22,10 @@ namespace TFS.Web.Controllers
             this.siteRepository = siteRepository;
         }
 
-        public virtual RedirectToRouteResult Index()
+        public virtual ActionResult Index()
         {
-            return this.RedirectToAction(Actions.Home());
+            //return this.RedirectToAction(Actions.Home());
+            return this.Redirect("http://tfs2.com");
         }
 
         public virtual ViewResult Home()

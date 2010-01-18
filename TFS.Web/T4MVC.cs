@@ -160,22 +160,22 @@ public interface IT4MVCActionResult {
   
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-public class T4MVC_ViewResult : System.Web.Mvc.ViewResult, IT4MVCActionResult {
-    public T4MVC_ViewResult(string area, string controller, string action): base()  {
-        this.InitMVCT4Result(area, controller, action);
-    }
-    
-    public string Controller { get; set; }
-    public string Action { get; set; }
-    public RouteValueDictionary RouteValueDictionary { get; set; }
-}
-[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public class T4MVC_ActionResult : System.Web.Mvc.ActionResult, IT4MVCActionResult {
     public T4MVC_ActionResult(string area, string controller, string action): base()  {
         this.InitMVCT4Result(area, controller, action);
     }
      
     public override void ExecuteResult(System.Web.Mvc.ControllerContext context) { }
+    
+    public string Controller { get; set; }
+    public string Action { get; set; }
+    public RouteValueDictionary RouteValueDictionary { get; set; }
+}
+[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+public class T4MVC_ViewResult : System.Web.Mvc.ViewResult, IT4MVCActionResult {
+    public T4MVC_ViewResult(string area, string controller, string action): base()  {
+        this.InitMVCT4Result(area, controller, action);
+    }
     
     public string Controller { get; set; }
     public string Action { get; set; }
@@ -500,8 +500,8 @@ namespace TFS.Web.Controllers {
     public class T4MVC_DashboardController: TFS.Web.Controllers.DashboardController {
         public T4MVC_DashboardController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.ViewResult Index() {
-            var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.Index);
+        public override System.Web.Mvc.ActionResult Index() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
             return callInfo;
         }
 
@@ -1316,8 +1316,8 @@ namespace TFS.Web.Controllers {
     public class T4MVC_SiteController: TFS.Web.Controllers.SiteController {
         public T4MVC_SiteController() : base(Dummy.Instance) { }
 
-        public override System.Web.Mvc.RedirectToRouteResult Index() {
-            var callInfo = new T4MVC_RedirectToRouteResult(Area, Name, ActionNames.Index);
+        public override System.Web.Mvc.ActionResult Index() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
             return callInfo;
         }
 

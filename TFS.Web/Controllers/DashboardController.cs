@@ -10,9 +10,10 @@ namespace TFS.Web.Controllers
     [Authorize]
     public partial class DashboardController : Controller
     {
-        public virtual ViewResult Index()
+        public virtual ActionResult Index()
         {
-            return View();
+            return Redirect("https://apollo.tfs2.com/secure");
+            //return View();
         }
     }
 }

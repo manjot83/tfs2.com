@@ -22,13 +22,18 @@
         <!-- The main content frame -->
         <div id="contentframe">
             <!-- Nav stuff here, all links follow the class "rollover_x" for now -->
-            <div id="nav">
-                <a href="<%= Url.Action(MVC.Site.Home()) %>" class="rollover_home"></a>
+            <div id="nav">                
+                <%--<a href="<%= Url.Action(MVC.Site.Home()) %>" class="rollover_home"></a>
                 <a href="<%= Url.Action(MVC.Site.Services()) %>" class="rollover_services"></a>
                 <a href="<%= Url.Action(MVC.Site.Programs()) %>" class="rollover_programs"></a>
-                <a href="<%= Url.Action(MVC.Site.Experience()) %>" class="rollover_experience"></a>
+                <a href="<%= Url.Action(MVC.Site.Experience()) %>" class="rollover_experience"></a>--%>
+                <a href="http://tfs2.com" class="rollover_home"></a>
+                <a href="http://tfs2.com/site/services.page" class="rollover_services"></a>
+                <a href="http://tfs2.com/site/programs.page" class="rollover_programs"></a>
+                <a href="http://tfs2.com/site/experience.page" class="rollover_experience"></a>
                 <a href="<%= Url.Action(MVC.Security.LogOn()) %>" class="rollover_logon"></a>
-                <a href="<%= Url.Action(MVC.Site.Contact()) %>" class="rollover_contact"></a>
+                <a href="http://tfs2.com/site/contact.page" class="rollover_contact"></a>
+                <%-- %><a href="<%= Url.Action(MVC.Site.Contact()) %>" class="rollover_contact"></a>--%>
             </div>
             <!-- The main content area -->
             <div id="content">

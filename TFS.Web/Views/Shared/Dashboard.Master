@@ -31,35 +31,38 @@
         <div class="main">
             
             <div class="sidenav">
+                <ul>
+                    <li><%= Html.NavImageLink("Return to old site", Tags.IMG_NAV_WEBSITE, "https://apollo.tfs2.com/secure") %></li>
+                </ul>
                 <div class="sidenav-header">Operations</div>
                 <ul>
-                    <li><%= Html.NavImageLink("Announcements", Tags.IMG_NAV_ANNOUNCEMENTS, MVC.Messages.ListMessages()) %></li>
+                    <%--<li><%= Html.NavImageLink("Announcements", Tags.IMG_NAV_ANNOUNCEMENTS, MVC.Messages.ListMessages()) %></li>--%>
                     <li><%= Html.NavImageLink("Flight Logs", Tags.IMG_NAV_FLIGHTLOGS, MVC.FlightLogs.Index()) %></li>
-                    <li><%= Html.NavImageLink("SRF", Tags.IMG_NAV_SRF, "https://apollo.tfs2.com/secure/Forms/SRFListing.aspx") %></li>
+                    <%--<li><%= Html.NavImageLink("SRF", Tags.IMG_NAV_SRF, "https://apollo.tfs2.com/secure/Forms/SRFListing.aspx") %></li>
                     <li><%= Html.NavImageLink("FCIF", Tags.IMG_NAV_FCIF, "https://apollo.tfs2.com/secure/Forms/FCIFListing.aspx")%></li>
                     <li><%= Html.NavImageLink("TFS Publications", Tags.IMG_NAV_FOLDER, "https://apollo.tfs2.com/secure/DocumentManager/CorporateDocs.aspx") %></li>
                     <li><%= Html.NavImageLink("Schedule", Tags.IMG_NAV_FOLDER, "https://apollo.tfs2.com/secure/DocumentManager/Schedule.aspx")%></li>
                     <li><%= Html.NavImageLink("Currency Status", Tags.IMG_NAV_FOLDER, "https://apollo.tfs2.com/secure/DocumentManager/CurrencyStatus.aspx") %></li>
-                    <li><%= Html.NavImageLink("Flash Reports", Tags.IMG_NAV_FOLDER, "https://apollo.tfs2.com/secure/DocumentManager/FlashReports.aspx")%></li>
+                    <li><%= Html.NavImageLink("Flash Reports", Tags.IMG_NAV_FOLDER, "https://apollo.tfs2.com/secure/DocumentManager/FlashReports.aspx")%></li>--%>
                 </ul>
                 <div class="sidenav-header">Self Service</div>
                 <ul>
                     <li><%= Html.NavImageLink("My Personnel File", Tags.IMG_NAV_PERSONNELFILES, MVC.PersonnelRecords.EditMyRecord()) %></li>
-                    <li><%= Html.NavImageLink("My Timecards", Tags.IMG_NAV_TIMECARDS, "https://apollo.tfs2.com/secure/Billing/default.aspx")%></li>
+                    <%--<li><%= Html.NavImageLink("My Timecards", Tags.IMG_NAV_TIMECARDS, "https://apollo.tfs2.com/secure/Billing/default.aspx")%></li>
                     <li><%= Html.NavImageLink("My Availability", Tags.IMG_NAV_AVAILABILITY, "https://apollo.tfs2.com/secure/Scheduling/Availability.aspx")%></li>
-                    <li><%= Html.NavImageLink("My Travel Profile", Tags.IMG_NAV_TRAVEL, "http://sprayberrytravel.com/profile_select.htm")%></li>
+                    <li><%= Html.NavImageLink("My Travel Profile", Tags.IMG_NAV_TRAVEL, "http://sprayberrytravel.com/profile_select.htm")%></li>--%>
                     
                 </ul>
                 <div class="sidenav-header">Administration</div>
                 <ul>                                        
-                    <li><%= Html.NavImageLink("Users and Security", Tags.IMG_NAV_USERS, MVC.Users.Index())%></li>
-                    <li><%= Html.NavImageLink("Payroll", Tags.IMG_NAV_FLIGHTPROGRAMS, "https://apollo.tfs2.com/secure/Billing/Admin/default.aspx")%></li>
+                    <li><%= Html.NavImageLink("Users and Security", Tags.IMG_NAV_USERS, MVC.Users.Index())%></li>                    
                     <li><%= Html.NavImageLink("Personnel Files", Tags.IMG_NAV_PERSONNELFILES, MVC.PersonnelRecords.List())%></li>
                     <li><%= Html.NavImageLink("Flight Programs", Tags.IMG_NAV_FLIGHTPROGRAMS, MVC.FlightPrograms.Manage())%></li>
+                    <%--<li><%= Html.NavImageLink("Payroll", Tags.IMG_NAV_FLIGHTPROGRAMS, "https://apollo.tfs2.com/secure/Billing/Admin/default.aspx")%></li>
                     <li><%= Html.NavImageLink("Availability", Tags.IMG_NAV_AVAILABILITY, "https://apollo.tfs2.com/secure/Scheduling/AvailabilityReport.aspx")%></li>
                     <li><%= Html.NavImageLink("Website", Tags.IMG_NAV_WEBSITE, "https://apollo.tfs2.com/secure/WebAdmin/Default.aspx")%></li>
                     <li><%= Html.NavImageLink("Publications", Tags.IMG_NAV_APPLICATIONS, "https://apollo.tfs2.com/secure/DocumentManager/Admin/CorporateDocsManager.aspx")%></li>
-                    <li><%= Html.NavImageLink("Forms", Tags.IMG_NAV_APPLICATIONS, "https://apollo.tfs2.com/secure/Forms/admin.aspx")%></li>
+                    <li><%= Html.NavImageLink("Forms", Tags.IMG_NAV_APPLICATIONS, "https://apollo.tfs2.com/secure/Forms/admin.aspx")%></li>--%>
                 </ul>
             </div>
             
