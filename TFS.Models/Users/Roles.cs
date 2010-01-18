@@ -12,4 +12,13 @@ namespace TFS.Models.Users
         ProgramManager,
         FlightLogManager,
     }
+
+    public static class RoleNames
+    {
+        public const string UserManager = "UserManager";
+        public const string PersonnelManager = "PersonnelManager";
+        public const string ProgramManager = "ProgramManager";
+        public const string FlightLogManager = "FlightLogManager";
+    }
+
 }

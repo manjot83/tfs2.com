@@ -30,6 +30,7 @@ namespace TFS.Web.Controllers
             this.flightProgramsRepository = flightProgramsRepository;
         }
 
+        [Authorize(Roles = RoleNames.PersonnelManager)]
         public virtual ViewResult List(string sortType, SortDirection? sortDirection, int? page, int? itemsPerPage)
         {
             if (string.IsNullOrEmpty(sortType))
@@ -58,6 +59,7 @@ namespace TFS.Web.Controllers
             return View(Views.List, viewModel);
         }
 
+        [Authorize(Roles = RoleNames.PersonnelManager)]
         public virtual ViewResult EditRecord(string username)
         {
             var user = userRepository.GetUser(username);
@@ -151,6 +153,7 @@ namespace TFS.Web.Controllers
             return viewModel;
         }
 
+        [Authorize(Roles = RoleNames.PersonnelManager)]
         public virtual FileContentResult DownloadAllAsCsv()
         {
             var users = userRepository.GetAllActiveUsers().OrderBy(x => x.FileByName());

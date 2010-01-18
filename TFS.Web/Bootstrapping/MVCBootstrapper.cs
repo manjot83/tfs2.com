@@ -83,9 +83,9 @@ namespace TFS.Web
 
 #if TESTDATA
             var unitOfWork = ObjectFactory.GetInstance<IUnitOfWork>() as INHibernateUnitOfWork;
-            new DatabaseBuilder(cfg, unitOfWork.Session);
+            new DatabaseBuilder(cfg, unitOfWork.Session).BuildSchema();
             unitOfWork.Start();
-            TestData.Execute(unitOfWork.Session);
+            TestData.Execute(ObjectFactory.GetInstance<IRepository>() as NHibernateRepository);
             unitOfWork.Finish();
             unitOfWork.Session.Clear();
 #endif

@@ -25,12 +25,12 @@ namespace TFS.Models.Data
 
         public TEntity Persist<TEntity>(TEntity entity) where TEntity : BaseDomainObject
         {
-            return Session.SaveOrUpdateCopy<TEntity>(entity);
+            return Session.Save<TEntity>(entity);
         }
 
         public object Persist(object entity)
         {
-            return Session.SaveOrUpdateCopy(entity);
+            return Session.Save(entity);
         }
 
         public void Delete(object entity)

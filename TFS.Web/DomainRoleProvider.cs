@@ -16,22 +16,11 @@ namespace TFS.Web
             if (container == null)
                 throw new InvalidOperationException("HttpApplication must implemented ICanResolveDependencies");
 
-            var unitOfWork = container.Resolve<IUnitOfWork>();
-            unitOfWork.Start();
-            try
-            {
-                string[] roles = new string[0];
-                var user = container.Resolve<IUserRepository>().GetUser(username);
-                if (user != null)
-                    roles = user.Roles.ToArray();
-                unitOfWork.Finish();
-                return roles;
-            }
-            catch (Exception)
-            {
-                unitOfWork.Abort();
-                throw;
-            }
+            string[] roles = new string[0];
+            var user = container.Resolve<IUserRepository>().GetUser(username);
+            if (user != null)
+                roles = user.Roles.ToArray();
+            return roles;
         }
 
         public override bool IsUserInRole(string username, string roleName)

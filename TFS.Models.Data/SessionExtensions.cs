@@ -8,6 +8,11 @@ namespace TFS.Models.Data
 {
     public static class SessionExtensions
     {
+        public static TObject Save<TObject>(this ISession session, TObject entity)
+        {
+            return (TObject)session.Get<TObject>(session.Save(entity));
+        }
+
         public static TObject SaveOrUpdateCopy<TObject>(this ISession session, TObject entity)
         {
             return (TObject)session.SaveOrUpdateCopy(entity);

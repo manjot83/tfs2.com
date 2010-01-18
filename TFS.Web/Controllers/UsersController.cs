@@ -9,8 +9,7 @@ using System.Collections.Generic;
 
 namespace TFS.Web.Controllers
 {
-    //[Authorize(Roles="UserManager")]
-    [Authorize]
+    [Authorize(Roles = RoleNames.UserManager)]
     public partial class UsersController : Controller
     {
         private readonly IUserRepository userRepository;
@@ -42,7 +41,7 @@ namespace TFS.Web.Controllers
             if (viewModel.ShowAll)
                 users = userRepository.GetAllUsers();
             else
-                users = userRepository.GetAllActiveUsers();            
+                users = userRepository.GetAllActiveUsers();
             if (viewModel.IsCurrentSortType("name") && viewModel.SortDirection == SortDirection.Ascending)
                 users = users.OrderBy(x => x.LastName);
             else if (viewModel.IsCurrentSortType("name"))

@@ -55,6 +55,7 @@ namespace TFS.Models.Data.Configuration
                 })
                 .ExposeConfiguration(c =>
                 {
+                    c.SetProperty(NHibernate.Cfg.Environment.ProxyFactoryFactoryClass, typeof(NHibernate.ByteCode.Castle.ProxyFactoryFactory).AssemblyQualifiedName);
                     c.SetProperty(NHibernate.Cfg.Environment.BatchSize, "20");
                     c.SetProperty(NHibernate.Cfg.Environment.GenerateStatistics, "true");
                 })
