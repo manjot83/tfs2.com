@@ -30,12 +30,24 @@ namespace PersonnelRecordsMigrator.New
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
+    partial void InsertAircraftMD(AircraftMD instance);
+    partial void UpdateAircraftMD(AircraftMD instance);
+    partial void DeleteAircraftMD(AircraftMD instance);
     partial void InsertCertificate(Certificate instance);
     partial void UpdateCertificate(Certificate instance);
     partial void DeleteCertificate(Certificate instance);
-    partial void InsertMissionLog(MissionLog instance);
-    partial void UpdateMissionLog(MissionLog instance);
-    partial void DeleteMissionLog(MissionLog instance);
+    partial void InsertFlightLog(FlightLog instance);
+    partial void UpdateFlightLog(FlightLog instance);
+    partial void DeleteFlightLog(FlightLog instance);
+    partial void InsertFlightProgram(FlightProgram instance);
+    partial void UpdateFlightProgram(FlightProgram instance);
+    partial void DeleteFlightProgram(FlightProgram instance);
+    partial void InsertMessage(Message instance);
+    partial void UpdateMessage(Message instance);
+    partial void DeleteMessage(Message instance);
+    partial void InsertMessagesForUser(MessagesForUser instance);
+    partial void UpdateMessagesForUser(MessagesForUser instance);
+    partial void DeleteMessagesForUser(MessagesForUser instance);
     partial void InsertMission(Mission instance);
     partial void UpdateMission(Mission instance);
     partial void DeleteMission(Mission instance);
@@ -48,6 +60,9 @@ namespace PersonnelRecordsMigrator.New
     partial void InsertPosition(Position instance);
     partial void UpdatePosition(Position instance);
     partial void DeletePosition(Position instance);
+    partial void InsertProgramLocation(ProgramLocation instance);
+    partial void UpdateProgramLocation(ProgramLocation instance);
+    partial void DeleteProgramLocation(ProgramLocation instance);
     partial void InsertQualification(Qualification instance);
     partial void UpdateQualification(Qualification instance);
     partial void DeleteQualification(Qualification instance);
@@ -89,6 +104,14 @@ namespace PersonnelRecordsMigrator.New
 			OnCreated();
 		}
 		
+		public System.Data.Linq.Table<AircraftMD> AircraftMDS
+		{
+			get
+			{
+				return this.GetTable<AircraftMD>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Certificate> Certificates
 		{
 			get
@@ -97,11 +120,35 @@ namespace PersonnelRecordsMigrator.New
 			}
 		}
 		
-		public System.Data.Linq.Table<MissionLog> MissionLogs
+		public System.Data.Linq.Table<FlightLog> FlightLogs
 		{
 			get
 			{
-				return this.GetTable<MissionLog>();
+				return this.GetTable<FlightLog>();
+			}
+		}
+		
+		public System.Data.Linq.Table<FlightProgram> FlightPrograms
+		{
+			get
+			{
+				return this.GetTable<FlightProgram>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Message> Messages
+		{
+			get
+			{
+				return this.GetTable<Message>();
+			}
+		}
+		
+		public System.Data.Linq.Table<MessagesForUser> MessagesForUsers
+		{
+			get
+			{
+				return this.GetTable<MessagesForUser>();
 			}
 		}
 		
@@ -142,6 +189,14 @@ namespace PersonnelRecordsMigrator.New
 			get
 			{
 				return this.GetTable<Position>();
+			}
+		}
+		
+		public System.Data.Linq.Table<ProgramLocation> ProgramLocations
+		{
+			get
+			{
+				return this.GetTable<ProgramLocation>();
 			}
 		}
 		
@@ -194,13 +249,99 @@ namespace PersonnelRecordsMigrator.New
 		}
 	}
 	
+	[Table(Name="dbo.AircraftMDS")]
+	public partial class AircraftMD : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _Id;
+		
+		private string _Name;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(System.Guid value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public AircraftMD()
+		{
+			OnCreated();
+		}
+		
+		[Column(Storage="_Id", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[Table(Name="dbo.Certificates")]
 	public partial class Certificate : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _Id;
+		private System.Guid _Id;
 		
 		private int _Type;
 		
@@ -212,7 +353,7 @@ namespace PersonnelRecordsMigrator.New
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIdChanging(int value);
+    partial void OnIdChanging(System.Guid value);
     partial void OnIdChanged();
     partial void OnTypeChanging(int value);
     partial void OnTypeChanged();
@@ -226,8 +367,8 @@ namespace PersonnelRecordsMigrator.New
 			OnCreated();
 		}
 		
-		[Column(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		[Column(Storage="_Id", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid Id
 		{
 			get
 			{
@@ -332,23 +473,25 @@ namespace PersonnelRecordsMigrator.New
 		}
 	}
 	
-	[Table(Name="dbo.MissionLogs")]
-	public partial class MissionLog : INotifyPropertyChanging, INotifyPropertyChanged
+	[Table(Name="dbo.FlightLogs")]
+	public partial class FlightLog : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _Id;
+		private System.Guid _Id;
 		
 		private System.DateTime _LogDate;
 		
 		private System.DateTime _LastModifiedDate;
 		
-		private string _Location;
-		
 		private string _AircraftMDS;
 		
 		private string _AircraftSerialNumber;
+		
+		private System.Guid _ProgramLocationId;
+		
+		private EntityRef<ProgramLocation> _ProgramLocation;
 		
 		private EntitySet<Mission> _Missions;
 		
@@ -358,29 +501,30 @@ namespace PersonnelRecordsMigrator.New
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIdChanging(int value);
+    partial void OnIdChanging(System.Guid value);
     partial void OnIdChanged();
     partial void OnLogDateChanging(System.DateTime value);
     partial void OnLogDateChanged();
     partial void OnLastModifiedDateChanging(System.DateTime value);
     partial void OnLastModifiedDateChanged();
-    partial void OnLocationChanging(string value);
-    partial void OnLocationChanged();
     partial void OnAircraftMDSChanging(string value);
     partial void OnAircraftMDSChanged();
     partial void OnAircraftSerialNumberChanging(string value);
     partial void OnAircraftSerialNumberChanged();
+    partial void OnProgramLocationIdChanging(System.Guid value);
+    partial void OnProgramLocationIdChanged();
     #endregion
 		
-		public MissionLog()
+		public FlightLog()
 		{
+			this._ProgramLocation = default(EntityRef<ProgramLocation>);
 			this._Missions = new EntitySet<Mission>(new Action<Mission>(this.attach_Missions), new Action<Mission>(this.detach_Missions));
 			this._SquadronLogs = new EntitySet<SquadronLog>(new Action<SquadronLog>(this.attach_SquadronLogs), new Action<SquadronLog>(this.detach_SquadronLogs));
 			OnCreated();
 		}
 		
-		[Column(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		[Column(Storage="_Id", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid Id
 		{
 			get
 			{
@@ -439,26 +583,6 @@ namespace PersonnelRecordsMigrator.New
 			}
 		}
 		
-		[Column(Storage="_Location", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
-		public string Location
-		{
-			get
-			{
-				return this._Location;
-			}
-			set
-			{
-				if ((this._Location != value))
-				{
-					this.OnLocationChanging(value);
-					this.SendPropertyChanging();
-					this._Location = value;
-					this.SendPropertyChanged("Location");
-					this.OnLocationChanged();
-				}
-			}
-		}
-		
 		[Column(Storage="_AircraftMDS", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string AircraftMDS
 		{
@@ -499,7 +623,65 @@ namespace PersonnelRecordsMigrator.New
 			}
 		}
 		
-		[Association(Name="FK_Missions_MissionLogs", Storage="_Missions", ThisKey="Id", OtherKey="MissionLogId", DeleteRule="NO ACTION")]
+		[Column(Storage="_ProgramLocationId", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid ProgramLocationId
+		{
+			get
+			{
+				return this._ProgramLocationId;
+			}
+			set
+			{
+				if ((this._ProgramLocationId != value))
+				{
+					if (this._ProgramLocation.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnProgramLocationIdChanging(value);
+					this.SendPropertyChanging();
+					this._ProgramLocationId = value;
+					this.SendPropertyChanged("ProgramLocationId");
+					this.OnProgramLocationIdChanged();
+				}
+			}
+		}
+		
+		[Association(Name="FK_FlightLogs_ProgramLocations", Storage="_ProgramLocation", ThisKey="ProgramLocationId", OtherKey="Id", IsForeignKey=true)]
+		public ProgramLocation ProgramLocation
+		{
+			get
+			{
+				return this._ProgramLocation.Entity;
+			}
+			set
+			{
+				ProgramLocation previousValue = this._ProgramLocation.Entity;
+				if (((previousValue != value) 
+							|| (this._ProgramLocation.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._ProgramLocation.Entity = null;
+						previousValue.FlightLogs.Remove(this);
+					}
+					this._ProgramLocation.Entity = value;
+					if ((value != null))
+					{
+						value.FlightLogs.Add(this);
+						this._ProgramLocationId = value.Id;
+					}
+					else
+					{
+						this._ProgramLocationId = default(System.Guid);
+					}
+					this.SendPropertyChanged("ProgramLocation");
+				}
+			}
+		}
+		
+		[Association(Name="FK_Missions_FlightLogs", Storage="_Missions", ThisKey="Id", OtherKey="FlightLogId", DeleteRule="NO ACTION")]
 		public EntitySet<Mission> Missions
 		{
 			get
@@ -512,7 +694,7 @@ namespace PersonnelRecordsMigrator.New
 			}
 		}
 		
-		[Association(Name="FK_SquadronLogs_MissionLogs", Storage="_SquadronLogs", ThisKey="Id", OtherKey="MissionLogId", DeleteRule="NO ACTION")]
+		[Association(Name="FK_SquadronLogs_FlightLogs", Storage="_SquadronLogs", ThisKey="Id", OtherKey="FlightLogId", DeleteRule="NO ACTION")]
 		public EntitySet<SquadronLog> SquadronLogs
 		{
 			get
@@ -548,25 +730,743 @@ namespace PersonnelRecordsMigrator.New
 		private void attach_Missions(Mission entity)
 		{
 			this.SendPropertyChanging();
-			entity.MissionLog = this;
+			entity.FlightLog = this;
 		}
 		
 		private void detach_Missions(Mission entity)
 		{
 			this.SendPropertyChanging();
-			entity.MissionLog = null;
+			entity.FlightLog = null;
 		}
 		
 		private void attach_SquadronLogs(SquadronLog entity)
 		{
 			this.SendPropertyChanging();
-			entity.MissionLog = this;
+			entity.FlightLog = this;
 		}
 		
 		private void detach_SquadronLogs(SquadronLog entity)
 		{
 			this.SendPropertyChanging();
-			entity.MissionLog = null;
+			entity.FlightLog = null;
+		}
+	}
+	
+	[Table(Name="dbo.FlightPrograms")]
+	public partial class FlightProgram : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _Id;
+		
+		private string _Name;
+		
+		private string _AccountName;
+		
+		private bool _Active;
+		
+		private EntitySet<ProgramLocation> _ProgramLocations;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(System.Guid value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnAccountNameChanging(string value);
+    partial void OnAccountNameChanged();
+    partial void OnActiveChanging(bool value);
+    partial void OnActiveChanged();
+    #endregion
+		
+		public FlightProgram()
+		{
+			this._ProgramLocations = new EntitySet<ProgramLocation>(new Action<ProgramLocation>(this.attach_ProgramLocations), new Action<ProgramLocation>(this.detach_ProgramLocations));
+			OnCreated();
+		}
+		
+		[Column(Storage="_Id", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_AccountName", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string AccountName
+		{
+			get
+			{
+				return this._AccountName;
+			}
+			set
+			{
+				if ((this._AccountName != value))
+				{
+					this.OnAccountNameChanging(value);
+					this.SendPropertyChanging();
+					this._AccountName = value;
+					this.SendPropertyChanged("AccountName");
+					this.OnAccountNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Active", DbType="Bit NOT NULL")]
+		public bool Active
+		{
+			get
+			{
+				return this._Active;
+			}
+			set
+			{
+				if ((this._Active != value))
+				{
+					this.OnActiveChanging(value);
+					this.SendPropertyChanging();
+					this._Active = value;
+					this.SendPropertyChanged("Active");
+					this.OnActiveChanged();
+				}
+			}
+		}
+		
+		[Association(Name="FK_ProgramLocations_FlightPrograms", Storage="_ProgramLocations", ThisKey="Id", OtherKey="FlightProgramId", DeleteRule="NO ACTION")]
+		public EntitySet<ProgramLocation> ProgramLocations
+		{
+			get
+			{
+				return this._ProgramLocations;
+			}
+			set
+			{
+				this._ProgramLocations.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_ProgramLocations(ProgramLocation entity)
+		{
+			this.SendPropertyChanging();
+			entity.FlightProgram = this;
+		}
+		
+		private void detach_ProgramLocations(ProgramLocation entity)
+		{
+			this.SendPropertyChanging();
+			entity.FlightProgram = null;
+		}
+	}
+	
+	[Table(Name="dbo.Messages")]
+	public partial class Message : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _Id;
+		
+		private int _MessageType;
+		
+		private string _Title;
+		
+		private System.DateTime _ActiveFromDate;
+		
+		private System.DateTime _ActiveToDate;
+		
+		private string _Content;
+		
+		private System.Nullable<bool> _Urgent;
+		
+		private System.Nullable<System.Guid> _Announcement_CreatedBy;
+		
+		private System.Nullable<System.Guid> _UserAlert_UserId;
+		
+		private EntityRef<User> _User;
+		
+		private EntitySet<MessagesForUser> _MessagesForUsers;
+		
+		private EntityRef<User> _UserAlert_User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(System.Guid value);
+    partial void OnIdChanged();
+    partial void OnMessageTypeChanging(int value);
+    partial void OnMessageTypeChanged();
+    partial void OnTitleChanging(string value);
+    partial void OnTitleChanged();
+    partial void OnActiveFromDateChanging(System.DateTime value);
+    partial void OnActiveFromDateChanged();
+    partial void OnActiveToDateChanging(System.DateTime value);
+    partial void OnActiveToDateChanged();
+    partial void OnContentChanging(string value);
+    partial void OnContentChanged();
+    partial void OnUrgentChanging(System.Nullable<bool> value);
+    partial void OnUrgentChanged();
+    partial void OnAnnouncement_CreatedByChanging(System.Nullable<System.Guid> value);
+    partial void OnAnnouncement_CreatedByChanged();
+    partial void OnUserAlert_UserIdChanging(System.Nullable<System.Guid> value);
+    partial void OnUserAlert_UserIdChanged();
+    #endregion
+		
+		public Message()
+		{
+			this._User = default(EntityRef<User>);
+			this._MessagesForUsers = new EntitySet<MessagesForUser>(new Action<MessagesForUser>(this.attach_MessagesForUsers), new Action<MessagesForUser>(this.detach_MessagesForUsers));
+			this._UserAlert_User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_Id", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_MessageType", DbType="Int NOT NULL")]
+		public int MessageType
+		{
+			get
+			{
+				return this._MessageType;
+			}
+			set
+			{
+				if ((this._MessageType != value))
+				{
+					this.OnMessageTypeChanging(value);
+					this.SendPropertyChanging();
+					this._MessageType = value;
+					this.SendPropertyChanged("MessageType");
+					this.OnMessageTypeChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Title", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string Title
+		{
+			get
+			{
+				return this._Title;
+			}
+			set
+			{
+				if ((this._Title != value))
+				{
+					this.OnTitleChanging(value);
+					this.SendPropertyChanging();
+					this._Title = value;
+					this.SendPropertyChanged("Title");
+					this.OnTitleChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ActiveFromDate", DbType="DateTime2(7) NOT NULL")]
+		public System.DateTime ActiveFromDate
+		{
+			get
+			{
+				return this._ActiveFromDate;
+			}
+			set
+			{
+				if ((this._ActiveFromDate != value))
+				{
+					this.OnActiveFromDateChanging(value);
+					this.SendPropertyChanging();
+					this._ActiveFromDate = value;
+					this.SendPropertyChanged("ActiveFromDate");
+					this.OnActiveFromDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ActiveToDate", DbType="DateTime2(7) NOT NULL")]
+		public System.DateTime ActiveToDate
+		{
+			get
+			{
+				return this._ActiveToDate;
+			}
+			set
+			{
+				if ((this._ActiveToDate != value))
+				{
+					this.OnActiveToDateChanging(value);
+					this.SendPropertyChanging();
+					this._ActiveToDate = value;
+					this.SendPropertyChanged("ActiveToDate");
+					this.OnActiveToDateChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Content", DbType="NVarChar(MAX)", UpdateCheck=UpdateCheck.Never)]
+		public string Content
+		{
+			get
+			{
+				return this._Content;
+			}
+			set
+			{
+				if ((this._Content != value))
+				{
+					this.OnContentChanging(value);
+					this.SendPropertyChanging();
+					this._Content = value;
+					this.SendPropertyChanged("Content");
+					this.OnContentChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Urgent", DbType="Bit")]
+		public System.Nullable<bool> Urgent
+		{
+			get
+			{
+				return this._Urgent;
+			}
+			set
+			{
+				if ((this._Urgent != value))
+				{
+					this.OnUrgentChanging(value);
+					this.SendPropertyChanging();
+					this._Urgent = value;
+					this.SendPropertyChanged("Urgent");
+					this.OnUrgentChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Announcement_CreatedBy", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> Announcement_CreatedBy
+		{
+			get
+			{
+				return this._Announcement_CreatedBy;
+			}
+			set
+			{
+				if ((this._Announcement_CreatedBy != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnAnnouncement_CreatedByChanging(value);
+					this.SendPropertyChanging();
+					this._Announcement_CreatedBy = value;
+					this.SendPropertyChanged("Announcement_CreatedBy");
+					this.OnAnnouncement_CreatedByChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_UserAlert_UserId", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> UserAlert_UserId
+		{
+			get
+			{
+				return this._UserAlert_UserId;
+			}
+			set
+			{
+				if ((this._UserAlert_UserId != value))
+				{
+					if (this._UserAlert_User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserAlert_UserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserAlert_UserId = value;
+					this.SendPropertyChanged("UserAlert_UserId");
+					this.OnUserAlert_UserIdChanged();
+				}
+			}
+		}
+		
+		[Association(Name="FK_Announcement_Messages_Users", Storage="_User", ThisKey="Announcement_CreatedBy", OtherKey="Id", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.Messages.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.Messages.Add(this);
+						this._Announcement_CreatedBy = value.Id;
+					}
+					else
+					{
+						this._Announcement_CreatedBy = default(Nullable<System.Guid>);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		[Association(Name="FK_MessagesForUsers_Messages", Storage="_MessagesForUsers", ThisKey="Id", OtherKey="MessageId", DeleteRule="NO ACTION")]
+		public EntitySet<MessagesForUser> MessagesForUsers
+		{
+			get
+			{
+				return this._MessagesForUsers;
+			}
+			set
+			{
+				this._MessagesForUsers.Assign(value);
+			}
+		}
+		
+		[Association(Name="FK_UserAlert_Messages_Users", Storage="_UserAlert_User", ThisKey="UserAlert_UserId", OtherKey="Id", IsForeignKey=true)]
+		public User UserAlert_User
+		{
+			get
+			{
+				return this._UserAlert_User.Entity;
+			}
+			set
+			{
+				User previousValue = this._UserAlert_User.Entity;
+				if (((previousValue != value) 
+							|| (this._UserAlert_User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._UserAlert_User.Entity = null;
+						previousValue.UserAlert_Messages_Users.Remove(this);
+					}
+					this._UserAlert_User.Entity = value;
+					if ((value != null))
+					{
+						value.UserAlert_Messages_Users.Add(this);
+						this._UserAlert_UserId = value.Id;
+					}
+					else
+					{
+						this._UserAlert_UserId = default(Nullable<System.Guid>);
+					}
+					this.SendPropertyChanged("UserAlert_User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_MessagesForUsers(MessagesForUser entity)
+		{
+			this.SendPropertyChanging();
+			entity.Message = this;
+		}
+		
+		private void detach_MessagesForUsers(MessagesForUser entity)
+		{
+			this.SendPropertyChanging();
+			entity.Message = null;
+		}
+	}
+	
+	[Table(Name="dbo.MessagesForUsers")]
+	public partial class MessagesForUser : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _UserId;
+		
+		private System.Guid _MessageId;
+		
+		private System.DateTime _SeenAtDate;
+		
+		private EntityRef<Message> _Message;
+		
+		private EntityRef<User> _User;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnUserIdChanging(System.Guid value);
+    partial void OnUserIdChanged();
+    partial void OnMessageIdChanging(System.Guid value);
+    partial void OnMessageIdChanged();
+    partial void OnSeenAtDateChanging(System.DateTime value);
+    partial void OnSeenAtDateChanged();
+    #endregion
+		
+		public MessagesForUser()
+		{
+			this._Message = default(EntityRef<Message>);
+			this._User = default(EntityRef<User>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_UserId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid UserId
+		{
+			get
+			{
+				return this._UserId;
+			}
+			set
+			{
+				if ((this._UserId != value))
+				{
+					if (this._User.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnUserIdChanging(value);
+					this.SendPropertyChanging();
+					this._UserId = value;
+					this.SendPropertyChanged("UserId");
+					this.OnUserIdChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_MessageId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid MessageId
+		{
+			get
+			{
+				return this._MessageId;
+			}
+			set
+			{
+				if ((this._MessageId != value))
+				{
+					if (this._Message.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnMessageIdChanging(value);
+					this.SendPropertyChanging();
+					this._MessageId = value;
+					this.SendPropertyChanged("MessageId");
+					this.OnMessageIdChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_SeenAtDate", DbType="DateTime2(7) NOT NULL")]
+		public System.DateTime SeenAtDate
+		{
+			get
+			{
+				return this._SeenAtDate;
+			}
+			set
+			{
+				if ((this._SeenAtDate != value))
+				{
+					this.OnSeenAtDateChanging(value);
+					this.SendPropertyChanging();
+					this._SeenAtDate = value;
+					this.SendPropertyChanged("SeenAtDate");
+					this.OnSeenAtDateChanged();
+				}
+			}
+		}
+		
+		[Association(Name="FK_MessagesForUsers_Messages", Storage="_Message", ThisKey="MessageId", OtherKey="Id", IsForeignKey=true)]
+		public Message Message
+		{
+			get
+			{
+				return this._Message.Entity;
+			}
+			set
+			{
+				Message previousValue = this._Message.Entity;
+				if (((previousValue != value) 
+							|| (this._Message.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Message.Entity = null;
+						previousValue.MessagesForUsers.Remove(this);
+					}
+					this._Message.Entity = value;
+					if ((value != null))
+					{
+						value.MessagesForUsers.Add(this);
+						this._MessageId = value.Id;
+					}
+					else
+					{
+						this._MessageId = default(System.Guid);
+					}
+					this.SendPropertyChanged("Message");
+				}
+			}
+		}
+		
+		[Association(Name="FK_MessagesForUsers_Users", Storage="_User", ThisKey="UserId", OtherKey="Id", IsForeignKey=true)]
+		public User User
+		{
+			get
+			{
+				return this._User.Entity;
+			}
+			set
+			{
+				User previousValue = this._User.Entity;
+				if (((previousValue != value) 
+							|| (this._User.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._User.Entity = null;
+						previousValue.MessagesForUsers.Remove(this);
+					}
+					this._User.Entity = value;
+					if ((value != null))
+					{
+						value.MessagesForUsers.Add(this);
+						this._UserId = value.Id;
+					}
+					else
+					{
+						this._UserId = default(System.Guid);
+					}
+					this.SendPropertyChanged("User");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -576,7 +1476,7 @@ namespace PersonnelRecordsMigrator.New
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _Id;
+		private System.Guid _Id;
 		
 		private string _Name;
 		
@@ -598,15 +1498,15 @@ namespace PersonnelRecordsMigrator.New
 		
 		private int _Totals;
 		
-		private int _MissionLogId;
+		private System.Guid _FlightLogId;
 		
-		private EntityRef<MissionLog> _MissionLog;
+		private EntityRef<FlightLog> _FlightLog;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIdChanging(int value);
+    partial void OnIdChanging(System.Guid value);
     partial void OnIdChanged();
     partial void OnNameChanging(string value);
     partial void OnNameChanged();
@@ -628,18 +1528,18 @@ namespace PersonnelRecordsMigrator.New
     partial void OnSortiesChanged();
     partial void OnTotalsChanging(int value);
     partial void OnTotalsChanged();
-    partial void OnMissionLogIdChanging(int value);
-    partial void OnMissionLogIdChanged();
+    partial void OnFlightLogIdChanging(System.Guid value);
+    partial void OnFlightLogIdChanged();
     #endregion
 		
 		public Mission()
 		{
-			this._MissionLog = default(EntityRef<MissionLog>);
+			this._FlightLog = default(EntityRef<FlightLog>);
 			OnCreated();
 		}
 		
-		[Column(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		[Column(Storage="_Id", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid Id
 		{
 			get
 			{
@@ -858,60 +1758,60 @@ namespace PersonnelRecordsMigrator.New
 			}
 		}
 		
-		[Column(Storage="_MissionLogId", DbType="Int NOT NULL")]
-		public int MissionLogId
+		[Column(Storage="_FlightLogId", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid FlightLogId
 		{
 			get
 			{
-				return this._MissionLogId;
+				return this._FlightLogId;
 			}
 			set
 			{
-				if ((this._MissionLogId != value))
+				if ((this._FlightLogId != value))
 				{
-					if (this._MissionLog.HasLoadedOrAssignedValue)
+					if (this._FlightLog.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnMissionLogIdChanging(value);
+					this.OnFlightLogIdChanging(value);
 					this.SendPropertyChanging();
-					this._MissionLogId = value;
-					this.SendPropertyChanged("MissionLogId");
-					this.OnMissionLogIdChanged();
+					this._FlightLogId = value;
+					this.SendPropertyChanged("FlightLogId");
+					this.OnFlightLogIdChanged();
 				}
 			}
 		}
 		
-		[Association(Name="FK_Missions_MissionLogs", Storage="_MissionLog", ThisKey="MissionLogId", OtherKey="Id", IsForeignKey=true)]
-		public MissionLog MissionLog
+		[Association(Name="FK_Missions_FlightLogs", Storage="_FlightLog", ThisKey="FlightLogId", OtherKey="Id", IsForeignKey=true)]
+		public FlightLog FlightLog
 		{
 			get
 			{
-				return this._MissionLog.Entity;
+				return this._FlightLog.Entity;
 			}
 			set
 			{
-				MissionLog previousValue = this._MissionLog.Entity;
+				FlightLog previousValue = this._FlightLog.Entity;
 				if (((previousValue != value) 
-							|| (this._MissionLog.HasLoadedOrAssignedValue == false)))
+							|| (this._FlightLog.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._MissionLog.Entity = null;
+						this._FlightLog.Entity = null;
 						previousValue.Missions.Remove(this);
 					}
-					this._MissionLog.Entity = value;
+					this._FlightLog.Entity = value;
 					if ((value != null))
 					{
 						value.Missions.Add(this);
-						this._MissionLogId = value.Id;
+						this._FlightLogId = value.Id;
 					}
 					else
 					{
-						this._MissionLogId = default(int);
+						this._FlightLogId = default(System.Guid);
 					}
-					this.SendPropertyChanged("MissionLog");
+					this.SendPropertyChanged("FlightLog");
 				}
 			}
 		}
@@ -1170,7 +2070,7 @@ namespace PersonnelRecordsMigrator.New
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _PersonId;
+		private System.Guid _PersonId;
 		
 		private string _StreetAddress;
 		
@@ -1179,10 +2079,6 @@ namespace PersonnelRecordsMigrator.New
 		private string _State;
 		
 		private string _ZipCode;
-		
-		private string _LastName;
-		
-		private string _FirstName;
 		
 		private string _MiddleInitial;
 		
@@ -1204,7 +2100,7 @@ namespace PersonnelRecordsMigrator.New
 		
 		private System.Nullable<int> _FlightSuitSize;
 		
-		private System.Nullable<int> _HirePositionId;
+		private System.Nullable<System.Guid> _HirePositionId;
 		
 		private string _AlternateEmail;
 		
@@ -1220,7 +2116,7 @@ namespace PersonnelRecordsMigrator.New
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnPersonIdChanging(int value);
+    partial void OnPersonIdChanging(System.Guid value);
     partial void OnPersonIdChanged();
     partial void OnStreetAddressChanging(string value);
     partial void OnStreetAddressChanged();
@@ -1230,10 +2126,6 @@ namespace PersonnelRecordsMigrator.New
     partial void OnStateChanged();
     partial void OnZipCodeChanging(string value);
     partial void OnZipCodeChanged();
-    partial void OnLastNameChanging(string value);
-    partial void OnLastNameChanged();
-    partial void OnFirstNameChanging(string value);
-    partial void OnFirstNameChanged();
     partial void OnMiddleInitialChanging(string value);
     partial void OnMiddleInitialChanged();
     partial void OnDateOfBirthChanging(System.Nullable<System.DateTime> value);
@@ -1254,7 +2146,7 @@ namespace PersonnelRecordsMigrator.New
     partial void OnShirtSizeChanged();
     partial void OnFlightSuitSizeChanging(System.Nullable<int> value);
     partial void OnFlightSuitSizeChanged();
-    partial void OnHirePositionIdChanging(System.Nullable<int> value);
+    partial void OnHirePositionIdChanging(System.Nullable<System.Guid> value);
     partial void OnHirePositionIdChanged();
     partial void OnAlternateEmailChanging(string value);
     partial void OnAlternateEmailChanged();
@@ -1269,8 +2161,8 @@ namespace PersonnelRecordsMigrator.New
 			OnCreated();
 		}
 		
-		[Column(Storage="_PersonId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int PersonId
+		[Column(Storage="_PersonId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid PersonId
 		{
 			get
 			{
@@ -1369,46 +2261,6 @@ namespace PersonnelRecordsMigrator.New
 					this._ZipCode = value;
 					this.SendPropertyChanged("ZipCode");
 					this.OnZipCodeChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_LastName", DbType="NVarChar(50)")]
-		public string LastName
-		{
-			get
-			{
-				return this._LastName;
-			}
-			set
-			{
-				if ((this._LastName != value))
-				{
-					this.OnLastNameChanging(value);
-					this.SendPropertyChanging();
-					this._LastName = value;
-					this.SendPropertyChanged("LastName");
-					this.OnLastNameChanged();
-				}
-			}
-		}
-		
-		[Column(Storage="_FirstName", DbType="NVarChar(50)")]
-		public string FirstName
-		{
-			get
-			{
-				return this._FirstName;
-			}
-			set
-			{
-				if ((this._FirstName != value))
-				{
-					this.OnFirstNameChanging(value);
-					this.SendPropertyChanging();
-					this._FirstName = value;
-					this.SendPropertyChanged("FirstName");
-					this.OnFirstNameChanged();
 				}
 			}
 		}
@@ -1613,8 +2465,8 @@ namespace PersonnelRecordsMigrator.New
 			}
 		}
 		
-		[Column(Storage="_HirePositionId", DbType="Int")]
-		public System.Nullable<int> HirePositionId
+		[Column(Storage="_HirePositionId", DbType="UniqueIdentifier")]
+		public System.Nullable<System.Guid> HirePositionId
 		{
 			get
 			{
@@ -1684,7 +2536,7 @@ namespace PersonnelRecordsMigrator.New
 					}
 					else
 					{
-						this._HirePositionId = default(Nullable<int>);
+						this._HirePositionId = default(Nullable<System.Guid>);
 					}
 					this.SendPropertyChanged("Position");
 				}
@@ -1718,7 +2570,7 @@ namespace PersonnelRecordsMigrator.New
 					}
 					else
 					{
-						this._PersonId = default(int);
+						this._PersonId = default(System.Guid);
 					}
 					this.SendPropertyChanged("User");
 				}
@@ -1806,7 +2658,7 @@ namespace PersonnelRecordsMigrator.New
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _Id;
+		private System.Guid _Id;
 		
 		private string _Title;
 		
@@ -1816,7 +2668,7 @@ namespace PersonnelRecordsMigrator.New
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIdChanging(int value);
+    partial void OnIdChanging(System.Guid value);
     partial void OnIdChanged();
     partial void OnTitleChanging(string value);
     partial void OnTitleChanged();
@@ -1828,8 +2680,8 @@ namespace PersonnelRecordsMigrator.New
 			OnCreated();
 		}
 		
-		[Column(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		[Column(Storage="_Id", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid Id
 		{
 			get
 			{
@@ -1914,13 +2766,192 @@ namespace PersonnelRecordsMigrator.New
 		}
 	}
 	
+	[Table(Name="dbo.ProgramLocations")]
+	public partial class ProgramLocation : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private System.Guid _Id;
+		
+		private string _Name;
+		
+		private System.Guid _FlightProgramId;
+		
+		private EntitySet<FlightLog> _FlightLogs;
+		
+		private EntityRef<FlightProgram> _FlightProgram;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(System.Guid value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnFlightProgramIdChanging(System.Guid value);
+    partial void OnFlightProgramIdChanged();
+    #endregion
+		
+		public ProgramLocation()
+		{
+			this._FlightLogs = new EntitySet<FlightLog>(new Action<FlightLog>(this.attach_FlightLogs), new Action<FlightLog>(this.detach_FlightLogs));
+			this._FlightProgram = default(EntityRef<FlightProgram>);
+			OnCreated();
+		}
+		
+		[Column(Storage="_Id", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_Name", DbType="NVarChar(100) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FlightProgramId", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid FlightProgramId
+		{
+			get
+			{
+				return this._FlightProgramId;
+			}
+			set
+			{
+				if ((this._FlightProgramId != value))
+				{
+					if (this._FlightProgram.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnFlightProgramIdChanging(value);
+					this.SendPropertyChanging();
+					this._FlightProgramId = value;
+					this.SendPropertyChanged("FlightProgramId");
+					this.OnFlightProgramIdChanged();
+				}
+			}
+		}
+		
+		[Association(Name="FK_FlightLogs_ProgramLocations", Storage="_FlightLogs", ThisKey="Id", OtherKey="ProgramLocationId", DeleteRule="NO ACTION")]
+		public EntitySet<FlightLog> FlightLogs
+		{
+			get
+			{
+				return this._FlightLogs;
+			}
+			set
+			{
+				this._FlightLogs.Assign(value);
+			}
+		}
+		
+		[Association(Name="FK_ProgramLocations_FlightPrograms", Storage="_FlightProgram", ThisKey="FlightProgramId", OtherKey="Id", IsForeignKey=true)]
+		public FlightProgram FlightProgram
+		{
+			get
+			{
+				return this._FlightProgram.Entity;
+			}
+			set
+			{
+				FlightProgram previousValue = this._FlightProgram.Entity;
+				if (((previousValue != value) 
+							|| (this._FlightProgram.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._FlightProgram.Entity = null;
+						previousValue.ProgramLocations.Remove(this);
+					}
+					this._FlightProgram.Entity = value;
+					if ((value != null))
+					{
+						value.ProgramLocations.Add(this);
+						this._FlightProgramId = value.Id;
+					}
+					else
+					{
+						this._FlightProgramId = default(System.Guid);
+					}
+					this.SendPropertyChanged("FlightProgram");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_FlightLogs(FlightLog entity)
+		{
+			this.SendPropertyChanging();
+			entity.ProgramLocation = this;
+		}
+		
+		private void detach_FlightLogs(FlightLog entity)
+		{
+			this.SendPropertyChanging();
+			entity.ProgramLocation = null;
+		}
+	}
+	
 	[Table(Name="dbo.Qualifications")]
 	public partial class Qualification : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _PersonId;
+		private System.Guid _PersonId;
 		
 		private System.Nullable<int> _BranchOfService;
 		
@@ -1950,7 +2981,7 @@ namespace PersonnelRecordsMigrator.New
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnPersonIdChanging(int value);
+    partial void OnPersonIdChanging(System.Guid value);
     partial void OnPersonIdChanged();
     partial void OnBranchOfServiceChanging(System.Nullable<int> value);
     partial void OnBranchOfServiceChanged();
@@ -1981,8 +3012,8 @@ namespace PersonnelRecordsMigrator.New
 			OnCreated();
 		}
 		
-		[Column(Storage="_PersonId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int PersonId
+		[Column(Storage="_PersonId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid PersonId
 		{
 			get
 			{
@@ -2232,7 +3263,7 @@ namespace PersonnelRecordsMigrator.New
 					}
 					else
 					{
-						this._PersonId = default(int);
+						this._PersonId = default(System.Guid);
 					}
 					this.SendPropertyChanged("Person");
 				}
@@ -2291,9 +3322,9 @@ namespace PersonnelRecordsMigrator.New
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _PersonId;
+		private System.Guid _PersonId;
 		
-		private int _CertificateId;
+		private System.Guid _CertificateId;
 		
 		private EntityRef<Certificate> _Certificate;
 		
@@ -2303,9 +3334,9 @@ namespace PersonnelRecordsMigrator.New
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnPersonIdChanging(int value);
+    partial void OnPersonIdChanging(System.Guid value);
     partial void OnPersonIdChanged();
-    partial void OnCertificateIdChanging(int value);
+    partial void OnCertificateIdChanging(System.Guid value);
     partial void OnCertificateIdChanged();
     #endregion
 		
@@ -2316,8 +3347,8 @@ namespace PersonnelRecordsMigrator.New
 			OnCreated();
 		}
 		
-		[Column(Storage="_PersonId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int PersonId
+		[Column(Storage="_PersonId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid PersonId
 		{
 			get
 			{
@@ -2340,8 +3371,8 @@ namespace PersonnelRecordsMigrator.New
 			}
 		}
 		
-		[Column(Storage="_CertificateId", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int CertificateId
+		[Column(Storage="_CertificateId", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid CertificateId
 		{
 			get
 			{
@@ -2391,7 +3422,7 @@ namespace PersonnelRecordsMigrator.New
 					}
 					else
 					{
-						this._CertificateId = default(int);
+						this._CertificateId = default(System.Guid);
 					}
 					this.SendPropertyChanged("Certificate");
 				}
@@ -2425,7 +3456,7 @@ namespace PersonnelRecordsMigrator.New
 					}
 					else
 					{
-						this._PersonId = default(int);
+						this._PersonId = default(System.Guid);
 					}
 					this.SendPropertyChanged("Qualification");
 				}
@@ -2504,7 +3535,7 @@ namespace PersonnelRecordsMigrator.New
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _Id;
+		private System.Guid _Id;
 		
 		private int _DutyCode;
 		
@@ -2526,11 +3557,11 @@ namespace PersonnelRecordsMigrator.New
 		
 		private double _SimulatedInstrumentHours;
 		
-		private int _MissionLogId;
+		private System.Guid _FlightLogId;
 		
-		private int _PersonId;
+		private System.Guid _PersonId;
 		
-		private EntityRef<MissionLog> _MissionLog;
+		private EntityRef<FlightLog> _FlightLog;
 		
 		private EntityRef<Person> _Person;
 		
@@ -2538,7 +3569,7 @@ namespace PersonnelRecordsMigrator.New
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIdChanging(int value);
+    partial void OnIdChanging(System.Guid value);
     partial void OnIdChanged();
     partial void OnDutyCodeChanging(int value);
     partial void OnDutyCodeChanged();
@@ -2560,21 +3591,21 @@ namespace PersonnelRecordsMigrator.New
     partial void OnPrimaryInstrumentHoursChanged();
     partial void OnSimulatedInstrumentHoursChanging(double value);
     partial void OnSimulatedInstrumentHoursChanged();
-    partial void OnMissionLogIdChanging(int value);
-    partial void OnMissionLogIdChanged();
-    partial void OnPersonIdChanging(int value);
+    partial void OnFlightLogIdChanging(System.Guid value);
+    partial void OnFlightLogIdChanged();
+    partial void OnPersonIdChanging(System.Guid value);
     partial void OnPersonIdChanged();
     #endregion
 		
 		public SquadronLog()
 		{
-			this._MissionLog = default(EntityRef<MissionLog>);
+			this._FlightLog = default(EntityRef<FlightLog>);
 			this._Person = default(EntityRef<Person>);
 			OnCreated();
 		}
 		
-		[Column(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		[Column(Storage="_Id", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid Id
 		{
 			get
 			{
@@ -2793,32 +3824,32 @@ namespace PersonnelRecordsMigrator.New
 			}
 		}
 		
-		[Column(Storage="_MissionLogId", DbType="Int NOT NULL")]
-		public int MissionLogId
+		[Column(Storage="_FlightLogId", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid FlightLogId
 		{
 			get
 			{
-				return this._MissionLogId;
+				return this._FlightLogId;
 			}
 			set
 			{
-				if ((this._MissionLogId != value))
+				if ((this._FlightLogId != value))
 				{
-					if (this._MissionLog.HasLoadedOrAssignedValue)
+					if (this._FlightLog.HasLoadedOrAssignedValue)
 					{
 						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
 					}
-					this.OnMissionLogIdChanging(value);
+					this.OnFlightLogIdChanging(value);
 					this.SendPropertyChanging();
-					this._MissionLogId = value;
-					this.SendPropertyChanged("MissionLogId");
-					this.OnMissionLogIdChanged();
+					this._FlightLogId = value;
+					this.SendPropertyChanged("FlightLogId");
+					this.OnFlightLogIdChanged();
 				}
 			}
 		}
 		
-		[Column(Storage="_PersonId", DbType="Int NOT NULL")]
-		public int PersonId
+		[Column(Storage="_PersonId", DbType="UniqueIdentifier NOT NULL")]
+		public System.Guid PersonId
 		{
 			get
 			{
@@ -2841,36 +3872,36 @@ namespace PersonnelRecordsMigrator.New
 			}
 		}
 		
-		[Association(Name="FK_SquadronLogs_MissionLogs", Storage="_MissionLog", ThisKey="MissionLogId", OtherKey="Id", IsForeignKey=true)]
-		public MissionLog MissionLog
+		[Association(Name="FK_SquadronLogs_FlightLogs", Storage="_FlightLog", ThisKey="FlightLogId", OtherKey="Id", IsForeignKey=true)]
+		public FlightLog FlightLog
 		{
 			get
 			{
-				return this._MissionLog.Entity;
+				return this._FlightLog.Entity;
 			}
 			set
 			{
-				MissionLog previousValue = this._MissionLog.Entity;
+				FlightLog previousValue = this._FlightLog.Entity;
 				if (((previousValue != value) 
-							|| (this._MissionLog.HasLoadedOrAssignedValue == false)))
+							|| (this._FlightLog.HasLoadedOrAssignedValue == false)))
 				{
 					this.SendPropertyChanging();
 					if ((previousValue != null))
 					{
-						this._MissionLog.Entity = null;
+						this._FlightLog.Entity = null;
 						previousValue.SquadronLogs.Remove(this);
 					}
-					this._MissionLog.Entity = value;
+					this._FlightLog.Entity = value;
 					if ((value != null))
 					{
 						value.SquadronLogs.Add(this);
-						this._MissionLogId = value.Id;
+						this._FlightLogId = value.Id;
 					}
 					else
 					{
-						this._MissionLogId = default(int);
+						this._FlightLogId = default(System.Guid);
 					}
-					this.SendPropertyChanged("MissionLog");
+					this.SendPropertyChanged("FlightLog");
 				}
 			}
 		}
@@ -2902,7 +3933,7 @@ namespace PersonnelRecordsMigrator.New
 					}
 					else
 					{
-						this._PersonId = default(int);
+						this._PersonId = default(System.Guid);
 					}
 					this.SendPropertyChanged("Person");
 				}
@@ -3046,7 +4077,7 @@ namespace PersonnelRecordsMigrator.New
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _Id;
+		private System.Guid _Id;
 		
 		private string _FirstName;
 		
@@ -3060,13 +4091,27 @@ namespace PersonnelRecordsMigrator.New
 		
 		private bool _Disabled;
 		
+		private bool _UserManagerRole;
+		
+		private bool _PersonnelManagerRole;
+		
+		private bool _ProgramManagerRole;
+		
+		private bool _FlightLogManagerRole;
+		
+		private EntitySet<Message> _Messages;
+		
+		private EntitySet<MessagesForUser> _MessagesForUsers;
+		
 		private EntityRef<Person> _Person;
+		
+		private EntitySet<Message> _UserAlert_Messages_Users;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void OnIdChanging(int value);
+    partial void OnIdChanging(System.Guid value);
     partial void OnIdChanged();
     partial void OnFirstNameChanging(string value);
     partial void OnFirstNameChanged();
@@ -3080,16 +4125,27 @@ namespace PersonnelRecordsMigrator.New
     partial void OnUsernameChanged();
     partial void OnDisabledChanging(bool value);
     partial void OnDisabledChanged();
+    partial void OnUserManagerRoleChanging(bool value);
+    partial void OnUserManagerRoleChanged();
+    partial void OnPersonnelManagerRoleChanging(bool value);
+    partial void OnPersonnelManagerRoleChanged();
+    partial void OnProgramManagerRoleChanging(bool value);
+    partial void OnProgramManagerRoleChanged();
+    partial void OnFlightLogManagerRoleChanging(bool value);
+    partial void OnFlightLogManagerRoleChanged();
     #endregion
 		
 		public User()
 		{
+			this._Messages = new EntitySet<Message>(new Action<Message>(this.attach_Messages), new Action<Message>(this.detach_Messages));
+			this._MessagesForUsers = new EntitySet<MessagesForUser>(new Action<MessagesForUser>(this.attach_MessagesForUsers), new Action<MessagesForUser>(this.detach_MessagesForUsers));
 			this._Person = default(EntityRef<Person>);
+			this._UserAlert_Messages_Users = new EntitySet<Message>(new Action<Message>(this.attach_UserAlert_Messages_Users), new Action<Message>(this.detach_UserAlert_Messages_Users));
 			OnCreated();
 		}
 		
-		[Column(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
+		[Column(Storage="_Id", DbType="UniqueIdentifier NOT NULL", IsPrimaryKey=true)]
+		public System.Guid Id
 		{
 			get
 			{
@@ -3228,6 +4284,112 @@ namespace PersonnelRecordsMigrator.New
 			}
 		}
 		
+		[Column(Storage="_UserManagerRole", DbType="Bit NOT NULL")]
+		public bool UserManagerRole
+		{
+			get
+			{
+				return this._UserManagerRole;
+			}
+			set
+			{
+				if ((this._UserManagerRole != value))
+				{
+					this.OnUserManagerRoleChanging(value);
+					this.SendPropertyChanging();
+					this._UserManagerRole = value;
+					this.SendPropertyChanged("UserManagerRole");
+					this.OnUserManagerRoleChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_PersonnelManagerRole", DbType="Bit NOT NULL")]
+		public bool PersonnelManagerRole
+		{
+			get
+			{
+				return this._PersonnelManagerRole;
+			}
+			set
+			{
+				if ((this._PersonnelManagerRole != value))
+				{
+					this.OnPersonnelManagerRoleChanging(value);
+					this.SendPropertyChanging();
+					this._PersonnelManagerRole = value;
+					this.SendPropertyChanged("PersonnelManagerRole");
+					this.OnPersonnelManagerRoleChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_ProgramManagerRole", DbType="Bit NOT NULL")]
+		public bool ProgramManagerRole
+		{
+			get
+			{
+				return this._ProgramManagerRole;
+			}
+			set
+			{
+				if ((this._ProgramManagerRole != value))
+				{
+					this.OnProgramManagerRoleChanging(value);
+					this.SendPropertyChanging();
+					this._ProgramManagerRole = value;
+					this.SendPropertyChanged("ProgramManagerRole");
+					this.OnProgramManagerRoleChanged();
+				}
+			}
+		}
+		
+		[Column(Storage="_FlightLogManagerRole", DbType="Bit NOT NULL")]
+		public bool FlightLogManagerRole
+		{
+			get
+			{
+				return this._FlightLogManagerRole;
+			}
+			set
+			{
+				if ((this._FlightLogManagerRole != value))
+				{
+					this.OnFlightLogManagerRoleChanging(value);
+					this.SendPropertyChanging();
+					this._FlightLogManagerRole = value;
+					this.SendPropertyChanged("FlightLogManagerRole");
+					this.OnFlightLogManagerRoleChanged();
+				}
+			}
+		}
+		
+		[Association(Name="FK_Announcement_Messages_Users", Storage="_Messages", ThisKey="Id", OtherKey="Announcement_CreatedBy", DeleteRule="NO ACTION")]
+		public EntitySet<Message> Messages
+		{
+			get
+			{
+				return this._Messages;
+			}
+			set
+			{
+				this._Messages.Assign(value);
+			}
+		}
+		
+		[Association(Name="FK_MessagesForUsers_Users", Storage="_MessagesForUsers", ThisKey="Id", OtherKey="UserId", DeleteRule="NO ACTION")]
+		public EntitySet<MessagesForUser> MessagesForUsers
+		{
+			get
+			{
+				return this._MessagesForUsers;
+			}
+			set
+			{
+				this._MessagesForUsers.Assign(value);
+			}
+		}
+		
 		[Association(Name="FK_Persons_Users", Storage="_Person", ThisKey="Id", OtherKey="PersonId", IsUnique=true, IsForeignKey=false, DeleteRule="NO ACTION")]
 		public Person Person
 		{
@@ -3257,6 +4419,19 @@ namespace PersonnelRecordsMigrator.New
 			}
 		}
 		
+		[Association(Name="FK_UserAlert_Messages_Users", Storage="_UserAlert_Messages_Users", ThisKey="Id", OtherKey="UserAlert_UserId", DeleteRule="NO ACTION")]
+		public EntitySet<Message> UserAlert_Messages_Users
+		{
+			get
+			{
+				return this._UserAlert_Messages_Users;
+			}
+			set
+			{
+				this._UserAlert_Messages_Users.Assign(value);
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -3275,6 +4450,42 @@ namespace PersonnelRecordsMigrator.New
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_Messages(Message entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_Messages(Message entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_MessagesForUsers(MessagesForUser entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = this;
+		}
+		
+		private void detach_MessagesForUsers(MessagesForUser entity)
+		{
+			this.SendPropertyChanging();
+			entity.User = null;
+		}
+		
+		private void attach_UserAlert_Messages_Users(Message entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserAlert_User = this;
+		}
+		
+		private void detach_UserAlert_Messages_Users(Message entity)
+		{
+			this.SendPropertyChanging();
+			entity.UserAlert_User = null;
 		}
 	}
 }

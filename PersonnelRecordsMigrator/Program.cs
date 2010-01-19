@@ -21,7 +21,7 @@ namespace PersonnelRecordsMigrator
         public Program()
         {
             oldDatabase = new OldDatabase(@"Server=apollo.tfs2.com;Database=tfs_opcenter;user id=sa;password=willypete;");
-            newDatabase = new NewDatabase(@"Server=.\SQLEXPRESS;Database=dev_tfs2.com;Trusted_Connection=yes;");
+            newDatabase = new NewDatabase(@"Server=.\SQLEXPRESS;Database=prod_tfs2.com;Trusted_Connection=yes;");
         }
 
         public void Run()
@@ -61,8 +61,6 @@ namespace PersonnelRecordsMigrator
                 person = new PersonnelRecordsMigrator.New.Person
                 {
                     User = user,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
                 };
                 newDatabase.Persons.InsertOnSubmit(person);
                 newDatabase.SubmitChanges();
@@ -89,10 +87,8 @@ namespace PersonnelRecordsMigrator
         {
             switch (record.Formfield.Name)
             {
-                case "Last Name": person.LastName = record.Storedvalue; return;
-                case "First Name": person.FirstName = record.Storedvalue; return;
                 case "Middle Initial": person.MiddleInitial = record.Storedvalue; return;
-                case "SSN Last Four": person.SocialSecurityLastFour = record.Storedvalue; return;
+                case "SSN Last Four": person.SocialSecurityLastFour = TakeLastFourDigits(record.Storedvalue); return;
                 case "Date of Birth": person.DateOfBirth = TryParseDate(record.Storedvalue); return;
                 case "Gender": person.Gender = MaleOrFemale(record.Storedvalue); return;
                 case "Phone": person.PrimaryPhoneNumber = StripExtraPhoneCharacters(record.Storedvalue); return;
@@ -183,6 +179,15 @@ namespace PersonnelRecordsMigrator
             if (input.StartsWith("TFS"))
                 return 2;
             return null;
+        }
+
+        private string TakeLastFourDigits(string ssn)
+        {
+            if (ssn == null)
+                return null;
+            if (ssn.Length > 4)
+                return ssn.Substring(ssn.Length - 4);
+            return ssn;
         }
     }
 }
