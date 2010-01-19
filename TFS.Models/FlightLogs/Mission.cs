@@ -8,7 +8,7 @@ namespace TFS.Models.FlightLogs
 {
     public class Mission : BaseDomainObject
     {
-        public virtual int? Id { get; set; }
+        public virtual Guid? Id { get; set; }
 
         public virtual FlightLog FlightLog { get; set; }
 

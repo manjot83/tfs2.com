@@ -4,7 +4,7 @@ AS
 GO
 
 CREATE TABLE Users (
-       Id INT IDENTITY NOT NULL,
+       Id UNIQUEIDENTIFIER NOT NULL,
        FirstName NVARCHAR(100) NOT NULL,
        LastName NVARCHAR(100) NOT NULL,
        DisplayName NVARCHAR(150) NOT NULL,

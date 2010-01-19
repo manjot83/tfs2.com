@@ -8,7 +8,7 @@ namespace TFS.Web.ViewModels.Messages
 {
     public abstract class MessageViewModel
     {
-        public int? Id { get; set; }
+        public Guid? Id { get; set; }
 
         [Required, StringLength(100)]
         public string Title { get; set; }

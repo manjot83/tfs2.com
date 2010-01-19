@@ -15,6 +15,6 @@ namespace TFS.Web.ViewModels.PersonnelRecords
         [Required]
         public virtual FlightSuitSize FlightSuitSize { get; set; }
         [Required]
-        public virtual int? HirePositionId { get; set; }
+        public virtual Guid? HirePositionId { get; set; }
     }
 }

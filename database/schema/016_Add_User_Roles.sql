@@ -1,6 +1,6 @@
 CREATE TABLE dbo.Tmp_Users
 	(
-	Id int NOT NULL IDENTITY (1, 1),
+	Id UNIQUEIDENTIFIER NOT NULL,
 	FirstName nvarchar(100) NOT NULL,
 	LastName nvarchar(100) NOT NULL,
 	DisplayName nvarchar(150) NOT NULL,
@@ -14,15 +14,9 @@ CREATE TABLE dbo.Tmp_Users
 	) ON [PRIMARY]
 GO
 
-SET IDENTITY_INSERT dbo.Tmp_Users ON
-GO
-
 IF EXISTS(SELECT * FROM dbo.Users)
 	 EXEC('INSERT INTO dbo.Tmp_Users (Id, FirstName, LastName, DisplayName, Email, Username, Disabled, UserManagerRole, PersonnelManagerRole, ProgramManagerRole, FlightLogManagerRole)
 		SELECT Id, FirstName, LastName, DisplayName, Email, Username, Disabled, 0, 0, 0, 0 FROM dbo.Users WITH (HOLDLOCK TABLOCKX)')
-GO
-
-SET IDENTITY_INSERT dbo.Tmp_Users OFF
 GO
 
 ALTER TABLE dbo.Persons

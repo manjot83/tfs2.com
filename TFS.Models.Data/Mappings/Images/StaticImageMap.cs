@@ -15,7 +15,7 @@ namespace TFS.Models.Data.Mappings.Images
 
             Id(x => x.Id)
                 .Not.Nullable()
-                .GeneratedBy.Guid();
+                .GeneratedBy.GuidComb();
 
             Map(x => x.MimeType)
                 .Not.Nullable()

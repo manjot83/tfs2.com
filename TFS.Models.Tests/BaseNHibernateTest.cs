@@ -26,7 +26,7 @@ namespace TFS.Models.Tests
 #if SQLITE
             cfg = ConfigurationBuilder.CreateMsSql2005Configuration("TFS_Models_Specs", mappingAssemblies);
 #else
-            cfg = ConfigurationBuilder.CreateMsSql2005Configuration(MsSqlConfiguration.MsSql2008.ConnectionString(@"Server=.\SQLEXPRESS;Database=dev_tfs2.com;Trusted_Connection=yes;"), mappingAssemblies);
+            cfg = ConfigurationBuilder.CreateFluentConfiguration(MsSqlConfiguration.MsSql2008.ConnectionString(@"Server=.\SQLEXPRESS;Database=dev_tfs2.com;Trusted_Connection=yes;"), mappingAssemblies);
 #endif
 
             sessionFactory = cfg.BuildSessionFactory();

@@ -15,7 +15,7 @@ namespace TFS.Models.Data.Mappings.Site
             Table("Pages");
 
             Id(x => x.Id)
-                .GeneratedBy.Guid()
+                .GeneratedBy.GuidComb()
                 .Not.Nullable();
 
             Map(x => x.URI)

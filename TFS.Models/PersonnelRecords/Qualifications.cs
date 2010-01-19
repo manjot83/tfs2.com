@@ -15,7 +15,7 @@ namespace TFS.Models.PersonnelRecords
             Certificates = new HashedSet<Certificate>();
         }
 
-        public virtual int? Id { get; private set; }
+        public virtual Guid? Id { get; private set; }
 
         [DomainEquality]
         [Required]

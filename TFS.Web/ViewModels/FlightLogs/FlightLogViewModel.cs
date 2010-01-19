@@ -12,7 +12,7 @@ namespace TFS.Web.ViewModels.FlightLogs
 {
     public class FlightLogViewModel
     {
-        public int? Id { get; set; }
+        public Guid? Id { get; set; }
         [Required, DateRange(Exclusive = true)]
         public DateTime LogDate { get; set; }
         [Required]
@@ -20,7 +20,7 @@ namespace TFS.Web.ViewModels.FlightLogs
         [Required]
         public string AircraftSerialNumber { get; set; } // "Serial No." or Tail Number
         [Required]
-        public int LocationId { get; set; }
+        public Guid LocationId { get; set; }
 
         public IEnumerable<MissionViewModel> Missions { get; set; }
         public IEnumerable<SquadronLogViewModel> SquadronLogs { get; set; }

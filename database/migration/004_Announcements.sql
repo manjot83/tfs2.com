@@ -1,6 +1,7 @@
 INSERT INTO [Messages]
-	(MessageType, Title, ActiveFromDate, ActiveToDate, Content, Urgent, Announcement_CreatedBy)	
-	SELECT 1 AS MessageType,
+	(Id, MessageType, Title, ActiveFromDate, ActiveToDate, Content, Urgent, Announcement_CreatedBy)	
+	SELECT NEWID(),
+	       1 AS MessageType,
 		   [subject] AS Title,		   
 		   _posts.[createdon] AS ActiveFromDate,
 		   '1/1/2010' AS ActiveToDate,

@@ -10,8 +10,8 @@ namespace TFS.Web.ViewModels.FlightLogs
 {
     public class MissionViewModel
     {
-        public int? Id { get; set; }
-        public int? FlightLogId { get; set; }
+        public Guid? Id { get; set; }
+        public Guid? FlightLogId { get; set; }
                 
         [Required, StringLength(50)]
         public string Name { get; set; }

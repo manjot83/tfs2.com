@@ -11,7 +11,7 @@ namespace TFS.Models.Data.Mappings.Messages
             Table("Messages");
 
             Id(x => x.Id)
-                .GeneratedBy.Identity();
+                .GeneratedBy.GuidComb();
 
             Map(x => x.Title)
                 .Not.Nullable()

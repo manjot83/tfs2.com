@@ -1,37 +1,33 @@
 /* First make sure at least 1 ProgramLocation Exists */
 
-DECLARE @flightProgramId INT
+DECLARE @flightProgramId UNIQUEIDENTIFIER
 
 IF NOT EXISTS(SELECT * FROM [ProgramLocations])
     BEGIN
-        INSERT INTO [FlightPrograms] ([Name],[AccountName],[Active])
-               VALUES ('Dummy Program', 'Dummy Program', 1)
+        INSERT INTO [FlightPrograms] ([Id],[Name],[AccountName],[Active])
+               VALUES (NEWID(), 'Dummy Program', 'Dummy Program', 1)
         SET @flightProgramId = (SELECT TOP 1 [Id] FROM [FlightPrograms])
-        INSERT INTO [ProgramLocations] ([Name],[FlightProgramId])
-               VALUES ('Dummy Location', @flightProgramId)
+        INSERT INTO [ProgramLocations] ([Id], [Name],[FlightProgramId])
+               VALUES (NEWID(), 'Dummy Location', @flightProgramId)
     END
 
 /* Tmp Table */
 CREATE TABLE [Tmp_FlightLogs](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
+	Id UNIQUEIDENTIFIER NOT NULL,
 	[LogDate] [datetime2](7) NOT NULL,
 	[LastModifiedDate] [datetime2](7) NOT NULL,
 	[AircraftMDS] [nvarchar](50) NOT NULL,
 	[AircraftSerialNumber] [nvarchar](50) NOT NULL,
-	[ProgramLocationId] [int] NOT NULL,
+	ProgramLocationId UNIQUEIDENTIFIER NOT NULL,
 	)
 GO
 
-SET IDENTITY_INSERT [Tmp_FlightLogs] ON
-GO
 
 IF EXISTS(SELECT * FROM dbo.FlightLogs)
 	 EXEC('INSERT INTO [Tmp_FlightLogs] (Id, LogDate, LastModifiedDate, AircraftMDS, AircraftSerialNumber, ProgramLocationId)
 		SELECT Id, LogDate, LastModifiedDate, AircraftMDS, AircraftSerialNumber, 1 FROM [FlightLogs]')
 GO
 
-SET IDENTITY_INSERT [Tmp_FlightLogs] OFF
-GO
 
 ALTER TABLE dbo.Missions
 	DROP CONSTRAINT FK_Missions_FlightLogs

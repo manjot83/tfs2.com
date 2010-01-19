@@ -20,7 +20,7 @@ namespace TFS.Models.FlightLogs
             OperatingUnit = "Tactical Flight Services";
         }
 
-        public virtual int? Id { get; set; }
+        public virtual Guid? Id { get; set; }
 
         [DomainEquality, Required, DateTimeKind(DateTimeKind.Utc)]
         public virtual DateTime LogDate { get; set; }

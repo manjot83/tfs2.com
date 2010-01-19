@@ -618,13 +618,13 @@ namespace TFS.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult EditFlightLog(int id) {
+        public override System.Web.Mvc.ViewResult EditFlightLog(System.Guid id) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.EditFlightLog);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult EditFlightLog(int id, TFS.Web.ViewModels.FlightLogs.FlightLogViewModel flightLogViewModel) {
+        public override System.Web.Mvc.ActionResult EditFlightLog(System.Guid id, TFS.Web.ViewModels.FlightLogs.FlightLogViewModel flightLogViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EditFlightLog);
             callInfo.RouteValueDictionary.Add("id", id);
             callInfo.RouteValueDictionary.Add("flightLogViewModel", flightLogViewModel);
@@ -642,20 +642,20 @@ namespace TFS.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult EditMission(int id) {
+        public override System.Web.Mvc.ViewResult EditMission(System.Guid id) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.EditMission);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult EditMission(int id, TFS.Web.ViewModels.FlightLogs.MissionViewModel missionViewModel) {
+        public override System.Web.Mvc.ActionResult EditMission(System.Guid id, TFS.Web.ViewModels.FlightLogs.MissionViewModel missionViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EditMission);
             callInfo.RouteValueDictionary.Add("id", id);
             callInfo.RouteValueDictionary.Add("missionViewModel", missionViewModel);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult CreateMission(int flightLogId) {
+        public override System.Web.Mvc.ViewResult CreateMission(System.Guid flightLogId) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.CreateMission);
             callInfo.RouteValueDictionary.Add("flightLogId", flightLogId);
             return callInfo;
@@ -667,20 +667,20 @@ namespace TFS.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult EditSquadronLog(int id) {
+        public override System.Web.Mvc.ViewResult EditSquadronLog(System.Guid id) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.EditSquadronLog);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult EditSquadronLog(int id, TFS.Web.ViewModels.FlightLogs.SquadronLogViewModel squadronLogViewModel) {
+        public override System.Web.Mvc.ActionResult EditSquadronLog(System.Guid id, TFS.Web.ViewModels.FlightLogs.SquadronLogViewModel squadronLogViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EditSquadronLog);
             callInfo.RouteValueDictionary.Add("id", id);
             callInfo.RouteValueDictionary.Add("squadronLogViewModel", squadronLogViewModel);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult CreateSquadronLog(int flightLogId) {
+        public override System.Web.Mvc.ViewResult CreateSquadronLog(System.Guid flightLogId) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.CreateSquadronLog);
             callInfo.RouteValueDictionary.Add("flightLogId", flightLogId);
             return callInfo;
@@ -692,7 +692,7 @@ namespace TFS.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult BulkCreateSquadronLog(int flightLogId) {
+        public override System.Web.Mvc.ViewResult BulkCreateSquadronLog(System.Guid flightLogId) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.BulkCreateSquadronLog);
             callInfo.RouteValueDictionary.Add("flightLogId", flightLogId);
             return callInfo;
@@ -704,7 +704,7 @@ namespace TFS.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.FileContentResult DownloadPDF(int id) {
+        public override System.Web.Mvc.FileContentResult DownloadPDF(System.Guid id) {
             var callInfo = new T4MVC_FileContentResult(Area, Name, ActionNames.DownloadPDF);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
@@ -816,13 +816,13 @@ namespace TFS.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult EditFlightProgram(int id) {
+        public override System.Web.Mvc.ViewResult EditFlightProgram(System.Guid id) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.EditFlightProgram);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult EditFlightProgram(int id, TFS.Web.ViewModels.FlightPrograms.FlightProgramViewModel flightProgramViewModel) {
+        public override System.Web.Mvc.ActionResult EditFlightProgram(System.Guid id, TFS.Web.ViewModels.FlightPrograms.FlightProgramViewModel flightProgramViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EditFlightProgram);
             callInfo.RouteValueDictionary.Add("id", id);
             callInfo.RouteValueDictionary.Add("flightProgramViewModel", flightProgramViewModel);
@@ -840,20 +840,20 @@ namespace TFS.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult RenamePosition(int id) {
+        public override System.Web.Mvc.ViewResult RenamePosition(System.Guid id) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.RenamePosition);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ActionResult RenamePosition(int id, TFS.Web.ViewModels.FlightPrograms.PositionViewModel positionViewModel) {
+        public override System.Web.Mvc.ActionResult RenamePosition(System.Guid id, TFS.Web.ViewModels.FlightPrograms.PositionViewModel positionViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.RenamePosition);
             callInfo.RouteValueDictionary.Add("id", id);
             callInfo.RouteValueDictionary.Add("positionViewModel", positionViewModel);
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult CreateProgramLocation(int flightProgramId) {
+        public override System.Web.Mvc.ViewResult CreateProgramLocation(System.Guid flightProgramId) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.CreateProgramLocation);
             callInfo.RouteValueDictionary.Add("flightProgramId", flightProgramId);
             return callInfo;
@@ -865,7 +865,7 @@ namespace TFS.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult EditProgramLocation(int id) {
+        public override System.Web.Mvc.ViewResult EditProgramLocation(System.Guid id) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.EditProgramLocation);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
@@ -1028,7 +1028,7 @@ namespace TFS.Web.Controllers {
             return callInfo;
         }
 
-        public override System.Web.Mvc.ViewResult ViewMessage(int id) {
+        public override System.Web.Mvc.ViewResult ViewMessage(System.Guid id) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.ViewMessage);
             callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;

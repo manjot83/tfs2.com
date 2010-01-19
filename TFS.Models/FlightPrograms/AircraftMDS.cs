@@ -8,7 +8,7 @@ namespace TFS.Models.FlightPrograms
 {
     public class AircraftMDS : BaseDomainObject
     {
-        public virtual int? Id { get; private set; }
+        public virtual Guid? Id { get; private set; }
 
         [DomainEquality]
         [Required, StringLength(50)]

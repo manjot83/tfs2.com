@@ -19,7 +19,7 @@ namespace TFS.Models.Messages
 
         public abstract MessageType MessageType { get; }
 
-        public virtual int? Id { get; private set; }
+        public virtual Guid? Id { get; private set; }
 
         [DomainEquality, Required, StringLength(100)]
         public virtual string Title { get; set; }

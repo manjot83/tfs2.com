@@ -83,7 +83,9 @@ namespace TFS.Web
 
 #if TESTDATA
             var unitOfWork = ObjectFactory.GetInstance<IUnitOfWork>() as INHibernateUnitOfWork;
+#if SQLITE
             new DatabaseBuilder(cfg, unitOfWork.Session).BuildSchema();
+#endif
             unitOfWork.Start();
             TestData.Execute(ObjectFactory.GetInstance<IRepository>() as NHibernateRepository);
             unitOfWork.Finish();

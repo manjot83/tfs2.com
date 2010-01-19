@@ -14,7 +14,7 @@ namespace TFS.Models.Data.Mappings.PersonnelRecords
             Table("Certificates");
 
             Id(x => x.Id)
-                .GeneratedBy.Identity()
+                .GeneratedBy.GuidComb()
                 .Not.Nullable();
 
             Map(x => x.Type)

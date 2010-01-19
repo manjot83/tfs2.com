@@ -80,7 +80,7 @@ namespace TFS.Web.Controllers
             return View(Views.CreateMessage, viewModel);
         }
 
-        public virtual ViewResult ViewMessage(int id)
+        public virtual ViewResult ViewMessage(Guid id)
         {
             var message = session.Get<Message>(id);
             MessageViewModel viewModel = null;

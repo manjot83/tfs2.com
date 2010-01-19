@@ -14,7 +14,7 @@ namespace TFS.Models.FlightPrograms
             Locations = new HashedSet<ProgramLocation>();
         }
 
-        public virtual int? Id { get; private set; }
+        public virtual Guid? Id { get; private set; }
 
         [DomainEquality]
         [Required, StringLength(50)]

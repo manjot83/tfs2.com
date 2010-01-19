@@ -10,7 +10,7 @@ namespace TFS.Models.Data.Mappings.FlightLogs
             Table("SquadronLogs");
 
             Id(x => x.Id)
-                .GeneratedBy.Identity()
+                .GeneratedBy.GuidComb()
                 .Not.Nullable();
 
             References(x => x.FlightLog)

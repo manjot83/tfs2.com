@@ -9,7 +9,7 @@ namespace TFS.Web.ViewModels.FlightPrograms
 {
     public class FlightProgramListItemViewModel
     {
-        public int? Id { get; set; }
+        public Guid? Id { get; set; }
 
         [Required, StringLength(50)]
         public string Name { get; set; }

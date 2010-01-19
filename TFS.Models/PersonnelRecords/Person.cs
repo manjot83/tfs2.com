@@ -12,7 +12,7 @@ namespace TFS.Models.PersonnelRecords
 {
     public class Person : BaseDomainObject, IKeyedModel
     {
-        public virtual int? Id { get; private set; }
+        public virtual Guid? Id { get; private set; }
 
         [DomainEquality, Required]
         public virtual User User { get; set; }

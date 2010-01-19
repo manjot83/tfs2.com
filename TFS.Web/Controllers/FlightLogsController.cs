@@ -67,7 +67,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
-        public virtual ViewResult EditFlightLog(int id)
+        public virtual ViewResult EditFlightLog(Guid id)
         {
             var flightLog = session.Get<FlightLog>(id);
             var viewModel = CreateFlightLogViewModel(flightLog);
@@ -76,7 +76,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public virtual ActionResult EditFlightLog(int id, FlightLogViewModel flightLogViewModel)
+        public virtual ActionResult EditFlightLog(Guid id, FlightLogViewModel flightLogViewModel)
         {
             var flightLog = session.Get<FlightLog>(id);
             this.Validate(flightLogViewModel, string.Empty);
@@ -125,7 +125,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
-        public virtual ViewResult EditMission(int id)
+        public virtual ViewResult EditMission(Guid id)
         {
             var mission = session.Get<Mission>(id);
             var viewModel = Mapper.Map<Mission, MissionViewModel>(mission);
@@ -133,7 +133,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public virtual ActionResult EditMission(int id, MissionViewModel missionViewModel)
+        public virtual ActionResult EditMission(Guid id, MissionViewModel missionViewModel)
         {
             var mission = session.Get<Mission>(id);
             this.Validate(missionViewModel, string.Empty);
@@ -148,7 +148,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
-        public virtual ViewResult CreateMission(int flightLogId)
+        public virtual ViewResult CreateMission(Guid flightLogId)
         {
             return View(new MissionViewModel { FlightLogId = flightLogId });
         }
@@ -168,7 +168,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
-        public virtual ViewResult EditSquadronLog(int id)
+        public virtual ViewResult EditSquadronLog(Guid id)
         {
             var squadronLog = session.Get<SquadronLog>(id);
             var viewModel = CreateSquadronLogViewModel(squadronLog);
@@ -176,7 +176,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public virtual ActionResult EditSquadronLog(int id, SquadronLogViewModel squadronLogViewModel)
+        public virtual ActionResult EditSquadronLog(Guid id, SquadronLogViewModel squadronLogViewModel)
         {
             var squadronLog = session.Get<SquadronLog>(id);
             this.Validate(squadronLogViewModel, string.Empty);
@@ -192,7 +192,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
-        public virtual ViewResult CreateSquadronLog(int flightLogId)
+        public virtual ViewResult CreateSquadronLog(Guid flightLogId)
         {
             var viewModel = CreateSquadronLogViewModel(null);
             viewModel.FlightLogId = flightLogId;
@@ -228,7 +228,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
-        public virtual ViewResult BulkCreateSquadronLog(int flightLogId)
+        public virtual ViewResult BulkCreateSquadronLog(Guid flightLogId)
         {
             var viewModel = CreateSquadronLogListViewModel(flightLogId, null);
             return View(Views.BulkCreateSquadronLog, viewModel);
@@ -251,7 +251,7 @@ namespace TFS.Web.Controllers
         }
 
         [NonAction]
-        private SquadronLogListViewModel CreateSquadronLogListViewModel(int flightLogId, SquadronLogViewModel squadronLogViewModel)
+        private SquadronLogListViewModel CreateSquadronLogListViewModel(Guid flightLogId, SquadronLogViewModel squadronLogViewModel)
         {
             var viewModel = new SquadronLogListViewModel();
             var flightLog = session.Get<FlightLog>(flightLogId);
@@ -265,7 +265,7 @@ namespace TFS.Web.Controllers
             return viewModel;
         }
 
-        public virtual FileContentResult DownloadPDF(int id)
+        public virtual FileContentResult DownloadPDF(Guid id)
         {
             var flightLog = session.Get<FlightLog>(id);
             var reportGenerator = new PdfReportGenerator(new FlightTimeSummaryReport(flightLog));

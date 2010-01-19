@@ -7,7 +7,7 @@ namespace TFS.Models.Help
 {
     public class Question : BaseDomainObject
     {
-        public virtual int? Id { get; private set; }
+        public virtual Guid? Id { get; private set; }
 
         [Required, DomainEquality]
         public virtual string Title { get; set; }

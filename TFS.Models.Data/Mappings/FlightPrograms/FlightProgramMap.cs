@@ -14,7 +14,7 @@ namespace TFS.Models.Data.Mappings.FlightPrograms
             Table("FlightPrograms");
 
             Id(x => x.Id)
-                .GeneratedBy.Identity()
+                .GeneratedBy.GuidComb()
                 .Not.Nullable();
 
             Map(x => x.Name)

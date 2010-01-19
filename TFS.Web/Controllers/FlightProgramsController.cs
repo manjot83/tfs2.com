@@ -65,7 +65,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
-        public virtual ViewResult EditFlightProgram(int id)
+        public virtual ViewResult EditFlightProgram(Guid id)
         {
             var flightProgram = session.Get<FlightProgram>(id);
             var viewModel = Mapper.Map<FlightProgram, FlightProgramViewModel>(flightProgram);
@@ -73,7 +73,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public virtual ActionResult EditFlightProgram(int id, FlightProgramViewModel flightProgramViewModel)
+        public virtual ActionResult EditFlightProgram(Guid id, FlightProgramViewModel flightProgramViewModel)
         {
             var flightProgram = session.Get<FlightProgram>(id);
             this.Validate(flightProgramViewModel, string.Empty);
@@ -103,7 +103,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
-        public virtual ViewResult RenamePosition(int id)
+        public virtual ViewResult RenamePosition(Guid id)
         {
             var position = session.Get<Position>(id);
             var viewModel = Mapper.Map<Position, PositionViewModel>(position);
@@ -111,7 +111,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public virtual ActionResult RenamePosition(int id, PositionViewModel positionViewModel)
+        public virtual ActionResult RenamePosition(Guid id, PositionViewModel positionViewModel)
         {
             var position = session.Get<Position>(id);
             this.Validate(positionViewModel, string.Empty);            
@@ -125,7 +125,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
-        public virtual ViewResult CreateProgramLocation(int flightProgramId)
+        public virtual ViewResult CreateProgramLocation(Guid flightProgramId)
         {
             var program = session.Get<FlightProgram>(flightProgramId);
             return View(Views.CreateProgramLocation, new ProgramLocationViewModel() { ProgramId = program.Id.Value, ProgramName = program.Name });
@@ -144,7 +144,7 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
-        public virtual ViewResult EditProgramLocation(int id)
+        public virtual ViewResult EditProgramLocation(Guid id)
         {
             var location = session.Get<ProgramLocation>(id);
             var viewModel = Mapper.Map<ProgramLocation, ProgramLocationViewModel>(location);

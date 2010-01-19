@@ -15,7 +15,7 @@ namespace TFS.Models.Data.Mappings.Help
             Table("Answers");
 
             Id(x => x.Id)
-                .GeneratedBy.Identity()
+                .GeneratedBy.GuidComb()
                 .Not.Nullable();
 
             Map(x => x.Content)

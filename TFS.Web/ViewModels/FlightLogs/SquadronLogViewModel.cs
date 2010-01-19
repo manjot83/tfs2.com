@@ -11,8 +11,8 @@ namespace TFS.Web.ViewModels.FlightLogs
 {
     public class SquadronLogViewModel
     {
-        public int? Id { get; set; }
-        public int? FlightLogId { get; set; }
+        public Guid? Id { get; set; }
+        public Guid? FlightLogId { get; set; }
 
         public IList<Person> AvailablePersons { get; set; }
 

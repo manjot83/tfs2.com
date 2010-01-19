@@ -1,19 +1,19 @@
  CREATE TABLE [Messages] (
-   Id INT IDENTITY NOT NULL,
+   Id UNIQUEIDENTIFIER NOT NULL,
    MessageType INT NOT NULL,
    Title NVARCHAR(100) NOT NULL,
    ActiveFromDate datetime2(7) NOT NULL,
    ActiveToDate datetime2(7) NOT NULL,
    Content NVARCHAR(MAX) NULL,
    Urgent BIT NULL,
-   Announcement_CreatedBy INT NULL,
-   UserAlert_UserId INT NULL,
+   Announcement_CreatedBy UNIQUEIDENTIFIER NULL,
+   UserAlert_UserId UNIQUEIDENTIFIER NULL,
    CONSTRAINT [PK_Messages] PRIMARY KEY CLUSTERED ([Id])
 )
 
 CREATE TABLE [MessagesForUsers] (
-   UserId INT NOT NULL,
-   MessageId INT NOT NULL,
+   UserId UNIQUEIDENTIFIER NOT NULL,
+   MessageId UNIQUEIDENTIFIER NOT NULL,
    SeenAtDate datetime2(7) NOT NULL,
    CONSTRAINT [PK_MessagesForUsers] PRIMARY KEY CLUSTERED (UserId, MessageId)
 )

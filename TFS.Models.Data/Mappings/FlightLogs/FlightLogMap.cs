@@ -11,7 +11,7 @@ namespace TFS.Models.Data.Mappings.FlightLogs
             Table("FlightLogs");
 
             Id(x => x.Id)
-                .GeneratedBy.Identity()
+                .GeneratedBy.GuidComb()
                 .Not.Nullable();
 
             Map(x => x.LogDate)

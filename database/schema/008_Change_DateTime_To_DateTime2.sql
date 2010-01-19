@@ -10,7 +10,7 @@ GO
 
 CREATE TABLE dbo.Tmp_Persons
 	(
-	PersonId int NOT NULL,
+	PersonId UNIQUEIDENTIFIER NOT NULL,
 	StreetAddress nvarchar(100) NULL,
 	City nvarchar(50) NULL,
 	State nvarchar(2) NULL,
@@ -27,7 +27,7 @@ CREATE TABLE dbo.Tmp_Persons
 	EmergencyContactPhoneNumber nvarchar(50) NULL,
 	ShirtSize int NULL,
 	FlightSuitSize int NULL,
-	HirePositionId int NULL,
+	HirePositionId UNIQUEIDENTIFIER NULL,
 	AlternateEmail nvarchar(254) NULL
 	)  ON [PRIMARY]
 GO
@@ -85,7 +85,7 @@ GO
 
 CREATE TABLE dbo.Tmp_Qualifications
 	(
-	PersonId int NOT NULL,
+	PersonId UNIQUEIDENTIFIER NOT NULL,
 	BranchOfService int NULL,
 	MilitaryFCFQualification int NULL,
 	LastAltitudeChamber datetime2(7) NULL,
@@ -149,7 +149,7 @@ GO
 
 CREATE TABLE dbo.Tmp_Missions
 	(
-	Id int NOT NULL IDENTITY (1, 1),
+	Id UNIQUEIDENTIFIER NOT NULL,
 	Name nvarchar(50) NOT NULL,
 	AdditionalInfo nvarchar(100) NULL,
 	FromICAO nvarchar(4) NOT NULL,
@@ -160,19 +160,13 @@ CREATE TABLE dbo.Tmp_Missions
 	FullStops int NOT NULL,
 	Sorties int NOT NULL,
 	Totals int NOT NULL,
-	MissionLogId int NOT NULL
+	MissionLogId UNIQUEIDENTIFIER NOT NULL,
 	)  ON [PRIMARY]
-GO
-
-SET IDENTITY_INSERT dbo.Tmp_Missions ON
 GO
 
 IF EXISTS(SELECT * FROM dbo.Missions)
 	 EXEC('INSERT INTO dbo.Tmp_Missions (Id, Name, AdditionalInfo, FromICAO, ToICAO, TakeOffTime, LandTime, TouchAndGos, FullStops, Sorties, Totals, MissionLogId)
 		SELECT Id, Name, AdditionalInfo, FromICAO, ToICAO, CONVERT(datetime2(7), TakeOffTime), CONVERT(datetime2(7), LandTime), TouchAndGos, FullStops, Sorties, Totals, MissionLogId FROM dbo.Missions WITH (HOLDLOCK TABLOCKX)')
-GO
-
-SET IDENTITY_INSERT dbo.Tmp_Missions OFF
 GO
 
 DROP TABLE dbo.Missions
@@ -202,7 +196,7 @@ GO
 
 CREATE TABLE dbo.Tmp_MissionLogs
 	(
-	Id int NOT NULL IDENTITY (1, 1),
+	Id UNIQUEIDENTIFIER NOT NULL,
 	CreatedDate datetime2(7) NOT NULL,
 	LastModifiedDate datetime2(7) NOT NULL,
 	Location nvarchar(100) NOT NULL,
@@ -211,15 +205,9 @@ CREATE TABLE dbo.Tmp_MissionLogs
 	)  ON [PRIMARY]
 GO
 
-SET IDENTITY_INSERT dbo.Tmp_MissionLogs ON
-GO
-
 IF EXISTS(SELECT * FROM dbo.MissionLogs)
 	 EXEC('INSERT INTO dbo.Tmp_MissionLogs (Id, CreatedDate, LastModifiedDate, Location, AircraftModel, AircraftSerialNumber)
 		SELECT Id, CONVERT(datetime2(7), CreatedDate), CONVERT(datetime2(7), LastModifiedDate), Location, AircraftModel, AircraftSerialNumber FROM dbo.MissionLogs WITH (HOLDLOCK TABLOCKX)')
-GO
-
-SET IDENTITY_INSERT dbo.Tmp_MissionLogs OFF
 GO
 
 ALTER TABLE dbo.Missions

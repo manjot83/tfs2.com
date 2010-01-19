@@ -14,7 +14,7 @@ namespace TFS.Models.Data.Mappings.Users
             Table("Users");
 
             Id(x => x.Id)
-                .GeneratedBy.Identity()
+                .GeneratedBy.GuidComb()
                 .Not.Nullable();
 
             HasOne(x => x.Person)

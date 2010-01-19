@@ -16,7 +16,7 @@ namespace TFS.Models.Users
             Roles = new UserRoles();
         }
 
-        public virtual int? Id { get; private set; }
+        public virtual Guid? Id { get; private set; }
 
         [Required, StringLength(50)]
         public virtual string FirstName { get; set; }

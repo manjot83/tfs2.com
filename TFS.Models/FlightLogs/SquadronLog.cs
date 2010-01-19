@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using TFS.Models;
 using TFS.Models.PersonnelRecords;
+using System;
 
 namespace TFS.Models.FlightLogs
 {
@@ -12,7 +13,7 @@ namespace TFS.Models.FlightLogs
             FlyingUnit = "TFS";
         }
 
-        public virtual int? Id { get; set; }
+        public virtual Guid? Id { get; set; }
 
         public virtual FlightLog FlightLog { get; set; }
 

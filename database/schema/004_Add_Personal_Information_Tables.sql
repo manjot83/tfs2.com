@@ -1,12 +1,12 @@
 CREATE TABLE Positions (
-    Id INT IDENTITY NOT NULL,
+    Id UNIQUEIDENTIFIER NOT NULL,
     Title NVARCHAR(50) NOT NULL,
     CONSTRAINT [PK_Positions] PRIMARY KEY CLUSTERED ([Id])
     )
 GO
 
 CREATE TABLE Persons (
-    PersonId INT NOT NULL,
+    PersonId UNIQUEIDENTIFIER NOT NULL,
     StreetAddress NVARCHAR(100) NULL,
     City NVARCHAR(50) NULL,
     [State] NVARCHAR(2) NULL,
@@ -23,13 +23,13 @@ CREATE TABLE Persons (
     EmergencyContactPhoneNumber NVARCHAR(50) NULL,
     ShirtSize INT NULL,
     FlightSuitSize INT NULL,
-    HirePositionId INT NULL,
+    HirePositionId UNIQUEIDENTIFIER NULL,
     CONSTRAINT [PK_Persons] PRIMARY KEY CLUSTERED ([PersonId])
     )
 GO
 
 CREATE TABLE Qualifications (
-    PersonId INT NOT NULL,
+    PersonId UNIQUEIDENTIFIER NOT NULL,
     BranchOfService INT NULL,
     MilitaryFCFQualification INT NULL,
     LastAltitudeChamber DATETIME NULL,
@@ -45,7 +45,7 @@ CREATE TABLE Qualifications (
 GO
 
 CREATE TABLE [Certificates] (
-    Id INT IDENTITY NOT NULL,
+    Id UNIQUEIDENTIFIER NOT NULL,
     [Type] INT NOT NULL,
     Name NVARCHAR(50) NOT NULL,
     CONSTRAINT [PK_Certificates] PRIMARY KEY CLUSTERED ([Id])
@@ -53,8 +53,8 @@ CREATE TABLE [Certificates] (
 GO
 
 CREATE TABLE QualificationsCertificates (
-    PersonId INT NOT NULL,
-    CertificateId INT NOT NULL
+    PersonId UNIQUEIDENTIFIER NOT NULL,
+    CertificateId UNIQUEIDENTIFIER NOT NULL
     CONSTRAINT [PK_QualificationsCertificates] PRIMARY KEY CLUSTERED ([PersonId],[CertificateId])
     )
 GO

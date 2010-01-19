@@ -4,7 +4,7 @@ GO
 
 CREATE TABLE dbo.Tmp_Missions
 	(
-	Id int NOT NULL IDENTITY (1, 1),
+	Id UNIQUEIDENTIFIER NOT NULL,
 	Name nvarchar(50) NOT NULL,
 	AdditionalInfo nvarchar(100) NULL,
 	FromICAO nvarchar(4) NOT NULL,
@@ -15,19 +15,13 @@ CREATE TABLE dbo.Tmp_Missions
 	FullStops int NOT NULL,
 	Sorties int NOT NULL,
 	Totals int NOT NULL,
-	MissionLogId int NOT NULL
+	MissionLogId UNIQUEIDENTIFIER NOT NULL
 	)  ON [PRIMARY]
-GO
-
-SET IDENTITY_INSERT dbo.Tmp_Missions ON
 GO
 
 IF EXISTS(SELECT * FROM dbo.Missions)
 	 EXEC('INSERT INTO dbo.Tmp_Missions (Id, Name, AdditionalInfo, FromICAO, ToICAO, TakeOffTime, LandingTime, TouchAndGos, FullStops, Sorties, Totals, MissionLogId)
 		SELECT Id, Name, AdditionalInfo, FromICAO, ToICAO, CONVERT(nvarchar(4), TakeOffTime), CONVERT(nvarchar(4), LandingTime), TouchAndGos, FullStops, Sorties, Totals, MissionLogId FROM dbo.Missions WITH (HOLDLOCK TABLOCKX)')
-GO
-
-SET IDENTITY_INSERT dbo.Tmp_Missions OFF
 GO
 
 DROP TABLE dbo.Missions
