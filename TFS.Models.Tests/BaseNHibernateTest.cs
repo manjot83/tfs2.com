@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Reflection;
 using FluentNHibernate.Cfg.Db;
-using NHibernate;
 using NUnit.Framework;
+using StructureMap;
 using TFS.Models.Data;
+using TFS.Models.Data.Bytecode;
 using TFS.Models.Data.Configuration;
 using TFS.Models.Data.Mappings;
 
@@ -11,8 +12,7 @@ namespace TFS.Models.Tests
 {
     public abstract class BaseNHibernateTest
     {
-        private NHibernate.Cfg.Configuration cfg;
-        private ISessionFactory sessionFactory;
+        private IContainer container;
 
         protected NHibernateRepository Repository { get; private set; }
         protected IUnitOfWork UnitOfWork { get; private set; }
@@ -23,28 +23,22 @@ namespace TFS.Models.Tests
             HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
 
             var mappingAssemblies = new List<Assembly> { typeof(MappingExtensions).Assembly };
-#if SQLITE
-            cfg = ConfigurationBuilder.CreateMsSql2005Configuration("TFS_Models_Specs", mappingAssemblies);
-#else
-            cfg = ConfigurationBuilder.CreateFluentConfiguration(MsSqlConfiguration.MsSql2008.ConnectionString(@"Server=.\SQLEXPRESS;Database=dev_tfs2.com;Trusted_Connection=yes;"), mappingAssemblies);
-#endif
+            var cfg = ConfigurationBuilder.CreateFluentConfiguration(MsSqlConfiguration.MsSql2008.ConnectionString(@"Server=.\SQLEXPRESS;Database=dev_tfs2.com;Trusted_Connection=yes;"), mappingAssemblies);
 
-            sessionFactory = cfg.BuildSessionFactory();
-                        
-#if SQLITE
-            using (var session = sessionFactory.OpenSession())
-            {
-                new DatabaseBuilder(cfg, session).BuildSchema();
-            }
-#endif
+            var coreRegistry = new CoreRegistry(cfg);
+
+            container = new Container(i => {
+                i.AddRegistry(coreRegistry);
+            });
+            ConfigurationBuilder.SetBytecodeProvider(new StructureMapBackedBytecodeProvider(container));
         }
 
         [SetUp]
         public virtual void SetUp()
         {
-            UnitOfWork = new NHibernateUnitOfWork(sessionFactory);
+            UnitOfWork = container.GetInstance<IUnitOfWork>();
             UnitOfWork.Start();
-            Repository = new NHibernateRepository(((INHibernateUnitOfWork)UnitOfWork).Session);
+            Repository = container.GetInstance<NHibernateRepository>();
         }
 
         [TearDown]

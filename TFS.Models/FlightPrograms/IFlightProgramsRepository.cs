@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TFS.Models.FlightPrograms
 {
-    public interface IFlightProgramsRepository
+    public interface IFlightProgramsRepository : IRepository
     {
         IList<Position> GetAllPositions();
         Position AddNewPosition(string title);

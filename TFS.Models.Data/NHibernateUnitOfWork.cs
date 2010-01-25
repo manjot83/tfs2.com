@@ -17,37 +17,37 @@ namespace TFS.Models.Data
         {
             get
             {
-                if (currentSession == null)
-                    currentSession = sessionFactory.OpenSession();
+                EnsureStarted();
                 return currentSession;
             }
         }
 
         public void Start()
         {
-            if (!Session.Transaction.IsActive)
+            if (currentSession == null || !currentSession.Transaction.IsActive)
             {
-                Session.FlushMode = FlushMode.Commit;
-                Session.BeginTransaction();
+                currentSession = sessionFactory.OpenSession();
+                currentSession.FlushMode = FlushMode.Commit;
+                currentSession.BeginTransaction();
             }
         }
 
         public void Finish()
         {
             EnsureStarted();
-            Session.Transaction.Commit();
+            currentSession.Transaction.Commit();
         }
 
         public void Abort()
         {
             EnsureStarted();
-            Session.Transaction.Rollback();
+            currentSession.Transaction.Rollback();
         }
 
         private void EnsureStarted()
         {
-            if (!Session.Transaction.IsActive)
-                throw new InvalidOperationException("An attempt was made to access the database session outside of a transaction. Please make sure all data access is made within a unit of work.");
+            if (currentSession == null || !currentSession.Transaction.IsActive)
+                throw new InvalidOperationException("An attempt was made to access the database session outside of a transaction. Please make sure all access is made within a unit of work.");
         }
     }
 }

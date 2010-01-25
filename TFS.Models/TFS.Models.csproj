@@ -76,6 +76,7 @@
     <Compile Include="Help\Answer.cs" />
     <Compile Include="Help\IHelpRepository.cs" />
     <Compile Include="Help\Question.cs" />
+    <Compile Include="IDomainObject.cs" />
     <Compile Include="IKeyedModel.cs" />
     <Compile Include="Images\IImageFinder.cs" />
     <Compile Include="Images\StaticImage.cs" />

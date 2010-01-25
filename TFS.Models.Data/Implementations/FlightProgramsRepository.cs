@@ -5,19 +5,20 @@ using NHibernate;
 using NHibernate.Linq;
 using TFS.Extensions;
 using TFS.Models.FlightPrograms;
+using StructureMap;
 
 namespace TFS.Models.Data.Implementations
 {
     public class FlightProgramsRepository : NHibernateRepository, IFlightProgramsRepository
     {
-        public FlightProgramsRepository(ISession session)
-            : base(session)
+        public FlightProgramsRepository(INHibernateUnitOfWork nhibernateUnitOfWork, IContainer container)
+            : base(nhibernateUnitOfWork, container)
         {
         }
 
         public IList<Position> GetAllPositions()
         {
-            return Session.Linq<Position>().ToList();
+            return Query<Position>().ToList();
         }
 
         public Position AddNewPosition(string title)
@@ -26,29 +27,29 @@ namespace TFS.Models.Data.Implementations
                 throw new InvalidOperationException(string.Format("A position with the title {0} already exists", title));
             var position = new Position { Title = title };
             position.Validate();
-            return Session.SaveOrUpdateCopy<Position>(position);
+            return Persist<Position>(position);
         }
 
         public IEnumerable<FlightProgram> GetAllActivePrograms()
         {
-            return Session.Linq<FlightProgram>().Where(x => x.Active).ToList();
+            return Query<FlightProgram>().Where(x => x.Active).ToList();
         }
 
         public IEnumerable<FlightProgram> GetAllPrograms()
         {
-            return Session.Linq<FlightProgram>().ToList();
+            return Query<FlightProgram>().ToList();
         }
 
         public FlightProgram AddNewFlightProgram(FlightProgram flightProgram)
         {
             flightProgram.Active = true;
             flightProgram.Validate();
-            return Session.SaveOrUpdateCopy<FlightProgram>(flightProgram);
+            return Persist<FlightProgram>(flightProgram);
         }
 
         public IEnumerable<ProgramLocation> GetAllActiveProgramLocations()
         {
-            return Session.Linq<ProgramLocation>().Where(x => x.Program.Active).ToList();
+            return Query<ProgramLocation>().Where(x => x.Program.Active).ToList();
         }
     }
 }

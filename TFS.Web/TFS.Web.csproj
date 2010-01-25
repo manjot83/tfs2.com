@@ -31,22 +31,6 @@
     <WarningLevel>4</WarningLevel>
     <MvcBuildViews>true</MvcBuildViews>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DEBUG TESTDATA SQLITE|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;TESTDATA SQLITE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'DEBUG TESTDATA|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;TESTDATA</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=0.4.0.126, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -124,6 +108,7 @@
     </Compile>
     <Compile Include="ApplicationSettings.cs" />
     <Compile Include="Bootstrapping\AutoMapperConfiguration.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ControllerExtension.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\FlightLogsController.cs" />
@@ -152,19 +137,18 @@
     <Compile Include="Html\StaticResourceExtensions.cs" />
     <Compile Include="IApplicationSettings.cs" />
     <Compile Include="IAuthenticationService.cs" />
-    <Compile Include="ICanResolveDependencies.cs" />
     <Compile Include="Bootstrapping\MvcBootstrapper.cs" />
+    <Compile Include="Mvc\StructureMapControllerFactory.cs" />
+    <Compile Include="Mvc\TransactionalActionInvoker.cs" />
+    <Compile Include="Mvc\TransactionalController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StructureMapControllerFactory.cs" />
-    <Compile Include="Tags.cs" />
-    <Compile Include="TestData.cs" />
     <Compile Include="T4MVC.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Tags.cs" />
     <Compile Include="ApplicationVersion.cs" />
-    <Compile Include="TransactionalActionInvoker.cs" />
     <Compile Include="ViewModels\FlightLogs\FlightLogListItemViewModel.cs" />
     <Compile Include="ViewModels\FlightLogs\FlightLogViewModel.cs" />
     <Compile Include="ViewModels\FlightLogs\MissionViewModel.cs" />
@@ -336,7 +320,7 @@
     <Content Include="Views\Security\ChangePassword.aspx" />
     <Content Include="Views\Security\LogOn.aspx" />
     <Content Include="Config\AppSettings.config" />
-    <Content Include="Config\dotless.config" />
+    <Content Include="Config\Authentication.config" />
     <None Include="Content\internal\forms.less" />
     <None Include="Content\internal\layout.less" />
     <None Include="Content\internal\list-table.less" />

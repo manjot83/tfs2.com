@@ -5,19 +5,20 @@ using System.Text;
 using TFS.Models.Messages;
 using NHibernate;
 using NHibernate.Linq;
+using StructureMap;
 
 namespace TFS.Models.Data.Implementations
 {
     public class MessagesRepository : NHibernateRepository, IMessagesRepository
     {
-        public MessagesRepository(ISession session)
-            : base(session)
+        public MessagesRepository(INHibernateUnitOfWork nhibernateUnitOfWork, IContainer container)
+            : base(nhibernateUnitOfWork, container)
         {
         }
 
         public IEnumerable<Message> GetAllActiveNonUserMessages()
         {
-            return Session.Linq<Message>()
+            return Query<Message>()
                           .Where(x => x.ActiveFromDate < DateTime.UtcNow)
                           .Where(x => x.ActiveToDate > DateTime.UtcNow)
                           .ToList()
@@ -27,12 +28,12 @@ namespace TFS.Models.Data.Implementations
 
         public IEnumerable<Announcement> GetAllAnnouncements()
         {
-            return Session.Linq<Announcement>().ToList();
+            return Query<Announcement>().ToList();
         }
 
         public IEnumerable<SystemAlert> GetAllSystemAlerts()
         {
-            return Session.Linq<SystemAlert>().ToList();
+            return Query<SystemAlert>().ToList();
         }
     }
 }

@@ -18,12 +18,12 @@ namespace TFS.Models.Tests.CRUD
         {
             var entity = BuildEntity();
 
-            InsertEntity(entity);
-            var id = Repository.Session.GetIdentifier(entity);
+            entity = InsertEntity(entity);
+            var id = Repository.UnitOfWork.Session.GetIdentifier(entity);
 
-            Repository.Session.Evict(entity);
+            Repository.UnitOfWork.Session.Evict(entity);
 
-            var reloadedEntity = Repository.Session.Get<TEntity>(id);
+            var reloadedEntity = Repository.Get<TEntity>(id);
 
             Assert.IsNotNull(reloadedEntity);
             AssertAreEqual(entity, reloadedEntity);
@@ -35,13 +35,13 @@ namespace TFS.Models.Tests.CRUD
         {
             var entity = BuildEntity();
 
-            InsertEntity(entity);
-            var id = Repository.Session.GetIdentifier(entity);
+            entity = InsertEntity(entity);
+            var id = Repository.UnitOfWork.Session.GetIdentifier(entity);
 
             ModifyEntity(entity);
             UpdateEntity(entity);
 
-            Repository.Session.Evict(entity);
+            Repository.UnitOfWork.Session.Evict(entity);
 
             var reloadedEntity = Repository.Get<TEntity>(id);
 
@@ -54,30 +54,31 @@ namespace TFS.Models.Tests.CRUD
         {
             var entity = BuildEntity();
 
-            InsertEntity(entity);
-            var id = Repository.Session.GetIdentifier(entity);
+            entity = InsertEntity(entity);
+            var id = Repository.UnitOfWork.Session.GetIdentifier(entity);
 
             DeleteEntity(entity);
 
             Assert.IsNull(Repository.Get<TEntity>(id));
         }
 
-        protected virtual void InsertEntity(TEntity entity)
+        protected virtual TEntity InsertEntity(TEntity entity)
         {
-            Repository.Persist(entity);
-            Repository.Session.Flush();
+            var persisted = Repository.Persist(entity);
+            Repository.UnitOfWork.Session.Flush();
+            return persisted;
         }
 
         protected virtual void UpdateEntity(TEntity entity)
         {
             Repository.Persist(entity);
-            Repository.Session.Flush();
+            Repository.UnitOfWork.Session.Flush();
         }
 
         protected virtual void DeleteEntity(TEntity entity)
         {
             Repository.Delete(entity);
-            Repository.Session.Flush();
+            Repository.UnitOfWork.Session.Flush();
         }
 
         protected abstract TEntity BuildEntity();

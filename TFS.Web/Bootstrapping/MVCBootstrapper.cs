@@ -7,6 +7,9 @@ using TFS.Models;
 using TFS.Models.Data;
 using TFS.Models.Data.Configuration;
 using TFS.Web.Controllers;
+using TFS.Web.Mvc;
+using TFS.Models.Data.Bytecode;
+using TFS.Models.Data.Mappings;
 
 namespace TFS.Web
 {
@@ -52,14 +55,12 @@ namespace TFS.Web
 #if DEBUG
             HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
 #endif
-            var mappingAssemblies = new List<Assembly> { typeof(TFS.Models.Data.Mappings.Users.UserMapping).Assembly };
-#if SQLITE
-            var cfg = ConfigurationBuilder.CreateFileBasedSQLiteConfiguration("TFS_Web", mappingAssemblies);
-#else
+            var mappingAssemblies = new List<Assembly> { typeof(MappingExtensions).Assembly };
             var cfg = ConfigurationBuilder.CreateMsSql2005Configuration("TFS_Web", mappingAssemblies);
-#endif
+      
             var coreRegistry = new CoreRegistry(cfg);
-            ObjectFactory.Initialize(i =>
+
+            var container = new Container(i =>
             {
                 i.AddRegistry(coreRegistry);
 
@@ -77,20 +78,10 @@ namespace TFS.Web
                     .Use(x => new ApplicationSettings());
             });
 #if DEBUG
-            ObjectFactory.AssertConfigurationIsValid();
+            container.AssertConfigurationIsValid();
 #endif
-            ControllerBuilder.Current.SetControllerFactory(new StructureMapControllerFactory());
-
-#if TESTDATA
-            var unitOfWork = ObjectFactory.GetInstance<IUnitOfWork>() as INHibernateUnitOfWork;
-#if SQLITE
-            new DatabaseBuilder(cfg, unitOfWork.Session).BuildSchema();
-#endif
-            unitOfWork.Start();
-            TestData.Execute(ObjectFactory.GetInstance<IRepository>() as NHibernateRepository);
-            unitOfWork.Finish();
-            unitOfWork.Session.Clear();
-#endif
+            ControllerBuilder.Current.SetControllerFactory(new StructureMapControllerFactory(container));
+            ConfigurationBuilder.SetBytecodeProvider(new StructureMapBackedBytecodeProvider(container));
         }
     }
 }

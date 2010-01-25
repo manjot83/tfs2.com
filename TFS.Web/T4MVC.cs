@@ -456,6 +456,11 @@ static class T4MVCHelpers {
     }
 }
 
+namespace TFS.Web.Controllers {
+    public partial class BaseController {
+        protected BaseController() { }
+    }
+}
 
 namespace TFS.Web.Controllers {
     public partial class DashboardController {

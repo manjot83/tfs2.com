@@ -12,12 +12,10 @@ namespace TFS.Web
     {
         public override string[] GetRolesForUser(string username)
         {
-            var container = HttpContext.Current.ApplicationInstance as ICanResolveDependencies;
-            if (container == null)
-                throw new InvalidOperationException("HttpApplication must implemented ICanResolveDependencies");
+            var container = MvcApplication.Container;
 
             string[] roles = new string[0];
-            var user = container.Resolve<IUserRepository>().GetUser(username);
+            var user = container.GetInstance<IUserRepository>().GetUser(username);
             if (user != null)
                 roles = user.Roles.ToArray();
             return roles;

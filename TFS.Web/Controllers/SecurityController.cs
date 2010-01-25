@@ -4,14 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
+using TFS.Models;
 
 namespace TFS.Web.Controllers
 {
-    public partial class SecurityController : Controller
+    public partial class SecurityController : BaseController
     {
         private readonly IAuthenticationService authenticationService;
 
-        public SecurityController(IAuthenticationService authenticationService)
+        public SecurityController(IAuthenticationService authenticationService, IApplicationSettings applicationSettings, IRepository repository)
+            :base(applicationSettings, repository)
         {
             this.authenticationService = authenticationService;
         }
@@ -52,7 +54,7 @@ namespace TFS.Web.Controllers
         [Authorize]
         public virtual ViewResult ChangePassword()
         {
-            var user = this.GetCurrentUser();
+            var user = this.CurrentUser;
             return View(user);
         }
 
@@ -70,7 +72,7 @@ namespace TFS.Web.Controllers
                 ModelState.AddModelError("newPassword", string.Format("Password must be at least {0} characters long.", authenticationService.MinRequiredPasswordLength));
             if (newPassword != confirmNewPassword)
                 ModelState.AddModelError("confirmNewPassword", "New password's must match.");
-            var user = this.GetCurrentUser();
+            var user = this.CurrentUser;
             if (!ModelState.IsValid)
                 return View(user);
             if (!authenticationService.ChangePassword(user, originalPassword, newPassword))

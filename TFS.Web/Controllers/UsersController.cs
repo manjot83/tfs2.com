@@ -10,11 +10,12 @@ using System.Collections.Generic;
 namespace TFS.Web.Controllers
 {
     [Authorize(Roles = RoleNames.UserManager)]
-    public partial class UsersController : Controller
+    public partial class UsersController : BaseController
     {
         private readonly IUserRepository userRepository;
 
-        public UsersController(IUserRepository userRepository)
+        public UsersController(IApplicationSettings applicationSettings, IUserRepository userRepository)
+            :base(applicationSettings, userRepository)
         {
             this.userRepository = userRepository;
         }
@@ -67,7 +68,7 @@ namespace TFS.Web.Controllers
         [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult Edit(string username)
         {
-            var user = this.GetUser(username);
+            var user = userRepository.GetUser(username);
             var viewModel = Mapper.Map<User, UserViewModel>(user);
             return View(viewModel);
         }

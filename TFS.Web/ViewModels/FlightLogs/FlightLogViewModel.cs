@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.ComponentModel.DataAnnotations;
-using TFS.Models.Validation;
-using TFS.Models;
+using System.Linq;
 using System.Web.Mvc;
 using TFS.Models.FlightPrograms;
+using TFS.Models.Validation;
 
 namespace TFS.Web.ViewModels.FlightLogs
 {
@@ -28,6 +26,19 @@ namespace TFS.Web.ViewModels.FlightLogs
         public bool PreviouslySaved { get; set; }
 
         public IEnumerable<SelectListItem> ActiveLocations { get; set; }
+
+        public IEnumerable<SelectListItem> AllAircraft {
+            get {
+                var aircraft = new List<string> { "C-130B", "C-130E", "C-130H", "C-130k", "C-130j", "C-130AMP" };
+                if (!string.IsNullOrEmpty(AircraftMDS) && !aircraft.Contains(AircraftMDS))
+                    aircraft.Add(AircraftMDS);
+                return aircraft.OrderBy(x => x).Select(x => new SelectListItem {
+                    Text = x,
+                    Value = x,
+                    Selected = AircraftMDS == x,
+                });
+            }
+        }
 
         public void SetActiveLocations(IEnumerable<ProgramLocation> programLocations)
         {

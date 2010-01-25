@@ -65,7 +65,8 @@ namespace TFS.Web
                   .ForMember(x => x.Program, m => m.MapFrom(x => x.Location.Program.Name));
             Mapper.CreateMap<FlightLog, FlightLogViewModel>()
                   .ForMember(x => x.ActiveLocations, m => m.Ignore())
-                  .ForMember(x => x.PreviouslySaved, m => m.Ignore());
+                  .ForMember(x => x.PreviouslySaved, m => m.Ignore())
+                  .ForMember(x => x.AllAircraft, m => m.Ignore());
             Mapper.CreateMap<FlightLogViewModel, FlightLog>()
                   .ForMember(x => x.LogDate, m => m.MapFrom(x => x.LogDate.ToUniversalTime()))
                   .ForMember(x => x.Id, m => m.Ignore())

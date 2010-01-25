@@ -5,10 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using TFS.Models.Site;
+using TFS.Web.Mvc;
 
 namespace TFS.Web.Controllers
 {
-    public partial class SiteController : Controller
+    public partial class SiteController : TransactionalController
     {
         private const string URI_HOME = "/home";
         private const string URI_SERVICES = "/services";

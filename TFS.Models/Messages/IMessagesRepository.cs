@@ -5,7 +5,7 @@ using System.Text;
 
 namespace TFS.Models.Messages
 {
-    public interface IMessagesRepository
+    public interface IMessagesRepository : IRepository
     {
         IEnumerable<Message> GetAllActiveNonUserMessages();
 

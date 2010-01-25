@@ -6,7 +6,7 @@ using TFS.Models.PersonnelRecords;
 
 namespace TFS.Models.FlightLogs
 {
-    public interface IFlightLogRepository
+    public interface IFlightLogRepository : IRepository
     {
         IEnumerable<FlightLog> GetAllFlightLogs();
         FlightLog AddFlightLog(FlightLog flightLog);

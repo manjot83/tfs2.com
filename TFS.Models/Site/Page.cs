@@ -8,7 +8,7 @@ using Iesi.Collections.Generic;
 
 namespace TFS.Models.Site
 {
-    public class Page 
+    public class Page : BaseDomainObject
     {
         public Page()
         {

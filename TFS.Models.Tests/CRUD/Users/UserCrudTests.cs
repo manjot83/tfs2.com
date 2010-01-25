@@ -47,7 +47,7 @@ namespace TFS.Models.Tests.CRUD.Users
         protected override void AssertValidId(User entity)
         {
             Assert.IsNotNull(entity.Id);
-            Assert.GreaterOrEqual(entity.Id.Value, 0);
+            Assert.AreNotEqual(entity.Id.Value, Guid.Empty);
         }
     }
 }

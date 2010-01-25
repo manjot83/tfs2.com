@@ -4,24 +4,25 @@ using NHibernate;
 using NHibernate.Linq;
 using TFS.Models.Help;
 using System;
+using StructureMap;
 
 namespace TFS.Models.Data.Implementations
 {
     public class HelpRepository : NHibernateRepository, IHelpRepository
     {
-        public HelpRepository(ISession session)
-            : base(session)
+        public HelpRepository(INHibernateUnitOfWork nhibernateUnitOfWork, IContainer container)
+            : base(nhibernateUnitOfWork, container)
         {
         }
 
         public IEnumerable<Question> GetAllQuestions()
         {
-            return Session.Linq<Question>().ToList();
+            return Query<Question>().ToList();
         }
 
         public IEnumerable<Question> GetRecentQuestions(int maxResult)
         {
-            return Session.Linq<Question>().Take(maxResult).ToList();
+            return Query<Question>().Take(maxResult).ToList();
         }
 
         public Question AddQuestion(Question question)
@@ -29,7 +30,7 @@ namespace TFS.Models.Data.Implementations
             question.AskedOnDate = DateTime.UtcNow;
             question.LastModifiedDate = question.AskedOnDate;
             question.Validate();
-            return Session.SaveOrUpdateCopy<Question>(question);
+            return Persist<Question>(question);
         }
     }
 }

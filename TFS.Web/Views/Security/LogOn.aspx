@@ -36,7 +36,6 @@
        <td bgcolor="#E8EBEA">
         <% using (Html.BeginForm())
            { %>
-	    <form method="POST" action="https://apollo.tfs2.com/secure/login.aspx">
 		    <div align="center"><font size="1">&nbsp;</font><table border="0" width="90%" cellspacing="0" cellpadding="2">
 			    <tr>
 				                  <td width="99" class="boldbodycopy"><p><b>Callsign:</b></p></td>

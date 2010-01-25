@@ -22,11 +22,11 @@ Create Flight Log
             <div class="field-group">
                 <div class="field">
                     <label for="AircraftMDS">Aircraft Model</label>
-                    <%= Html.TextBox("AircraftMDS", Model.AircraftMDS, new { size = "20", maxlength = "50" })%>
+                    <%= Html.DropDownList("AircraftMDS", Model.AllAircraft) %>
                     <%= Html.ValidationMessage("AircraftMDS")%>
                 </div>
                 <div class="field">
-                    <label for="aircraftserialnumber">Aircraft Serial Number</label>
+                    <label for="aircraftserialnumber">Aircraft Serial Number</label>                    
                     <%= Html.TextBox("aircraftserialnumber", Model.AircraftSerialNumber, new { size = "20", maxlength = "50" })%>
                     <%= Html.ValidationMessage("aircraftserialnumber")%>
                 </div>

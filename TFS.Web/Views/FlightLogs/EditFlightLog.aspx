@@ -24,8 +24,8 @@ Edit Flight Log
             </div>
             <div class="field-group">
                 <div class="field">
-                    <label for="AircraftMDS">Aircraft <acronym title="Mission-Design Series">MDS</acronym></label>
-                    <%= Html.TextBox("AircraftMDS", Model.AircraftMDS, new { size = "20", maxlength = "50" })%>
+                    <label for="AircraftMDS">Aircraft MDS</label>
+                    <%= Html.DropDownList("AircraftMDS", Model.AllAircraft) %>
                     <%= Html.ValidationMessage("AircraftMDS")%>
                 </div>
                 <div class="field">

@@ -17,15 +17,14 @@ using NHibernate;
 namespace TFS.Web.Controllers
 {
     [Authorize]
-    public partial class PersonnelRecordsController : Controller
+    public partial class PersonnelRecordsController : BaseController
     {
-        private readonly ISession session;
         private readonly IUserRepository userRepository;
         private readonly IFlightProgramsRepository flightProgramsRepository;
 
-        public PersonnelRecordsController(ISession session, IUserRepository userRepository, IFlightProgramsRepository flightProgramsRepository)
+        public PersonnelRecordsController(IApplicationSettings applicationSettings, IUserRepository userRepository, IFlightProgramsRepository flightProgramsRepository)
+            :base(applicationSettings, userRepository)
         {
-            this.session = session;
             this.userRepository = userRepository;
             this.flightProgramsRepository = flightProgramsRepository;
         }
@@ -74,7 +73,7 @@ namespace TFS.Web.Controllers
 
         public virtual ViewResult EditMyRecord()
         {
-            var user = this.GetCurrentUser();
+            var user = this.CurrentUser;
             var person = user.Person;
             if (person == null)
                 person = userRepository.CreatePersonFor(user);
@@ -88,7 +87,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditPersonalInfo(string username, bool editingMyRecord, PersonalInfo personalInfo)
         {
             this.Validate(personalInfo, string.Empty);
-            var person = this.GetUser(username).Person;
+            var person = userRepository.GetUser(username).Person;
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
             Mapper.Map<PersonalInfo, Person>(personalInfo, person);
@@ -102,7 +101,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditContactInfo(string username, bool editingMyRecord, ContactInfo contactInfo)
         {
             this.Validate(contactInfo, string.Empty);
-            var person = this.GetUser(username).Person;
+            var person = userRepository.GetUser(username).Person;
             if (USState.FromAbbreviation(contactInfo.AddressState.ToUpper()) == null)
                 ModelState.AddModelError("State", "Must be a valid US state abbreviation.");
             if (!ModelState.IsValid)
@@ -118,11 +117,11 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditCompanyInfo(string username, bool editingMyRecord, CompanyInfo companyInfo)
         {
             this.Validate(companyInfo, string.Empty);
-            var person = this.GetUser(username).Person;
+            var person = userRepository.GetUser(username).Person;
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
             Mapper.Map<CompanyInfo, Person>(companyInfo, person);
-            person.HirePosition = session.Get<Position>(companyInfo.HirePositionId.Value);
+            person.HirePosition = Repository.Get<Position>(companyInfo.HirePositionId.Value);
             if (editingMyRecord)
                 return RedirectToAction(MVC.PersonnelRecords.EditMyRecord());
             else
@@ -133,7 +132,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult EditQualifications(string username, bool editingMyRecord, QualificationViewModel qualifications)
         {
             this.Validate(qualifications, string.Empty);
-            var person = this.GetUser(username).Person;
+            var person = userRepository.GetUser(username).Person;
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
 

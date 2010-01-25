@@ -7,29 +7,30 @@ using NHibernate;
 using NHibernate.Linq;
 using TFS.Models.PersonnelRecords;
 using TFS.Models.Users;
+using StructureMap;
 
 namespace TFS.Models.Data.Implementations
 {
     public class UserRepository : NHibernateRepository, IUserRepository
     {
-        public UserRepository(ISession session)
-            : base(session)
+        public UserRepository(INHibernateUnitOfWork nhibernateUnitOfWork, IContainer container)
+            : base(nhibernateUnitOfWork, container)
         {
         }
 
         public User GetUser(string username)
         {
-            return Session.Linq<User>().Where(x => x.Username == username).FirstOrDefault();
+            return Query<User>().Where(x => x.Username == username).FirstOrDefault();
         }
 
         public IEnumerable<User> GetAllUsers()
         {
-            return Session.Linq<User>();
+            return Query<User>();
         }
 
         public IEnumerable<User> GetAllActiveUsers()
         {
-            return Session.Linq<User>().Where(x => !x.Disabled);
+            return Query<User>().Where(x => !x.Disabled);
         }
 
         //public bool AuthenticateUser(string username, string password)
@@ -104,7 +105,7 @@ namespace TFS.Models.Data.Implementations
             };
             user.SetDefaultEmailAddress(username);
             user.Validate();
-            return Session.SaveOrUpdateCopy<User>(user);
+            return Persist<User>(user);
         }
 
         public Person CreatePersonFor(User user)

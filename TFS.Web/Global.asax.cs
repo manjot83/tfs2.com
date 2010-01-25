@@ -3,21 +3,14 @@ using StructureMap;
 
 namespace TFS.Web
 {
-    public class MvcApplication : System.Web.HttpApplication, ICanResolveDependencies
+    public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
         {
             MvcBootstrapper.SetupApplication();
         }
 
-        public object Resolve(Type type)
-        {
-            return ObjectFactory.GetInstance(type);
-        }
-
-        public TObject Resolve<TObject>()
-        {
-            return ObjectFactory.GetInstance<TObject>();
-        }
+        // Legacy Container reference for DomainRoleProvider
+        public static IContainer Container { get; set; }
     }
 }

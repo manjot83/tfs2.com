@@ -81,6 +81,9 @@
     <Compile Include="..\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Bytecode\StructureMapBackedBytecodeProvider.cs" />
+    <Compile Include="Bytecode\StructureMapBackedObjectsFactory.cs" />
+    <Compile Include="Bytecode\StructureMapBackedReflectionOptimizer.cs" />
     <Compile Include="Configuration\ConfigurationBuilder.cs" />
     <Compile Include="Configuration\CoreRegistry.cs" />
     <Compile Include="Configuration\DatabaseBuilder.cs" />

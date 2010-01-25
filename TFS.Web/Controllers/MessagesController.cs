@@ -1,28 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Mvc.Ajax;
-using TFS.Models;
-using TFS.Web.ViewModels.Messages;
-using TFS.Models.Messages;
 using AutoMapper;
-using TFS.Web.ViewModels;
-using NHibernate;
 using TFS.Extensions;
+using TFS.Models.Messages;
+using TFS.Web.ViewModels;
+using TFS.Web.ViewModels.Messages;
 
 namespace TFS.Web.Controllers
 {
     [Authorize]
-    public partial class MessagesController : Controller
+    public partial class MessagesController : BaseController
     {
-        private readonly ISession session;
         private readonly IMessagesRepository messagesRepository;
 
-        public MessagesController(ISession session, IMessagesRepository messagesRepository)
+        public MessagesController(IApplicationSettings applicationSettings, IMessagesRepository messagesRepository)
+            :base(applicationSettings, messagesRepository)
         {
-            this.session = session;
             this.messagesRepository = messagesRepository;
         }
 
@@ -82,7 +77,7 @@ namespace TFS.Web.Controllers
 
         public virtual ViewResult ViewMessage(Guid id)
         {
-            var message = session.Get<Message>(id);
+            var message = Repository.Get<Message>(id);
             MessageViewModel viewModel = null;
             switch (message.MessageType)
             {
@@ -109,9 +104,9 @@ namespace TFS.Web.Controllers
             if (!ModelState.IsValid)
                 return View(Views.CreateMessage, announcementViewModel);
             var announcement = Mapper.Map<AnnouncementViewModel, Announcement>(announcementViewModel);
-            announcement.CreatedBy = this.GetCurrentUser();
+            announcement.CreatedBy = this.CurrentUser;
             announcement.ActiveFromDate = DateTime.Today.ToUniversalTime().WithoutMilliseconds();
-            session.Save(announcement);
+            Repository.Persist(announcement);
             return RedirectToAction(MVC.Dashboard.Index());
         }
 
@@ -123,14 +118,14 @@ namespace TFS.Web.Controllers
                 return View(Views.CreateMessage, systemAlertViewModel);
             var aystemAlert = Mapper.Map<SystemAlertViewModel, SystemAlert>(systemAlertViewModel);
             aystemAlert.ActiveFromDate = DateTime.Today.ToUniversalTime().WithoutMilliseconds();
-            session.Save(aystemAlert);
+            Repository.Persist(aystemAlert);
             return RedirectToAction(MVC.Dashboard.Index());
         }
 
         [NonAction]
         private bool DetermineCanEdit()
         {
-            return this.GetCurrentUser().Roles.ProgramManager;
+            return CurrentUser.Roles.ProgramManager;
         }
     }
 }
