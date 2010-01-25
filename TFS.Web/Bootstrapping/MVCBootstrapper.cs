@@ -82,6 +82,7 @@ namespace TFS.Web
 #endif
             ControllerBuilder.Current.SetControllerFactory(new StructureMapControllerFactory(container));
             ConfigurationBuilder.SetBytecodeProvider(new StructureMapBackedBytecodeProvider(container));
+            MvcApplication.Container = container;
         }
     }
 }
