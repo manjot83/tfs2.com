@@ -46,7 +46,7 @@ Edit a New User
             <div class="field-group">
                 <div class="field">                
                     <%= Html.CheckBox("RolesFlightLogManager", Model.RolesFlightLogManager)%>
-                    <label for="RolesFlightLogManager" class="checkboxlabel">Manage flight logs, delete and and change data</label>
+                    <label for="RolesFlightLogManager" class="checkboxlabel">Manage flight logs, delete and change data</label>
                     <%= Html.ValidationMessage("RolesFlightLogManager")%>
                 </div>
             </div>
