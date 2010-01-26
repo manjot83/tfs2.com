@@ -46,5 +46,7 @@ namespace TFS.Web.ViewModels.FlightLogs
         {
             AvailablePersons = availablePersons.OrderBy(x => x.FileByName()).ToList();
         }
+
+        public bool IsFlightLogManager { get; set; }
     }
 }

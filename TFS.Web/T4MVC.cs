@@ -182,8 +182,8 @@ public class T4MVC_ViewResult : System.Web.Mvc.ViewResult, IT4MVCActionResult {
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-public class T4MVC_FileContentResult : System.Web.Mvc.FileContentResult, IT4MVCActionResult {
-    public T4MVC_FileContentResult(string area, string controller, string action): base(new byte[0], " ")  {
+public class T4MVC_RedirectToRouteResult : System.Web.Mvc.RedirectToRouteResult, IT4MVCActionResult {
+    public T4MVC_RedirectToRouteResult(string area, string controller, string action): base(" ", default(System.Web.Routing.RouteValueDictionary))  {
         this.InitMVCT4Result(area, controller, action);
     }
     
@@ -192,8 +192,8 @@ public class T4MVC_FileContentResult : System.Web.Mvc.FileContentResult, IT4MVCA
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-public class T4MVC_RedirectToRouteResult : System.Web.Mvc.RedirectToRouteResult, IT4MVCActionResult {
-    public T4MVC_RedirectToRouteResult(string area, string controller, string action): base(" ", default(System.Web.Routing.RouteValueDictionary))  {
+public class T4MVC_FileContentResult : System.Web.Mvc.FileContentResult, IT4MVCActionResult {
+    public T4MVC_FileContentResult(string area, string controller, string action): base(new byte[0], " ")  {
         this.InitMVCT4Result(area, controller, action);
     }
     
@@ -427,7 +427,14 @@ namespace Links {
             private const string URLPATH = "~/Static/js";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string jquery_1_3_2_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.3.2.min.js") ? Url("jquery-1.3.2.min.js") : Url("jquery-1.3.2.js");
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class jquery {
+                private const string URLPATH = "~/Static/js/jquery";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string jquery_1_4_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.4.min.js") ? Url("jquery-1.4.min.js") : Url("jquery-1.4.js");
+            }
+        
         }
     
     }
@@ -536,6 +543,11 @@ namespace TFS.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.RedirectToRouteResult DeleteFlightLog() {
+            return new T4MVC_RedirectToRouteResult(Area, Name, ActionNames.DeleteFlightLog);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ViewResult EditMission() {
             return new T4MVC_ViewResult(Area, Name, ActionNames.EditMission);
         }
@@ -546,6 +558,11 @@ namespace TFS.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.RedirectToRouteResult DeleteMission() {
+            return new T4MVC_RedirectToRouteResult(Area, Name, ActionNames.DeleteMission);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ViewResult EditSquadronLog() {
             return new T4MVC_ViewResult(Area, Name, ActionNames.EditSquadronLog);
         }
@@ -553,6 +570,11 @@ namespace TFS.Web.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ViewResult CreateSquadronLog() {
             return new T4MVC_ViewResult(Area, Name, ActionNames.CreateSquadronLog);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.RedirectToRouteResult DeleteSquadronLog() {
+            return new T4MVC_RedirectToRouteResult(Area, Name, ActionNames.DeleteSquadronLog);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -581,10 +603,13 @@ namespace TFS.Web.Controllers {
             public readonly string List = "List";
             public readonly string EditFlightLog = "EditFlightLog";
             public readonly string CreateFlightLog = "CreateFlightLog";
+            public readonly string DeleteFlightLog = "DeleteFlightLog";
             public readonly string EditMission = "EditMission";
             public readonly string CreateMission = "CreateMission";
+            public readonly string DeleteMission = "DeleteMission";
             public readonly string EditSquadronLog = "EditSquadronLog";
             public readonly string CreateSquadronLog = "CreateSquadronLog";
+            public readonly string DeleteSquadronLog = "DeleteSquadronLog";
             public readonly string BulkCreateSquadronLog = "BulkCreateSquadronLog";
             public readonly string DownloadPDF = "DownloadPDF";
         }
@@ -647,6 +672,12 @@ namespace TFS.Web.Controllers {
             return callInfo;
         }
 
+        public override System.Web.Mvc.RedirectToRouteResult DeleteFlightLog(System.Guid id) {
+            var callInfo = new T4MVC_RedirectToRouteResult(Area, Name, ActionNames.DeleteFlightLog);
+            callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
         public override System.Web.Mvc.ViewResult EditMission(System.Guid id) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.EditMission);
             callInfo.RouteValueDictionary.Add("id", id);
@@ -672,6 +703,12 @@ namespace TFS.Web.Controllers {
             return callInfo;
         }
 
+        public override System.Web.Mvc.RedirectToRouteResult DeleteMission(System.Guid id) {
+            var callInfo = new T4MVC_RedirectToRouteResult(Area, Name, ActionNames.DeleteMission);
+            callInfo.RouteValueDictionary.Add("id", id);
+            return callInfo;
+        }
+
         public override System.Web.Mvc.ViewResult EditSquadronLog(System.Guid id) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.EditSquadronLog);
             callInfo.RouteValueDictionary.Add("id", id);
@@ -694,6 +731,12 @@ namespace TFS.Web.Controllers {
         public override System.Web.Mvc.ActionResult CreateSquadronLog(TFS.Web.ViewModels.FlightLogs.SquadronLogViewModel squadronLogViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateSquadronLog);
             callInfo.RouteValueDictionary.Add("squadronLogViewModel", squadronLogViewModel);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.RedirectToRouteResult DeleteSquadronLog(System.Guid id) {
+            var callInfo = new T4MVC_RedirectToRouteResult(Area, Name, ActionNames.DeleteSquadronLog);
+            callInfo.RouteValueDictionary.Add("id", id);
             return callInfo;
         }
 

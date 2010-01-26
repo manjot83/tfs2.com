@@ -24,6 +24,8 @@ namespace TFS.Web
                                                  Links.Static.css.internal_forms_style_css,
                                                  Links.Static.css.internal_list_table_less);
 
+            AssetCache.AddJavaScript(JS_JQUERY, Links.Static.js.jquery.jquery_1_4_js);
+
             AssetCache.AddCssProcessor(new DotLessResourceProcessor());
             AssetCache.AddCssProcessor(new CacheBusterEmbeddedUrlProcessor());
 
@@ -53,6 +55,8 @@ namespace TFS.Web
         }
 
         public const string CSS_INTERNAL_BASE = "internalbase";
+
+        public const string JS_JQUERY = "jquery";
 
         public const string IMG_NAV_EMAIL = "IMG_NAV_EMAIL";
         public const string IMG_NAV_SRF = "IMG_NAV_SRF";

@@ -9,5 +9,7 @@ namespace TFS.Web.ViewModels.FlightLogs
     {
         public FlightLogListItemViewModel FlightLog { get; set; }
         public SquadronLogViewModel CurrentSquadronLog { get; set; }
+
+        public bool IsFlightLogManager { get; set; }
     }
 }

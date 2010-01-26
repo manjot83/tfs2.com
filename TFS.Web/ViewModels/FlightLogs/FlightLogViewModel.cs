@@ -20,6 +20,8 @@ namespace TFS.Web.ViewModels.FlightLogs
         [Required]
         public Guid LocationId { get; set; }
 
+        public bool IsFlightLogManager { get; set; }
+
         public IEnumerable<MissionViewModel> Missions { get; set; }
         public IEnumerable<SquadronLogViewModel> SquadronLogs { get; set; }
 

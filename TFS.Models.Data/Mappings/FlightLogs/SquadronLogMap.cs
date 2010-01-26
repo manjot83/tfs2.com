@@ -21,6 +21,7 @@ namespace TFS.Models.Data.Mappings.FlightLogs
             References(x => x.Person)
                 .ForeignKey("FK_SquadronLogs_Persons")
                 .Column("PersonId")
+                .Cascade.None()
                 .Not.Nullable();
 
             Map(x => x.DutyCode)

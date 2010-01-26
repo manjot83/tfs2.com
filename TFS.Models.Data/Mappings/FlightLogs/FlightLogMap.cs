@@ -30,17 +30,17 @@ namespace TFS.Models.Data.Mappings.FlightLogs
             References(x => x.Location)
                 .ForeignKey("FK_FlightLogs_ProgramLocations")
                 .Column("ProgramLocationId")
-                //.Cascade.None()
+                .Cascade.None()
                 .Not.Nullable();
 
             HasMany(x => x.Missions)
                 .KeyColumn("FlightLogId")
                 .Inverse()
-                .Cascade.SaveUpdate();
+                .Cascade.All();
             HasMany(x => x.SquadronLogs)
                 .KeyColumn("FlightLogId")
                 .Inverse()
-                .Cascade.SaveUpdate();
+                .Cascade.All();
         }
     }
 }

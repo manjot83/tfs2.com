@@ -149,6 +149,7 @@
     </Compile>
     <Compile Include="Tags.cs" />
     <Compile Include="ApplicationVersion.cs" />
+    <Compile Include="ViewModels\FlightLogs\FlightLogList.cs" />
     <Compile Include="ViewModels\FlightLogs\FlightLogListItemViewModel.cs" />
     <Compile Include="ViewModels\FlightLogs\FlightLogViewModel.cs" />
     <Compile Include="ViewModels\FlightLogs\MissionViewModel.cs" />
@@ -219,7 +220,7 @@
     <Content Include="Global.asax" />
     <Content Include="Views\Site\SitePage.aspx" />
     <Content Include="Web.config" />
-    <Content Include="Static\js\jquery-1.3.2.js" />
+    <Content Include="Static\js\jquery\jquery-1.4.js" />
     <Content Include="Views\Shared\Site.Master" />
     <Content Include="Views\Web.config" />
   </ItemGroup>

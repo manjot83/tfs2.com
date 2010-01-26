@@ -38,5 +38,7 @@ namespace TFS.Web.ViewModels.FlightLogs
         public int Sorties { get; set; }
         [Required]
         public int Totals { get; set; }
+
+        public bool IsFlightLogManager { get; set; }
     }
 }

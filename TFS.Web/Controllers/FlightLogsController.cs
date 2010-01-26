@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using TFS.Models.FlightPrograms;
 using TFS.Models;
 using NHibernate;
+using TFS.Models.Users;
 
 namespace TFS.Web.Controllers
 {
@@ -40,7 +41,7 @@ namespace TFS.Web.Controllers
                 sortType = "date";
             if (sortDirection == null)
                 sortDirection = SortDirection.Descending;
-            var viewModel = new SortedListViewModel<FlightLogListItemViewModel>();
+            var viewModel = new FlightLogList();
             viewModel.SortDirection = sortDirection ?? SortDirection.Ascending;
             viewModel.SortType = sortType;
             var flightLogs = flightLogRepository.GetAllFlightLogs();
@@ -109,6 +110,13 @@ namespace TFS.Web.Controllers
             return RedirectToAction(MVC.FlightLogs.EditFlightLog(flightLog.Id.Value));
         }
 
+        [AcceptVerbs(HttpVerbs.Post), Authorize(Roles = RoleNames.FlightLogManager)]
+        public virtual RedirectToRouteResult DeleteFlightLog(Guid id) {
+            var flightLog = Repository.Get<FlightLog>(id);
+            Repository.Delete(flightLog);
+            return RedirectToAction(Actions.List());
+        }
+
         [NonAction]
         private FlightLogViewModel CreateFlightLogViewModel(FlightLog flightLog)
         {
@@ -120,6 +128,7 @@ namespace TFS.Web.Controllers
                 activeLocations = activeLocations.Union(new ProgramLocation[] { flightLog.Location });
             }
             viewModel.SetActiveLocations(activeLocations);
+            viewModel.IsFlightLogManager = CurrentUser.Roles.FlightLogManager;
             return viewModel;
         }
 
@@ -128,6 +137,7 @@ namespace TFS.Web.Controllers
         {
             var mission = Repository.Get<Mission>(id);
             var viewModel = Mapper.Map<Mission, MissionViewModel>(mission);
+            viewModel.IsFlightLogManager = CurrentUser.Roles.FlightLogManager;
             return View(viewModel);
         }
 
@@ -139,6 +149,7 @@ namespace TFS.Web.Controllers
             if (!ModelState.IsValid)
             {
                 var viewModel = Mapper.Map<Mission, MissionViewModel>(mission);
+                viewModel.IsFlightLogManager = CurrentUser.Roles.FlightLogManager;
                 return View(viewModel);
             }
             Mapper.Map<MissionViewModel, Mission>(missionViewModel, mission);
@@ -164,6 +175,14 @@ namespace TFS.Web.Controllers
             var mission = Mapper.Map<MissionViewModel, Mission>(missionViewModel);
             flightLog.AddMission(mission);
             return RedirectToAction(MVC.FlightLogs.EditFlightLog(missionViewModel.FlightLogId.Value));
+        }
+
+        [AcceptVerbs(HttpVerbs.Post), Authorize(Roles = RoleNames.FlightLogManager)]
+        public virtual RedirectToRouteResult DeleteMission(Guid id) {
+            var mission = Repository.Get<Mission>(id);
+            var flightLogId = mission.FlightLog.Id.Value;
+            Repository.Delete(mission);
+            return RedirectToAction(Actions.EditFlightLog(flightLogId));
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
@@ -215,6 +234,14 @@ namespace TFS.Web.Controllers
             return RedirectToAction(MVC.FlightLogs.EditFlightLog(squadronLogViewModel.FlightLogId.Value));
         }
 
+        [AcceptVerbs(HttpVerbs.Post), Authorize(Roles = RoleNames.FlightLogManager)]
+        public virtual RedirectToRouteResult DeleteSquadronLog(Guid id) {
+            var squadronLog = Repository.Get<SquadronLog>(id);
+            var flightLogId = squadronLog.FlightLog.Id.Value;
+            Repository.Delete(squadronLog);
+            return RedirectToAction(Actions.EditFlightLog(flightLogId));
+        }
+
         private SquadronLogViewModel CreateSquadronLogViewModel(SquadronLog squadronLog)
         {
             var viewModel = new SquadronLogViewModel();
@@ -223,6 +250,7 @@ namespace TFS.Web.Controllers
                 Mapper.Map<SquadronLog, SquadronLogViewModel>(squadronLog, viewModel);
             }
             viewModel.SetAvailablePersons(Repository.GetAllActivePersons());
+            viewModel.IsFlightLogManager = CurrentUser.Roles.FlightLogManager;
             return viewModel;
         }
 

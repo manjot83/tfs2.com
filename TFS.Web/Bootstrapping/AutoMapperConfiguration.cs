@@ -66,7 +66,8 @@ namespace TFS.Web
             Mapper.CreateMap<FlightLog, FlightLogViewModel>()
                   .ForMember(x => x.ActiveLocations, m => m.Ignore())
                   .ForMember(x => x.PreviouslySaved, m => m.Ignore())
-                  .ForMember(x => x.AllAircraft, m => m.Ignore());
+                  .ForMember(x => x.AllAircraft, m => m.Ignore())
+                  .ForMember(x => x.IsFlightLogManager, m => m.Ignore());
             Mapper.CreateMap<FlightLogViewModel, FlightLog>()
                   .ForMember(x => x.LogDate, m => m.MapFrom(x => x.LogDate.ToUniversalTime()))
                   .ForMember(x => x.Id, m => m.Ignore())
@@ -77,7 +78,8 @@ namespace TFS.Web
                   .ForMember(x => x.Location, m => m.Ignore());
             Mapper.CreateMap<Mission, MissionViewModel>()
                   .ForMember(x => x.FlightLogId, m => m.MapFrom(x => x.FlightLog.Id.Value))
-                  .ForMember(x => x.TotalFlightTime, m => m.MapFrom(x => x.ComputeFlightTime().TotalHours));
+                  .ForMember(x => x.TotalFlightTime, m => m.MapFrom(x => x.ComputeFlightTime().TotalHours))
+                  .ForMember(x => x.IsFlightLogManager, m => m.Ignore());
             Mapper.CreateMap<MissionViewModel, Mission>()
                   .ForMember(x => x.Id, m => m.Ignore())
                   .ForMember(x => x.FlightLog, m => m.Ignore());
@@ -85,7 +87,8 @@ namespace TFS.Web
                   .ForMember(x => x.FlightLogId, m => m.MapFrom(x => x.FlightLog.Id.Value))
                   .ForMember(x => x.PersonUsername, m => m.MapFrom(x => x.Person.User.Username))
                   .ForMember(x => x.TotalHours, m => m.MapFrom(x => x.CalculateTotalHours()))
-                  .ForMember(x => x.AvailablePersons, m => m.Ignore());
+                  .ForMember(x => x.AvailablePersons, m => m.Ignore())
+                  .ForMember(x => x.IsFlightLogManager, m => m.Ignore());
             Mapper.CreateMap<TFS.Web.ViewModels.FlightLogs.SquadronLogViewModel, SquadronLog>()
                   .ForMember(x => x.Id, m => m.Ignore())
                   .ForMember(x => x.FlightLog, m => m.Ignore())
