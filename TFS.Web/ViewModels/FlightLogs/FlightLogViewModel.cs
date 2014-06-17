@@ -31,7 +31,7 @@ namespace TFS.Web.ViewModels.FlightLogs
 
         public IEnumerable<SelectListItem> AllAircraft {
             get {
-                var aircraft = new List<string> { "C-130B", "C-130E", "C-130H", "C-130k", "C-130j", "C-130AMP" };
+                var aircraft = new List<string> { "C-130B", "C-130E", "C-130H", "C-130K", "C-130J", "C-130AMP", "C-130R", "HC-130H", "HC-130J" };
                 if (!string.IsNullOrEmpty(AircraftMDS) && !aircraft.Contains(AircraftMDS))
                     aircraft.Add(AircraftMDS);
                 return aircraft.OrderBy(x => x).Select(x => new SelectListItem {
