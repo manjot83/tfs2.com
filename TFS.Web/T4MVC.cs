@@ -11,6 +11,7 @@ using System;
 using System.Diagnostics;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Web;
 using System.Web.Hosting;
@@ -37,19 +38,24 @@ public static class MVC {
 namespace T4MVC {
 }
 
+   
 namespace System.Web.Mvc {
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public static class T4Extensions {
-        public static string ActionLink(this HtmlHelper htmlHelper, string linkText, ActionResult result) {
-            return htmlHelper.RouteLink(linkText, result.GetRouteValueDictionary());
+        public static MvcHtmlString ActionLink(this HtmlHelper htmlHelper, string linkText, ActionResult result) {
+            return htmlHelper.ActionLink(linkText, result, null, null, null, null);
         }
 
-        public static string ActionLink(this HtmlHelper htmlHelper, string linkText, ActionResult result, object htmlAttributes) {
-            return ActionLink(htmlHelper, linkText, result, new RouteValueDictionary(htmlAttributes));
+        public static MvcHtmlString ActionLink(this HtmlHelper htmlHelper, string linkText, ActionResult result, object htmlAttributes, string protocol = null, string hostName = null, string fragment = null) {
+            return htmlHelper.RouteLink(linkText, null, protocol ?? result.GetT4MVCResult().Protocol, hostName, fragment, result.GetRouteValueDictionary(), HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
         }
 
-        public static string ActionLink(this HtmlHelper htmlHelper, string linkText, ActionResult result, IDictionary<string, object> htmlAttributes) {
-            return htmlHelper.RouteLink(linkText, result.GetRouteValueDictionary(), htmlAttributes);
+        public static MvcHtmlString ActionLink(this HtmlHelper htmlHelper, string linkText, ActionResult result, IDictionary<string, object> htmlAttributes, string protocol = null, string hostName = null, string fragment = null) {
+            return htmlHelper.RouteLink(linkText, null, protocol ?? result.GetT4MVCResult().Protocol, hostName, fragment, result.GetRouteValueDictionary(), htmlAttributes);
+        }
+
+        public static MvcForm BeginForm(this HtmlHelper htmlHelper, ActionResult result) {
+            return htmlHelper.BeginForm(result, FormMethod.Post);
         }
 
         public static MvcForm BeginForm(this HtmlHelper htmlHelper, ActionResult result, FormMethod formMethod) {
@@ -57,7 +63,7 @@ namespace System.Web.Mvc {
         }
 
         public static MvcForm BeginForm(this HtmlHelper htmlHelper, ActionResult result, FormMethod formMethod, object htmlAttributes) {
-            return BeginForm(htmlHelper, result, formMethod, new RouteValueDictionary(htmlAttributes));
+            return BeginForm(htmlHelper, result, formMethod, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
         }
 
         public static MvcForm BeginForm(this HtmlHelper htmlHelper, ActionResult result, FormMethod formMethod, IDictionary<string, object> htmlAttributes) {
@@ -65,27 +71,116 @@ namespace System.Web.Mvc {
             return htmlHelper.BeginForm(callInfo.Action, callInfo.Controller, callInfo.RouteValueDictionary, formMethod, htmlAttributes);
         }
 
-        public static string Action(this UrlHelper urlHelper, ActionResult result) {
-            return urlHelper.RouteUrl(result.GetRouteValueDictionary());
+        public static void RenderAction(this HtmlHelper htmlHelper, ActionResult result) {
+            var callInfo = result.GetT4MVCResult();
+            htmlHelper.RenderAction(callInfo.Action, callInfo.Controller, callInfo.RouteValueDictionary);
         }
 
-        public static string ActionLink(this AjaxHelper ajaxHelper, string linkText, ActionResult result, AjaxOptions ajaxOptions) {
+        public static MvcHtmlString Action(this HtmlHelper htmlHelper, ActionResult result) {
+            var callInfo = result.GetT4MVCResult();
+            return htmlHelper.Action(callInfo.Action, callInfo.Controller, callInfo.RouteValueDictionary);
+        }
+
+        public static string Action(this UrlHelper urlHelper, ActionResult result) {
+            return urlHelper.Action(result, null, null);
+        }
+
+        public static string Action(this UrlHelper urlHelper, ActionResult result, string protocol = null, string hostName = null) {
+            return urlHelper.RouteUrl(null, result.GetRouteValueDictionary(), protocol ?? result.GetT4MVCResult().Protocol, hostName);
+        }
+
+        public static string ActionAbsolute(this UrlHelper urlHelper, ActionResult result) {
+            return string.Format("{0}{1}",urlHelper.RequestContext.HttpContext.Request.Url.GetLeftPart(UriPartial.Authority),
+                urlHelper.RouteUrl(result.GetRouteValueDictionary()));
+        }
+
+        public static MvcHtmlString ActionLink(this AjaxHelper ajaxHelper, string linkText, ActionResult result, AjaxOptions ajaxOptions) {
             return ajaxHelper.RouteLink(linkText, result.GetRouteValueDictionary(), ajaxOptions);
         }
 
-        public static string ActionLink(this AjaxHelper ajaxHelper, string linkText, ActionResult result, AjaxOptions ajaxOptions, object htmlAttributes) {
-            return ajaxHelper.RouteLink(linkText, result.GetRouteValueDictionary(), ajaxOptions, new RouteValueDictionary(htmlAttributes));
+        public static MvcHtmlString ActionLink(this AjaxHelper ajaxHelper, string linkText, ActionResult result, AjaxOptions ajaxOptions, object htmlAttributes) {
+            return ajaxHelper.RouteLink(linkText, result.GetRouteValueDictionary(), ajaxOptions, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
         }
 
-        public static string ActionLink(this AjaxHelper ajaxHelper, string linkText, ActionResult result, AjaxOptions ajaxOptions, IDictionary<string, object> htmlAttributes) {
+        public static MvcHtmlString ActionLink(this AjaxHelper ajaxHelper, string linkText, ActionResult result, AjaxOptions ajaxOptions, IDictionary<string, object> htmlAttributes) {
             return ajaxHelper.RouteLink(linkText, result.GetRouteValueDictionary(), ajaxOptions, htmlAttributes);
         }
 
+        public static MvcForm BeginForm(this AjaxHelper ajaxHelper, ActionResult result, AjaxOptions ajaxOptions) {
+            return ajaxHelper.BeginForm(result, ajaxOptions, null);
+        }
+
+        public static MvcForm BeginForm(this AjaxHelper ajaxHelper, ActionResult result, AjaxOptions ajaxOptions, object htmlAttributes) {
+            return BeginForm(ajaxHelper, result, ajaxOptions, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+        }
+
+        public static MvcForm BeginForm(this AjaxHelper ajaxHelper, ActionResult result, AjaxOptions ajaxOptions, IDictionary<string, object> htmlAttributes) {
+            var callInfo = result.GetT4MVCResult();
+            return ajaxHelper.BeginForm(callInfo.Action, callInfo.Controller, callInfo.RouteValueDictionary, ajaxOptions, htmlAttributes);
+        }
+
         public static Route MapRoute(this RouteCollection routes, string name, string url, ActionResult result) {
-            return routes.MapRoute(name, url, result, (ActionResult)null);
+            return MapRoute(routes, name, url, result, null /*namespaces*/);
         }
 
         public static Route MapRoute(this RouteCollection routes, string name, string url, ActionResult result, object defaults) {
+            return MapRoute(routes, name, url, result, defaults, null /*constraints*/, null /*namespaces*/);
+        }
+
+        public static Route MapRoute(this RouteCollection routes, string name, string url, ActionResult result, string[] namespaces) {
+            return MapRoute(routes, name, url, result, null /*defaults*/, namespaces);
+        }
+
+        public static Route MapRoute(this RouteCollection routes, string name, string url, ActionResult result, object defaults, object constraints) {
+            return MapRoute(routes, name, url, result, defaults, constraints, null /*namespaces*/);
+        }
+
+        public static Route MapRoute(this RouteCollection routes, string name, string url, ActionResult result, object defaults, string[] namespaces) {
+            return MapRoute(routes, name, url, result, defaults, null /*constraints*/, namespaces);
+        }
+
+        public static Route MapRoute(this RouteCollection routes, string name, string url, ActionResult result, object defaults, object constraints, string[] namespaces) {
+            // Create and add the route
+            var route = CreateRoute(url, result, defaults, constraints, namespaces);
+            routes.Add(name, route);
+            return route;
+        }
+
+        // Note: can't name the AreaRegistrationContext methods 'MapRoute', as that conflicts with the existing methods
+        public static Route MapRouteArea(this AreaRegistrationContext context, string name, string url, ActionResult result) {
+            return MapRouteArea(context, name, url, result, null /*namespaces*/);
+        }
+
+        public static Route MapRouteArea(this AreaRegistrationContext context, string name, string url, ActionResult result, object defaults) {
+            return MapRouteArea(context, name, url, result, defaults, null /*constraints*/, null /*namespaces*/);
+        }
+
+        public static Route MapRouteArea(this AreaRegistrationContext context, string name, string url, ActionResult result, string[] namespaces) {
+            return MapRouteArea(context, name, url, result, null /*defaults*/, namespaces);
+        }
+
+        public static Route MapRouteArea(this AreaRegistrationContext context, string name, string url, ActionResult result, object defaults, object constraints) {
+            return MapRouteArea(context, name, url, result, defaults, constraints, null /*namespaces*/);
+        }
+
+        public static Route MapRouteArea(this AreaRegistrationContext context, string name, string url, ActionResult result, object defaults, string[] namespaces) {
+            return MapRouteArea(context, name, url, result, defaults, null /*constraints*/, namespaces);
+        }
+
+        public static Route MapRouteArea(this AreaRegistrationContext context, string name, string url, ActionResult result, object defaults, object constraints, string[] namespaces) {
+            // Create and add the route
+            if ((namespaces == null) && (context.Namespaces != null)) {
+                 namespaces = context.Namespaces.ToArray();
+            }
+            var route = CreateRoute(url, result, defaults, constraints, namespaces);
+            context.Routes.Add(name, route);
+            route.DataTokens["area"] = context.AreaName;
+            bool useNamespaceFallback = (namespaces == null) || (namespaces.Length == 0);
+            route.DataTokens["UseNamespaceFallback"] = useNamespaceFallback;
+            return route;
+        }
+
+        private static Route CreateRoute(string url, ActionResult result, object defaults, object constraints, string[] namespaces) {
             // Start by adding the default values from the anonymous object (if any)
             var routeValues = new RouteValueDictionary(defaults);
 
@@ -94,16 +189,24 @@ namespace System.Web.Mvc {
                 routeValues.Add(pair.Key, pair.Value);
             }
 
+            var routeConstraints = new RouteValueDictionary(constraints);
+
             // Create and add the route
-            var route = new Route(url, routeValues, new MvcRouteHandler());
-            routes.Add(name, route);
+            var route = new Route(url, routeValues, routeConstraints, new MvcRouteHandler());
+
+            route.DataTokens = new RouteValueDictionary();
+
+            if (namespaces != null && namespaces.Length > 0) {
+                route.DataTokens["Namespaces"] = namespaces;
+            }
+
             return route;
         }
 
         public static IT4MVCActionResult GetT4MVCResult(this ActionResult result) {
             var t4MVCResult = result as IT4MVCActionResult;
             if (t4MVCResult == null) {
-                throw new InvalidOperationException("T4MVC methods can only be passed pseudo-action calls (e.g. MVC.Home.About()), and not real action calls.");
+                throw new InvalidOperationException("T4MVC was called incorrectly. You may need to force it to regenerate by right clicking on T4MVC.tt and choosing Run Custom Tool");
             }
             return t4MVCResult;
         }
@@ -121,23 +224,30 @@ namespace System.Web.Mvc {
 
             // Add all the extra values
             foreach (var pair in routeValues) {
-                currentRouteValues.Add(pair.Key, pair.Value);
+                ModelUnbinderHelpers.AddRouteValues(currentRouteValues, pair.Key, pair.Value);
             }
 
             return result;
         }
 
+        public static ActionResult AddRouteValues(this ActionResult result, System.Collections.Specialized.NameValueCollection nameValueCollection) {
+            // Copy all the values from the NameValueCollection into the route dictionary
+            nameValueCollection.CopyTo(result.GetRouteValueDictionary());
+            return result;
+        }
+
         public static ActionResult AddRouteValue(this ActionResult result, string name, object value) {
             RouteValueDictionary routeValues = result.GetRouteValueDictionary();
-            routeValues.Add(name, value);
+            ModelUnbinderHelpers.AddRouteValues(routeValues, name, value);
             return result;
         }
         
-        public static void InitMVCT4Result(this IT4MVCActionResult result, string area, string controller, string action) {
+        public static void InitMVCT4Result(this IT4MVCActionResult result, string area, string controller, string action, string protocol = null) {
             result.Controller = controller;
             result.Action = action;
+            result.Protocol = T4MVCHelpers.IsProduction() ? protocol : null;
             result.RouteValueDictionary = new RouteValueDictionary();
-             
+            result.RouteValueDictionary.Add("Area", area ?? "");
             result.RouteValueDictionary.Add("Controller", controller);
             result.RouteValueDictionary.Add("Action", action);
         }
@@ -147,58 +257,83 @@ namespace System.Web.Mvc {
             string filePath = HostingEnvironment.MapPath(virtualPath);
             return System.IO.File.Exists(filePath);
         }
+
+        static DateTime CenturyBegin=new DateTime(2001,1,1);
+        public static string TimestampString(string virtualPath) {
+            if (!HostingEnvironment.IsHosted) return string.Empty;
+            string filePath = HostingEnvironment.MapPath(virtualPath);
+            return Convert.ToString((System.IO.File.GetLastWriteTimeUtc(filePath).Ticks-CenturyBegin.Ticks)/1000000000,16);            
+        }
     }
 }
+
+
+
+namespace T4MVC {
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public class Dummy {
+        private Dummy() { }
+        public static Dummy Instance = new Dummy();
+    }
+}
+
+
+  
 
    
 [GeneratedCode("T4MVC", "2.0")]   
 public interface IT4MVCActionResult {   
     string Action { get; set; }   
     string Controller { get; set; }   
-    RouteValueDictionary RouteValueDictionary { get; set; }   
+    RouteValueDictionary RouteValueDictionary { get; set; } 
+    string Protocol {get; set; }  
 }   
   
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public class T4MVC_ActionResult : System.Web.Mvc.ActionResult, IT4MVCActionResult {
-    public T4MVC_ActionResult(string area, string controller, string action): base()  {
-        this.InitMVCT4Result(area, controller, action);
+    public T4MVC_ActionResult(string area, string controller, string action, string protocol = null): base()  {
+        this.InitMVCT4Result(area, controller, action, protocol);
     }
      
     public override void ExecuteResult(System.Web.Mvc.ControllerContext context) { }
     
     public string Controller { get; set; }
     public string Action { get; set; }
+    public string Protocol { get; set; }
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public class T4MVC_ViewResult : System.Web.Mvc.ViewResult, IT4MVCActionResult {
-    public T4MVC_ViewResult(string area, string controller, string action): base()  {
-        this.InitMVCT4Result(area, controller, action);
+    public T4MVC_ViewResult(string area, string controller, string action, string protocol = null): base()  {
+        this.InitMVCT4Result(area, controller, action, protocol);
     }
     
     public string Controller { get; set; }
     public string Action { get; set; }
+    public string Protocol { get; set; }
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public class T4MVC_RedirectToRouteResult : System.Web.Mvc.RedirectToRouteResult, IT4MVCActionResult {
-    public T4MVC_RedirectToRouteResult(string area, string controller, string action): base(" ", default(System.Web.Routing.RouteValueDictionary))  {
-        this.InitMVCT4Result(area, controller, action);
+    public T4MVC_RedirectToRouteResult(string area, string controller, string action, string protocol = null): base(" ", default(System.Web.Routing.RouteValueDictionary), default(bool))  {
+        this.InitMVCT4Result(area, controller, action, protocol);
     }
     
     public string Controller { get; set; }
     public string Action { get; set; }
+    public string Protocol { get; set; }
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public class T4MVC_FileContentResult : System.Web.Mvc.FileContentResult, IT4MVCActionResult {
-    public T4MVC_FileContentResult(string area, string controller, string action): base(new byte[0], " ")  {
-        this.InitMVCT4Result(area, controller, action);
+    public T4MVC_FileContentResult(string area, string controller, string action, string protocol = null): base(new byte[0], " ")  {
+        this.InitMVCT4Result(area, controller, action, protocol);
     }
     
     public string Controller { get; set; }
     public string Action { get; set; }
+    public string Protocol { get; set; }
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
 
@@ -244,7 +379,8 @@ namespace Links {
             public static readonly string layout_less = Url("layout.less");
             public static readonly string list_table_less = Url("list-table.less");
             public static readonly string paragraph_less = Url("paragraph.less");
-            public static readonly string reset_css = Url("reset.css");
+            public static readonly string reset_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/reset.min.css") ? Url("reset.min.css") : Url("reset.css");
+                 
             public static readonly string style_less = Url("style.less");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class template {
@@ -295,8 +431,10 @@ namespace Links {
                 public static readonly string header05_jpg = Url("header05.jpg");
             }
         
-            public static readonly string imagerollover_css = Url("imagerollover.css");
-            public static readonly string layout_css = Url("layout.css");
+            public static readonly string imagerollover_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/imagerollover.min.css") ? Url("imagerollover.min.css") : Url("imagerollover.css");
+                 
+            public static readonly string layout_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/layout.min.css") ? Url("layout.min.css") : Url("layout.css");
+                 
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class login {
                 private const string URLPATH = "~/Content/public/login";
@@ -332,7 +470,8 @@ namespace Links {
                 public static readonly string services_rollover_gif = Url("services_rollover.gif");
             }
         
-            public static readonly string tags_css = Url("tags.css");
+            public static readonly string tags_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/tags.min.css") ? Url("tags.min.css") : Url("tags.css");
+                 
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class template {
                 private const string URLPATH = "~/Content/public/template";
@@ -360,13 +499,19 @@ namespace Links {
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
             public static readonly string internal_base_layout_less = Url("internal_base_layout.less");
-            public static readonly string internal_base_style_css = Url("internal_base_style.css");
-            public static readonly string internal_forms_layout_css = Url("internal_forms_layout.css");
-            public static readonly string internal_forms_style_css = Url("internal_forms_style.css");
+            public static readonly string internal_base_style_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/internal_base_style.min.css") ? Url("internal_base_style.min.css") : Url("internal_base_style.css");
+                 
+            public static readonly string internal_forms_layout_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/internal_forms_layout.min.css") ? Url("internal_forms_layout.min.css") : Url("internal_forms_layout.css");
+                 
+            public static readonly string internal_forms_style_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/internal_forms_style.min.css") ? Url("internal_forms_style.min.css") : Url("internal_forms_style.css");
+                 
             public static readonly string internal_list_table_less = Url("internal_list-table.less");
-            public static readonly string yui_base_css = Url("yui_base.css");
-            public static readonly string yui_fonts_css = Url("yui_fonts.css");
-            public static readonly string yui_reset_css = Url("yui_reset.css");
+            public static readonly string yui_base_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/yui_base.min.css") ? Url("yui_base.min.css") : Url("yui_base.css");
+                 
+            public static readonly string yui_fonts_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/yui_fonts.min.css") ? Url("yui_fonts.min.css") : Url("yui_fonts.css");
+                 
+            public static readonly string yui_reset_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/yui_reset.min.css") ? Url("yui_reset.min.css") : Url("yui_reset.css");
+                 
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -433,6 +578,7 @@ namespace Links {
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string jquery_1_4_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-1.4.min.js") ? Url("jquery-1.4.min.js") : Url("jquery-1.4.js");
+                              
             }
         
         }
@@ -441,7 +587,7 @@ namespace Links {
 
 }
 
-static class T4MVCHelpers {
+public static class T4MVCHelpers {
     // You can change the ProcessVirtualPath method to modify the path that gets returned to the client.
     // e.g. you can prepend a domain, or append a query string:
     //      return "http://localhost" + path + "?foo=bar";
@@ -483,6 +629,12 @@ namespace TFS.Web.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result) {
+            var callInfo = result.GetT4MVCResult();
+            return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
+        }
+
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public DashboardController Actions { get { return MVC.Dashboard; } }
@@ -490,6 +642,8 @@ namespace TFS.Web.Controllers {
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Name = "Dashboard";
+        [GeneratedCode("T4MVC", "2.0")]
+        public const string NameConst = "Dashboard";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -499,8 +653,14 @@ namespace TFS.Web.Controllers {
             public readonly string Index = "Index";
         }
 
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionNameConstants {
+            public const string Index = "Index";
+        }
+
 
         static readonly ViewNames s_views = new ViewNames();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
@@ -529,6 +689,12 @@ namespace TFS.Web.Controllers {
         protected RedirectToRouteResult RedirectToAction(ActionResult result) {
             var callInfo = result.GetT4MVCResult();
             return RedirectToRoute(callInfo.RouteValueDictionary);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result) {
+            var callInfo = result.GetT4MVCResult();
+            return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
         }
 
         [NonAction]
@@ -593,6 +759,8 @@ namespace TFS.Web.Controllers {
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Name = "FlightLogs";
+        [GeneratedCode("T4MVC", "2.0")]
+        public const string NameConst = "FlightLogs";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -614,8 +782,104 @@ namespace TFS.Web.Controllers {
             public readonly string DownloadPDF = "DownloadPDF";
         }
 
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionNameConstants {
+            public const string Index = "Index";
+            public const string List = "List";
+            public const string EditFlightLog = "EditFlightLog";
+            public const string CreateFlightLog = "CreateFlightLog";
+            public const string DeleteFlightLog = "DeleteFlightLog";
+            public const string EditMission = "EditMission";
+            public const string CreateMission = "CreateMission";
+            public const string DeleteMission = "DeleteMission";
+            public const string EditSquadronLog = "EditSquadronLog";
+            public const string CreateSquadronLog = "CreateSquadronLog";
+            public const string DeleteSquadronLog = "DeleteSquadronLog";
+            public const string BulkCreateSquadronLog = "BulkCreateSquadronLog";
+            public const string DownloadPDF = "DownloadPDF";
+        }
 
+
+        static readonly ActionParamsClass_List s_params_List = new ActionParamsClass_List();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_List ListParams { get { return s_params_List; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_List {
+            public readonly string sortType = "sortType";
+            public readonly string sortDirection = "sortDirection";
+        }
+        static readonly ActionParamsClass_EditFlightLog s_params_EditFlightLog = new ActionParamsClass_EditFlightLog();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EditFlightLog EditFlightLogParams { get { return s_params_EditFlightLog; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EditFlightLog {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_DeleteFlightLog s_params_DeleteFlightLog = new ActionParamsClass_DeleteFlightLog();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_DeleteFlightLog DeleteFlightLogParams { get { return s_params_DeleteFlightLog; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_DeleteFlightLog {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_EditMission s_params_EditMission = new ActionParamsClass_EditMission();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EditMission EditMissionParams { get { return s_params_EditMission; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EditMission {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_CreateMission s_params_CreateMission = new ActionParamsClass_CreateMission();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_CreateMission CreateMissionParams { get { return s_params_CreateMission; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_CreateMission {
+            public readonly string flightLogId = "flightLogId";
+        }
+        static readonly ActionParamsClass_DeleteMission s_params_DeleteMission = new ActionParamsClass_DeleteMission();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_DeleteMission DeleteMissionParams { get { return s_params_DeleteMission; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_DeleteMission {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_EditSquadronLog s_params_EditSquadronLog = new ActionParamsClass_EditSquadronLog();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EditSquadronLog EditSquadronLogParams { get { return s_params_EditSquadronLog; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EditSquadronLog {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_CreateSquadronLog s_params_CreateSquadronLog = new ActionParamsClass_CreateSquadronLog();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_CreateSquadronLog CreateSquadronLogParams { get { return s_params_CreateSquadronLog; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_CreateSquadronLog {
+            public readonly string flightLogId = "flightLogId";
+        }
+        static readonly ActionParamsClass_DeleteSquadronLog s_params_DeleteSquadronLog = new ActionParamsClass_DeleteSquadronLog();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_DeleteSquadronLog DeleteSquadronLogParams { get { return s_params_DeleteSquadronLog; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_DeleteSquadronLog {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_BulkCreateSquadronLog s_params_BulkCreateSquadronLog = new ActionParamsClass_BulkCreateSquadronLog();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_BulkCreateSquadronLog BulkCreateSquadronLogParams { get { return s_params_BulkCreateSquadronLog; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_BulkCreateSquadronLog {
+            public readonly string flightLogId = "flightLogId";
+        }
+        static readonly ActionParamsClass_DownloadPDF s_params_DownloadPDF = new ActionParamsClass_DownloadPDF();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_DownloadPDF DownloadPDFParams { get { return s_params_DownloadPDF; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_DownloadPDF {
+            public readonly string id = "id";
+        }
         static readonly ViewNames s_views = new ViewNames();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
@@ -643,21 +907,21 @@ namespace TFS.Web.Controllers {
 
         public override System.Web.Mvc.ViewResult List(string sortType, System.Web.UI.WebControls.SortDirection? sortDirection) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.List);
-            callInfo.RouteValueDictionary.Add("sortType", sortType);
-            callInfo.RouteValueDictionary.Add("sortDirection", sortDirection);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "sortType", sortType);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "sortDirection", sortDirection);
             return callInfo;
         }
 
         public override System.Web.Mvc.ViewResult EditFlightLog(System.Guid id) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.EditFlightLog);
-            callInfo.RouteValueDictionary.Add("id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             return callInfo;
         }
 
         public override System.Web.Mvc.ActionResult EditFlightLog(System.Guid id, TFS.Web.ViewModels.FlightLogs.FlightLogViewModel flightLogViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EditFlightLog);
-            callInfo.RouteValueDictionary.Add("id", id);
-            callInfo.RouteValueDictionary.Add("flightLogViewModel", flightLogViewModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "flightLogViewModel", flightLogViewModel);
             return callInfo;
         }
 
@@ -668,93 +932,93 @@ namespace TFS.Web.Controllers {
 
         public override System.Web.Mvc.ActionResult CreateFlightLog(TFS.Web.ViewModels.FlightLogs.FlightLogViewModel flightLogViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateFlightLog);
-            callInfo.RouteValueDictionary.Add("flightLogViewModel", flightLogViewModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "flightLogViewModel", flightLogViewModel);
             return callInfo;
         }
 
         public override System.Web.Mvc.RedirectToRouteResult DeleteFlightLog(System.Guid id) {
             var callInfo = new T4MVC_RedirectToRouteResult(Area, Name, ActionNames.DeleteFlightLog);
-            callInfo.RouteValueDictionary.Add("id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             return callInfo;
         }
 
         public override System.Web.Mvc.ViewResult EditMission(System.Guid id) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.EditMission);
-            callInfo.RouteValueDictionary.Add("id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             return callInfo;
         }
 
         public override System.Web.Mvc.ActionResult EditMission(System.Guid id, TFS.Web.ViewModels.FlightLogs.MissionViewModel missionViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EditMission);
-            callInfo.RouteValueDictionary.Add("id", id);
-            callInfo.RouteValueDictionary.Add("missionViewModel", missionViewModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "missionViewModel", missionViewModel);
             return callInfo;
         }
 
         public override System.Web.Mvc.ViewResult CreateMission(System.Guid flightLogId) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.CreateMission);
-            callInfo.RouteValueDictionary.Add("flightLogId", flightLogId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "flightLogId", flightLogId);
             return callInfo;
         }
 
         public override System.Web.Mvc.ActionResult CreateMission(TFS.Web.ViewModels.FlightLogs.MissionViewModel missionViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateMission);
-            callInfo.RouteValueDictionary.Add("missionViewModel", missionViewModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "missionViewModel", missionViewModel);
             return callInfo;
         }
 
         public override System.Web.Mvc.RedirectToRouteResult DeleteMission(System.Guid id) {
             var callInfo = new T4MVC_RedirectToRouteResult(Area, Name, ActionNames.DeleteMission);
-            callInfo.RouteValueDictionary.Add("id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             return callInfo;
         }
 
         public override System.Web.Mvc.ViewResult EditSquadronLog(System.Guid id) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.EditSquadronLog);
-            callInfo.RouteValueDictionary.Add("id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             return callInfo;
         }
 
         public override System.Web.Mvc.ActionResult EditSquadronLog(System.Guid id, TFS.Web.ViewModels.FlightLogs.SquadronLogViewModel squadronLogViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EditSquadronLog);
-            callInfo.RouteValueDictionary.Add("id", id);
-            callInfo.RouteValueDictionary.Add("squadronLogViewModel", squadronLogViewModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "squadronLogViewModel", squadronLogViewModel);
             return callInfo;
         }
 
         public override System.Web.Mvc.ViewResult CreateSquadronLog(System.Guid flightLogId) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.CreateSquadronLog);
-            callInfo.RouteValueDictionary.Add("flightLogId", flightLogId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "flightLogId", flightLogId);
             return callInfo;
         }
 
         public override System.Web.Mvc.ActionResult CreateSquadronLog(TFS.Web.ViewModels.FlightLogs.SquadronLogViewModel squadronLogViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateSquadronLog);
-            callInfo.RouteValueDictionary.Add("squadronLogViewModel", squadronLogViewModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "squadronLogViewModel", squadronLogViewModel);
             return callInfo;
         }
 
         public override System.Web.Mvc.RedirectToRouteResult DeleteSquadronLog(System.Guid id) {
             var callInfo = new T4MVC_RedirectToRouteResult(Area, Name, ActionNames.DeleteSquadronLog);
-            callInfo.RouteValueDictionary.Add("id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             return callInfo;
         }
 
         public override System.Web.Mvc.ViewResult BulkCreateSquadronLog(System.Guid flightLogId) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.BulkCreateSquadronLog);
-            callInfo.RouteValueDictionary.Add("flightLogId", flightLogId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "flightLogId", flightLogId);
             return callInfo;
         }
 
         public override System.Web.Mvc.ActionResult BulkCreateSquadronLog(TFS.Web.ViewModels.FlightLogs.SquadronLogViewModel squadronLogViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.BulkCreateSquadronLog);
-            callInfo.RouteValueDictionary.Add("squadronLogViewModel", squadronLogViewModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "squadronLogViewModel", squadronLogViewModel);
             return callInfo;
         }
 
         public override System.Web.Mvc.FileContentResult DownloadPDF(System.Guid id) {
             var callInfo = new T4MVC_FileContentResult(Area, Name, ActionNames.DownloadPDF);
-            callInfo.RouteValueDictionary.Add("id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             return callInfo;
         }
 
@@ -770,6 +1034,12 @@ namespace TFS.Web.Controllers {
         protected RedirectToRouteResult RedirectToAction(ActionResult result) {
             var callInfo = result.GetT4MVCResult();
             return RedirectToRoute(callInfo.RouteValueDictionary);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result) {
+            var callInfo = result.GetT4MVCResult();
+            return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
         }
 
         [NonAction]
@@ -804,6 +1074,8 @@ namespace TFS.Web.Controllers {
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Name = "FlightPrograms";
+        [GeneratedCode("T4MVC", "2.0")]
+        public const string NameConst = "FlightPrograms";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -820,8 +1092,56 @@ namespace TFS.Web.Controllers {
             public readonly string EditProgramLocation = "EditProgramLocation";
         }
 
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionNameConstants {
+            public const string Index = "Index";
+            public const string Manage = "Manage";
+            public const string CreateFlightProgram = "CreateFlightProgram";
+            public const string EditFlightProgram = "EditFlightProgram";
+            public const string CreatePosition = "CreatePosition";
+            public const string RenamePosition = "RenamePosition";
+            public const string CreateProgramLocation = "CreateProgramLocation";
+            public const string EditProgramLocation = "EditProgramLocation";
+        }
 
+
+        static readonly ActionParamsClass_Manage s_params_Manage = new ActionParamsClass_Manage();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Manage ManageParams { get { return s_params_Manage; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Manage {
+            public readonly string showAllPrograms = "showAllPrograms";
+        }
+        static readonly ActionParamsClass_EditFlightProgram s_params_EditFlightProgram = new ActionParamsClass_EditFlightProgram();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EditFlightProgram EditFlightProgramParams { get { return s_params_EditFlightProgram; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EditFlightProgram {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_RenamePosition s_params_RenamePosition = new ActionParamsClass_RenamePosition();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_RenamePosition RenamePositionParams { get { return s_params_RenamePosition; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_RenamePosition {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_CreateProgramLocation s_params_CreateProgramLocation = new ActionParamsClass_CreateProgramLocation();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_CreateProgramLocation CreateProgramLocationParams { get { return s_params_CreateProgramLocation; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_CreateProgramLocation {
+            public readonly string flightProgramId = "flightProgramId";
+        }
+        static readonly ActionParamsClass_EditProgramLocation s_params_EditProgramLocation = new ActionParamsClass_EditProgramLocation();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EditProgramLocation EditProgramLocationParams { get { return s_params_EditProgramLocation; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EditProgramLocation {
+            public readonly string id = "id";
+        }
         static readonly ViewNames s_views = new ViewNames();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
@@ -849,7 +1169,7 @@ namespace TFS.Web.Controllers {
 
         public override System.Web.Mvc.ViewResult Manage(bool? showAllPrograms) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.Manage);
-            callInfo.RouteValueDictionary.Add("showAllPrograms", showAllPrograms);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "showAllPrograms", showAllPrograms);
             return callInfo;
         }
 
@@ -860,20 +1180,20 @@ namespace TFS.Web.Controllers {
 
         public override System.Web.Mvc.ActionResult CreateFlightProgram(TFS.Web.ViewModels.FlightPrograms.FlightProgramViewModel flightProgramViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateFlightProgram);
-            callInfo.RouteValueDictionary.Add("flightProgramViewModel", flightProgramViewModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "flightProgramViewModel", flightProgramViewModel);
             return callInfo;
         }
 
         public override System.Web.Mvc.ViewResult EditFlightProgram(System.Guid id) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.EditFlightProgram);
-            callInfo.RouteValueDictionary.Add("id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             return callInfo;
         }
 
         public override System.Web.Mvc.ActionResult EditFlightProgram(System.Guid id, TFS.Web.ViewModels.FlightPrograms.FlightProgramViewModel flightProgramViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EditFlightProgram);
-            callInfo.RouteValueDictionary.Add("id", id);
-            callInfo.RouteValueDictionary.Add("flightProgramViewModel", flightProgramViewModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "flightProgramViewModel", flightProgramViewModel);
             return callInfo;
         }
 
@@ -884,44 +1204,44 @@ namespace TFS.Web.Controllers {
 
         public override System.Web.Mvc.ActionResult CreatePosition(TFS.Web.ViewModels.FlightPrograms.PositionViewModel positionViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreatePosition);
-            callInfo.RouteValueDictionary.Add("positionViewModel", positionViewModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "positionViewModel", positionViewModel);
             return callInfo;
         }
 
         public override System.Web.Mvc.ViewResult RenamePosition(System.Guid id) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.RenamePosition);
-            callInfo.RouteValueDictionary.Add("id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             return callInfo;
         }
 
         public override System.Web.Mvc.ActionResult RenamePosition(System.Guid id, TFS.Web.ViewModels.FlightPrograms.PositionViewModel positionViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.RenamePosition);
-            callInfo.RouteValueDictionary.Add("id", id);
-            callInfo.RouteValueDictionary.Add("positionViewModel", positionViewModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "positionViewModel", positionViewModel);
             return callInfo;
         }
 
         public override System.Web.Mvc.ViewResult CreateProgramLocation(System.Guid flightProgramId) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.CreateProgramLocation);
-            callInfo.RouteValueDictionary.Add("flightProgramId", flightProgramId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "flightProgramId", flightProgramId);
             return callInfo;
         }
 
         public override System.Web.Mvc.ActionResult CreateProgramLocation(TFS.Web.ViewModels.FlightPrograms.ProgramLocationViewModel programLocationViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateProgramLocation);
-            callInfo.RouteValueDictionary.Add("programLocationViewModel", programLocationViewModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "programLocationViewModel", programLocationViewModel);
             return callInfo;
         }
 
         public override System.Web.Mvc.ViewResult EditProgramLocation(System.Guid id) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.EditProgramLocation);
-            callInfo.RouteValueDictionary.Add("id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             return callInfo;
         }
 
         public override System.Web.Mvc.ActionResult EditProgramLocation(TFS.Web.ViewModels.FlightPrograms.ProgramLocationViewModel programLocationViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EditProgramLocation);
-            callInfo.RouteValueDictionary.Add("programLocationViewModel", programLocationViewModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "programLocationViewModel", programLocationViewModel);
             return callInfo;
         }
 
@@ -939,6 +1259,12 @@ namespace TFS.Web.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result) {
+            var callInfo = result.GetT4MVCResult();
+            return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
+        }
+
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult StaticImage() {
@@ -951,6 +1277,8 @@ namespace TFS.Web.Controllers {
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Name = "Images";
+        [GeneratedCode("T4MVC", "2.0")]
+        public const string NameConst = "Images";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -960,8 +1288,21 @@ namespace TFS.Web.Controllers {
             public readonly string StaticImage = "StaticImage";
         }
 
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionNameConstants {
+            public const string StaticImage = "StaticImage";
+        }
 
+
+        static readonly ActionParamsClass_StaticImage s_params_StaticImage = new ActionParamsClass_StaticImage();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_StaticImage StaticImageParams { get { return s_params_StaticImage; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_StaticImage {
+            public readonly string id = "id";
+        }
         static readonly ViewNames s_views = new ViewNames();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
@@ -974,7 +1315,7 @@ namespace TFS.Web.Controllers {
 
         public override System.Web.Mvc.ActionResult StaticImage(System.Guid id) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.StaticImage);
-            callInfo.RouteValueDictionary.Add("id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             return callInfo;
         }
 
@@ -990,6 +1331,12 @@ namespace TFS.Web.Controllers {
         protected RedirectToRouteResult RedirectToAction(ActionResult result) {
             var callInfo = result.GetT4MVCResult();
             return RedirectToRoute(callInfo.RouteValueDictionary);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result) {
+            var callInfo = result.GetT4MVCResult();
+            return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
         }
 
         [NonAction]
@@ -1024,6 +1371,8 @@ namespace TFS.Web.Controllers {
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Name = "Messages";
+        [GeneratedCode("T4MVC", "2.0")]
+        public const string NameConst = "Messages";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -1038,8 +1387,54 @@ namespace TFS.Web.Controllers {
             public readonly string CreateSystemAlert = "CreateSystemAlert";
         }
 
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionNameConstants {
+            public const string ListMessages = "ListMessages";
+            public const string ListAllMessages = "ListAllMessages";
+            public const string CreateMessage = "CreateMessage";
+            public const string ViewMessage = "ViewMessage";
+            public const string CreateAnnouncement = "CreateAnnouncement";
+            public const string CreateSystemAlert = "CreateSystemAlert";
+        }
 
+
+        static readonly ActionParamsClass_ListAllMessages s_params_ListAllMessages = new ActionParamsClass_ListAllMessages();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ListAllMessages ListAllMessagesParams { get { return s_params_ListAllMessages; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ListAllMessages {
+            public readonly string messageType = "messageType";
+        }
+        static readonly ActionParamsClass_CreateMessage s_params_CreateMessage = new ActionParamsClass_CreateMessage();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_CreateMessage CreateMessageParams { get { return s_params_CreateMessage; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_CreateMessage {
+            public readonly string messageType = "messageType";
+        }
+        static readonly ActionParamsClass_ViewMessage s_params_ViewMessage = new ActionParamsClass_ViewMessage();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ViewMessage ViewMessageParams { get { return s_params_ViewMessage; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ViewMessage {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_CreateAnnouncement s_params_CreateAnnouncement = new ActionParamsClass_CreateAnnouncement();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_CreateAnnouncement CreateAnnouncementParams { get { return s_params_CreateAnnouncement; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_CreateAnnouncement {
+            public readonly string announcementViewModel = "announcementViewModel";
+        }
+        static readonly ActionParamsClass_CreateSystemAlert s_params_CreateSystemAlert = new ActionParamsClass_CreateSystemAlert();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_CreateSystemAlert CreateSystemAlertParams { get { return s_params_CreateSystemAlert; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_CreateSystemAlert {
+            public readonly string systemAlertViewModel = "systemAlertViewModel";
+        }
         static readonly ViewNames s_views = new ViewNames();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
@@ -1066,31 +1461,31 @@ namespace TFS.Web.Controllers {
 
         public override System.Web.Mvc.ViewResult ListAllMessages(TFS.Models.Messages.MessageType messageType) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.ListAllMessages);
-            callInfo.RouteValueDictionary.Add("messageType", messageType);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "messageType", messageType);
             return callInfo;
         }
 
         public override System.Web.Mvc.ViewResult CreateMessage(TFS.Models.Messages.MessageType messageType) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.CreateMessage);
-            callInfo.RouteValueDictionary.Add("messageType", messageType);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "messageType", messageType);
             return callInfo;
         }
 
         public override System.Web.Mvc.ViewResult ViewMessage(System.Guid id) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.ViewMessage);
-            callInfo.RouteValueDictionary.Add("id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             return callInfo;
         }
 
         public override System.Web.Mvc.ActionResult CreateAnnouncement(TFS.Web.ViewModels.Messages.AnnouncementViewModel announcementViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateAnnouncement);
-            callInfo.RouteValueDictionary.Add("announcementViewModel", announcementViewModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "announcementViewModel", announcementViewModel);
             return callInfo;
         }
 
         public override System.Web.Mvc.ActionResult CreateSystemAlert(TFS.Web.ViewModels.Messages.SystemAlertViewModel systemAlertViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateSystemAlert);
-            callInfo.RouteValueDictionary.Add("systemAlertViewModel", systemAlertViewModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "systemAlertViewModel", systemAlertViewModel);
             return callInfo;
         }
 
@@ -1106,6 +1501,12 @@ namespace TFS.Web.Controllers {
         protected RedirectToRouteResult RedirectToAction(ActionResult result) {
             var callInfo = result.GetT4MVCResult();
             return RedirectToRoute(callInfo.RouteValueDictionary);
+        }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result) {
+            var callInfo = result.GetT4MVCResult();
+            return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
         }
 
         [NonAction]
@@ -1145,6 +1546,8 @@ namespace TFS.Web.Controllers {
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Name = "PersonnelRecords";
+        [GeneratedCode("T4MVC", "2.0")]
+        public const string NameConst = "PersonnelRecords";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -1161,8 +1564,74 @@ namespace TFS.Web.Controllers {
             public readonly string DownloadAllAsCsv = "DownloadAllAsCsv";
         }
 
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionNameConstants {
+            public const string List = "List";
+            public const string EditRecord = "EditRecord";
+            public const string EditMyRecord = "EditMyRecord";
+            public const string EditPersonalInfo = "EditPersonalInfo";
+            public const string EditContactInfo = "EditContactInfo";
+            public const string EditCompanyInfo = "EditCompanyInfo";
+            public const string EditQualifications = "EditQualifications";
+            public const string DownloadAllAsCsv = "DownloadAllAsCsv";
+        }
 
+
+        static readonly ActionParamsClass_List s_params_List = new ActionParamsClass_List();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_List ListParams { get { return s_params_List; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_List {
+            public readonly string sortType = "sortType";
+            public readonly string sortDirection = "sortDirection";
+            public readonly string page = "page";
+            public readonly string itemsPerPage = "itemsPerPage";
+        }
+        static readonly ActionParamsClass_EditRecord s_params_EditRecord = new ActionParamsClass_EditRecord();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EditRecord EditRecordParams { get { return s_params_EditRecord; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EditRecord {
+            public readonly string username = "username";
+        }
+        static readonly ActionParamsClass_EditPersonalInfo s_params_EditPersonalInfo = new ActionParamsClass_EditPersonalInfo();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EditPersonalInfo EditPersonalInfoParams { get { return s_params_EditPersonalInfo; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EditPersonalInfo {
+            public readonly string username = "username";
+            public readonly string editingMyRecord = "editingMyRecord";
+            public readonly string personalInfo = "personalInfo";
+        }
+        static readonly ActionParamsClass_EditContactInfo s_params_EditContactInfo = new ActionParamsClass_EditContactInfo();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EditContactInfo EditContactInfoParams { get { return s_params_EditContactInfo; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EditContactInfo {
+            public readonly string username = "username";
+            public readonly string editingMyRecord = "editingMyRecord";
+            public readonly string contactInfo = "contactInfo";
+        }
+        static readonly ActionParamsClass_EditCompanyInfo s_params_EditCompanyInfo = new ActionParamsClass_EditCompanyInfo();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EditCompanyInfo EditCompanyInfoParams { get { return s_params_EditCompanyInfo; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EditCompanyInfo {
+            public readonly string username = "username";
+            public readonly string editingMyRecord = "editingMyRecord";
+            public readonly string companyInfo = "companyInfo";
+        }
+        static readonly ActionParamsClass_EditQualifications s_params_EditQualifications = new ActionParamsClass_EditQualifications();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EditQualifications EditQualificationsParams { get { return s_params_EditQualifications; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EditQualifications {
+            public readonly string username = "username";
+            public readonly string editingMyRecord = "editingMyRecord";
+            public readonly string qualifications = "qualifications";
+        }
         static readonly ViewNames s_views = new ViewNames();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
@@ -1177,16 +1646,16 @@ namespace TFS.Web.Controllers {
 
         public override System.Web.Mvc.ViewResult List(string sortType, System.Web.UI.WebControls.SortDirection? sortDirection, int? page, int? itemsPerPage) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.List);
-            callInfo.RouteValueDictionary.Add("sortType", sortType);
-            callInfo.RouteValueDictionary.Add("sortDirection", sortDirection);
-            callInfo.RouteValueDictionary.Add("page", page);
-            callInfo.RouteValueDictionary.Add("itemsPerPage", itemsPerPage);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "sortType", sortType);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "sortDirection", sortDirection);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "itemsPerPage", itemsPerPage);
             return callInfo;
         }
 
         public override System.Web.Mvc.ViewResult EditRecord(string username) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.EditRecord);
-            callInfo.RouteValueDictionary.Add("username", username);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "username", username);
             return callInfo;
         }
 
@@ -1197,33 +1666,33 @@ namespace TFS.Web.Controllers {
 
         public override System.Web.Mvc.ActionResult EditPersonalInfo(string username, bool editingMyRecord, TFS.Web.ViewModels.PersonnelRecords.PersonalInfo personalInfo) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EditPersonalInfo);
-            callInfo.RouteValueDictionary.Add("username", username);
-            callInfo.RouteValueDictionary.Add("editingMyRecord", editingMyRecord);
-            callInfo.RouteValueDictionary.Add("personalInfo", personalInfo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "username", username);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "editingMyRecord", editingMyRecord);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "personalInfo", personalInfo);
             return callInfo;
         }
 
         public override System.Web.Mvc.ActionResult EditContactInfo(string username, bool editingMyRecord, TFS.Web.ViewModels.PersonnelRecords.ContactInfo contactInfo) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EditContactInfo);
-            callInfo.RouteValueDictionary.Add("username", username);
-            callInfo.RouteValueDictionary.Add("editingMyRecord", editingMyRecord);
-            callInfo.RouteValueDictionary.Add("contactInfo", contactInfo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "username", username);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "editingMyRecord", editingMyRecord);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "contactInfo", contactInfo);
             return callInfo;
         }
 
         public override System.Web.Mvc.ActionResult EditCompanyInfo(string username, bool editingMyRecord, TFS.Web.ViewModels.PersonnelRecords.CompanyInfo companyInfo) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EditCompanyInfo);
-            callInfo.RouteValueDictionary.Add("username", username);
-            callInfo.RouteValueDictionary.Add("editingMyRecord", editingMyRecord);
-            callInfo.RouteValueDictionary.Add("companyInfo", companyInfo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "username", username);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "editingMyRecord", editingMyRecord);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "companyInfo", companyInfo);
             return callInfo;
         }
 
         public override System.Web.Mvc.ActionResult EditQualifications(string username, bool editingMyRecord, TFS.Web.ViewModels.PersonnelRecords.QualificationViewModel qualifications) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EditQualifications);
-            callInfo.RouteValueDictionary.Add("username", username);
-            callInfo.RouteValueDictionary.Add("editingMyRecord", editingMyRecord);
-            callInfo.RouteValueDictionary.Add("qualifications", qualifications);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "username", username);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "editingMyRecord", editingMyRecord);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "qualifications", qualifications);
             return callInfo;
         }
 
@@ -1246,6 +1715,12 @@ namespace TFS.Web.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result) {
+            var callInfo = result.GetT4MVCResult();
+            return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
+        }
+
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ViewResult LogOn() {
@@ -1258,6 +1733,8 @@ namespace TFS.Web.Controllers {
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Name = "Security";
+        [GeneratedCode("T4MVC", "2.0")]
+        public const string NameConst = "Security";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -1269,8 +1746,23 @@ namespace TFS.Web.Controllers {
             public readonly string ChangePassword = "ChangePassword";
         }
 
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionNameConstants {
+            public const string LogOn = "LogOn";
+            public const string LogOff = "LogOff";
+            public const string ChangePassword = "ChangePassword";
+        }
 
+
+        static readonly ActionParamsClass_LogOn s_params_LogOn = new ActionParamsClass_LogOn();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_LogOn LogOnParams { get { return s_params_LogOn; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_LogOn {
+            public readonly string returnUrl = "returnUrl";
+        }
         static readonly ViewNames s_views = new ViewNames();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
@@ -1285,16 +1777,16 @@ namespace TFS.Web.Controllers {
 
         public override System.Web.Mvc.ViewResult LogOn(System.Uri returnUrl) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.LogOn);
-            callInfo.RouteValueDictionary.Add("returnUrl", returnUrl);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
             return callInfo;
         }
 
         public override System.Web.Mvc.ActionResult LogOn(string userName, string password, bool rememberMe, System.Uri returnUrl) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.LogOn);
-            callInfo.RouteValueDictionary.Add("userName", userName);
-            callInfo.RouteValueDictionary.Add("password", password);
-            callInfo.RouteValueDictionary.Add("rememberMe", rememberMe);
-            callInfo.RouteValueDictionary.Add("returnUrl", returnUrl);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "userName", userName);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "password", password);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "rememberMe", rememberMe);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
             return callInfo;
         }
 
@@ -1310,9 +1802,9 @@ namespace TFS.Web.Controllers {
 
         public override System.Web.Mvc.ActionResult ChangePassword(string originalPassword, string newPassword, string confirmNewPassword) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ChangePassword);
-            callInfo.RouteValueDictionary.Add("originalPassword", originalPassword);
-            callInfo.RouteValueDictionary.Add("newPassword", newPassword);
-            callInfo.RouteValueDictionary.Add("confirmNewPassword", confirmNewPassword);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "originalPassword", originalPassword);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "newPassword", newPassword);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "confirmNewPassword", confirmNewPassword);
             return callInfo;
         }
 
@@ -1330,6 +1822,12 @@ namespace TFS.Web.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result) {
+            var callInfo = result.GetT4MVCResult();
+            return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
+        }
+
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public SiteController Actions { get { return MVC.Site; } }
@@ -1337,6 +1835,8 @@ namespace TFS.Web.Controllers {
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Name = "Site";
+        [GeneratedCode("T4MVC", "2.0")]
+        public const string NameConst = "Site";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -1351,8 +1851,19 @@ namespace TFS.Web.Controllers {
             public readonly string Contact = "Contact";
         }
 
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionNameConstants {
+            public const string Index = "Index";
+            public const string Home = "Home";
+            public const string Services = "Services";
+            public const string Programs = "Programs";
+            public const string Experience = "Experience";
+            public const string Contact = "Contact";
+        }
+
 
         static readonly ViewNames s_views = new ViewNames();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
@@ -1408,6 +1919,12 @@ namespace TFS.Web.Controllers {
             return RedirectToRoute(callInfo.RouteValueDictionary);
         }
 
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RedirectToRouteResult RedirectToActionPermanent(ActionResult result) {
+            var callInfo = result.GetT4MVCResult();
+            return RedirectToRoutePermanent(callInfo.RouteValueDictionary);
+        }
+
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ViewResult List() {
@@ -1425,6 +1942,8 @@ namespace TFS.Web.Controllers {
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Name = "Users";
+        [GeneratedCode("T4MVC", "2.0")]
+        public const string NameConst = "Users";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -1437,8 +1956,35 @@ namespace TFS.Web.Controllers {
             public readonly string Create = "Create";
         }
 
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionNameConstants {
+            public const string Index = "Index";
+            public const string List = "List";
+            public const string Edit = "Edit";
+            public const string Create = "Create";
+        }
 
+
+        static readonly ActionParamsClass_List s_params_List = new ActionParamsClass_List();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_List ListParams { get { return s_params_List; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_List {
+            public readonly string sortType = "sortType";
+            public readonly string sortDirection = "sortDirection";
+            public readonly string page = "page";
+            public readonly string itemsPerPage = "itemsPerPage";
+            public readonly string showAll = "showAll";
+        }
+        static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Edit EditParams { get { return s_params_Edit; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Edit {
+            public readonly string username = "username";
+        }
         static readonly ViewNames s_views = new ViewNames();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
@@ -1460,23 +2006,23 @@ namespace TFS.Web.Controllers {
 
         public override System.Web.Mvc.ViewResult List(string sortType, System.Web.UI.WebControls.SortDirection? sortDirection, int? page, int? itemsPerPage, bool? showAll) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.List);
-            callInfo.RouteValueDictionary.Add("sortType", sortType);
-            callInfo.RouteValueDictionary.Add("sortDirection", sortDirection);
-            callInfo.RouteValueDictionary.Add("page", page);
-            callInfo.RouteValueDictionary.Add("itemsPerPage", itemsPerPage);
-            callInfo.RouteValueDictionary.Add("showAll", showAll);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "sortType", sortType);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "sortDirection", sortDirection);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "itemsPerPage", itemsPerPage);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "showAll", showAll);
             return callInfo;
         }
 
         public override System.Web.Mvc.ViewResult Edit(string username) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.Edit);
-            callInfo.RouteValueDictionary.Add("username", username);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "username", username);
             return callInfo;
         }
 
         public override System.Web.Mvc.ActionResult Edit(TFS.Web.ViewModels.UserViewModel userViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
-            callInfo.RouteValueDictionary.Add("userViewModel", userViewModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "userViewModel", userViewModel);
             return callInfo;
         }
 
@@ -1487,7 +2033,7 @@ namespace TFS.Web.Controllers {
 
         public override System.Web.Mvc.ActionResult Create(TFS.Web.ViewModels.UserViewModel userViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Create);
-            callInfo.RouteValueDictionary.Add("userViewModel", userViewModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "userViewModel", userViewModel);
             return callInfo;
         }
 
@@ -1498,6 +2044,7 @@ namespace T4MVC {
     public class SharedController {
 
         static readonly ViewNames s_views = new ViewNames();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
@@ -1509,15 +2056,110 @@ namespace T4MVC {
 
 
 
-namespace T4MVC {
-    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public class Dummy {
-        private Dummy() { }
-        public static Dummy Instance = new Dummy();
-    }
-}
 
 #endregion T4MVC
 #pragma warning restore 1591
+
+namespace System.Web.Mvc {
+    #region ModelUnbinders
+    [GeneratedCode("T4MVC", "2.0")]
+    public interface IModelUnbinder {
+        void UnbindModel(RouteValueDictionary routeValueDictionary, string routeName, object routeValue);
+    }
+    [GeneratedCode("T4MVC", "2.0")]
+    public interface IModelUnbinder<in T> where T : class {
+        void UnbindModel(RouteValueDictionary routeValueDictionary, string routeName, T routeValue);
+    }
+    [GeneratedCode("T4MVC", "2.0")]
+        public class ModelUnbinders {
+        private class GenericModelUnbinderWrapper<T> : IModelUnbinder where T : class {
+            private readonly IModelUnbinder<T> _unbinder;
+
+            public GenericModelUnbinderWrapper(IModelUnbinder<T> unbinder) {
+                _unbinder = unbinder;
+            }
+
+            public void UnbindModel(RouteValueDictionary routeValueDictionary, string routeName, object routeValue) {
+                var typedObject = routeValue as T;
+                _unbinder.UnbindModel(routeValueDictionary, routeName, typedObject);
+            }
+        }
+        
+        private readonly Dictionary<Type, IModelUnbinder> _unbinders = new Dictionary<Type, IModelUnbinder>();
+        public virtual void Add(Type type, IModelUnbinder unbinder) {
+            _unbinders[type] = unbinder;
+        }
+        public virtual void Add<T>(IModelUnbinder<T> unbinder) where T : class {
+            Add(typeof(T), new GenericModelUnbinderWrapper<T>(unbinder));
+        }
+        public virtual IModelUnbinder FindUnbinderFor(Type type) {
+            IModelUnbinder resultUnbinder = null;
+            Type baseType = null;
+            foreach (var unbinder in _unbinders) {
+                if (unbinder.Key.IsAssignableFrom(type)) {
+                    if ((baseType == null) || baseType.IsAssignableFrom(unbinder.Key)) {
+                        resultUnbinder = unbinder.Value;
+                        baseType = unbinder.Key;
+                    }
+                }
+            }
+            return resultUnbinder;
+        }
+        
+        public virtual void Clear() {
+            _unbinders.Clear();
+        }
+    }
+    [GeneratedCode("T4MVC", "2.0")]
+    public class DefaultModelUnbinder : IModelUnbinder {
+        public void UnbindModel(RouteValueDictionary routeValueDictionary, string routeName, object routeValue) {
+            routeValueDictionary.Add(routeName, routeValue);
+        }
+    }
+    [GeneratedCode("T4MVC", "2.0")]
+    public class PropertiesUnbinder : IModelUnbinder {
+        public virtual void UnbindModel(RouteValueDictionary routeValueDictionary, string routeName, object routeValue) {
+            var dict = new RouteValueDictionary(routeValue);
+            foreach (var entry in dict) {
+                var name = entry.Key;
+
+                if (!(entry.Value is string) && (entry.Value is System.Collections.IEnumerable)) {
+                    var enumerableValue = (System.Collections.IEnumerable)entry.Value;
+                    var i = 0;
+                    foreach (var enumerableElement in enumerableValue) {
+                        ModelUnbinderHelpers.AddRouteValues(routeValueDictionary, string.Format("{0}.{1}[{2}]", routeName, name, i), enumerableElement);
+                        i++;
+                    }
+                }
+                else {
+                    ModelUnbinderHelpers.AddRouteValues(routeValueDictionary, routeName + "." + name, entry.Value);
+                }
+            }
+        }
+    }
+    public class ModelUnbinderHelpers {
+        public static void AddRouteValues(RouteValueDictionary routeValueDictionary, string routeName, object routeValue) {
+            IModelUnbinder unbinder = DefaultModelUnbinder;
+            if (routeValue != null)
+            {
+                unbinder = ModelUnbinders.FindUnbinderFor(routeValue.GetType()) ?? DefaultModelUnbinder;
+            }
+            unbinder.UnbindModel(routeValueDictionary, routeName, routeValue);
+        }
+    
+        private static readonly ModelUnbinders _modelUnbinders = new ModelUnbinders();
+        public static ModelUnbinders ModelUnbinders {
+            get { return _modelUnbinders; }
+        }
+
+        public static IModelUnbinder DefaultModelUnbinder { get; set; }
+        static ModelUnbinderHelpers() {
+            DefaultModelUnbinder = new DefaultModelUnbinder();
+        }
+    }
+}
+    #endregion
+
+
 
 

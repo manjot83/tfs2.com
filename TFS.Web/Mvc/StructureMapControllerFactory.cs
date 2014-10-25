@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using TFS.Models;
 using StructureMap;
+using System.Web.Routing;
 
 namespace TFS.Web.Mvc {
     public class StructureMapControllerFactory : DefaultControllerFactory {
@@ -11,12 +12,13 @@ namespace TFS.Web.Mvc {
             this.container = container;
         }
 
-        protected override IController GetControllerInstance(Type controllerType) {
+        protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
+        {
             if (controllerType == null)
-                return base.GetControllerInstance(controllerType);
+                return base.GetControllerInstance(requestContext, controllerType);
             var controller = (TransactionalController)container.GetInstance(controllerType);
             if (controller == null)
-                return base.GetControllerInstance(controllerType);
+                return base.GetControllerInstance(requestContext, controllerType);
             controller.UnitOfWork = container.GetInstance<IUnitOfWork>();
             controller.ActionInvoker = new TransactionalActionInvoker();
             return controller;
