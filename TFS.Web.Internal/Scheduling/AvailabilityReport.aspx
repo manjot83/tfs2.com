@@ -25,8 +25,9 @@
             </asp:DropDownList>
             <asp:DropDownList ID="YearDropDown" runat="Server">
                 <asp:ListItem Text="2007" Value="2007"></asp:ListItem>
-                <asp:ListItem Text="2008" Value="2008" Selected="true"></asp:ListItem>
-                <asp:ListItem Text="2009" Value="2009"></asp:ListItem>
+                <asp:ListItem Text="2008" Value="2008"></asp:ListItem>
+                <asp:ListItem Text="2009" Value="2009" Selected="True"></asp:ListItem>
+                <asp:ListItem Text="2010" Value="2010"></asp:ListItem>
             </asp:DropDownList>
             <asp:LinkButton ID="SelectMonthButton" runat="server" Text="Select Month"></asp:LinkButton>
         </p>

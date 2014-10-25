@@ -23,7 +23,7 @@
         | <asp:HyperLink ID="IntranetLink" runat="server" NavigateUrl="~" Text="Intranet Home" /> |
         <a href="http://www.tfs2.com" class="highlight">TFS Home</a> |
         <a href="https://apollo.tfs2.com/exchange" class="highlight">Webmail</a> |
-        <a href="https://apollo.tfs2.com/password" class="highlight">Change Password</a> |
+        <a href="http://secure.tfs2.com/Security/ChangePassword" class="highlight">Change Password</a> |
         <asp:HyperLink ID="PayrollLink" runat="server" NavigateUrl="~/Billing/default.aspx" Text="My Timecards" /> |        
       </div>
       

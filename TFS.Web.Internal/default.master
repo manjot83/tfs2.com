@@ -16,11 +16,11 @@
     <tfs:header ID="header_control" runat="server" />
 
     <!-- ##### Side Bar ##### -->
-    <%--<tfs:siderbar ID="sidebar_control" runat="server" />--%>
+    <tfs:siderbar ID="sidebar_control" runat="server" />
 
     <!-- ##### Main Copy ##### -->
     <div id="main-copy">
-        <asp:contentplaceholder id="MainContent" runat="server" Visible="true">
+        <asp:contentplaceholder id="MainContent" runat="server">
         </asp:contentplaceholder>
     </div>
     

@@ -19,6 +19,13 @@
             </asp:HyperLink>
         </li>
         <li>
+            <asp:HyperLink runat="server" NavigateUrl="http://secure.tfs2.com/FlightLogs">
+                <asp:Image  runat="server" ImageUrl="~/icons/transmit_go.png" ImageAlign="Middle" />
+                &nbsp;
+                Flight logs
+            </asp:HyperLink>
+        </li>
+        <li>
             <asp:HyperLink ID="HyperLink16" runat="server" NavigateUrl="~/Forms/SRFListing.aspx">
                 <asp:Image ID="Image17" runat="server" ImageUrl="~/icons/shield_go.png" ImageAlign="Middle" />
                 &nbsp;
@@ -73,7 +80,7 @@
     <p class="sideBarTitle">Self Service</p>
     <ul>         
         <li>
-            <asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="https://apollo.tfs2.com/password">
+            <asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="http://secure.tfs2.com/Security/ChangePassword">
                 <asp:Image ID="Image8" runat="server" ImageUrl="~/icons/lock_go.png" ImageAlign="Middle" />
                 &nbsp;
                 Change My Password
@@ -81,10 +88,10 @@
         </li>      
         
         <li>
-            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Forms/PersonnelFile.aspx">
+            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="http://secure.tfs2.com/PersonnelRecords/EditMyRecord">
                 <asp:Image ID="Image16" runat="server" ImageUrl="~/icons/table_go.png" ImageAlign="Middle" />
                 &nbsp;
-                My Personnel Record
+                My Personnel File
             </asp:HyperLink>
         </li>  
        
@@ -129,10 +136,17 @@
             </asp:HyperLink>
         </li>
         <li>
-            <asp:HyperLink ID="HyperLink13" runat="server" NavigateUrl="~/Users/admin.aspx">
+            <asp:HyperLink ID="HyperLink13" runat="server" NavigateUrl="http://secure.tfs2.com/Users">
                 <asp:Image ID="Image13" runat="server" ImageUrl="~/icons/user_go.png" ImageAlign="Middle" />
                 &nbsp;
                 People Admin
+            </asp:HyperLink>
+        </li>
+        <li>
+            <asp:HyperLink runat="server" NavigateUrl="http://secure.tfs2.com/PersonnelRecords/List">
+                <asp:Image  runat="server" ImageUrl="~/icons/user_go.png" ImageAlign="Middle" />
+                &nbsp;
+                Personnel Files
             </asp:HyperLink>
         </li>
         <li>

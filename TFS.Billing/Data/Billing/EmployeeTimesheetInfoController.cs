@@ -99,10 +99,10 @@ namespace TFS.Intranet.Data.Billing
             BillingPeriodAccountsJoinCollection col = new BillingPeriodAccountsJoinCollection().Where(BillingPeriodAccountsJoin.Columns.Openuntil, SubSonic.Comparison.GreaterOrEquals, DateTime.Now).Load();
             BillingPeriodAccountsJoinCollection returnCollection = new BillingPeriodAccountsJoinCollection();
             returnCollection.AddRange(col);
-            foreach (Timesheet timesheet in new TimesheetController().FetchByUsername(Username))
-                foreach (BillingPeriodAccountsJoin billingperiod in col)
-                    if (billingperiod.Id == timesheet.Periodaccountid)
-                        returnCollection.Remove(billingperiod);
+            //foreach (Timesheet timesheet in new TimesheetController().FetchByUsername(Username))
+            //    foreach (BillingPeriodAccountsJoin billingperiod in col)
+            //        if (billingperiod.Id == timesheet.Periodaccountid)
+            //            returnCollection.Remove(billingperiod);
             returnCollection.Sort(BillingPeriodAccountsJoin.Columns.Periodid, true);
             return returnCollection;
         }

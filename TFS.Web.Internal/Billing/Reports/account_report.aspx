@@ -30,68 +30,67 @@
             </div>
         </ItemTemplate>
     </asp:Repeater>
-    
-    <table id="Table1" width="100%" style="border: solid 2px black; font-family:Arial;" cellspacing="0">
-        
-         <tr style="background-color: #CCCCCC;">
-            <td align="center" colspan="11">&nbsp;</td>
+   
+    <table id="Table1" width="550px" style="border: solid 2px black; font-family:Arial;" cellspacing="0">
+        <tr style="background-color: #CCCCCC;">
+            <td align="center" colspan="4">&nbsp;</td>
         </tr>
         <tr style="background-color: #CCCCCC; font-family:Arial;">
-            <td align="center">Position</td>
-            <td align="center">Total <asp:Label ID="report_ratename1" runat="server" /></td>
-            <td align="center">Total <asp:Label ID="report_ratename2" runat="server" /></td>
-            <td align="center">Total <asp:Label ID="report_ratename3" runat="server" /></td>
-            <td align="center">Total <asp:Label ID="report_ratename4" runat="server" /></td>
-            <td align="center">Total Time</td>
-            <td align="center">Total Expenses</td>
-            <td align="center">Total Per Diem</td>
-            <td align="center">Total Mileage</td>
-            <td align="center">Total Labor Billed</td>
-            <td align="center">Total Invoice</td>
+            <td align="center">&nbsp;</td>
+            <td align="center" style="background-color: #CCCCCC;">Time</td>
+            <td align="center" style="background-color: #CCCCCC;">Billing Rate</td>
+            <td align="center">Billed Line Items</td>       
+        </tr>
+        <asp:Repeater ID="BillingGroupRepeater" runat="server">
+            <ItemTemplate>
+                <tr>
+                    <td align="center" style="background-color: #CCCCCC;">Total <%# Eval("RateGroupName") %></td>
+                    <td align="center"><b><%# Eval("TotalHours") %> Hours</b></td>
+                    <td align="center">$<%# Eval("Rate") %>/hr</td>
+                    <td align="center"><b>$<%# Double.Parse(Eval("TotalHours").ToString()) * Double.Parse(Eval("Rate").ToString()) %></b></td>
+                </tr>
+            </ItemTemplate>
+        </asp:Repeater>
+        <tr>
+            <td align="center" style="background-color: #CCCCCC;">&nbsp;</td>
+            <td align="center" colspan="3">&nbsp;</td>
         </tr>
         <tr>
-            <td align="center" style="background-color: #CCCCCC;">Time</td>
-            <td align="center"><b><asp:Label ID="report_Total1Hours" runat="server" /> Hours</b></td>
-            <td align="center"><b><asp:Label ID="report_Total2Hours" runat="server" /> Hours</b></td>
-            <td align="center"><b><asp:Label ID="report_Total3Hours" runat="server" /> Hours</b></td>
-            <td align="center"><b><asp:Label ID="report_Total4Hours" runat="server" /> Hours</b></td>
-            <td align="center"><b><asp:Label ID="report_TotalHours" runat="server" /> Hours</b></td>
-            <td align="center"><b>$<asp:Label ID="report_TotalExpenses" runat="server" /></b></td>
-            <td align="center"><b><asp:Label ID="report_TotalPerDiemCount" runat="server" /> Days</b></td>  
-            <td align="center"><b><asp:Label ID="report_TotalMileage" runat="server" /> Miles</b></td>
-            <td align="center"><b></b></td>      
-            <td align="center"><b></b></td>                                    
+            <td align="center" style="background-color: #CCCCCC;">Total Time</td>
+            <td align="center"><b><%= GetTotalHours().ToString() %></b></td>
+            <td align="center" colspan="2">&nbsp;</td>            
         </tr>
-        <tr style="background-color: #FFFFFF;">
-            <td align="center" style="background-color: #CCCCCC;">&nbsp;</td>
-            <td align="center" colspan="10">&nbsp;</td>
+        <tr>
+            <td align="center" style="background-color: #CCCCCC;">Total Expenses</td>
+            <td align="center"><b>$<%= summaryinfo.Rows[0]["ExpenseTotal"].ToString() %></b></td>
+            <td align="center">&nbsp;</td>            
+            <td align="center"><b>$<%= summaryinfo.Rows[0]["ExpenseTotal"].ToString() %></b></td>
         </tr>
-        <tr style="background-color: #FFFFFF;">
-            <td align="center" style="background-color: #CCCCCC;">Billing Rate</td>
-            <td align="center">$<asp:Label ID="report_1rate" runat="server" />/hr</td>
-            <td align="center">$<asp:Label ID="report_2rate" runat="server" />/hr</td>
-            <td align="center">$<asp:Label ID="report_3rate" runat="server" />/hr</td>
-            <td align="center">$<asp:Label ID="report_4rate" runat="server" />/hr</td>
-            <td align="center" colspan="2">&nbsp;</td>
-            <td align="center">$<asp:Label ID="report_perdiemrate" runat="server" />/hr</td>
-            <td align="center">$<asp:Label ID="report_mileagerate" runat="server" />/mile</td>
-            <td align="center" colspan="2">&nbsp;</td>
+        <tr>
+            <td align="center" style="background-color: #CCCCCC;">Total Per Diem</td>
+            <td align="center"><b><%= summaryinfo.Rows[0]["PerDiemTotal"].ToString()%> Days</b></td>
+            <td align="center"><%= summaryinfo.Rows[0]["PerDiemRate"].ToString()%>/hr</td>    
+            <td align="center"><b>$<%= GetTotalPerDiem().ToString() %></b></td>
         </tr>
-        <tr style="background-color: #CCCCCC;">
-            <td align="center">Billed Line Items</td>                                
-            <td align="center"><b>$<asp:Label ID="report_line_1" runat="server" /></b></td>
-            <td align="center"><b>$<asp:Label ID="report_line_2" runat="server" /></b></td>
-            <td align="center"><b>$<asp:Label ID="report_line_3" runat="server" /></b></td>
-            <td align="center"><b>$<asp:Label ID="report_line_4" runat="server" /></b></td>
-            <td align="center">&nbsp;</td>                
-            <td align="center"><b>$<asp:Label ID="report_line_expensetotal" runat="server" /></b></td>
-            <td align="center"><b>$<asp:Label ID="report_line_perdiem" runat="server" /></b></td>
-            <td align="center"><b>$<asp:Label ID="report_line_mileage" runat="server" /></b></td>
-            <td align="center"><b>$<asp:Label ID="report_line_labor" runat="server" /></b></td>
-            <td align="center"><b>$<asp:Label ID="report_line_invoice" runat="server" /></b></td>
+        <tr>
+            <td align="center" style="background-color: #CCCCCC;">Total Mileage</td>
+            <td align="center"><b><%= summaryinfo.Rows[0]["MileageTotal"].ToString() %> Days</b></td>
+            <td align="center"><%= summaryinfo.Rows[0]["MileageRate"].ToString()%>/hr</td>    
+            <td align="center"><b>$<%= GetTotalMileage().ToString() %></b></td>
         </tr>
-        
-    </table>   
+        <tr>
+            <td align="center" style="background-color: #CCCCCC;">Total Labor Billed</td>
+            <td align="center" colspan="2">&nbsp;</td>            
+            <td align="center"><b>$<%= GetTotalLabor().ToString() %></b></td>
+        </tr>
+        <tr>
+            <td align="center" style="background-color: #CCCCCC;">Total Invoice</td>
+            <td align="center" colspan="2">&nbsp;</td>            
+            <td align="center"><b>$<%= GetTotalBilled().ToString() %></b></td>
+        </tr>
+    </table>
+    
+   
     <table width="100%" cellspacing="0">
     <tr>
             <td align="center">Report Generated: <%= DateTime.Now.ToShortDateString() %></td>
