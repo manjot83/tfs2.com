@@ -34,10 +34,34 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\lib\NHibernate\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\lib\NHibernate\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="nfop">
+      <HintPath>..\lib\nfop.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\lib\NHibernate\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.Castle">
+      <HintPath>..\lib\NHibernate\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Linq">
+      <HintPath>..\lib\NHibernate\NHibernate.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\lib\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -68,7 +92,113 @@
     <Compile Include="Logging\Log.cs" />
     <Compile Include="Logging\LogFileTraceListener.cs" />
     <Compile Include="Logging\LogTraceListenerCollection.cs" />
+    <Compile Include="Models\BaseDomainObject.cs" />
+    <Compile Include="Models\Data\Bytecode\StructureMapBackedBytecodeProvider.cs" />
+    <Compile Include="Models\Data\Bytecode\StructureMapBackedObjectsFactory.cs" />
+    <Compile Include="Models\Data\Bytecode\StructureMapBackedReflectionOptimizer.cs" />
+    <Compile Include="Models\Data\Configuration\ConfigurationBuilder.cs" />
+    <Compile Include="Models\Data\Configuration\CoreRegistry.cs" />
+    <Compile Include="Models\Data\Configuration\DatabaseBuilder.cs" />
+    <Compile Include="Models\Data\Implementations\FlightLogRepository.cs" />
+    <Compile Include="Models\Data\Implementations\FlightProgramsRepository.cs" />
+    <Compile Include="Models\Data\Implementations\HelpRepository.cs" />
+    <Compile Include="Models\Data\Implementations\MessagesRepository.cs" />
+    <Compile Include="Models\Data\Implementations\SiteRepository.cs" />
+    <Compile Include="Models\Data\Implementations\UserRepository.cs" />
+    <Compile Include="Models\Data\INHibernateUnitOfWork.cs" />
+    <Compile Include="Models\Data\Mappings\FlightLogs\FlightLogMap.cs" />
+    <Compile Include="Models\Data\Mappings\FlightLogs\MissionMap.cs" />
+    <Compile Include="Models\Data\Mappings\FlightLogs\SquadronLogMap.cs" />
+    <Compile Include="Models\Data\Mappings\FlightPrograms\AircraftMDSMap.cs" />
+    <Compile Include="Models\Data\Mappings\FlightPrograms\FlightProgramMap.cs" />
+    <Compile Include="Models\Data\Mappings\FlightPrograms\PositionMap.cs" />
+    <Compile Include="Models\Data\Mappings\FlightPrograms\ProgramLocationMap.cs" />
+    <Compile Include="Models\Data\Mappings\Help\AnswerClassMap.cs" />
+    <Compile Include="Models\Data\Mappings\Help\QuestionClassMap.cs" />
+    <Compile Include="Models\Data\Mappings\Images\StaticImageMap.cs" />
+    <Compile Include="Models\Data\Mappings\MappingExtensions.cs" />
+    <Compile Include="Models\Data\Mappings\Messages\AnnouncementClassMap.cs" />
+    <Compile Include="Models\Data\Mappings\Messages\MessageClassMap.cs" />
+    <Compile Include="Models\Data\Mappings\Messages\MessageStatusClassMap.cs" />
+    <Compile Include="Models\Data\Mappings\Messages\SystemAlertClassMap.cs" />
+    <Compile Include="Models\Data\Mappings\Messages\UserAlertClassMap.cs" />
+    <Compile Include="Models\Data\Mappings\PersonnelRecords\CertificateMap.cs" />
+    <Compile Include="Models\Data\Mappings\PersonnelRecords\PersonMap.cs" />
+    <Compile Include="Models\Data\Mappings\PersonnelRecords\QualificationsMap.cs" />
+    <Compile Include="Models\Data\Mappings\Site\PageMap.cs" />
+    <Compile Include="Models\Data\Mappings\Users\UserMapping.cs" />
+    <Compile Include="Models\Data\NHibernateRepository.cs" />
+    <Compile Include="Models\Data\NHibernateUnitOfWork.cs" />
+    <Compile Include="Models\Data\SessionExtensions.cs" />
+    <Compile Include="Models\Data\UserTypes\USStateUserType.cs" />
+    <Compile Include="Models\Data\UserTypes\UtcDateTimeUserType.cs" />
+    <Compile Include="Models\DomainEqualityAttribute.cs" />
+    <Compile Include="Models\DomainModelException.cs" />
+    <Compile Include="Models\FlightLogs\DutyCode.cs" />
+    <Compile Include="Models\FlightLogs\FlightLog.cs" />
+    <Compile Include="Models\FlightLogs\IFlightLogRepository.cs" />
+    <Compile Include="Models\FlightLogs\Mission.cs" />
+    <Compile Include="Models\FlightLogs\SquadronLog.cs" />
+    <Compile Include="Models\FlightPrograms\AircraftMDS.cs" />
+    <Compile Include="Models\FlightPrograms\FlightProgram.cs" />
+    <Compile Include="Models\FlightPrograms\IFlightProgramsRepository.cs" />
+    <Compile Include="Models\FlightPrograms\Position.cs" />
+    <Compile Include="Models\FlightPrograms\ProgramLocation.cs" />
+    <Compile Include="Models\Geography\USAddress.cs" />
+    <Compile Include="Models\Geography\USState.cs" />
+    <Compile Include="Models\Help\Answer.cs" />
+    <Compile Include="Models\Help\IHelpRepository.cs" />
+    <Compile Include="Models\Help\Question.cs" />
+    <Compile Include="Models\IDomainObject.cs" />
+    <Compile Include="Models\IKeyedModel.cs" />
+    <Compile Include="Models\Images\IImageFinder.cs" />
+    <Compile Include="Models\Images\StaticImage.cs" />
+    <Compile Include="Models\InvalidModelException.cs" />
+    <Compile Include="Models\IRepository.cs" />
+    <Compile Include="Models\IUnitOfWork.cs" />
+    <Compile Include="Models\Messages\Announcement.cs" />
+    <Compile Include="Models\Messages\IMessagesRepository.cs" />
+    <Compile Include="Models\Messages\Message.cs" />
+    <Compile Include="Models\Messages\MessageStatus.cs" />
+    <Compile Include="Models\Messages\MessageType.cs" />
+    <Compile Include="Models\Messages\SystemAlert.cs" />
+    <Compile Include="Models\Messages\UserAlert.cs" />
+    <Compile Include="Models\PersonnelRecords\Certificate.cs" />
+    <Compile Include="Models\PersonnelRecords\CertificateType.cs" />
+    <Compile Include="Models\PersonnelRecords\FCFQualification.cs" />
+    <Compile Include="Models\PersonnelRecords\FlightSuitSize.cs" />
+    <Compile Include="Models\PersonnelRecords\Gender.cs" />
+    <Compile Include="Models\PersonnelRecords\Person.cs" />
+    <Compile Include="Models\PersonnelRecords\Qualifications.cs" />
+    <Compile Include="Models\PersonnelRecords\ServiceBranch.cs" />
+    <Compile Include="Models\PersonnelRecords\ShirtSize.cs" />
+    <Compile Include="Models\RegExLib.cs" />
+    <Compile Include="Models\Reports\CsvReportGenerator.cs" />
+    <Compile Include="Models\Reports\FlightTimeSummaryReport.cs" />
+    <Compile Include="Models\Reports\ICsvReport.cs" />
+    <Compile Include="Models\Reports\IXmlReport.cs" />
+    <Compile Include="Models\Reports\PdfReportGenerator.cs" />
+    <Compile Include="Models\Reports\PersonnelFileReport.cs" />
+    <Compile Include="Models\Site\ISiteRepository.cs" />
+    <Compile Include="Models\Site\Page.cs" />
+    <Compile Include="Models\Users\IUserRepository.cs" />
+    <Compile Include="Models\Users\Roles.cs" />
+    <Compile Include="Models\Users\User.cs" />
+    <Compile Include="Models\Users\UserRoles.cs" />
+    <Compile Include="Models\Validation\DataAnnotationsValidator.cs" />
+    <Compile Include="Models\Validation\DateIsInFutureAttribute.cs" />
+    <Compile Include="Models\Validation\DateIsInPastAttribute.cs" />
+    <Compile Include="Models\Validation\DateRangeAttribute.cs" />
+    <Compile Include="Models\Validation\DateTimeKindAttribute.cs" />
+    <Compile Include="Models\Validation\DigitsAttribute.cs" />
+    <Compile Include="Models\Validation\MilitaryTimeFormatAttribute.cs" />
+    <Compile Include="Models\Validation\StringIsEmailAttribute.cs" />
+    <Compile Include="Models\Validation\StringIsNumericAttribute.cs" />
+    <Compile Include="Models\Validation\ValidationError.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Models\Reports\FlightTimeSummary.xsl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

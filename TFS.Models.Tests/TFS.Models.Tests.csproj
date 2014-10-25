@@ -107,14 +107,6 @@
       <Project>{88F0DC86-E359-4746-98B8-F320EA7C2D49}</Project>
       <Name>TFS.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TFS.Models.Data\TFS.Models.Data.csproj">
-      <Project>{A4BDC461-2A4C-4AC7-BB5D-18D3A4CF5DAC}</Project>
-      <Name>TFS.Models.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\TFS.Models\TFS.Models.csproj">
-      <Project>{67E5844A-31A4-49F7-ABCE-2D70559D4EB7}</Project>
-      <Name>TFS.Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
