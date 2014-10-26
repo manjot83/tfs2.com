@@ -4,6 +4,105 @@
         <name>Elmah</name>
     </assembly>
     <members>
+        <member name="T:Elmah.Assertions.AssertionFactoryHandler">
+            <summary>
+            Represents the method that will be responsible for creating an 
+            assertion object and initializing it from an XML configuration
+            element.
+            </summary>
+        </member>
+        <member name="T:Elmah.Assertions.AssertionFactory">
+            <summary>
+            Holds factory methods for creating configured assertion objects.
+            </summary>
+        </member>
+        <member name="M:Elmah.Assertions.AssertionFactory.DecodeClrTypeNamespaceFromXmlNamespace(System.String,System.String@,System.String@)">
+            <remarks>
+            Ideally, we would be able to use SoapServices.DecodeXmlNamespaceForClrTypeNamespace
+            but that requires a link demand permission that will fail in partially trusted
+            environments such as ASP.NET medium trust.
+            </remarks>
+        </member>
+        <member name="T:Elmah.Assertions.ComparisonAssertion">
+            <summary>
+            An assertion implementation whose test is based on whether
+            the result of an input expression evaluated against a context
+            matches a regular expression pattern or not.
+            </summary>
+        </member>
+        <member name="T:Elmah.Assertions.IAssertion">
+            <summary>
+            Provides evaluation of a context to determine whether it matches
+            certain criteria or not.
+            </summary>
+        </member>
+        <member name="M:Elmah.Assertions.IAssertion.Test(System.Object)">
+            <remarks>
+            The context is typed generically as System.Object when it could have
+            been restricted to System.Web.HttpContext and also avoid unnecessary
+            casting downstream. However, using object allows simple
+            assertions to be unit-tested without having to stub out a lot of
+            the classes from System.Web (most of which cannot be stubbed anyhow
+            due to lack of virtual and instance methods).
+            </remarks>
+        </member>
+        <member name="T:Elmah.Assertions.CompositeAssertion">
+            <summary>
+            Read-only collection of <see cref="T:Elmah.Assertions.IAssertion"/> instances.
+            </summary>
+        </member>
+        <member name="T:Elmah.DataBinder">
+            <summary>
+            Provides data expression evaluation facilites similar to 
+            <see cref="T:System.Web.UI.DataBinder"/> in ASP.NET.
+            </summary>
+        </member>
+        <member name="T:Elmah.Assertions.JScriptAssertion">
+            <summary>
+            An assertion implementation that uses a JScript expression to
+            determine the outcome.
+            </summary>
+            <remarks>
+            Each instance of this type maintains a separate copy of the JScript 
+            engine so use it sparingly. For example, instead of creating several
+            objects, each with different a expression, try and group all
+            expressions that apply to particular context into a single compound 
+            JScript expression using the conditional-OR (||) operator.
+            </remarks>
+        </member>
+        <member name="T:Elmah.Assertions.JScriptAssertion.PartialTrustEvaluationStrategy">
+            <summary>
+            Uses the JScript eval function to compile and evaluate the
+            expression against the context on each evaluation.
+            </summary>
+        </member>
+        <member name="T:Elmah.Assertions.JScriptAssertion.FullTrustEvaluationStrategy">
+            <summary>
+            Compiles the given expression into a JScript function at time of 
+            construction and then simply invokes it during evaluation, using
+            the context as a parameter.
+            </summary>
+        </member>
+        <member name="T:Elmah.Assertions.RegexMatchAssertion">
+            <summary>
+            An assertion implementation whose test is based on whether
+            the result of an input expression evaluated against a context
+            matches a regular expression pattern or not.
+            </summary>
+        </member>
+        <member name="T:Elmah.Assertions.StaticAssertion">
+            <summary>
+            An static assertion implementation that always evaluates to 
+            a preset value.
+            </summary>
+        </member>
+        <member name="T:Elmah.Assertions.TypeAssertion">
+            <summary>
+            An assertion implementation whose test is based on whether
+            the result of an input expression evaluated against a context
+            matches a regular expression pattern or not.
+            </summary>
+        </member>
         <member name="T:Elmah.AboutPage">
             <summary>
             Renders an HTML page that presents information about the version,
@@ -15,37 +114,6 @@
             <summary>
             Provides the base implementation and layout for most pages that render 
             HTML for the error log.
-            </summary>
-        </member>
-        <member name="T:Elmah.ApplicationException">
-            <summary>
-            The exception that is thrown when a non-fatal error occurs. 
-            This exception also serves as the base for all exceptions thrown by
-            this library.
-            </summary>
-        </member>
-        <member name="M:Elmah.ApplicationException.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Elmah.ApplicationException"/> class.
-            </summary>
-        </member>
-        <member name="M:Elmah.ApplicationException.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Elmah.ApplicationException"/> class 
-            with a specified error message.
-            </summary>
-        </member>
-        <member name="M:Elmah.ApplicationException.#ctor(System.String,System.Exception)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Elmah.ApplicationException"/> 
-            class with a specified error message and a reference to the 
-            inner exception that is the cause of this exception.
-            </summary>
-        </member>
-        <member name="M:Elmah.ApplicationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Elmah.ApplicationException"/> class 
-            with serialized data.
             </summary>
         </member>
         <member name="T:Elmah.AccessErrorLog">
@@ -185,103 +253,35 @@
             Gets the connection string used by the log to connect to the database.
             </summary>
         </member>
-        <member name="T:Elmah.Assertions.AssertionFactoryHandler">
+        <member name="T:Elmah.ApplicationException">
             <summary>
-            Represents the method that will be responsible for creating an 
-            assertion object and initializing it from an XML configuration
-            element.
+            The exception that is thrown when a non-fatal error occurs. 
+            This exception also serves as the base for all exceptions thrown by
+            this library.
             </summary>
         </member>
-        <member name="T:Elmah.Assertions.AssertionFactory">
+        <member name="M:Elmah.ApplicationException.#ctor">
             <summary>
-            Holds factory methods for creating configured assertion objects.
+            Initializes a new instance of the <see cref="T:Elmah.ApplicationException"/> class.
             </summary>
         </member>
-        <member name="M:Elmah.Assertions.AssertionFactory.DecodeClrTypeNamespaceFromXmlNamespace(System.String,System.String@,System.String@)">
-            <remarks>
-            Ideally, we would be able to use SoapServices.DecodeXmlNamespaceForClrTypeNamespace
-            but that requires a link demand permission that will fail in partially trusted
-            environments such as ASP.NET medium trust.
-            </remarks>
-        </member>
-        <member name="T:Elmah.Assertions.ComparisonAssertion">
+        <member name="M:Elmah.ApplicationException.#ctor(System.String)">
             <summary>
-            An assertion implementation whose test is based on whether
-            the result of an input expression evaluated against a context
-            matches a regular expression pattern or not.
+            Initializes a new instance of the <see cref="T:Elmah.ApplicationException"/> class 
+            with a specified error message.
             </summary>
         </member>
-        <member name="T:Elmah.Assertions.IAssertion">
+        <member name="M:Elmah.ApplicationException.#ctor(System.String,System.Exception)">
             <summary>
-            Provides evaluation of a context to determine whether it matches
-            certain criteria or not.
+            Initializes a new instance of the <see cref="T:Elmah.ApplicationException"/> 
+            class with a specified error message and a reference to the 
+            inner exception that is the cause of this exception.
             </summary>
         </member>
-        <member name="M:Elmah.Assertions.IAssertion.Test(System.Object)">
-            <remarks>
-            The context is typed generically as System.Object when it could have
-            been restricted to System.Web.HttpContext and also avoid unnecessary
-            casting downstream. However, using object allows simple
-            assertions to be unit-tested without having to stub out a lot of
-            the classes from System.Web (most of which cannot be stubbed anyhow
-            due to lack of virtual and instance methods).
-            </remarks>
-        </member>
-        <member name="T:Elmah.Assertions.CompositeAssertion">
+        <member name="M:Elmah.ApplicationException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <summary>
-            Read-only collection of <see cref="T:Elmah.Assertions.IAssertion"/> instances.
-            </summary>
-        </member>
-        <member name="T:Elmah.DataBinder">
-            <summary>
-            Provides data expression evaluation facilites similar to 
-            <see cref="T:System.Web.UI.DataBinder"/> in ASP.NET.
-            </summary>
-        </member>
-        <member name="T:Elmah.Assertions.JScriptAssertion">
-            <summary>
-            An assertion implementation that uses a JScript expression to
-            determine the outcome.
-            </summary>
-            <remarks>
-            Each instance of this type maintains a separate copy of the JScript 
-            engine so use it sparingly. For example, instead of creating several
-            objects, each with different a expression, try and group all
-            expressions that apply to particular context into a single compound 
-            JScript expression using the conditional-OR (||) operator.
-            </remarks>
-        </member>
-        <member name="T:Elmah.Assertions.JScriptAssertion.PartialTrustEvaluationStrategy">
-            <summary>
-            Uses the JScript eval function to compile and evaluate the
-            expression against the context on each evaluation.
-            </summary>
-        </member>
-        <member name="T:Elmah.Assertions.JScriptAssertion.FullTrustEvaluationStrategy">
-            <summary>
-            Compiles the given expression into a JScript function at time of 
-            construction and then simply invokes it during evaluation, using
-            the context as a parameter.
-            </summary>
-        </member>
-        <member name="T:Elmah.Assertions.RegexMatchAssertion">
-            <summary>
-            An assertion implementation whose test is based on whether
-            the result of an input expression evaluated against a context
-            matches a regular expression pattern or not.
-            </summary>
-        </member>
-        <member name="T:Elmah.Assertions.StaticAssertion">
-            <summary>
-            An static assertion implementation that always evaluates to 
-            a preset value.
-            </summary>
-        </member>
-        <member name="T:Elmah.Assertions.TypeAssertion">
-            <summary>
-            An assertion implementation whose test is based on whether
-            the result of an input expression evaluated against a context
-            matches a regular expression pattern or not.
+            Initializes a new instance of the <see cref="T:Elmah.ApplicationException"/> class 
+            with serialized data.
             </summary>
         </member>
         <member name="F:Elmah.Build.Status">
@@ -336,6 +336,12 @@
             Provides methods for assertions and debugging help that is mostly 
             applicable during development.
             </summary>
+        </member>
+        <member name="M:Elmah.Environment.TryGetMachineName(System.Web.HttpContext,System.String)">
+            <remarks>
+            If <paramref name="unknownName"/> is a null reference then this
+            method will still return an empty string.
+            </remarks>
         </member>
         <member name="T:Elmah.Error">
             <summary>
@@ -1385,6 +1391,56 @@
             Logs an exception and its context to the error log.
             </summary>
         </member>
+        <member name="T:Elmah.MySqlErrorLog">
+            <summary>
+            An <see cref="T:Elmah.ErrorLog"/> implementation that uses 
+            <a href="http://www.mysql.com/">MySQL</a> as its backing store.
+            </summary>
+        </member>
+        <member name="M:Elmah.MySqlErrorLog.#ctor(System.Collections.IDictionary)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Elmah.SqlErrorLog"/> class
+            using a dictionary of configured settings.
+            </summary>
+        </member>
+        <member name="M:Elmah.MySqlErrorLog.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Elmah.SqlErrorLog"/> class
+            to use a specific connection string for connecting to the database.
+            </summary>
+        </member>
+        <member name="M:Elmah.MySqlErrorLog.Log(Elmah.Error)">
+            <summary>
+            Logs an error to the database.
+            </summary>
+            <remarks>
+            Use the stored procedure called by this implementation to set a
+            policy on how long errors are kept in the log. The default
+            implementation stores all errors for an indefinite time.
+            </remarks>
+        </member>
+        <member name="M:Elmah.MySqlErrorLog.GetErrors(System.Int32,System.Int32,System.Collections.IList)">
+            <summary>
+            Returns a page of errors from the databse in descending order 
+            of logged time.
+            </summary>
+        </member>
+        <member name="M:Elmah.MySqlErrorLog.GetError(System.String)">
+            <summary>
+            Returns the specified error from the database, or null 
+            if it does not exist.
+            </summary>
+        </member>
+        <member name="P:Elmah.MySqlErrorLog.Name">
+            <summary>
+            Gets the name of this error log implementation.
+            </summary>
+        </member>
+        <member name="P:Elmah.MySqlErrorLog.ConnectionString">
+            <summary>
+            Gets the connection string used by the log to connect to the database.
+            </summary>
+        </member>
         <member name="T:Elmah.OracleErrorLog">
             <summary>
             An <see cref="T:Elmah.ErrorLog"/> implementation that uses Oracle as its backing store.
@@ -1400,6 +1456,13 @@
             <summary>
             Initializes a new instance of the <see cref="T:Elmah.OracleErrorLog"/> class
             to use a specific connection string for connecting to the database.
+            </summary>
+        </member>
+        <member name="M:Elmah.OracleErrorLog.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Elmah.OracleErrorLog"/> class
+            to use a specific connection string for connecting to the database and
+            a specific schema owner.
             </summary>
         </member>
         <member name="M:Elmah.OracleErrorLog.Log(Elmah.Error)">
@@ -1424,12 +1487,46 @@
             if it does not exist.
             </summary>
         </member>
+        <member name="P:Elmah.OracleErrorLog.SchemaOwner">
+            <summary>
+            Gets the name of the schema owner where the errors are being stored.
+            </summary>
+        </member>
         <member name="P:Elmah.OracleErrorLog.Name">
             <summary>
             Gets the name of this error log implementation.
             </summary>
         </member>
         <member name="P:Elmah.OracleErrorLog.ConnectionString">
+            <summary>
+            Gets the connection string used by the log to connect to the database.
+            </summary>
+        </member>
+        <member name="T:Elmah.PgsqlErrorLog">
+            <summary>
+            An <see cref="T:Elmah.ErrorLog"/> implementation that uses PostgreSQL
+            as its backing store.
+            </summary>
+            
+        </member>
+        <member name="M:Elmah.PgsqlErrorLog.#ctor(System.Collections.IDictionary)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Elmah.SqlErrorLog"/> class
+            using a dictionary of configured settings.
+            </summary>
+        </member>
+        <member name="M:Elmah.PgsqlErrorLog.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Elmah.SqlErrorLog"/> class
+            to use a specific connection string for connecting to the database.
+            </summary>
+        </member>
+        <member name="P:Elmah.PgsqlErrorLog.Name">
+            <summary>
+            Gets the name of this error log implementation.
+            </summary>
+        </member>
+        <member name="P:Elmah.PgsqlErrorLog.ConnectionString">
             <summary>
             Gets the connection string used by the log to connect to the database.
             </summary>
@@ -1477,13 +1574,13 @@
             number.
             </summary>
         </member>
-        <member name="M:Elmah.SccStamp.SortByRevision(Elmah.SccStamp[])">
+        <member name="M:Elmah.SccStamp.SortByLastChanged(Elmah.SccStamp[])">
             <summary>
             Sorts an array of <see cref="T:Elmah.SccStamp"/> objects by their 
             revision numbers in ascending order.
             </summary>
         </member>
-        <member name="M:Elmah.SccStamp.SortByRevision(Elmah.SccStamp[],System.Boolean)">
+        <member name="M:Elmah.SccStamp.SortByLastChanged(Elmah.SccStamp[],System.Boolean)">
             <summary>
             Sorts an array of <see cref="T:Elmah.SccStamp"/> objects by their 
             revision numbers in ascending or descending order.
@@ -1506,7 +1603,7 @@
         </member>
         <member name="P:Elmah.SccStamp.Revision">
             <summary>
-            Gets the revision number component of the SCC stamp ID.
+            Gets the revision component of the SCC stamp ID.
             </summary>
         </member>
         <member name="P:Elmah.SccStamp.LastChanged">
@@ -1524,6 +1621,48 @@
             <summary>
             Handler for the &lt;security&gt; section of the
             configuration file.
+            </summary>
+        </member>
+        <member name="T:Elmah.ServiceProviderQueryHandler">
+            <summary>
+            A delegate to an implementation that returns an <see cref="T:System.IServiceProvider"/>
+            object based on a given context.
+            </summary>
+        </member>
+        <member name="T:Elmah.ServiceCenter">
+            <summary>
+            Central point for locating arbitrary services.
+            </summary>
+        </member>
+        <member name="F:Elmah.ServiceCenter.Default">
+            <summary>
+            The default and factory-supplied implementation of 
+            <see cref="T:Elmah.ServiceProviderQueryHandler"/>.
+            </summary>
+        </member>
+        <member name="M:Elmah.ServiceCenter.FindService(System.Object,System.Type)">
+            <summary>
+            Attempts to locate a service of a given type based on a given context.
+            If the service is not available, a null reference is returned.
+            </summary>
+        </member>
+        <member name="M:Elmah.ServiceCenter.GetService(System.Object,System.Type)">
+            <summary>
+            Gets a service of a given type based on a given context.
+            If the service is not available, an exception is thrown.
+            </summary>
+        </member>
+        <member name="M:Elmah.ServiceCenter.GetServiceProvider(System.Object)">
+            <summary>
+            Gets an <see cref="T:System.IServiceProvider"/> object based on a 
+            supplied context and which can be used to request further
+            services.
+            </summary>
+        </member>
+        <member name="P:Elmah.ServiceCenter.Current">
+            <summary>
+            The current <see cref="T:Elmah.ServiceProviderQueryHandler"/> implementation
+            in effect.
             </summary>
         </member>
         <member name="T:Elmah.SimpleServiceProviderFactory">
@@ -1597,23 +1736,6 @@
             An <see cref="T:System.IAsyncResult"/> implementation that wraps another.
             </summary>
         </member>
-        <member name="T:Elmah.StringFormatter">
-            <summary>
-            Helper class for formatting templated strings with supplied replacements.
-            </summary>
-        </member>
-        <member name="M:Elmah.StringFormatter.Format(System.String,System.Object[])">
-            <summary>
-            Replaces each format item in a specified string with the text 
-            equivalent of a corresponding object's value. 
-            </summary>
-        </member>
-        <member name="T:Elmah.StringTranslation">
-            <summary>
-            Provides translation from multiple representations of a string to a
-            single base representation.
-            </summary>
-        </member>
         <member name="T:Elmah.SQLiteErrorLog">
             <summary>
             An <see cref="T:Elmah.ErrorLog"/> implementation that uses SQLite as its backing store.
@@ -1663,6 +1785,74 @@
             Gets the connection string used by the log to connect to the database.
             </summary>
         </member>
+        <member name="T:Elmah.SqlServerCompactErrorLog">
+            <summary>
+            An <see cref="T:Elmah.ErrorLog"/> implementation that uses SQL Server 
+            Compact 4 as its backing store.
+            </summary>
+        </member>
+        <member name="M:Elmah.SqlServerCompactErrorLog.#ctor(System.Collections.IDictionary)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Elmah.SqlServerCompactErrorLog"/> class
+            using a dictionary of configured settings.
+            </summary>
+        </member>
+        <member name="M:Elmah.SqlServerCompactErrorLog.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Elmah.SqlServerCompactErrorLog"/> class
+            to use a specific connection string for connecting to the database.
+            </summary>
+        </member>
+        <member name="M:Elmah.SqlServerCompactErrorLog.Log(Elmah.Error)">
+            <summary>
+            Logs an error to the database.
+            </summary>
+            <remarks>
+            Use the stored procedure called by this implementation to set a
+            policy on how long errors are kept in the log. The default
+            implementation stores all errors for an indefinite time.
+            </remarks>
+        </member>
+        <member name="M:Elmah.SqlServerCompactErrorLog.GetErrors(System.Int32,System.Int32,System.Collections.IList)">
+            <summary>
+            Returns a page of errors from the databse in descending order 
+            of logged time.
+            </summary>
+            
+        </member>
+        <member name="M:Elmah.SqlServerCompactErrorLog.GetError(System.String)">
+            <summary>
+            Returns the specified error from the database, or null 
+            if it does not exist.
+            </summary>
+        </member>
+        <member name="P:Elmah.SqlServerCompactErrorLog.Name">
+            <summary>
+            Gets the name of this error log implementation.
+            </summary>
+        </member>
+        <member name="P:Elmah.SqlServerCompactErrorLog.ConnectionString">
+            <summary>
+            Gets the connection string used by the log to connect to the database.
+            </summary>
+        </member>
+        <member name="T:Elmah.StringFormatter">
+            <summary>
+            Helper class for formatting templated strings with supplied replacements.
+            </summary>
+        </member>
+        <member name="M:Elmah.StringFormatter.Format(System.String,System.Object[])">
+            <summary>
+            Replaces each format item in a specified string with the text 
+            equivalent of a corresponding object's value. 
+            </summary>
+        </member>
+        <member name="T:Elmah.StringTranslation">
+            <summary>
+            Provides translation from multiple representations of a string to a
+            single base representation.
+            </summary>
+        </member>
         <member name="T:Elmah.TestException">
             <summary>
             The exception that is thrown when to test the error logging 
@@ -1692,55 +1882,6 @@
             <summary>
             Initializes a new instance of the <see cref="T:Elmah.TestException"/> class 
             with serialized data.
-            </summary>
-        </member>
-        <member name="T:Elmah.VistaDBErrorLog">
-            <summary>
-            An <see cref="T:Elmah.ErrorLog"/> implementation that uses VistaDB as its backing store.
-            </summary>
-        </member>
-        <member name="M:Elmah.VistaDBErrorLog.#ctor(System.Collections.IDictionary)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Elmah.VistaDBErrorLog"/> class
-            using a dictionary of configured settings.
-            </summary>
-        </member>
-        <member name="M:Elmah.VistaDBErrorLog.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Elmah.VistaDBErrorLog"/> class
-            to use a specific connection string for connecting to the database.
-            </summary>
-        </member>
-        <member name="M:Elmah.VistaDBErrorLog.Log(Elmah.Error)">
-            <summary>
-            Logs an error to the database.
-            </summary>
-            <remarks>
-            Use the stored procedure called by this implementation to set a
-            policy on how long errors are kept in the log. The default
-            implementation stores all errors for an indefinite time.
-            </remarks>
-        </member>
-        <member name="M:Elmah.VistaDBErrorLog.GetErrors(System.Int32,System.Int32,System.Collections.IList)">
-            <summary>
-            Returns a page of errors from the databse in descending order 
-            of logged time.
-            </summary>
-        </member>
-        <member name="M:Elmah.VistaDBErrorLog.GetError(System.String)">
-            <summary>
-            Returns the specified error from the database, or null 
-            if it does not exist.
-            </summary>
-        </member>
-        <member name="P:Elmah.VistaDBErrorLog.Name">
-            <summary>
-            Gets the name of this error log implementation.
-            </summary>
-        </member>
-        <member name="P:Elmah.VistaDBErrorLog.ConnectionString">
-            <summary>
-            Gets the connection string used by the log to connect to the database.
             </summary>
         </member>
         <member name="T:Elmah.XmlFileErrorLog">
@@ -1798,6 +1939,38 @@
             <summary>
             Gets the name of this error log implementation.
             </summary>
+        </member>
+        <member name="T:Elmah.XmlSerializer">
+            <summary>
+            Serializes object to and from XML documents.
+            </summary>
+        </member>
+        <member name="T:Elmah.XmlText">
+            <summary>
+            XML 1.0 services.
+            </summary>
+        </member>
+        <member name="M:Elmah.XmlText.StripIllegalXmlCharacters(System.String)">
+            <summary>
+            Replaces illegal XML characters with a question mark (?).
+            </summary>
+            <remarks>
+            Only strips illegal characters as per XML 1.0, not 1.1. 
+            See section <a href="http://www.w3.org/TR/2006/REC-xml-20060816/#charsets">2.2 Characters</a>
+            of <a href="http://www.w3.org/TR/2006/REC-xml-20060816">Extensible Markup Language (XML) 1.0 (Fourth Edition)</a>.
+            </remarks>
+        </member>
+        <member name="M:Elmah.XmlText.StripIllegalXmlCharacters(System.String,System.String)">
+            <summary>
+            Replaces illegal XML characters with a replacement string,
+            with the default being a question mark (?) if the replacement
+            is null reference.
+            </summary>
+            <remarks>
+            Only strips illegal characters as per XML 1.0, not 1.1. 
+            See section <a href="http://www.w3.org/TR/2006/REC-xml-20060816/#charsets">2.2 Characters</a>
+            of <a href="http://www.w3.org/TR/2006/REC-xml-20060816">Extensible Markup Language (XML) 1.0 (Fourth Edition)</a>.
+            </remarks>
         </member>
     </members>
 </doc>

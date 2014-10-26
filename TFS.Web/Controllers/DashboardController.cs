@@ -13,11 +13,7 @@ namespace TFS.Web.Controllers
     {
         public virtual ActionResult Index()
         {
-#if DEBUG
-            return View();
-#else
-            return Redirect("https://apollo.tfs2.com/secure");
-#endif
+            return Redirect("default.aspx");
         }
     }
 }

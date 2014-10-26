@@ -31,13 +31,15 @@ namespace TFS.Web
             routes.IgnoreRoute("{*favicon}", new { favicon = @"(.*/)?favicon.ico(/.*)?" });
             routes.IgnoreRoute("Content/{*resource}");
             routes.IgnoreRoute("Static/{*resource}");
+            routes.IgnoreRoute("icons/{*resource}");
+            routes.IgnoreRoute("images/{*resource}");
+            routes.IgnoreRoute("style/{*resource}");
 
             routes.MapRoute(
                 string.Empty,
                 "{controller}/{action}/{id}",
                 new { controller = MVC.Dashboard.Name, action = MVC.Dashboard.ActionNames.Index, id = "" }
             );
-
         }
 
         public static void InitializeAutoMapper()

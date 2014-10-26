@@ -26,7 +26,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult Index()
         {
             //return this.RedirectToAction(Actions.Home());
-            return this.Redirect("http://tfs2.com");
+            return this.Redirect("http://tacticalflightservices.com/");
         }
 
         public virtual ViewResult Home()

@@ -33,12 +33,14 @@ namespace TFS.Web
             if (user == null || user.Disabled)
                 return false;
             var queryString = string.Format("?username={0}&password={1}", cleanedUsername, password);
-            var request = WebRequest.Create(applicationSettings.AuthenticationService + queryString);
-            using (var response = request.GetResponse())
-            {
-                var responseText = new StreamReader(response.GetResponseStream()).ReadToEnd();
-                return responseText == "1";
-            }
+            // TODO: new authentication
+            return true;
+            //var request = WebRequest.Create(applicationSettings.AuthenticationService + queryString);
+            //using (var response = request.GetResponse())
+            //{
+            //    var responseText = new StreamReader(response.GetResponseStream()).ReadToEnd();
+            //    return responseText == "1";
+            //}
         }
 
         public bool ChangePassword(User user, string originalPassword, string newPassword)

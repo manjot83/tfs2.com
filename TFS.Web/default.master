@@ -1,0 +1,32 @@
+<%@ Master Language="C#" AutoEventWireup="true" Inherits="_default" Codebehind="default.master.cs" %>
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title>TFS Intranet <asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+    <link rel="icon" type="image/vnd.microsoft.icon" href="~/favicon.ico" /> 
+    <link rel="stylesheet" type="text/css" href="style/AjaxCSSHelpers.css" />
+    <link rel="stylesheet" type="text/css" href="style/sinorca-tfs2.css" />
+    <link rel="stylesheet" type="text/css" href="style/list-table.css" />
+    <asp:ContentPlaceHolder ID="MoreStylesheets" runat="server" />
+</head>
+<body>
+    <form id="form1" runat="server">    
+    
+    <!-- ##### Header ##### -->          
+    <tfs:header ID="header_control" runat="server" />
+
+    <!-- ##### Side Bar ##### -->
+    <tfs:siderbar ID="sidebar_control" runat="server" />
+
+    <!-- ##### Main Copy ##### -->
+    <div id="main-copy">
+        <asp:contentplaceholder id="MainContent" runat="server">
+        </asp:contentplaceholder>
+    </div>
+    
+    
+    <!-- ##### Footer ##### -->
+    <tfs:footer ID="footer_control" runat="server" />
+    </form>
+</body>
+</html>

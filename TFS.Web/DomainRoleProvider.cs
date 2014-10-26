@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
+using NHibernate;
+using NHibernate.Linq;
 using TFS.Models;
 using TFS.Models.Users;
 
@@ -15,10 +17,13 @@ namespace TFS.Web
             var container = MvcApplication.Container;
 
             string[] roles = new string[0];
-            var user = container.GetInstance<IUserRepository>().GetUser(username);
-            if (user != null)
-                roles = user.Roles.ToArray();
-            return roles;
+            using (var session = container.GetInstance<ISessionFactory>().OpenSession())
+            {
+                var user = session.Linq<User>().Where(x => x.Username == username).FirstOrDefault();
+                if (user != null)
+                    roles = user.Roles.ToArray();
+                return roles;
+            }
         }
 
         public override bool IsUserInRole(string username, string roleName)

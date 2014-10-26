@@ -1,0 +1,30 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="simple.master.cs" Inherits="TFS.Intranet.Web.simple" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1" runat="server">
+    <title>TFS Intranet - Error!</title>
+    <link rel="stylesheet" type="text/css" href="style/sinorca-tfs2.css" />
+</head>
+<body>
+    <form id="form1" runat="server">    
+    <!-- ##### Header ##### -->      
+    
+    <TFS:header ID="header_control" runat="server" />
+
+    <!-- ##### Side Bar ##### -->
+    <TFS:siderbar ID="sidebar_control" runat="Server" Visible="false" />
+
+    <!-- ##### Main Copy ##### -->
+    <div id="main-copy">
+        <asp:contentplaceholder id="MainContent" runat="server" Visible="true">
+        </asp:contentplaceholder>
+    </div>
+    
+    
+    <!-- ##### Footer ##### -->
+    <TFS:footer ID="footer_control" runat="server" />
+    </form>
+</body>
+</html>

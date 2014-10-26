@@ -15,9 +15,9 @@ namespace TFS.Web
 #else
             AssetCache.CompressAssets = true;
 #endif
-            AssetCache.AddCss(CSS_INTERNAL_BASE, Links.Static.css.yui_reset_css,
-                                                 Links.Static.css.yui_fonts_css,
-                                                 Links.Static.css.yui_base_css,
+            AssetCache.AddCss(CSS_INTERNAL_BASE, //Links.Static.css.yui_reset_css,
+                                                 //Links.Static.css.yui_fonts_css,
+                                                 //Links.Static.css.yui_base_css,
                                                  Links.Static.css.internal_base_layout_less,
                                                  Links.Static.css.internal_base_style_css,
                                                  Links.Static.css.internal_forms_layout_css,

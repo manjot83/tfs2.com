@@ -1,4 +1,4 @@
-﻿html
+﻿/*html
 {
 	background: transparent;	
 }
@@ -15,7 +15,7 @@ body
 	font-size: 93%;
 	padding-top: 12px;
 	margin-left: 240px;	
-}
+}*/
 
 .warning
 {
@@ -28,25 +28,25 @@ hr
 	margin-bottom: 20px;
 }
 
-a
+/*a
 {
 	color: #734D26;
 }
 a:hover
 {
 	color: #CC6600;
-}
+}*/
 
 acronym
 {
 	text-decoration: underline;
 }
 
-p, cite, code, ul, table
+/*p, cite, code, ul, table
 {
 	padding-top: 5px;
 	padding-bottom: 5px;
-}
+}*/
 
 ol, ul
 {
