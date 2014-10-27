@@ -317,11 +317,16 @@ namespace TFS.OpCenter.Data
             
             SetPKValues();
         }
-        
-		
+
+
+        private TFS.OpCenter.Data.FormrecordCollection _cachedFormrecords;
 		public TFS.OpCenter.Data.FormrecordCollection Formrecords()
 		{
-			return new TFS.OpCenter.Data.FormrecordCollection().Where(Formrecord.Columns.Fileid, Id).Load();
+            if (_cachedFormrecords == null)
+            {
+                _cachedFormrecords = new TFS.OpCenter.Data.FormrecordCollection().Where(Formrecord.Columns.Fileid, Id).Load();
+            }
+            return _cachedFormrecords;
 		}
 		#endregion
 		

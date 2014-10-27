@@ -355,36 +355,60 @@ namespace TFS.OpCenter.Data
 			
 		
 		#region ForeignKey Properties
-		
+
+        public TFS.OpCenter.Data.Formfile CachedFormfile;
 		/// <summary>
 		/// Returns a Formfile ActiveRecord object related to this Formrecord
 		/// 
 		/// </summary>
 		public TFS.OpCenter.Data.Formfile Formfile
 		{
-			get { return TFS.OpCenter.Data.Formfile.FetchByID(this.Fileid); }
-			set { SetColumnValue("fileid", value.Id); }
+            get
+            {
+                if (CachedFormfile == null)
+                {
+                    CachedFormfile = TFS.OpCenter.Data.Formfile.FetchByID(this.Fileid);
+                }
+                return CachedFormfile;
+            }
+            set { SetColumnValue("fileid", value.Id); }
 		}
-		
-		
+
+
+        private TFS.OpCenter.Data.Formcode CachedFormcode;
 		/// <summary>
 		/// Returns a Formcode ActiveRecord object related to this Formrecord
 		/// 
 		/// </summary>
 		public TFS.OpCenter.Data.Formcode Formcode
 		{
-			get { return TFS.OpCenter.Data.Formcode.FetchByID(this.Codeid); }
+            get
+            {
+                if (CachedFormcode == null)
+                {
+                    CachedFormcode = TFS.OpCenter.Data.Formcode.FetchByID(this.Codeid);
+                }
+                return CachedFormcode;
+            }
 			set { SetColumnValue("codeid", value.Id); }
 		}
-		
-		
+
+
+        private TFS.OpCenter.Data.Formfield CachedFormfield;
 		/// <summary>
 		/// Returns a Formfield ActiveRecord object related to this Formrecord
 		/// 
 		/// </summary>
 		public TFS.OpCenter.Data.Formfield Formfield
 		{
-			get { return TFS.OpCenter.Data.Formfield.FetchByID(this.Fieldid); }
+            get
+            {
+                if (CachedFormfield == null)
+                {
+                    CachedFormfield = TFS.OpCenter.Data.Formfield.FetchByID(this.Fieldid);
+                }
+                return CachedFormfield;
+            }
 			set { SetColumnValue("fieldid", value.Id); }
 		}
 		

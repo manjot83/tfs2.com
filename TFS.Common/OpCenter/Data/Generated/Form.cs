@@ -379,11 +379,15 @@ namespace TFS.OpCenter.Data
             
             SetPKValues();
         }
-        
-		
+
+        TFS.OpCenter.Data.FormfieldCollection _cachedFormFields;
 		public TFS.OpCenter.Data.FormfieldCollection Formfields()
 		{
-			return new TFS.OpCenter.Data.FormfieldCollection().Where(Formfield.Columns.Formid, Id).Load();
+            if (_cachedFormFields == null)
+            {
+                _cachedFormFields = new TFS.OpCenter.Data.FormfieldCollection().Where(Formfield.Columns.Formid, Id).Load();
+            }
+            return _cachedFormFields;
 		}
 		public TFS.OpCenter.Data.FormfileCollection Formfiles()
 		{
