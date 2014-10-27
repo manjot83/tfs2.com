@@ -1,5 +1,0 @@
-Data Model:
-[ ] - Fix "Person" database schema
-
-Personnel Records:
-[ ] - Implement regex validation rules for telephone number and e-mail
