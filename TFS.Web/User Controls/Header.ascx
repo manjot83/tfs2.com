@@ -25,7 +25,7 @@
         <a href="#" class="highlight" onclick="alert('TODO: add link to email'); return false;">Email</a> |
         <a href="#" class="highlight" onclick="alert('TODO: add link to change password'); return false;">Change Password</a> |
         <asp:HyperLink ID="PayrollLink" runat="server" NavigateUrl="~/Billing/default.aspx" Text="My Timecards" /> |        
-        <a href="~Security/LogOff" class="highlight">Log Off</a> |
+        <asp:HyperLink ID="LogoffLink" runat="server" NavigateUrl="~/Security/LogOff" Text="Log Off" CssClass="highlight" /> |        
       </div>
       
     </div>
