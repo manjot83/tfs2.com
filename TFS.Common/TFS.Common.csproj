@@ -320,24 +320,12 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Security\ActiveDirectory\GroupObjectDataSource.cs" />
-    <Compile Include="Security\ActiveDirectory\UserObjectDataSource.cs" />
-    <Compile Include="Security\GroupAccount.cs" />
-    <Compile Include="Security\Impersonation.cs" />
-    <Compile Include="Security\LdapAuthentication.cs" />
-    <Compile Include="Security\ObjectAccount.cs" />
-    <Compile Include="Security\TFSMembershipProvider.cs" />
-    <Compile Include="Security\TFSMembershipUser.cs" />
-    <Compile Include="Security\UserAccount.cs" />
     <Compile Include="Security\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Models\Reports\FlightTimeSummary.xsl" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config">
-      <SubType>Designer</SubType>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

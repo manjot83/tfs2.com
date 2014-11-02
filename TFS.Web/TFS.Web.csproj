@@ -458,13 +458,6 @@
     <Compile Include="LinkAdmin\removelink.aspx.designer.cs">
       <DependentUpon>removelink.aspx</DependentUpon>
     </Compile>
-    <Compile Include="login.aspx.cs">
-      <DependentUpon>login.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="login.aspx.designer.cs">
-      <DependentUpon>login.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Mvc\StructureMapControllerFactory.cs" />
     <Compile Include="Mvc\TransactionalActionInvoker.cs" />
     <Compile Include="Mvc\TransactionalController.cs" />
@@ -757,7 +750,6 @@
     <Content Include="LinkAdmin\editlink.aspx" />
     <Content Include="LinkAdmin\newlink.aspx" />
     <Content Include="LinkAdmin\removelink.aspx" />
-    <Content Include="login.aspx" />
     <Content Include="NewsAdmin\Default.aspx" />
     <Content Include="NewsAdmin\editcat.aspx" />
     <Content Include="NewsAdmin\editpost.aspx" />
