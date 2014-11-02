@@ -60,7 +60,6 @@
                     <li><%= Html.NavImageLink("Flight Programs", Tags.IMG_NAV_FLIGHTPROGRAMS, MVC.FlightPrograms.Manage())%></li>
                     <%--<li><%= Html.NavImageLink("Payroll", Tags.IMG_NAV_FLIGHTPROGRAMS, "https://apollo.tfs2.com/secure/Billing/Admin/default.aspx")%></li>
                     <li><%= Html.NavImageLink("Availability", Tags.IMG_NAV_AVAILABILITY, "https://apollo.tfs2.com/secure/Scheduling/AvailabilityReport.aspx")%></li>
-                    <li><%= Html.NavImageLink("Website", Tags.IMG_NAV_WEBSITE, "https://apollo.tfs2.com/secure/WebAdmin/Default.aspx")%></li>
                     <li><%= Html.NavImageLink("Publications", Tags.IMG_NAV_APPLICATIONS, "https://apollo.tfs2.com/secure/DocumentManager/Admin/CorporateDocsManager.aspx")%></li>
                     <li><%= Html.NavImageLink("Forms", Tags.IMG_NAV_APPLICATIONS, "https://apollo.tfs2.com/secure/Forms/admin.aspx")%></li>--%>
                 </ul>

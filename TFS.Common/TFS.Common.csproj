@@ -125,11 +125,6 @@
     <Compile Include="Billing\Data\Billing\UserController.cs" />
     <Compile Include="CMS\Markdown.cs" />
     <Compile Include="CMS\NavLink.cs" />
-    <Compile Include="CMS\SQLProvider.cs" />
-    <Compile Include="CMS\StaticContent.cs" />
-    <Compile Include="CMS\Web\StandardTemplate.cs">
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="Extensions\AssemblyExtensions.cs" />
     <Compile Include="Extensions\Attributes.cs" />
     <Compile Include="Extensions\Crypto.cs" />
@@ -305,7 +300,6 @@
     <Compile Include="OpCenter\Forms\ViewableField.cs" />
     <Compile Include="OpCenter\Forms\ViewableFile.cs" />
     <Compile Include="OpCenter\Forms\ViewableFileCollection.cs" />
-    <Compile Include="OpCenter\Imaging\ImageProvider.cs" />
     <Compile Include="OpCenter\News\NewsController.cs" />
     <Compile Include="OpCenter\People\PeopleCollection.cs" />
     <Compile Include="OpCenter\People\SyncEnabledPerson.cs" />

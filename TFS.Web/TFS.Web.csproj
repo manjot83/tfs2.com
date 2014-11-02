@@ -430,10 +430,6 @@
     <Compile Include="IApplicationSettings.cs" />
     <Compile Include="IAuthenticationService.cs" />
     <Compile Include="Bootstrapping\MvcBootstrapper.cs" />
-    <Compile Include="images\ImageView.aspx.cs">
-      <DependentUpon>ImageView.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="LinkAdmin\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -597,41 +593,6 @@
     <Compile Include="ViewModels\FlightLogs\SquadronLogListViewModel.cs" />
     <Compile Include="ViewModels\SuccessViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
-    <Compile Include="WebAdmin\Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebAdmin\Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebAdmin\EditPage.aspx.cs">
-      <DependentUpon>EditPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebAdmin\EditPage.aspx.designer.cs">
-      <DependentUpon>EditPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebAdmin\NewPage.aspx.cs">
-      <DependentUpon>NewPage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebAdmin\NewPage.aspx.designer.cs">
-      <DependentUpon>NewPage.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebAdmin\StaticPageManager.aspx.cs">
-      <DependentUpon>StaticPageManager.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebAdmin\StaticPageManager.aspx.designer.cs">
-      <DependentUpon>StaticPageManager.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="WebAdmin\UploadImage.aspx.cs">
-      <DependentUpon>UploadImage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="WebAdmin\UploadImage.aspx.designer.cs">
-      <DependentUpon>UploadImage.aspx</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Billing\Admin\billingaccount_manage.aspx" />
@@ -792,7 +753,6 @@
     <Content Include="icons\world_go.png" />
     <Content Include="icons\xhtml_go.png" />
     <Content Include="images\Calendar_scheduleHS.png" />
-    <Content Include="images\ImageView.aspx" />
     <Content Include="LinkAdmin\Default.aspx" />
     <Content Include="LinkAdmin\editlink.aspx" />
     <Content Include="LinkAdmin\newlink.aspx" />
@@ -831,15 +791,12 @@
     <Content Include="ViewArticle.aspx" />
     <Content Include="ViewHelpArticle.aspx" />
     <Content Include="Views\Site\SitePage.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Static\js\jquery\jquery-1.4.js" />
     <Content Include="Views\Shared\Site.Master" />
     <Content Include="Views\Web.config" />
-    <Content Include="WebAdmin\Default.aspx" />
-    <Content Include="WebAdmin\EditPage.aspx" />
-    <Content Include="WebAdmin\NewPage.aspx" />
-    <Content Include="WebAdmin\StaticPageManager.aspx" />
-    <Content Include="WebAdmin\UploadImage.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="404.html" />
@@ -949,8 +906,8 @@
     <Content Include="images\Web.config" />
     <Content Include="icons\Web.config" />
     <Content Include="Forms\Web.config" />
-    <None Include="Static\css\internal_base_layout.less" />
-    <None Include="Static\css\internal_list-table.less" />
+    <Content Include="Static\css\internal_base_layout.less" />
+    <Content Include="Static\css\internal_list-table.less" />
     <None Include="Static\images\internal_template\bgfooter.pdn" />
     <Content Include="Views\Shared\Dashboard.Master" />
     <Content Include="Views\Shared\Success.aspx" />
@@ -965,7 +922,6 @@
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </Content>
     <Content Include="style\Web.config" />
-    <Content Include="WebAdmin\Web.config" />
     <Content Include="Views\Shared\Dashboard_Old.Master" />
   </ItemGroup>
   <ItemGroup>
@@ -1012,4 +968,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y $(ProjectDir)..\lib\vj*.* $(ProjectDir)$(OutDir)</PostBuildEvent>
+  </PropertyGroup>
 </Project>
