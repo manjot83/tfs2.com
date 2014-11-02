@@ -26,6 +26,10 @@ namespace TFS.Models.Users
         public virtual string DisplayName { get; set; }
         [Required, StringLength(50)]
         public virtual string Email { get; set; }
+        [Required, StringLength(255)]
+        public virtual string Title { get; set; }
+        [Required]
+        public virtual int RateGroup { get; set; }
         [DomainEquality]
         [Required, StringLength(50)]
         public virtual string Username { get; set; }

@@ -51,3 +51,20 @@ END
 CLOSE vendor_cursor;
 DEALLOCATE vendor_cursor;
 GO
+
+-- 
+-- Missing Columns
+
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE name = 'title' AND object_id = OBJECT_ID('Users'))
+ALTER TABLE Users ADD title nvarchar(255) NOT NULL CONSTRAINT DF_Users_title DEFAULT ('NOT SET');
+GO
+IF EXISTS (SELECT * FROM sys.default_constraints WHERE name = 'DF_Users_title')
+ALTER TABLE Users DROP CONSTRAINT DF_Users_title;
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE name = 'rategroup' AND object_id = OBJECT_ID('Users'))
+ALTER TABLE Users ADD rategroup int NOT NULL CONSTRAINT DF_Users_rategroup DEFAULT (-1);
+GO
+IF EXISTS (SELECT * FROM sys.default_constraints WHERE name = 'DF_Users_rategroup')
+ALTER TABLE Users DROP CONSTRAINT DF_Users_rategroup;
+GO

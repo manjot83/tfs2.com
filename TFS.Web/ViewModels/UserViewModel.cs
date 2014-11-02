@@ -26,5 +26,8 @@ namespace TFS.Web.ViewModels
         public bool RolesProgramManager { get; set; }
         public bool RolesFlightLogManager { get; set; }
         public bool RolesPayrollAdmin { get; set; }
+
+        public string Title { get; set; }
+        public int RateGroup { get; set; }
     }
 }

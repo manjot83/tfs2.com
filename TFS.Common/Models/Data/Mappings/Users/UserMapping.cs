@@ -32,6 +32,10 @@ namespace TFS.Models.Data.Mappings.Users
             Map(x => x.Email)
                 .Length(254)
                 .Not.Nullable();
+            Map(x => x.Title)
+                .Length(255)
+                .Not.Nullable();
+            Map(x => x.RateGroup).Not.Nullable();
             Map(x => x.Username)
                 .Length(100)
                 .Not.Nullable();

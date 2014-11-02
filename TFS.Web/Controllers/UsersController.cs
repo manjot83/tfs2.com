@@ -98,7 +98,7 @@ namespace TFS.Web.Controllers
                 ModelState.AddModelError("username", "Username must be unique.");
             if (!ModelState.IsValid)
                 return View(userViewModel);
-            userRepository.CreateUser(userViewModel.Username, userViewModel.FirstName, userViewModel.LastName, userViewModel.DisplayName);
+            userRepository.CreateUser(userViewModel.Username, userViewModel.FirstName, userViewModel.LastName, userViewModel.DisplayName, userViewModel.Title, userViewModel.RateGroup);
             return RedirectToAction(MVC.Users.List());
         }
     }

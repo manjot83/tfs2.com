@@ -93,7 +93,7 @@ namespace TFS.Models.Data.Implementations
             return user != null ? user.Person : null;
         }
 
-        public User CreateUser(string username, string firstname, string lastname, string displayname)
+        public User CreateUser(string username, string firstname, string lastname, string displayname, string title, int rateGroup)
         {
             var user = new User
             {
@@ -101,6 +101,8 @@ namespace TFS.Models.Data.Implementations
                 FirstName = firstname,
                 LastName = lastname,
                 DisplayName = displayname,
+                Title = title,
+                RateGroup = rateGroup,
                 Disabled = false,
             };
             user.SetDefaultEmailAddress(username);

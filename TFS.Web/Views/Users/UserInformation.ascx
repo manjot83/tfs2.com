@@ -18,3 +18,18 @@
         <%= Html.ValidationMessage("displayname")%>
     </div>
 </div>
+<div class="field-group">
+    <div class="field">
+        <label for="Title">Billing Title</label>
+        <%= Html.TextBox("Title", Model.Title, new { size = "40", maxlength = "100" })%>
+        <%= Html.ValidationMessage("Title")%>
+    </div>
+</div>
+
+<div class="field-group">
+    <div class="field">
+        <label for="RateGroup">Billing Rate Group</label>
+        <%= Html.TextBox("RateGroup", Model.RateGroup, new { size = "40", maxlength = "100" })%>
+        <%= Html.ValidationMessage("RateGroup")%>
+    </div>
+</div>
