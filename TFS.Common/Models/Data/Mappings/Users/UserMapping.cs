@@ -52,6 +52,9 @@ namespace TFS.Models.Data.Mappings.Users
                     c.Map(x => x.FlightLogManager)
                          .Column("FlightLogManagerRole")
                          .Not.Nullable();
+                    c.Map(x => x.PayrollAdmin)
+                         .Column("PayrollAdmin")
+                         .Not.Nullable();
                 });
 
         }

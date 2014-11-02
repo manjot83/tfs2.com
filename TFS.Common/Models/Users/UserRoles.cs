@@ -21,6 +21,9 @@ namespace TFS.Models.Users
         [Required, DomainEquality]
         public virtual bool FlightLogManager { get; set; }
 
+        [Required, DomainEquality]
+        public virtual bool PayrollAdmin { get; set; }
+
         public virtual bool IsInRole(string role)
         {
             if (Enum.GetNames(typeof(Roles)).Any(x => x.Matches(role)))
@@ -40,6 +43,10 @@ namespace TFS.Models.Users
                     return ProgramManager;
                 case TFS.Models.Users.Roles.FlightLogManager:
                     return FlightLogManager;
+                case TFS.Models.Users.Roles.PayrollUsers:
+                    return true;
+                case TFS.Models.Users.Roles.PayrollAdmins:
+                    return PayrollAdmin;
                 default:
                     return false;
             }
@@ -48,6 +55,7 @@ namespace TFS.Models.Users
         public virtual string[] ToArray()
         {
             var roles = new List<string>();
+            roles.Add(Roles.PayrollUsers.ToString());
             if (UserManager)
                 roles.Add(Roles.UserManager.ToString());
             if (PersonnelManager)
@@ -56,6 +64,8 @@ namespace TFS.Models.Users
                 roles.Add(Roles.ProgramManager.ToString());
             if (FlightLogManager)
                 roles.Add(Roles.FlightLogManager.ToString());
+            if (PayrollAdmin)
+                roles.Add(Roles.PayrollAdmins.ToString());
             return roles.ToArray();
         }
     }

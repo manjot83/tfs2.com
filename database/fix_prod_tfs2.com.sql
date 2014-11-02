@@ -23,6 +23,13 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[schem
 DROP TABLE [dbo].[schema_info]
 GO
 
+-- missing column
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE Name = 'PayrollAdmin' AND object_id = OBJECT_ID('Users'))
+ALTER TABLE Users ADD PayrollAdmin bit NOT NULL CONSTRAINT DF_Users_PayrollAdmin DEFAULT (0);
+IF EXISTS (SELECT * FROM sys.default_constraints WHERE name = 'DF_Users_PayrollAdmin')
+ALTER TABLE Users DROP CONSTRAINT DF_Users_PayrollAdmin;
+GO
+
 declare @table_name varchar(200)
 declare @SQL varchar(300)
 

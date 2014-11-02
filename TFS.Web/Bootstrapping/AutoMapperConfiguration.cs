@@ -190,6 +190,7 @@ namespace TFS.Web
                           UserManager = x.RolesUserManager,
                           ProgramManager = x.RolesProgramManager,
                           FlightLogManager = x.RolesFlightLogManager,
+                          PayrollAdmin = x.RolesPayrollAdmin,
                       };
                   }));
         }

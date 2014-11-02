@@ -22,6 +22,7 @@ namespace TFS.Models.Tests.CRUD.Users
                 Disabled = false,
                 Roles = new UserRoles
                 {
+                    PayrollAdmin = true,
                     FlightLogManager = true,
                     PersonnelManager = false,
                     ProgramManager = true,

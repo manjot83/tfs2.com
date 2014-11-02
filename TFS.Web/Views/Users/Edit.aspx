@@ -49,6 +49,13 @@ Edit a New User
                     <label for="RolesFlightLogManager" class="checkboxlabel">Manage flight logs, delete and change data</label>
                     <%= Html.ValidationMessage("RolesFlightLogManager")%>
                 </div>
+            </div>        
+            <div class="field-group">
+                <div class="field">                
+                    <%= Html.CheckBox("RolesPayrollAdmin", Model.RolesPayrollAdmin)%>
+                    <label for="RolesPayrollAdmin" class="checkboxlabel">Manage payroll records, delete and change data</label>
+                    <%= Html.ValidationMessage("RolesPayrollAdmin")%>
+                </div>
             </div>
             <div class="button-group">
                 <input type="submit" value="Save" />
