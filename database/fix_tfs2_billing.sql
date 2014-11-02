@@ -1,3 +1,6 @@
+USE tfs2_billing
+GO 
+
 declare @table_name varchar(200)
 declare @SQL varchar(300)
 
