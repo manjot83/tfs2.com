@@ -12,6 +12,13 @@ IF  EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'[dbo].[
 ALTER TABLE [dbo].[newsposts] NOCHECK CONSTRAINT [FK_newsposts_persons]
 GO
 
+IF  EXISTS (SELECT * FROM sys.database_principals WHERE name = N'TFS2\IUSR_APOLLO')
+DROP USER [TFS2\IUSR_APOLLO]
+GO
+IF  EXISTS (SELECT * FROM sys.database_principals WHERE name = N'webdbreader')
+DROP USER [webdbreader]
+GO
+
 -- Missing Indexes
 USE [tfs_opcenter]
 GO

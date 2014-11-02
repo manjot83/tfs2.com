@@ -1,6 +1,17 @@
 USE tfs2_billing
 GO 
 
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[schema_info]') AND type in (N'U'))
+DROP TABLE [dbo].[schema_info]
+GO
+IF  EXISTS (SELECT * FROM sys.database_principals WHERE name = N'webdbreader')
+DROP USER [webdbreader]
+GO
+IF  EXISTS (SELECT * FROM sys.database_principals WHERE name = N'IUSR_APOLLO')
+DROP USER [IUSR_APOLLO]
+GO
+
+
 declare @table_name varchar(200)
 declare @SQL varchar(300)
 
@@ -22,3 +33,23 @@ END
 CLOSE vendor_cursor;
 DEALLOCATE vendor_cursor;
 GO
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[vw_Users]'))
+DROP VIEW [dbo].[vw_Users]
+GO
+
+IF NOT EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[vw_Users]'))
+EXEC dbo.sp_executesql @statement = N'CREATE VIEW [dbo].[vw_Users]
+AS
+SELECT	Tmp_Users.id,
+		Tmp_Users.username,
+		Tmp_Users.firstname,
+		Tmp_Users.lastname,
+		Tmp_Users.title,
+		Tmp_Users.rategroup,
+		[RateGroups].[name] as [rategroupname]
+ FROM Tmp_Users
+  INNER JOIN [RateGroups] ON [RateGroups].[id] = rategroup	
+' 
+GO
+
