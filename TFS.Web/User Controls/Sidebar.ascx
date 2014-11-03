@@ -39,46 +39,11 @@
                 FCIF
             </asp:HyperLink>
         </li>
-        <li>
-            <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/DocumentManager/CorporateDocs.aspx">
-                <asp:Image ID="Image2" runat="server" ImageUrl="~/icons/folder_go.png" ImageAlign="Middle" />
-                &nbsp;
-                TFS Publications
-            </asp:HyperLink>
-        </li>
-        <li>
-            <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/DocumentManager/Schedule.aspx">
-                <asp:Image ID="Image4" runat="server" ImageUrl="~/icons/folder_go.png" ImageAlign="Middle" />
-                &nbsp;
-                Schedule
-            </asp:HyperLink>
-        </li>
-        <li>
-            <asp:HyperLink ID="HyperLink5" runat="server" NavigateUrl="~/DocumentManager/CurrencyStatus.aspx">
-                <asp:Image ID="Image5" runat="server" ImageUrl="~/icons/folder_go.png" ImageAlign="Middle" />
-                &nbsp;
-                Currency Status
-            </asp:HyperLink>
-        </li>
-        <li>
-            <asp:HyperLink ID="HyperLink6" runat="server" NavigateUrl="~/DocumentManager/FlashReports.aspx">
-                <asp:Image ID="Image6" runat="server" ImageUrl="~/icons/folder_go.png" ImageAlign="Middle" />
-                &nbsp;
-                Flash Reports
-            </asp:HyperLink>
-        </li>
     </ul>
   </div>
   <div>
     <p class="sideBarTitle">Self Service</p>
-    <ul>         
-        <li>
-            <asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="#">
-                <asp:Image ID="Image8" runat="server" ImageUrl="~/icons/lock_go.png" ImageAlign="Middle" />
-                &nbsp;
-                Change My Password
-            </asp:HyperLink>
-        </li>      
+    <ul>
         
         <li>
             <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/PersonnelRecords/EditMyRecord">

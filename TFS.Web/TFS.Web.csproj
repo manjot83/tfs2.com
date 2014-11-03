@@ -782,6 +782,7 @@
     <Content Include="User Controls\Sidebar.ascx" />
     <Content Include="ViewArticle.aspx" />
     <Content Include="ViewHelpArticle.aspx" />
+    <Content Include="Views\Security\LogOn.aspx" />
     <Content Include="Views\Site\SitePage.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -882,8 +883,6 @@
     <Content Include="Views\Messages\ViewUserAlert.ascx" />
     <Content Include="Views\PersonnelRecords\EditRecord.aspx" />
     <Content Include="Views\PersonnelRecords\List.aspx" />
-    <Content Include="Views\Security\ChangePassword.aspx" />
-    <Content Include="Views\Security\LogOn.aspx" />
     <Content Include="Config\Authentication.config" />
     <Content Include="Billing\Admin\Web.config" />
     <Content Include="Billing\Web.config" />
@@ -914,7 +913,6 @@
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </Content>
     <Content Include="style\Web.config" />
-    <Content Include="Views\Shared\Dashboard_Old.Master" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -961,6 +959,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>copy /Y $(ProjectDir)..\lib\vj*.* $(ProjectDir)$(OutDir)</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>
