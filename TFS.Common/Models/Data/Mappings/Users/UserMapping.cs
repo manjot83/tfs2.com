@@ -17,6 +17,9 @@ namespace TFS.Models.Data.Mappings.Users
                 .GeneratedBy.GuidComb()
                 .Not.Nullable();
 
+            Map(x => x.Identity)
+                .Nullable();
+
             HasOne(x => x.Person)
                 .Cascade.All();
 

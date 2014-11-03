@@ -95,6 +95,8 @@ namespace TFS.Models.Data.Implementations
 
         public User CreateUser(string username, string firstname, string lastname, string displayname, string title, int rateGroup)
         {
+            var next_identity = this.UnitOfWork.Session.CreateSQLQuery("SELECT max([identity]) FROM Users").List<int>().Single();
+
             var user = new User
             {
                 Username = username,
@@ -104,6 +106,7 @@ namespace TFS.Models.Data.Implementations
                 Title = title,
                 RateGroup = rateGroup,
                 Disabled = false,
+                Identity = next_identity + 1,
             };
             user.SetDefaultEmailAddress(username);
             user.Validate();

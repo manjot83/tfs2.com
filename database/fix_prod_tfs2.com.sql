@@ -68,3 +68,7 @@ GO
 IF EXISTS (SELECT * FROM sys.default_constraints WHERE name = 'DF_Users_rategroup')
 ALTER TABLE Users DROP CONSTRAINT DF_Users_rategroup;
 GO
+
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE name = 'identity' AND object_id = OBJECT_ID('Users'))
+ALTER TABLE Users ADD [identity] int NULL;
+GO

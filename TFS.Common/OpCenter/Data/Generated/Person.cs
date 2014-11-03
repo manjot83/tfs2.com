@@ -120,7 +120,7 @@ namespace TFS.OpCenter.Data
 			if(!IsSchemaInitialized)
 			{
 				//Schema declaration
-				TableSchema.Table schema = new TableSchema.Table("persons", TableType.Table, DataService.GetInstance("OpCenter"));
+				TableSchema.Table schema = new TableSchema.Table("vw_persons", TableType.View, DataService.GetInstance("OpCenter"));
 				schema.Columns = new TableSchema.TableColumnCollection();
 				schema.SchemaName = @"dbo";
 				//columns
@@ -404,79 +404,6 @@ namespace TFS.OpCenter.Data
 		
         
         
-		#region ObjectDataSource support
-		
-		
-		/// <summary>
-		/// Inserts a record, can be used with the Object Data Source
-		/// </summary>
-		public static void Insert(string varFirstname,string varLastname,string varEmail,string varUsername,string varDisplayname,bool? varDeleted,DateTime? varCreatedon,DateTime? varModifiedon,string varCreatedby,string varModifiedby)
-		{
-			Person item = new Person();
-			
-			item.Firstname = varFirstname;
-			
-			item.Lastname = varLastname;
-			
-			item.Email = varEmail;
-			
-			item.Username = varUsername;
-			
-			item.Displayname = varDisplayname;
-			
-			item.Deleted = varDeleted;
-			
-			item.Createdon = varCreatedon;
-			
-			item.Modifiedon = varModifiedon;
-			
-			item.Createdby = varCreatedby;
-			
-			item.Modifiedby = varModifiedby;
-			
-		
-			if (System.Web.HttpContext.Current != null)
-				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
-			else
-				item.Save(System.Threading.Thread.CurrentPrincipal.Identity.Name);
-		}
-		
-		/// <summary>
-		/// Updates a record, can be used with the Object Data Source
-		/// </summary>
-		public static void Update(int varId,string varFirstname,string varLastname,string varEmail,string varUsername,string varDisplayname,bool? varDeleted,DateTime? varCreatedon,DateTime? varModifiedon,string varCreatedby,string varModifiedby)
-		{
-			Person item = new Person();
-			
-				item.Id = varId;
-			
-				item.Firstname = varFirstname;
-			
-				item.Lastname = varLastname;
-			
-				item.Email = varEmail;
-			
-				item.Username = varUsername;
-			
-				item.Displayname = varDisplayname;
-			
-				item.Deleted = varDeleted;
-			
-				item.Createdon = varCreatedon;
-			
-				item.Modifiedon = varModifiedon;
-			
-				item.Createdby = varCreatedby;
-			
-				item.Modifiedby = varModifiedby;
-			
-			item.IsNew = false;
-			if (System.Web.HttpContext.Current != null)
-				item.Save(System.Web.HttpContext.Current.User.Identity.Name);
-			else
-				item.Save(System.Threading.Thread.CurrentPrincipal.Identity.Name);
-		}
-		#endregion
         
         
         

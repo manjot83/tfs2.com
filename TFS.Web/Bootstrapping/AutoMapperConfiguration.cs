@@ -182,6 +182,7 @@ namespace TFS.Web
                   .ForMember(x => x.Id, m => m.Ignore())
                   .ForMember(x => x.Email, m => m.Ignore())
                   .ForMember(x => x.Person, m => m.Ignore())
+                  .ForMember(x => x.Identity, m => m.Ignore())
                   .ForMember(x => x.Roles, m => m.MapFrom(x =>
                   {
                       return new UserRoles

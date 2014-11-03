@@ -18,6 +18,8 @@ namespace TFS.Models.Users
 
         public virtual Guid? Id { get; private set; }
 
+        public virtual int? Identity { get; set; }
+
         [Required, StringLength(50)]
         public virtual string FirstName { get; set; }
         [Required, StringLength(50)]
