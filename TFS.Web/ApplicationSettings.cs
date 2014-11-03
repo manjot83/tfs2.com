@@ -5,9 +5,6 @@ namespace TFS.Web
 {
     public class ApplicationSettings : IApplicationSettings
     {
-        public const string AuthenticationServiceKey = "AuthenticationService";
-        public const string ChangePasswordServiceKey = "ChangePasswordService";
-
         private NameValueCollection settings;
 
         public ApplicationSettings()
@@ -19,9 +16,5 @@ namespace TFS.Web
         {
             this.settings = settings;
         }
-
-        public string AuthenticationService { get { return settings[AuthenticationServiceKey]; } }
-
-        public string ChangePasswordService { get { return settings[ChangePasswordServiceKey]; } }
     }
 }

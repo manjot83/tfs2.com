@@ -54,33 +54,35 @@ namespace TFS.Web.Controllers
         [Authorize]
         public virtual ViewResult ChangePassword()
         {
-            var user = this.CurrentUser;
-            return View(user);
+            throw new NotSupportedException();
+            //var user = this.CurrentUser;
+            //return View(user);
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
         [Authorize]
         public virtual ActionResult ChangePassword(string originalPassword, string newPassword, string confirmNewPassword)
         {
-            if (string.IsNullOrEmpty(originalPassword))
-                ModelState.AddModelError("originalPassword", "Password cannot be blank.");
-            if (string.IsNullOrEmpty(newPassword))
-                ModelState.AddModelError("newPassword", "Password cannot be blank.");
-            if (string.IsNullOrEmpty(confirmNewPassword))
-                ModelState.AddModelError("confirmNewPassword", "Password cannot be blank.");
-            if (newPassword.Length < authenticationService.MinRequiredPasswordLength)
-                ModelState.AddModelError("newPassword", string.Format("Password must be at least {0} characters long.", authenticationService.MinRequiredPasswordLength));
-            if (newPassword != confirmNewPassword)
-                ModelState.AddModelError("confirmNewPassword", "New password's must match.");
-            var user = this.CurrentUser;
-            if (!ModelState.IsValid)
-                return View(user);
-            if (!authenticationService.ChangePassword(user, originalPassword, newPassword))
-            {
-                ModelState.AddModelError("originalPassword", "Incorrect password.");
-                return View(user);
-            }
-            return RedirectToAction(MVC.Dashboard.Index());
+            throw new NotSupportedException();
+            //if (string.IsNullOrEmpty(originalPassword))
+            //    ModelState.AddModelError("originalPassword", "Password cannot be blank.");
+            //if (string.IsNullOrEmpty(newPassword))
+            //    ModelState.AddModelError("newPassword", "Password cannot be blank.");
+            //if (string.IsNullOrEmpty(confirmNewPassword))
+            //    ModelState.AddModelError("confirmNewPassword", "Password cannot be blank.");
+            //if (newPassword.Length < authenticationService.MinRequiredPasswordLength)
+            //    ModelState.AddModelError("newPassword", string.Format("Password must be at least {0} characters long.", authenticationService.MinRequiredPasswordLength));
+            //if (newPassword != confirmNewPassword)
+            //    ModelState.AddModelError("confirmNewPassword", "New password's must match.");
+            //var user = this.CurrentUser;
+            //if (!ModelState.IsValid)
+            //    return View(user);
+            //if (!authenticationService.ChangePassword(user, originalPassword, newPassword))
+            //{
+            //    ModelState.AddModelError("originalPassword", "Incorrect password.");
+            //    return View(user);
+            //}
+            //return RedirectToAction(MVC.Dashboard.Index());
         }
     }
 }

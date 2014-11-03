@@ -301,8 +301,6 @@
     <Compile Include="OpCenter\Forms\ViewableFile.cs" />
     <Compile Include="OpCenter\Forms\ViewableFileCollection.cs" />
     <Compile Include="OpCenter\News\NewsController.cs" />
-    <Compile Include="OpCenter\People\PeopleCollection.cs" />
-    <Compile Include="OpCenter\People\SyncEnabledPerson.cs" />
     <Compile Include="OpCenter\Scheduling\AvailabilityController.cs" />
     <Compile Include="OpCenter\Serialization\SerializableDictionary.cs" />
     <Compile Include="OpCenter\Serialization\Serializer.cs" />

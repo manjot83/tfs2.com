@@ -8,7 +8,6 @@ namespace TFS.Web
         void LogOn(string username, bool persistent);
         void LogOff();
 
-        bool ChangePassword(User user, string originalPassword, string newPassword);
         int MinRequiredPasswordLength { get; }
     }
 }
