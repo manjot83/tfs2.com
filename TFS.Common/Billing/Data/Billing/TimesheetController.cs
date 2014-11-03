@@ -109,7 +109,7 @@ namespace TFS.Intranet.Data.Billing
             TimesheetCollection col = this.FetchAll();
             foreach (Timesheet timesheet in col)
             {
-                if (timesheet.BillingPeriodAccount.Id == BillingPeriodAccountID)
+                if (timesheet.Periodaccountid == BillingPeriodAccountID)
                     total += timesheet.Perdiemcount;
             }
             return total;
@@ -121,7 +121,7 @@ namespace TFS.Intranet.Data.Billing
             TimesheetCollection col = this.FetchAll();
             foreach (Timesheet timesheet in col)
             {
-                if (timesheet.BillingPeriodAccount.Id == BillingPeriodAccountID)
+                if (timesheet.Periodaccountid == BillingPeriodAccountID)
                     total += timesheet.Mileageclaimed;
             }
             return total;

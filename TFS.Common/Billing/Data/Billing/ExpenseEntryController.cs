@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.ComponentModel;
@@ -17,9 +18,11 @@ namespace TFS.Intranet.Data.Billing
         {
             Double total = 0;
             ExpenseEntryCollection col = this.FetchAll().Where(ExpenseEntry.Columns.IsDeleted, false);
+            var allTimesheets = new TimesheetController().FetchAll();
             foreach (ExpenseEntry expenseentry in col)
             {
-                if (expenseentry.Timesheet.BillingPeriodAccount.Id == BillingPeriodAccountID &&
+                var timesheet = allTimesheets.FirstOrDefault(x => x.Id == expenseentry.Timesheetid);
+                if (timesheet != null && timesheet.Periodaccountid == BillingPeriodAccountID &&
                     expenseentry.IsDeleted == false)
                     total += expenseentry.Cost;
             }
