@@ -608,46 +608,6 @@
     <Content Include="Billing\Reports\timecardreport_print.aspx" />
     <Content Include="Billing\Reports\user_report.aspx" />
     <Content Include="Billing\timecard.aspx" />
-    <Content Include="Content\public\banners\aircrew_login.gif" />
-    <Content Include="Content\public\banners\contact.gif" />
-    <Content Include="Content\public\banners\experience.gif" />
-    <Content Include="Content\public\banners\programs.gif" />
-    <Content Include="Content\public\banners\services.gif" />
-    <Content Include="Content\public\banners\welcome.gif" />
-    <Content Include="Content\public\login\index_r3_c1.jpg" />
-    <Content Include="Content\public\login\loginlayout_r1_c1.jpg" />
-    <Content Include="Content\public\login\loginlayout_r2_c1.jpg" />
-    <Content Include="Content\public\login\loginlayout_r3_c1.jpg" />
-    <Content Include="Content\public\login\loginlayout_r3_c2.jpg" />
-    <Content Include="Content\public\login\loginlayout_r3_c3.jpg" />
-    <Content Include="Content\public\login\loginlayout_r4_c1.jpg" />
-    <Content Include="Content\public\login\spacer.gif" />
-    <Content Include="Content\public\login\submit.gif" />
-    <Content Include="Content\public\imagerollover.css" />
-    <Content Include="Content\public\layout.css" />
-    <Content Include="Content\public\tags.css" />
-    <Content Include="Content\public\template\content_bg.gif" />
-    <Content Include="Content\public\template\footer.gif" />
-    <Content Include="Content\public\headers\header01.jpg" />
-    <Content Include="Content\public\headers\header02.jpg" />
-    <Content Include="Content\public\headers\header03.jpg" />
-    <Content Include="Content\public\headers\header04.jpg" />
-    <Content Include="Content\public\headers\header05.jpg" />
-    <Content Include="Content\public\rollovers\contact.gif" />
-    <Content Include="Content\public\rollovers\contact_rollover.gif" />
-    <Content Include="Content\public\rollovers\home.gif" />
-    <Content Include="Content\public\rollovers\home_rollover.gif" />
-    <Content Include="Content\public\rollovers\services.gif" />
-    <Content Include="Content\public\rollovers\services_rollover.gif" />
-    <Content Include="Content\public\rollovers\programs.gif" />
-    <Content Include="Content\public\rollovers\programs_rollover.gif" />
-    <Content Include="Content\public\rollovers\experience.gif" />
-    <Content Include="Content\public\rollovers\experience_rollover.gif" />
-    <Content Include="Content\public\rollovers\logon.gif" />
-    <Content Include="Content\public\rollovers\logon_rollover.gif" />
-    <Content Include="Content\public\template\item.jpg" />
-    <Content Include="Content\public\template\item_hover.jpg" />
-    <Content Include="Content\public\template\spacer.gif" />
     <Content Include="default.aspx" />
     <Content Include="error.aspx" />
     <Content Include="Forms\Admin.aspx" />
@@ -789,14 +749,11 @@
     <Content Include="User Controls\Sidebar.ascx" />
     <Content Include="ViewArticle.aspx" />
     <Content Include="ViewHelpArticle.aspx" />
-    <Content Include="Views\Security\LogOn_old.aspx" />
     <Content Include="Views\Security\LogOn.aspx" />
-    <Content Include="Views\Site\SitePage.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Static\js\jquery\jquery-1.4.js" />
-    <Content Include="Views\Shared\Site.Master" />
     <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>

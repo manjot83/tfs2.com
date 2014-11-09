@@ -54,10 +54,10 @@ namespace TFS.Models.Users
 
         public virtual void SetDefaultEmailAddress(string username)
         {
-            if (username.ToUpper().EndsWith("@TFS2.COM"))
+            if (username.ToLower().EndsWith("@tacticalflightservices.com"))
                 Email = username;
             else
-                Email = username + "@tfs2.com";
+                Email = username + "@tacticalflightservices.com";
         }
 
         public virtual string FileByName()

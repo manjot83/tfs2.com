@@ -15,7 +15,7 @@ Create a New User
             <% Html.RenderPartial(MVC.Users.Views.UserInformation); %>
             <div class="field-group">
                 <div class="field">
-                    <label for="username">Username (@tfs2.com)</label>
+                    <label for="username">Username ([username]@tacticalflightservices.com)</label>
                     <%= Html.TextBox("username", Model.Username, new { size = "20", maxlength = "50" })%>
                     <%= Html.ValidationMessage("username")%>
                 </div>

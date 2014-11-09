@@ -401,91 +401,6 @@ namespace Links {
         
         }
     
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public static class @public {
-            private const string URLPATH = "~/Content/public";
-            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-            public static class banners {
-                private const string URLPATH = "~/Content/public/banners";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string aircrew_login_gif = Url("aircrew_login.gif");
-                public static readonly string contact_gif = Url("contact.gif");
-                public static readonly string experience_gif = Url("experience.gif");
-                public static readonly string programs_gif = Url("programs.gif");
-                public static readonly string services_gif = Url("services.gif");
-                public static readonly string welcome_gif = Url("welcome.gif");
-            }
-        
-            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-            public static class headers {
-                private const string URLPATH = "~/Content/public/headers";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string header01_jpg = Url("header01.jpg");
-                public static readonly string header02_jpg = Url("header02.jpg");
-                public static readonly string header03_jpg = Url("header03.jpg");
-                public static readonly string header04_jpg = Url("header04.jpg");
-                public static readonly string header05_jpg = Url("header05.jpg");
-            }
-        
-            public static readonly string imagerollover_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/imagerollover.min.css") ? Url("imagerollover.min.css") : Url("imagerollover.css");
-                 
-            public static readonly string layout_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/layout.min.css") ? Url("layout.min.css") : Url("layout.css");
-                 
-            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-            public static class login {
-                private const string URLPATH = "~/Content/public/login";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string index_r3_c1_jpg = Url("index_r3_c1.jpg");
-                public static readonly string loginlayout_r1_c1_jpg = Url("loginlayout_r1_c1.jpg");
-                public static readonly string loginlayout_r2_c1_jpg = Url("loginlayout_r2_c1.jpg");
-                public static readonly string loginlayout_r3_c1_jpg = Url("loginlayout_r3_c1.jpg");
-                public static readonly string loginlayout_r3_c2_jpg = Url("loginlayout_r3_c2.jpg");
-                public static readonly string loginlayout_r3_c3_jpg = Url("loginlayout_r3_c3.jpg");
-                public static readonly string loginlayout_r4_c1_jpg = Url("loginlayout_r4_c1.jpg");
-                public static readonly string spacer_gif = Url("spacer.gif");
-                public static readonly string submit_gif = Url("submit.gif");
-            }
-        
-            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-            public static class rollovers {
-                private const string URLPATH = "~/Content/public/rollovers";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string contact_gif = Url("contact.gif");
-                public static readonly string contact_rollover_gif = Url("contact_rollover.gif");
-                public static readonly string experience_gif = Url("experience.gif");
-                public static readonly string experience_rollover_gif = Url("experience_rollover.gif");
-                public static readonly string home_gif = Url("home.gif");
-                public static readonly string home_rollover_gif = Url("home_rollover.gif");
-                public static readonly string logon_gif = Url("logon.gif");
-                public static readonly string logon_rollover_gif = Url("logon_rollover.gif");
-                public static readonly string programs_gif = Url("programs.gif");
-                public static readonly string programs_rollover_gif = Url("programs_rollover.gif");
-                public static readonly string services_gif = Url("services.gif");
-                public static readonly string services_rollover_gif = Url("services_rollover.gif");
-            }
-        
-            public static readonly string tags_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/tags.min.css") ? Url("tags.min.css") : Url("tags.css");
-                 
-            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-            public static class template {
-                private const string URLPATH = "~/Content/public/template";
-                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
-                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string content_bg_gif = Url("content_bg.gif");
-                public static readonly string footer_gif = Url("footer.gif");
-                public static readonly string item_jpg = Url("item.jpg");
-                public static readonly string item_hover_jpg = Url("item_hover.jpg");
-                public static readonly string spacer_gif = Url("spacer.gif");
-            }
-        
-        }
-    
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -1779,7 +1694,6 @@ namespace TFS.Web.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
             public readonly string LogOn = "~/Views/Security/LogOn.aspx";
-            public readonly string LogOn_old = "~/Views/Security/LogOn_old.aspx";
         }
     }
 
@@ -1811,6 +1725,9 @@ namespace TFS.Web.Controllers {
 namespace TFS.Web.Controllers {
     public partial class SiteController {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public SiteController() { }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected SiteController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -1841,21 +1758,11 @@ namespace TFS.Web.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
             public readonly string Index = "Index";
-            public readonly string Home = "Home";
-            public readonly string Services = "Services";
-            public readonly string Programs = "Programs";
-            public readonly string Experience = "Experience";
-            public readonly string Contact = "Contact";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants {
             public const string Index = "Index";
-            public const string Home = "Home";
-            public const string Services = "Services";
-            public const string Programs = "Programs";
-            public const string Experience = "Experience";
-            public const string Contact = "Contact";
         }
 
 
@@ -1864,7 +1771,6 @@ namespace TFS.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
-            public readonly string SitePage = "~/Views/Site/SitePage.aspx";
         }
     }
 
@@ -1874,31 +1780,6 @@ namespace TFS.Web.Controllers {
 
         public override System.Web.Mvc.ActionResult Index() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ViewResult Home() {
-            var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.Home);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ViewResult Services() {
-            var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.Services);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ViewResult Programs() {
-            var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.Programs);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ViewResult Experience() {
-            var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.Experience);
-            return callInfo;
-        }
-
-        public override System.Web.Mvc.ViewResult Contact() {
-            var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.Contact);
             return callInfo;
         }
 
