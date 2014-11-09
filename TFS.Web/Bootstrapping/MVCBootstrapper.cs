@@ -37,6 +37,12 @@ namespace TFS.Web
 
             routes.MapRoute(
                 string.Empty,
+                "oauth2callback",
+                new { controller = MVC.Security.Name, action = MVC.Security.ActionNames.OAuth2callback }
+            );
+
+            routes.MapRoute(
+                string.Empty,
                 "{controller}/{action}/{id}",
                 new { controller = MVC.Dashboard.Name, action = MVC.Dashboard.ActionNames.Index, id = "" }
             );
@@ -71,10 +77,6 @@ namespace TFS.Web
                     s.IncludeNamespaceContainingType<DashboardController>();
                     s.AddAllTypesOf<IController>();
                 });
-
-                i.For<IAuthenticationService>()
-                    .HybridHttpOrThreadLocalScoped()
-                    .Use<FormsAuthenticationWrapper>();
 
                 i.ForSingletonOf<IApplicationSettings>()
                     .Use(x => new ApplicationSettings());

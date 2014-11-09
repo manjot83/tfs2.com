@@ -1,88 +1,92 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
+using System.Web.Security;
+using Newtonsoft.Json;
 using TFS.Models;
 
 namespace TFS.Web.Controllers
 {
     public partial class SecurityController : BaseController
     {
-        private readonly IAuthenticationService authenticationService;
-
-        public SecurityController(IAuthenticationService authenticationService, IApplicationSettings applicationSettings, IRepository repository)
-            :base(applicationSettings, repository)
+        public SecurityController(IApplicationSettings applicationSettings, IRepository repository)
+            : base(applicationSettings, repository)
         {
-            this.authenticationService = authenticationService;
         }
 
         public virtual ViewResult LogOn(Uri returnUrl)
         {
             ViewData["returnUrl"] = returnUrl;
+            ViewData["google_url"] = string.Format("https://accounts.google.com/o/oauth2/auth?scope=email%20profile&state=foobar&redirect_uri={0}&response_type=code&client_id={1}&approval_prompt=auto", HttpUtility.UrlEncode(Google_RedirectUri), google_clientid);
             return View();
         }
 
-        [AcceptVerbs(HttpVerbs.Post)]
-        public virtual ActionResult LogOn(string userName, string password, bool rememberMe, Uri returnUrl)
+        private string Google_RedirectUri
         {
-            if (!authenticationService.Authenticate(userName, password))
+            get
             {
-                this.ModelState.AddModelError("Logon Credentials", "Username or password incorrect.");
-                return View();
+                return "http://localhost:60488/oauth2callback";
+            }
+        }
+        
+        private const string google_clientid = "830934135780-pt5a3b3n8fi36koambitrrhhr6f8o1vv.apps.googleusercontent.com";
+        private const string google_clientsecret = "MF13fiwoYvligiqFKdu1tSw7";
+
+        public virtual ActionResult OAuth2callback(string state, string code)
+        {
+            var post = string.Format("code={0}&client_id={1}&client_secret={2}&redirect_uri={3}&grant_type={4}"
+                , HttpUtility.UrlEncode(code)
+                , HttpUtility.UrlEncode(google_clientid)
+                , HttpUtility.UrlEncode(google_clientsecret)
+                , HttpUtility.UrlEncode(Google_RedirectUri)
+                , HttpUtility.UrlEncode("authorization_code"));
+
+            var request = (HttpWebRequest)HttpWebRequest.Create("https://accounts.google.com/o/oauth2/token");
+            request.Method = "POST";
+            request.AllowAutoRedirect = false;
+            request.ContentType = "application/x-www-form-urlencoded";
+            using (var stOut = new StreamWriter(request.GetRequestStream(), System.Text.Encoding.ASCII))
+            {
+                stOut.Write(post);
+                stOut.Close();
             }
 
-            authenticationService.LogOn(userName, rememberMe);
-            if (returnUrl != null && !String.IsNullOrEmpty(returnUrl.OriginalString))
+            string responseContent = "";
+            var httpResponse = (HttpWebResponse)request.GetResponse();
+            using (var resStream = new StreamReader(httpResponse.GetResponseStream(), Encoding.ASCII))
             {
-                return Redirect(returnUrl.OriginalString);
+                responseContent = resStream.ReadToEnd();
             }
-            else
-            {
-                return RedirectToAction(MVC.Dashboard.Index());
-            }
+
+            var reply = JsonConvert.DeserializeObject<dynamic>(responseContent);
+            var id_token = reply["id_token"];
+            var token = new System.IdentityModel.Tokens.JwtSecurityToken(id_token.Value);
+            var emailAddress =  token.Claims.FirstOrDefault(x => x.Type == "email").Value;
+
+
+            //FormsAuthentication.SetAuthCookie(cleanedUsername, persistent);
+
+            return Content(emailAddress);
         }
 
         public virtual RedirectToRouteResult LogOff()
         {
-            authenticationService.LogOff();
+            FormsAuthentication.SignOut();
             return RedirectToAction(MVC.Site.Index());
         }
 
-        [AcceptVerbs(HttpVerbs.Get)]
-        [Authorize]
-        public virtual ViewResult ChangePassword()
+        private static string CleanUpUsername(string username)
         {
-            throw new NotSupportedException();
-            //var user = this.CurrentUser;
-            //return View(user);
-        }
-
-        [AcceptVerbs(HttpVerbs.Post)]
-        [Authorize]
-        public virtual ActionResult ChangePassword(string originalPassword, string newPassword, string confirmNewPassword)
-        {
-            throw new NotSupportedException();
-            //if (string.IsNullOrEmpty(originalPassword))
-            //    ModelState.AddModelError("originalPassword", "Password cannot be blank.");
-            //if (string.IsNullOrEmpty(newPassword))
-            //    ModelState.AddModelError("newPassword", "Password cannot be blank.");
-            //if (string.IsNullOrEmpty(confirmNewPassword))
-            //    ModelState.AddModelError("confirmNewPassword", "Password cannot be blank.");
-            //if (newPassword.Length < authenticationService.MinRequiredPasswordLength)
-            //    ModelState.AddModelError("newPassword", string.Format("Password must be at least {0} characters long.", authenticationService.MinRequiredPasswordLength));
-            //if (newPassword != confirmNewPassword)
-            //    ModelState.AddModelError("confirmNewPassword", "New password's must match.");
-            //var user = this.CurrentUser;
-            //if (!ModelState.IsValid)
-            //    return View(user);
-            //if (!authenticationService.ChangePassword(user, originalPassword, newPassword))
-            //{
-            //    ModelState.AddModelError("originalPassword", "Incorrect password.");
-            //    return View(user);
-            //}
-            //return RedirectToAction(MVC.Dashboard.Index());
+            string cleanedUsername = username;
+            if (cleanedUsername.Contains("@"))
+                cleanedUsername = cleanedUsername.Substring(0, cleanedUsername.IndexOf("@"));
+            return cleanedUsername;
         }
     }
 }
