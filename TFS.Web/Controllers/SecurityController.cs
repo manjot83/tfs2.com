@@ -69,10 +69,17 @@ namespace TFS.Web.Controllers
             var token = new System.IdentityModel.Tokens.JwtSecurityToken(id_token.Value);
             var emailAddress =  token.Claims.FirstOrDefault(x => x.Type == "email").Value;
 
+            var username = CleanUpUsername(emailAddress);
 
-            //FormsAuthentication.SetAuthCookie(cleanedUsername, persistent);
+            var user = this.Repository.GetUserByUsername(username);
+            if (user == null || user.Disabled)
+            {
+                return Content("You are not an active user. Please contact an administrator and provide your email address: " + emailAddress);
+            }
 
-            return Content(emailAddress);
+            FormsAuthentication.SetAuthCookie(user.Username, false);
+
+            return Redirect("~");
         }
 
         public virtual RedirectToRouteResult LogOff()
