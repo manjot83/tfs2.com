@@ -12,10 +12,10 @@
             </asp:HyperLink>
         </li>
         <li>
-            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="#">
+            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="https://mail.google.com" Target="_blank">
                 <asp:Image ID="Image3" runat="server" ImageUrl="~/icons/email_go.png" ImageAlign="Middle" />
                 &nbsp;
-                E-mail
+                Email
             </asp:HyperLink>
         </li>
         <li>

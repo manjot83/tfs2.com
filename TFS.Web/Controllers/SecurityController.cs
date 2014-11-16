@@ -23,7 +23,7 @@ namespace TFS.Web.Controllers
         public virtual ViewResult LogOn(Uri returnUrl)
         {
             ViewData["returnUrl"] = returnUrl;
-            ViewData["google_url"] = string.Format("https://accounts.google.com/o/oauth2/auth?scope=email%20profile&state=foobar&redirect_uri={0}&response_type=code&client_id={1}&approval_prompt=auto", HttpUtility.UrlEncode(Google_RedirectUri), google_clientid);
+            ViewData["google_url"] = string.Format("https://accounts.google.com/o/oauth2/auth?scope=email%20profile&state=foobar&redirect_uri={0}&response_type=code&client_id={1}&approval_prompt=auto&access_type=online", HttpUtility.UrlEncode(Google_RedirectUri), google_clientid);
             return View();
         }
 
@@ -40,28 +40,39 @@ namespace TFS.Web.Controllers
 
         public virtual ActionResult OAuth2callback(string state, string code)
         {
-            var post = string.Format("code={0}&client_id={1}&client_secret={2}&redirect_uri={3}&grant_type={4}"
-                , HttpUtility.UrlEncode(code)
-                , HttpUtility.UrlEncode(google_clientid)
-                , HttpUtility.UrlEncode(google_clientsecret)
-                , HttpUtility.UrlEncode(Google_RedirectUri)
-                , HttpUtility.UrlEncode("authorization_code"));
-
-            var request = (HttpWebRequest)HttpWebRequest.Create("https://accounts.google.com/o/oauth2/token");
-            request.Method = "POST";
-            request.AllowAutoRedirect = false;
-            request.ContentType = "application/x-www-form-urlencoded";
-            using (var stOut = new StreamWriter(request.GetRequestStream(), System.Text.Encoding.ASCII))
+            if (state != "foobar")
             {
-                stOut.Write(post);
-                stOut.Close();
+                return RedirectToAction(Actions.LogOn());
             }
-
             string responseContent = "";
-            var httpResponse = (HttpWebResponse)request.GetResponse();
-            using (var resStream = new StreamReader(httpResponse.GetResponseStream(), Encoding.ASCII))
+            try
             {
-                responseContent = resStream.ReadToEnd();
+                var post = string.Format("code={0}&client_id={1}&client_secret={2}&redirect_uri={3}&grant_type={4}"
+                    , HttpUtility.UrlEncode(code)
+                    , HttpUtility.UrlEncode(google_clientid)
+                    , HttpUtility.UrlEncode(google_clientsecret)
+                    , HttpUtility.UrlEncode(Google_RedirectUri)
+                    , HttpUtility.UrlEncode("authorization_code"));
+
+                var request = (HttpWebRequest)HttpWebRequest.Create("https://accounts.google.com/o/oauth2/token");
+                request.Method = "POST";
+                request.AllowAutoRedirect = false;
+                request.ContentType = "application/x-www-form-urlencoded";
+                using (var stOut = new StreamWriter(request.GetRequestStream(), System.Text.Encoding.ASCII))
+                {
+                    stOut.Write(post);
+                    stOut.Close();
+                }
+
+                var httpResponse = (HttpWebResponse)request.GetResponse();
+                using (var resStream = new StreamReader(httpResponse.GetResponseStream(), Encoding.ASCII))
+                {
+                    responseContent = resStream.ReadToEnd();
+                }
+            }
+            catch (Exception e)
+            {
+                return Content("There was a problem with your request (" + e.Message + "). Please go back and try again.");
             }
 
             var reply = JsonConvert.DeserializeObject<dynamic>(responseContent);
@@ -74,7 +85,8 @@ namespace TFS.Web.Controllers
             var user = this.Repository.GetUserByUsername(username);
             if (user == null || user.Disabled)
             {
-                return Content("You are not an active user. Please contact an administrator and provide your email address: " + emailAddress);
+                ViewBag.EmailAddress = emailAddress;
+                return View("NotAUser");
             }
 
             FormsAuthentication.SetAuthCookie(user.Username, false);

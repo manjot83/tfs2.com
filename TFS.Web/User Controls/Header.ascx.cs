@@ -13,6 +13,6 @@ public partial class User_Controls_Header : System.Web.UI.UserControl
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-   
+        this.LogoffLink.Text = "(" + HttpContext.Current.User.Identity.Name + ") Log Off";
     }
 }

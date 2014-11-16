@@ -22,7 +22,7 @@
         <span class="doNotDisplay">Navigation:</span>        
         | <asp:HyperLink ID="IntranetLink" runat="server" NavigateUrl="~" Text="Intranet Home" /> |
         <a href="http://tacticalflightservices.com" class="highlight">TFS Home</a> |
-        <a href="#" class="highlight" onclick="alert('TODO: add link to email'); return false;">Email</a> |
+        <a href="https://mail.google.com" class="highlight" target="_blank">Email</a> |
         <asp:HyperLink ID="PayrollLink" runat="server" NavigateUrl="~/Billing/default.aspx" Text="My Timecards" /> |        
         <asp:HyperLink ID="LogoffLink" runat="server" NavigateUrl="~/Security/LogOff" Text="Log Off" CssClass="highlight" /> |        
       </div>
