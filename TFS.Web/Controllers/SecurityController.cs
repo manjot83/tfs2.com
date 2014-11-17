@@ -109,7 +109,7 @@ namespace TFS.Web.Controllers
             return RedirectToAction(MVC.Site.Index());
         }
 
-        private static string CleanUpUsername(string username)
+        public static string CleanUpUsername(string username)
         {
             string cleanedUsername = username;
             if (cleanedUsername.Contains("@"))

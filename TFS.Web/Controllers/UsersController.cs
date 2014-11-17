@@ -94,6 +94,7 @@ namespace TFS.Web.Controllers
         public virtual ActionResult Create(UserViewModel userViewModel)
         {
             this.Validate(userViewModel, string.Empty);
+            userViewModel.Username = SecurityController.CleanUpUsername(userViewModel.Username);
             if (ModelState.IsValid && userRepository.GetUser(userViewModel.Username) != null)
                 ModelState.AddModelError("username", "Username must be unique.");
             if (!ModelState.IsValid)
