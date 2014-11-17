@@ -31,7 +31,11 @@ namespace TFS.Web.Controllers
         {
             get
             {
+#if DEBUG
                 return "http://localhost:60488/oauth2callback";
+#else
+                return "http://tacticalflightservices.azurewebsites.net/oauth2callback";
+#endif
             }
         }
         
