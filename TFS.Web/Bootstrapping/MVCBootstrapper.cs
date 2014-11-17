@@ -64,7 +64,7 @@ namespace TFS.Web
             HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
 #endif
             var mappingAssemblies = new List<Assembly> { typeof(MappingExtensions).Assembly };
-            var cfg = ConfigurationBuilder.CreateMsSql2005Configuration("TFS_Web", mappingAssemblies);
+            var cfg = ConfigurationBuilder.CreateMsSql2005Configuration("tfsql", mappingAssemblies);
       
             var coreRegistry = new CoreRegistry(cfg);
 
