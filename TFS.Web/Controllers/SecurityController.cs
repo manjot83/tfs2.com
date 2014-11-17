@@ -20,10 +20,15 @@ namespace TFS.Web.Controllers
         {
         }
 
+        public virtual ActionResult Index()
+        {
+            return Redirect(string.Format("https://accounts.google.com/o/oauth2/auth?scope=email%20profile&state=foobar&redirect_uri={0}&response_type=code&client_id={1}&prompt=select_account&access_type=online", HttpUtility.UrlEncode(Google_RedirectUri), google_clientid));
+        }
+
         public virtual ViewResult LogOn(Uri returnUrl)
         {
             ViewData["returnUrl"] = returnUrl;
-            ViewData["google_url"] = string.Format("https://accounts.google.com/o/oauth2/auth?scope=email%20profile&state=foobar&redirect_uri={0}&response_type=code&client_id={1}&approval_prompt=auto&access_type=online", HttpUtility.UrlEncode(Google_RedirectUri), google_clientid);
+            ViewData["google_url"] = string.Format("https://accounts.google.com/o/oauth2/auth?scope=email%20profile&state=foobar&redirect_uri={0}&response_type=code&client_id={1}&prompt=select_account&access_type=online", HttpUtility.UrlEncode(Google_RedirectUri), google_clientid);
             return View();
         }
 

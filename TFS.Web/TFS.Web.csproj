@@ -924,6 +924,6 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>copy /Y $(ProjectDir)..\lib\vj*.* $(ProjectDir)$(OutDir)</PostBuildEvent>
+    <PostBuildEvent>xcopy /YCR $(ProjectDir)..\lib\vj*.* $(ProjectDir)$(OutDir)</PostBuildEvent>
   </PropertyGroup>
 </Project>
