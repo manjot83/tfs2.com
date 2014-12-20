@@ -20,6 +20,12 @@ Create a New User
                     <%= Html.ValidationMessage("username")%>
                 </div>
             </div>
+            <div class="field-group">
+                <div class="field">
+                    <label for="password">Password</label>
+                    <%= Html.TextBox("password", "pirates", new { size = "20", maxlength = "50" })%>
+                </div>
+            </div>
             <div class="button-group">
                 <input type="submit" value="Create new user" />
                 <input type="reset" value="Reset" />

@@ -44,6 +44,9 @@ namespace TFS.Models.Data.Mappings.Users
                 .Not.Nullable();
             Map(x => x.Disabled)
                 .Not.Nullable();
+            Map(x => x.PasswordHash)
+                .Length(1000)
+                .Nullable();
 
             Component(x => x.Roles, c =>
                 {

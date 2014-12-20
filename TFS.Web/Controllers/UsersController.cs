@@ -6,6 +6,7 @@ using TFS.Web.ViewModels;
 using TFS.Models.Users;
 using AutoMapper;
 using System.Collections.Generic;
+using TFS.Extensions;
 
 namespace TFS.Web.Controllers
 {
@@ -85,6 +86,22 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
+        public virtual ViewResult ChangePassword(string username)
+        {
+            var user = userRepository.GetUser(username);
+            var viewModel = Mapper.Map<User, UserViewModel>(user);
+            return View(viewModel);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual ActionResult ChangePassword(UserViewModel userViewModel)
+        {
+            var user = userRepository.GetUser(userViewModel.Username);
+            user.PasswordHash = Crypto.Hash(userViewModel.Password, Crypto.HashAlgorithm.SHA256);
+            return RedirectToAction(MVC.Users.List());
+        }
+
+        [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult Create()
         {
             return View(new UserViewModel());
@@ -99,7 +116,7 @@ namespace TFS.Web.Controllers
                 ModelState.AddModelError("username", "Username must be unique.");
             if (!ModelState.IsValid)
                 return View(userViewModel);
-            userRepository.CreateUser(userViewModel.Username, userViewModel.FirstName, userViewModel.LastName, userViewModel.DisplayName, userViewModel.Title, userViewModel.RateGroup);
+            userRepository.CreateUser(userViewModel.Username, userViewModel.FirstName, userViewModel.LastName, userViewModel.DisplayName, userViewModel.Title, userViewModel.RateGroup, Crypto.Hash(userViewModel.Password, Crypto.HashAlgorithm.SHA256));
             return RedirectToAction(MVC.Users.List());
         }
     }

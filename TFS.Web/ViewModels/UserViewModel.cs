@@ -18,6 +18,7 @@ namespace TFS.Web.ViewModels
         public string DisplayName { get; set; }
 
         public string Email { get; set; }
+        public string Password { get; set; }
 
         public bool Disabled { get; set; }
 

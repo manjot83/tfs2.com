@@ -177,12 +177,14 @@ namespace TFS.Web
 
         private static void Setup_UserViewModel()
         {
-            Mapper.CreateMap<User, UserViewModel>();
+            Mapper.CreateMap<User, UserViewModel>()
+                  .ForMember(x => x.Password, m => m.Ignore());
             Mapper.CreateMap<UserViewModel, User>()
                   .ForMember(x => x.Id, m => m.Ignore())
                   .ForMember(x => x.Email, m => m.Ignore())
                   .ForMember(x => x.Person, m => m.Ignore())
                   .ForMember(x => x.Identity, m => m.Ignore())
+                  .ForMember(x => x.PasswordHash, m => m.Ignore())
                   .ForMember(x => x.Roles, m => m.MapFrom(x =>
                   {
                       return new UserRoles

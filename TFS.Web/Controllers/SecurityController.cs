@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Security;
 using Newtonsoft.Json;
+using TFS.Extensions;
 using TFS.Models;
 
 namespace TFS.Web.Controllers
@@ -30,6 +31,41 @@ namespace TFS.Web.Controllers
             ViewData["returnUrl"] = returnUrl;
             ViewData["google_url"] = string.Format("https://accounts.google.com/o/oauth2/auth?scope=email%20profile&state=foobar&redirect_uri={0}&response_type=code&client_id={1}&prompt=select_account&access_type=online", HttpUtility.UrlEncode(Google_RedirectUri), google_clientid);
             return View();
+        }
+
+        public virtual ActionResult Authenticate(string username, string password)
+        {
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            {
+                ViewData.Add("ErrorMessage", "Invalid Username or Password");
+                return View("LogOn");
+            }
+            username = CleanUpUsername(username);
+            string passwordHash = null;
+            try
+            {
+                passwordHash = Crypto.Hash(password, Crypto.HashAlgorithm.SHA256);
+            }
+            catch (Exception)
+            {
+                ViewData.Add("ErrorMessage", "Invalid Username or Password");
+                return View("LogOn");
+            }
+
+            var user = this.Repository.GetUserByUsername(username);
+            if (user == null || user.Disabled)
+            {
+                ViewData.Add("ErrorMessage", "Invalid Username or Password");
+                return View("LogOn");
+            }
+            if (user.PasswordHash != passwordHash)
+            {
+                ViewData.Add("ErrorMessage", "Invalid Username or Password");
+                return View("LogOn");
+            }
+
+            FormsAuthentication.SetAuthCookie(user.Username, false);
+            return Redirect("~");
         }
 
         private string Google_RedirectUri

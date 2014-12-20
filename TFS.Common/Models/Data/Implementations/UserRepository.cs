@@ -93,7 +93,7 @@ namespace TFS.Models.Data.Implementations
             return user != null ? user.Person : null;
         }
 
-        public User CreateUser(string username, string firstname, string lastname, string displayname, string title, int rateGroup)
+        public User CreateUser(string username, string firstname, string lastname, string displayname, string title, int rateGroup, string passwordHash)
         {
             var next_identity = this.UnitOfWork.Session.CreateSQLQuery("SELECT max([identity]) FROM Users").List<int>().Single();
 
@@ -107,6 +107,7 @@ namespace TFS.Models.Data.Implementations
                 RateGroup = rateGroup,
                 Disabled = false,
                 Identity = next_identity + 1,
+                PasswordHash = passwordHash,
             };
             user.SetDefaultEmailAddress(username);
             user.Validate();

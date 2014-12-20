@@ -13,6 +13,7 @@ Edit a New User
         <legend>User Information</legend>
         <% using (Html.BeginForm(MVC.Users.Edit(), FormMethod.Post, new { @class = "fieldset-content" })) { %>
             <%= Html.Hidden("username", Model.Username) %>
+            <h3><%= Html.ActionLink("Change Password", MVC.Users.ChangePassword(Model.Username)) %></h3>
             <% Html.RenderPartial(MVC.Users.Views.UserInformation); %>        
             <div class="field-group">
                 <div class="field">                

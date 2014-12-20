@@ -36,6 +36,7 @@ namespace TFS.Models.Users
         [Required, StringLength(50)]
         public virtual string Username { get; set; }
         public virtual bool Disabled { get; set; }
+        public virtual string PasswordHash { get; set; }
 
         [Required]
         public virtual UserRoles Roles { get; set; }

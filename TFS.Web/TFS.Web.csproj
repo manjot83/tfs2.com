@@ -751,6 +751,7 @@
     <Content Include="ViewHelpArticle.aspx" />
     <Content Include="Views\Security\NotAUser.aspx" />
     <Content Include="Views\Security\LogOn.aspx" />
+    <Content Include="Views\Users\ChangePassword.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

@@ -1642,6 +1642,11 @@ namespace TFS.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ActionResult Authenticate() {
+            return new T4MVC_ActionResult(Area, Name, ActionNames.Authenticate);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ActionResult OAuth2callback() {
             return new T4MVC_ActionResult(Area, Name, ActionNames.OAuth2callback);
         }
@@ -1660,14 +1665,18 @@ namespace TFS.Web.Controllers {
         public ActionNamesClass ActionNames { get { return s_actions; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass {
+            public readonly string Index = "Index";
             public readonly string LogOn = "LogOn";
+            public readonly string Authenticate = "Authenticate";
             public readonly string OAuth2callback = "OAuth2callback";
             public readonly string LogOff = "LogOff";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants {
+            public const string Index = "Index";
             public const string LogOn = "LogOn";
+            public const string Authenticate = "Authenticate";
             public const string OAuth2callback = "OAuth2callback";
             public const string LogOff = "LogOff";
         }
@@ -1679,6 +1688,14 @@ namespace TFS.Web.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_LogOn {
             public readonly string returnUrl = "returnUrl";
+        }
+        static readonly ActionParamsClass_Authenticate s_params_Authenticate = new ActionParamsClass_Authenticate();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Authenticate AuthenticateParams { get { return s_params_Authenticate; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Authenticate {
+            public readonly string username = "username";
+            public readonly string password = "password";
         }
         static readonly ActionParamsClass_OAuth2callback s_params_OAuth2callback = new ActionParamsClass_OAuth2callback();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -1694,6 +1711,7 @@ namespace TFS.Web.Controllers {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
             public readonly string LogOn = "~/Views/Security/LogOn.aspx";
+            public readonly string NotAUser = "~/Views/Security/NotAUser.aspx";
         }
     }
 
@@ -1701,9 +1719,21 @@ namespace TFS.Web.Controllers {
     public class T4MVC_SecurityController: TFS.Web.Controllers.SecurityController {
         public T4MVC_SecurityController() : base(Dummy.Instance) { }
 
+        public override System.Web.Mvc.ActionResult Index() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Index);
+            return callInfo;
+        }
+
         public override System.Web.Mvc.ViewResult LogOn(System.Uri returnUrl) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.LogOn);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult Authenticate(string username, string password) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Authenticate);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "username", username);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "password", password);
             return callInfo;
         }
 
@@ -1813,6 +1843,11 @@ namespace TFS.Web.Controllers {
         public System.Web.Mvc.ViewResult Edit() {
             return new T4MVC_ViewResult(Area, Name, ActionNames.Edit);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ViewResult ChangePassword() {
+            return new T4MVC_ViewResult(Area, Name, ActionNames.ChangePassword);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public UsersController Actions { get { return MVC.Users; } }
@@ -1831,6 +1866,7 @@ namespace TFS.Web.Controllers {
             public readonly string Index = "Index";
             public readonly string List = "List";
             public readonly string Edit = "Edit";
+            public readonly string ChangePassword = "ChangePassword";
             public readonly string Create = "Create";
         }
 
@@ -1839,6 +1875,7 @@ namespace TFS.Web.Controllers {
             public const string Index = "Index";
             public const string List = "List";
             public const string Edit = "Edit";
+            public const string ChangePassword = "ChangePassword";
             public const string Create = "Create";
         }
 
@@ -1861,11 +1898,19 @@ namespace TFS.Web.Controllers {
         public class ActionParamsClass_Edit {
             public readonly string username = "username";
         }
+        static readonly ActionParamsClass_ChangePassword s_params_ChangePassword = new ActionParamsClass_ChangePassword();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ChangePassword ChangePasswordParams { get { return s_params_ChangePassword; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ChangePassword {
+            public readonly string username = "username";
+        }
         static readonly ViewNames s_views = new ViewNames();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string ChangePassword = "~/Views/Users/ChangePassword.aspx";
             public readonly string Create = "~/Views/Users/Create.aspx";
             public readonly string Edit = "~/Views/Users/Edit.aspx";
             public readonly string List = "~/Views/Users/List.aspx";
@@ -1900,6 +1945,18 @@ namespace TFS.Web.Controllers {
 
         public override System.Web.Mvc.ActionResult Edit(TFS.Web.ViewModels.UserViewModel userViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Edit);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "userViewModel", userViewModel);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult ChangePassword(string username) {
+            var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.ChangePassword);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "username", username);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ChangePassword(TFS.Web.ViewModels.UserViewModel userViewModel) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ChangePassword);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "userViewModel", userViewModel);
             return callInfo;
         }
