@@ -29,6 +29,7 @@
 <div class="field-group">
     <div class="field">
         <label for="RateGroup">Billing Rate Group</label>
+        <%= Html.ActionLink("Rate Groups", MVC.Users.RateGroups(), new { target = "_blank" } )%>
         <%= Html.TextBox("RateGroup", Model.RateGroup, new { size = "40", maxlength = "100" })%>
         <%= Html.ValidationMessage("RateGroup")%>
     </div>

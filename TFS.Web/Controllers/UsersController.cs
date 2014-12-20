@@ -7,6 +7,7 @@ using TFS.Models.Users;
 using AutoMapper;
 using System.Collections.Generic;
 using TFS.Extensions;
+using System.Text;
 
 namespace TFS.Web.Controllers
 {
@@ -118,6 +119,19 @@ namespace TFS.Web.Controllers
                 return View(userViewModel);
             userRepository.CreateUser(userViewModel.Username, userViewModel.FirstName, userViewModel.LastName, userViewModel.DisplayName, userViewModel.Title, userViewModel.RateGroup, Crypto.Hash(userViewModel.Password, Crypto.HashAlgorithm.SHA256));
             return RedirectToAction(MVC.Users.List());
+        }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public virtual ActionResult RateGroups()
+        {
+            var rategroups = new TFS.Intranet.Data.Billing.RateGroupController().FetchAll();
+            var sb = new StringBuilder();
+            sb.AppendLine("Id \t| Name").AppendLine("-- \t ----");
+            foreach (var item in rategroups.OrderBy(x => x.Id))
+            {
+                sb.AppendFormat("{0} \t| {1}", item.Id, item.Name).AppendLine();
+            }
+            return Content(sb.ToString(), "text/plain");
         }
     }
 }

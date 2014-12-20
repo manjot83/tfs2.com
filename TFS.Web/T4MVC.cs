@@ -1868,6 +1868,7 @@ namespace TFS.Web.Controllers {
             public readonly string Edit = "Edit";
             public readonly string ChangePassword = "ChangePassword";
             public readonly string Create = "Create";
+            public readonly string RateGroups = "RateGroups";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -1877,6 +1878,7 @@ namespace TFS.Web.Controllers {
             public const string Edit = "Edit";
             public const string ChangePassword = "ChangePassword";
             public const string Create = "Create";
+            public const string RateGroups = "RateGroups";
         }
 
 
@@ -1969,6 +1971,11 @@ namespace TFS.Web.Controllers {
         public override System.Web.Mvc.ActionResult Create(TFS.Web.ViewModels.UserViewModel userViewModel) {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.Create);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "userViewModel", userViewModel);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult RateGroups() {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.RateGroups);
             return callInfo;
         }
 
