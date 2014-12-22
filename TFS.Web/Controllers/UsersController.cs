@@ -98,6 +98,10 @@ namespace TFS.Web.Controllers
         public virtual ActionResult ChangePassword(UserViewModel userViewModel)
         {
             var user = userRepository.GetUser(userViewModel.Username);
+            if (string.IsNullOrWhiteSpace(userViewModel.Password))
+            {
+                return RedirectToAction(MVC.Users.ChangePassword(userViewModel.Username));
+            }
             user.PasswordHash = Crypto.Hash(userViewModel.Password, Crypto.HashAlgorithm.SHA256);
             return RedirectToAction(MVC.Users.List());
         }

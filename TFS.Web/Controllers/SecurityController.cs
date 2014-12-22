@@ -8,9 +8,12 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
 using System.Web.Security;
+using AutoMapper;
 using Newtonsoft.Json;
 using TFS.Extensions;
 using TFS.Models;
+using TFS.Models.Users;
+using TFS.Web.ViewModels;
 
 namespace TFS.Web.Controllers
 {
@@ -151,6 +154,29 @@ namespace TFS.Web.Controllers
             if (cleanedUsername.Contains("@"))
                 cleanedUsername = cleanedUsername.Substring(0, cleanedUsername.IndexOf("@"));
             return cleanedUsername;
+        }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        [Authorize]
+        public virtual ViewResult ChangePassword()
+        {
+            var user = this.CurrentUser;
+            var viewModel = Mapper.Map<User, UserViewModel>(user);
+            return View(viewModel);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [Authorize]
+        public virtual ActionResult ChangePassword(string password, string confirmPassword)
+        {
+            var user = this.CurrentUser;
+            if (string.IsNullOrWhiteSpace(password) || password != confirmPassword)
+            {
+                ViewData["ErrorMessage"] = "Invalid Password";
+                return View();
+            }
+            user.PasswordHash = Crypto.Hash(password, Crypto.HashAlgorithm.SHA256);
+            return Redirect("~");
         }
     }
 }

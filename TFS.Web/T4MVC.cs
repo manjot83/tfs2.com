@@ -1670,6 +1670,7 @@ namespace TFS.Web.Controllers {
             public readonly string Authenticate = "Authenticate";
             public readonly string OAuth2callback = "OAuth2callback";
             public readonly string LogOff = "LogOff";
+            public readonly string ChangePassword = "ChangePassword";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -1679,6 +1680,7 @@ namespace TFS.Web.Controllers {
             public const string Authenticate = "Authenticate";
             public const string OAuth2callback = "OAuth2callback";
             public const string LogOff = "LogOff";
+            public const string ChangePassword = "ChangePassword";
         }
 
 
@@ -1710,6 +1712,7 @@ namespace TFS.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string ChangePassword = "~/Views/Security/ChangePassword.aspx";
             public readonly string LogOn = "~/Views/Security/LogOn.aspx";
             public readonly string NotAUser = "~/Views/Security/NotAUser.aspx";
         }
@@ -1746,6 +1749,18 @@ namespace TFS.Web.Controllers {
 
         public override System.Web.Mvc.RedirectToRouteResult LogOff() {
             var callInfo = new T4MVC_RedirectToRouteResult(Area, Name, ActionNames.LogOff);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult ChangePassword() {
+            var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.ChangePassword);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult ChangePassword(string password, string confirmPassword) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.ChangePassword);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "password", password);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "confirmPassword", confirmPassword);
             return callInfo;
         }
 

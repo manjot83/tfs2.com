@@ -44,7 +44,14 @@
   <div>
     <p class="sideBarTitle">Self Service</p>
     <ul>
-        
+        <li>
+            <asp:HyperLink ID="HyperLink8" runat="server" NavigateUrl="~/Security/ChangePassword">
+                <asp:Image ID="Image8" runat="server" ImageUrl="~/icons/lock_go.png" ImageAlign="Middle" />
+                &nbsp;
+                Change My Password
+            </asp:HyperLink>
+        </li>  
+
         <li>
             <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/PersonnelRecords/EditMyRecord">
                 <asp:Image ID="Image16" runat="server" ImageUrl="~/icons/table_go.png" ImageAlign="Middle" />
