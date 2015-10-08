@@ -132,6 +132,7 @@
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\mvc5\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Xml" />
@@ -866,6 +867,8 @@
     <Content Include="Forms\Web.config" />
     <Content Include="Static\css\internal_base_layout.less" />
     <Content Include="Static\css\internal_list-table.less" />
+    <None Include="Properties\PublishProfiles\dev-tacticalflightservices.pubxml" />
+    <None Include="Properties\PublishProfiles\tacticalflightservices.pubxml" />
     <None Include="Static\images\internal_template\bgfooter.pdn" />
     <Content Include="Views\Shared\Dashboard.Master" />
     <Content Include="Views\Shared\Success.aspx" />
@@ -880,6 +883,12 @@
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </Content>
     <Content Include="style\Web.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
@@ -926,6 +935,7 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>xcopy /YCR $(ProjectDir)..\lib\vj*.* $(ProjectDir)$(OutDir)</PostBuildEvent>
+    <PostBuildEvent>xcopy /YCR $(ProjectDir)..\lib\vj*.* $(ProjectDir)$(OutDir)
+rmdir /S /Q "$(ProjectDir)\obj"</PostBuildEvent>
   </PropertyGroup>
 </Project>

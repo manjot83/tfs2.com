@@ -32,7 +32,7 @@ namespace TFS.Web.Forms
             if (newfile)
             {
                 Formfile file = this.controller.CreateFile();
-                /// redirect to the correct page
+                // redirect to the correct page
                 Response.Redirect(string.Format("Editor.aspx?file={0}&form={1}", file.Id, formid));
             }
             else

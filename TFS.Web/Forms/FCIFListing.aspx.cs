@@ -28,7 +28,7 @@ namespace TFS.Web.Forms
 
         protected bool UserCanEdit()
         {
-            return HttpContext.Current.User.IsInRole("UserAdmins");
+            return HttpContext.Current.User.IsInRole("UserManager");
         }
     }
 }
