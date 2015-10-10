@@ -9,6 +9,9 @@ namespace TFS.Models
 
         public static string ParseRegEx(string input, string pattern)
         {
+            if (string.IsNullOrEmpty(input))
+                return string.Empty;
+
             if (pattern == USPhoneNumber)
                 return input.Substitute(RegExLib.USPhoneNumber, x => x.Success ? x.Groups[1].Value + x.Groups[2].Value + x.Groups[3].Value : string.Empty);
             else

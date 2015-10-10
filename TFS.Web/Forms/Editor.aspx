@@ -21,6 +21,6 @@ Title="TFS - Form File Editor"
 
 <h1>File Records</h1>
 
-<tfs:EditableFileForm ID="EditForm" runat="server" />
+<tfs:EditableFileForm ID="EditForm" runat="server" OnCancelButtonPressed="OnCancelButtonPressed" OnSaveButtonPressed="OnSaveButtonPressed" OnDeleteButtonPressed="OnDeleteButtonPressed" />
 
 </asp:Content>

@@ -107,7 +107,7 @@
                 Flight Programs
             </asp:HyperLink>
         </li>
-        <li>
+        <li style="display:none;">
             <asp:HyperLink ID="HyperLink14" runat="server" NavigateUrl="~/Scheduling/AvailabilityReport.aspx">
                 <asp:Image ID="Image14" runat="server" ImageUrl="~/icons/world_go.png" ImageAlign="Middle" />
                 &nbsp;

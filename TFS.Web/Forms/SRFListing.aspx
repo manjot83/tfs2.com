@@ -18,7 +18,7 @@ SelectMethod="FetchAll">
 <h1>Safety Read Files</h1>
 
 <p>
-<a runat="server" id="AddFileLink" href="Editor.aspx?form=101" title="Add a new SRF" visible='<%# this.UserCanEdit() %>'>Add New File (admin only)</a>
+<a runat="server" id="AddFileLink" href="Editor.aspx?filetype=srf&amp;form=101" title="Add a new SRF" visible='<%# this.UserCanEdit() %>'>Add New File</a>
 </p>
 
 <asp:UpdatePanel ID="FilesListViewUpdatePanel" runat="server">
@@ -56,8 +56,8 @@ SelectMethod="FetchAll">
             <%# Eval("SRF NUMBER") %>
         </td>
         <td>
-            <a runat="server" href='<%# "Editor.aspx?file="+Eval("FileId")+"&form="+Eval("FormId") %>' title="Edit this file" visible='<%# this.UserCanEdit() %>'>
-                edit (admin only)
+            <a runat="server" href='<%# "Editor.aspx?filetype=srf&file="+Eval("FileId")+"&form="+Eval("FormId") %>' title="Edit this file" visible='<%# this.UserCanEdit() %>'>
+                edit
             </a>
         </td>       
     </tr>

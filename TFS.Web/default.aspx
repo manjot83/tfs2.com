@@ -25,6 +25,7 @@
         <ItemTemplate>            
             <a href='ViewArticle.aspx?id=<%# Eval("id") %>'><%# Eval("subject") %></a>
             <span runat="server" class="hotitem" visible='<%# Eval("isurgent") %>'>Hot Item</span>
+            <span>&nbsp;-&nbsp;<%# Eval("createdon") %></span>
             <br />
         </ItemTemplate>        
         <FooterTemplate>

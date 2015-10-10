@@ -102,8 +102,11 @@ namespace TFS.Web.Controllers
         {
             this.Validate(contactInfo, string.Empty);
             var person = userRepository.GetUser(username).Person;
-            if (USState.FromAbbreviation(contactInfo.AddressState.ToUpper()) == null)
-                ModelState.AddModelError("State", "Must be a valid US state abbreviation.");
+            if (!string.IsNullOrEmpty(contactInfo.AddressState))
+            {
+                if (USState.FromAbbreviation(contactInfo.AddressState.ToUpper()) == null)
+                    ModelState.AddModelError("State", "Must be a valid US state abbreviation.");
+            }
             if (!ModelState.IsValid)
                 return View(MVC.PersonnelRecords.Views.EditRecord, GeneratePersonnelRecordViewModel(person, editingMyRecord));
             Mapper.Map<ContactInfo, Person>(contactInfo, person);

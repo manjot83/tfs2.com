@@ -42,7 +42,7 @@ acronym, .titleTip {
 .superHeader {
   color: white;
   /*background-color: rgb(100,135,220);*/
-  background-color: #003300;				
+  background-color: #00086D;				
   height: 2em;
 }
 
@@ -73,7 +73,7 @@ acronym, .titleTip {
 
 .midHeader {
   /*color: rgb(39,78,144);*/
-  color: #2A5400;
+  color: #003298;
   /*background-color: rgb(140,170,230);*/
 }
 
@@ -90,7 +90,7 @@ acronym, .titleTip {
 .subHeader {
   color: white;
   /*background-color: rgb(0,51,153);*/
-  background-color: #003300;	
+  background-color: #3B468F;	
   margin: 0;
   padding: 1ex 1ex 1ex 1.5mm;
 }
@@ -258,7 +258,7 @@ li.sideBarText
 
 #main-copy a {
   font-weight: bold;
-	color: #2A5400;
+	/*color: #2A5400;*/
   background-color: transparent;
   text-decoration: underline;
 }
@@ -269,7 +269,7 @@ li.sideBarText
 
 #main-copy h1 {
   color: white;
-  background-color: #2A5400;	
+  background-color: #5c68ff;	
   font-size: 100%;
   font-weight: bold;
   margin: 3em 0 0 0;
@@ -330,7 +330,7 @@ dd {
 #footer {
   color: white;
   /*background-color: rgb(100,135,220);*/
-  background-color: #003300;	
+  background-color: #00086D;	
   font-size: 91%;
   margin: 0;
   padding: 1em 2.5mm 2.5ex 2.5mm;

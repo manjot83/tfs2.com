@@ -5,7 +5,7 @@
     <title>TFS Intranet <asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
     <link rel="icon" type="image/vnd.microsoft.icon" href="~/favicon.ico" /> 
     <link rel="stylesheet" type="text/css" href="style/AjaxCSSHelpers.css" />
-    <link rel="stylesheet" type="text/css" href="style/sinorca-tfs2.css" />
+    <link rel="stylesheet" type="text/css" href="style/sinorca-tfs2.css?version=1" />
     <link rel="stylesheet" type="text/css" href="style/list-table.css" />
     <asp:ContentPlaceHolder ID="MoreStylesheets" runat="server" />
 </head>

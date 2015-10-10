@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 using System.Web.UI.WebControls;
-
+using NHibernate.Criterion;
+using org.apache.avalon.framework;
+using TFS.OpCenter.Data;
 using TFS.OpCenter.Forms;
 using System.ComponentModel;
 using System.Web.UI;
@@ -12,6 +15,22 @@ namespace TFS.OpCenter.UI
 {
     public class EditableFileForm : CompositeControl
     {
+        /// <summary>
+        /// Fires when field values have been changed
+        /// </summary>
+        private event EventHandler FieldValuesChanged;
+        /// <summary>
+        /// The cancel button was pressed and field values have been reset to their original values
+        /// </summary>
+        public event EventHandler CancelButtonPressed;
+        /// <summary>
+        /// The save button was pressed and field values have been saved.
+        /// </summary>
+        public event EventHandler SaveButtonPressed;
+        /// <summary>
+        /// The save button was pressed and field values have been saved.
+        /// </summary>
+        public event EventHandler DeleteButtonPressed;
 
 		#region Public Properties 
 
@@ -59,10 +78,49 @@ namespace TFS.OpCenter.UI
 
         private void HandleSaveButtonClick(object sender, EventArgs e)
         {
+            //var allFields = new FormfieldCollection().Where(Formfield.Columns.Formid, this.EditableForm.FormFile.Formid).Load();
+            var catController = new ArticlecategoryController();
+            var category = catController.FetchAll().SingleOrDefault(item => item.Name.ToLower() == "general");
+            var categoryId = 5; //general category id;
+            string subject = null;
+            string content = null;
+
+            if (category != null)
+            {
+                categoryId = category.Id;
+            }
+
+          //(DateTime Createdon, string personName, int Categoryid, string Subject, string Content, bool Isurgent)
             foreach (EditableField field in this.EditableForm.Fields)
             {
+                //var fieldInfo = allFields.SingleOrDefault(item => item.Id == field.FormField.Id)
+
+                //if(fieldInfo != null)
+                //{
+                //    switch fieldInfo.Name
+                //}
+
+                switch(field.FormField.Name.ToLower())
+                {
+                    case "subject":
+                        subject = field.TextValue;
+                        break;
+                    case "narrative":
+                        content = field.TextValue;
+                        break;
+                    default:
+                        break;
+                }
+
                 field.Store();
             }
+
+            if (subject != null && content != null)
+            {
+                var newPostController = new NewspostController();
+                newPostController.Insert(DateTime.Now, HttpContext.Current.User.Identity.Name, categoryId, subject, content, true);
+            }
+
             if (this.SaveButtonPressed != null)
                 this.SaveButtonPressed(this, EventArgs.Empty);
         }
@@ -135,25 +193,23 @@ namespace TFS.OpCenter.UI
 
         private void HandleDeleteButtonClicked(object sender, EventArgs e)
         {
-            /// Delete the file. But don't destroy it.
+            // Delete the file. But don't destroy it.
             this.EditableForm.DeleteFile(false);
-            /// Redirect back to the form admin page
+
+            if (this.DeleteButtonPressed != null)
+            {
+                //end process, let control owner handle next action - Brian Ogden - 10-9-2015
+                this.DeleteButtonPressed(this, EventArgs.Empty);
+                return;
+            }
+
+            //crappy redirect to page the does not logically apply to all Web Forms 
+            //that are using EditableFileForm custom control - Brian Ogden - 10-9-2015
+            // Redirect back to the form admin page
             this.Page.Response.Redirect("~/Forms/Admin.aspx");
         }
 
 		#endregion Protected Methods 
-        /// <summary>
-        /// Fires when field values have been changed
-        /// </summary>
-        private event EventHandler FieldValuesChanged;
-        /// <summary>
-        /// The cancel button was pressed and field values have been reset to their original values
-        /// </summary>
-        private event EventHandler CancelButtonPressed;
-        /// <summary>
-        /// The save button was pressed and field values have been saved.
-        /// </summary>
-        private event EventHandler SaveButtonPressed;
 
     }
 }

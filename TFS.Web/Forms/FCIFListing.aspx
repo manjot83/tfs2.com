@@ -16,7 +16,7 @@ SelectMethod="FetchAll">
 <h1>Flight Crew Information Files</h1>
 
 <p>
-<a runat="server" id="AddFileLink" href="Editor.aspx?form=102" title="Add a new FCIF" visible='<%# this.UserCanEdit() %>'>Add New File (admin only)</a>
+<a runat="server" id="AddFileLink" href="Editor.aspx?filetype=fcif&amp;form=102" title="Add a new FCIF" visible='<%# this.UserCanEdit() %>'>Add New File</a>
 </p>
 
 <asp:UpdatePanel ID="FilesListViewUpdatePanel" runat="server">
@@ -54,8 +54,8 @@ SelectMethod="FetchAll">
             <%# Eval("FCIF number") %>
         </td>
         <td>
-            <a runat="server" href='<%# "Editor.aspx?file="+Eval("FileId")+"&form="+Eval("FormId") %>' title="Edit this file" visible='<%# this.UserCanEdit() %>'>
-                edit (admin only)
+            <a runat="server" href='<%# "Editor.aspx?filetype=fcif&file="+Eval("FileId")+"&form="+Eval("FormId") %>' title="Edit this file" visible='<%# this.UserCanEdit() %>'>
+                edit
             </a>
         </td>       
     </tr>

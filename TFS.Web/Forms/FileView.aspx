@@ -13,7 +13,7 @@
 </p>
 <p>
     <a href='FileList.aspx?form=<%= this.file.FormId %>' title="Return">Return to File Listing</a><br />
-    <asp:HyperLink ID="EditLink" runat="server" title="Edit">Edit this file (admin only)</asp:HyperLink><br />    
+    <asp:HyperLink ID="EditLink" runat="server" title="Edit">Edit this file</asp:HyperLink><br />    
 </p>
 
 </asp:Content>
