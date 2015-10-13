@@ -29,17 +29,16 @@ namespace TFS.Web.ViewModels.FlightLogs
 
         public IEnumerable<SelectListItem> ActiveLocations { get; set; }
 
-        public IEnumerable<SelectListItem> AllAircraft {
-            get {
-                var aircraft = new List<string> { "C-130B", "C-130E", "C-130H", "C-130K", "C-130J", "C-130AMP", "C-130R", "HC-130H", "HC-130J" };
-                if (!string.IsNullOrEmpty(AircraftMDS) && !aircraft.Contains(AircraftMDS))
-                    aircraft.Add(AircraftMDS);
-                return aircraft.OrderBy(x => x).Select(x => new SelectListItem {
-                    Text = x,
-                    Value = x,
-                    Selected = AircraftMDS == x,
-                });
-            }
+        public IEnumerable<SelectListItem> ActiveAircraft { get; set; }
+
+        public void SetActiveAircraft(IEnumerable<AircraftMDS> aircraftMds) {
+
+            ActiveAircraft = aircraftMds.Select(x => new SelectListItem
+            {
+                Text = x.Name,
+                Value = x.Name,
+                Selected = AircraftMDS == x.Name,
+            });
         }
 
         public void SetActiveLocations(IEnumerable<ProgramLocation> programLocations)

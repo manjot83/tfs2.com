@@ -5,9 +5,9 @@ Add new position
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
-    <div class="header-main">Add a new position</div>
+    <div class="header-main">Add a new aircraft</div>
     <fieldset class="standard-form">
-        <legend>Position</legend>
+        <legend>Aircraft</legend>
         <% using (Html.BeginForm(MVC.FlightPrograms.CreatePosition(), FormMethod.Post, new { @class = "fieldset-content" })) { %>
             <% Html.RenderPartial(MVC.FlightPrograms.Views.PositionTitle); %>
             <div class="button-group">

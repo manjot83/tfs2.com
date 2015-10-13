@@ -122,12 +122,14 @@ namespace TFS.Web.Controllers
         {
             var viewModel = new FlightLogViewModel();
             var activeLocations = flightProgramsRepository.GetAllActiveProgramLocations();
+            var activeAircraft = flightProgramsRepository.GetAllActiveAircraftMds();
             if (flightLog != null)
             {
                 Mapper.Map<FlightLog, FlightLogViewModel>(flightLog, viewModel);
                 activeLocations = activeLocations.Union(new ProgramLocation[] { flightLog.Location });
             }
             viewModel.SetActiveLocations(activeLocations);
+            viewModel.SetActiveAircraft(activeAircraft);
             viewModel.IsFlightLogManager = CurrentUser.Roles.FlightLogManager;
             return viewModel;
         }

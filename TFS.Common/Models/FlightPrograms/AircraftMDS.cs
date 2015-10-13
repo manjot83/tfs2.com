@@ -13,5 +13,8 @@ namespace TFS.Models.FlightPrograms
         [DomainEquality]
         [Required, StringLength(50)]
         public virtual string Name { get; set; }
+
+        [Required]
+        public virtual bool Active { get; set; }
     }
 }

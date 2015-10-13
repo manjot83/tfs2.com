@@ -51,5 +51,35 @@ namespace TFS.Models.Data.Implementations
         {
             return Query<ProgramLocation>().Where(x => x.Program.Active).ToList();
         }
+
+        public AircraftMDS AddNewAircraftMds(string name)
+        {
+            if (GetAllAircrafts().Any(x => x.Name.Matches(name)))
+                throw new InvalidOperationException(string.Format("An aircraft with the name {0} already exists", name));
+            var aircraft = new AircraftMDS()
+            {
+                Name = name,
+                Active = true
+            };
+            aircraft.Validate();
+            return Persist<AircraftMDS>(aircraft);
+        }
+
+        public AircraftMDS AddAircraftMds(AircraftMDS aircraftMds)
+        {
+            aircraftMds.Validate();
+            aircraftMds.Active = true;
+            return Persist<AircraftMDS>(aircraftMds);
+        }
+
+        public IList<AircraftMDS> GetAllAircrafts()
+        {
+            return Query<AircraftMDS>().ToList();
+        }
+
+        public IEnumerable<AircraftMDS> GetAllActiveAircraftMds()
+        {
+            return Query<AircraftMDS>().Where(x => x.Active).ToList();
+        }
     }
 }

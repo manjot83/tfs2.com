@@ -36,11 +36,21 @@ namespace TFS.Web.Controllers
                 ShowAllPrograms = showAllPrograms.HasValue && showAllPrograms.Value,
             };
             IEnumerable<FlightProgram> programs = null;
+            IEnumerable<AircraftMDS> aircraft = null;
+
             if (viewModel.ShowAllPrograms)
                 programs = flightProgramsRepository.GetAllPrograms();
             else
                 programs = flightProgramsRepository.GetAllActivePrograms();
+
+            if (viewModel.ShowAllPrograms)
+                aircraft = flightProgramsRepository.GetAllAircrafts();
+            else
+                aircraft = flightProgramsRepository.GetAllActiveAircraftMds();
+
             var positions = flightProgramsRepository.GetAllPositions();
+
+            viewModel.Aircrafts = Mapper.Map<IEnumerable<AircraftMDS>, IEnumerable<AircraftViewModel>>(aircraft);
             viewModel.Positions = Mapper.Map<IEnumerable<Position>, IEnumerable<PositionViewModel>>(positions);
             viewModel.FlightPrograms = Mapper.Map<IEnumerable<FlightProgram>, IEnumerable<FlightProgramListItemViewModel>>(programs);
             return View(Views.Manage, viewModel);
@@ -102,6 +112,22 @@ namespace TFS.Web.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Get)]
+        public virtual ViewResult CreateAircraft()
+        {
+            return View(Views.CreateAircraft, new AircraftViewModel());
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual ActionResult CreateAircraft(AircraftViewModel aircraftViewModel)
+        {
+            this.Validate(aircraftViewModel, string.Empty);
+            if (!ModelState.IsValid)
+                return View(Views.CreateAircraft, aircraftViewModel);
+            flightProgramsRepository.AddNewAircraftMds(aircraftViewModel.Name);
+            return RedirectToAction(MVC.FlightPrograms.Manage());
+        }
+
+        [AcceptVerbs(HttpVerbs.Get)]
         public virtual ViewResult RenamePosition(Guid id)
         {
             var position = Repository.Get<Position>(id);
@@ -120,6 +146,28 @@ namespace TFS.Web.Controllers
                 return View(Views.EditPosition, viewModel);
             }
             Mapper.Map<PositionViewModel, Position>(positionViewModel, position);
+            return RedirectToAction(MVC.FlightPrograms.Manage());
+        }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public virtual ViewResult EditAircraft(Guid id)
+        {
+            var aircraft = Repository.Get<AircraftMDS>(id);
+            var viewModel = Mapper.Map<AircraftMDS, AircraftViewModel>(aircraft);
+            return View(Views.EditAircraft, viewModel);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public virtual ActionResult EditAircraft(Guid id, AircraftViewModel aircraftViewModel)
+        {
+            var aircraft = Repository.Get<AircraftMDS>(id);
+            this.Validate(aircraftViewModel, string.Empty);
+            if (!ModelState.IsValid)
+            {
+                var viewModel = Mapper.Map<AircraftMDS, AircraftViewModel>(aircraft);
+                return View(Views.EditAircraft, viewModel);
+            }
+            Mapper.Map<AircraftViewModel, AircraftMDS>(aircraftViewModel, aircraft);
             return RedirectToAction(MVC.FlightPrograms.Manage());
         }
 

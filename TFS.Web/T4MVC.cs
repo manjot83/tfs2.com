@@ -973,6 +973,11 @@ namespace TFS.Web.Controllers {
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public System.Web.Mvc.ViewResult EditAircraft() {
+            return new T4MVC_ViewResult(Area, Name, ActionNames.EditAircraft);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public System.Web.Mvc.ViewResult CreateProgramLocation() {
             return new T4MVC_ViewResult(Area, Name, ActionNames.CreateProgramLocation);
         }
@@ -1001,7 +1006,9 @@ namespace TFS.Web.Controllers {
             public readonly string CreateFlightProgram = "CreateFlightProgram";
             public readonly string EditFlightProgram = "EditFlightProgram";
             public readonly string CreatePosition = "CreatePosition";
+            public readonly string CreateAircraft = "CreateAircraft";
             public readonly string RenamePosition = "RenamePosition";
+            public readonly string EditAircraft = "EditAircraft";
             public readonly string CreateProgramLocation = "CreateProgramLocation";
             public readonly string EditProgramLocation = "EditProgramLocation";
         }
@@ -1013,7 +1020,9 @@ namespace TFS.Web.Controllers {
             public const string CreateFlightProgram = "CreateFlightProgram";
             public const string EditFlightProgram = "EditFlightProgram";
             public const string CreatePosition = "CreatePosition";
+            public const string CreateAircraft = "CreateAircraft";
             public const string RenamePosition = "RenamePosition";
+            public const string EditAircraft = "EditAircraft";
             public const string CreateProgramLocation = "CreateProgramLocation";
             public const string EditProgramLocation = "EditProgramLocation";
         }
@@ -1040,6 +1049,13 @@ namespace TFS.Web.Controllers {
         public class ActionParamsClass_RenamePosition {
             public readonly string id = "id";
         }
+        static readonly ActionParamsClass_EditAircraft s_params_EditAircraft = new ActionParamsClass_EditAircraft();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EditAircraft EditAircraftParams { get { return s_params_EditAircraft; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EditAircraft {
+            public readonly string id = "id";
+        }
         static readonly ActionParamsClass_CreateProgramLocation s_params_CreateProgramLocation = new ActionParamsClass_CreateProgramLocation();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_CreateProgramLocation CreateProgramLocationParams { get { return s_params_CreateProgramLocation; } }
@@ -1059,9 +1075,12 @@ namespace TFS.Web.Controllers {
         public ViewNames Views { get { return s_views; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
+            public readonly string AircraftName = "~/Views/FlightPrograms/AircraftName.ascx";
+            public readonly string CreateAircraft = "~/Views/FlightPrograms/CreateAircraft.aspx";
             public readonly string CreateFlightProgram = "~/Views/FlightPrograms/CreateFlightProgram.aspx";
             public readonly string CreatePosition = "~/Views/FlightPrograms/CreatePosition.aspx";
             public readonly string CreateProgramLocation = "~/Views/FlightPrograms/CreateProgramLocation.aspx";
+            public readonly string EditAircraft = "~/Views/FlightPrograms/EditAircraft.aspx";
             public readonly string EditFlightProgram = "~/Views/FlightPrograms/EditFlightProgram.aspx";
             public readonly string EditPosition = "~/Views/FlightPrograms/EditPosition.aspx";
             public readonly string EditProgramLocation = "~/Views/FlightPrograms/EditProgramLocation.aspx";
@@ -1122,6 +1141,17 @@ namespace TFS.Web.Controllers {
             return callInfo;
         }
 
+        public override System.Web.Mvc.ViewResult CreateAircraft() {
+            var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.CreateAircraft);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult CreateAircraft(TFS.Web.ViewModels.FlightPrograms.AircraftViewModel aircraftViewModel) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.CreateAircraft);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "aircraftViewModel", aircraftViewModel);
+            return callInfo;
+        }
+
         public override System.Web.Mvc.ViewResult RenamePosition(System.Guid id) {
             var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.RenamePosition);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
@@ -1132,6 +1162,19 @@ namespace TFS.Web.Controllers {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.RenamePosition);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "positionViewModel", positionViewModel);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ViewResult EditAircraft(System.Guid id) {
+            var callInfo = new T4MVC_ViewResult(Area, Name, ActionNames.EditAircraft);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.ActionResult EditAircraft(System.Guid id, TFS.Web.ViewModels.FlightPrograms.AircraftViewModel aircraftViewModel) {
+            var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.EditAircraft);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "aircraftViewModel", aircraftViewModel);
             return callInfo;
         }
 

@@ -7,9 +7,9 @@
     <div class="header-main">Flight Programs</div>
     <p>
         <% if (Model.ShowAllPrograms) { %>
-        Current showing ALL flight programs. Click to show only <b><%= Html.ActionLink("ACTIVE", MVC.FlightPrograms.Manage(false)) %></b> flight programs.
+        Current showing ALL flight programs and aircraft. Click to show only <b><%= Html.ActionLink("ACTIVE", MVC.FlightPrograms.Manage(false)) %></b> flight programs and aircraft.
         <% } else { %>
-        Current showing only ACTIVE flight programs. Click to show <b><%= Html.ActionLink("ALL", MVC.FlightPrograms.Manage(true)) %></b> flight programs.
+        Current showing only ACTIVE flight programs and aircraft. Click to show <b><%= Html.ActionLink("ALL", MVC.FlightPrograms.Manage(true)) %></b> flight programs and aircraft.
         <% } %>
     </p>
     <p>
@@ -76,6 +76,38 @@
         <tr>
             <td>
                 <%= Html.ActionLink(position.Title, MVC.FlightPrograms.RenamePosition(position.Id.Value))%>
+            </td>
+        </tr>
+        <% } %>
+    </table>
+     <hr />
+    <div class="header-main">Aircraft</div>
+    <p>
+        Click on an Aircraft title to rename.
+    </p>
+    <% using(Html.BeginForm(MVC.FlightPrograms.CreateAircraft(), FormMethod.Get)) { %>
+        <p>
+            <input type="submit" value="Add a new aircraft" />
+        </p>
+    <% } %>
+    <table class="list-table">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th> 
+                <th>
+                    Status
+                </th>                       
+            </tr>
+        </thead>
+        <% foreach (var aircraft in Model.SortedAircraft) { %>
+        <tr>
+            <td>
+                <%= Html.ActionLink(aircraft.Name, MVC.FlightPrograms.EditAircraft(aircraft.Id.Value))%>
+            </td>
+                 <td>
+                <%= Html.Encode(aircraft.GetStatus()) %>
             </td>
         </tr>
         <% } %>

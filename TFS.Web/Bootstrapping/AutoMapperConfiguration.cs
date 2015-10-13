@@ -44,6 +44,9 @@ namespace TFS.Web
 
         private static void Setup_FlightPrograms()
         {
+            Mapper.CreateMap<AircraftMDS, AircraftViewModel>();
+            Mapper.CreateMap<AircraftViewModel, AircraftMDS>()
+                .ForMember(x => x.Id, m => m.Ignore());
             Mapper.CreateMap<FlightProgram, FlightProgramListItemViewModel>();
             Mapper.CreateMap<FlightProgram, FlightProgramViewModel>();
             Mapper.CreateMap<FlightProgramViewModel, FlightProgram>()
@@ -66,7 +69,7 @@ namespace TFS.Web
             Mapper.CreateMap<FlightLog, FlightLogViewModel>()
                   .ForMember(x => x.ActiveLocations, m => m.Ignore())
                   .ForMember(x => x.PreviouslySaved, m => m.Ignore())
-                  .ForMember(x => x.AllAircraft, m => m.Ignore())
+                  .ForMember(x => x.ActiveAircraft, m => m.Ignore())
                   .ForMember(x => x.IsFlightLogManager, m => m.Ignore());
             Mapper.CreateMap<FlightLogViewModel, FlightLog>()
                   .ForMember(x => x.LogDate, m => m.MapFrom(x => x.LogDate.ToUniversalTime()))

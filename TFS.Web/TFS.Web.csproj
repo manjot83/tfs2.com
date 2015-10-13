@@ -581,6 +581,7 @@
     <Compile Include="ViewModels\FlightLogs\FlightLogViewModel.cs" />
     <Compile Include="ViewModels\FlightLogs\MissionViewModel.cs" />
     <Compile Include="ViewModels\FlightLogs\SquadronLogViewModel.cs" />
+    <Compile Include="ViewModels\FlightPrograms\AircraftViewModel.cs" />
     <Compile Include="ViewModels\FlightPrograms\DashboardViewModel.cs" />
     <Compile Include="ViewModels\FlightPrograms\FlightProgramListItemViewModel.cs" />
     <Compile Include="ViewModels\FlightPrograms\FlightProgramViewModel.cs" />
@@ -758,6 +759,9 @@
     <Content Include="User Controls\Sidebar.ascx" />
     <Content Include="ViewArticle.aspx" />
     <Content Include="ViewHelpArticle.aspx" />
+    <Content Include="Views\FlightPrograms\AircraftName.ascx" />
+    <Content Include="Views\FlightPrograms\EditAircraft.aspx" />
+    <Content Include="Views\FlightPrograms\CreateAircraft.aspx" />
     <Content Include="Views\Security\ChangePassword.aspx" />
     <Content Include="Views\Security\NotAUser.aspx" />
     <Content Include="Views\Security\LogOn.aspx" />

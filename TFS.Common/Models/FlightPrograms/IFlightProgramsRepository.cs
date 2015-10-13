@@ -15,5 +15,9 @@ namespace TFS.Models.FlightPrograms
         FlightProgram AddNewFlightProgram(FlightProgram flightProgram);
 
         IEnumerable<ProgramLocation> GetAllActiveProgramLocations();
+
+        AircraftMDS AddNewAircraftMds(string name);
+        IList<AircraftMDS> GetAllAircrafts();
+        IEnumerable<AircraftMDS> GetAllActiveAircraftMds();
     }
 }

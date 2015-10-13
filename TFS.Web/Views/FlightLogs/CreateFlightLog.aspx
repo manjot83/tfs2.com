@@ -22,7 +22,7 @@ Create Flight Log
             <div class="field-group">
                 <div class="field">
                     <label for="AircraftMDS">Aircraft Model</label>
-                    <%= Html.DropDownList("AircraftMDS", Model.AllAircraft) %>
+                    <%= Html.DropDownList("AircraftMDS", Model.ActiveAircraft) %>
                     <%= Html.ValidationMessage("AircraftMDS")%>
                 </div>
                 <div class="field">

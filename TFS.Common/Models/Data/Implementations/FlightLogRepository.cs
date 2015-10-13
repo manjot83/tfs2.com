@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NHibernate;
 using TFS.Models.FlightLogs;
+using TFS.Models.FlightPrograms;
 using TFS.Models.PersonnelRecords;
 using TFS.Extensions;
 using TFS.Models.Users;
@@ -28,5 +29,6 @@ namespace TFS.Models.Data.Implementations
             flightLog.Validate();
             return Persist<FlightLog>(flightLog);
         }
+
     }
 }

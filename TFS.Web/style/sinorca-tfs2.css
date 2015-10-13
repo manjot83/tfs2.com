@@ -16,6 +16,14 @@ body {
   padding: 0;
 }
 
+a {
+    color: #134545;
+}
+
+a:visited {
+    color: #34bdbd;
+}
+
 html > body {
   font-size: 8.5pt;
 }
@@ -269,7 +277,7 @@ li.sideBarText
 
 #main-copy h1 {
   color: white;
-  background-color: #5c68ff;	
+  background-color: #000ca0;	
   font-size: 100%;
   font-weight: bold;
   margin: 3em 0 0 0;

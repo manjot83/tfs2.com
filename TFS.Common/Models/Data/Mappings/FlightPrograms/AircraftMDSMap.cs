@@ -20,6 +20,9 @@ namespace TFS.Models.Data.Mappings.FlightPrograms
             Map(x => x.Name)
                 .Length(50)
                 .Not.Nullable();
+
+            Map(x => x.Active)
+               .Not.Nullable();
         }
     }
 }

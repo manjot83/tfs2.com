@@ -125,13 +125,13 @@ Edit Personnel Record
         <% using (Html.BeginForm(MVC.PersonnelRecords.EditCompanyInfo(), FormMethod.Post, new { @class = "fieldset-content" })) { %>
             <%= Html.Hidden("username", Model.Username) %>
             <%= Html.Hidden("editingmyrecord", Model.EditingMyRecord)%>
-            <div class="field-group">
+         <%--   <div class="field-group">
                 <div class="field">
                     <label for="HirePositionId">Hired On Position</label>
                     <%= Html.DropDownList("HirePositionId", Model.HirePositions)%>
                     <%= Html.ValidationMessage("HirePositionId")%>
                 </div>
-            </div>
+            </div>--%>
             <div class="field-group">
                 <div class="field">
                     <label for="ShirtSize">Shirt Size</label>
