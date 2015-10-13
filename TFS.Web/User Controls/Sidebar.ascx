@@ -39,6 +39,14 @@
                 FCIF
             </asp:HyperLink>
         </li>
+       <%--  <li>
+             <a href="/DocumentManager/CorporateDocs.aspx">TFS Publications</a>
+            <asp:HyperLink ID="HyperLink666" runat="server" NavigateUrl="~/DocumentManager/CorporateDocs.aspx">
+                <asp:Image ID="Image192" runat="server" ImageUrl="~/icons/folder_go.png" ImageAlign="Middle" />
+                &nbsp;
+                TFS Publications
+            </asp:HyperLink>
+        </li>--%>
     </ul>
   </div>
   <div>
@@ -67,7 +75,7 @@
                 My Timecards
             </asp:HyperLink>
         </li>
-        <li>
+        <li style="display: none;">
             <asp:HyperLink ID="HyperLink10" runat="server" NavigateUrl="~/Scheduling/Availability.aspx">
                 <asp:Image ID="Image10" runat="server" ImageUrl="~/icons/date_go.png" ImageAlign="Middle" />
                 &nbsp;

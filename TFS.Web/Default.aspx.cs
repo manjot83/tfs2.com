@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using System.Configuration;
+using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -23,7 +24,7 @@ public partial class main_Default : System.Web.UI.Page
             news.Sort(Newspost.Columns.Createdon, false);
             helparticles.Sort(Helparticle.Columns.Createdon, false);
 
-            this.HotItems.DataSource = urgentNews;
+            this.HotItems.DataSource = urgentNews.OrderByDescending(item => item.Createdon);
             this.HotItems.DataBind();
 
             this.NewsEntries.DataSource = news;

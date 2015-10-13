@@ -9,6 +9,7 @@
         </HeaderTemplate>
         <ItemTemplate>
             <a href='ViewArticle.aspx?id=<%# Eval("id") %>'><%# Eval("subject") %></a>
+            <span>&nbsp;-&nbsp;<%# Eval("createdon") %></span>
             <br />
         </ItemTemplate>
         <FooterTemplate>
