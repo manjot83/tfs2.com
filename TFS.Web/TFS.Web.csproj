@@ -284,6 +284,13 @@
     <Compile Include="default.master.designer.cs">
       <DependentUpon>default.master</DependentUpon>
     </Compile>
+    <Compile Include="DocumentManager\CorporateDocs.aspx.cs">
+      <DependentUpon>CorporateDocs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocumentManager\CorporateDocs.aspx.designer.cs">
+      <DependentUpon>CorporateDocs.aspx</DependentUpon>
+    </Compile>
     <Compile Include="error.aspx.cs">
       <DependentUpon>error.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -610,6 +617,7 @@
     <Content Include="Billing\Reports\user_report.aspx" />
     <Content Include="Billing\timecard.aspx" />
     <Content Include="default.aspx" />
+    <Content Include="DocumentManager\CorporateDocs.aspx" />
     <Content Include="error.aspx" />
     <Content Include="Forms\Admin.aspx" />
     <Content Include="Forms\Controls\ViewableFileControl.ascx" />

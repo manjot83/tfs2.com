@@ -39,14 +39,12 @@
                 FCIF
             </asp:HyperLink>
         </li>
-       <%--  <li>
-             <a href="/DocumentManager/CorporateDocs.aspx">TFS Publications</a>
-            <asp:HyperLink ID="HyperLink666" runat="server" NavigateUrl="~/DocumentManager/CorporateDocs.aspx">
-                <asp:Image ID="Image192" runat="server" ImageUrl="~/icons/folder_go.png" ImageAlign="Middle" />
-                &nbsp;
-                TFS Publications
-            </asp:HyperLink>
-        </li>--%>
+         <li>
+             <a href="/DocumentManager/CorporateDocs.aspx">
+                 <img src="/icons/folder_go.png" alt="TFS Publications"/>
+                 TFS Publications
+             </a>
+        </li>
     </ul>
   </div>
   <div>
