@@ -33,12 +33,16 @@ namespace TFS.Web.Forms
         protected FormFileController controller;
         private string fileType = null;
         private int _fileid = 0;
+        private bool _isNewFileRequestParam = false;
 
         protected void Page_Load(object sender, EventArgs e)
         {
             fileType = this.Request.Params["filetype"];
 
             bool newfile = !(int.TryParse(this.Request.Params["file"], out _fileid));
+
+            if (!bool.TryParse(this.Request.Params["newFile"], out _isNewFileRequestParam))
+                _isNewFileRequestParam = false;
 
             int formid = int.Parse(this.Request.Params["form"]);
 
@@ -48,7 +52,7 @@ namespace TFS.Web.Forms
             {
                 Formfile file = this.controller.CreateFile();
                 // redirect to the correct page
-                Response.Redirect(string.Format("Editor.aspx?file={0}&form={1}&fileType={2}", file.Id, formid, fileType));
+                Response.Redirect(string.Format("Editor.aspx?file={0}&form={1}&fileType={2}&newFile=true", file.Id, formid, fileType));
             }
             else
                 this.controller.LoadFile(_fileid);
@@ -59,6 +63,9 @@ namespace TFS.Web.Forms
 
         protected void OnSaveButtonPressed(object sender, EventArgs e)
         {
+            if (!_isNewFileRequestParam)
+                editorRedirectHelper(); //exit
+
             TFS.OpCenter.UI.EditableFileFormEventArgs customEventArgs;
 
             try
