@@ -110,7 +110,8 @@ namespace TFS.Web
                   .ForMember(x => x.HirePositions, m => m.Ignore());
             Mapper.CreateMap<Person, PersonalInfo>()
                   .ForMember(x => x.FirstName, m => m.MapFrom(x => x.User.FirstName))
-                  .ForMember(x => x.LastName, m => m.MapFrom(x => x.User.LastName));
+                  .ForMember(x => x.LastName, m => m.MapFrom(x => x.User.LastName))
+                  .ForMember(x => x.Email, m => m.MapFrom(x => x.User.Email));
             Mapper.CreateMap<Person, ContactInfo>()
                   .ForMember(x => x.AddressState, m => m.MapFrom(x => x.Address != null ? x.Address.State.Abbreviation : null));
             Mapper.CreateMap<Person, CompanyInfo>()
@@ -133,6 +134,7 @@ namespace TFS.Web
                   {
                       y.User.FirstName = x.FirstName;
                       y.User.LastName = x.LastName;
+                      y.User.Email = x.Email;
                   });
             Mapper.CreateMap<ContactInfo, Person>()
                   .ForMember(x => x.Id, m => m.Ignore())

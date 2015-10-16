@@ -26,10 +26,13 @@ SelectMethod="FetchAll">
 
 <asp:ListView ID="FilesListView" runat="server" EnableViewState="true" DataSourceID="FilesObjectDataSource">
 <LayoutTemplate>
-    <table width="500px">
+     <table width="55%">
         <tr>
+             <th>
+                <asp:LinkButton ID="LinkButton1" runat="server" CommandName="Sort" CommandArgument="CreatedOn" Text="Created Date" ToolTip="Sort by date"></asp:LinkButton>
+            </th>
             <th>
-                <asp:LinkButton ID="Header1" runat="server" CommandName="Sort" CommandArgument="POSTING DATE" Text="DATE" ToolTip="Sort by date"></asp:LinkButton>
+                <asp:Label ID="Header1" runat="server" Text="Posting Date"></asp:Label>
             </th>
             <th>                
                 <asp:LinkButton ID="Header2" runat="server" CommandName="Sort" CommandArgument="Subject" Text="SUBJECT" ToolTip="Sort by subject"></asp:LinkButton>
@@ -44,6 +47,9 @@ SelectMethod="FetchAll">
 </LayoutTemplate>
 <ItemTemplate>
     <tr>
+         <td>
+            <%# Convert.ToDateTime(Eval("createdon")).ToShortDateString() %>
+        </td>
         <td>
             <%# Eval("Posting Date") %>
         </td>

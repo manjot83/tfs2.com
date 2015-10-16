@@ -1,7 +1,11 @@
+using System;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using FluentNHibernate.Infrastructure;
+using StructureMap.Query;
 using TFS.Models;
+using TFS.OpCenter;
 using TFS.Web.ViewModels;
 using TFS.Models.Users;
 using AutoMapper;
@@ -121,7 +125,7 @@ namespace TFS.Web.Controllers
                 ModelState.AddModelError("username", "Username must be unique.");
             if (!ModelState.IsValid)
                 return View(userViewModel);
-            userRepository.CreateUser(userViewModel.Username, userViewModel.FirstName, userViewModel.LastName, userViewModel.DisplayName, userViewModel.Title, userViewModel.RateGroup, Crypto.Hash(userViewModel.Password, Crypto.HashAlgorithm.SHA256));
+            userRepository.CreateUser(userViewModel.Username, userViewModel.FirstName, userViewModel.LastName, userViewModel.DisplayName, userViewModel.Title, userViewModel.RateGroup, Crypto.Hash(userViewModel.Password, Crypto.HashAlgorithm.SHA256), userViewModel.Email);
             return RedirectToAction(MVC.Users.List());
         }
 
@@ -136,6 +140,37 @@ namespace TFS.Web.Controllers
                 sb.AppendFormat("{0} \t| {1}", item.Id, item.Name).AppendLine();
             }
             return Content(sb.ToString(), "text/plain");
+        }
+
+        [AcceptVerbs(HttpVerbs.Get)]
+        public virtual JsonResult GetAllActiveUsers()
+        {
+            return Json(userRepository.GetAllActiveUsers());
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        [AllowAnonymous]
+        public virtual void SendNewsPostNotification(NewsPostNotificationViewModel viewModel)
+        {
+            var users = userRepository.GetAllActiveUsers();
+            var recipients = string.Empty;
+
+            foreach (var user in users)
+            {
+                if (string.IsNullOrEmpty(user.Email))
+                    continue;
+
+                recipients += user.Email + ",";
+            }
+
+            if (string.IsNullOrEmpty(recipients))
+                return;
+
+            //remove trailing comma
+            recipients = recipients.Remove(recipients.Length - 1);
+
+            Utility.EmailNewsNotification(recipients, viewModel.NewsPostId);
+
         }
     }
 }

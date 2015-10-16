@@ -20,6 +20,17 @@ namespace TFS.OpCenter.Forms
             return new ViewableFileCollection(formId).LoadAll().ToDataTable();
         }
 
+
+        //does not change initial display in SRFListing.aspx or FCIFListing.aspx
+        //not sure why, done trying for now - Brian Ogden 10-15-2015
+        [DataObjectMethod(DataObjectMethodType.Select, true)]
+        public DataTable FetchAllOrderedByCreatedOn(int formId)
+        {
+            var dt = new ViewableFileCollection(formId).LoadAll().ToDataTable();
+            dt.DefaultView.Sort = "createdon desc";
+            return dt.DefaultView.ToTable();
+        }
+
         [DataObjectMethod(DataObjectMethodType.Select, false)]
         public DataTable FetchAll(int formId, string orderfield, bool orderdesc)
         {

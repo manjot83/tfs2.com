@@ -41,6 +41,19 @@ namespace TFS.Extensions
                                  RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
         }
 
+        public static bool IsValidEmail(this string input)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(input);
+                return addr.Address == input;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         public static string Substitute(this string input, string pattern, string replacement)
         {
             return Regex.Replace(input, pattern, replacement);

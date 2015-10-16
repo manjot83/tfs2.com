@@ -20,12 +20,24 @@ namespace TFS.Web.ViewModels.PersonnelRecords
 
         public void SetHirePositions(IEnumerable<Position> hirePositions, Position currentPosition)
         {
-            HirePositions = hirePositions.Select(x => new SelectListItem
+            var hirePositionsList = hirePositions.Select(x => new SelectListItem
             {
                 Text = x.Title,
                 Value = x.Id.Value.ToString(),
                 Selected = x == currentPosition
-            }).OrderBy(x => x.Text);
+            }).OrderBy(x => x.Text).ToList();
+
+
+            hirePositionsList.Insert(0,new SelectListItem()
+            {
+                Text = "--Please Choose--",
+                Value = "",
+                Selected = false
+            });
+
+            HirePositions = hirePositionsList;
+
+
         }
     }
 }

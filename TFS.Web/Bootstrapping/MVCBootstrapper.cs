@@ -1,8 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Web.Mvc;
 using System.Web.Routing;
 using StructureMap;
+using StructureMap.Configuration.DSL;
+using StructureMap.Graph;
+using StructureMap.TypeRules;
 using TFS.Models;
 using TFS.Models.Data;
 using TFS.Models.Data.Configuration;
@@ -75,6 +80,7 @@ namespace TFS.Web
                 i.Scan(s =>
                 {
                     s.IncludeNamespaceContainingType<DashboardController>();
+                    s.With(new SingletonConvention<IController>());
                     s.AddAllTypesOf<IController>();
                 });
 
@@ -87,6 +93,16 @@ namespace TFS.Web
             ControllerBuilder.Current.SetControllerFactory(new StructureMapControllerFactory(container));
             ConfigurationBuilder.SetBytecodeProvider(new StructureMapBackedBytecodeProvider(container));
             MvcApplication.Container = container;
+        }
+    }
+
+    internal class SingletonConvention<TPluginFamily> : IRegistrationConvention
+    {
+        public void Process(Type type, Registry registry)
+        {
+            if (!type.IsConcrete() || !type.CanBeCreated() || !type.AllInterfaces().Contains(typeof(TPluginFamily))) return;
+
+            registry.For(typeof(TPluginFamily)).Singleton().Use(type);
         }
     }
 }

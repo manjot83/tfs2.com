@@ -101,7 +101,7 @@ namespace TFS.OpCenter.Forms
             readonlyDataTable.Columns.Add("FormId", typeof(string));
             readonlyDataTable.Columns.Add("FileId", typeof(string));
             /// audit columns
-            readonlyDataTable.Columns.Add("createdon", typeof(string));
+            readonlyDataTable.Columns.Add("createdon", typeof(DateTime));
             readonlyDataTable.Columns.Add("creadtedby", typeof(string));
             readonlyDataTable.Columns.Add("modifiedon", typeof(string));
             readonlyDataTable.Columns.Add("modifiedby", typeof(string));
@@ -119,7 +119,7 @@ namespace TFS.OpCenter.Forms
                 row["FileId"] = file.FileId;
                 /// audit columns
                 if (file.FormFile.Createdon.HasValue)
-                    row["createdon"] = file.FormFile.Createdon.Value.ToShortDateString();
+                    row["createdon"] = file.FormFile.Createdon.Value;
                 else
                     row["createdon"] = string.Empty;
                 row["creadtedby"] = Utility.ResolveDisplayName(file.FormFile.Createdby);

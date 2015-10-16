@@ -336,6 +336,17 @@ public class T4MVC_FileContentResult : System.Web.Mvc.FileContentResult, IT4MVCA
     public string Protocol { get; set; }
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
+[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+public class T4MVC_JsonResult : System.Web.Mvc.JsonResult, IT4MVCActionResult {
+    public T4MVC_JsonResult(string area, string controller, string action, string protocol = null): base()  {
+        this.InitMVCT4Result(area, controller, action, protocol);
+    }
+    
+    public string Controller { get; set; }
+    public string Action { get; set; }
+    public string Protocol { get; set; }
+    public RouteValueDictionary RouteValueDictionary { get; set; }
+}
 
 
 
@@ -1927,6 +1938,7 @@ namespace TFS.Web.Controllers {
             public readonly string ChangePassword = "ChangePassword";
             public readonly string Create = "Create";
             public readonly string RateGroups = "RateGroups";
+            public readonly string GetAllActiveUsers = "GetAllActiveUsers";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -1937,6 +1949,7 @@ namespace TFS.Web.Controllers {
             public const string ChangePassword = "ChangePassword";
             public const string Create = "Create";
             public const string RateGroups = "RateGroups";
+            public const string GetAllActiveUsers = "GetAllActiveUsers";
         }
 
 
@@ -2034,6 +2047,11 @@ namespace TFS.Web.Controllers {
 
         public override System.Web.Mvc.ActionResult RateGroups() {
             var callInfo = new T4MVC_ActionResult(Area, Name, ActionNames.RateGroups);
+            return callInfo;
+        }
+
+        public override System.Web.Mvc.JsonResult GetAllActiveUsers() {
+            var callInfo = new T4MVC_JsonResult(Area, Name, ActionNames.GetAllActiveUsers);
             return callInfo;
         }
 

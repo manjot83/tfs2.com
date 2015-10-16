@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="style/AjaxCSSHelpers.css" />
     <link rel="stylesheet" type="text/css" href="style/sinorca-tfs2.css?version=1" />
     <link rel="stylesheet" type="text/css" href="style/list-table.css" />
+    <script src="/Static/js/jquery/jquery-1.4.js"></script>
     <asp:ContentPlaceHolder ID="MoreStylesheets" runat="server" />
 </head>
 <body>

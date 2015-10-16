@@ -6,6 +6,8 @@ using System.Web;
 using System.Web.UI.WebControls;
 using NHibernate.Criterion;
 using org.apache.avalon.framework;
+using TFS.Models.Data;
+using TFS.Models.Data.Implementations;
 using TFS.OpCenter.Data;
 using TFS.OpCenter.Forms;
 using System.ComponentModel;
@@ -13,6 +15,20 @@ using System.Web.UI;
 
 namespace TFS.OpCenter.UI
 {
+    public class EditableFileFormEventArgs : EventArgs
+    {
+        public string Subject { get; internal set; }
+        public string Content { get; internal set; }
+        public string SrfFcifNumber { get; internal set; }
+
+        public EditableFileFormEventArgs(string subject, string content, string srfFcifNumber)
+        {
+            this.Subject = subject;
+            this.Content = content;
+            this.SrfFcifNumber = srfFcifNumber;
+        }
+    }
+
     public class EditableFileForm : CompositeControl
     {
         /// <summary>
@@ -77,29 +93,13 @@ namespace TFS.OpCenter.UI
         }
 
         private void HandleSaveButtonClick(object sender, EventArgs e)
-        {
-            //var allFields = new FormfieldCollection().Where(Formfield.Columns.Formid, this.EditableForm.FormFile.Formid).Load();
-            var catController = new ArticlecategoryController();
-            var category = catController.FetchAll().SingleOrDefault(item => item.Name.ToLower() == "general");
-            var categoryId = 5; //general category id;
+        {            
             string subject = null;
             string content = null;
+            string srfFcifNumber = null;
 
-            if (category != null)
-            {
-                categoryId = category.Id;
-            }
-
-          //(DateTime Createdon, string personName, int Categoryid, string Subject, string Content, bool Isurgent)
             foreach (EditableField field in this.EditableForm.Fields)
             {
-                //var fieldInfo = allFields.SingleOrDefault(item => item.Id == field.FormField.Id)
-
-                //if(fieldInfo != null)
-                //{
-                //    switch fieldInfo.Name
-                //}
-
                 switch(field.FormField.Name.ToLower())
                 {
                     case "subject":
@@ -108,6 +108,10 @@ namespace TFS.OpCenter.UI
                     case "narrative":
                         content = field.TextValue;
                         break;
+                    case "srf number":
+                    case "fcif number":
+                        srfFcifNumber = field.TextValue;
+                        break;
                     default:
                         break;
                 }
@@ -115,14 +119,15 @@ namespace TFS.OpCenter.UI
                 field.Store();
             }
 
-            if (subject != null && content != null)
+            var eventArgs = EventArgs.Empty;
+
+            if (!(string.IsNullOrEmpty(subject) && string.IsNullOrEmpty(content) && string.IsNullOrEmpty(srfFcifNumber)))
             {
-                var newPostController = new NewspostController();
-                newPostController.Insert(DateTime.Now, HttpContext.Current.User.Identity.Name, categoryId, subject, content, true);
+                eventArgs = new EditableFileFormEventArgs(subject, content, srfFcifNumber);
             }
 
             if (this.SaveButtonPressed != null)
-                this.SaveButtonPressed(this, EventArgs.Empty);
+                this.SaveButtonPressed(this, eventArgs);
         }
 
 		#endregion Private Methods 

@@ -43,7 +43,7 @@
             <li>
                 <% if (HttpContext.Current.User.IsInRole("UserManager"))
                    { %>
-                <a href="https://tfs.hostedftp.com" target="_blank">
+                <a href="https://us3.hostedftp.com/files/path/" target="_blank">
                     <img src="/icons/folder_go.png" alt="TFS Publications" />
                     TFS Publications
                 </a>

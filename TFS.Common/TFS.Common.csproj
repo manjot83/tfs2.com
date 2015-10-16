@@ -57,6 +57,10 @@
     <Reference Include="NHibernate.Linq">
       <HintPath>..\lib\NHibernate\NHibernate.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net451\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="StructureMap">
       <HintPath>..\lib\StructureMap.dll</HintPath>
     </Reference>
@@ -317,6 +321,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Models\Reports\FlightTimeSummary.xsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

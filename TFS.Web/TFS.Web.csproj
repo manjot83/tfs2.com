@@ -89,6 +89,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\pithy\Pithy.dll</HintPath>
     </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net451\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="StructureMap, Version=2.5.2.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\StructureMap.dll</HintPath>
@@ -476,6 +480,7 @@
     <Compile Include="Mvc\StructureMapControllerFactory.cs" />
     <Compile Include="Mvc\TransactionalActionInvoker.cs" />
     <Compile Include="Mvc\TransactionalController.cs" />
+    <Compile Include="Mvc\WebRequestHelper.cs" />
     <Compile Include="NewsAdmin\Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -592,6 +597,7 @@
     <Compile Include="ViewModels\Messages\MessageViewModel.cs" />
     <Compile Include="ViewModels\Messages\SystemAlertViewModel.cs" />
     <Compile Include="ViewModels\Messages\UserAlertViewModel.cs" />
+    <Compile Include="ViewModels\NewsPostNotificationViewModel.cs" />
     <Compile Include="ViewModels\PersonnelRecords\PersonnelRecordListViewModel.cs" />
     <Compile Include="ViewModels\PersonnelRecords\CompanyInfo.cs" />
     <Compile Include="ViewModels\PersonnelRecords\ContactInfo.cs" />
@@ -747,6 +753,10 @@
     <Content Include="style\template\item_hover.jpg" />
     <Content Include="style\template\spacer.gif" />
     <Content Include="style\template\tfs2logo.png" />
+    <Content Include="style\template\tfs2logo_new.jpg" />
+    <Content Include="style\template\tfs2logo_new_med.jpg" />
+    <Content Include="style\template\tfs2logo_new_small.jpg" />
+    <Content Include="style\template\tfs2logo_new_xsmall.jpg" />
     <Content Include="style\template\tfs2logo_smaller.png" />
     <Content Include="style\template\TFSPATCH_BF4.jpg" />
     <Content Include="style\template\TFSPATCH_BF4.png" />
@@ -879,6 +889,7 @@
     <Content Include="Forms\Web.config" />
     <Content Include="Static\css\internal_base_layout.less" />
     <Content Include="Static\css\internal_list-table.less" />
+    <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\dev-tacticalflightservices.pubxml" />
     <None Include="Properties\PublishProfiles\tacticalflightservices.pubxml" />
     <None Include="Static\images\internal_template\bgfooter.pdn" />

@@ -6,7 +6,8 @@
         ID="NewsDataSource" 
         runat="server" 
         TypeName="TFS.OpCenter.Data.NewspostController"
-        InsertMethod="Insert">
+        InsertMethod="Insert"
+        OnInserted="ObjDS_OnInserted">
         <InsertParameters>
             <asp:ControlParameter ControlID="createdby" Name="personName" PropertyName="value" Type="String" /> 
             <asp:Parameter Name="isurgent" DefaultValue="false" Type="Boolean" />

@@ -3,6 +3,7 @@ using System.ComponentModel;
 using SubSonic;
 using System.Linq;
 using System.Collections.Generic;
+using TFS.Intranet.Data.Billing;
 
 namespace TFS.OpCenter.Data
 {
@@ -39,7 +40,7 @@ namespace TFS.OpCenter.Data
 	        item.Save(UserName);
 	    }
 
-        public void Insert(DateTime Createdon, string personName, int Categoryid, string Subject, string Content, bool Isurgent)
+        public int Insert(DateTime Createdon, string personName, int Categoryid, string Subject, string Content, bool Isurgent)
         {
             Newspost item = new Newspost();
 
@@ -58,6 +59,8 @@ namespace TFS.OpCenter.Data
             item.Deleted = false;
 
             item.Save(UserName);
+
+            return item.Id;
         }
     }
 }

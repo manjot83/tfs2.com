@@ -17,6 +17,7 @@ namespace TFS.Web.ViewModels
         [Required, StringLength(100)]
         public string DisplayName { get; set; }
 
+        [StringLength(254)]
         public string Email { get; set; }
         public string Password { get; set; }
 

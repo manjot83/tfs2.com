@@ -93,7 +93,7 @@ namespace TFS.Models.Data.Implementations
             return user != null ? user.Person : null;
         }
 
-        public User CreateUser(string username, string firstname, string lastname, string displayname, string title, int rateGroup, string passwordHash)
+        public User CreateUser(string username, string firstname, string lastname, string displayname, string title, int rateGroup, string passwordHash, string email = null)
         {
             var next_identity = this.UnitOfWork.Session.CreateSQLQuery("SELECT max([identity]) FROM Users").List<int>().Single();
 
@@ -109,7 +109,16 @@ namespace TFS.Models.Data.Implementations
                 Identity = next_identity + 1,
                 PasswordHash = passwordHash,
             };
-            user.SetDefaultEmailAddress(username);
+
+            if (string.IsNullOrEmpty(email) || ! email.IsValidEmail())
+            {
+                user.SetDefaultEmailAddress(username);
+            }
+            else
+            {
+                user.Email = email;
+            }
+            
             user.Validate();
             return Persist<User>(user);
         }

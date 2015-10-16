@@ -16,7 +16,7 @@ Title="TFS - Form File Editor"
 <p>
     TFSF: <b><%= this.controller.Form.Tfsfnumber %></b><br />
     Remarks: <b><%= this.controller.Form.Remarks %></b><br />
-    Form Created On: <b><%= this.controller.Form.Createdon.Value.ToShortDateString() %></b><br />
+    Form Created On: <b><%= this.controller.Form.Createdon.Value %></b><br />
 </p>
 
 <h1>File Records</h1>

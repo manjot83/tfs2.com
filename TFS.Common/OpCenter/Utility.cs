@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.ComponentModel.DataAnnotations;
+using System.Configuration;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Web;
+using RestSharp.Authenticators;
 using TFS.OpCenter.Data;
+using RestSharp;
 
 namespace TFS.OpCenter
 {
@@ -12,6 +18,26 @@ namespace TFS.OpCenter
     /// </summary>
     public class Utility
     {
+        public static IRestResponse EmailNewsNotification(string recipients, int newsPostId)
+        {
+            var url = string.Format("{0}/ViewArticle.aspx?id={1}", Utility.GetCurrentWebsiteRoot(), newsPostId);
+
+            var client = new RestClient();
+            client.BaseUrl = new Uri("https://api.mailgun.net/v3");
+            client.Authenticator =
+            new HttpBasicAuthenticator("api", "key-78d4c90b6e7edb2d9886ca526cf19f20");
+            var request = new RestRequest();
+            request.AddParameter("domain", "mg.tacticalflightservices.com", ParameterType.UrlSegment);
+            request.Resource = "{domain}/messages";
+            request.AddParameter("from", "TFS Mailer noreply@mg.tacticalflightservices.com");
+            request.AddParameter("to", "noreply@mg.tacticalflightservices.com");
+            request.AddParameter("bcc", recipients);
+            request.AddParameter("subject", "TFS News Notification");
+            request.AddParameter("text", string.Format("A new news item has been posted to the TFS Intranet. Here is the URL: {0}", url));
+            request.Method = Method.POST;
+            return client.Execute(request);
+        }
+
         /// <summary>
         /// Gets the username of the active user in an HTTP context
         /// </summary>
@@ -64,6 +90,10 @@ namespace TFS.OpCenter
             return typeof(Utility).Assembly.GetName().Version.ToString(3);
         }
 
+        public static string GetCurrentWebsiteRoot()
+        {
+            return HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
 
+        }
     }
 }

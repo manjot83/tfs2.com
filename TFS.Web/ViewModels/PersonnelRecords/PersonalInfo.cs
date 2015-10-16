@@ -13,6 +13,8 @@ namespace TFS.Web.ViewModels.PersonnelRecords
         public virtual string FirstName { get; set; }
         [StringLength(5)]
         public virtual string MiddleInitial { get; set; }
+        [Required, StringLength(254)]
+        public virtual string Email { get; set; }
         [Required]
         //[Range(typeof(DateTime), "01/01/1990", "01/01/2100")]
         public virtual DateTime? DateOfBirth { get; set; }

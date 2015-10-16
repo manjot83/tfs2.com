@@ -15,7 +15,7 @@ namespace TFS.Models.Users
         IList<Person> GetAllActivePersons();
         Person GetPersonForUser(string username);
 
-        User CreateUser(string username, string firstname, string lastname, string displayname, string title, int rateGroup, string passwordHash);
+        User CreateUser(string username, string firstname, string lastname, string displayname, string title, int rateGroup, string passwordHash, string email = null);
         Person CreatePersonFor(User user);
         Qualifications CreateQualificationsFor(Person person);
     }

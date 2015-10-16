@@ -45,7 +45,7 @@ SelectMethod="FetchByTimesheetID">
 
 
     <tr>
-        <td colspan="4" ><asp:Image ID="imag1" runat="server" ImageUrl="~/style/template/tfs2logo_smaller.png" /></td>
+        <td colspan="4" ><asp:Image ID="imag1" runat="server" ImageUrl="~/style/template/tfs2logo_new_xsmall.jpg" /></td>
         
         <td colspan="1"><h2>PAY AND EXPENSE REPORT</h2></td>
     </tr>

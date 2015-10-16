@@ -249,6 +249,7 @@ Change Mileage<br />
 <p>
     <b>Insert New Day</b>
 </p>
+
 <table style="border: solid 2px black;">
     <tr>
         <td style="width:75px;">
@@ -276,6 +277,9 @@ Change Mileage<br />
             <asp:DropDownList ID="TimeOutMinutes" runat="server" DataSourceID="MinuteValuesDataSource"
                 DataTextField="Time" DataValueField="Time" />
         </td>
+    </tr>
+     <tr>
+        <td colspan="3">Check for full day: <input type="checkbox" id="cbxFullday"/></td>
     </tr>
     <tr>
         <td colspan="3">
@@ -407,5 +411,33 @@ Change Mileage<br />
     </tr>
 </table>
 
-
+<script>
+    $(function () {
+        $('#cbxFullday').click(function () {
+            var $timeInHours = $('#<%=TimeInHours.ClientID%>');
+            var $timeOutHours = $('#<%=TimeOutHours.ClientID%>');
+            var $timeInMinutes = $('#<%=TimeInMinutes.ClientID%>');
+            var $timeOutMinutes = $('#<%=TimeOutMinutes.ClientID%>');
+            if ($(this).is(':checked')) {
+                console.log('checked');
+                $timeInHours.val('09');
+                $timeOutHours.val('17');
+                $timeInMinutes.val('00');
+                $timeOutMinutes.val('00');
+                $timeInHours.attr('disabled', 'disabled');
+                $timeOutHours.attr('disabled', 'disabled');
+                $timeInMinutes.attr('disabled', 'disabled');
+                $timeOutMinutes.attr('disabled', 'disabled');
+            } else {
+                console.log('unchecked');
+                $timeInHours.val('00');
+                $timeOutHours.val('00');
+                $timeInHours.removeAttr('disabled');
+                $timeOutHours.removeAttr('disabled');
+                $timeInMinutes.removeAttr('disabled');
+                $timeOutMinutes.removeAttr('disabled');
+            }
+        });
+    });
+</script>
 </asp:Content>
