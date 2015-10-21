@@ -60,6 +60,13 @@ namespace TFS.Intranet.Data.Billing
                 billingRateController.Insert(periodaccountid, rategroup.Id, defaultrate, false, null, null, null, null);
             }
 
+            /* step 3 is for each City Per Diem rate record, pull out the default value from  BillingDefaultCityRates and Insert into BillingCityRates for this BillingPeriodAccount*/
+            var billingCityRateController = new BillingCityRateController();
+
+            foreach (var cityRateGroup in new BillingDefaultCityRateController().FetchAllActiveByAccountId(AccountID))
+            {
+                billingCityRateController.Insert(cityRateGroup.Id, periodaccountid, cityRateGroup.DefaultPerDiemRate);
+            }
         }
 
     }

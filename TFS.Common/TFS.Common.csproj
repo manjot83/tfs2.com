@@ -94,6 +94,12 @@
     <Compile Include="Billing\DAL\Billing\BillingRate.cs" />
     <Compile Include="Billing\DAL\Billing\BillingRateController.cs" />
     <Compile Include="Billing\DAL\Billing\BillingRatesJoin.cs" />
+    <Compile Include="Billing\DAL\Billing\BillingDefaultCityRate.cs" />
+    <Compile Include="Billing\DAL\Billing\BillingDefaultCityRateController.cs" />
+    <Compile Include="Billing\DAL\Billing\BillingPeriodCityRatesJoin.cs" />
+    <Compile Include="Billing\DAL\Billing\BillingCityRate.cs" />
+    <Compile Include="Billing\DAL\Billing\BillingCityRateController.cs" />
+    <Compile Include="Billing\DAL\Billing\BillingCityRateJoin.cs" />
     <Compile Include="Billing\DAL\Billing\DefaultBillingRate.cs" />
     <Compile Include="Billing\DAL\Billing\DefaultBillingRateController.cs" />
     <Compile Include="Billing\DAL\Billing\EmployeeSummary.cs" />
@@ -116,6 +122,8 @@
     <Compile Include="Billing\Data\Billing\BillingPeriodController.cs" />
     <Compile Include="Billing\Data\Billing\BillingRateController.cs" />
     <Compile Include="Billing\Data\Billing\BillingRatesJoinController.cs" />
+    <Compile Include="Billing\Data\Billing\BillingCityRateController.cs" />
+    <Compile Include="Billing\Data\Billing\BillingCityRateJoinController.cs" />
     <Compile Include="Billing\Data\Billing\DefaultBillingRateController.cs" />
     <Compile Include="Billing\Data\Billing\EmployeeSummaryController.cs" />
     <Compile Include="Billing\Data\Billing\EmployeeTimesheetInfo.cs" />

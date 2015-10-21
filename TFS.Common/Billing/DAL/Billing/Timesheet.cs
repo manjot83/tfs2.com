@@ -137,6 +137,20 @@ namespace TFS.Intranet.Data.Billing
 				
 					colvarPeriodaccountid.ForeignKeyTableName = "BillingPeriodAccounts";
 				schema.Columns.Add(colvarPeriodaccountid);
+
+                TableSchema.TableColumn colvarCityRateId = new TableSchema.TableColumn(schema);
+                colvarCityRateId.ColumnName = "CityRateId";
+                colvarCityRateId.DataType = DbType.Int32;
+                colvarCityRateId.MaxLength = 0;
+                colvarCityRateId.AutoIncrement = false;
+                colvarCityRateId.IsNullable = false;
+                colvarCityRateId.IsPrimaryKey = false;
+                colvarCityRateId.IsForeignKey = true;
+                colvarCityRateId.IsReadOnly = false;
+                colvarCityRateId.DefaultSetting = @"";
+
+                colvarPeriodaccountid.ForeignKeyTableName = "BillingCityRates";
+                schema.Columns.Add(colvarCityRateId);
 				
 				TableSchema.TableColumn colvarPerdiemcount = new TableSchema.TableColumn(schema);
 				colvarPerdiemcount.ColumnName = "perdiemcount";
@@ -284,6 +298,15 @@ namespace TFS.Intranet.Data.Billing
 			set { SetColumnValue("periodaccountid", value); }
 
 		}
+
+        [XmlAttribute("CityRateId")]
+        public int CityRateId
+        {
+            get { return GetColumnValue<int>("CityRateId"); }
+
+            set { SetColumnValue("CityRateId", value); }
+
+        }
 
 		  
 		[XmlAttribute("Perdiemcount")]
@@ -490,7 +513,8 @@ namespace TFS.Intranet.Data.Billing
 			 public static string Id = @"id";
 			 public static string Username = @"username";
 			 public static string Periodaccountid = @"periodaccountid";
-			 public static string Perdiemcount = @"perdiemcount";
+             public static string Perdiemcount = @"perdiemcount";
+             public static string CityRateId = @"CityRateId";
 			 public static string IsDeleted = @"IsDeleted";
 			 public static string CreatedOn = @"CreatedOn";
 			 public static string CreatedBy = @"CreatedBy";

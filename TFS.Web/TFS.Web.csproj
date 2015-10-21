@@ -876,6 +876,7 @@
     <Content Include="Views\PersonnelRecords\List.aspx" />
     <Content Include="Billing\Admin\Web.config" />
     <Content Include="Billing\Web.config" />
+    <Content Include="Billing\Admin\packages.config" />
     <None Include="Content\internal\forms.less" />
     <None Include="Content\internal\layout.less" />
     <None Include="Content\internal\list-table.less" />
@@ -923,7 +924,9 @@
       <Name>TFS.Common</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Billing\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">12.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

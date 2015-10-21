@@ -40,6 +40,14 @@ SelectMethod="FetchByPeriodID">
     </SelectParameters>
 </asp:ObjectDataSource>
 
+<asp:ObjectDataSource ID="BillingCityRateDataSource" runat="server"
+TypeName="TFS.Intranet.Data.Billing.BillingCityRateJoinController"
+SelectMethod="FetchByPeriodID">
+    <SelectParameters>
+        <asp:QueryStringParameter Name="periodid" QueryStringField="id" Type="int32" />
+    </SelectParameters>
+</asp:ObjectDataSource>
+
 
 <p><a href="default.aspx">Go Back</a></p>
 
@@ -99,7 +107,7 @@ SelectMethod="FetchByPeriodID">
     <table>
         <tr>
             <th style="width: 150px;">Account</th>
-            <th style="width: 150px;">Rate Group</th>
+            <th style="width: 150px;">Type</th>
             <th style="width: 100px;">Rate</th>
             <th style="width: 100px;">Command</th>
             <th style="width: 100px;">Status</th>
@@ -129,8 +137,28 @@ SelectMethod="FetchByPeriodID">
             </tr>
         </ItemTemplate>
         </asp:Repeater>
+          <tr>
+            <td colspan="5">&nbsp;</td>
+        </tr>
+         <tr>
+            <td colspan="5"><b>City Per Diem Rates</b></td>
+        </tr>
+        <asp:Repeater ID="rptBillingCityRates" runat="server" DataSourceID="BillingCityRateDataSource" OnItemCommand="BillingCityRate_Command">
+        <ItemTemplate>
+            <tr>
+                <td><asp:Label ID="Label1" runat="Server" Text='<%# Eval("Accountname") %>'></asp:Label></td>
+                <td><asp:Label ID="Label2" runat="Server" Text='<%# Eval("city") %>'></asp:Label></td>
+                <td>$<asp:TextBox ID="rate" runat="Server" Text='<%# Eval("PerDiemRate") %>' Width="50"></asp:TextBox></td>
+                <td><asp:LinkButton ID="CityPerDiemSet" runat="server" CommandName="SetRate" CommandArgument='<%# Eval("id") %>'>Set Rate</asp:LinkButton></td>
+                <td><asp:Label ID="status" runat="server" ForeColor="red"></asp:Label></td>
+            </tr>
+        </ItemTemplate>
+        </asp:Repeater>
         <tr>
             <td colspan="5">&nbsp;</td>
+        </tr>
+         <tr>
+            <td colspan="5"><b>Rate Groups</b></td>
         </tr>
         <asp:Repeater ID="AccountsBillingRatesRepeater" runat="server" DataSourceID="BillingRateDataSource" OnItemCommand="BillingRate_Command">
         <ItemTemplate>

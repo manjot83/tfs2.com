@@ -14,6 +14,7 @@ namespace TFS.Intranet.Web.Billing
 {
     public partial class timecard : System.Web.UI.Page
     {
+        protected int PeriodAccountId = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             int id = Int32.Parse(Request.Params["id"]);
@@ -24,6 +25,18 @@ namespace TFS.Intranet.Web.Billing
                 PerDiemCountDropDown.SelectedValue = timesheet.Perdiemcount.ToString();
                 Mileage_Textbox.Text = timesheet.Mileageclaimed.ToString();
                 RateGroupDropDown.SelectedValue = timesheet.Rategroupid.ToString();
+                PeriodAccountId = timesheet.Periodaccountid;
+            }
+        }
+
+        protected void CityRateDataSource_Selecting(object sender, System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs e)
+        {
+            if (PeriodAccountId > 0)
+            {
+                if (e.InputParameters["PeriodAccountId"] == null)
+                {
+                    e.InputParameters["PeriodAccountId"] = PeriodAccountId;
+                }
             }
         }
 
@@ -35,8 +48,25 @@ namespace TFS.Intranet.Web.Billing
             RateGroupChangeStatus.Text = "Changed to " + RateGroupDropDown.SelectedItem.Text;
         }
 
+        protected void Change_CityPerDiem(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(drpDwnPerDiemCity.SelectedValue))
+                return;
+
+            int cityRateId = Int32.Parse(drpDwnPerDiemCity.SelectedValue);
+            int id = Int32.Parse(Request.Params["id"]);
+            new TFS.Intranet.Data.Billing.TimesheetController().UpdateCityRateId(id, cityRateId);
+            CityPerDiemChangeStatus.Text = "Changed to " + drpDwnPerDiemCity.SelectedItem.Text;
+        }
+
         protected void Change_PerDiem(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(drpDwnPerDiemCity.SelectedValue))
+            {
+                PerDiemChangeStatus.Text = "ERROR Please select the City the Per Diem is in first";
+                return;
+            }
+
             int Count = Int32.Parse(PerDiemCountDropDown.SelectedValue);
             int id = Int32.Parse(Request.Params["id"]);
             new TFS.Intranet.Data.Billing.TimesheetController().UpdatePerDiem(id, Count);

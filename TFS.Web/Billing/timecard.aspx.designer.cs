@@ -31,6 +31,15 @@ namespace TFS.Intranet.Web.Billing {
         protected global::System.Web.UI.WebControls.ObjectDataSource RateGroupDataSource;
         
         /// <summary>
+        /// CityRateDataSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource CityRateDataSource;
+        
+        /// <summary>
         /// UserDataSource control.
         /// </summary>
         /// <remarks>
@@ -146,6 +155,33 @@ namespace TFS.Intranet.Web.Billing {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label RateGroupChangeStatus;
+        
+        /// <summary>
+        /// CityPerDiemUpdatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel CityPerDiemUpdatePanel;
+        
+        /// <summary>
+        /// drpDwnPerDiemCity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpDwnPerDiemCity;
+        
+        /// <summary>
+        /// CityPerDiemChangeStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CityPerDiemChangeStatus;
         
         /// <summary>
         /// PerDiemUpdatePanel control.

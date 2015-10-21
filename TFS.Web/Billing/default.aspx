@@ -3,6 +3,7 @@
 <asp:Content ContentPlaceHolderID="MainContent" runat="server">
 
     <asp:HiddenField ID="field_username" runat="Server" />
+    
 
     <asp:ObjectDataSource ID="ReportTimesheetInfoData" runat="server" TypeName="TFS.Intranet.Data.Billing.EmployeeTimesheetInfoController"
     SelectMethod="GetTimesheets">
@@ -10,7 +11,7 @@
             <asp:ControlParameter Name="Username" ControlID="field_username" PropertyName="value" Type="string" />
         </SelectParameters>
     </asp:ObjectDataSource>
-    
+
     <asp:ObjectDataSource ID="OpenTimesheetInfoData" runat="server" TypeName="TFS.Intranet.Data.Billing.EmployeeTimesheetInfoController"
     SelectMethod="GetOpenTimesheets">
         <SelectParameters>
@@ -24,7 +25,8 @@
             <asp:ControlParameter Name="Username" ControlID="field_username" PropertyName="value" Type="string" />
         </SelectParameters>
     </asp:ObjectDataSource>
-    
+  
+
     <a class="topOfPage" href="#top" title="Go to the top of this page">^ TOP</a>
     <h1 id="H1_3">My Pending Timesheets</h1>
     
@@ -64,7 +66,7 @@
                 <td><a href='<%# "timecard.aspx?username="+Eval("username").ToString()+"&id="+Eval("timesheetid").ToString()+"&month="+Eval("month").ToString()+"&year="+Eval("year").ToString() %>'>Edit</a></td>
                 <td><%# Eval("month")%>, <%# Eval("year")%></td>
                 <td><%# Eval("accountname") %></td>
-                <td><%# ((DateTime) Eval("openuntil") ).ToString("d") %></td>                    
+                <td><%# ((DateTime) Eval("openuntil") ).ToString("d") %></td>     
             </tr>
         </ItemTemplate>
     </asp:Repeater>

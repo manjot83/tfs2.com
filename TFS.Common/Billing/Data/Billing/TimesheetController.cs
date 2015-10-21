@@ -42,6 +42,16 @@ namespace TFS.Intranet.Data.Billing
             item.Save(UserName);
         }
 
+        public void UpdateCityRateId(int Id, int cityRateId)
+        {
+            Timesheet item = FetchByID(Id)[0];
+
+            item.CityRateId = cityRateId;
+
+            item.MarkOld();
+            item.Save(UserName);
+        }
+
         public void UpdatePerDiem(int Id, int Perdiemcount)
         {
             Timesheet item = FetchByID(Id)[0];

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Ajax;
+using NHibernate.Mapping;
 using TFS.Models.FlightPrograms;
 using TFS.Web.ViewModels.FlightPrograms;
 using TFS.Web.ViewModels;
@@ -27,6 +28,11 @@ namespace TFS.Web.Controllers
         public virtual ViewResult Index()
         {
             return Manage(null);
+        }
+
+        public IEnumerable<FlightProgram> GetOpenTimesheets(string userName)
+        {
+            return new List<FlightProgram>();
         }
 
         public virtual ViewResult Manage(bool? showAllPrograms)

@@ -218,6 +218,21 @@ namespace TFS.Intranet.Data.Billing{
                 colvarIsDeleted.IsReadOnly = false;
                 
                 schema.Columns.Add(colvarIsDeleted);
+
+
+                TableSchema.TableColumn colvarTimeSheetCreatedOn = new TableSchema.TableColumn(schema);
+                colvarTimeSheetCreatedOn.ColumnName = "TimesheetCreatedOn";
+                colvarTimeSheetCreatedOn.DataType = DbType.DateTime;
+                colvarTimeSheetCreatedOn.MaxLength = 0;
+                colvarTimeSheetCreatedOn.AutoIncrement = false;
+                colvarTimeSheetCreatedOn.IsNullable = true;
+                colvarTimeSheetCreatedOn.IsPrimaryKey = false;
+                colvarTimeSheetCreatedOn.IsForeignKey = false;
+                colvarTimeSheetCreatedOn.IsReadOnly = false;
+                colvarTimeSheetCreatedOn.DefaultSetting = @"";
+                colvarTimeSheetCreatedOn.ForeignKeyTableName = "";
+
+                schema.Columns.Add(colvarTimeSheetCreatedOn);
                 
                 
                 BaseSchema = schema;
@@ -484,6 +499,21 @@ namespace TFS.Intranet.Data.Billing{
 
         }
 
+        [XmlAttribute("TimesheetCreatedOn")]
+        public DateTime TimesheetCreatedOn
+        {
+            get
+            {
+                return GetColumnValue<DateTime>("TimesheetCreatedOn");
+            }
+
+            set
+            {
+                SetColumnValue("TimesheetCreatedOn", value);
+            }
+
+        }
+
 	    
 	    #endregion
     
@@ -517,6 +547,8 @@ namespace TFS.Intranet.Data.Billing{
             public static string Rategroupname = @"rategroupname";
             
             public static string IsDeleted = @"IsDeleted";
+
+            public static string TimesheetCreatedOn = @"TimesheetCreatedOn";
             
 	    }
 

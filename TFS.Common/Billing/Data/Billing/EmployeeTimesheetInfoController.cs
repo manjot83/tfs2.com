@@ -11,12 +11,12 @@ namespace TFS.Intranet.Data.Billing
 
         public EmployeeTimesheetInfoCollection GetOpenTimesheets(String Username)
         {
-            return (new EmployeeTimesheetInfoCollection()).Where(EmployeeTimesheetInfo.Columns.Username, Username).Where(EmployeeTimesheetInfo.Columns.Openuntil, SubSonic.Comparison.GreaterOrEquals, DateTime.Now).OrderByAsc(EmployeeTimesheetInfo.Columns.Openuntil).Load();
+            return (new EmployeeTimesheetInfoCollection()).Where(EmployeeTimesheetInfo.Columns.Username, Username).Where(EmployeeTimesheetInfo.Columns.Openuntil, SubSonic.Comparison.GreaterOrEquals, DateTime.Now).OrderByDesc(EmployeeTimesheetInfo.Columns.TimesheetCreatedOn).Load();
         }
 
         public EmployeeTimesheetInfoCollection GetTimesheets(String Username)
         {
-            return (new EmployeeTimesheetInfoCollection()).Where(EmployeeTimesheetInfo.Columns.Username, Username).OrderByAsc(EmployeeTimesheetInfo.Columns.Openuntil).Load();
+            return (new EmployeeTimesheetInfoCollection()).Where(EmployeeTimesheetInfo.Columns.Username, Username).OrderByDesc(EmployeeTimesheetInfo.Columns.TimesheetCreatedOn).Load();
         }
 
         public EmployeeTimesheetInfoCollection GetTimesheets(String Username, Int32 PeriodID)

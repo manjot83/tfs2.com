@@ -38,6 +38,16 @@ namespace TFS.Intranet.Web.Billing.Admin
         }
 
 
+        protected void BillingCityRate_Command(Object Sender, RepeaterCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("SetRate", StringComparison.CurrentCultureIgnoreCase))
+            {
+                int id = Int32.Parse(e.CommandArgument.ToString());
+                double rate = double.Parse(((TextBox)e.Item.FindControl("rate")).Text);
+                new TFS.Intranet.Data.Billing.BillingCityRateController().Update(id, rate);
+                ((Label)e.Item.FindControl("status")).Text = "Rate Set To " + rate;
+            }
+        }
 
         protected void BillingRate_Command(Object Sender, RepeaterCommandEventArgs e)
         {

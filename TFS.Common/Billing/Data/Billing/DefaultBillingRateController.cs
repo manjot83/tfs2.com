@@ -25,6 +25,8 @@ namespace TFS.Intranet.Data.Billing
                 Insert(AccountID, RateGroupID, Rate, false, null, null, null, null);
 
             DefaultBillingRate item = new DefaultBillingRate();
+            item.MarkOld();
+            item.IsLoaded = true;
 
             item.Id = FetchByAccountAndGroup(AccountID, RateGroupID)[0].Id;
 
@@ -34,7 +36,6 @@ namespace TFS.Intranet.Data.Billing
 
             item.Rate = Rate;
 
-            item.MarkOld();
             item.Save(UserName);
         }
 
