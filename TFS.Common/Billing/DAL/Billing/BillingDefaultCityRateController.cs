@@ -122,6 +122,20 @@ namespace TFS.Intranet.Data.Billing
             item.Save(UserName);
         }
 
+        public BillingDefaultCityRate InsertObjReturn(int accountId, double defaultPerDiemRate, string city)
+        {
+            var item = new BillingDefaultCityRate();
+
+            item.AccountId = accountId;
+
+            item.City = city;
+
+            item.DefaultPerDiemRate = defaultPerDiemRate;
+
+            item.Save(UserName);
+
+            return item;
+        }
 
         /// <summary>
         /// Updates a record, can be used with the Object Data Source

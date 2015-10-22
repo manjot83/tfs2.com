@@ -35,16 +35,27 @@ namespace TFS.Intranet.Data.Billing
         public double CityPerDiemHourlyRateAverageByTimesheetId(int timesheetId)
         {
             var col = this.FetchActiveByTimesheetId(timesheetId);
-            var perdiemCityRateSum = 0.00;
+            var cityPerdiemTotal = 0.00;
+            var cityPerdiemCount = 0;
             var retAvg = 0.00; //display if there are no City per diems
 
             foreach (var cityRate in col)
             {
-                perdiemCityRateSum += cityRate.PerDiemRate;
+                cityPerdiemCount += cityRate.PerdiemCount;
+                cityPerdiemTotal += (cityRate.PerdiemCount * cityRate.PerDiemRate);
             }
 
+            //var col = this.FetchActiveByTimesheetId(timesheetId);
+            //var perdiemCityRateSum = 0.00;
+            //var retAvg = 0.00; //display if there are no City per diems
+
+            //foreach (var cityRate in col)
+            //{
+            //    perdiemCityRateSum += cityRate.PerDiemRate;
+            //}
+
             if (col.Count > 0)
-                retAvg = perdiemCityRateSum / col.Count; //get the average
+                retAvg = cityPerdiemTotal / cityPerdiemCount; //get the average
 
             return retAvg;
         }

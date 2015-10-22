@@ -12,6 +12,13 @@ namespace TFS.Intranet.Data.Billing
             return (new BillingPeriodCollection()).OrderByDesc(BillingPeriod.Columns.Id).Load();
         }
 
+        public BillingPeriodCollection FetchOpenPeriod()
+        {
+            return (new BillingPeriodCollection())
+                .Where(BillingPeriodAccountsJoin.Columns.Openuntil, SubSonic.Comparison.GreaterOrEquals, DateTime.Now)
+                .Load();
+        }
+
         public void Insert(Int32 Month, Int32 Year, DateTime OpenUntil)
         {
             if (new BillingPeriodCollection().Where(BillingPeriod.Columns.Year, Year).Where(BillingPeriod.Columns.Month, Month).Load().Count > 0)

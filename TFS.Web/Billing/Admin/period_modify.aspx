@@ -24,13 +24,22 @@ SelectMethod="FetchAccountsNotActive">
     </SelectParameters>
 </asp:ObjectDataSource>
 
-<asp:ObjectDataSource ID="BillingPeriodAccountDataSource" runat="server"
+<asp:ObjectDataSource ID="BillingPeriodAccountPerDiemDataSource" runat="server"
+TypeName="TFS.Intranet.Data.Billing.BillingPeriodAccountsJoinController"
+SelectMethod="FetchByPeriodIDWithoutCityPerdiem">
+    <SelectParameters>
+        <asp:QueryStringParameter Name="periodid" QueryStringField="id" Type="int32" />
+    </SelectParameters>
+</asp:ObjectDataSource>
+    
+    <asp:ObjectDataSource ID="BillingPeriodAccountMileageDataSource" runat="server"
 TypeName="TFS.Intranet.Data.Billing.BillingPeriodAccountsJoinController"
 SelectMethod="FetchByPeriodID">
     <SelectParameters>
         <asp:QueryStringParameter Name="periodid" QueryStringField="id" Type="int32" />
     </SelectParameters>
 </asp:ObjectDataSource>
+
 
 <asp:ObjectDataSource ID="BillingRateDataSource" runat="server"
 TypeName="TFS.Intranet.Data.Billing.BillingRatesJoinController"
@@ -112,7 +121,7 @@ SelectMethod="FetchByPeriodID">
             <th style="width: 100px;">Command</th>
             <th style="width: 100px;">Status</th>
         </tr>
-        <asp:Repeater ID="AccountsPerDiemRepeater" runat="server" DataSourceID="BillingPeriodAccountDataSource" OnItemCommand="PerDiemRate_Command">
+        <asp:Repeater ID="AccountsPerDiemRepeater" runat="server" DataSourceID="BillingPeriodAccountPerDiemDataSource" OnItemCommand="PerDiemRate_Command">
         <ItemTemplate>
             <tr>
                 <td><asp:Label ID="Label1" runat="Server" Text='<%# Eval("accountname") %>'></asp:Label></td>
@@ -126,7 +135,7 @@ SelectMethod="FetchByPeriodID">
         <tr>
             <td colspan="5">&nbsp;</td>
         </tr>
-        <asp:Repeater ID="AccountsMileageRepeater" runat="server" DataSourceID="BillingPeriodAccountDataSource" OnItemCommand="MileageRate_Command">
+        <asp:Repeater ID="AccountsMileageRepeater" runat="server" DataSourceID="BillingPeriodAccountMileageDataSource" OnItemCommand="MileageRate_Command">
         <ItemTemplate>
             <tr>
                 <td><asp:Label ID="Label1" runat="Server" Text='<%# Eval("accountname") %>'></asp:Label></td>

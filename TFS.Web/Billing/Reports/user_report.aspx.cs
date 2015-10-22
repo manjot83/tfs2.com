@@ -94,7 +94,8 @@ namespace TFS.Intranet.Web.Billing.Reports
             var timeBillingCityRateJoinController = new TimesheetBillingCityRateJoinController();
             var cityPerdiemAvg = timeBillingCityRateJoinController.CityPerDiemHourlyRateAverageByTimesheetId(timesheetId);
 
-            return cityPerdiemAvg > 0 ? cityPerdiemAvg.ToString() : rate.ToString();
+            var displayVal = cityPerdiemAvg > 0 ? cityPerdiemAvg : rate;
+            return string.Format("{0:#.00}", displayVal);
         }
 
         protected String GetPerDiemGrandTotal(int count, Double rate, int timesheetId)

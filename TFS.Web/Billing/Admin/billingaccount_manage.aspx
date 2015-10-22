@@ -153,7 +153,7 @@
 
 
                 <p>
-                    <b>Insert New City Per Diem</b>
+                    <b>Insert New City Per Diem (New Cities will be added to Open Billing Periods the Account is associated with)</b>
                 </p>
 
                 <table style="border: solid 2px black;">

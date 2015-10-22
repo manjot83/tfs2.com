@@ -8,6 +8,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
+using TFS.Intranet.Data.Billing;
 using TFS.OpCenter;
 using TFS.OpCenter.Data;
 
@@ -49,9 +50,20 @@ namespace TFS.Intranet.Web.Billing.Admin
             if (!double.TryParse(rate, out rateDouble))
                 return;
 
-            var billingController = new TFS.Intranet.Data.Billing.BillingDefaultCityRateController();
+            var billingController = new BillingDefaultCityRateController();
+            var billingCityRateController = new BillingCityRateController();
+            var billingPeriodAccountJoinController = new BillingPeriodAccountsJoinController();
 
-            billingController.Insert(Convert.ToInt32(BillingAccountDropDown.SelectedValue), rateDouble, city);
+            var newDefaultCityRate = billingController.InsertObjReturn(Convert.ToInt32(BillingAccountDropDown.SelectedValue), rateDouble, city);
+            var openPeriodAccountJoinCol =
+                billingPeriodAccountJoinController.FetchOpenPeriodByAccountId(
+                    Convert.ToInt32(BillingAccountDropDown.SelectedValue));
+
+            //add new city to active billing periods
+            foreach (var openPeriod in openPeriodAccountJoinCol)
+            {
+                billingCityRateController.Insert(newDefaultCityRate.Id, openPeriod.Id, rateDouble);
+            }
 
             tbxCity.Text = string.Empty;
             tbxCityPerDiemRate.Text = string.Empty;

@@ -40,13 +40,22 @@ namespace TFS.Intranet.Web.Billing.Admin {
         protected global::System.Web.UI.WebControls.ObjectDataSource DisabledBillingPeriodAccountDataSource;
         
         /// <summary>
-        /// BillingPeriodAccountDataSource control.
+        /// BillingPeriodAccountPerDiemDataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource BillingPeriodAccountDataSource;
+        protected global::System.Web.UI.WebControls.ObjectDataSource BillingPeriodAccountPerDiemDataSource;
+        
+        /// <summary>
+        /// BillingPeriodAccountMileageDataSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource BillingPeriodAccountMileageDataSource;
         
         /// <summary>
         /// BillingRateDataSource control.

@@ -104,9 +104,10 @@
                     <td align="center">
                        <asp:Label ID="PerDiemCount" runat="server" Text='<%# GetPerDiemCount((int)Eval("perdiemcount"),(int)Eval("timesheetid")) %>'></asp:Label></td>
                     <td align="center">
-                        <asp:Label ID="PerDiemRate" runat="server" Text='<%# GetPerDiemRate((double)Eval("perdiemrate"), (int)Eval("timesheetid")) %>'></asp:Label></td>
+                        $<asp:Label ID="PerDiemRate" runat="server" Text='<%# GetPerDiemRate((double)Eval("perdiemrate"), (int)Eval("timesheetid")) %>'></asp:Label></td>
                     <td align="center" style="border-right: solid 1px black;">
-                        $<asp:Label ID="PerDiemTotal" runat="server" Text='<%# GetPerDiemGrandTotal((int)Eval("perdiemcount"),(double)Eval("perdiemrate"), (int)Eval("timesheetid")) %>'></asp:Label></td>                   
+                        $<asp:Label ID="PerDiemTotal" runat="server" Text='<%# GetPerDiemGrandTotal((int)Eval("perdiemcount"),(double)Eval("perdiemrate"), (int)Eval("timesheetid")) %>'></asp:Label>
+                    </td>                   
                     <td align="center">
                         <asp:Label ID="MileageCount" runat="server" Text='<%# Eval("mileageclaimed") %>'></asp:Label></td>
                     <td align="center">
