@@ -116,10 +116,12 @@ namespace TFS.Intranet.Data.Billing
         /// Updates a record, can be used with the Object Data Source
         /// </summary>
         [DataObjectMethod(DataObjectMethodType.Update, true)]
-        public void Update(int defaultCityRateId, int periodAccountId, double rerDiemRate)
+        public void Update(int id, int defaultCityRateId, int periodAccountId, double rerDiemRate)
         {
             BillingCityRate item = new BillingCityRate();
             item.MarkOld();
+
+            item.Id = id;
 
             item.Periodaccountid = periodAccountId;
 

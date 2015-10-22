@@ -46,6 +46,15 @@ namespace TFS.Intranet.Data.Billing
 
         }
 
+        public TimesheetCollection FetchAllByPeriodAccountId(int periodAccountId)
+        {
+            TimesheetCollection coll = new TimesheetCollection();
+            Query qry = new Query(Timesheet.Schema);
+            qry.WHERE(Timesheet.Columns.Periodaccountid, periodAccountId);
+            coll.LoadAndCloseReader(qry.ExecuteReader());
+            return coll;
+        }
+
         [DataObjectMethod(DataObjectMethodType.Select, true)]
         public TimesheetCollection FetchAll()
         {

@@ -8,6 +8,9 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
+using NHibernate.Hql.Ast.ANTLR;
+using TFS.Intranet.Data.Billing;
+using TFS.OpCenter;
 
 namespace TFS.Intranet.Web.Billing.Reports
 {
@@ -75,6 +78,32 @@ namespace TFS.Intranet.Web.Billing.Reports
             }
 
             return total.ToString();
+        }
+
+        protected String GetPerDiemCount(int count, int timesheetId)
+        {
+            var timeBillingCityRateJoinController = new TimesheetBillingCityRateJoinController();
+            var perdiemCityCount = timeBillingCityRateJoinController.CityPerDiemCountGrandTotalByTimesheetId(timesheetId);
+
+
+            return perdiemCityCount > 0 ? perdiemCityCount.ToString() : count.ToString();
+        }
+
+        protected String GetPerDiemRate(Double rate, int timesheetId)
+        {
+            var timeBillingCityRateJoinController = new TimesheetBillingCityRateJoinController();
+            var cityPerdiemAvg = timeBillingCityRateJoinController.CityPerDiemHourlyRateAverageByTimesheetId(timesheetId);
+
+            return cityPerdiemAvg > 0 ? cityPerdiemAvg.ToString() : rate.ToString();
+        }
+
+        protected String GetPerDiemGrandTotal(int count, Double rate, int timesheetId)
+        {
+            var timeBillingCityRateJoinController = new TimesheetBillingCityRateJoinController();
+            var cityPerdiemTotal = timeBillingCityRateJoinController.CityPerDiemRateGrandTotalByTimesheetId(timesheetId);
+            var perdiemIfNoCities = count * rate; ;//no cities BillingRate Per Diem
+
+            return cityPerdiemTotal > 0 ? cityPerdiemTotal.ToString() : perdiemIfNoCities.ToString();
         }
 
         protected String GetRateTotal(Double count, Double rate)

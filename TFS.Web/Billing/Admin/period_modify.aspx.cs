@@ -34,7 +34,7 @@ namespace TFS.Intranet.Web.Billing.Admin
             DisabledAccountsRepeater.DataBind();
             AccountsBillingRatesRepeater.DataBind();
             AccountsPerDiemRepeater.DataBind();
-
+            rptBillingCityRates.DataBind();
         }
 
 

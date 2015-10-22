@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using System.Configuration;
 using System.Collections;
+using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
@@ -15,28 +16,70 @@ namespace TFS.Intranet.Web.Billing
     public partial class timecard : System.Web.UI.Page
     {
         protected int PeriodAccountId = 0;
+        protected int AccountId = 0;
+        protected int TimesheetId = 0;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            int id = Int32.Parse(Request.Params["id"]);
+            TimesheetId = Int32.Parse(Request.Params["id"]);
+
+            var timesheet = TFS.Intranet.Data.Billing.Timesheet.FetchByID(TimesheetId);
+
+            PeriodAccountId = timesheet.Periodaccountid;
+            var billingPeriodAccount = TFS.Intranet.Data.Billing.BillingPeriodAccount.FetchByID(PeriodAccountId);
+            AccountId = billingPeriodAccount.Accountid;
 
             if (!IsPostBack)
             {
-                Data.Billing.Timesheet timesheet = new TFS.Intranet.Data.Billing.TimesheetController().FetchByID(id)[0];
                 PerDiemCountDropDown.SelectedValue = timesheet.Perdiemcount.ToString();
                 Mileage_Textbox.Text = timesheet.Mileageclaimed.ToString();
                 RateGroupDropDown.SelectedValue = timesheet.Rategroupid.ToString();
-                PeriodAccountId = timesheet.Periodaccountid;
+
+                //check and see if there are any BillingCityRates for this account
+                var billingCityRateController = new BillingDefaultCityRateController();
+                var billingCityRateCol = billingCityRateController.FetchAllActiveByAccountId(AccountId);
+
+                if (billingCityRateCol.Count > 0)
+                {
+                    
+                    //hide default per diem count UI element
+                    pnlDefaultPerdiemCount.Visible = false;
+
+                    //show city per diem UI elements
+                    pnlTimesheetBillingCityRates.Visible = true;
+                }
             }
         }
 
-        protected void CityRateDataSource_Selecting(object sender, System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs e)
+        protected void inserting_TimesheetBillingCityRate(object sender, EventArgs e)
         {
-            if (PeriodAccountId > 0)
+            var city = Convert.ToInt32(drpDwnInsertPerDiemCity.SelectedValue);
+            var count = Convert.ToInt32(drpDwnInsertPerDiemCount.SelectedValue);
+
+            var billingCityRateControl = new TFS.Intranet.Data.Billing.TimesheetBillingCityRateController();
+
+            billingCityRateControl.Insert(TimesheetId, city, count);
+
+            TimesheetCityRateGridView.DataBind();
+        }
+
+        protected void TimesheetCityRateDataSource_Selecting(object sender, System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs e)
+        {
+            if (TimesheetId <= 0) return;
+
+            if (e.InputParameters["TimesheetId"] == null)
             {
-                if (e.InputParameters["PeriodAccountId"] == null)
-                {
-                    e.InputParameters["PeriodAccountId"] = PeriodAccountId;
-                }
+                e.InputParameters["TimesheetId"] = TimesheetId;
+            }
+        }
+
+        protected void BillingCityRateDataSource_Selecting(object sender, System.Web.UI.WebControls.ObjectDataSourceSelectingEventArgs e)
+        {
+            if (PeriodAccountId <= 0) return;
+
+            if (e.InputParameters["PeriodAccountId"] == null)
+            {
+                e.InputParameters["PeriodAccountId"] = PeriodAccountId;
             }
         }
 
@@ -48,28 +91,11 @@ namespace TFS.Intranet.Web.Billing
             RateGroupChangeStatus.Text = "Changed to " + RateGroupDropDown.SelectedItem.Text;
         }
 
-        protected void Change_CityPerDiem(object sender, EventArgs e)
+        protected void Change_TimesheetPerDiemCount(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(drpDwnPerDiemCity.SelectedValue))
-                return;
-
-            int cityRateId = Int32.Parse(drpDwnPerDiemCity.SelectedValue);
-            int id = Int32.Parse(Request.Params["id"]);
-            new TFS.Intranet.Data.Billing.TimesheetController().UpdateCityRateId(id, cityRateId);
-            CityPerDiemChangeStatus.Text = "Changed to " + drpDwnPerDiemCity.SelectedItem.Text;
-        }
-
-        protected void Change_PerDiem(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(drpDwnPerDiemCity.SelectedValue))
-            {
-                PerDiemChangeStatus.Text = "ERROR Please select the City the Per Diem is in first";
-                return;
-            }
-
             int Count = Int32.Parse(PerDiemCountDropDown.SelectedValue);
             int id = Int32.Parse(Request.Params["id"]);
-            new TFS.Intranet.Data.Billing.TimesheetController().UpdatePerDiem(id, Count);
+            new TFS.Intranet.Data.Billing.TimesheetController().UpdatePerDiemCount(id, Count);
             PerDiemChangeStatus.Text = "Changed to " + Count;
         }
 

@@ -15,24 +15,24 @@ using SubSonic.Utilities;
 namespace TFS.Intranet.Data.Billing
 {
 	/// <summary>
-	/// Strongly-typed collection for the BillingCityRate class.
+	/// Strongly-typed collection for the TimesheetBillingCityRate class.
 	/// </summary>
 	[Serializable]
-	public partial class BillingCityRateCollection : ActiveList<BillingCityRate, BillingCityRateCollection> 
+	public partial class TimesheetBillingCityRateCollection : ActiveList<TimesheetBillingCityRate, TimesheetBillingCityRateCollection> 
 	{	   
-		public BillingCityRateCollection() {}
+		public TimesheetBillingCityRateCollection() {}
 
 	}
 
 	/// <summary>
-	/// This is an ActiveRecord class which wraps the BillingCityRate table.
+	/// This is an ActiveRecord class which wraps the TimesheetBillingCityRate table.
 	/// </summary>
 	[Serializable]
-	public partial class BillingCityRate : ActiveRecord<BillingCityRate>
+	public partial class TimesheetBillingCityRate : ActiveRecord<TimesheetBillingCityRate>
 	{
 		#region .ctors and Default Settings
 		
-		public BillingCityRate()
+		public TimesheetBillingCityRate()
 		{
 		  SetSQLProps();
 		  InitSetDefaults();
@@ -43,7 +43,7 @@ namespace TFS.Intranet.Data.Billing
 		private void InitSetDefaults() { SetDefaults(); }
 
 		
-		public BillingCityRate(bool useDatabaseDefaults)
+		public TimesheetBillingCityRate(bool useDatabaseDefaults)
 		{
 			SetSQLProps();
 			if(useDatabaseDefaults)
@@ -51,7 +51,7 @@ namespace TFS.Intranet.Data.Billing
 			MarkNew();
 		}
 
-		public BillingCityRate(object keyID)
+		public TimesheetBillingCityRate(object keyID)
 		{
 			SetSQLProps();
 			InitSetDefaults();
@@ -59,7 +59,7 @@ namespace TFS.Intranet.Data.Billing
 		}
 
 		 
-		public BillingCityRate(string columnName, object columnValue)
+		public TimesheetBillingCityRate(string columnName, object columnValue)
 		{
 			SetSQLProps();
 			InitSetDefaults();
@@ -93,7 +93,7 @@ namespace TFS.Intranet.Data.Billing
 			if(!IsSchemaInitialized)
 			{
 				//Schema declaration
-				TableSchema.Table schema = new TableSchema.Table("BillingCityRates", TableType.Table, DataService.GetInstance("Billing"));
+                TableSchema.Table schema = new TableSchema.Table("TimesheetBillingCityRates", TableType.Table, DataService.GetInstance("Billing"));
 				schema.Columns = new TableSchema.TableColumnCollection();
 				schema.SchemaName = @"dbo";
 				//columns
@@ -110,47 +110,48 @@ namespace TFS.Intranet.Data.Billing
 				colvarId.DefaultSetting = @"";
 				colvarId.ForeignKeyTableName = "";
 				schema.Columns.Add(colvarId);
-				
-				TableSchema.TableColumn colvarPeriodaccountid = new TableSchema.TableColumn(schema);
-				colvarPeriodaccountid.ColumnName = "periodaccountid";
-				colvarPeriodaccountid.DataType = DbType.Int32;
-				colvarPeriodaccountid.MaxLength = 0;
-				colvarPeriodaccountid.AutoIncrement = false;
-				colvarPeriodaccountid.IsNullable = false;
-				colvarPeriodaccountid.IsPrimaryKey = false;
-				colvarPeriodaccountid.IsForeignKey = true;
-				colvarPeriodaccountid.IsReadOnly = false;
-				colvarPeriodaccountid.DefaultSetting = @"";
-				
-					colvarPeriodaccountid.ForeignKeyTableName = "BillingPeriodAccounts";
-				schema.Columns.Add(colvarPeriodaccountid);
 
-                TableSchema.TableColumn colvarDefaultCityRateId = new TableSchema.TableColumn(schema);
-				colvarDefaultCityRateId.ColumnName = "DefaultCityRateId";
-				colvarDefaultCityRateId.DataType = DbType.Int32;
-				colvarDefaultCityRateId.MaxLength = 0;
-				colvarDefaultCityRateId.AutoIncrement = false;
-				colvarDefaultCityRateId.IsNullable = false;
-				colvarDefaultCityRateId.IsPrimaryKey = false;
-				colvarDefaultCityRateId.IsForeignKey = true;
-				colvarDefaultCityRateId.IsReadOnly = false;
-				colvarDefaultCityRateId.DefaultSetting = @"";
+                TableSchema.TableColumn colvarTimesheetId = new TableSchema.TableColumn(schema);
+				colvarTimesheetId.ColumnName = "TimesheetId";
+				colvarTimesheetId.DataType = DbType.Int32;
+				colvarTimesheetId.MaxLength = 0;
+				colvarTimesheetId.AutoIncrement = false;
+				colvarTimesheetId.IsNullable = false;
+				colvarTimesheetId.IsPrimaryKey = false;
+				colvarTimesheetId.IsForeignKey = true;
+				colvarTimesheetId.IsReadOnly = false;
+				colvarTimesheetId.DefaultSetting = @"";
 
-                colvarDefaultCityRateId.ForeignKeyTableName = "BillingDefaultCityRates";
-				schema.Columns.Add(colvarDefaultCityRateId);
+                colvarTimesheetId.ForeignKeyTableName = "Timesheets";
+				schema.Columns.Add(colvarTimesheetId);
 
-                TableSchema.TableColumn colvarPerDiemRate = new TableSchema.TableColumn(schema);
-                colvarPerDiemRate.ColumnName = "PerDiemRate";
-				colvarPerDiemRate.DataType = DbType.Double;
-				colvarPerDiemRate.MaxLength = 0;
-				colvarPerDiemRate.AutoIncrement = false;
-				colvarPerDiemRate.IsNullable = false;
-				colvarPerDiemRate.IsPrimaryKey = false;
-				colvarPerDiemRate.IsForeignKey = false;
-				colvarPerDiemRate.IsReadOnly = false;
-				colvarPerDiemRate.DefaultSetting = @"";
-				colvarPerDiemRate.ForeignKeyTableName = "";
-				schema.Columns.Add(colvarPerDiemRate);
+                TableSchema.TableColumn colvarBillingCityRateId = new TableSchema.TableColumn(schema);
+                colvarBillingCityRateId.ColumnName = "BillingCityRateId";
+				colvarBillingCityRateId.DataType = DbType.Int32;
+				colvarBillingCityRateId.MaxLength = 0;
+				colvarBillingCityRateId.AutoIncrement = false;
+				colvarBillingCityRateId.IsNullable = false;
+				colvarBillingCityRateId.IsPrimaryKey = false;
+				colvarBillingCityRateId.IsForeignKey = true;
+				colvarBillingCityRateId.IsReadOnly = false;
+				colvarBillingCityRateId.DefaultSetting = @"";
+
+                colvarBillingCityRateId.ForeignKeyTableName = "BillingCityRates";
+				schema.Columns.Add(colvarBillingCityRateId);
+
+                TableSchema.TableColumn colvarPerdiemCount = new TableSchema.TableColumn(schema);
+                colvarPerdiemCount.ColumnName = "PerdiemCount";
+                colvarPerdiemCount.DataType = DbType.Int32;
+                colvarPerdiemCount.MaxLength = 0;
+                colvarPerdiemCount.AutoIncrement = false;
+                colvarPerdiemCount.IsNullable = false;
+                colvarPerdiemCount.IsPrimaryKey = false;
+                colvarPerdiemCount.IsForeignKey = false;
+                colvarPerdiemCount.IsReadOnly = false;
+                colvarPerdiemCount.DefaultSetting = @"";
+                colvarPerdiemCount.ForeignKeyTableName = "";
+                schema.Columns.Add(colvarPerdiemCount);
+
 				
 				TableSchema.TableColumn colvarIsDeleted = new TableSchema.TableColumn(schema);
 				colvarIsDeleted.ColumnName = "IsDeleted";
@@ -221,7 +222,7 @@ namespace TFS.Intranet.Data.Billing
 				BaseSchema = schema;
 				//add this schema to the provider
 				//so we can query it later
-				DataService.Providers["Billing"].AddSchema("BillingCityRates",schema);
+                DataService.Providers["Billing"].AddSchema("TimesheetBillingCityRates", schema);
 			}
 
 		}
@@ -241,32 +242,32 @@ namespace TFS.Intranet.Data.Billing
 		}
 
 		  
-		[XmlAttribute("Periodaccountid")]
-		public int Periodaccountid 
+		[XmlAttribute("TimesheetId")]
+        public int TimesheetId 
 		{
-			get { return GetColumnValue<int>("periodaccountid"); }
+            get { return GetColumnValue<int>("TimesheetId"); }
 
-			set { SetColumnValue("periodaccountid", value); }
+            set { SetColumnValue("TimesheetId", value); }
 
 		}
 
 
-        [XmlAttribute("DefaultCityRateId")]
-        public int DefaultCityRateId 
+        [XmlAttribute("BillingCityRateId")]
+        public int BillingCityRateId 
 		{
-			get { return GetColumnValue<int>("DefaultCityRateId"); }
+            get { return GetColumnValue<int>("BillingCityRateId"); }
 
-			set { SetColumnValue("DefaultCityRateId", value); }
+            set { SetColumnValue("BillingCityRateId", value); }
 
 		}
 
 
-        [XmlAttribute("PerDiemRate")]
-        public double PerDiemRate 
+        [XmlAttribute("PerdiemCount")]
+        public int PerdiemCount 
 		{
-            get { return GetColumnValue<double>("PerDiemRate"); }
+            get { return GetColumnValue<int>("PerdiemCount"); }
 
-            set { SetColumnValue("PerDiemRate", value); }
+            set { SetColumnValue("PerdiemCount", value); }
 
 		}
 
@@ -329,28 +330,28 @@ namespace TFS.Intranet.Data.Billing
 		#region ForeignKey Properties
 		
 		/// <summary>
-		/// Returns a BillingPeriodAccount ActiveRecord object related to this BillingCityRate
+		/// Returns a BillingPeriodAccount ActiveRecord object related to this TimesheetBillingCityRate
 		/// 
 		/// </summary>
-		public TFS.Intranet.Data.Billing.BillingPeriodAccount BillingPeriodAccount
+        public TFS.Intranet.Data.Billing.Timesheet Timesheet
 		{
-			get { return TFS.Intranet.Data.Billing.BillingPeriodAccount.FetchByID(this.Periodaccountid); }
+            get { return TFS.Intranet.Data.Billing.Timesheet.FetchByID(this.TimesheetId); }
 
-			set { SetColumnValue("periodaccountid", value.Id); }
+            set { SetColumnValue("TimesheetId", value.Id); }
 
 		}
 
 		
 		
 		/// <summary>
-		/// Returns a RateGroup ActiveRecord object related to this BillingCityRate
+		/// Returns a RateGroup ActiveRecord object related to this TimesheetBillingCityRate
 		/// 
 		/// </summary>
-        public TFS.Intranet.Data.Billing.BillingDefaultCityRate BillingDefaultCityRate
+        public TFS.Intranet.Data.Billing.BillingCityRate BillingCityRate
 		{
-            get { return TFS.Intranet.Data.Billing.BillingDefaultCityRate.FetchByID(this.DefaultCityRateId); }
+            get { return TFS.Intranet.Data.Billing.BillingCityRate.FetchByID(this.BillingCityRateId); }
 
-			set { SetColumnValue("DefaultCityRateId", value.Id); }
+            set { SetColumnValue("BillingCityRateId", value.Id); }
 
 		}
 
@@ -362,13 +363,14 @@ namespace TFS.Intranet.Data.Billing
 		
 		//no ManyToMany tables defined (0)
 		
+		
 		#region Columns Struct
 		public struct Columns
 		{
 			 public static string Id = @"id";
-			 public static string Periodaccountid = @"periodaccountid";
-             public static string DefaultCityRateId = @"DefaultCityRateId";
-             public static string PerDiemRate = @"PerDiemRate";
+             public static string TimesheetId = @"TimesheetId";
+             public static string BillingCityRateId = @"BillingCityRateId";
+             public static string PerdiemCount = @"PerdiemCount";
 			 public static string IsDeleted = @"IsDeleted";
 			 public static string CreatedOn = @"CreatedOn";
 			 public static string CreatedBy = @"CreatedBy";

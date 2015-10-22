@@ -93,14 +93,14 @@ SelectMethod="FetchByTimesheetID">
     <asp:Repeater ID="PerDiemRepeater" runat="server" DataSourceID="TimesheetDataSource">
     <ItemTemplate>
         <tr style="background-color: #CCCCCC;">
-            <td align="right" style="background-color: #FFFFFF; border: solid 1px black;"><b><%# Eval("PerDiemCount")%></b></td>
+            <td align="right" style="background-color: #FFFFFF; border: solid 1px black;"><b><%# CalcTotalPerDiemCount((int)Eval("PerDiemCount")) %></b></td>
             <td align="left" style="border-top: solid 1px black;">TOTAL DAYS PER DIEM</td>
             <td align="right" style="border-top: solid 1px black;">TOTAL HOURS</td>
             <td align="center" style="background-color: #FFFFFF; border: solid 1px black;"><b><%= getTotalTime() %></b></td>
             <td align="center" style="background-color: #CCCCCC; border-top: solid 1px black;">&nbsp;</td>
         </tr>
         <tr style="background-color: #CCCCCC;">
-            <td align="right" style="background-color: #FFFFFF; border: solid 1px black; border-top:none;"><b>$<%# CalcTotalPerDiem((int)Eval("PerDiemCount")) %></b></td>
+            <td align="right" style="background-color: #FFFFFF; border: solid 1px black; border-top:none;"><b><%# CalcTotalPerDiem((int)Eval("PerDiemCount")) %></b></td>
             <td align="left">TOTAL PER DIEM DUE</td>
             <td align="center">&nbsp;</td>
             <td align="center">&nbsp;</td>
@@ -114,7 +114,7 @@ SelectMethod="FetchByTimesheetID">
             <td align="center">&nbsp;</td>
         </tr>
         <tr style="background-color: #CCCCCC;">
-            <td align="right" style="background-color: #FFFFFF; border: solid 1px black; border-bottom: none; border-top:none;"><b>$<%# CalcTotalMileage((double)Eval("MileageClaimed")) %></b></td>
+            <td align="right" style="background-color: #FFFFFF; border: solid 1px black; border-bottom: none; border-top:none;"><b><%# CalcTotalMileage((double)Eval("MileageClaimed")) %></b></td>
             <td align="left">TOTAL MILEAGE DUE</td>
             <td align="center">&nbsp;</td>
             <td align="center">&nbsp;</td>

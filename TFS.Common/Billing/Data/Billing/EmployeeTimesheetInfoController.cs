@@ -41,6 +41,7 @@ namespace TFS.Intranet.Data.Billing
         {
             BillingPeriodAccountsJoin billingperiodaccount = new BillingPeriodAccountsJoinCollection().Where(BillingPeriodAccountsJoin.Columns.Periodid, PeriodID).Where(BillingPeriodAccountsJoin.Columns.Accountid, Billingaccountid).Load()[0];
             Int32 billingperiodaccountid = billingperiodaccount.Id;
+            var timeSheetController = new TimesheetController();
 
             DataTable summaryTotals = new DataTable();
             summaryTotals.Columns.Add("RateGroupID");
@@ -57,10 +58,17 @@ namespace TFS.Intranet.Data.Billing
             summaryTotals.Columns.Add("ExpenseTotal");
 
             Double perdiemrate = billingperiodaccount.Perdiemrate;
-            Double perdiemtotal = new TimesheetController().GetPerDiemCountByBillingPeriodAccountID(billingperiodaccountid);
+            Double cityPerdiemRateAverage =
+                timeSheetController.GetPerCityDiemRateAverageByBillingPeriodAccountID(billingperiodaccountid);
+            Double perdiemtotal = timeSheetController.GetPerDiemCountByBillingPeriodAccountID(billingperiodaccountid);
             Double expensetotal = new ExpenseEntryController().GetTotalByBillingPeriodAccountID(billingperiodaccountid);
             Double mileagerate = billingperiodaccount.Mileagerate;
-            Double mileagetotal = new TimesheetController().GetMileageCountByBillingPeriodAccountID(billingperiodaccountid);
+            Double mileagetotal = timeSheetController.GetMileageCountByBillingPeriodAccountID(billingperiodaccountid);
+
+            if (cityPerdiemRateAverage > 0)
+            {
+                perdiemrate = cityPerdiemRateAverage;
+            }
 
             RateGroupCollection rategroups = new RateGroupController().FetchAll();
             foreach (RateGroup rategroup in rategroups)

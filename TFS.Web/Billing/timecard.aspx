@@ -6,11 +6,22 @@
     <asp:ObjectDataSource ID="RateGroupDataSource" runat="server" TypeName="TFS.Intranet.Data.Billing.RateGroupController"
         SelectMethod="FetchAll"></asp:ObjectDataSource>
 
-    <asp:ObjectDataSource ID="CityRateDataSource" runat="server" TypeName="TFS.Intranet.Data.Billing.BillingCityRateJoinController"
+    <asp:ObjectDataSource ID="BillingCityRateDataSource" runat="server" TypeName="TFS.Intranet.Data.Billing.BillingCityRateJoinController"
         SelectMethod="FetchByPeriodAccountId"
-        OnSelecting="CityRateDataSource_Selecting">
+        OnSelecting="BillingCityRateDataSource_Selecting">
         <SelectParameters>
             <asp:QueryStringParameter Name="PeriodAccountId" QueryStringField="PeriodAccountId" Type="int32" />
+        </SelectParameters>
+    </asp:ObjectDataSource>
+
+    <asp:ObjectDataSource ID="TimesheetCityRateDataSource" runat="server"
+        TypeName="TFS.Intranet.Data.Billing.TimesheetBillingCityRateController"
+        SelectMethod="FetchAllActiveByTimesheetIdJoin"
+        DeleteMethod="Delete"
+        UpdateMethod="Update"
+        OnSelecting="TimesheetCityRateDataSource_Selecting">
+        <SelectParameters>
+            <asp:QueryStringParameter Name="TimesheetId" QueryStringField="TimesheetId" Type="int32" />
         </SelectParameters>
     </asp:ObjectDataSource>
 
@@ -128,39 +139,130 @@
 
     <a class="topOfPage" href="#top" title="Go to the top of this page">^ TOP</a>
     <h1>Per Diem Worksheet</h1>
-    <p>
-        <b>Instructions</b><br />
-        Use this worksheet to select Per Diem City and fill ouot Per Diem Counts for this month for this account.
-    </p>
 
-    Select City<br />
-    <asp:UpdatePanel ID="CityPerDiemUpdatePanel" runat="Server">
-        <ContentTemplate>
-            <p>
-                <asp:DropDownList ID="drpDwnPerDiemCity" runat="server" DataSourceID="CityRateDataSource"
-                    DataTextField="City" DataValueField="DefaultCityRateId" AppendDataBoundItems="true" Width="260px"
-                    OnSelectedIndexChanged="Change_CityPerDiem" AutoPostBack="true">
-                    <asp:ListItem Text="--Please Select--" Value="" />
-                </asp:DropDownList>
-                <asp:Label ID="CityPerDiemChangeStatus" runat="server" ForeColor="red"></asp:Label>
-            </p>
-        </ContentTemplate>
-    </asp:UpdatePanel>
+    <!--**************************************-->
+    <!--City Per Diems-->
+    <!--**************************************-->
+    <asp:Panel ID="pnlTimesheetBillingCityRates" runat="server" Visible="False">
+        <p>
+            <b>Instructions</b><br />
+            Use this worksheet to select Per Diem City and Per Diem Counts for the city; for this month, for this account.
+        </p>
+        <asp:UpdatePanel ID="TimesheetCityRateUpdatePanel" runat="server">
+            <ContentTemplate>
+                <asp:Label ID="TimesheetCityRateChangeStatus" runat="server" ForeColor="red"></asp:Label>
+                <asp:GridView ID="TimesheetCityRateGridView" runat="server" AutoGenerateColumns="False"
+                    CellPadding="3" DataSourceID="TimesheetCityRateDataSource" GridLines="None" BackColor="White"
+                    BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellSpacing="1"
+                    DataKeyNames="id">
+                    <FooterStyle BackColor="#C6C3C6" ForeColor="Black" />
+                    <Columns>
+                        <asp:TemplateField ShowHeader="False" ItemStyle-Width="100">
+                            <EditItemTemplate>
+                                <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True" CommandName="Update"
+                                    Text="Update"></asp:LinkButton>
+                                <asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Cancel"
+                                    Text="Cancel"></asp:LinkButton>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit"
+                                    Text="Edit"></asp:LinkButton>
+                                <asp:LinkButton ID="DeleteButton" runat="server" CausesValidation="False" CommandName="Delete"
+                                    Text="Delete"></asp:LinkButton>
+                                <ajax:ConfirmButtonExtender ID="DeleteConfirmExtender" runat="server" TargetControlID="DeleteButton"
+                                    ConfirmText="Are you sure you want to delete this entry?">
+                                </ajax:ConfirmButtonExtender>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="City" SortExpression="City" ItemStyle-HorizontalAlign="Center" ItemStyle-Width="90">
+                            <ItemTemplate>
+                                <asp:Label ID="CityLabel" runat="server" Text='<%# Eval("City") %>' />
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:DropDownList ID="drpDwnGridViewPerDiemCity" runat="server" DataSourceID="BillingCityRateDataSource"
+                                    DataTextField="City" DataValueField="Id" SelectedValue='<%# Bind("BillingCityRateId") %>'>
+                                </asp:DropDownList>
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Count" ItemStyle-HorizontalAlign="Center" SortExpression="PerdiemCount" ItemStyle-Width="60">
+                            <ItemTemplate>
+                                <asp:Label ID="PerDiemCountLabel" runat="server" Text='<%# Eval("PerdiemCount") %>' />
+                            </ItemTemplate>
+                            <EditItemTemplate>
+                                <asp:DropDownList ID="drpDwnGriewViewPerDiemCount" runat="server" DataSourceID="DayValuesDataSource"
+                                    DataTextField="Day" DataValueField="Day" SelectedValue='<%# Bind("PerdiemCount") %>' Width="60px">
+                                </asp:DropDownList>
+                            </EditItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                    <RowStyle BackColor="#DEDFDE" ForeColor="Black" />
+                    <SelectedRowStyle BackColor="#9471DE" Font-Bold="True" ForeColor="White" />
+                    <PagerStyle BackColor="#C6C3C6" ForeColor="Black" HorizontalAlign="Right" />
+                    <HeaderStyle BackColor="#4A3C8C" Font-Bold="True" ForeColor="#E7E7FF" />
+                    <EmptyDataTemplate>
+                        No City Per Diem Entries Entered Yet
+                    </EmptyDataTemplate>
+                </asp:GridView>
+            </ContentTemplate>
+            <Triggers>
+                <asp:AsyncPostBackTrigger ControlID="TimesheetBillingCityRateSubmit" EventName="Click" />
+            </Triggers>
+        </asp:UpdatePanel>
+        <p>
+            <b>Insert New City Per Diem</b>
+        </p>
 
-    Change Number<br />
-    <asp:UpdatePanel ID="PerDiemUpdatePanel" runat="Server">
-        <ContentTemplate>
-            <p>
-                <asp:DropDownList ID="PerDiemCountDropDown" runat="server" DataSourceID="DayValuesDataSource"
-                    DataTextField="Day" DataValueField="Day" AppendDataBoundItems="true" Width="60px"
-                    OnSelectedIndexChanged="Change_PerDiem" AutoPostBack="true">
-                    <asp:ListItem Text="0" Value="0" />
-                </asp:DropDownList>
-                <asp:Label ID="PerDiemChangeStatus" runat="server" ForeColor="red"></asp:Label>
-            </p>
-        </ContentTemplate>
-    </asp:UpdatePanel>
-
+        <table style="border: solid 2px black;">
+            <tr>
+                <td>
+                    <b>City:</b>
+                    <asp:DropDownList ID="drpDwnInsertPerDiemCity" runat="server" DataSourceID="BillingCityRateDataSource"
+                        DataTextField="City" DataValueField="Id">
+                        <asp:ListItem Text="--Please Select--" Value="" />
+                    </asp:DropDownList>
+                <td>
+                    <b>Per Diem Count:</b>
+                    <asp:DropDownList ID="drpDwnInsertPerDiemCount" runat="server" DataSourceID="DayValuesDataSource"
+                        DataTextField="Day" DataValueField="Day" Width="60px">
+                        <asp:ListItem Text="0" Value="" />
+                    </asp:DropDownList>
+            </tr>
+            <tr>
+                <td>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ValidationGroup="CityPerDiem" ControlToValidate="drpDwnInsertPerDiemCity"
+                        Text="City Required"></asp:RequiredFieldValidator>
+                </td>
+                <td>
+                    <asp:RequiredFieldValidator ID="RequiredFieldValidator5" runat="server" ValidationGroup="CityPerDiem" ControlToValidate="drpDwnInsertPerDiemCount"
+                        Text="City Per Diem Rate Required"></asp:RequiredFieldValidator>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3">
+                    <asp:Button ID="TimesheetBillingCityRateSubmit" OnClick="inserting_TimesheetBillingCityRate" Text="Add" runat="Server" ValidationGroup="CityPerDiem" /></td>
+            </tr>
+        </table>
+    </asp:Panel>
+    <!--**************************************-->
+    <asp:Panel runat="server" ID="pnlDefaultPerdiemCount">
+        <p>
+            <b>Instructions</b><br />
+            Use this worksheet to select Per Diem Counts for this month, for this account.
+        </p>
+        Change Number<br />
+        <asp:UpdatePanel ID="PerDiemUpdatePanel" runat="Server">
+            <ContentTemplate>
+                <p>
+                    <asp:DropDownList ID="PerDiemCountDropDown" runat="server" DataSourceID="DayValuesDataSource"
+                        DataTextField="Day" DataValueField="Day" AppendDataBoundItems="true" Width="60px"
+                        OnSelectedIndexChanged="Change_TimesheetPerDiemCount" AutoPostBack="true">
+                        <asp:ListItem Text="0" Value="0" />
+                    </asp:DropDownList>
+                    <asp:Label ID="PerDiemChangeStatus" runat="server" ForeColor="red"></asp:Label>
+                </p>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </asp:Panel>
 
     <a class="topOfPage" href="#top" title="Go to the top of this page">^ TOP</a>
     <h1 id="H1_5">Mileage Worksheet</h1>
@@ -444,29 +546,29 @@
         $(function () {
             $('#cbxFullday').click(function () {
                 var $timeInHours = $('#<%=TimeInHours.ClientID%>');
-            var $timeOutHours = $('#<%=TimeOutHours.ClientID%>');
-            var $timeInMinutes = $('#<%=TimeInMinutes.ClientID%>');
-            var $timeOutMinutes = $('#<%=TimeOutMinutes.ClientID%>');
-            if ($(this).is(':checked')) {
-                console.log('checked');
-                $timeInHours.val('09');
-                $timeOutHours.val('17');
-                $timeInMinutes.val('00');
-                $timeOutMinutes.val('00');
-                $timeInHours.attr('disabled', 'disabled');
-                $timeOutHours.attr('disabled', 'disabled');
-                $timeInMinutes.attr('disabled', 'disabled');
-                $timeOutMinutes.attr('disabled', 'disabled');
-            } else {
-                console.log('unchecked');
-                $timeInHours.val('00');
-                $timeOutHours.val('00');
-                $timeInHours.removeAttr('disabled');
-                $timeOutHours.removeAttr('disabled');
-                $timeInMinutes.removeAttr('disabled');
-                $timeOutMinutes.removeAttr('disabled');
-            }
+                var $timeOutHours = $('#<%=TimeOutHours.ClientID%>');
+                var $timeInMinutes = $('#<%=TimeInMinutes.ClientID%>');
+                var $timeOutMinutes = $('#<%=TimeOutMinutes.ClientID%>');
+                if ($(this).is(':checked')) {
+                    console.log('checked');
+                    $timeInHours.val('09');
+                    $timeOutHours.val('17');
+                    $timeInMinutes.val('00');
+                    $timeOutMinutes.val('00');
+                    $timeInHours.attr('disabled', 'disabled');
+                    $timeOutHours.attr('disabled', 'disabled');
+                    $timeInMinutes.attr('disabled', 'disabled');
+                    $timeOutMinutes.attr('disabled', 'disabled');
+                } else {
+                    console.log('unchecked');
+                    $timeInHours.val('00');
+                    $timeOutHours.val('00');
+                    $timeInHours.removeAttr('disabled');
+                    $timeOutHours.removeAttr('disabled');
+                    $timeInMinutes.removeAttr('disabled');
+                    $timeOutMinutes.removeAttr('disabled');
+                }
+            });
         });
-    });
     </script>
 </asp:Content>

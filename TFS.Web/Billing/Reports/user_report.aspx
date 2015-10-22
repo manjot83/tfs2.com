@@ -90,29 +90,29 @@
                     <td align="center" style="border-right: solid 1px black;">
                         <%# Eval("accountname") %></td>
                     <td align="center">
-                        <asp:Label ID="TotalHours" runat="server" Text='<%# GetTotalTime(Int32.Parse(Eval("timesheetid").ToString())) %>'></asp:Label></td>
+                        <asp:Label ID="TotalHours" runat="server" Text='<%# GetTotalTime((int)Eval("timesheetid")) %>'></asp:Label></td>
                     <td align="center">
                         <%# Eval("rate") %></td>
                     <td align="center">
-                        $<asp:Label ID="TotalBillingHours" runat="server" Text='<%# GetTotalHoursCost(Double.Parse(Eval("rate").ToString()),Int32.Parse(Eval("timesheetid").ToString())) %>'></asp:Label></td>
+                        $<asp:Label ID="TotalBillingHours" runat="server" Text='<%# GetTotalHoursCost((double)Eval("rate"),(int)Eval("timesheetid")) %>'></asp:Label></td>
                     <td align="center" style="border-right: solid 1px black;">
                         &nbsp;</td>
                     <td align="center">
-                        $<asp:Label ID="TotalExpenses" runat="server" Text='<%# GetTotalExpenses(Int32.Parse(Eval("timesheetid").ToString())) %>'></asp:Label></td>
+                        $<asp:Label ID="TotalExpenses" runat="server" Text='<%# GetTotalExpenses((int)Eval("timesheetid")) %>'></asp:Label></td>
                     <td align="center" style="border-right: solid 1px black;">
                         &nbsp;</td>
                     <td align="center">
-                       <asp:Label ID="PerDiemCount" runat="server" Text='<%# Eval("perdiemcount") %>'></asp:Label></td>
+                       <asp:Label ID="PerDiemCount" runat="server" Text='<%# GetPerDiemCount((int)Eval("perdiemcount"),(int)Eval("timesheetid")) %>'></asp:Label></td>
                     <td align="center">
-                        <asp:Label ID="PerDiemRate" runat="server" Text='<%# Eval("perdiemrate") %>'></asp:Label></td>
+                        <asp:Label ID="PerDiemRate" runat="server" Text='<%# GetPerDiemRate((double)Eval("perdiemrate"), (int)Eval("timesheetid")) %>'></asp:Label></td>
                     <td align="center" style="border-right: solid 1px black;">
-                        $<asp:Label ID="PerDiemTotal" runat="server" Text='<%# GetRateTotal(Double.Parse(Eval("perdiemcount").ToString()),Double.Parse(Eval("perdiemrate").ToString())) %>'></asp:Label></td>                   
+                        $<asp:Label ID="PerDiemTotal" runat="server" Text='<%# GetPerDiemGrandTotal((int)Eval("perdiemcount"),(double)Eval("perdiemrate"), (int)Eval("timesheetid")) %>'></asp:Label></td>                   
                     <td align="center">
                         <asp:Label ID="MileageCount" runat="server" Text='<%# Eval("mileageclaimed") %>'></asp:Label></td>
                     <td align="center">
                         <asp:Label ID="MileageRate" runat="server" Text='<%# Eval("mileagerate") %>'></asp:Label></td>
                     <td align="center">
-                        $<asp:Label ID="MileageTotal" runat="server" Text='<%# GetRateTotal(Double.Parse(Eval("mileageclaimed").ToString()),Double.Parse(Eval("mileagerate").ToString())) %>'></asp:Label></td>
+                        $<asp:Label ID="MileageTotal" runat="server" Text='<%# GetRateTotal((double)Eval("mileageclaimed"),(double)Eval("mileagerate")) %>'></asp:Label></td>
                 </tr>
                 </ItemTemplate>
             </asp:Repeater>

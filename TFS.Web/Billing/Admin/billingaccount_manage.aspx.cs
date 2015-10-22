@@ -32,6 +32,14 @@ namespace TFS.Intranet.Web.Billing.Admin
             }
         }
 
+        protected void CityPerDiemDataSource_Deleting(object sender, ObjectDataSourceMethodEventArgs e)
+        {
+            if (e.InputParameters["AccountId"] != null)
+            {
+                e.InputParameters.Remove("AccountId");
+            }
+        }
+
         protected void inserting_cityperdiem(object sender, EventArgs e)
         {
             var city = tbxCity.Text;

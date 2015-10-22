@@ -31,13 +31,22 @@ namespace TFS.Intranet.Web.Billing {
         protected global::System.Web.UI.WebControls.ObjectDataSource RateGroupDataSource;
         
         /// <summary>
-        /// CityRateDataSource control.
+        /// BillingCityRateDataSource control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ObjectDataSource CityRateDataSource;
+        protected global::System.Web.UI.WebControls.ObjectDataSource BillingCityRateDataSource;
+        
+        /// <summary>
+        /// TimesheetCityRateDataSource control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ObjectDataSource TimesheetCityRateDataSource;
         
         /// <summary>
         /// UserDataSource control.
@@ -157,31 +166,94 @@ namespace TFS.Intranet.Web.Billing {
         protected global::System.Web.UI.WebControls.Label RateGroupChangeStatus;
         
         /// <summary>
-        /// CityPerDiemUpdatePanel control.
+        /// pnlTimesheetBillingCityRates control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel CityPerDiemUpdatePanel;
+        protected global::System.Web.UI.WebControls.Panel pnlTimesheetBillingCityRates;
         
         /// <summary>
-        /// drpDwnPerDiemCity control.
+        /// TimesheetCityRateUpdatePanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drpDwnPerDiemCity;
+        protected global::System.Web.UI.UpdatePanel TimesheetCityRateUpdatePanel;
         
         /// <summary>
-        /// CityPerDiemChangeStatus control.
+        /// TimesheetCityRateChangeStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CityPerDiemChangeStatus;
+        protected global::System.Web.UI.WebControls.Label TimesheetCityRateChangeStatus;
+        
+        /// <summary>
+        /// TimesheetCityRateGridView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView TimesheetCityRateGridView;
+        
+        /// <summary>
+        /// drpDwnInsertPerDiemCity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpDwnInsertPerDiemCity;
+        
+        /// <summary>
+        /// drpDwnInsertPerDiemCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpDwnInsertPerDiemCount;
+        
+        /// <summary>
+        /// RequiredFieldValidator4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator4;
+        
+        /// <summary>
+        /// RequiredFieldValidator5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator5;
+        
+        /// <summary>
+        /// TimesheetBillingCityRateSubmit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button TimesheetBillingCityRateSubmit;
+        
+        /// <summary>
+        /// pnlDefaultPerdiemCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlDefaultPerdiemCount;
         
         /// <summary>
         /// PerDiemUpdatePanel control.

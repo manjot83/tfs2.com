@@ -42,17 +42,7 @@ namespace TFS.Intranet.Data.Billing
             item.Save(UserName);
         }
 
-        public void UpdateCityRateId(int Id, int cityRateId)
-        {
-            Timesheet item = FetchByID(Id)[0];
-
-            item.CityRateId = cityRateId;
-
-            item.MarkOld();
-            item.Save(UserName);
-        }
-
-        public void UpdatePerDiem(int Id, int Perdiemcount)
+        public void UpdatePerDiemCount(int Id, int Perdiemcount)
         {
             Timesheet item = FetchByID(Id)[0];
 
@@ -113,16 +103,38 @@ namespace TFS.Intranet.Data.Billing
             this.Delete(TimesheetID);
         }
 
-        public Double GetPerDiemCountByBillingPeriodAccountID(Int32 BillingPeriodAccountID)
+        public Double GetPerCityDiemRateAverageByBillingPeriodAccountID(Int32 BillingPeriodAccountID)
         {
+            var timesheetBillingRateCityJoin = new TimesheetBillingCityRateJoinController();
+            var cityPerdiemRateAverageTotal = 0.00;
+
             Double total = 0;
-            TimesheetCollection col = this.FetchAll();
+            TimesheetCollection col = this.FetchAllByPeriodAccountId(BillingPeriodAccountID);
             foreach (Timesheet timesheet in col)
             {
-                if (timesheet.Periodaccountid == BillingPeriodAccountID)
-                    total += timesheet.Perdiemcount;
+                cityPerdiemRateAverageTotal += timesheetBillingRateCityJoin.CityPerDiemHourlyRateAverageByTimesheetId(timesheet.Id);
             }
-            return total;
+
+            if (col.Count > 0)
+                cityPerdiemRateAverageTotal = cityPerdiemRateAverageTotal / col.Count;
+
+            return cityPerdiemRateAverageTotal;
+        }
+
+        public Double GetPerDiemCountByBillingPeriodAccountID(Int32 BillingPeriodAccountID)
+        {
+            var timesheetBillingRateCityJoin = new TimesheetBillingCityRateJoinController();
+            var cityPerdiemCountTotal = 0;
+
+            Double total = 0;
+            TimesheetCollection col = this.FetchAllByPeriodAccountId(BillingPeriodAccountID);
+            foreach (Timesheet timesheet in col)
+            {
+                cityPerdiemCountTotal += timesheetBillingRateCityJoin.CityPerDiemCountGrandTotalByTimesheetId(timesheet.Id);
+                total += timesheet.Perdiemcount;
+            }
+
+            return cityPerdiemCountTotal > 0 ? cityPerdiemCountTotal : total;
         }
 
         public Double GetMileageCountByBillingPeriodAccountID(Int32 BillingPeriodAccountID)

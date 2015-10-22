@@ -8,15 +8,13 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
+using TFS.Intranet.Data.Billing;
 
 public partial class billing_timesheet_printable : System.Web.UI.UserControl
 {
-
-    protected double perdiemrate;
-
-    protected double mileagerate;
-
     private Int32 _timesheetid;
+
+    private TFS.Intranet.Data.Billing.TimesheetController _controller = new TFS.Intranet.Data.Billing.TimesheetController();
 
     public Int32 TimesheetID
     {
@@ -41,26 +39,38 @@ public partial class billing_timesheet_printable : System.Web.UI.UserControl
 
     protected override void OnPreRender(EventArgs e)
     {
-        int id = TimesheetID;
-        TFS.Intranet.Data.Billing.TimesheetController controller = new TFS.Intranet.Data.Billing.TimesheetController();
-        perdiemrate = controller.PerDiemRateByID(id);
-        mileagerate = controller.MileageRateByID(id);
-
-        month.Value = controller.MonthByID(id).ToString();
-        year.Value = controller.YearByID(id).ToString();
+        month.Value = _controller.MonthByID(TimesheetID).ToString();
+        year.Value = _controller.YearByID(TimesheetID).ToString();
 
         base.OnPreRender(e);
     }
 
-    protected String CalcTotalPerDiem(int count)
+    protected String CalcTotalPerDiemCount(int count)
     {
-        return (count * perdiemrate)+"";
+        var timeBillingCityRateJoinController = new TimesheetBillingCityRateJoinController();
+        var cityCountTotal = timeBillingCityRateJoinController.CityPerDiemCountGrandTotalByTimesheetId(TimesheetID);
+        
+        return cityCountTotal > 0 ? cityCountTotal.ToString() : count.ToString();
+
+    }
+
+    protected String CalcTotalPerDiem(int billingRatePerDiemCount)
+    {
+        var timeBillingCityRateJoinController = new TimesheetBillingCityRateJoinController();
+        var cityPerdiemTotal = timeBillingCityRateJoinController.CityPerDiemRateGrandTotalByTimesheetId(TimesheetID);
+        var perdiemIfNotCities = _controller.PerDiemRateByID(TimesheetID) * billingRatePerDiemCount;//no cities BillingRate Per Diem
+        var perdiemTotalForDisplay = perdiemIfNotCities; 
+
+        if (cityPerdiemTotal > 0)
+            perdiemTotalForDisplay = cityPerdiemTotal;
+
+        return string.Format("{0:C}", perdiemTotalForDisplay);
     }
 
     protected String CalcTotalMileage(double mileage)
     {
-        String total = ((mileage * mileagerate) + "");
-        return total;
+        var mileagerate = _controller.MileageRateByID(TimesheetID);
+        return string.Format("{0:C}", (mileage * mileagerate));
     }
 
     protected String getTimeDifference(String time1, String time2)

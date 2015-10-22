@@ -10,11 +10,8 @@
         SelectMethod="FetchAllActiveByAccountId"
         DeleteMethod="Delete"
         UpdateMethod="Update"
-        OnSelecting="CityPerDiemDataSource_Selecting">
-        <SelectParameters>
-        <asp:QueryStringParameter  Name="AccountId" QueryStringField="AccountId" Type="int32" />
-    </SelectParameters>
-    </asp:ObjectDataSource>
+        OnSelecting="CityPerDiemDataSource_Selecting"
+        OnDeleting="CityPerDiemDataSource_Deleting"></asp:ObjectDataSource>
 
 
     <asp:ObjectDataSource ID="RateGroupDataSource" runat="server" TypeName="TFS.Intranet.Data.Billing.RateGroupController"
@@ -75,7 +72,7 @@
                 <asp:Label ID="SelectedBillingAccountName" runat="server">Please Select An Account From Above</asp:Label></b>
         </p>
         <table>
-            <tr style="display:none;">
+            <tr style="display: none;">
                 <th>
                     <asp:Label ID="Label2" runat="server" Text="Command" Width="120px"></asp:Label></th>
                 <th>
@@ -83,7 +80,7 @@
                 <th>
                     <asp:Label ID="Label6" runat="server" Text="Status" Width="100px"></asp:Label></th>
             </tr>
-            <tr style="display:none;">
+            <tr style="display: none;">
                 <!--Replaced  by City Per Diem - BJO 10/20/2015-->
                 <td>
                     <asp:LinkButton ID="PerDiemSet" runat="server" OnClick="SetDefaultPerDiemRate">Set Rate</asp:LinkButton></td>
@@ -121,7 +118,7 @@
                 <asp:GridView ID="CityPerDiemGridView" runat="server" AutoGenerateColumns="False"
                     CellPadding="3" DataSourceID="CityPerDiemDataSource" GridLines="None" BackColor="White"
                     BorderColor="White" BorderStyle="Ridge" BorderWidth="2px" CellSpacing="1"
-                    DataKeyNames="id,AccountId">
+                    DataKeyNames="id">
                     <FooterStyle BackColor="#C6C3C6" ForeColor="Black" />
                     <Columns>
                         <asp:TemplateField ShowHeader="False" ItemStyle-Width="100">
@@ -153,39 +150,42 @@
                         No City Per Diem Entries Entered Yet
                     </EmptyDataTemplate>
                 </asp:GridView>
+
+
+                <p>
+                    <b>Insert New City Per Diem</b>
+                </p>
+
+                <table style="border: solid 2px black;">
+                    <tr>
+                        <td>
+                            <b>City:</b>
+                            <asp:TextBox ID="tbxCity" Width="90%" runat="server"></asp:TextBox></td>
+                        <td>
+                            <b>Rate:</b>
+                            <asp:TextBox ID="tbxCityPerDiemRate" Width="90%" runat="server"></asp:TextBox></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ValidationGroup="CityPerDiem" ControlToValidate="tbxCity"
+                                Text="City Required"></asp:RequiredFieldValidator>
+                        </td>
+                        <td>
+                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ValidationGroup="CityPerDiem" ControlToValidate="tbxCityPerDiemRate"
+                                Text="City Per Diem Rate Required"></asp:RequiredFieldValidator>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="3">
+                            <asp:Button ID="CityPerDiemSubmit" OnClick="inserting_cityperdiem" Text="Add" runat="Server" ValidationGroup="CityPerDiem" /></td>
+                    </tr>
+                </table>
             </ContentTemplate>
             <Triggers>
                 <asp:AsyncPostBackTrigger ControlID="CityPerDiemSubmit" EventName="Click" />
             </Triggers>
         </asp:UpdatePanel>
-        <p>
-            <b>Insert New City Per Diem</b>
-        </p>
 
-        <table style="border: solid 2px black;">
-            <tr>
-                <td>
-                    <b>City:</b>
-                    <asp:TextBox ID="tbxCity" Width="90%" runat="server"></asp:TextBox></td>
-                <td>
-                    <b>Rate:</b>
-                    <asp:TextBox ID="tbxCityPerDiemRate" Width="90%" runat="server"></asp:TextBox></td>
-            </tr>
-            <tr>
-                <td>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ValidationGroup="CityPerDiem" ControlToValidate="tbxCity"
-                        Text="City Required"></asp:RequiredFieldValidator>
-                </td>
-                <td>
-                    <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ValidationGroup="CityPerDiem" ControlToValidate="tbxCityPerDiemRate"
-                        Text="City Per Diem Rate Required"></asp:RequiredFieldValidator>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    <asp:Button ID="CityPerDiemSubmit" OnClick="inserting_cityperdiem" Text="Add" runat="Server" ValidationGroup="CityPerDiem" /></td>
-            </tr>
-        </table>
 
         <!--**************************************-->
 
