@@ -69,7 +69,7 @@
         <tr>
             <td align="center" style="background-color: #CCCCCC;">Total Per Diem</td>
             <td align="center"><b><%= summaryinfo.Rows[0]["PerDiemTotal"].ToString()%> Days</b></td>
-            <td align="center">$<%= string.Format("{0:#.00}", Convert.ToDouble(summaryinfo.Rows[0]["PerDiemRate"]))%>/hr</td>    
+            <td align="center">$<%= string.Format("{0:#.00}", Convert.ToDouble(summaryinfo.Rows[0]["PerDiemRate"]))%>/day</td>    
             <td align="center"><b>$<%= GetTotalPerDiem().ToString() %></b></td>
         </tr>
         <tr>
