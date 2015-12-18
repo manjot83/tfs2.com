@@ -31,6 +31,11 @@ namespace TFS.Intranet.Web.Billing
 
             if (!IsPostBack)
             {
+                var period = TFS.Intranet.Data.Billing.BillingPeriod.FetchByID(billingPeriodAccount.Periodid);
+
+                timeEntryDayCalendar.StartDate = DateTime.Now;
+                timeEntryDayCalendar.EndDate = period.Openuntil;
+
                 PerDiemCountDropDown.SelectedValue = timesheet.Perdiemcount.ToString();
                 Mileage_Textbox.Text = timesheet.Mileageclaimed.ToString();
                 RateGroupDropDown.SelectedValue = timesheet.Rategroupid.ToString();
@@ -109,8 +114,16 @@ namespace TFS.Intranet.Web.Billing
 
         protected void inserting_timeentry(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(tbxDay.Text))
+                return;
+
+            DateTime dayDateTime;
+
+            if (!DateTime.TryParse(tbxDay.Text, out dayDateTime))
+                return;
+
             int id = Int32.Parse(Request.Params["id"]);
-            int __Day = Int32.Parse(Day.SelectedValue.ToString());
+            int __Day = dayDateTime.Day;
             String TimeIn = TimeInHours.SelectedValue + ":" + TimeInMinutes.SelectedValue + ":00";
             String TimeOut = TimeOutHours.SelectedValue + ":" + TimeOutMinutes.SelectedValue + ":00";
             String NotesText = Notes.Text;

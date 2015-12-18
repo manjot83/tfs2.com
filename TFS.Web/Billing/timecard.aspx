@@ -1,5 +1,6 @@
 <%@ Page MasterPageFile="~/default.master" Language="C#" AutoEventWireup="true" CodeBehind="timecard.aspx.cs" Inherits="TFS.Intranet.Web.Billing.timecard" Title="Timecard" %>
 
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server" />
 
@@ -382,7 +383,7 @@
 
     <table style="border: solid 2px black;">
         <tr>
-            <td style="width: 75px;">
+            <td style="width: 120px;">
                 <b>Day</b></td>
             <td style="width: 150px;">
                 <b>Time In</b></td>
@@ -391,8 +392,12 @@
         </tr>
         <tr>
             <td>
-                <asp:DropDownList ID="Day" runat="server" DataSourceID="DayValuesDataSource" DataTextField="Day"
-                    DataValueField="Day" /></td>
+                <asp:TextBox runat="server" ID="tbxDay" Width="75"></asp:TextBox>
+                 <asp:ImageButton runat="Server" ID="Image2" ImageUrl="~/Images/Calendar_scheduleHS.png" AlternateText="Click to show calendar" />
+                <ajax:CalendarExtender ID="timeEntryDayCalendar" runat="server" TargetControlID="tbxDay" PopupButtonID="Image2"></ajax:CalendarExtender>
+<%--                <asp:DropDownList ID="Day" runat="server" DataSourceID="DayValuesDataSource" DataTextField="Day"
+                    DataValueField="Day" />--%>
+            </td>
             <td>
                 <asp:DropDownList ID="TimeInHours" runat="server" DataSourceID="HourValuesDataSource"
                     DataTextField="Time" DataValueField="Time" />
