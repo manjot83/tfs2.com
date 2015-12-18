@@ -32,8 +32,9 @@ namespace TFS.Intranet.Web.Billing
             if (!IsPostBack)
             {
                 var period = TFS.Intranet.Data.Billing.BillingPeriod.FetchByID(billingPeriodAccount.Periodid);
+                var periodStart = new DateTime(period.Year, period.Month, 1);
 
-                timeEntryDayCalendar.StartDate = DateTime.Now;
+                timeEntryDayCalendar.StartDate = periodStart;
                 timeEntryDayCalendar.EndDate = period.Openuntil;
 
                 PerDiemCountDropDown.SelectedValue = timesheet.Perdiemcount.ToString();
