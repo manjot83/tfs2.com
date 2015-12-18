@@ -20,6 +20,13 @@ namespace TFS.Intranet.Data.Billing
 
         }
 
+        public int GetIdByPeriodIdAndAccountId(int periodId, int accountId)
+        {
+            var record = new BillingPeriodAccountCollection().Where(BillingPeriodAccount.Columns.Periodid, periodId).Where(BillingPeriodAccount.Columns.Accountid, accountId).Load()[0];
+
+            return record.Id;
+        }
+
         public void UpdateMileageRate(Int32 id, Double mileagerate)
         {
             BillingPeriodAccount item = FetchByID(id)[0];

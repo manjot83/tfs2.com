@@ -63,9 +63,9 @@ namespace TFS.Intranet.Data.Billing
         }
 
 
-        public void Insert(String Username, Int32 PeriodAccountID, int rategroupid)
+        public int Insert(String Username, Int32 PeriodAccountID, int rategroupid)
         {
-            Insert(Username, PeriodAccountID, 0, false, null, null, null, null, 0, rategroupid);
+            return Insert(Username, PeriodAccountID, 0, false, null, null, null, null, 0, rategroupid);
         }
 
 

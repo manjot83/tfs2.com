@@ -102,7 +102,7 @@ namespace TFS.Intranet.Data.Billing
             return summaryTotals;
         }
 
-        public BillingPeriodAccountsJoinCollection GetPendingTimesheets(String Username)
+        public BillingPeriodAccountsJoinCollection GetPendingTimesheets()
         {
             BillingPeriodAccountsJoinCollection col = new BillingPeriodAccountsJoinCollection().Where(BillingPeriodAccountsJoin.Columns.Openuntil, SubSonic.Comparison.GreaterOrEquals, DateTime.Now).Load();
             BillingPeriodAccountsJoinCollection returnCollection = new BillingPeriodAccountsJoinCollection();

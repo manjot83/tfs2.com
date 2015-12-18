@@ -10,12 +10,28 @@ namespace TFS.Intranet.Data.Billing
 
         public UserCollection SelectUser(String Username)
         {
-            return new UserCollection().Where(User.Columns.Username, SubSonic.Comparison.Like, "%"+Username+"%").Load();
+            return new UserCollection().Where(User.Columns.Username, SubSonic.Comparison.Like, "%" + Username + "%").Load();
         }
 
         public UserCollection FetchAll()
         {
             return new UserCollection().Load();
+        }
+
+        public UserCollection FetchAllActive()
+        {
+            return new UserCollection()
+            .Where(User.Columns.Disabled, false)
+            .Load();
+        }
+
+        public UserCollection FetchAllActiveOrderedByLastName()
+        {
+            return new UserCollection()
+           .Where(User.Columns.Disabled, false)
+           .OrderByAsc(User.Columns.Lastname)
+           .Load();
+
         }
 
         public User ByUsername(string username)

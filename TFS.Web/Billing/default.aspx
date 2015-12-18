@@ -21,9 +21,6 @@
     
     <asp:ObjectDataSource ID="PendingTimesheetInfoData" runat="server" TypeName="TFS.Intranet.Data.Billing.EmployeeTimesheetInfoController"
     SelectMethod="GetPendingTimesheets">
-        <SelectParameters>
-            <asp:ControlParameter Name="Username" ControlID="field_username" PropertyName="value" Type="string" />
-        </SelectParameters>
     </asp:ObjectDataSource>
   
 

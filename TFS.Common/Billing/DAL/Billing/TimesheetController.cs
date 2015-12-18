@@ -99,7 +99,7 @@ namespace TFS.Intranet.Data.Billing
 	    /// Inserts a record, can be used with the Object Data Source
 	    /// </summary>
         [DataObjectMethod(DataObjectMethodType.Insert, true)]
-	    public void Insert(string Username,int Periodaccountid,int Perdiemcount,bool IsDeleted,DateTime? CreatedOn,string CreatedBy,DateTime? ModifiedOn,string ModifiedBy,double Mileageclaimed,int Rategroupid)
+	    public int Insert(string Username,int Periodaccountid,int Perdiemcount,bool IsDeleted,DateTime? CreatedOn,string CreatedBy,DateTime? ModifiedOn,string ModifiedBy,double Mileageclaimed,int Rategroupid)
 	    {
 		    Timesheet item = new Timesheet();
 		    
@@ -124,6 +124,8 @@ namespace TFS.Intranet.Data.Billing
             item.Rategroupid = Rategroupid;
 	    
 		    item.Save(UserName);
+
+	        return item.Id;
 	    }
 
     	

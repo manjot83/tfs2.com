@@ -65,7 +65,7 @@ namespace TFS.Intranet.Data.Billing{
                 
                 TableSchema.TableColumn colvarId = new TableSchema.TableColumn(schema);
                 colvarId.ColumnName = "id";
-                colvarId.DataType = DbType.Int32;
+                colvarId.DataType = DbType.Guid;
                 colvarId.MaxLength = 0;
                 colvarId.AutoIncrement = false;
                 colvarId.IsNullable = false;
@@ -146,6 +146,20 @@ namespace TFS.Intranet.Data.Billing{
                 colvarRategroupname.IsReadOnly = false;
                 
                 schema.Columns.Add(colvarRategroupname);
+
+                TableSchema.TableColumn colvarDisabled = new TableSchema.TableColumn(schema);
+                colvarDisabled.ColumnName = "disabled";
+                colvarDisabled.DataType = DbType.Boolean;
+                colvarDisabled.MaxLength = 0;
+                colvarDisabled.AutoIncrement = false;
+                colvarDisabled.IsNullable = false;
+                colvarDisabled.IsPrimaryKey = false;
+                colvarDisabled.IsForeignKey = false;
+                colvarDisabled.IsReadOnly = false;
+
+                colvarDisabled.DefaultSetting = @"((0))";
+                colvarDisabled.ForeignKeyTableName = "";
+                schema.Columns.Add(colvarDisabled);
                 
                 
                 BaseSchema = schema;
@@ -206,11 +220,11 @@ namespace TFS.Intranet.Data.Billing{
 	    
           
         [XmlAttribute("Id")]
-        public int Id 
+        public Guid Id 
 	    {
 		    get
 		    {
-			    return GetColumnValue<int>("id");
+			    return GetColumnValue<Guid>("id");
 		    }
 
             set 
@@ -268,6 +282,35 @@ namespace TFS.Intranet.Data.Billing{
 
         }
 
+
+        [XmlAttribute("FullName")]
+        public string Fullname
+        {
+            get
+            {
+                var firstName = GetColumnValue<string>("firstname");
+                var lastname = GetColumnValue<string>("lastname");
+
+                if (string.IsNullOrEmpty(firstName))
+                {
+                    firstName = "empty";
+                }
+
+                if (string.IsNullOrEmpty(lastname))
+                {
+                    lastname = "empty";
+                }
+
+                return firstName + " " + lastname;
+            }
+
+            set
+            {
+                SetColumnValue("firstname", value);
+            }
+
+        }
+
 	      
         [XmlAttribute("Title")]
         public string Title 
@@ -316,6 +359,21 @@ namespace TFS.Intranet.Data.Billing{
 
         }
 
+
+        [XmlAttribute("Disabled")]
+        public bool Disabled
+        {
+            get
+            {
+                return GetColumnValue<bool>("Disabled");
+            }
+
+            set
+            {
+                SetColumnValue("Disabled", value);
+            }
+
+        }
 	    
 	    #endregion
     
@@ -337,6 +395,8 @@ namespace TFS.Intranet.Data.Billing{
             public static string Rategroup = @"rategroup";
             
             public static string Rategroupname = @"rategroupname";
+
+            public static string Disabled = @"disabled";
             
 	    }
 
